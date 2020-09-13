@@ -1,13 +1,14 @@
 package visualize;
 
-public class ColoredString{
+public class ColoredString {
 
     private String string;
-    private Color foreColor, backColor;
+    private Color foreColor;
+    private Color backColor;
 
     public ColoredString(String string) {
         setString(string);
-        if(!string.equals(Sprite.IGNORE)) {
+        if (!string.equals(Sprite.IGNORE)) {
             setForeColor(Color.White);
             setBackColor(Color.Black);
         }
@@ -47,12 +48,12 @@ public class ColoredString{
     public String get() {
         String strForeColor = "";
         String strBackColor = "";
-        if(foreColor != null) {
-            strForeColor = "\u001b[38;5;"+foreColor.code+"m";
+        if (foreColor != null) {
+            strForeColor = "\u001b[38;5;" + foreColor.code+"m";
         }
-        if(backColor != null) {
-            strBackColor = "\u001b[48;5;" +backColor.code+"m";
+        if (backColor != null) {
+            strBackColor = "\u001b[48;5;" + backColor.code+"m";
         }
-        return strForeColor + strBackColor + string.replace(Sprite.IGNORE,Sprite.SPACE) + "\u001b[0m";
+        return strForeColor + strBackColor + string.replace(Sprite.IGNORE, Sprite.SPACE) + "\u001b[0m";
     }
 }

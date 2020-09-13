@@ -10,16 +10,17 @@ public enum Sprite {
 
     public static final String IGNORE = "`";
     public static final String SPACE = " ";
-    private final String SPRITE;
-    public int width, height;
+    private final String sprite;
+    public int width;
+    public int height;
 
     Sprite(String sprite, int width, int height) {
-        SPRITE = sprite;
+        this.sprite = sprite;
         this.width = width;
         this.height = height;
     }
 
     public String toString() {
-        return SPRITE;
+        return sprite;
     }
 }

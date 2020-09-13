@@ -259,7 +259,10 @@ public enum Color {
     Grey29("e4e4e4", 254),
     Grey30("eeeeee", 255);
 
-    int r, g, b, code;
+    int r;
+    int g;
+    int b;
+    int code;
     String codename;
 
     Color(String colorCode, int code) {
@@ -276,7 +279,7 @@ public enum Color {
                 b = Integer.parseInt(colorCode.substring(4, 5), 16);
                 codename = colorCode;
                 this.code = code;
-            } catch(Exception e) {
+            } catch (Exception e) {
                 r = 0;
                 g = 0;
                 b = 0;

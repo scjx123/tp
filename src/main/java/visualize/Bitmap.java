@@ -48,14 +48,14 @@ public class Bitmap {
     }
 
     private boolean isInRange(Point p, int width, int height) {
-        boolean isXInRange = p.x >= 0 || p.x < width;
-        boolean isYInRange = p.y >= 0 || p.y < height;
+        boolean isXInRange = p._x >= 0 || p._x < width;
+        boolean isYInRange = p._y >= 0 || p._y < height;
         return isXInRange && isYInRange;
     }
 
     private boolean isAllInRange(Point[] points, int width, int height) {
         boolean output = true;
-        for(Point p: points) {
+        for (Point p: points) {
             output = output && isInRange(p, width, height);
         }
         return output;
@@ -79,13 +79,17 @@ public class Bitmap {
             throws IndexOutOfBoundsException, NullPointerException {
         checkValidInput(x1, y1, x2, y2, string);
         int index = 0;
-        int dx, dy, p, x, y;
+        int dx;
+        int dy;
         dx = x2 - x1;
         dy = y2 - y1;
+        int x;
+        int y;
+        int p;
         x = x1; // set x to initial value
         y = y1; // set y to initial value
         p = 2 * dy - dx; //progression of Bresenham's Line Algorithm
-        while(x <= x2){
+        while(x <= x2) {
             setAttributes(string, backColor, foreColor, index, x, y);
             if (p >= 0) {
                 y++;
@@ -103,11 +107,11 @@ public class Bitmap {
 
     private void setAttributes(String string, Color backColor, Color foreColor, int index, int x, int y) {
         String target = string.substring(index, index + 1);
-        if(!target.equals(Sprite.IGNORE)){
-            if(foreColor != null){
+        if (!target.equals(Sprite.IGNORE)) {
+            if (foreColor != null) {
                 setPixelTextColor(x, y, foreColor);
             }
-            if(backColor != null){
+            if (backColor != null) {
                 setPixelColor(x, y, backColor);
             }
             setPixelText(x, y, target);
