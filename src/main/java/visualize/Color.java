@@ -259,30 +259,30 @@ public enum Color {
     Grey29("e4e4e4", 254),
     Grey30("eeeeee", 255);
 
-    int r;
-    int g;
-    int b;
+    int red;
+    int green;
+    int blue;
     int code;
     String codename;
 
     Color(String colorCode, int code) {
         if (colorCode.length() != 6) {
-            r = 0;
-            g = 0;
-            b = 0;
+            red = 0;
+            green = 0;
+            blue = 0;
             this.code = 0;
             codename = "000000";
         } else {
             try {
-                r = Integer.parseInt(colorCode.substring(0, 1), 16);
-                g = Integer.parseInt(colorCode.substring(2, 3), 16);
-                b = Integer.parseInt(colorCode.substring(4, 5), 16);
+                red = Integer.parseInt(colorCode.substring(0, 1), 16);
+                green = Integer.parseInt(colorCode.substring(2, 3), 16);
+                blue = Integer.parseInt(colorCode.substring(4, 5), 16);
                 codename = colorCode;
                 this.code = code;
             } catch (Exception e) {
-                r = 0;
-                g = 0;
-                b = 0;
+                red = 0;
+                green = 0;
+                blue = 0;
                 this.code = 0;
                 codename = "000000";
             }

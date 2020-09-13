@@ -49,10 +49,10 @@ public class ColoredString {
         String strForeColor = "";
         String strBackColor = "";
         if (foreColor != null) {
-            strForeColor = "\u001b[38;5;" + foreColor.code+"m";
+            strForeColor = "\u001b[38;5;" + foreColor.code + "m";
         }
         if (backColor != null) {
-            strBackColor = "\u001b[48;5;" + backColor.code+"m";
+            strBackColor = "\u001b[48;5;" + backColor.code + "m";
         }
         return strForeColor + strBackColor + string.replace(Sprite.IGNORE, Sprite.SPACE) + "\u001b[0m";
     }

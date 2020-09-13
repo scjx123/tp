@@ -2,11 +2,11 @@ package visualize;
 
 public class Point {
 
-    public int _x;
-    public int _y;
+    public int xCoord;
+    public int yCoord;
 
     public Point(int x, int y) {
-        _x = x;
-        _y = y;
+        xCoord = x;
+        yCoord = y;
     }
 }

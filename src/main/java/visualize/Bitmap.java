@@ -48,8 +48,8 @@ public class Bitmap {
     }
 
     private boolean isInRange(Point p, int width, int height) {
-        boolean isXInRange = p._x >= 0 || p._x < width;
-        boolean isYInRange = p._y >= 0 || p._y < height;
+        boolean isXInRange = p.xCoord >= 0 || p.xCoord < width;
+        boolean isYInRange = p.yCoord >= 0 || p.yCoord < height;
         return isXInRange && isYInRange;
     }
 
@@ -89,7 +89,7 @@ public class Bitmap {
         x = x1; // set x to initial value
         y = y1; // set y to initial value
         p = 2 * dy - dx; //progression of Bresenham's Line Algorithm
-        while(x <= x2) {
+        while (x <= x2) {
             setAttributes(string, backColor, foreColor, index, x, y);
             if (p >= 0) {
                 y++;
@@ -118,7 +118,7 @@ public class Bitmap {
         }
     }
 
-    public void drawSprite (
+    public void drawSprite(
             int x1, int y1, int scaleX, int scaleY, Sprite sprite,
             Color backColor, Color foreColor)
             throws IndexOutOfBoundsException, NullPointerException {
@@ -128,7 +128,8 @@ public class Bitmap {
         if (scaleX == 0) {
             return;
         }
-        int spriteX = 0, spriteY = 0;
+        int spriteX = 0;
+        int spriteY = 0;
         for (int y = y1; y <= y2; y++) {
             if (y - y1 == (spriteY + 1) * scaleY) {
                 spriteY++;
