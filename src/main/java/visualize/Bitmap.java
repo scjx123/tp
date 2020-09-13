@@ -1,23 +1,18 @@
 package visualize;
 
-import java.util.HashMap;
-
 public class Bitmap {
 
-    private ColoredString[] map;
-    private int width, height;
-    private HashMap<Integer, Integer> colors;
-    private HashMap<Integer, Integer> textColors;
+    private final ColoredString[] map;
+    private final int width;
+    private final int height;
 
-    public Bitmap(int width, int height){
+    public Bitmap(int width, int height) {
         this.width = width;
         this.height = height;
         map = new ColoredString[width * height];
         for (int i = 0; i < map.length; i++) {
             map[i] = new ColoredString(Sprite.IGNORE);
         }
-        colors = new HashMap<>();
-        textColors = new HashMap<>();
     }
 
     public void setPixelColor(int x, int y, Color c) throws IndexOutOfBoundsException {
@@ -25,17 +20,14 @@ public class Bitmap {
             throw new IndexOutOfBoundsException();
         }
         int index = x + y * width;
-        colors.put(index , c.CODE);
         map[index].setBackColor(c);
     }
 
     public void flush(Color c) {
-        for (int i = 0; i < map.length; i++) {
-            map[i].setString(Sprite.SPACE);
-            colors.put(i,c.CODE);
-            textColors.put(i,c.CODE);
-            map[i].setBackColor(c);
-            map[i].setForeColor(c);
+        for (ColoredString coloredString : map) {
+            coloredString.setString(Sprite.SPACE);
+            coloredString.setBackColor(c);
+            coloredString.setForeColor(c);
         }
     }
 
@@ -52,7 +44,6 @@ public class Bitmap {
             throw new IndexOutOfBoundsException();
         }
         int index = x + y * width;
-        textColors.put(x + y * width , c.CODE);
         map[index].setForeColor(c);
     }
 
@@ -64,16 +55,16 @@ public class Bitmap {
 
     private boolean isAllInRange(Point[] points, int width, int height) {
         boolean output = true;
-        for(Point p: points){
+        for(Point p: points) {
             output = output && isInRange(p, width, height);
         }
         return output;
     }
 
     private void checkValidInput(int x1, int y1, int x2, int y2, String string)
-            throws IndexOutOfBoundsException, NullPointerException{
-        Point start = new Point(x1,y1);
-        Point end = new Point(x2,y2);
+            throws IndexOutOfBoundsException, NullPointerException {
+        Point start = new Point(x1, y1);
+        Point end = new Point(x2, y2);
         if (!isAllInRange(new Point[]{start, end}, width, height)) {
             throw new IndexOutOfBoundsException();
         }
@@ -114,10 +105,10 @@ public class Bitmap {
         String target = string.substring(index, index + 1);
         if(!target.equals(Sprite.IGNORE)){
             if(foreColor != null){
-                setPixelTextColor(x,y,foreColor);
+                setPixelTextColor(x, y, foreColor);
             }
             if(backColor != null){
-                setPixelColor(x,y,backColor);
+                setPixelColor(x, y, backColor);
             }
             setPixelText(x, y, target);
         }
@@ -126,23 +117,23 @@ public class Bitmap {
     public void drawSprite (
             int x1, int y1, int scaleX, int scaleY, Sprite sprite,
             Color backColor, Color foreColor)
-            throws IndexOutOfBoundsException, NullPointerException{
-        int x2 = x1 + sprite.W * scaleX - 1;
-        int y2 = y1 + sprite.H * scaleY - 1;
+            throws IndexOutOfBoundsException, NullPointerException {
+        int x2 = x1 + sprite.width * scaleX - 1;
+        int y2 = y1 + sprite.height * scaleY - 1;
         checkValidInput(x1, y1, x2, y2, sprite.toString());
         if (scaleX == 0) {
             return;
         }
         int spriteX = 0, spriteY = 0;
-        for (int y = y1; y <= y2; y++){
-            if (y - y1 == (spriteY + 1) * scaleY){
+        for (int y = y1; y <= y2; y++) {
+            if (y - y1 == (spriteY + 1) * scaleY) {
                 spriteY++;
             }
-            for (int x = x1; x <= x2; x++){
-                if (x - x1 == (spriteX + 1) * scaleX){
+            for (int x = x1; x <= x2; x++) {
+                if (x - x1 == (spriteX + 1) * scaleX) {
                     spriteX++;
                 }
-                int spriteIndex = spriteX + sprite.W * spriteY;
+                int spriteIndex = spriteX + sprite.width * spriteY;
                 String strSprite = sprite.toString();
                 setAttributes(strSprite, backColor, foreColor, spriteIndex, x, y);
             }
@@ -151,7 +142,7 @@ public class Bitmap {
     }
 
     public String get() {
-        StringBuilder strBuilder = new StringBuilder("");
+        StringBuilder strBuilder = new StringBuilder();
         for (int i = 0; i < map.length; i++) {
             strBuilder.append(map[i].get());
             if ((i + 1) % width == 0) {

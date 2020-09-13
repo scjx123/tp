@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import visualize.Bitmap;
 import visualize.Color;
-import visualize.ColoredString;
 import visualize.Sprite;
 
 public class Duke {

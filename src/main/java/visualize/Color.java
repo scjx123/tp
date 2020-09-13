@@ -259,30 +259,36 @@ public enum Color {
     Grey29("e4e4e4", 254),
     Grey30("eeeeee", 255);
 
-    int R, G, B, CODE;
-    String CODENAME;
+    int r, g, b, code;
+    String codename;
 
     Color(String colorCode, int code) {
         if (colorCode.length() != 6) {
-            R = G = B = CODE = 0;
-            CODENAME = "000000";
+            r = 0;
+            g = 0;
+            b = 0;
+            this.code = 0;
+            codename = "000000";
         } else {
             try {
-                R = Integer.parseInt(colorCode.substring(0,1),16);
-                G = Integer.parseInt(colorCode.substring(2,3),16);
-                B = Integer.parseInt(colorCode.substring(4,5),16);
-                CODENAME = colorCode;
-                CODE = code;
+                r = Integer.parseInt(colorCode.substring(0, 1), 16);
+                g = Integer.parseInt(colorCode.substring(2, 3), 16);
+                b = Integer.parseInt(colorCode.substring(4, 5), 16);
+                codename = colorCode;
+                this.code = code;
             } catch(Exception e) {
-                R = G = B = CODE = 0;
-                CODENAME = "000000";
+                r = 0;
+                g = 0;
+                b = 0;
+                this.code = 0;
+                codename = "000000";
             }
         }
     }
 
     public static Color getFromCode(int code) {
         for (Color c: Color.values()) {
-            if (c.CODE == code) {
+            if (c.code == code) {
                 return c;
             }
         }
