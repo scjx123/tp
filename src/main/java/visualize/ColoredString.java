@@ -1,46 +1,56 @@
 package visualize;
 
 public class ColoredString{
+
     private String string;
     private Color foreColor, backColor;
-    public ColoredString(String string){
+
+    public ColoredString(String string) {
         setString(string);
-        if(!string.equals(Sprite.IGNORE)){
+        if(!string.equals(Sprite.IGNORE)) {
             setForeColor(Color.White);
             setBackColor(Color.Black);
         }
     }
-    public void setString(String string){
+
+    public void setString(String string) {
         this.string = string;
     }
-    public void setForeColor(Color color){
+
+    public void setForeColor(Color color) {
         foreColor = color;
     }
-    public void setBackColor(Color color){
+
+    public void setBackColor(Color color) {
         backColor = color;
     }
-    public void bold(){
+
+    public void bold() {
         string = "\u001b[1m" + string;
     }
-    public void underline(){
+
+    public void underline() {
         string = "\u001b[4m" + string;
     }
-    public void reversedColor(){
+
+    public void reversedColor() {
         string = "\u001b[7m" + string;
     }
-    public ColoredString subString(int start, int end){
+
+    public ColoredString subString(int start, int end) {
         ColoredString output = new ColoredString(string.substring(start, end));
         output.setForeColor(foreColor);
         output.setBackColor(backColor);
         return output;
     }
-    public String get(){
+
+    public String get() {
         String strForeColor = "";
         String strBackColor = "";
-        if(foreColor != null){
+        if(foreColor != null) {
             strForeColor = "\u001b[38;5;"+foreColor.CODE+"m";
         }
-        if(backColor != null){
+        if(backColor != null) {
             strBackColor = "\u001b[48;5;" +backColor.CODE+"m";
         }
         return strForeColor + strBackColor + string.replace(Sprite.IGNORE,Sprite.SPACE) + "\u001b[0m";

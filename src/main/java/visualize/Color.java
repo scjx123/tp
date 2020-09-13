@@ -1,6 +1,7 @@
 package visualize;
 
 public enum Color {
+
     White("000000", 0),
     Maroon("800000", 1),
     Green("008000", 2),
@@ -260,7 +261,8 @@ public enum Color {
 
     int R, G, B, CODE;
     String CODENAME;
-    Color(String colorCode, int code){
+
+    Color(String colorCode, int code) {
         if (colorCode.length() != 6) {
             R = G = B = CODE = 0;
             CODENAME = "000000";
@@ -278,9 +280,9 @@ public enum Color {
         }
     }
 
-    public static Color getFromCode(int code){
+    public static Color getFromCode(int code) {
         for (Color c: Color.values()) {
-            if (c.CODE == code){
+            if (c.CODE == code) {
                 return c;
             }
         }

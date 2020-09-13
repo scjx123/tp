@@ -3,10 +3,12 @@ package visualize;
 import java.util.HashMap;
 
 public class Bitmap {
+
     private ColoredString[] map;
     private int width, height;
     private HashMap<Integer, Integer> colors;
     private HashMap<Integer, Integer> textColors;
+
     public Bitmap(int width, int height){
         this.width = width;
         this.height = height;
@@ -17,7 +19,8 @@ public class Bitmap {
         colors = new HashMap<>();
         textColors = new HashMap<>();
     }
-    public void setPixelColor(int x, int y, Color c) throws IndexOutOfBoundsException{
+
+    public void setPixelColor(int x, int y, Color c) throws IndexOutOfBoundsException {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             throw new IndexOutOfBoundsException();
         }
@@ -25,7 +28,8 @@ public class Bitmap {
         colors.put(index , c.CODE);
         map[index].setBackColor(c);
     }
-    public void flush(Color c){
+
+    public void flush(Color c) {
         for (int i = 0; i < map.length; i++) {
             map[i].setString(Sprite.SPACE);
             colors.put(i,c.CODE);
@@ -34,14 +38,16 @@ public class Bitmap {
             map[i].setForeColor(c);
         }
     }
-    public void setPixelText(int x, int y, String character) throws  IndexOutOfBoundsException{
+
+    public void setPixelText(int x, int y, String character) throws  IndexOutOfBoundsException {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             throw new IndexOutOfBoundsException();
         }
         int index = x + y * width;
         map[index].setString(character);
     }
-    public void setPixelTextColor(int x, int y, Color c) throws IndexOutOfBoundsException{
+
+    public void setPixelTextColor(int x, int y, Color c) throws IndexOutOfBoundsException {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             throw new IndexOutOfBoundsException();
         }
@@ -49,12 +55,14 @@ public class Bitmap {
         textColors.put(x + y * width , c.CODE);
         map[index].setForeColor(c);
     }
-    private boolean isInRange(Point p, int width, int height){
+
+    private boolean isInRange(Point p, int width, int height) {
         boolean isXInRange = p.x >= 0 || p.x < width;
         boolean isYInRange = p.y >= 0 || p.y < height;
         return isXInRange && isYInRange;
     }
-    private boolean isAllInRange(Point[] points, int width, int height){
+
+    private boolean isAllInRange(Point[] points, int width, int height) {
         boolean output = true;
         for(Point p: points){
             output = output && isInRange(p, width, height);
@@ -77,7 +85,7 @@ public class Bitmap {
     public void drawLine(
             int x1, int y1, int x2, int y2, String string,
             Color backColor, Color foreColor)
-            throws IndexOutOfBoundsException, NullPointerException{
+            throws IndexOutOfBoundsException, NullPointerException {
         checkValidInput(x1, y1, x2, y2, string);
         int index = 0;
         int dx, dy, p, x, y;
@@ -141,7 +149,8 @@ public class Bitmap {
             spriteX = 0;
         }
     }
-    public String get(){
+
+    public String get() {
         StringBuilder strBuilder = new StringBuilder("");
         for (int i = 0; i < map.length; i++) {
             strBuilder.append(map[i].get());

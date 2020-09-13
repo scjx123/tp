@@ -13,6 +13,7 @@ public class Duke {
      */
     private static final int W = 60;
     private static final int H = 10;
+
     public static void main(String[] args) {
         Bitmap bmp = new Bitmap(W,H);
         bmp.flush(Color.Maroon);
