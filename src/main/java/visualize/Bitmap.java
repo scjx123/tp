@@ -1,5 +1,7 @@
 package visualize;
 
+import java.util.ArrayList;
+
 public class Bitmap {
 
     private final ColoredString[] map;
@@ -47,25 +49,32 @@ public class Bitmap {
         map[index].setForeColor(c);
     }
 
-    private boolean isInRange(Point p, int width, int height) {
-        boolean isXInRange = p.xComponent >= 0 || p.xComponent < width;
-        boolean isYInRange = p.yComponent >= 0 || p.yComponent < height;
+    private boolean isInRange(int x, int y, int width, int height) {
+        boolean isXInRange = x >= 0 || x < width;
+        boolean isYInRange = y >= 0 || y < height;
         return isXInRange && isYInRange;
     }
 
-    private boolean isAllInRange(Point[] points, int width, int height) {
+    private boolean isAllInRange(ArrayList<int[]> points, int width, int height) {
         boolean output = true;
-        for (Point p: points) {
-            output = output && isInRange(p, width, height);
+        if (points == null || points.isEmpty()) {
+            return false;
+        }
+        for (int[] point: points) {
+            if (point.length != 2) {
+                continue;
+            }
+            output = output && isInRange(point[0], point[1], width, height);
         }
         return output;
     }
 
     private void checkValidInput(int x1, int y1, int x2, int y2, String string)
             throws IndexOutOfBoundsException, NullPointerException {
-        Point start = new Point(x1, y1);
-        Point end = new Point(x2, y2);
-        if (!isAllInRange(new Point[]{start, end}, width, height)) {
+        ArrayList<int[]> points = new ArrayList<>();
+        points.add(new int[]{x1, y1});
+        points.add(new int[]{x2, y2});
+        if (!isAllInRange(points, width, height)) {
             throw new IndexOutOfBoundsException();
         }
         if (string == null) {
@@ -85,10 +94,10 @@ public class Bitmap {
         dy = y2 - y1;
         int x;
         int y;
-        int p;
+        int p;  //parameter p of Bresenham's Line Algorithm
         x = x1; // set x to initial value
         y = y1; // set y to initial value
-        p = 2 * dy - dx; //progression of Bresenham's Line Algorithm
+        p = 2 * dy - dx;
         while (x <= x2) {
             setAttributes(string, backColor, foreColor, index, x, y);
             if (p >= 0) {
