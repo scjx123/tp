@@ -48,8 +48,8 @@ public class Bitmap {
     }
 
     private boolean isInRange(Point p, int width, int height) {
-        boolean isXInRange = p.xCoord >= 0 || p.xCoord < width;
-        boolean isYInRange = p.yCoord >= 0 || p.yCoord < height;
+        boolean isXInRange = p.xComponent >= 0 || p.xComponent < width;
+        boolean isYInRange = p.yComponent >= 0 || p.yComponent < height;
         return isXInRange && isYInRange;
     }
 
