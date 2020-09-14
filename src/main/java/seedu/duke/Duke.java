@@ -32,8 +32,10 @@ public class Duke {
         bmp.drawSprite(28,4,1,1,Sprite.ZERO,Color.Grey7,null);
         bmp.drawSprite(36,4,1,1,Sprite.TWO,Color.White,null);
         bmp.drawSprite(44,4,1,1,Sprite.ZERO,Color.Grey7,null);
-        System.out.println(bmp.get());
+        System.out.print(bmp.get());
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+        bmp.flush(Color.Purple);
+        System.out.print(bmp.get());
     }
 }
