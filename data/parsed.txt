@@ -1,0 +1,39 @@
+[add{
+	option{
+		s:	0
+		m:	CS1010 CS2113T CG2027 
+		help:	0
+	}
+	type{
+		mod:	0
+		task:	0
+		help:	0
+	}
+	_atom_{
+		_:	0
+	}
+}, list{
+	option{
+		mod:	0
+		task:	0
+		cmd:	0
+		all:	1
+		help:	0
+	}
+	range{
+		all:	1
+		sel:	0
+	}
+	_atom_{
+		_:	0
+	}
+}, sel{
+	option{
+		s:	1
+		m:	0
+		help:	0
+	}
+	_atom_{
+		_:	CS2113T 
+	}
+}]
