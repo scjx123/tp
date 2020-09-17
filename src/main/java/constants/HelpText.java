@@ -36,7 +36,8 @@ public enum HelpText {
             },
             new String[]{
                 "1. \"sel CS2113T\" >> add the item CS2113T on the item list to the selection",
-                "2. \"sel -m CS1010 CS2113\" >> add the multiple items: CS1010 and CS2113 on the item list to the selection",
+                "2. \"sel -m CS1010 CS2113\" >> add the multiple items: " +
+                        "CS1010 and CS2113 on the item list to the selection",
                 "3. \"sel -help\" >> print the detailed help text for the \"sel\" command"
             }),
     ADD(
@@ -50,7 +51,8 @@ public enum HelpText {
             new String[]{
                 "1. \"add -mod CS2113T\" >> adds a single module CS2113T to item list",
                 "2. \"add -task deadline\" >> adds a single task deadline to the item list",
-                "3. \"add -m -mod M1 M2 -task T1 T2 \" >> add multiple items: modules M1, M2 and tasks T1, T2 to the item list",
+                "3. \"add -m -mod M1 M2 -task T1 T2 \" >> add multiple items: " +
+                        "modules M1, M2 and tasks T1, T2 to the item list",
                 "4. \"add -help\" >> print the detailed help text for the \"add\" command"
             }),
     MC(
