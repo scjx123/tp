@@ -17,7 +17,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void testBitmap(){
+    public static void testBitmap() {
         final int W = 60;
         final int H = 10;
         Bitmap bmp = new Bitmap(W,H);
@@ -54,7 +54,7 @@ public class Duke {
         }
         Lexer lexer = new Lexer();
         List<Token> tokens = lexer.analyze(stringBuilder.toString());
-        for(Token t: tokens) {
+        for (Token t: tokens) {
             System.out.println(t);
         }
         //Test parser

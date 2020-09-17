@@ -98,7 +98,7 @@ public class Parameter extends Container {
 
     @Override
     public String toString() {
-        if(content == null || content.size() == 0) {
+        if (content == null || content.size() == 0) {
             return name + "{ }";
         } else {
             return name + "{" + Constants.WIN_NEWLINE + getContentString() + "}";

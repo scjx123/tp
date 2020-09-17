@@ -55,7 +55,7 @@ public class Command extends Parameter implements Help {
                     parameter.updateContainer(head.string, list);
                 }
             }
-        } else if (p != null){ // not par -> everything must be atomic
+        } else if (p != null) { // not par -> everything must be atomic
             StringBuilder strBuilder = new StringBuilder(head.string).append(Constants.SPACE);
             for (Token t: list) {
                 if (!t.token.equals(Types.PAR)) {
@@ -94,7 +94,7 @@ public class Command extends Parameter implements Help {
     }
 
     @Override
-    public Command getClone () {
+    public Command getClone() {
         return new Command(helpText, content);
     }
 

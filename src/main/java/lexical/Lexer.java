@@ -9,7 +9,7 @@ public class Lexer {
     public String getCommand(String s, int i) {
         int j = i;
         while (j < s.length()) {
-            if(Character.isLetter(s.charAt(j))) {
+            if (Character.isLetter(s.charAt(j))) {
                 j++;
             } else {
                 break;
@@ -22,7 +22,7 @@ public class Lexer {
         int j = i;
         while (j < s.length()) {
             char c = s.charAt(j);
-            if(c != Constants.SPACE && c != Constants.CMD_END) {
+            if (c != Constants.SPACE && c != Constants.CMD_END) {
                 j++;
             } else {
                 break;
@@ -35,9 +35,9 @@ public class Lexer {
         List<Token> result = new ArrayList<>();
         String inString = input.trim();
         boolean isCommand = true;
-        for(int i = 0; i < inString.length(); ) {
+        for (int i = 0; i < inString.length(); ) {
             char c = inString.charAt(i);
-            switch(c) {
+            switch (c) {
             case Constants.LPAREN:
                 result.add(new Token(Types.LPA, c));
                 i++;

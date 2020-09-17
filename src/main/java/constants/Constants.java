@@ -23,8 +23,8 @@ public class Constants {
     public static final String TODO_ICON = ICON_LEFT + "T" + ICON_RIGHT;
     public static final String EVENT_ICON = ICON_LEFT + "E" + ICON_RIGHT;
     public static final String DDL_ICON = ICON_LEFT + "D" + ICON_RIGHT;
-    public static final String TICK = "\u2713";
-    public static final String CROSS = "\u2718";
+    public static final String TICK = "V";//""\u2713";
+    public static final String CROSS = "X";//""\u2718";
     public static final String TAB = "\t";
     public static final String NEWLINE = "\n";
     public static final String RETURN = "\r";

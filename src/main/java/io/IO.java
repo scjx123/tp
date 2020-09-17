@@ -13,8 +13,7 @@ public class IO {
         this.fileName = fileName;
     }
 
-    protected boolean isFileInvalid()
-            throws IOException{
+    protected boolean isFileInvalid() throws IOException {
         boolean isValidated = true;
         File path = new File(this.path);
         if (!path.exists() || !path.isDirectory()) {
