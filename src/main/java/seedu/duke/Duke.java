@@ -1,11 +1,13 @@
 package seedu.duke;
 
 import java.util.List;
+import java.util.Scanner;
 
 import command.Command;
 import constants.Constants;
 import io.FileLoader;
 import io.FileSaver;
+import io.ReadFile;
 import jobs.ParentModules;
 import lexical.Lexer;
 import lexical.Parser;
@@ -73,10 +75,14 @@ public class Duke {
         System.out.println(saver.save(parsed.toString()) ? "Saved." : "Save failed.");
     }
 
+    static String dummy;
+
     public static void main(String[] args) {
         //testBitmap();
         //testIO();
-        io.ReadFile.loadModules();
-        ParentModules.printList();
+        Scanner in = new Scanner(System.in);
+        dummy = in.nextLine();
+        new ReadFile("data/courseList.txt");
+        ReadFile.loadModules();
     }
 }

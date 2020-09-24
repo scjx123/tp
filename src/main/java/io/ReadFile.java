@@ -1,34 +1,38 @@
 package io;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import jobs.ParentModules;
 
 public class ReadFile {
     static String moduleName;
     static String moduleCode;
-    private static final String FILE_NAME = "courseList.txt";
-    private static final String FILE_PATH = "./data";
-    static ArrayList<String> fileContent = new ArrayList<>();
-    static ArrayList<ParentModules> moduleList = new ArrayList<>();
+    /** Get home directory of the user's operating system. */
+    static String home = System.getProperty("user.home");
+    /** Temporary stores the file directory and the name of the text file itself given in the filePath. */
+    static String[] dir = new String[2];
 
-    static Path p = Paths.get(FILE_PATH, FILE_NAME);
+    private static String filename = "courseList.txt";
+    private static String filedir = "data";
 
-    //read file content
-    public static List<String> readFile() throws IOException {
-        //read previous data
-        if (!Files.exists(p)) {
-            Files.createFile(p);
+    public ReadFile(String filePath) {
+        dir = filePath.split("/",2);
+        System.out.println(dir[0]);
+        System.out.println(dir[1]);
+        filedir = dir[0];
+        filename = dir[1];
+    }
+
+    static Path p2 = Paths.get(filedir,filename);
+
+    public static List<String> load() throws IOException {
+        if (!Files.exists(p2)) {
+            Files.createFile(p2);
         }
-        return Files.readAllLines(p);
+        return Files.readAllLines(p2);
     }
 
     //convert file entry to tasks
@@ -37,18 +41,17 @@ public class ReadFile {
             String[] tempModules = modules.split("_");
             moduleName = tempModules[0];
             moduleCode = tempModules[1];
-            ParentModules module = new ParentModules(tempModules[0], tempModules[1]);
-            moduleList.add(module);
+            new ParentModules(moduleName,moduleCode);
         }
     }
 
     //retrieve past saved data
     public static void loadModules() {
         try {
-            parseFile(readFile());
+            parseFile(load());
+            ParentModules.printList();
         } catch (IOException e) {
-            System.out.println("Unable to read file");
+            System.out.println("Opps");
         }
     }
-
 }

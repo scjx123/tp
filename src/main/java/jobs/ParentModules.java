@@ -3,6 +3,7 @@ package jobs;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class ParentModules {
     static Map<String, String> moduleCodeAndName = new HashMap<>();
     String moduleCode;
@@ -19,6 +20,10 @@ public class ParentModules {
     //This function is used to print all ParentModules
     public static void printList() {
         //Note: Due to memory allocation the module sequence will appear differently as input.
-        ParentModules.moduleCodeAndName.forEach((key, value) -> System.out.println(key + " " + value));
+        //moduleCodeAndName.forEach((key, value) -> System.out.println(key + " " + value));
+        for (Map.Entry<String, String> entry : moduleCodeAndName.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+
     }
 }
