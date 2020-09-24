@@ -1,101 +1,32 @@
 package command;
 
+import command.action.HelpAction;
 import constants.Constants;
 import constants.HelpText;
-import lexical.Container;
-import lexical.Token;
-import lexical.Types;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import command.action.Action;
+import data.Data;
 
-public class Command extends Parameter implements Help {
+public class Command implements Help{
 
-    private final String description;
-    private final String[] syntax;
-    private final String[] usages;
-    private final HelpText helpText;
-    private ArrayList<Parameter> content;
+    public ParamNode args;
+    public String name;
+    private HelpText helpText;
+    public Action action;
 
-    public Command(HelpText text, ArrayList<Parameter> values) {
-        super(text.name);
-        this.content = values;
-        this.description = text.description;
-        this.syntax = text.syntax;
-        this.usages = text.usages;
-        helpText = text;
+    public Command(ParamNode args) {
+        this.args = args;
+        name = args.name;
+        helpText = Constants.helpMap.getOrDefault(name, HelpText.LIST); // later change to help.
+        initiateAction();
     }
 
-    public void changeContent(HashMap<String, ArrayList<String>> newContent) {
-        for (Parameter p: content) {
-            p.changeContent(newContent);
-        }
+    private void initiateAction() {
+        action = Constants.actionMap.getOrDefault(name, new HelpAction());
     }
 
-    public void updateParams(List<Token> list) {
-        if (list == null || list.size() == 0) {
-            return;
-        }
-        Parameter p = null; // the atomic parameter of the command
-        for (Parameter par: content) {
-            if (par.name.equals(Constants.ATOMIC)) {
-                p = par;
-            }
-        }
-        Token head = list.get(0);
-        list.remove(head);
-        if (head.token.equals(Types.PAR)) { // starts with parameter
-            if (list.size() == 0) { // par without container
-                for (Parameter parameter: content) {
-                    parameter.updateContainer(head);
-                }
-            } else { // par with container list, update par and then put atoms
-                for (Parameter parameter: content) {
-                    parameter.updateContainer(head.string, list);
-                }
-            }
-        } else if (p != null) { // not par -> everything must be atomic
-            StringBuilder strBuilder = new StringBuilder(head.string).append(Constants.SPACE);
-            for (Token t: list) {
-                if (!t.token.equals(Types.PAR)) {
-                    strBuilder.append(t.string).append(Constants.SPACE);
-                }
-            }
-            String atomText = strBuilder.toString();
-            p.updateContainer(atomText);
-        }
-    }
-
-    @Override
-    public String getContentString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Parameter item : content) {
-            stringBuilder.append(item.toString()).append(Constants.WIN_NEWLINE);
-        }
-        return stringBuilder.toString();
-    }
-
-    @Override
-    public String toString() {
-        if (content == null || content.size() == 0) {
-            return name + "{ }";
-        }
-        String[] split = getContentString().split(Constants.WIN_NEWLINE);
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String str : split) {
-            if (str.equals("")) {
-                continue;
-            }
-            stringBuilder.append(Constants.TAB).append(
-                    str).append(Constants.WIN_NEWLINE);
-        }
-        return name + "{" + Constants.WIN_NEWLINE + stringBuilder.toString() + "}";
-    }
-
-    @Override
-    public Command getClone() {
-        return new Command(helpText, content);
+    public void act(Data tasks) {
+        action.prepare(args);
+        action.act(tasks);
     }
 
     @Override
@@ -105,22 +36,27 @@ public class Command extends Parameter implements Help {
 
     @Override
     public String getDescription() {
-        return description;
+        return helpText.description;
     }
 
     @Override
     public String[] getSyntax() {
-        return syntax;
+        return helpText.syntax;
     }
 
     @Override
     public String[] getUsages() {
-        return usages;
+        return helpText.usages;
     }
 
     @Override
     public String getHelp() {
-        String output = "";
-        return null;
+        return helpText.toString();
     }
+
+    @Override
+    public String toString() {
+        return args.toString();
+    }
+
 }

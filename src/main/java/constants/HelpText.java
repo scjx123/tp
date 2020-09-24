@@ -95,4 +95,23 @@ public enum HelpText {
         this.description = description;
         this.usages = usages;
     }
+
+    public String arrayToString(String[] input) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String string: input) {
+            stringBuilder.append(string).append(Constants.WIN_NEWLINE);
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("Name:");
+        stringBuilder.append(Constants.SPACE).append(name).append(Constants.WIN_NEWLINE);
+        stringBuilder.append("Description:").append(Constants.SPACE).append(
+                description).append(Constants.WIN_NEWLINE);
+        stringBuilder.append("Syntax:").append(Constants.WIN_NEWLINE).append(arrayToString(syntax));
+        stringBuilder.append("Usages:").append(Constants.WIN_NEWLINE).append(arrayToString(usages));
+        return stringBuilder.toString();
+    }
 }

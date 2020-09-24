@@ -1,6 +1,5 @@
 package lexical;
 
-import java.util.List;
 import java.util.ArrayList;
 import constants.Constants;
 
@@ -31,8 +30,8 @@ public class Lexer {
         return s.substring(i, j);
     }
 
-    public List<Token> analyze(String input) {
-        List<Token> result = new ArrayList<>();
+    public ArrayList<Token> analyze(String input) {
+        ArrayList<Token> result = new ArrayList<>();
         String inString = input.trim();
         boolean isCommand = true;
         for (int i = 0; i < inString.length(); ) {

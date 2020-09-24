@@ -1,5 +1,8 @@
 package constants;
 
+import command.action.*;
+import java.util.Map;
+
 public class Constants {
 
     public static final char LPAREN = '(';
@@ -31,7 +34,12 @@ public class Constants {
     public static final String WIN_NEWLINE = RETURN + NEWLINE;
     public static final String ZERO_LENGTH_STRING = "";
     public static final String PATH = "./data";
-    public static final String LOAD_FILENAME = "duke.txt";
+    public static final String LOAD_FILENAME = "commands.txt";
     public static final String SAVE_FILENAME = "parsed.txt";
-
+    public static final Map<String, Action> actionMap = Map.ofEntries(
+            Map.entry("list", new ListAction()),
+            Map.entry("add", new AddAction()));
+    public static final Map<String, HelpText> helpMap = Map.ofEntries(
+            Map.entry("list", HelpText.LIST),
+            Map.entry("add", HelpText.ADD));
 }

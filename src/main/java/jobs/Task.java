@@ -1,13 +1,14 @@
 package jobs;
 
 import constants.Constants;
+import data.Item;
 
-public class Task {
+public class Task extends Item {
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
+        super(description);
         this.isDone = false;
     }
 
