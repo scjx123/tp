@@ -13,8 +13,9 @@ import java.util.Scanner;
 import jobs.ParentModules;
 
 public class ReadFile {
-    static String moduleName, moduleCode;
-    private static final String FILE_NAME= "courseList.txt";
+    static String moduleName;
+    static String moduleCode;
+    private static final String FILE_NAME = "courseList.txt";
     private static final String FILE_PATH = "./data";
     static ArrayList<String> fileContent = new ArrayList<>();
     static ArrayList<ParentModules> moduleList = new ArrayList<>();
@@ -24,7 +25,7 @@ public class ReadFile {
     //read file content
     public static List<String> readFile() throws IOException {
         //read previous data
-        if(!Files.exists(p)){
+        if (!Files.exists(p)) {
             Files.createFile(p);
         }
         return Files.readAllLines(p);
@@ -34,8 +35,8 @@ public class ReadFile {
     private static void parseFile(List<String> fileContent) {
         for (String modules : fileContent) {
             String[] tempModules = modules.split("_");
-            moduleName=tempModules[0];
-            moduleCode=tempModules[1];
+            moduleName = tempModules[0];
+            moduleCode = tempModules[1];
             ParentModules module = new ParentModules(tempModules[0], tempModules[1]);
             moduleList.add(module);
         }
@@ -43,9 +44,9 @@ public class ReadFile {
 
     //retrieve past saved data
     public static void loadModules() {
-        try{
+        try {
             parseFile(readFile());
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Unable to read file");
         }
     }

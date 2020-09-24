@@ -5,12 +5,13 @@ import java.util.Map;
 
 public class ParentModules {
     static Map<String, String> moduleCodeAndName = new HashMap<>();
-    String moduleCode, moduleName;
+    String moduleCode;
+    String moduleName;
     static boolean isMultiple;
 
-    public ParentModules(String Code, String Name) {
-        moduleCode = Code;
-        moduleName = Name;
+    public ParentModules(String code, String name) {
+        moduleCode = code;
+        moduleName = name;
         moduleCodeAndName.put(moduleCode, moduleName);
         isMultiple = false;
     }

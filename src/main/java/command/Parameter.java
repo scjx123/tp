@@ -36,7 +36,7 @@ public class Parameter extends Container {
     public void updateContainer(Token t) {
         for (Container container: content) {
             if (container.name.equals(t.string)) {
-                container.changeContent(Constants.DEFAULT);  //if the parameters matches what we have then we changecontent
+                container.changeContent(Constants.DEFAULT);
             } else {
                 container.changeContent(Constants.EMPTY);
             }
