@@ -24,7 +24,7 @@ public class TaskList {
         tasks.add(task);
     }
 
-    static void showNewlyAddedTask() {
+    public static void showNewlyAddedTask() {
         Ui.getAddedTask();
     }
 }
