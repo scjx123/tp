@@ -1,2 +1,4 @@
-package seedu.duke;public class OtherException {
+package seedu.duke;
+
+public class OtherException extends DukeException{
 }
