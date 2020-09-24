@@ -1,7 +1,10 @@
 package constants;
 
-import command.action.*;
-
+import command.action.Action;
+import command.action.AddAction;
+import command.action.ListAction;
+import command.action.HelpAction;
+import command.action.ByeAction;
 import java.util.Map;
 
 public class Constants {
