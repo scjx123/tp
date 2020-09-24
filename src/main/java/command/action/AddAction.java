@@ -8,8 +8,9 @@ public class AddAction implements Action {
     private ParamNode args;
 
     @Override
-    public void act(Data tasks) {
-
+    public boolean act(Data tasks) {
+        // do stuff
+        return true;
     }
 
     @Override

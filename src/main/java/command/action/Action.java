@@ -5,7 +5,8 @@ import data.Data;
 
 public interface Action {
 
-    void act(Data tasks);
+    boolean act(Data tasks);
+
     void prepare(ParamNode args);
 
 }

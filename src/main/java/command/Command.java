@@ -6,7 +6,7 @@ import constants.HelpText;
 import command.action.Action;
 import data.Data;
 
-public class Command implements Help{
+public class Command implements Help {
 
     public ParamNode args;
     public String name;
@@ -24,9 +24,9 @@ public class Command implements Help{
         action = Constants.actionMap.getOrDefault(name, new HelpAction());
     }
 
-    public void act(Data tasks) {
+    public boolean act(Data tasks) {
         action.prepare(args);
-        action.act(tasks);
+        return action.act(tasks);
     }
 
     @Override

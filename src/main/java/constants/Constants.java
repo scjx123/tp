@@ -1,6 +1,7 @@
 package constants;
 
 import command.action.*;
+
 import java.util.Map;
 
 public class Constants {
@@ -17,6 +18,7 @@ public class Constants {
     public static final String PREV = "prev";
     public static final String SEL = "sel";
     public static final String ADD = "add";
+    public static final String BYE = "bye";
     public static final String MC = "mc";
     public static final String LIST = "list";
     public static final String LINE_UNIT = "_";
@@ -37,9 +39,10 @@ public class Constants {
     public static final String LOAD_FILENAME = "commands.txt";
     public static final String SAVE_FILENAME = "parsed.txt";
     public static final Map<String, Action> actionMap = Map.ofEntries(
-            Map.entry("list", new ListAction()),
-            Map.entry("add", new AddAction()));
+            Map.entry(LIST, new ListAction()),
+            Map.entry(ADD, new AddAction()),
+            Map.entry(BYE, new ByeAction()));
     public static final Map<String, HelpText> helpMap = Map.ofEntries(
-            Map.entry("list", HelpText.LIST),
-            Map.entry("add", HelpText.ADD));
+            Map.entry(LIST, HelpText.LIST),
+            Map.entry(ADD, HelpText.ADD));
 }

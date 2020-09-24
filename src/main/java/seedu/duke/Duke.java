@@ -45,12 +45,15 @@ public class Duke {
 
     public static void main(String[] args) {
         Data data = new Data();
+        // the following 3 lines are for testing only. to be removed when command function is added.
         data.addItem(new Module("CS1010", "Mod1"));
         data.addItem(new Module("CS2113", "Mod2"));
         data.addItem(new Module("CS2113T", "Mod2.5"));
+        // initialize UI with suitable graphic size
         UI ui = new UI(data, new Bitmap(100,12), new Bitmap(100,6));
         ui.initialize();
-        ui.drawWelcomeScreen();
+        //uncomment this to show welcome screen upon startup.
+        //ui.drawWelcomeScreen();
         Scanner inputGetter = new Scanner(System.in);
         Lexer lexer = new Lexer();
         Parser parser = new Parser();
@@ -60,7 +63,10 @@ public class Duke {
             ArrayList<Token> tokens = lexer.analyze(input);
             ArrayList<Command> parsed = parser.parseTree(tokens);
             for (Command cmd: parsed) {
-                cmd.act(data);
+                isRunning = cmd.act(data);
+                if (!isRunning) {
+                    break;
+                }
                 ui.draw();
             }
         }
