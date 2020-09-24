@@ -5,6 +5,7 @@ public class Token {
     public Types token;
     public final String string;
 
+    //A token is a small part of the whole command
     public Token(Types t, char c) {
         this.token = t;
         this.string = Character.toString(c);

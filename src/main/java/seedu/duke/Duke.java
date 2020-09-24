@@ -6,6 +6,7 @@ import command.Command;
 import constants.Constants;
 import io.FileLoader;
 import io.FileSaver;
+import jobs.ParentModules;
 import lexical.Lexer;
 import lexical.Parser;
 import lexical.Token;
@@ -44,24 +45,28 @@ public class Duke {
     public static void testIO() {
         //Test loader
         System.out.println("Loading some commands from a file...");
-        final FileLoader loader = new FileLoader(Constants.PATH, Constants.LOAD_FILENAME);
-        String[] strings = loader.loadAllLines();
+        final FileLoader loader = new FileLoader(Constants.PATH, Constants.LOAD_FILENAME); //load from duke
+        String[] strings = loader.loadAllLines(); //read all lines
         StringBuilder stringBuilder = new StringBuilder();
+
         //Test lexer
         System.out.println("Loaded. Now lexing...");
         for (String str: strings) {
-            stringBuilder.append(str).append(";");
+            stringBuilder.append(str).append(";"); //reconstruct the lines as a command.
         }
         Lexer lexer = new Lexer();
+        //each command, is broken down into parts now and identified each type and assembled a list.
         List<Token> tokens = lexer.analyze(stringBuilder.toString());
         for (Token t: tokens) {
             System.out.println(t);
         }
+
         //Test parser
         System.out.println("Lexing done. Now parsing...");
         Parser parser = new Parser();
         List<Command> parsed = parser.parseTree(tokens);
         System.out.println(parsed);
+
         //Test saver
         System.out.println("Saving parsed result as a text file...");
         FileSaver saver = new FileSaver(Constants.PATH, Constants.SAVE_FILENAME);
@@ -70,6 +75,8 @@ public class Duke {
 
     public static void main(String[] args) {
         //testBitmap();
-        testIO();
+        //testIO();
+        io.ReadFile.loadModules();
+        ParentModules.printList();
     }
 }

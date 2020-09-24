@@ -15,13 +15,13 @@ public class Parser {
         int lastIndex = 0;
         List<List<Token>> output = new ArrayList<>();
         List<Token> target = new ArrayList<>();
-        output.add(target);
+        output.add(target); //output is a list that contains a list of target.
         while (i < input.size()) {
-            Token token = input.get(i);
-            if (token.token.equals(key)) {
-                if (output.get(lastIndex).size() > 0) {
-                    output.add(new ArrayList<>());
-                    lastIndex++;
+            Token token = input.get(i); //get each token
+            if (token.token.equals(key)) { //if key== Types.END, then this is end of line.
+                if (output.get(lastIndex).size() > 0) { //if the last index of output is not empty
+                    output.add(new ArrayList<>()); //create a new list .
+                    lastIndex++; //last index becomes 1
                 }
                 if (isKeepKey) {
                     output.get(lastIndex).add(token);
@@ -36,23 +36,24 @@ public class Parser {
     }
 
     public List<Command> parseTree(List<Token> input) {
+        //trying to detect each semicolon and split commands commands into separate list
         List<List<Token>> splitCommands = splitList(input, Types.END, false);
         List<Command> output = new ArrayList<>();
-        for (List<Token> tokenList: splitCommands) {
+        for (List<Token> tokenList: splitCommands) { //for each string command,
             int i = 0;
             while (i < tokenList.size()) {
-                if (tokenList.get(i).token.equals(Types.COM)) {
+                if (tokenList.get(i).token.equals(Types.COM)) { //locate the command type.
                     break;
                 } else {
                     i++;
                 }
             }
-            Token head = tokenList.get(i);
-            Command command = getCommand(head.string);
-            tokenList.remove(head);
+            Token head = tokenList.get(i); //store command as head
+            Command command = getCommand(head.string); //match command
+            tokenList.remove(head); //remove head and move on to the next string.
             List<List<Token>> splitParams = splitList(tokenList, Types.PAR, true);
             for (List<Token> paramList: splitParams) {
-                command.updateParams(paramList);
+                command.updateParams(paramList); //give the command, a list of remaining of the string
             }
             output.add(command);
         }
@@ -88,17 +89,17 @@ public class Parser {
             atoms.add(new Container(Constants.LINE_UNIT, Constants.EMPTY));
             params.add(new Parameter(Constants.ATOMIC, atoms));
             return new Command(HelpText.SEL, params); //break unreachable
-        case Constants.ADD:
+        case Constants.ADD: //all the possible contents for 'add' will be put in here
             content1.add(new Container("s", Constants.DEFAULT));
             content1.add(new Container("m", Constants.EMPTY));
             content1.add(new Container("help", Constants.EMPTY));
-            params.add(new Parameter("option", content1));
+            params.add(new Parameter("option", content1)); //under 'options' it contains s,m,help
             content2.add(new Container("mod", Constants.EMPTY));
             content2.add(new Container("task", Constants.EMPTY));
             content2.add(new Container("help", Constants.DEFAULT));
-            params.add(new Parameter("type", content2));
-            atoms.add(new Container(Constants.LINE_UNIT, Constants.EMPTY));
-            params.add(new Parameter(Constants.ATOMIC, atoms));
+            params.add(new Parameter("type", content2)); //under 'type', it contains, mod,task,help
+            atoms.add(new Container(Constants.LINE_UNIT, Constants.EMPTY)); //instantiate atoms.
+            params.add(new Parameter(Constants.ATOMIC, atoms)); //add atoms into parameters.
             return new Command(HelpText.ADD, params); //break unreachable
         case Constants.MC:
             content1.add(new Container("c", Constants.DEFAULT));

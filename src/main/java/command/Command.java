@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+//this class represents the whole command object given by the user. d
 public class Command extends Parameter implements Help {
 
     private final String description;
@@ -18,7 +19,8 @@ public class Command extends Parameter implements Help {
     private final HelpText helpText;
     private ArrayList<Parameter> content;
 
-    public Command(HelpText text, ArrayList<Parameter> values) {
+    public Command(HelpText text, ArrayList<Parameter> values) { //values is the list of possible options for the
+        //given command eg. Add.
         super(text.name);
         this.content = values;
         this.description = text.description;
@@ -33,33 +35,34 @@ public class Command extends Parameter implements Help {
         }
     }
 
-    public void updateParams(List<Token> list) {
+    public void updateParams(List<Token> list) { //given a list of remaining of the strings
         if (list == null || list.size() == 0) {
             return;
         }
         Parameter p = null; // the atomic parameter of the command
         for (Parameter par: content) {
             if (par.name.equals(Constants.ATOMIC)) {
-                p = par;
+                p = par; //if its an atom, pull out and call it a parameter p
             }
         }
-        Token head = list.get(0);
-        list.remove(head);
+        Token head = list.get(0); //further process the string, as we now know it's 'ADD' or 'SEL'
+        list.remove(head); //we can then remove the head
         if (head.token.equals(Types.PAR)) { // starts with parameter
             if (list.size() == 0) { // par without container
                 for (Parameter parameter: content) {
-                    parameter.updateContainer(head);
+                    parameter.updateContainer(head); //match the command of head to if we found a match,
+                    // we change the value of it to 1
                 }
             } else { // par with container list, update par and then put atoms
                 for (Parameter parameter: content) {
-                    parameter.updateContainer(head.string, list);
+                    parameter.updateContainer(head.string, list); //-m
                 }
             }
         } else if (p != null) { // not par -> everything must be atomic
             StringBuilder strBuilder = new StringBuilder(head.string).append(Constants.SPACE);
             for (Token t: list) {
                 if (!t.token.equals(Types.PAR)) {
-                    strBuilder.append(t.string).append(Constants.SPACE);
+                    strBuilder.append(t.string).append(Constants.SPACE); //construct the list of modules
                 }
             }
             String atomText = strBuilder.toString();

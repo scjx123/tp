@@ -52,7 +52,7 @@ public class Lexer {
             case Constants.PARAM:
                 i++;
                 String command = getCommand(inString, i);
-                i += command.length();
+                i += command.length(); //skip away the rest of the commands
                 result.add(new Token(Types.PAR, command));
                 break;
             case Constants.CMD_END:

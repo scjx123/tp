@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class Parameter extends Container {
 
     private ArrayList<Container> content;
@@ -35,7 +36,7 @@ public class Parameter extends Container {
     public void updateContainer(Token t) {
         for (Container container: content) {
             if (container.name.equals(t.string)) {
-                container.changeContent(Constants.DEFAULT);
+                container.changeContent(Constants.DEFAULT);  //if the parameters matches what we have then we changecontent
             } else {
                 container.changeContent(Constants.EMPTY);
             }
