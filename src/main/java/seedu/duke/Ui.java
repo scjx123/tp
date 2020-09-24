@@ -16,7 +16,7 @@ public class Ui {
         showLine();
         System.out.println("   Got it. I've added this task:\n\t"
                 + TaskList.tasks.get(TaskList.tasks.size()-1) + "\n   Now you have "
-                + TaskList.tasks.size() + " tasks in the list.\n");
+                + TaskList.tasks.size() + " tasks in the list.");
         showLine();
     }
 
