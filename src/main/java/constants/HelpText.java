@@ -6,102 +6,102 @@ public enum HelpText {
             "bye",
             "Quit the program",
             new String[]{
-                    "bye"
+                "bye"
             },
             new String[]{
-                    "1. \"bye\" >> quits the program"
+                "1. \"bye\" >> quits the program"
             }),
     CLEAR(
             "clear",
             "Clear the task list",
             new String[]{
-                    "clear"
+                "clear"
             },
             new String[]{
-                    "1. \"clear\" >> clears the task list"
+                "1. \"clear\" >> clears the task list"
             }),
     DEADLINE(
             "deadline",
             "Add a deadline to the task list",
             new String[]{
-                    "deadline [description] -by [time]"
+                "deadline [description] -by [time]"
             },
             new String[]{
-                    "1. \"deadline ddl -by 5:00pm\" >> adds a deadline with description \"ddl\" and time \"5:00pm\""
+                "1. \"deadline ddl -by 5:00pm\" >> adds a deadline with description \"ddl\" and time \"5:00pm\""
             }),
     DELETE(
             "delete",
             "Delete a task from the task list",
             new String[]{
-                    "delete [index]"
+                "delete [index]"
             },
             new String[]{
-                    "1. \"delete 1\" >> deletes the task with index 1 from the task list"
+                "1. \"delete 1\" >> deletes the task with index 1 from the task list"
             }),
     DONE(
             "done",
             "Mark a task as done",
             new String[]{
-                    "done [index]"
+                "done [index]"
             },
             new String[]{
-                    "1. \"done 1\" >> marks the task with index 1 as done"
+                "1. \"done 1\" >> marks the task with index 1 as done"
             }),
     EVENT(
             "event",
             "Add an event to the task list",
             new String[]{
-                    "event [description] -at [time]"
+                "event [description] -at [time]"
             },
             new String[]{
-                    "1. \"event e -at 7:00am\" >> adds an event with description \"e\" and time \"7:00am\""
+                "1. \"event e -at 7:00am\" >> adds an event with description \"e\" and time \"7:00am\""
             }),
     HELP(
             "help",
             "Print the list of available commands, or print the details of a specified command",
             new String[]{
-                    "help [target]",
-                    "target: the name of the target command"
+                "help [target]",
+                "target: the name of the target command"
             },
             new String[]{
-                    "1. \"help\" >> prints the list of available commands",
-                    "2. \"help event\" >> prints the details of the \"event\" command"
+                "1. \"help\" >> prints the list of available commands",
+                "2. \"help event\" >> prints the details of the \"event\" command"
             }),
     LIST(
             "list",
             "Print a list of all added tasks",
             new String[]{
-                    "list"
+                "list"
             },
             new String[]{
-                    "1. \"list\" >> list all added tasks"
+                "1. \"list\" >> list all added tasks"
             }),
     TODO(
             "todo",
             "Add a todo to the task list",
             new String[]{
-                    "todo [description]"
+                "todo [description]"
             },
             new String[]{
-                    "1. \"todo class\" >> adds a todo with description \"class\""
+                "1. \"todo class\" >> adds a todo with description \"class\""
             }),
     UNDONE(
             "undone",
             "Mark a task as undone",
             new String[]{
-                    "undone [index]"
+                "undone [index]"
             },
             new String[]{
-                    "1. \"undone 1\" >> marks the task with index 1 as undone"
+                "1. \"undone 1\" >> marks the task with index 1 as undone"
             }),
     UNKNOWN(
             "unknown",
             "Prints the error message for an unrecognized command",
             new String[]{
-                    "unknown"
+                "unknown"
             },
             new String[]{
-                    "1. \"unknown\" >> prints \"OOPS, I don't know what that means :-( Try \"help\"!\""
+                "1. \"unknown\" >> prints \"OOPS, I don't know what that means :-( Try \"help\"!\""
             }),
     NEXT(
             "next",

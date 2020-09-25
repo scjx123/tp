@@ -7,19 +7,18 @@ import constants.Constants;
 import data.TaskList;
 import io.Storage;
 import lexical.Parser;
-import visualize.CLI;
-import visualize.FancyCLI;
+import visualize.Cli;
 
 public class Duke {
 
     private TaskList tasks;
     private final Storage storage;
-    private final CLI ui;
+    private final Cli ui;
     private final Parser parser;
 
     public Duke(String directory, String fileName) {
         //ui = new FancyCLI(); //uncomment this to use gui
-        ui = new CLI(); //uncomment this to use normal cli for backup
+        ui = new Cli(); //uncomment this to use normal cli for backup
         ui.showWelcome();
         parser = new Parser();
         storage = new Storage(directory, fileName, parser);

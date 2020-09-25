@@ -1,6 +1,6 @@
 package data;
 
-import jobs.Task;;
+import jobs.Task;
 import messages.MessageOptions;
 import java.util.ArrayList;
 

@@ -4,9 +4,7 @@ import constants.Constants;
 import data.TaskList;
 import messages.MessageOptions;
 
-import java.util.Collections;
-
-public class FancyCLI extends CLI{
+public class FancyCli extends Cli {
 
     private Bitmap bmpList;
     private Bitmap bmpSel;
@@ -18,7 +16,7 @@ public class FancyCLI extends CLI{
     private final int maxSelY = Constants.BITMAP_SEL_H - 1;
     private int currentColor;
 
-    public FancyCLI() {
+    public FancyCli() {
         super();
         currentColor = 1;
         this.bmpList = new Bitmap(Constants.BITMAP_W, Constants.BITMAP_LIST_H);
@@ -66,27 +64,27 @@ public class FancyCLI extends CLI{
 
     public void showBlock(int x, int y, int width, int height, String input, boolean isDisplayMode) {
         int startIndex = 0;
-        int yIncrement = 0;
+        int deltaY = 0;
         int myWidth = isDisplayMode ? width : maxX - x;
         int myHeight = isDisplayMode ? height : 1;
         int maxY = isDisplayMode ? maxListY : maxSelY;
         while (startIndex + myWidth < input.length()) {
-            if (y + yIncrement > maxY) {
+            if (y + deltaY > maxY) {
                 return;
             }
             String string = input.substring(startIndex, startIndex + myWidth);
             startIndex += myWidth;
-            fillCellLine(x, y + yIncrement, myWidth, isDisplayMode, string);
-            yIncrement++;
-            if (yIncrement >= myHeight) {
+            fillCellLine(x, y + deltaY, myWidth, isDisplayMode, string);
+            deltaY++;
+            if (deltaY >= myHeight) {
                 return;
             }
         }
-        if (y + yIncrement > maxY) {
+        if (y + deltaY > maxY) {
             return;
         }
         String string = input.substring(startIndex);
-        fillCellLine(x, y + yIncrement, myWidth, isDisplayMode, string);
+        fillCellLine(x, y + deltaY, myWidth, isDisplayMode, string);
         if (isDisplayMode) {
             currentColor++;
             if (currentColor > 255) {
@@ -128,7 +126,7 @@ public class FancyCLI extends CLI{
         int y = Constants.BANNER;
         int x = 0;
         int maxY = isDisplayMode ? maxListY : maxSelY;
-        for (String line: lines) {
+        for (String line : lines) {
             showBlock(x, y, Constants.CELL_W, Constants.CELL_H, line, isDisplayMode);
             if (isDisplayMode) {
                 x += Constants.CELL_W;

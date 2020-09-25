@@ -1,6 +1,18 @@
 package constants;
 
-import command.action.*;
+import command.action.Action;
+import command.action.ByeAction;
+import command.action.UnknownAction;
+import command.action.UndoneAction;
+import command.action.TodoAction;
+import command.action.ListAction;
+import command.action.HelpAction;
+import command.action.EventAction;
+import command.action.DoneAction;
+import command.action.DeleteAction;
+import command.action.DeadlineAction;
+import command.action.AddAction;
+import command.action.ClearAction;
 
 import java.util.Map;
 
@@ -30,8 +42,8 @@ public class Constants {
     public static final String PARAM_SIGNATURE = SPACE + PARAM_LEFT;
     public static final String PARAM_SEPARATOR = LINE_UNIT + PARAM_LEFT;
     public static final String DETAILS_SIGNATURE = ": ";
-    public static final String TICK = "\u2713";
-    public static final String CROSS = "\u2718";
+    public static final String TICK = "V"; //"\u2713";
+    public static final String CROSS = "X"; //"\u2718";
     public static final String TICK_ICON = ICON_LEFT + TICK + ICON_RIGHT;
     public static final String CROSS_ICON = ICON_LEFT + CROSS + ICON_RIGHT;
     public static final String TAB = "\t";
