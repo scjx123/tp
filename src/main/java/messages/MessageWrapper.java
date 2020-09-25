@@ -84,8 +84,7 @@ public class MessageWrapper {
     }
 
     private String buildLine(int lineIndent, String lineBase) {
-        return Constants.TAB.repeat(lineIndent) +
-                lineBase + Constants.WIN_NEWLINE;
+        return Constants.TAB.repeat(lineIndent) + lineBase + Constants.WIN_NEWLINE;
     }
 
     private String buildMessage(int indent, int index, String message,
@@ -95,8 +94,7 @@ public class MessageWrapper {
             if (indexOption == MessageOptions.INDEXED_NUM) {
                 formattedMessage += index + Constants.DOT;
             } else if (indexOption == MessageOptions.INDEXED_ABC) {
-                formattedMessage += (char) (index +
-                        Constants.LETTER_OFFSET) + Constants.DOT;
+                formattedMessage += (char) (index + Constants.LETTER_OFFSET) + Constants.DOT;
             }
         }
         formattedMessage += message;
