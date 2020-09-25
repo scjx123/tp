@@ -1,16 +1,16 @@
 package command.action;
 
 import command.ParamNode;
-import data.Data;
+import data.TaskList;
 
-public class AddAction implements Action {
+public class AddAction extends Action {
 
     private ParamNode args;
 
     @Override
-    public boolean act(Data tasks) {
+    public String act(TaskList tasks) {
         // do stuff
-        return true;
+        return "";
     }
 
     @Override

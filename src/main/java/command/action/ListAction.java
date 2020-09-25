@@ -1,20 +1,20 @@
 package command.action;
 
-import command.ParamNode;
-import data.Data;
+import constants.Constants;
+import data.TaskList;
+import jobs.Task;
+import messages.MessageOptions;
 
-public class ListAction implements Action {
-
-    private ParamNode args;
-
-    @Override
-    public boolean act(Data tasks) {
-        tasks.updateListUI(null);
-        return true;
-    }
+public class ListAction extends Action {
 
     @Override
-    public void prepare(ParamNode args) {
-        this.args = args;
+    public String act(TaskList tasks) {
+        StringBuilder builder = new StringBuilder();
+        tasks.indexOption = MessageOptions.INDEXED_NUM;
+        for (Task task: tasks.tasks) {
+            builder.append(task.toString()).append(Constants.WIN_NEWLINE);
+        }
+        return builder.toString();
     }
+
 }

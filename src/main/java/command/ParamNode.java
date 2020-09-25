@@ -67,8 +67,14 @@ public class ParamNode {
         int i = 0;
         for ( ; i < tokens.size(); i++) {
             Token token = tokens.get(i);
-            if (token.token.equals(type) || token.token.equals(Types.END)) {
-                return i - 1;
+            if (type.equals(Types.STR)) {
+                if (!token.token.equals(Types.STR)) {
+                    return i - 1;
+                }
+            } else {
+                if (token.token.equals(type) || token.token.equals(Types.END)) {
+                    return i - 1;
+                }
             }
         }
         return i - 1;
@@ -81,6 +87,12 @@ public class ParamNode {
             stringBuilder.append(Constants.TAB).append(string).append(Constants.WIN_NEWLINE);
         }
         return stringBuilder.toString();
+    }
+
+    public String toFlatString() {
+        String myName = name == null ? "" : name + " ";
+        String nextName = thisData == null ? "" : thisData.toFlatString();
+        return (myName + nextName).trim();
     }
 
     @Override

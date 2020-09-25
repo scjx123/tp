@@ -1,32 +1,69 @@
 package command;
 
-import command.action.HelpAction;
+import command.action.UnknownAction;
 import constants.Constants;
-import constants.HelpText;
 import command.action.Action;
-import data.Data;
+import constants.HelpText;
+import data.TaskList;
+import exceptions.InvalidCommandException;
 
 public class Command implements Help {
 
     public ParamNode args;
+    public ParamNode[] flattenedArgs;
     public String name;
     private HelpText helpText;
     public Action action;
+    public String result = "";
 
     public Command(ParamNode args) {
         this.args = args;
         name = args.name;
-        helpText = Constants.helpMap.getOrDefault(name, HelpText.LIST); // later change to help.
+        flattenedArgs = new ParamNode[0];
+        if (args.thisData != null) {
+            flattenedArgs = args.thisData.flatten().toArray(flattenedArgs);
+        }
+        helpText = Constants.helpMap.getOrDefault(name, HelpText.UNKNOWN); // later change to help.
         initiateAction();
     }
 
-    private void initiateAction() {
-        action = Constants.actionMap.getOrDefault(name, new HelpAction());
+    private boolean isArgsValid() {
+        String targetArg = Constants.paramMap.get(name);
+        if (targetArg == null) {
+            return true; // does not need any parameter
+        } else {
+            for (ParamNode node: flattenedArgs) {
+                if (targetArg.equals(node.name)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
-    public boolean act(Data tasks) {
-        action.prepare(args);
-        return action.act(tasks);
+    private void initiateAction() {
+        action = Constants.actionMap.getOrDefault(name, new UnknownAction());
+    }
+
+    public void execute(TaskList tasks) {
+        try {
+            if (isArgsValid()) {
+                action.prepare(args);
+                result = action.act(tasks);
+            } else {
+                throw new InvalidCommandException();
+            }
+        } catch (Exception e) {
+            StringBuilder builder = new StringBuilder(Constants.INVALID);
+            for (String string: getSyntax()) {
+                builder.append(string).append(Constants.TAB);
+            }
+            result = builder.toString();
+        }
+    }
+
+    public boolean isExit() {
+        return result.equals(Constants.messageMap.get(Constants.BYE));
     }
 
     @Override

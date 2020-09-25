@@ -1,3 +1,0 @@
-add -mod -m CS1010 CS2113T CG2027
-list -all
-sel CS2113T

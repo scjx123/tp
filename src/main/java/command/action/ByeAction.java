@@ -1,17 +1,10 @@
 package command.action;
 
-import command.ParamNode;
-import data.Data;
+public class ByeAction extends Action {
 
-public class ByeAction implements Action {
-
-    @Override
-    public boolean act(Data tasks) {
-        return false;
+    public ByeAction() {
+        super();
+        isExiting = true;
     }
 
-    @Override
-    public void prepare(ParamNode args) {
-
-    }
 }

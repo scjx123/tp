@@ -2,17 +2,17 @@ package jobs;
 
 import constants.Constants;
 
-public class Event extends Task {
+public class Event extends Task{
 
     protected String at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at){
         super(description);
         this.at = at;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return Constants.EVENT_ICON + super.toString() + " (at: " + at + ")";
     }
 }

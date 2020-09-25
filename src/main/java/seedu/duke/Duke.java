@@ -1,74 +1,59 @@
 package seedu.duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import command.Command;
 import constants.Constants;
-import data.Data;
-import data.Module;
-import io.FileLoader;
-import lexical.Lexer;
+import data.TaskList;
+import io.Storage;
 import lexical.Parser;
-import lexical.Token;
-import visualize.Bitmap;
-import visualize.UI;
+import visualize.CLI;
+import visualize.FancyCLI;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
 
-    public static void testIO() {
-        //Test loader
-        System.out.println("Loading some commands from a file...");
-        final FileLoader loader = new FileLoader(Constants.PATH, Constants.LOAD_FILENAME);
-        String[] strings = loader.loadAllLines();
-        StringBuilder stringBuilder = new StringBuilder();
-        //Test lexer
-        System.out.println("Loaded. Now lexing...");
-        for (String str: strings) {
-            stringBuilder.append(str).append(";");
+    private TaskList tasks;
+    private final Storage storage;
+    private final CLI ui;
+    private final Parser parser;
+
+    public Duke(String directory, String fileName) {
+        //ui = new FancyCLI(); //uncomment this to use gui
+        ui = new CLI(); //uncomment this to use normal cli for backup
+        ui.showWelcome();
+        parser = new Parser();
+        storage = new Storage(directory, fileName, parser);
+        try {
+            tasks = storage.load();
+        } catch (Exception e) {
+            ui.showText(e.getMessage());
+            tasks = new TaskList();
         }
-        Lexer lexer = new Lexer();
-        ArrayList<Token> tokens = lexer.analyze(stringBuilder.toString());
-        //Test parser
-        System.out.println("Lexing done. Now parsing...");
-        Parser parser = new Parser();
-        ArrayList<Command> parsed = parser.parseTree(tokens);
-        System.out.println(parsed);
-        //Test saver
-        //System.out.println("Saving parsed result as a text file...");
-        //FileSaver saver = new FileSaver(Constants.PATH, Constants.SAVE_FILENAME);
-        //System.out.println(saver.save(parsed.toString()) ? "Saved." : "Save failed.");
+    }
+
+    public void run() {
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.nextLine();
+                ArrayList<Command> commands = parser.parse(fullCommand);
+                for (Command c: commands) {
+                    c.execute(tasks);
+                    ui.update(c.result, tasks);
+                    isExit = c.isExit();
+                    storage.saveTasks(tasks.tasks);
+                }
+            } catch (Exception e) {
+                String message = e.getMessage();
+                if (message == null) {
+                    message = Constants.INDEX_OUT;
+                }
+                ui.showText(message);
+            }
+        }
     }
 
     public static void main(String[] args) {
-        Data data = new Data();
-        // the following 3 lines are for testing only. to be removed when command function is added.
-        data.addItem(new Module("CS1010", "Mod1"));
-        data.addItem(new Module("CS2113", "Mod2"));
-        data.addItem(new Module("CS2113T", "Mod2.5"));
-        // initialize UI with suitable graphic size
-        UI ui = new UI(data, new Bitmap(100,12), new Bitmap(100,6));
-        ui.initialize();
-        //uncomment this to show welcome screen upon startup.
-        //ui.drawWelcomeScreen();
-        Scanner inputGetter = new Scanner(System.in);
-        Lexer lexer = new Lexer();
-        Parser parser = new Parser();
-        boolean isRunning = true;
-        while (isRunning) {
-            String input = inputGetter.nextLine();
-            ArrayList<Token> tokens = lexer.analyze(input);
-            ArrayList<Command> parsed = parser.parseTree(tokens);
-            for (Command cmd: parsed) {
-                isRunning = cmd.act(data);
-                if (!isRunning) {
-                    break;
-                }
-                ui.draw();
-            }
-        }
+        new Duke(Constants.PATH, Constants.FILENAME).run();
     }
 }
