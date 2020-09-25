@@ -84,12 +84,12 @@ public class MessageWrapper {
     }
 
     private String buildLine(int lineIndent, String lineBase) {
-        return Constants.SPACE.repeat(lineIndent) + lineBase + Constants.WIN_NEWLINE;
+        return Constants.TAB.repeat(lineIndent) + lineBase + Constants.WIN_NEWLINE;
     }
 
     private String buildMessage(int indent, int index, String message,
                                 boolean isAutoReturn, MessageOptions indexOption) {
-        String formattedMessage = Constants.SPACE.repeat(indent);
+        String formattedMessage = Constants.TAB.repeat(indent);
         if (index > 0) {
             if (indexOption == MessageOptions.INDEXED_NUM) {
                 formattedMessage += index + Constants.DOT;

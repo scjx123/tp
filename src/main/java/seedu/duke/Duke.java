@@ -8,6 +8,7 @@ import data.TaskList;
 import io.Storage;
 import lexical.Parser;
 import visualize.Cli;
+import visualize.FancyCli;
 
 public class Duke {
 
@@ -17,8 +18,8 @@ public class Duke {
     private final Parser parser;
 
     public Duke(String directory, String fileName) {
-        //ui = new FancyCLI(); //uncomment this to use gui
-        ui = new Cli(); //uncomment this to use normal cli for backup
+        ui = new FancyCli(); //uncomment this to use gui
+        //ui = new Cli(); //uncomment this to use normal cli for backup
         ui.showWelcome();
         parser = new Parser();
         storage = new Storage(directory, fileName, parser);
@@ -53,6 +54,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(Constants.PATH, Constants.FILENAME).run();
+        //uncomment this line to run program.
+        //new Duke(Constants.PATH, Constants.FILENAME).run();
     }
 }
