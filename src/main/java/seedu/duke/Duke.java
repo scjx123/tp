@@ -61,8 +61,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         dummy = in.nextLine();
-        new ReadFile("data/courselist11.txt");
-        ReadFile.loadModules();
+        //new ReadFile("data/courselist11.txt");
+        //ReadFile.loadModules();
         //uncomment this line to run program.
         //new Duke(Constants.PATH, Constants.FILENAME).run();
     }
