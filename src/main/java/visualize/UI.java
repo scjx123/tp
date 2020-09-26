@@ -56,7 +56,7 @@ public class UI {
         }
     }
 
-    public void printMCTitle(int i) {
+    public void printMcTitle(int i) {
         System.out.println("The total MC in this region is: " + i);
     }
 

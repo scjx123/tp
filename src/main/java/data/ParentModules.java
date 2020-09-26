@@ -78,6 +78,6 @@ public class ParentModules {
         for (SingleModule m : moduleList) {
             totalMC += Integer.parseInt(m.moduleMC);
         }
-        ui.printMCTitle(totalMC);
+        ui.printMcTitle(totalMC);
     }
 }
