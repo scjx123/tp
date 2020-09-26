@@ -8,8 +8,12 @@ public class Item {
         this.description = description;
     }
 
+
+    //For SingleModule item it will return module code
+    //For Task item, it will return task description
     public String getName() {
         return description;
     }
+
 
 }
