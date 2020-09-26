@@ -119,5 +119,9 @@ public class Ui {
         System.out.println("Please enter a valid number !\n");
         showLine();
     }
+
+    public static void getInvalidDateFormat(){
+        System.out.println("Incorrect date format");
+    }
 }
 

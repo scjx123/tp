@@ -175,6 +175,7 @@ public class TaskList {
                 try {
                     return f.parse(o1.getTime()).compareTo(f.parse(o2.getTime()));
                 } catch (ParseException e) {
+                    Ui.getInvalidDateFormat();
                     throw new IllegalArgumentException(e);
                 }
             }
