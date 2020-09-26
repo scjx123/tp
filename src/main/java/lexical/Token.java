@@ -22,7 +22,7 @@ public class Token {
 
     public String toString() {
         if (token == Types.STR) {
-            return "ATM\t<" + string + ">";
+            return "STR\t<" + string + ">";
         } else if (token == Types.PAR) {
             return "PAR\t<" + string + ">";
         } else if (token == Types.COM) {

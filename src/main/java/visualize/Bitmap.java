@@ -1,12 +1,14 @@
 package visualize;
 
+import constants.Constants;
+
 import java.util.ArrayList;
 
 public class Bitmap {
 
     private final ColoredString[] map;
-    private final int width;
-    private final int height;
+    public final int width;
+    public final int height;
 
     public Bitmap(int width, int height) {
         this.width = width;
@@ -84,7 +86,7 @@ public class Bitmap {
 
     public void drawLine(
             int x1, int y1, int x2, int y2, String string,
-            Color backColor, Color foreColor)
+            Color backColor, Color foreColor, boolean isAutoFill)
             throws IndexOutOfBoundsException, NullPointerException {
         checkValidInput(x1, y1, x2, y2, string);
         int index = 0;
@@ -108,14 +110,14 @@ public class Bitmap {
             }
             x++;
             index++;
-            if (index == string.length()) {
+            if (index == string.length() && isAutoFill) {
                 index -= string.length();
             }
         }
     }
 
     private void setAttributes(String string, Color backColor, Color foreColor, int index, int x, int y) {
-        String target = string.substring(index, index + 1);
+        String target = index < string.length() ? string.substring(index, index + 1) : String.valueOf(Constants.SPACE);
         if (!target.equals(Sprite.IGNORE)) {
             if (foreColor != null) {
                 setPixelTextColor(x, y, foreColor);

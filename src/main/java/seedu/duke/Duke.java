@@ -1,88 +1,68 @@
+
 package seedu.duke;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import command.Command;
 import constants.Constants;
-import io.FileLoader;
-import io.FileSaver;
+import data.TaskList;
 import io.ReadFile;
-import jobs.ParentModules;
-import lexical.Lexer;
+import io.Storage;
 import lexical.Parser;
-import lexical.Token;
-import visualize.Bitmap;
-import visualize.Color;
-import visualize.Sprite;
+import visualize.Cli;
+import visualize.FancyCli;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static void testBitmap() {
-        final int W = 60;
-        final int H = 10;
-        Bitmap bmp = new Bitmap(W,H);
-        bmp.flush(Color.Maroon);
-        for (int i = 0; i < 256; i++) {
-            int x = i % 60;
-            int y = (i - x) / 60;
-            bmp.setPixelColor(x,y,Color.getFromCode(i));
+
+    private TaskList tasks;
+    private final Storage storage;
+    private final Cli ui;
+    private final Parser parser;
+
+    public Duke(String directory, String fileName) {
+        ui = new FancyCli(); //uncomment this to use gui
+        //ui = new Cli(); //uncomment this to use normal cli for backup
+        ui.showWelcome();
+        parser = new Parser();
+        storage = new Storage(directory, fileName, parser);
+        try {
+            tasks = storage.load();
+        } catch (Exception e) {
+            ui.showText(e.getMessage());
+            tasks = new TaskList();
         }
-        bmp.drawLine(0,9,59,9,"0-`+`-",Color.White,Color.Black);
-        bmp.setPixelColor(29,9,Color.Red);
-        bmp.setPixelText(30,9,"+");
-        bmp.setPixelTextColor(30,9,Color.Blue);
-        bmp.drawSprite(0,7,1,1,
-                Sprite.HOLLOWSQUARE,Color.Blue3,Color.Yellow);
-        bmp.drawSprite(57,5,1,1,Sprite.ONE,Color.Lime,Color.MistyRose1);
-        bmp.drawSprite(20,4,1,1,Sprite.TWO,Color.White,null);
-        bmp.drawSprite(28,4,1,1,Sprite.ZERO,Color.Grey7,null);
-        bmp.drawSprite(36,4,1,1,Sprite.TWO,Color.White,null);
-        bmp.drawSprite(44,4,1,1,Sprite.ZERO,Color.Grey7,null);
-        System.out.print(bmp.get());
     }
 
-    public static void testIO() {
-        //Test loader
-        System.out.println("Loading some commands from a file...");
-        final FileLoader loader = new FileLoader(Constants.PATH, Constants.LOAD_FILENAME); //load from duke
-        String[] strings = loader.loadAllLines(); //read all lines
-        StringBuilder stringBuilder = new StringBuilder();
-
-        //Test lexer
-        System.out.println("Loaded. Now lexing...");
-        for (String str: strings) {
-            stringBuilder.append(str).append(";"); //reconstruct the lines as a command.
+    public void run() {
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.nextLine();
+                ArrayList<Command> commands = parser.parse(fullCommand);
+                for (Command c: commands) {
+                    c.execute(tasks);
+                    ui.update(c.result, tasks);
+                    isExit = c.isExit();
+                    storage.saveTasks(tasks.tasks);
+                }
+            } catch (Exception e) {
+                String message = e.getMessage();
+                if (message == null) {
+                    message = Constants.INDEX_OUT;
+                }
+                ui.showText(message);
+            }
         }
-        Lexer lexer = new Lexer();
-        //each command, is broken down into parts now and identified each type and assembled a list.
-        List<Token> tokens = lexer.analyze(stringBuilder.toString());
-        for (Token t: tokens) {
-            System.out.println(t);
-        }
-
-        //Test parser
-        System.out.println("Lexing done. Now parsing...");
-        Parser parser = new Parser();
-        List<Command> parsed = parser.parseTree(tokens);
-        System.out.println(parsed);
-
-        //Test saver
-        System.out.println("Saving parsed result as a text file...");
-        FileSaver saver = new FileSaver(Constants.PATH, Constants.SAVE_FILENAME);
-        System.out.println(saver.save(parsed.toString()) ? "Saved." : "Save failed.");
     }
-
     static String dummy;
 
     public static void main(String[] args) {
-        //testBitmap();
-        //testIO();
         Scanner in = new Scanner(System.in);
         dummy = in.nextLine();
         new ReadFile("data/courseList.txt");
         ReadFile.loadModules();
+        //uncomment this line to run program.
+        new Duke(Constants.PATH, Constants.FILENAME).run();
     }
 }

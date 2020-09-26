@@ -1,12 +1,11 @@
 package lexical;
 
-import java.util.List;
 import java.util.ArrayList;
 import constants.Constants;
 
 public class Lexer {
 
-    public String getCommand(String s, int i) {
+    private String getCommand(String s, int i) {
         int j = i;
         while (j < s.length()) {
             if (Character.isLetter(s.charAt(j))) {
@@ -18,11 +17,11 @@ public class Lexer {
         return s.substring(i, j);
     }
 
-    public String getAtom(String s, int i) {
+    private String getAtom(String s, int i) {
         int j = i;
         while (j < s.length()) {
             char c = s.charAt(j);
-            if (c != Constants.SPACE && c != Constants.CMD_END) {
+            if (c != Constants.CHAR_SPACE && c != Constants.CMD_END) {
                 j++;
             } else {
                 break;
@@ -31,8 +30,8 @@ public class Lexer {
         return s.substring(i, j);
     }
 
-    public List<Token> analyze(String input) {
-        List<Token> result = new ArrayList<>();
+    public ArrayList<Token> analyze(String input) {
+        ArrayList<Token> result = new ArrayList<>();
         String inString = input.trim();
         boolean isCommand = true;
         for (int i = 0; i < inString.length(); ) {
@@ -46,10 +45,11 @@ public class Lexer {
                 result.add(new Token(Types.RPN, c));
                 i++;
                 break;
-            case Constants.SPACE:
+            case Constants.CHAR_SPACE:
                 i++;
                 break;
-            case Constants.PARAM:
+            case Constants.PARAM: //this case is the same as the next case, thus no break
+            case Constants.PARAM_ALIAS:
                 i++;
                 String command = getCommand(inString, i);
                 i += command.length(); //skip away the rest of the commands
