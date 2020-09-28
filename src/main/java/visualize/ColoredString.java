@@ -1,11 +1,19 @@
 package visualize;
 
+/**
+ * The type Colored string.
+ */
 public class ColoredString {
 
     private String string;
     private Color foreColor;
     private Color backColor;
 
+    /**
+     * Instantiates a new Colored string.
+     *
+     * @param string the string
+     */
     public ColoredString(String string) {
         setString(string);
         if (!string.equals(Sprite.IGNORE)) {
@@ -14,30 +22,61 @@ public class ColoredString {
         }
     }
 
+    /**
+     * Sets string.
+     *
+     * @param string the string
+     */
     public void setString(String string) {
         this.string = string;
     }
 
+    /**
+     * Sets fore color.
+     *
+     * @param color the color
+     */
     public void setForeColor(Color color) {
         foreColor = color;
     }
 
+    /**
+     * Sets back color.
+     *
+     * @param color the color
+     */
     public void setBackColor(Color color) {
         backColor = color;
     }
 
+    /**
+     * Bold.
+     */
     public void bold() {
         string = "\u001b[1m" + string;
     }
 
+    /**
+     * Underline.
+     */
     public void underline() {
         string = "\u001b[4m" + string;
     }
 
+    /**
+     * Reversed color.
+     */
     public void reversedColor() {
         string = "\u001b[7m" + string;
     }
 
+    /**
+     * Sub string colored string.
+     *
+     * @param start the start
+     * @param end   the end
+     * @return the colored string
+     */
     public ColoredString subString(int start, int end) {
         ColoredString output = new ColoredString(string.substring(start, end));
         output.setForeColor(foreColor);
@@ -45,6 +84,11 @@ public class ColoredString {
         return output;
     }
 
+    /**
+     * Get string.
+     *
+     * @return the string
+     */
     public String get() {
         String strForeColor = "";
         String strBackColor = "";

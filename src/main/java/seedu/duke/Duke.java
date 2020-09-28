@@ -10,6 +10,9 @@ import lexical.Parser;
 import visualize.Cli;
 import visualize.FancyCli;
 
+/**
+ * The type Duke.
+ */
 public class Duke {
 
     private TaskList tasks;
@@ -17,6 +20,12 @@ public class Duke {
     private final Cli ui;
     private final Parser parser;
 
+    /**
+     * Instantiates a new Duke.
+     *
+     * @param directory the directory
+     * @param fileName  the file name
+     */
     public Duke(String directory, String fileName) {
         ui = new FancyCli(); //uncomment this to use gui
         //ui = new Cli(); //uncomment this to use normal cli for backup
@@ -31,6 +40,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run.
+     */
     public void run() {
         boolean isExit = false;
         while (!isExit) {
@@ -53,6 +65,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         //uncomment this line to run program.
         //new Duke(Constants.PATH, Constants.FILENAME).run();

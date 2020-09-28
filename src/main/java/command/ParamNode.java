@@ -6,12 +6,29 @@ import lexical.Types;
 
 import java.util.ArrayList;
 
+/**
+ * The type Param node.
+ */
 public class ParamNode {
 
+    /**
+     * The Name.
+     */
     public String name;
+    /**
+     * The This data.
+     */
     public ParamNode thisData;
+    /**
+     * The Next data.
+     */
     public ParamNode nextData;
 
+    /**
+     * Instantiates a new Param node.
+     *
+     * @param tokens the tokens
+     */
     public ParamNode(ArrayList<Token> tokens) {
         ArrayList<Token> tokensClone = new ArrayList<>();
         for (Token token: tokens) {
@@ -57,6 +74,13 @@ public class ParamNode {
         }
     }
 
+    /**
+     * Instantiates a new Param node.
+     *
+     * @param name     the name
+     * @param thisData the this data
+     * @param nextData the next data
+     */
     public ParamNode(String name, ParamNode thisData, ParamNode nextData) {
         this.name = name;
         this.thisData = thisData;
@@ -89,6 +113,11 @@ public class ParamNode {
         return stringBuilder.toString();
     }
 
+    /**
+     * To flat string string.
+     *
+     * @return the string
+     */
     public String toFlatString() {
         String myName = name == null ? "" : name + " ";
         String nextName = thisData == null ? "" : thisData.toFlatString();
@@ -105,6 +134,11 @@ public class ParamNode {
         return name + data + next;
     }
 
+    /**
+     * Flatten array list.
+     *
+     * @return the array list
+     */
     public ArrayList<ParamNode> flatten() {
         ArrayList<ParamNode> output = new ArrayList<>();
         output.add(new ParamNode(name, thisData, nextData));
@@ -114,6 +148,25 @@ public class ParamNode {
             output.get(index).nextData = null;
             output.add(new ParamNode(nextNode.name, nextNode.thisData, nextNode.nextData));
             nextNode = nextNode.nextData;
+            index++;
+        }
+        return output;
+    }
+
+    /**
+     * Extend array list.
+     *
+     * @return the array list
+     */
+    public ArrayList<ParamNode> extend() {
+        ArrayList<ParamNode> output = new ArrayList<>();
+        output.add(new ParamNode(name, thisData, nextData));
+        int index = 0;
+        ParamNode nextNode = output.get(index).thisData;
+        while (nextNode != null) {
+            output.get(index).thisData = null;
+            output.add(new ParamNode(nextNode.name, nextNode.thisData, nextNode.nextData));
+            nextNode = nextNode.thisData;
             index++;
         }
         return output;

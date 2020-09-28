@@ -5,13 +5,16 @@ import constants.Constants;
 import data.TaskList;
 import jobs.Task;
 
+/**
+ * The type Done action.
+ */
 public class DoneAction extends Action {
 
     private int index;
 
     @Override
     public String act(TaskList tasks) {
-        Task task = tasks.tasks.get(index);
+        Task task = tasks.get(index);
         if (task == null) {
             return Constants.INDEX_OUT;
         } else {
@@ -22,7 +25,7 @@ public class DoneAction extends Action {
     }
 
     @Override
-    public void prepare(ParamNode args) {
+    public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
         index = getIndex(args.thisData.name);
     }

@@ -1,7 +1,13 @@
 package constants;
 
+/**
+ * The enum Help text.
+ */
 public enum HelpText {
 
+    /**
+     * The Bye.
+     */
     BYE(
             "bye",
             "Quit the program",
@@ -11,6 +17,9 @@ public enum HelpText {
             new String[]{
                 "1. \"bye\" >> quits the program"
             }),
+    /**
+     * The Clear.
+     */
     CLEAR(
             "clear",
             "Clear the task list",
@@ -20,6 +29,9 @@ public enum HelpText {
             new String[]{
                 "1. \"clear\" >> clears the task list"
             }),
+    /**
+     * The Deadline.
+     */
     DEADLINE(
             "deadline",
             "Add a deadline to the task list",
@@ -27,8 +39,12 @@ public enum HelpText {
                 "deadline [description] -by [time]"
             },
             new String[]{
-                "1. \"deadline ddl -by 5:00pm\" >> adds a deadline with description \"ddl\" and time \"5:00pm\""
+                "1. \"deadline ddl -by 21/9/15 1:12\" >> "
+                        + "adds a deadline with description \"ddl\" and time \"Sep 15 2021 1:12\""
             }),
+    /**
+     * The Delete.
+     */
     DELETE(
             "delete",
             "Delete a task from the task list",
@@ -36,8 +52,11 @@ public enum HelpText {
                 "delete [index]"
             },
             new String[]{
-                "1. \"delete 1\" >> deletes the task with index 1 from the task list"
+                "1. \"delete 1\" >> deletes the task with index 1 from the current list"
             }),
+    /**
+     * The Done.
+     */
     DONE(
             "done",
             "Mark a task as done",
@@ -47,6 +66,9 @@ public enum HelpText {
             new String[]{
                 "1. \"done 1\" >> marks the task with index 1 as done"
             }),
+    /**
+     * The Event.
+     */
     EVENT(
             "event",
             "Add an event to the task list",
@@ -54,8 +76,24 @@ public enum HelpText {
                 "event [description] -at [time]"
             },
             new String[]{
-                "1. \"event e -at 7:00am\" >> adds an event with description \"e\" and time \"7:00am\""
+                "1. \"event e -at May 13 2020 8:00\" >> "
+                        + "adds an event with description \"e\" and time \"May 13 2020 8:00\""
             }),
+    /**
+     * The Find.
+     */
+    FIND(
+            "find",
+            "Find an event in the task list with the specified keyword",
+            new String[]{
+                "find [keyword]"
+            },
+            new String[]{
+                "1. \"find exam\" >> finds all tasks with the \"exam\" keyword from the task list"
+            }),
+    /**
+     * The Help.
+     */
     HELP(
             "help",
             "Print the list of available commands, or print the details of a specified command",
@@ -67,15 +105,24 @@ public enum HelpText {
                 "1. \"help\" >> prints the list of available commands",
                 "2. \"help event\" >> prints the details of the \"event\" command"
             }),
+    /**
+     * The List.
+     */
     LIST(
             "list",
             "Print a list of all added tasks",
             new String[]{
-                "list"
+                "list",
+                "list date [asc / desc / spec \"date\"(any common date format)]"
             },
             new String[]{
-                "1. \"list\" >> list all added tasks"
+                "1. \"list\" >> list all added tasks",
+                "2. \"list date asc\" >> list tasks with a \"date\" field in ascending order",
+                "3. \"list date spec Oct 5 2020\" >> list tasks with specific \"date\" field of Oct 5 2020"
             }),
+    /**
+     * The Todo.
+     */
     TODO(
             "todo",
             "Add a todo to the task list",
@@ -85,6 +132,9 @@ public enum HelpText {
             new String[]{
                 "1. \"todo class\" >> adds a todo with description \"class\""
             }),
+    /**
+     * The Undone.
+     */
     UNDONE(
             "undone",
             "Mark a task as undone",
@@ -94,15 +144,21 @@ public enum HelpText {
             new String[]{
                 "1. \"undone 1\" >> marks the task with index 1 as undone"
             }),
+    /**
+     * The Unknown.
+     */
     UNKNOWN(
             "unknown",
-            "Prints the error message for an unrecognized command",
+            "Prints the error message for an unrecognized command for debugging purposes",
             new String[]{
                 "unknown"
             },
             new String[]{
                 "1. \"unknown\" >> prints \"OOPS, I don't know what that means :-( Try \"help\"!\""
             }),
+    /**
+     * The Next.
+     */
     NEXT(
             "next",
             "View next page: Switch the target region to the next page, keeping other regions unchanged.",
@@ -116,6 +172,9 @@ public enum HelpText {
                 "3. \"next -a\" >> switch both item list and selection to the next page",
                 "4. \"next -help\" >> print the detailed help text for the \"next\" command"
             }),
+    /**
+     * The Prev.
+     */
     PREV(
             "prev",
             "View previous page: Switch the target region to the next page, keeping other regions unchanged.",
@@ -129,6 +188,9 @@ public enum HelpText {
                 "3. \"prev -a\" >> switch both item list and selection to the previous page",
                 "4. \"prev -help\" >> print the detailed help text for the \"prev\" command"
             }),
+    /**
+     * The Sel.
+     */
     SEL(
             "sel",
             "Make selection: Add specified items to the selection. If no target is specified, print help.",
@@ -142,6 +204,9 @@ public enum HelpText {
                         + "CS1010 and CS2113 on the item list to the selection",
                 "3. \"sel -help\" >> print the detailed help text for the \"sel\" command"
             }),
+    /**
+     * The Add.
+     */
     ADD(
             "add",
             "Add item(s): Add specified item(s) to item list. If item already exists, update it.",
@@ -157,6 +222,9 @@ public enum HelpText {
                         + "modules M1, M2 and tasks T1, T2 to the item list",
                 "4. \"add -help\" >> print the detailed help text for the \"add\" command"
             }),
+    /**
+     * The Mc.
+     */
     MC(
             "mc",
             "Print MCs: Print the number of MCs based on selected option.",
@@ -187,9 +255,21 @@ public enum HelpText {
             })*/
     ;
 
+    /**
+     * The Name.
+     */
     public String name;
+    /**
+     * The Description.
+     */
     public String description;
+    /**
+     * The Syntax.
+     */
     public String[] syntax;
+    /**
+     * The Usages.
+     */
     public String[] usages;
 
     HelpText(String name, String description, String[] syntax, String[] usages) {
@@ -199,6 +279,12 @@ public enum HelpText {
         this.usages = usages;
     }
 
+    /**
+     * Array to string string.
+     *
+     * @param input the input
+     * @return the string
+     */
     public String arrayToString(String[] input) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String string: input) {
