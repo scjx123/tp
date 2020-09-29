@@ -73,26 +73,28 @@ public class Task {
         LocalDateTime dateTime = null;
         ArrayList<String> patterns = getPatterns(false);
         for (String pattern : patterns) {
-            try {
-                if (dateTime != null) {
-                    break;
-                } else {
+            if (dateTime == null) {
+                try {
                     dateTime = LocalDateTime.parse(input.trim(), DateTimeFormatter.ofPattern(pattern));
+                } catch (Exception e) {
+                    e.addSuppressed(e); // do nothing basically.
                 }
-            } catch (Exception ignored) {
+            } else {
+                break;
             }
         }
         if (dateTime == null) {
             patterns = getPatterns(true);
             for (String datePattern : patterns) {
-                try {
-                    if (dateTime != null) {
-                        break;
-                    } else {
+                if (dateTime == null) {
+                    try {
                         dateTime = LocalDate.parse(input.trim(),
                                 DateTimeFormatter.ofPattern(datePattern)).atStartOfDay();
+                    } catch (Exception e) {
+                        e.addSuppressed(e); // do nothing basically.
                     }
-                } catch (Exception ignored) {
+                } else {
+                    break;
                 }
             }
         }
@@ -104,7 +106,7 @@ public class Task {
      *
      * @param date the date
      */
-    protected void getDateTime(String date) {
+    protected void setDateTime(String date) {
         dateTime = parseDateTime(date);
         isDated = dateTime != null;
     }

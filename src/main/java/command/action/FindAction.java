@@ -31,7 +31,6 @@ public class FindAction extends Action {
             }
             return builder.toString();
         } else {
-            String result = super.act(tasks);
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
             filtered.removeIf(x -> !x.toString().contains(keyword));
             StringBuilder builder = new StringBuilder();
@@ -44,6 +43,7 @@ public class FindAction extends Action {
             } else {
                 tasks.indexOption = MessageOptions.INDEXED_NUM;
             }
+            String result = super.act(tasks);
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
         }
     }
