@@ -1,21 +1,47 @@
 package lexical;
 
+/**
+ * The type Token.
+ */
 public class Token {
 
+    /**
+     * The Token.
+     */
     public Types token;
+    /**
+     * The String.
+     */
     public final String string;
 
+    /**
+     * Instantiates a new Token.
+     *
+     * @param t the t
+     * @param c the c
+     */
     //A token is a small part of the whole command
     public Token(Types t, char c) {
         this.token = t;
         this.string = Character.toString(c);
     }
 
+    /**
+     * Instantiates a new Token.
+     *
+     * @param t the t
+     * @param s the s
+     */
     public Token(Types t, String s) {
         this.token = t;
         this.string = s;
     }
 
+    /**
+     * Change type.
+     *
+     * @param newType the new type
+     */
     public void changeType(Types newType) {
         this.token = newType;
     }

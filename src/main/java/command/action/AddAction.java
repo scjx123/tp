@@ -3,6 +3,9 @@ package command.action;
 import command.ParamNode;
 import data.TaskList;
 
+/**
+ * The type Add action.
+ */
 public class AddAction extends Action {
 
     private ParamNode args;
@@ -14,7 +17,7 @@ public class AddAction extends Action {
     }
 
     @Override
-    public void prepare(ParamNode args) {
+    public void prepare(ParamNode args) throws Exception {
         this.args = args;
     }
 }

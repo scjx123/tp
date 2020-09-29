@@ -4,6 +4,9 @@ import constants.Constants;
 import data.TaskList;
 import messages.MessageOptions;
 
+/**
+ * The type Fancy cli.
+ */
 public class FancyCli extends Cli {
 
     private Bitmap bmpList;
@@ -16,6 +19,9 @@ public class FancyCli extends Cli {
     private final int maxSelY = Constants.BITMAP_SEL_H - 1;
     private int currentColor;
 
+    /**
+     * Instantiates a new Fancy cli.
+     */
     public FancyCli() {
         super();
         currentColor = 1;
@@ -23,20 +29,41 @@ public class FancyCli extends Cli {
         this.bmpSel = new Bitmap(Constants.BITMAP_W, Constants.BITMAP_SEL_H);
     }
 
+    /**
+     * Initialize.
+     */
     public void initialize() {
         initializeList();
         initializeSel();
     }
 
+    /**
+     * Initialize list.
+     */
     public void initializeList() {
         bmpList.flush(listBackground);
         bmpList.drawLine(0, 0, maxX, 0, "Welcome to DomSun! This is the item list.",
                 Color.DarkGreen, Color.White, false);
     }
 
+    public void initializeList(String text) {
+        bmpList.flush(listBackground);
+        bmpList.drawLine(0, 0, maxX, 0, text,
+                Color.DarkGreen, Color.White, false);
+    }
+
+    /**
+     * Initialize sel.
+     */
     public void initializeSel() {
         bmpSel.flush(selBackground);
         bmpSel.drawLine(0, 0, maxX, 0, "This is the selection list.",
+                Color.LightCyan, Color.Black, false);
+    }
+
+    public void initializeSel(String text) {
+        bmpSel.flush(selBackground);
+        bmpSel.drawLine(0, 0, maxX, 0, text,
                 Color.LightCyan, Color.Black, false);
     }
 
@@ -62,29 +89,46 @@ public class FancyCli extends Cli {
         System.out.print(bmpSel.get());
     }
 
-    public void showBlock(int x, int y, int width, int height, String input, boolean isDisplayMode) {
+    /**
+     * Show block.
+     *
+     * @param x             the x
+     * @param y             the y
+     * @param width         the width
+     * @param height        the height
+     * @param rawInput         the raw input
+     * @param isDisplayMode the is display mode
+     */
+    public void showBlock(int x, int y, int width, int height, String rawInput, boolean isDisplayMode) {
         int startIndex = 0;
         int deltaY = 0;
         int myWidth = isDisplayMode ? width : maxX - x;
         int myHeight = isDisplayMode ? height : 1;
         int maxY = isDisplayMode ? maxListY : maxSelY;
-        while (startIndex + myWidth < input.length()) {
+        int maxLen = Math.min(myWidth * myHeight, rawInput.length());
+        String input = rawInput.substring(0, maxLen);
+        boolean isBroken = false;
+        while (startIndex + myWidth - 1 < input.length()) {
             if (y + deltaY > maxY) {
-                return;
+                isBroken = true;
+                break;
             }
             String string = input.substring(startIndex, startIndex + myWidth);
             startIndex += myWidth;
             fillCellLine(x, y + deltaY, myWidth, isDisplayMode, string);
             deltaY++;
             if (deltaY >= myHeight) {
-                return;
+                isBroken = true;
+                break;
             }
         }
         if (y + deltaY > maxY) {
-            return;
+            isBroken = true;
         }
-        String string = input.substring(startIndex);
-        fillCellLine(x, y + deltaY, myWidth, isDisplayMode, string);
+        if (!isBroken) {
+            String string = input.substring(startIndex);
+            fillCellLine(x, y + deltaY, myWidth, isDisplayMode, string);
+        }
         if (isDisplayMode) {
             currentColor++;
             if (currentColor > 255) {
@@ -102,21 +146,31 @@ public class FancyCli extends Cli {
         }
     }
 
+    /**
+     * Show text.
+     *
+     * @param input         the input
+     * @param isDisplayMode the is display mode
+     * @param indexState    the index state
+     */
     public void showText(String input, boolean isDisplayMode, MessageOptions indexState) {
-        if (isDisplayMode) {
-            initializeList();
-        } else {
-            initializeSel();
-        }
         String[] lines = input.split(Constants.WIN_NEWLINE);
+        if (lines.length == 0) {
+            return;
+        }
+        if (isDisplayMode) {
+            initializeList(lines[0]);
+        } else {
+            initializeSel(lines[0]);
+        }
         switch (indexState) {
         case INDEXED_NUM:
-            for (int i = 0; i < lines.length; i++) {
-                lines[i] = (i + 1) + Constants.DOT + Constants.SPACE + lines[i];
+            for (int i = 1; i < lines.length; i++) {
+                lines[i] = i + Constants.DOT + Constants.SPACE + lines[i];
             }
             break;
         case INDEXED_ABC:
-            for (int i = 0; i < lines.length; i++) {
+            for (int i = 1; i < lines.length; i++) {
                 lines[i] = (i + Constants.LETTER_OFFSET) + Constants.DOT + Constants.SPACE + lines[i];
             }
             break;
@@ -126,7 +180,8 @@ public class FancyCli extends Cli {
         int y = Constants.BANNER;
         int x = 0;
         int maxY = isDisplayMode ? maxListY : maxSelY;
-        for (String line : lines) {
+        for (int i = 1; i < lines.length; i++) {
+            String line = lines[i];
             showBlock(x, y, Constants.CELL_W, Constants.CELL_H, line, isDisplayMode);
             if (isDisplayMode) {
                 x += Constants.CELL_W;
@@ -149,6 +204,13 @@ public class FancyCli extends Cli {
         showText(input, false, MessageOptions.NOT_INDEXED);
     }
 
+    /**
+     * Update.
+     *
+     * @param input         the input
+     * @param tasks         the tasks
+     * @param isDisplayMode the is display mode
+     */
     public void update(String input, TaskList tasks, boolean isDisplayMode) {
         if (input == null || input.equals(Constants.ZERO_LENGTH_STRING)) {
             showText(input, isDisplayMode, MessageOptions.NOT_INDEXED);

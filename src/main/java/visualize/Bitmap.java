@@ -4,12 +4,27 @@ import constants.Constants;
 
 import java.util.ArrayList;
 
+/**
+ * The type Bitmap.
+ */
 public class Bitmap {
 
     private final ColoredString[] map;
+    /**
+     * The Width.
+     */
     public final int width;
+    /**
+     * The Height.
+     */
     public final int height;
 
+    /**
+     * Instantiates a new Bitmap.
+     *
+     * @param width  the width
+     * @param height the height
+     */
     public Bitmap(int width, int height) {
         this.width = width;
         this.height = height;
@@ -19,6 +34,14 @@ public class Bitmap {
         }
     }
 
+    /**
+     * Sets pixel color.
+     *
+     * @param x the x
+     * @param y the y
+     * @param c the c
+     * @throws IndexOutOfBoundsException the index out of bounds exception
+     */
     public void setPixelColor(int x, int y, Color c) throws IndexOutOfBoundsException {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             throw new IndexOutOfBoundsException();
@@ -27,6 +50,11 @@ public class Bitmap {
         map[index].setBackColor(c);
     }
 
+    /**
+     * Flush.
+     *
+     * @param c the c
+     */
     public void flush(Color c) {
         for (ColoredString coloredString : map) {
             coloredString.setString(Sprite.SPACE);
@@ -35,6 +63,14 @@ public class Bitmap {
         }
     }
 
+    /**
+     * Sets pixel text.
+     *
+     * @param x         the x
+     * @param y         the y
+     * @param character the character
+     * @throws IndexOutOfBoundsException the index out of bounds exception
+     */
     public void setPixelText(int x, int y, String character) throws  IndexOutOfBoundsException {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             throw new IndexOutOfBoundsException();
@@ -43,6 +79,14 @@ public class Bitmap {
         map[index].setString(character);
     }
 
+    /**
+     * Sets pixel text color.
+     *
+     * @param x the x
+     * @param y the y
+     * @param c the c
+     * @throws IndexOutOfBoundsException the index out of bounds exception
+     */
     public void setPixelTextColor(int x, int y, Color c) throws IndexOutOfBoundsException {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             throw new IndexOutOfBoundsException();
@@ -84,6 +128,20 @@ public class Bitmap {
         }
     }
 
+    /**
+     * Draw line.
+     *
+     * @param x1         the x 1
+     * @param y1         the y 1
+     * @param x2         the x 2
+     * @param y2         the y 2
+     * @param string     the string
+     * @param backColor  the back color
+     * @param foreColor  the fore color
+     * @param isAutoFill the is auto fill
+     * @throws IndexOutOfBoundsException the index out of bounds exception
+     * @throws NullPointerException      the null pointer exception
+     */
     public void drawLine(
             int x1, int y1, int x2, int y2, String string,
             Color backColor, Color foreColor, boolean isAutoFill)
@@ -129,6 +187,19 @@ public class Bitmap {
         }
     }
 
+    /**
+     * Draw sprite.
+     *
+     * @param x1        the x 1
+     * @param y1        the y 1
+     * @param scaleX    the scale x
+     * @param scaleY    the scale y
+     * @param sprite    the sprite
+     * @param backColor the back color
+     * @param foreColor the fore color
+     * @throws IndexOutOfBoundsException the index out of bounds exception
+     * @throws NullPointerException      the null pointer exception
+     */
     public void drawSprite(
             int x1, int y1, int scaleX, int scaleY, Sprite sprite,
             Color backColor, Color foreColor)
@@ -157,6 +228,11 @@ public class Bitmap {
         }
     }
 
+    /**
+     * Get string.
+     *
+     * @return the string
+     */
     public String get() {
         StringBuilder strBuilder = new StringBuilder();
         for (int i = 0; i < map.length; i++) {

@@ -5,9 +5,18 @@ import command.ParamNode;
 import constants.Constants;
 import data.TaskList;
 
+/**
+ * The type Help action.
+ */
 public class HelpAction extends Action {
 
+    /**
+     * The Is detailed.
+     */
     boolean isDetailed = false;
+    /**
+     * The Help text.
+     */
     HelpText helpText = null;
 
     @Override
@@ -26,7 +35,7 @@ public class HelpAction extends Action {
     }
 
     @Override
-    public void prepare(ParamNode args) {
+    public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
         if (flattenedArgs.length > 0) {
             String target = flattenedArgs[0].name;

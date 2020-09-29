@@ -7,15 +7,38 @@ import constants.HelpText;
 import data.TaskList;
 import exceptions.InvalidCommandException;
 
+/**
+ * The type Command.
+ */
 public class Command implements Help {
 
+    /**
+     * The Args.
+     */
     public ParamNode args;
+    /**
+     * The Flattened args.
+     */
     public ParamNode[] flattenedArgs;
+    /**
+     * The Name.
+     */
     public String name;
     private HelpText helpText;
+    /**
+     * The Action.
+     */
     public Action action;
+    /**
+     * The Result.
+     */
     public String result = "";
 
+    /**
+     * Instantiates a new Command.
+     *
+     * @param args the args
+     */
     public Command(ParamNode args) {
         this.args = args;
         name = args.name;
@@ -32,7 +55,7 @@ public class Command implements Help {
         if (targetArg == null) {
             return true; // does not need any parameter
         } else {
-            for (ParamNode node: flattenedArgs) {
+            for (ParamNode node : flattenedArgs) {
                 if (targetArg.equals(node.name)) {
                     return true;
                 }
@@ -45,6 +68,11 @@ public class Command implements Help {
         action = Constants.actionMap.getOrDefault(name, new UnknownAction());
     }
 
+    /**
+     * Execute.
+     *
+     * @param tasks the tasks
+     */
     public void execute(TaskList tasks) {
         try {
             if (isArgsValid()) {
@@ -55,13 +83,22 @@ public class Command implements Help {
             }
         } catch (Exception e) {
             StringBuilder builder = new StringBuilder(Constants.INVALID);
-            for (String string: getSyntax()) {
-                builder.append(string).append(Constants.TAB);
+            String[] syntax = getSyntax();
+            for (int i = 0; i < syntax.length; i++) {
+                builder.append(syntax[i]);
+                if (i < syntax.length - 1) {
+                    builder.append(Constants.SYNTAX_OR);
+                }
             }
             result = builder.toString();
         }
     }
 
+    /**
+     * Is exit boolean.
+     *
+     * @return the boolean
+     */
     public boolean isExit() {
         return result.equals(Constants.messageMap.get(Constants.BYE));
     }

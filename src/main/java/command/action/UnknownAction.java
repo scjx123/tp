@@ -3,6 +3,9 @@ package command.action;
 import constants.Constants;
 import data.TaskList;
 
+/**
+ * The type Unknown action.
+ */
 public class UnknownAction extends Action {
 
     @Override
