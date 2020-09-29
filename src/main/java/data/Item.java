@@ -24,8 +24,12 @@ public class Item {
      *
      * @return the name
      */
+
+    //For SingleModule item it will return module code
+    //For Task item, it will return task description
     public String getName() {
         return description;
     }
+
 
 }
