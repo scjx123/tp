@@ -23,9 +23,20 @@ public class TaskList {
     public ArrayList<Integer> indices;
 
     /**
+     * The Last input.
+     */
+    public String lastInput;
+    /**
+     * The Last index option.
+     */
+    public MessageOptions lastIndexOption;
+
+    /**
      * Instantiates a new Task list.
      */
     public TaskList() {
+        lastInput = "";
+        lastIndexOption = MessageOptions.NOT_INDEXED;
         tasks = new ArrayList<>();
         indexOption = MessageOptions.NOT_INDEXED;
         indices = new ArrayList<>();
