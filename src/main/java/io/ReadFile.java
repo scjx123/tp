@@ -16,27 +16,58 @@ import data.SingleModule;
  * DO NOT ALTER THE parseFILE() list under any circumstance.
  */
 public class ReadFile {
+    /**
+     * The Module name.
+     */
     static String moduleName;
+    /**
+     * The Module code.
+     */
     static String moduleCode;
+    /**
+     * The Module description.
+     */
     static String moduleDescription;
+    /**
+     * The Module mc.
+     */
     static String moduleMC;
+    /**
+     * The Module prerequisite.
+     */
     static String modulePrerequisite;
 
-    /** Temporary stores the file directory and the name of the text file itself given in the filePath. */
+    /**
+     * Temporary stores the file directory and the name of the text file itself given in the filePath.
+     */
     static String[] dir = new String[2];
 
     private static String filename = "courselist11.txt";
     private static String filedir = "data";
 
+    /**
+     * Instantiates a new Read file.
+     *
+     * @param filePath the file path
+     */
     public ReadFile(String filePath) {
         dir = filePath.split("/",2);
         filedir = dir[0];
         filename = dir[1];
     }
 
+    /**
+     * The P 2.
+     */
     static Path p2 = Paths.get(filedir,filename);
 
+    /**
+     * The St.
+     */
     static StringTokenizer st;
+    /**
+     * The Temp string.
+     */
     static String tempString;
 
     /**
@@ -90,7 +121,6 @@ public class ReadFile {
 
     /**
      * Master List of module is being created here.
-     *
      */
     public static void loadModules() {
         try {

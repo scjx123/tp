@@ -99,8 +99,26 @@ public class Command implements Help {
      *
      * @return the boolean
      */
-    public boolean isExit() {
+    public boolean isBye() {
         return result.equals(Constants.messageMap.get(Constants.BYE));
+    }
+
+    /**
+     * Is fancy boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isFancy() {
+        return result.equals(Constants.messageMap.get(Constants.FANCY));
+    }
+
+    /**
+     * Is plain boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isPlain() {
+        return result.equals(Constants.messageMap.get(Constants.PLAIN));
     }
 
     @Override

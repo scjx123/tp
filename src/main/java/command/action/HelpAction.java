@@ -22,9 +22,10 @@ public class HelpAction extends Action {
     @Override
     public String act(TaskList tasks) {
         if (isDetailed && helpText != null) {
+            isDetailed = false;
             return helpText.toString();
         } else {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder(Constants.HELP_HEADING);
             for (HelpText help: HelpText.values()) {
                 builder.append("Command: ").append(help.name).append(Constants.SPACE).append(Constants.SPACE).append(
                         "Description: ").append(help.description).append(Constants.WIN_NEWLINE);

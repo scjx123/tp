@@ -3,6 +3,10 @@ package visualize;
 import constants.Constants;
 import data.SingleModule;
 import data.TaskList;
+import messages.MessageOptions;
+
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
@@ -11,22 +15,42 @@ import java.util.Scanner;
 public class UI {
 
     /**
+     * The Stream.
+     */
+    protected PrintStream stream;
+    /**
+     * The Input.
+     */
+    protected InputStream input;
+
+    /**
+     * The Freshly switched.
+     */
+    protected boolean freshlySwitched;
+
+    /**
      * The Input getter.
      */
     protected Scanner inputGetter;
 
     /**
      * Instantiates a new Ui.
+     *
+     * @param stream the stream
+     * @param input  the input
      */
-    public UI() {
-        inputGetter = new Scanner(System.in);
+    public UI(PrintStream stream, InputStream input) {
+        this.stream = stream;
+        this.input = input;
+        inputGetter = new Scanner(input);
+        freshlySwitched = false;
     }
 
     /**
      * Show welcome.
      */
     public void showWelcome() {
-        System.out.print(Constants.WELCOME);
+        stream.print(Constants.WELCOME);
     }
 
     /**
@@ -35,7 +59,7 @@ public class UI {
      * @param input the input
      */
     public void showText(String input) {
-        System.out.print(input);
+        stream.print(input);
     }
 
     /**
@@ -57,35 +81,58 @@ public class UI {
         return inputGetter.nextLine();
     }
 
+    /**
+     * Print module details.
+     *
+     * @param m the m
+     */
     public void printModuleDetails(SingleModule m) {
-        System.out.println(m.moduleCode + m.moduleName + m.description + m.moduleMC + m.modulePrerequisite);
+        stream.println(m.moduleCode + m.moduleName + m.description + m.moduleMC + m.modulePrerequisite);
     }
 
+    /**
+     * Print module.
+     *
+     * @param m    the m
+     * @param task the task
+     */
     public void printModule(SingleModule m,String task) {
         switch (task) {
         case "code":
-            System.out.println("This is the module you are searching for: ");
+            stream.println("This is the module you are searching for: ");
             printModuleDetails(m);
             break;
         case "mc":
-            System.out.println("Here are all the 4mcs module in the list (:");
+            stream.println("Here are all the 4mcs module in the list (:");
             printModuleDetails(m);
             break;
         case "description":
-            System.out.println("Is this what you are searching for? ");
+            stream.println("Is this what you are searching for? ");
             printModuleDetails(m);
             break;
         case "prereq":
-            System.out.println("These are the modules that are prerequisite(s) to the current module:\n");
-            System.out.println(m.modulePrerequisite);
+            stream.println("These are the modules that are prerequisite(s) to the current module:\n");
+            stream.println(m.modulePrerequisite);
             break;
         default:
             break;
         }
     }
 
+    /**
+     * Sets switched.
+     */
+    public void setSwitched() {
+        freshlySwitched = true;
+    }
+
+    /**
+     * Print mc title.
+     *
+     * @param i the
+     */
     public void printMcTitle(int i) {
-        System.out.println("The total MC in this region is: " + i);
+        stream.println("The total MC in this region is: " + i);
     }
 
 }

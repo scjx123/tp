@@ -6,6 +6,8 @@ import messages.MessageFormat;
 import messages.MessageOptions;
 import messages.MessageWrapper;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -25,9 +27,12 @@ public class Cli extends UI {
 
     /**
      * Instantiates a new Cli.
+     *
+     * @param stream the stream
+     * @param input  the input
      */
-    public Cli() {
-        super();
+    public Cli(PrintStream stream, InputStream input) {
+        super(stream, input);
         msgFormat = new MessageFormat(new MessageOptions[]{
             MessageOptions.LINE_INDENT_1,
             MessageOptions.LINE_BEFORE,
@@ -40,13 +45,13 @@ public class Cli extends UI {
 
     @Override
     public void showWelcome() {
-        msgWrapper.show(Constants.WELCOME, msgFormat.getMessageOptions());
+        msgWrapper.show(stream, Constants.WELCOME, msgFormat.getMessageOptions());
     }
 
     @Override
     public void showText(String input) {
         String[] lines = input.split(Constants.WIN_NEWLINE);
-        msgWrapper.show(lines, msgFormat.getMessageOptions());
+        msgWrapper.show(stream, lines, msgFormat.getMessageOptions());
     }
 
     /**
@@ -60,23 +65,41 @@ public class Cli extends UI {
         String head = lines.get(0);
         lines.remove(head);
         msgFormat.removeMessageOption(MessageOptions.LINE_AFTER);
-        msgWrapper.show(head, msgFormat.getMessageOptions());
+        msgWrapper.show(stream, head, msgFormat.getMessageOptions());
         msgFormat.addMessageOption(MessageOptions.LINE_AFTER);
         msgFormat.removeMessageOption(MessageOptions.LINE_BEFORE);
         msgFormat.addMessageOption(indexOption);
         String[] strings = new String[0];
         strings = lines.toArray(strings);
-        msgWrapper.show(strings, msgFormat.getMessageOptions());
+        msgWrapper.show(stream, strings, msgFormat.getMessageOptions());
         msgFormat.addMessageOption(MessageOptions.LINE_BEFORE);
         msgFormat.removeMessageOption(indexOption);
     }
 
     @Override
     public void update(String input, TaskList tasks) {
+        if (freshlySwitched) {
+            String replay = tasks.lastInput;
+            MessageOptions replayOption = tasks.lastIndexOption;
+            if (replay == null || replay.equals(Constants.ZERO_LENGTH_STRING)) {
+                showWelcome();
+            } else {
+                showListText(replay, replayOption);
+            }
+            freshlySwitched = false;
+            return;
+        }
         if (input == null || input.equals(Constants.ZERO_LENGTH_STRING)) {
-            showText(input);
+            showText(Constants.ZERO_LENGTH_STRING);
+        } else if (input.contains(Constants.BMP_LIST_SWITCH)
+                || input.contains(Constants.BMP_SEL_SWITCH)) {
+            if (!tasks.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
+                showListText(tasks.lastInput, tasks.lastIndexOption);
+            }
         } else {
             showListText(input, tasks.indexOption);
+            tasks.lastInput = input;
+            tasks.lastIndexOption = tasks.indexOption;
         }
         tasks.indexOption = MessageOptions.NOT_INDEXED;
     }

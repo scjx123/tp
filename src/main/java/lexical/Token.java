@@ -20,7 +20,6 @@ public class Token {
      * @param t the t
      * @param c the c
      */
-    //A token is a small part of the whole command
     public Token(Types t, char c) {
         this.token = t;
         this.string = Character.toString(c);
