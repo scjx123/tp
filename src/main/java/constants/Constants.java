@@ -1,7 +1,6 @@
 package constants;
 
 import command.action.Action;
-import command.action.AddAction;
 import command.action.ByeAction;
 import command.action.ClearAction;
 import command.action.DeadlineAction;
@@ -14,6 +13,10 @@ import command.action.ListAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
 import command.action.UnknownAction;
+import command.action.PlainAction;
+import command.action.FancyAction;
+import command.action.NextAction;
+import command.action.PrevAction;
 
 import java.util.Map;
 
@@ -247,6 +250,14 @@ public class Constants {
      */
     public static final String PREV = "prev";
     /**
+     * The constant FANCY.
+     */
+    public static final String FANCY = "fancy";
+    /**
+     * The constant PLAIN.
+     */
+    public static final String PLAIN = "plain";
+    /**
      * The constant SEL.
      */
     public static final String SEL = "sel";
@@ -282,9 +293,8 @@ public class Constants {
     /**
      * The constant CHANGED.
      */
-    public static final String CHANGED = Constants.WIN_NEWLINE + Constants.TEXT_PLACEHOLDER
-            + Constants.WIN_NEWLINE + Constants.COUNT_PREFIX + Constants.NUMBER_PLACEHOLDER
-            + Constants.COUNT_SUFFIX;
+    public static final String CHANGED = WIN_NEWLINE + TEXT_PLACEHOLDER
+            + WIN_NEWLINE + COUNT_PREFIX + NUMBER_PLACEHOLDER + COUNT_SUFFIX;
     /**
      * The constant INVALID.
      */
@@ -321,6 +331,19 @@ public class Constants {
      * The constant LIST_HEAD.
      */
     public static final String LIST_HEAD = "Here is the list of tasks:" + WIN_NEWLINE;
+    /**
+     * The constant HELP_HEADING.
+     */
+    public static final String HELP_HEADING = "Here are all available commands:" + WIN_NEWLINE;
+    /**
+     * The constant BMP_LIST_SWITCH.
+     */
+    public static final String BMP_LIST_SWITCH = "LIST";
+    /**
+     * The constant BMP_SEL_SWITCH.
+     */
+    public static final String BMP_SEL_SWITCH = "SEL";
+
     /**
      * The constant LINE_REPETITION.
      */
@@ -360,7 +383,7 @@ public class Constants {
     /**
      * The constant CELL_W.
      */
-    public static final int CELL_W = 10;
+    public static final int CELL_W = 20;
     /**
      * The constant CELL_H.
      */
@@ -385,7 +408,11 @@ public class Constants {
             Map.entry(LIST, new ListAction()),
             Map.entry(TODO, new TodoAction()),
             Map.entry(UNDONE, new UndoneAction()),
-            Map.entry(UNKNOWN, new UnknownAction()));
+            Map.entry(UNKNOWN, new UnknownAction()),
+            Map.entry(PREV, new PrevAction()),
+            Map.entry(NEXT, new NextAction()),
+            Map.entry(FANCY, new FancyAction()),
+            Map.entry(PLAIN, new PlainAction()));
     /**
      * The constant helpMap.
      */
@@ -401,7 +428,11 @@ public class Constants {
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
             Map.entry(UNDONE, HelpText.UNDONE),
-            Map.entry(UNKNOWN, HelpText.UNKNOWN));
+            Map.entry(UNKNOWN, HelpText.UNKNOWN),
+            Map.entry(PREV, HelpText.PREV),
+            Map.entry(NEXT, HelpText.NEXT),
+            Map.entry(FANCY, HelpText.FANCY),
+            Map.entry(PLAIN, HelpText.PLAIN));
     /**
      * The constant paramMap.
      */
@@ -412,24 +443,30 @@ public class Constants {
      * The constant optionalParamMap.
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
-            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}));
+            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
+            Map.entry(PREV, new String[]{"i", "s", "a"}),
+            Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
      * The constant messageMap.
      */
     public static final Map<String, String> messageMap = Map.ofEntries(
             Map.entry(BYE,"Bye. Hope to see you again soon!"),
             Map.entry(CLEAR, "Nice! I've cleared everything in the list."),
-            Map.entry(DEADLINE, Constants.ADDED + Constants.CHANGED),
-            Map.entry(DELETE, Constants.REMOVED + Constants.CHANGED),
+            Map.entry(DEADLINE, ADDED + CHANGED),
+            Map.entry(DELETE, REMOVED + CHANGED),
             Map.entry(DONE, "Nice! I've marked this task as done:"
-                    + Constants.WIN_NEWLINE + Constants.TEXT_PLACEHOLDER),
-            Map.entry(EVENT, Constants.ADDED + Constants.CHANGED),
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(EVENT, ADDED + CHANGED),
             Map.entry(FIND, "Tasks with the specified keyword are:"
-                    + Constants.WIN_NEWLINE + Constants.TEXT_PLACEHOLDER),
-            Map.entry(HELP, Constants.TEXT_PLACEHOLDER),
-            Map.entry(LIST, Constants.TEXT_PLACEHOLDER),
-            Map.entry(TODO, Constants.ADDED + Constants.CHANGED),
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(HELP, TEXT_PLACEHOLDER),
+            Map.entry(LIST, TEXT_PLACEHOLDER),
+            Map.entry(TODO, ADDED + CHANGED),
             Map.entry(UNDONE, "Nice! I've marked this task as undone:"
-                    + Constants.WIN_NEWLINE + Constants.TEXT_PLACEHOLDER),
-            Map.entry(UNKNOWN, "OOPS, I don't know what that means :-( Try \"help\"!"));
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNKNOWN, "OOPS, I don't know what that means :-( Try \"help\"!"),
+            Map.entry(PREV, TEXT_PLACEHOLDER),
+            Map.entry(NEXT, TEXT_PLACEHOLDER),
+            Map.entry(FANCY, WELCOME),
+            Map.entry(PLAIN, WELCOME));
 }

@@ -2,6 +2,7 @@ package messages;
 
 import constants.Constants;
 
+import java.io.PrintStream;
 import java.util.Arrays;
 
 /**
@@ -76,21 +77,23 @@ public class MessageWrapper {
     /**
      * Show.
      *
+     * @param stream  the stream
      * @param inputs  the inputs
      * @param options the options
      */
-    public void show(String[] inputs, MessageOptions[] options) {
-        System.out.print(wrap(inputs, options));
+    public void show(PrintStream stream, String[] inputs, MessageOptions[] options) {
+        stream.print(wrap(inputs, options));
     }
 
     /**
      * Show.
      *
+     * @param stream  the stream
      * @param input   the input
      * @param options the options
      */
-    public void show(String input, MessageOptions[] options) {
-        System.out.print(wrap(input, options));
+    public void show(PrintStream stream, String input, MessageOptions[] options) {
+        stream.print(wrap(input, options));
     }
 
     private int getLineIndent(MessageOptions[] options) {

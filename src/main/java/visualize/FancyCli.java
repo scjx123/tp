@@ -4,6 +4,9 @@ import constants.Constants;
 import data.TaskList;
 import messages.MessageOptions;
 
+import java.io.InputStream;
+import java.io.PrintStream;
+
 /**
  * The type Fancy cli.
  */
@@ -19,14 +22,26 @@ public class FancyCli extends Cli {
     private final int maxSelY = Constants.BITMAP_SEL_H - 1;
     private int currentColor;
 
+    private String[] listString;
+    private String[] selString;
+    private int listIndex;
+    private int selIndex;
+
     /**
      * Instantiates a new Fancy cli.
+     *
+     * @param stream the stream
+     * @param input  the input
      */
-    public FancyCli() {
-        super();
+    public FancyCli(PrintStream stream, InputStream input) {
+        super(stream, input);
         currentColor = 1;
         this.bmpList = new Bitmap(Constants.BITMAP_W, Constants.BITMAP_LIST_H);
         this.bmpSel = new Bitmap(Constants.BITMAP_W, Constants.BITMAP_SEL_H);
+        listString = new String[0];
+        selString = new String[0];
+        listIndex = 0;
+        selIndex = 0;
     }
 
     /**
@@ -46,6 +61,11 @@ public class FancyCli extends Cli {
                 Color.DarkGreen, Color.White, false);
     }
 
+    /**
+     * Initialize list.
+     *
+     * @param text the text
+     */
     public void initializeList(String text) {
         bmpList.flush(listBackground);
         bmpList.drawLine(0, 0, maxX, 0, text,
@@ -61,6 +81,11 @@ public class FancyCli extends Cli {
                 Color.LightCyan, Color.Black, false);
     }
 
+    /**
+     * Initialize sel.
+     *
+     * @param text the text
+     */
     public void initializeSel(String text) {
         bmpSel.flush(selBackground);
         bmpSel.drawLine(0, 0, maxX, 0, text,
@@ -85,8 +110,8 @@ public class FancyCli extends Cli {
         bmpList.drawSprite(78, Constants.BANNER, 1, 1, Sprite.S, foreground, foreground);
         bmpList.drawSprite(84, Constants.BANNER, 1, 1, Sprite.u, foreground, foreground);
         bmpList.drawSprite(90, Constants.BANNER, 1, 1, Sprite.n, foreground, foreground);
-        System.out.print(bmpList.get());
-        System.out.print(bmpSel.get());
+        stream.print(bmpList.get());
+        stream.print(bmpSel.get());
     }
 
     /**
@@ -96,7 +121,7 @@ public class FancyCli extends Cli {
      * @param y             the y
      * @param width         the width
      * @param height        the height
-     * @param rawInput         the raw input
+     * @param rawInput      the raw input
      * @param isDisplayMode the is display mode
      */
     public void showBlock(int x, int y, int width, int height, String rawInput, boolean isDisplayMode) {
@@ -209,24 +234,142 @@ public class FancyCli extends Cli {
      *
      * @param input         the input
      * @param tasks         the tasks
-     * @param isDisplayMode the is display mode
      */
-    public void update(String input, TaskList tasks, boolean isDisplayMode) {
+    public void update(String input, TaskList tasks) {
+        if (freshlySwitched) {
+            String replay = tasks.lastInput;
+            MessageOptions replayOption = tasks.lastIndexOption;
+            if (replay == null || replay.equals(Constants.ZERO_LENGTH_STRING)) {
+                showWelcome();
+            } else {
+                boolean displayMode = replayOption != MessageOptions.NOT_INDEXED;
+                separatePages(replay, displayMode);
+                fixIndex();
+                showText(getShownText(displayMode), displayMode, replayOption);
+            }
+            freshlySwitched = false;
+            return;
+        }
         if (input == null || input.equals(Constants.ZERO_LENGTH_STRING)) {
-            showText(input, isDisplayMode, MessageOptions.NOT_INDEXED);
+            showText(Constants.ZERO_LENGTH_STRING);
+        } else if (input.contains(Constants.BMP_LIST_SWITCH) || input.contains(Constants.BMP_SEL_SWITCH)) {
+            flipPage(input);
+            if (!tasks.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
+                boolean displayMode = tasks.indexOption != MessageOptions.NOT_INDEXED;
+                showText(getShownText(displayMode), displayMode, tasks.indexOption);
+            }
         } else {
-            showText(input, tasks.indexOption != MessageOptions.NOT_INDEXED, tasks.indexOption);
+            boolean displayMode = tasks.indexOption != MessageOptions.NOT_INDEXED;
+            separatePages(input, displayMode);
+            fixIndex();
+            showText(getShownText(displayMode), displayMode, tasks.indexOption);
+            tasks.lastInput = input;
+            tasks.lastIndexOption = tasks.indexOption;
         }
         tasks.indexOption = MessageOptions.NOT_INDEXED;
     }
 
-    @Override
-    public void update(String input, TaskList tasks) {
-        update(input, tasks, false);
+    private void flipPage(String input) {
+        boolean isList = input.contains(Constants.BMP_LIST_SWITCH);
+        boolean isSel = input.contains(Constants.BMP_SEL_SWITCH);
+        String number = input;
+        if (isList) {
+            number = number.replace(Constants.BMP_LIST_SWITCH, Constants.ZERO_LENGTH_STRING);
+        }
+        if (isSel) {
+            number = number.replace(Constants.BMP_SEL_SWITCH, Constants.ZERO_LENGTH_STRING);
+        }
+        int num = Integer.parseInt(number);
+        listIndex = flippedNumber(listIndex, isList, num, listString.length);
+        selIndex = flippedNumber(selIndex, isSel, num, selString.length);
+    }
+
+    private int flippedNumber(int currentNumber, boolean condition, int increment, int max) {
+        int result = currentNumber;
+        if (condition && max > 1) {
+            result += increment;
+            if (result > max - 1) {
+                result -= max;
+            } else if (result < 0) {
+                result += max;
+            }
+        }
+        return result;
+    }
+
+    private void fixIndex() {
+        if (listString == null || listString.length == 0) {
+            listIndex = 0;
+        } else if (listIndex >= listString.length) {
+            listIndex = listString.length - 1;
+        }
+        if (selString == null || selString.length == 0) {
+            selIndex = 0;
+        } else if (selIndex >= selString.length) {
+            selIndex = selString.length - 1;
+        }
+    }
+
+    /**
+     * Gets shown text.
+     *
+     * @param isDisplayMode the is display mode
+     * @return the shown text
+     */
+    String getShownText(boolean isDisplayMode) {
+        if (isDisplayMode) {
+            return listString[listIndex];
+        } else {
+            return selString[selIndex];
+        }
     }
 
     private void draw() {
-        System.out.print(bmpList.get());
-        System.out.print(bmpSel.get());
+        stream.print(bmpList.get());
+        stream.print(bmpSel.get());
     }
+
+    private void separatePages(String input, boolean isDisplayMode) {
+        if (input == null || input.equals(Constants.ZERO_LENGTH_STRING)) {
+            return;
+        }
+        String[] lines = input.split(Constants.WIN_NEWLINE);
+        int numLines = lines.length - 1;
+        if (isDisplayMode) {
+            int cellNum = (bmpList.width / Constants.CELL_W) * ((bmpList.height - 1) / Constants.CELL_H);
+            if (numLines <= cellNum) {
+                listString = new String[]{input};
+                return;
+            }
+            int pages = (int) Math.ceil((double) numLines / (double) cellNum);
+            listString = groupStrings(lines, pages, cellNum);
+        } else {
+            int lineNum = bmpSel.height - 1;
+            if (numLines <= lineNum) {
+                selString = new String[]{input};
+                return;
+            }
+            int pages = (int) Math.ceil((double) numLines / (double) lineNum);
+            selString = groupStrings(lines, pages, lineNum);
+        }
+    }
+
+    private String[] groupStrings(String[] strings, int groups, int groupLength) {
+        StringBuilder[] builders = new StringBuilder[groups];
+        String heading = strings[0];
+        for (int i = 0; i < groups; i++) {
+            builders[i] = new StringBuilder(heading).append(Constants.SPACE).append(
+                    Constants.PARAM_LEFT).append(i + 1).append(Constants.PARAM_RIGHT).append(Constants.WIN_NEWLINE);
+        }
+        for (int i = 1; i < strings.length; i++) {
+            int currentGroup = (i - 1) / groupLength;
+            builders[currentGroup].append(strings[i]).append(Constants.WIN_NEWLINE);
+        }
+        String[] groupedStrings = new String[groups];
+        for (int i = 0; i < groups; i++) {
+            groupedStrings[i] = builders[i].toString();
+        }
+        return groupedStrings;
+    }
+
 }
