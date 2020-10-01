@@ -35,6 +35,7 @@ public class Duke {
      * @param directory the directory
      * @param fileName  the file name
      */
+
     public Duke(boolean isFancy, PrintStream stream, InputStream input, String directory, String fileName) {
         fui = new FancyCli(stream, input);
         pui = new Cli(stream, input);
@@ -95,6 +96,7 @@ public class Duke {
      * @param args the input arguments
      */
     public static void main(String[] args) {
+
         // Starts up using colored CLI on mac or linux, and pure text on windows (for now).
         // This is because ansi sequences needed to be enabled on programs started by cmd in recent windows versions.
         // this is an intended behaviour brought by microsoft developers, so that programs called by cmd
@@ -106,7 +108,7 @@ public class Duke {
         // However, no matter what mode it starts in, I have created switching commands.
         // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
-//        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-//        new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
+        //boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        //new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
     }
 }
