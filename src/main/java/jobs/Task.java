@@ -1,6 +1,7 @@
 package jobs;
 
 import constants.Constants;
+import exceptions.CommandException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -77,7 +78,7 @@ public class Task {
                 try {
                     dateTime = LocalDateTime.parse(input.trim(), DateTimeFormatter.ofPattern(pattern));
                 } catch (Exception e) {
-                    e.addSuppressed(e); // do nothing basically.
+                    e.addSuppressed(new CommandException()); // do nothing basically.
                 }
             } else {
                 break;
@@ -91,7 +92,7 @@ public class Task {
                         dateTime = LocalDate.parse(input.trim(),
                                 DateTimeFormatter.ofPattern(datePattern)).atStartOfDay();
                     } catch (Exception e) {
-                        e.addSuppressed(e); // do nothing basically.
+                        e.addSuppressed(new CommandException()); // do nothing basically.
                     }
                 } else {
                     break;

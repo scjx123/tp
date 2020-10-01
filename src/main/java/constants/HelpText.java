@@ -161,32 +161,52 @@ public enum HelpText {
      */
     NEXT(
             "next",
-            "View next page: Switch the target region to the next page, keeping other regions unchanged.",
+            "Switch the target region to the next page, keeping other regions unchanged.",
             new String[]{
-                "next [-option]",
-                "option: {-i(items, default), -s(selection), -a(all), -help}"
+                "next [region]",
+                "region: i(item list), s(selection), a(all, default)"
             },
             new String[]{
-                "1. \"next\" >> switch item list to the next page (default)",
-                "2. \"next -s\" >> switch the selection to the next page",
-                "3. \"next -a\" >> switch both item list and selection to the next page",
-                "4. \"next -help\" >> print the detailed help text for the \"next\" command"
+                "1. \"next\" >> switch both item list and selection region to the next page (default)",
+                "2. \"next s\" >> switch only the selection region to the next page"
             }),
     /**
      * The Prev.
      */
     PREV(
             "prev",
-            "View previous page: Switch the target region to the next page, keeping other regions unchanged.",
+            "Switch the target region to the previous page, keeping other regions unchanged.",
             new String[]{
-                "prev [-option]",
-                "option: {-i(items, default), -s(selection), -a(all), -help}"
+                "prev [region]",
+                "region: i(items, default), s(selection), a(all)"
             },
             new String[]{
                 "1. \"prev\" >> switch item list to the previous page (default)",
-                "2. \"prev -s\" >> switch the selection to the previous page",
-                "3. \"prev -a\" >> switch both item list and selection to the previous page",
-                "4. \"prev -help\" >> print the detailed help text for the \"prev\" command"
+                "2. \"prev s\" >> switch the selection to the previous page"
+            }),
+    /**
+     * The Fancy.
+     */
+    FANCY(
+            "fancy",
+            "Switch to a fancy Cli (requires the shell to support ansi codes).",
+            new String[]{
+                "fancy"
+            },
+            new String[]{
+                "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
+            }),
+    /**
+     * The Plain.
+     */
+    PLAIN(
+            "plain",
+            "Switch to a plain Cli.",
+            new String[]{
+                "plain"
+            },
+            new String[]{
+                "1. \"plain\" >> switch to a plain pure-text Cli. Use \"fancy\" to switch to fancy Cli"
             }),
     /**
      * The Sel.
