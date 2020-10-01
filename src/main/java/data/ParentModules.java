@@ -11,12 +11,20 @@ import java.util.ArrayList;
  * deleteModule (by moduleCode / index)
  * addModule : add a single module (by object) to the list
  * printMC : prints the total mc in the list
- *
  */
 public class ParentModules {
+    /**
+     * The Module list.
+     */
     static ArrayList<SingleModule> moduleList;
-    static UI ui = new UI();
+    /**
+     * The Ui.
+     */
+    static UI ui = new UI(System.out, System.in);
 
+    /**
+     * Instantiates a new Parent modules.
+     */
     public ParentModules() {
         moduleList = new ArrayList<>();
     }
@@ -32,7 +40,9 @@ public class ParentModules {
 
     /**
      * Find module by mc, code, name.
+     *
      * @param details A string that could be any module related information.
+     * @throws NumberFormatException the number format exception
      */
     public static void find(String details) throws NumberFormatException {
         for (SingleModule m : moduleList) {
@@ -52,12 +62,17 @@ public class ParentModules {
      * Remove module from module list.
      * Note: Removing multiple module is just repeating this function.
      *
+     * @param moduleToBeDeleted the module to be deleted
      */
     public void deleteModule(SingleModule moduleToBeDeleted) {
         moduleList.removeIf(m -> m.moduleCode.equals(moduleToBeDeleted.moduleCode));
     }
 
-    //Remove by index
+    /**
+     * Delete module by index.
+     *
+     * @param index the index
+     */
     public void deleteModule(int index) {
         moduleList.remove(index - 1);
     }
@@ -72,8 +87,14 @@ public class ParentModules {
         moduleList.add(m);
     }
 
+    /**
+     * The Total mc.
+     */
     int totalMC = 0;
 
+    /**
+     * Print mc.
+     */
     public void printMC() {
         for (SingleModule m : moduleList) {
             totalMC += Integer.parseInt(m.moduleMC);

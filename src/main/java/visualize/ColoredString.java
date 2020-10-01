@@ -100,4 +100,9 @@ public class ColoredString {
         }
         return strForeColor + strBackColor + string.replace(Sprite.IGNORE, Sprite.SPACE) + "\u001b[0m";
     }
+
+    @Override
+    public String toString() {
+        return get();
+    }
 }
