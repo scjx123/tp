@@ -32,8 +32,8 @@ public class Duke {
      */
 
     public Duke(String directory, String fileName) {
-        //ui = new FancyCli(); //uncomment this to use gui
-        ui = new Cli(); //uncomment this to use normal cli for backup
+        ui = new FancyCli(); //uncomment this to use gui
+        //ui = new Cli(); //uncomment this to use normal cli for backup
         ui.showWelcome();
         parser = new Parser();
         storage = new Storage(directory, fileName, parser);
@@ -78,11 +78,11 @@ public class Duke {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        dummy = in.nextLine();
+        //Scanner in = new Scanner(System.in);
+        //dummy = in.nextLine();
         //new ReadFile("data/courselist11.txt");
         //ReadFile.loadModules();
         //uncomment this line to run program.
-        //new Duke(Constants.PATH, Constants.FILENAME).run();
+        new Duke(Constants.PATH, Constants.FILENAME).run();
     }
 }
