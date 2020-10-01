@@ -20,7 +20,6 @@ public class ListAction extends Action {
     private boolean isDesc = false;
     private String stringDate = "";
 
-
     @Override
     public String act(TaskList tasks) {
         tasks.indices = new ArrayList<>();

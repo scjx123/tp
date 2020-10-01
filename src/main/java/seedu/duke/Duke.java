@@ -110,6 +110,5 @@ public class Duke {
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
         //boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
         //new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
-
     }
 }
