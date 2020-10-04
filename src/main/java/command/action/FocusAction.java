@@ -18,12 +18,12 @@ public class FocusAction extends Action{
     public String act(TaskList tasks) {
         tasks.indices = new ArrayList<>();
         if (typeTask == null || typeTask.length() == 0) {
-            StringBuilder builder = new StringBuilder(Constants.NO_KEYWORD);
+            StringBuilder builder = new StringBuilder(Constants.NO_TYPETASK);
             for (Task task : tasks.tasks) {
                 builder.append(task.toString()).append(Constants.WIN_NEWLINE);
                 tasks.indices.add(tasks.indexOf(task));
             }
-            if (builder.toString().equals(Constants.NO_KEYWORD)) {
+            if (builder.toString().equals(Constants.NO_TYPETASK)) {
                 builder.append(Constants.NOT_FOUND);
             } else {
                 tasks.indexOption = MessageOptions.INDEXED_NUM;
