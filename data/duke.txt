@@ -29,3 +29,5 @@
 [D][V] eat (by: Dec 12 2018 12:30)
 [T][X] borrow book
 [T][X] borrow book
+[D][X] eat (by: 9pm)
+[T][V] slepp
