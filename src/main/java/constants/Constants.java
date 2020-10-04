@@ -335,13 +335,14 @@ public class Constants {
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all tasks:" + WIN_NEWLINE;
     /**
-     * The constant NO_TASKTYPE.
+     * The constant NO_TASK_TYPE.
      */
-    public static final String NO_TASKTYPE= "No task type provided, listing all tasks:" + WIN_NEWLINE;
+    public static final String NO_TASK_TYPE = "No task type provided, listing all tasks:" + WIN_NEWLINE;
     /**
-     * The constant UNIDENTIED_TYPE.
+     * The constant UNIDENTIFIED_TYPE.
      */
-    public static final String UNIDENTIED_TYPE= "Unidentified task type! Please provide the correct task type." + WIN_NEWLINE;
+    public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
+            + WIN_NEWLINE;
     /**
      * The constant LIST_HEAD.
      */

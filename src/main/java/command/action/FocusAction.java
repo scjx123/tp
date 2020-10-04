@@ -11,27 +11,30 @@ import messages.MessageOptions;
 
 import java.util.ArrayList;
 
-public class FocusAction extends Action{
+/**
+ * The type Focus action.
+ */
+public class FocusAction extends Action {
     private String typeTask;
 
     @Override
     public String act(TaskList tasks) {
         tasks.indices = new ArrayList<>();
         if (typeTask == null || typeTask.length() == 0) {
-            StringBuilder builder = new StringBuilder(Constants.NO_TASKTYPE);
+            StringBuilder builder = new StringBuilder(Constants.NO_TASK_TYPE);
             for (Task task : tasks.tasks) {
                 builder.append(task.toString()).append(Constants.WIN_NEWLINE);
                 tasks.indices.add(tasks.indexOf(task));
             }
-            if (builder.toString().equals(Constants.NO_TASKTYPE)) {
+            if (builder.toString().equals(Constants.NO_TASK_TYPE)) {
                 builder.append(Constants.NOT_FOUND);
             } else {
                 tasks.indexOption = MessageOptions.INDEXED_NUM;
             }
             return builder.toString();
-        } else if(typeTask.equals(Constants.DEADLINE)){
+        } else if (typeTask.equals(Constants.DEADLINE)) {
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
-            filtered.removeIf(t-> !(t instanceof Deadline));
+            filtered.removeIf(t -> !(t instanceof Deadline));
             StringBuilder builder = new StringBuilder();
             for (Task task : filtered) {
                 builder.append(task.toString()).append(Constants.WIN_NEWLINE);
@@ -44,9 +47,9 @@ public class FocusAction extends Action{
             }
             String result = super.act(tasks);
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
-        } else if(typeTask.equals(Constants.TODO)){
+        } else if (typeTask.equals(Constants.TODO)) {
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
-            filtered.removeIf(t-> !(t instanceof ToDo));
+            filtered.removeIf(t -> !(t instanceof ToDo));
             StringBuilder builder = new StringBuilder();
             for (Task task : filtered) {
                 builder.append(task.toString()).append(Constants.WIN_NEWLINE);
@@ -59,9 +62,9 @@ public class FocusAction extends Action{
             }
             String result = super.act(tasks);
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
-        } else if(typeTask.equals(Constants.EVENT)){
+        } else if (typeTask.equals(Constants.EVENT)) {
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
-            filtered.removeIf(t-> !(t instanceof Event));
+            filtered.removeIf(t -> !(t instanceof Event));
             StringBuilder builder = new StringBuilder();
             for (Task task : filtered) {
                 builder.append(task.toString()).append(Constants.WIN_NEWLINE);
@@ -74,8 +77,8 @@ public class FocusAction extends Action{
             }
             String result = super.act(tasks);
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
-        } else{
-            StringBuilder builder = new StringBuilder(Constants.UNIDENTIED_TYPE);
+        } else {
+            StringBuilder builder = new StringBuilder(Constants.UNIDENTIFIED_TYPE);
             return builder.toString();
         }
     }
