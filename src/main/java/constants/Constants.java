@@ -427,6 +427,7 @@ public class Constants {
             Map.entry(DONE, HelpText.DONE),
             Map.entry(EVENT, HelpText.EVENT),
             Map.entry(FIND, HelpText.FIND),
+            Map.entry(FOCUS, HelpText.FOCUS),
             Map.entry(HELP, HelpText.HELP),
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
