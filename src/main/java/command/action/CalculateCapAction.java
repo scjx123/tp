@@ -3,11 +3,13 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 
+import data.ParentModules;
 import static data.ParentModules.moduleList;
 import data.SingleModule;
 import data.TaskList;
 import exceptions.ModuleNotFoundException;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +33,7 @@ public class CalculateCapAction extends Action {
         }
 
         capValue = totalScore / totalMC;
-        return Constants.SHOW_CAP + capValue;
+        return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
     }
 
     @Override
