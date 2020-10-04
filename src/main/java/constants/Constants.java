@@ -11,6 +11,7 @@ import command.action.DoneAction;
 import command.action.EventAction;
 import command.action.FancyAction;
 import command.action.FindAction;
+import command.action.FocusAction;
 import command.action.HelpAction;
 import command.action.ListAction;
 import command.action.McAction;
@@ -212,6 +213,10 @@ public class Constants {
      */
     public static final String FIND = "find";
     /**
+     * The constant FOCUS.
+     */
+    public static final String FOCUS = "focus";
+    /**
      * The constant HELP.
      */
     public static final String HELP = "help";
@@ -335,6 +340,15 @@ public class Constants {
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all tasks:" + WIN_NEWLINE;
     /**
+     * The constant NO_TASK_TYPE.
+     */
+    public static final String NO_TASK_TYPE = "No task type provided, listing all tasks:" + WIN_NEWLINE;
+    /**
+     * The constant UNIDENTIFIED_TYPE.
+     */
+    public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
+            + WIN_NEWLINE;
+    /**
      * The constant LIST_HEAD.
      */
     public static final String LIST_HEAD = "Here is the list of tasks:" + WIN_NEWLINE;
@@ -424,6 +438,7 @@ public class Constants {
             Map.entry(FIND, new FindAction()),
             Map.entry(HELP, new HelpAction()),
             Map.entry(LIST, new ListAction()),
+            Map.entry(FOCUS, new FocusAction()),
             Map.entry(MC, new McAction()),
             Map.entry(TODO, new TodoAction()),
             Map.entry(UNDONE, new UndoneAction()),
@@ -444,6 +459,7 @@ public class Constants {
             Map.entry(DONE, HelpText.DONE),
             Map.entry(EVENT, HelpText.EVENT),
             Map.entry(FIND, HelpText.FIND),
+            Map.entry(FOCUS, HelpText.FOCUS),
             Map.entry(HELP, HelpText.HELP),
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
@@ -467,7 +483,9 @@ public class Constants {
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"p", "d"}),
-            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec", "mod"}),
+
+            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec","mod"}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
@@ -482,6 +500,8 @@ public class Constants {
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(EVENT, ADDED + CHANGED),
             Map.entry(FIND, "Tasks with the specified keyword are:"
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(FOCUS, "Tasks with the specified task type are:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
