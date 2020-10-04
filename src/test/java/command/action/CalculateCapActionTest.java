@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 
 /**
- * Test class for CAP calculator
+ * Test class for CAP calculator.
  */
 class CalculateCapActionTest {
 
