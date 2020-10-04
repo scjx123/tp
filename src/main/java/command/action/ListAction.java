@@ -73,7 +73,7 @@ public class ListAction extends Action {
      * Picking up optional parameter and check if user entered.
      *
      * @param args the args
-     * @throws Exception
+     * @throws Exception to handle prepare exceptions.
      */
     @Override
     public void prepare(ParamNode args) throws Exception {

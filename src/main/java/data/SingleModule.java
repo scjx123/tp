@@ -55,6 +55,7 @@ public class SingleModule extends Item {
     public String toString() {
         return moduleCode + Constants.SPACE + moduleName + Constants.SPACE + moduleMC;
     }
+
     /**
      * Gets module description.
      *

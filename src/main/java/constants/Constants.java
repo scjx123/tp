@@ -1,22 +1,6 @@
 package constants;
 
-import command.action.Action;
-import command.action.ByeAction;
-import command.action.ClearAction;
-import command.action.DeadlineAction;
-import command.action.DeleteAction;
-import command.action.DoneAction;
-import command.action.EventAction;
-import command.action.FindAction;
-import command.action.HelpAction;
-import command.action.ListAction;
-import command.action.TodoAction;
-import command.action.UndoneAction;
-import command.action.UnknownAction;
-import command.action.PlainAction;
-import command.action.FancyAction;
-import command.action.NextAction;
-import command.action.PrevAction;
+import command.action.*;
 
 import java.util.Map;
 
@@ -331,6 +315,10 @@ public class Constants {
      * The constant LIST_HEAD.
      */
     public static final String LIST_HEAD = "Here is the list of tasks:" + WIN_NEWLINE;
+/**
+     * The constant MC_HEAD.
+     */
+    public static final String MC_HEAD = "Here is the total MC:" + WIN_NEWLINE;
     /**
      * The constant HELP_HEADING.
      */
@@ -406,6 +394,7 @@ public class Constants {
             Map.entry(FIND, new FindAction()),
             Map.entry(HELP, new HelpAction()),
             Map.entry(LIST, new ListAction()),
+            Map.entry(MC, new McAction()),
             Map.entry(TODO, new TodoAction()),
             Map.entry(UNDONE, new UndoneAction()),
             Map.entry(UNKNOWN, new UnknownAction()),
@@ -432,7 +421,8 @@ public class Constants {
             Map.entry(PREV, HelpText.PREV),
             Map.entry(NEXT, HelpText.NEXT),
             Map.entry(FANCY, HelpText.FANCY),
-            Map.entry(PLAIN, HelpText.PLAIN));
+            Map.entry(PLAIN, HelpText.PLAIN),
+            Map.entry(MC,HelpText.MC));
     /**
      * The constant paramMap.
      */
@@ -443,6 +433,7 @@ public class Constants {
      * The constant optionalParamMap.
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
+            Map.entry(MC, new String[]{"p", "d"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec","mod"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
