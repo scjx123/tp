@@ -323,7 +323,7 @@ public class Constants {
     /**
      * The constant UNIDENTIED_TYPE.
      */
-    public static final String UNIDENTIED_TYPE= "Unidentified task type provided, listing all tasks:" + WIN_NEWLINE;
+    public static final String UNIDENTIED_TYPE= "Unidentified task type! Please provide the correct task type." + WIN_NEWLINE;
     /**
      * The constant LIST_HEAD.
      */
