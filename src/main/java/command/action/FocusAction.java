@@ -29,7 +29,7 @@ public class FocusAction extends Action{
                 tasks.indexOption = MessageOptions.INDEXED_NUM;
             }
             return builder.toString();
-        } else if(typeTask == "Deadline"){
+        } else if(typeTask.equals(Constants.DEADLINE)){
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
             filtered.removeIf(t-> !(t instanceof Deadline));
             StringBuilder builder = new StringBuilder();
@@ -44,7 +44,7 @@ public class FocusAction extends Action{
             }
             String result = super.act(tasks);
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
-        } else if(typeTask == "Todo"){
+        } else if(typeTask.equals(Constants.TODO)){
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
             filtered.removeIf(t-> !(t instanceof ToDo));
             StringBuilder builder = new StringBuilder();
@@ -59,7 +59,7 @@ public class FocusAction extends Action{
             }
             String result = super.act(tasks);
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
-        } else if(typeTask == "Event"){
+        } else if(typeTask.equals(Constants.EVENT)){
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
             filtered.removeIf(t-> !(t instanceof Event));
             StringBuilder builder = new StringBuilder();
