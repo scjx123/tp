@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Calculate user's cap
+ * Calculate user's cap.
  */
 public class CalculateCapAction extends Action {
 
@@ -66,7 +66,7 @@ public class CalculateCapAction extends Action {
     }
 
     /**
-     * Turn grade alphabet to numbers
+     * Turn grade alphabet to numbers.
      *
      * @param grade grade alphabet
      * @return grade value in number

@@ -276,20 +276,20 @@ public enum HelpText {
                 "4. \"mc -help\" >> print the detailed help text for the \"mc\" command"
             }),
     /**
-     * Help commands for CAP
+     * Help commands for CAP.
      */
     CAP(
             "cap",
             "Calculate CAP: Calculate CAP for courses based on selected option.",
             new String[]{
-                    "cap [-option] [module] [grade] {[module] [grade]...}",
-                    "option: {-u(user, default), -m(multiple/custom modules), -help}"
+                "cap [-option] [module] [grade] {[module] [grade]...}",
+                "option: {-u(user, default), -m(multiple/custom modules), -help}"
             },
             new String[]{
-                    "1. \"cap\" >> calculate user CAP from their past data",
-                    "2. \"cap -m M1 G1 M2 G2 \" >> calculate cap based on input modules: "
-                            + "modules M1 with grade G1, module M2 with grade G2 correspondingly.",
-                    "3. \"cap -help\" >> print the detailed help text for the \"cap\" command"
+                "1. \"cap\" >> calculate user CAP from their past data",
+                "2. \"cap -m M1 G1 M2 G2 \" >> calculate cap based on input modules: "
+                        + "modules M1 with grade G1, module M2 with grade G2 correspondingly.",
+                "3. \"cap -help\" >> print the detailed help text for the \"cap\" command"
             }),
     /*LIST(
             "list",
