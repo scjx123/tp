@@ -1,24 +1,7 @@
 package constants;
 
 
-import command.action.Action;
-import command.action.ByeAction;
-import command.action.ClearAction;
-import command.action.DeadlineAction;
-import command.action.DeleteAction;
-import command.action.DoneAction;
-import command.action.EventAction;
-import command.action.FancyAction;
-import command.action.FindAction;
-import command.action.HelpAction;
-import command.action.ListAction;
-import command.action.McAction;
-import command.action.NextAction;
-import command.action.PlainAction;
-import command.action.PrevAction;
-import command.action.TodoAction;
-import command.action.UndoneAction;
-import command.action.UnknownAction;
+import command.action.*;
 
 import java.util.Map;
 
@@ -210,6 +193,10 @@ public class Constants {
      * The constant FIND.
      */
     public static final String FIND = "find";
+    /**
+     * The constant FOCUS.
+     */
+    public static final String FOCUS = "focus";
     /**
      * The constant HELP.
      */
@@ -412,6 +399,7 @@ public class Constants {
             Map.entry(FIND, new FindAction()),
             Map.entry(HELP, new HelpAction()),
             Map.entry(LIST, new ListAction()),
+            Map.entry(FOCUS, new FocusAction()),
             Map.entry(MC, new McAction()),
             Map.entry(TODO, new TodoAction()),
             Map.entry(UNDONE, new UndoneAction()),
@@ -453,6 +441,7 @@ public class Constants {
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(MC, new String[]{"p", "d"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec","mod"}),
+            Map.entry(FOCUS, new String[]{"Deadline", "Todo", "Event"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
@@ -467,6 +456,8 @@ public class Constants {
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(EVENT, ADDED + CHANGED),
             Map.entry(FIND, "Tasks with the specified keyword are:"
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(FOCUS, "Tasks with the specified task type are:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
