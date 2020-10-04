@@ -443,7 +443,7 @@ public class Constants {
      * The constant optionalParamMap.
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
-            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
+            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec","mod"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**

@@ -5,6 +5,8 @@ import lexical.Parser;
 import constants.Constants;
 import data.TaskList;
 import jobs.Task;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +17,7 @@ public class Storage {
     private FileLoader loader;
     private FileSaver saver;
     private Parser parser;
+    private ReadFile moduleloader;
 
     /**
      * Instantiates a new Storage.
@@ -27,6 +30,7 @@ public class Storage {
         loader = new FileLoader(directory, fileName);
         saver = new FileSaver(directory, fileName);
         this.parser = parser;
+        this.moduleloader = new ReadFile("data/courselist11.txt");
     }
 
     /**
@@ -56,6 +60,11 @@ public class Storage {
             for (Command c: commands) {
                 c.execute(list);
             }
+        }
+        try {
+            list.mods = moduleloader.load();
+        } catch (IOException e) {
+            e.addSuppressed(new IOException());
         }
         return list;
     }

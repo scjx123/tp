@@ -25,3 +25,7 @@
 [T][X] y
 [T][X] z
 [T][X] test 2
+[E][X] eat dinner (at: 12-12-2018 1830)
+[D][V] eat (by: Dec 12 2018 12:30)
+[T][X] borrow book
+[T][X] borrow book

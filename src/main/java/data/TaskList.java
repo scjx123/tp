@@ -13,6 +13,9 @@ public class TaskList {
      * The Tasks.
      */
     public ArrayList<Task> tasks;
+
+    public ArrayList<SingleModule> mods;
+
     /**
      * The Index option.
      */
@@ -40,6 +43,7 @@ public class TaskList {
         tasks = new ArrayList<>();
         indexOption = MessageOptions.NOT_INDEXED;
         indices = new ArrayList<>();
+        mods = new ArrayList<>();
     }
 
     /**
@@ -74,4 +78,6 @@ public class TaskList {
     public void loadList(ArrayList<Task> input) {
         tasks = input;
     }
+
+
 }

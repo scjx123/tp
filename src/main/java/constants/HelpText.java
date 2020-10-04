@@ -110,15 +110,17 @@ public enum HelpText {
      */
     LIST(
             "list",
-            "Print a list of all added tasks",
+            "Print a list of all added tasks/modules",
             new String[]{
                 "list",
-                "list date [asc / desc / spec \"date\"(any common date format)]"
+                "list date [asc / desc / spec \"date\"(any common date format)]",
+                "list mod"
             },
             new String[]{
                 "1. \"list\" >> list all added tasks",
                 "2. \"list date asc\" >> list tasks with a \"date\" field in ascending order",
-                "3. \"list date spec Oct 5 2020\" >> list tasks with specific \"date\" field of Oct 5 2020"
+                "3. \"list date spec Oct 5 2020\" >> list tasks with specific \"date\" field of Oct 5 2020",
+                "4. \"list mod\" >> list all the modules"
             }),
     /**
      * The Todo.

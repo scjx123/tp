@@ -1,5 +1,7 @@
 package data;
 
+import constants.Constants;
+
 /**
  * The type Single module.
  */
@@ -37,6 +39,7 @@ public class SingleModule extends Item {
      */
     public SingleModule(String code, String name, String description, String mc, String prereq) {
         super(code); //moduleDescription is handle here.
+        this.moduleCode = code;
         this.moduleDescription = description;
         this.moduleName = name;
         this.moduleMC = mc;
@@ -48,6 +51,10 @@ public class SingleModule extends Item {
         return moduleCode;
     }
 
+    @Override
+    public String toString() {
+        return moduleCode + Constants.SPACE + moduleName + Constants.SPACE + moduleMC;
+    }
     /**
      * Gets module description.
      *

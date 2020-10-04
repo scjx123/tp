@@ -16,7 +16,7 @@ public class ParentModules {
     /**
      * The Module list.
      */
-    static ArrayList<SingleModule> moduleList;
+    public static ArrayList<SingleModule> moduleList;
     /**
      * The Ui.
      */
@@ -100,5 +100,14 @@ public class ParentModules {
             totalMC += Integer.parseInt(m.moduleMC);
         }
         ui.printMcTitle(totalMC);
+    }
+
+
+
+    /**
+     *
+     */
+    public void timetableForToday(){
+
     }
 }
