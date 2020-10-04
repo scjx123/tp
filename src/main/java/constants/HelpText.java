@@ -110,15 +110,17 @@ public enum HelpText {
      */
     LIST(
             "list",
-            "Print a list of all added tasks",
+            "Print a list of all added tasks/modules",
             new String[]{
                 "list",
-                "list date [asc / desc / spec \"date\"(any common date format)]"
+                "list date [asc / desc / spec \"date\"(any common date format)]",
+                "list mod"
             },
             new String[]{
                 "1. \"list\" >> list all added tasks",
                 "2. \"list date asc\" >> list tasks with a \"date\" field in ascending order",
-                "3. \"list date spec Oct 5 2020\" >> list tasks with specific \"date\" field of Oct 5 2020"
+                "3. \"list date spec Oct 5 2020\" >> list tasks with specific \"date\" field of Oct 5 2020",
+                "4. \"list mod\" >> list all the modules"
             }),
     /**
      * The Todo.
@@ -266,14 +268,13 @@ public enum HelpText {
             "cap",
             "Calculate CAP: Calculate CAP for courses based on selected option.",
             new String[]{
-                    "cap [-option] [-type] [name(s)] {[-type] [name(s)] ...}",
-                    "option: {-s(single, default), -m(multiple), -help}",
-                    "type: {-mod, -task, -help(default)}"
+                    "cap [-option] [module] [grade] {[module] [grade]...}",
+                    "option: {-u(user, default), -m(multiple/custom modules), -help}"
             },
             new String[]{
                     "1. \"cap\" >> calculate user CAP from their past data",
-                    "2. \"cap -m -mod M1 M2 -grade G1 G2 \" >> calculate cap based on input modules: "
-                            + "modules M1, M2 and grade G1, G2 correspondingly.",
+                    "2. \"cap -m M1 G1 M2 G2 \" >> calculate cap based on input modules: "
+                            + "modules M1 with grade G1, module M2 with grade G2 correspondingly.",
                     "3. \"cap -help\" >> print the detailed help text for the \"cap\" command"
             }),
     /*LIST(

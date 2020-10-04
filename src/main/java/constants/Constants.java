@@ -1,5 +1,6 @@
 package constants;
 
+
 import command.action.Action;
 import command.action.ByeAction;
 import command.action.CalculateCapAction;
@@ -8,16 +9,17 @@ import command.action.DeadlineAction;
 import command.action.DeleteAction;
 import command.action.DoneAction;
 import command.action.EventAction;
+import command.action.FancyAction;
 import command.action.FindAction;
 import command.action.HelpAction;
 import command.action.ListAction;
+import command.action.McAction;
+import command.action.NextAction;
+import command.action.PlainAction;
+import command.action.PrevAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
 import command.action.UnknownAction;
-import command.action.PlainAction;
-import command.action.FancyAction;
-import command.action.NextAction;
-import command.action.PrevAction;
 
 import java.util.Map;
 
@@ -270,6 +272,10 @@ public class Constants {
      * The constant MC.
      */
     public static final String MC = "mc";
+    /**
+     * Signals CAP command.
+     */
+    public static final String CAP = "cap";
 
     /**
      * The constant INDEX_OUT.
@@ -333,6 +339,10 @@ public class Constants {
      */
     public static final String LIST_HEAD = "Here is the list of tasks:" + WIN_NEWLINE;
     /**
+     * The constant MC_HEAD.
+     */
+    public static final String MC_HEAD = "Here is the total MC:" + WIN_NEWLINE;
+    /**
      * The constant HELP_HEADING.
      */
     public static final String HELP_HEADING = "Here are all available commands:" + WIN_NEWLINE;
@@ -348,10 +358,7 @@ public class Constants {
      * The constant BMP_SEL_SWITCH.
      */
     public static final String BMP_SEL_SWITCH = "SEL";
-    /**
-     * Signals CAP command.
-     */
-    public static final String CAP = "cap";
+
 
     /**
      * The constant LINE_REPETITION.
@@ -417,6 +424,7 @@ public class Constants {
             Map.entry(FIND, new FindAction()),
             Map.entry(HELP, new HelpAction()),
             Map.entry(LIST, new ListAction()),
+            Map.entry(MC, new McAction()),
             Map.entry(TODO, new TodoAction()),
             Map.entry(UNDONE, new UndoneAction()),
             Map.entry(UNKNOWN, new UnknownAction()),
@@ -445,7 +453,8 @@ public class Constants {
             Map.entry(NEXT, HelpText.NEXT),
             Map.entry(CAP, HelpText.CAP),
             Map.entry(FANCY, HelpText.FANCY),
-            Map.entry(PLAIN, HelpText.PLAIN));
+            Map.entry(PLAIN, HelpText.PLAIN),
+            Map.entry(MC, HelpText.MC));
     /**
      * The constant paramMap.
      */
@@ -456,14 +465,16 @@ public class Constants {
      * The constant optionalParamMap.
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
-            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
+            Map.entry(CAP, new String[]{"u", "m"}),
+            Map.entry(MC, new String[]{"p", "d"}),
+            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec", "mod"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
      * The constant messageMap.
      */
     public static final Map<String, String> messageMap = Map.ofEntries(
-            Map.entry(BYE,"Bye. Hope to see you again soon!"),
+            Map.entry(BYE, "Bye. Hope to see you again soon!"),
             Map.entry(CLEAR, "Nice! I've cleared everything in the list."),
             Map.entry(DEADLINE, ADDED + CHANGED),
             Map.entry(DELETE, REMOVED + CHANGED),

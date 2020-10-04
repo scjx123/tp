@@ -1,9 +1,11 @@
 package io;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -45,6 +47,7 @@ public class ReadFile {
     private static String filename = "courselist11.txt";
     private static String filedir = "data";
 
+
     /**
      * Instantiates a new Read file.
      *
@@ -77,21 +80,21 @@ public class ReadFile {
      *
      * @throws IOException are being thrown here.
      */
-    public static void load() throws IOException {
+    public static ArrayList<SingleModule> load() throws IOException {
         if (!Files.exists(p2)) {
             Files.createFile(p2);
         }
 
-        ParentModules masterList = new ParentModules();
+        ArrayList<SingleModule> masterList = new ArrayList<>();
         Scanner s = new Scanner(p2);
 
         while (s.hasNext()) {
             tempString = s.nextLine();
             parseFile(tempString);
             SingleModule m = new SingleModule(moduleCode,moduleName,moduleDescription,moduleMC,modulePrerequisite);
-            masterList.addModule(m);
+            masterList.add(m);
         }
-
+        return masterList;
     }
 
     /**
@@ -119,14 +122,18 @@ public class ReadFile {
         }
     }
 
+    private static ArrayList<SingleModule> tempList = new ArrayList<>();
+
     /**
      * Master List of module is being created here.
      */
-    public static void loadModules() {
+    public static ArrayList<SingleModule> loadModules() {
         try {
-            load();
+            tempList = load();
         } catch (IOException e) {
             System.out.println("Opps");
         }
+
+        return tempList;
     }
 }

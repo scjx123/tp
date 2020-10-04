@@ -1,3 +1,34 @@
+[T][V] a
+[T][V] b
+[T][X] c
+[T][X] d
+[T][X] e
+[T][X] f
+[T][X] g
+[T][X] h
+[T][X] i
+[T][X] j
+[T][X] k
+[T][X] l
+[T][X] m
+[T][X] n
+[T][X] o
+[T][X] p
+[T][X] q
+[T][X] r
+[T][X] s
+[T][X] t
+[T][X] u
+[T][X] v
+[T][X] w
+[T][X] x
+[T][X] y
+[T][X] z
+[T][X] test 2
+[E][X] eat dinner (at: 12-12-2018 1830)
+[D][V] eat (by: Dec 12 2018 12:30)
+[T][X] borrow book
+[T][X] borrow book
 [D][X] eat (by: 9pm)
 [T][V] slepp
 [T][X] watch power rangers!

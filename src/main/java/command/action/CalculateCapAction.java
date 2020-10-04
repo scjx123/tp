@@ -2,72 +2,65 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
-import data.ParentModules;
+
 import static data.ParentModules.moduleList;
-
 import data.SingleModule;
-import messages.MessageOptions;
+import data.TaskList;
+import exceptions.ModuleNotFoundException;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Calculate user's cap
  */
 public class CalculateCapAction extends Action {
 
-    private ArrayList<Double> grades = new ArrayList<>();
-    private ArrayList<String> moduleNames = new ArrayList<>();
-    private ArrayList<SingleModule> modules = new ArrayList<>();
+    private HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
     private double capValue = 0;
 
     @Override
-    public String act(ParentModules parentModules) {
-        int gradeIndex = 0;
+    public String act(TaskList tasks) {
         double totalScore = 0;
         double totalMC = 0;
-        for (SingleModule module : modules) {
+        for (Map.Entry<SingleModule, Double> m : modulesWithGrades.entrySet()) {
+            Double grade = m.getValue();
+            SingleModule module = m.getKey();
             totalMC += Double.parseDouble(module.getModuleMC());
-            totalScore += Double.parseDouble(module.getModuleMC()) * (grades.get(gradeIndex));
-            gradeIndex++;
+            totalScore += Double.parseDouble(module.getModuleMC()) * grade;
         }
-        capValue = totalMC / totalScore;
+
+        capValue = totalScore / totalMC;
         return Constants.SHOW_CAP + capValue;
     }
 
     @Override
     public void prepare(ParamNode args) throws Exception {
-        ParamNode currData;
         super.prepare(args);
+        ParamNode currData;
 
         //extract modules name
-        currData = flattenedArgs[1];
-        if (currData.name.equals("m")) {
+        currData = flattenedArgs[0];
+        //input custom modules
+        if (flattenedArgs[0].name.equals("m")) {
             while (currData.thisData != null) {
-                moduleNames.add(currData.thisData.name);
-                currData = currData.thisData;
+                SingleModule module;
+                String moduleCode = currData.thisData.name.toUpperCase();
+                Double grade = numerateGrade(currData.thisData.thisData.name.toUpperCase());
+                module = matchModule(moduleCode);
+                modulesWithGrades.put(module, grade);
+                currData = currData.thisData.thisData;
             }
         }
+    }
 
-        int i=0;
-        for (String moduleName: moduleNames){
-            if(moduleName.equals(moduleList))
-        }
-        for(SingleModule module : moduleList){
-            if(module.equals(moduleNames.get(i)))
-            modules.add()
-        }
-        modules = (ArrayList<SingleModule>) moduleList.stream()
-                .map(module -> moduleNames.stream()
-                        .filter(moduleName -> moduleName.equals(module.getName())));
-
-        //extract module grades
-        currData = flattenedArgs[2];
-        if (currData.name.equals("g")) {
-            while (currData.thisData != null) {
-                grades.add(numerateGrade(currData.thisData.name));
-                currData = currData.thisData;
+    private SingleModule matchModule(String moduleCode) throws ModuleNotFoundException {
+        for (SingleModule module : moduleList) {
+            if (moduleCode.equals(module.getName())) {
+                return module;
             }
         }
+        throw new ModuleNotFoundException();
     }
 
     /**
