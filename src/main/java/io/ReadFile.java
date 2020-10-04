@@ -43,6 +43,27 @@ public class ReadFile {
      * Temporary stores the file directory and the name of the text file itself given in the filePath.
      */
     static String[] dir = new String[2];
+
+    private static String filename = "courselist11.txt";
+    private static String filedir = "data";
+
+
+    /**
+     * Instantiates a new Read file.
+     *
+     * @param filePath the file path
+     */
+    public ReadFile(String filePath) {
+        dir = filePath.split("/",2);
+        filedir = dir[0];
+        filename = dir[1];
+    }
+
+    /**
+     * The P 2.
+     */
+    static Path p2 = Paths.get(filedir,filename);
+
     /**
      * The St.
      */
@@ -51,24 +72,6 @@ public class ReadFile {
      * The Temp string.
      */
     static String tempString;
-    private static String filename = "courselist11.txt";
-    private static String filedir = "data";
-    /**
-     * The P 2.
-     */
-    static Path p2 = Paths.get(filedir, filename);
-    private static ArrayList<SingleModule> tempList = new ArrayList<>();
-
-    /**
-     * Instantiates a new Read file.
-     *
-     * @param filePath the file path
-     */
-    public ReadFile(String filePath) {
-        dir = filePath.split("/", 2);
-        filedir = dir[0];
-        filename = dir[1];
-    }
 
     /**
      * New modules are being created here.
@@ -88,7 +91,7 @@ public class ReadFile {
         while (s.hasNext()) {
             tempString = s.nextLine();
             parseFile(tempString);
-            SingleModule m = new SingleModule(moduleCode, moduleName, moduleDescription, moduleMC, modulePrerequisite);
+            SingleModule m = new SingleModule(moduleCode,moduleName,moduleDescription,moduleMC,modulePrerequisite);
             masterList.add(m);
         }
         return masterList;
@@ -103,21 +106,23 @@ public class ReadFile {
     private static void parseFile(String tempString) {
         if (tempString.indexOf("EE") == 0 || tempString.indexOf("CG") == 0
                 || tempString.indexOf("MA") == 0 || tempString.indexOf("CS") == 0 || tempString.indexOf("EG") == 0) {
-            st = new StringTokenizer(tempString, "_");
+            st = new StringTokenizer(tempString,"_");
             moduleCode = st.nextToken();
             moduleName = st.nextToken(); //moduleName;
             if (moduleName.contains("\t")) {
-                moduleName = moduleName.replace("\t", "");
+                moduleName = moduleName.replace("\t","");
             }
             moduleDescription = st.nextToken(); //moduleDescription;
             moduleMC = st.nextToken(); //moduleMC;
             if (moduleMC.contains("\"")) {
-                moduleMC = moduleMC.replace("\"", "");
+                moduleMC = moduleMC.replace("\"","");
                 moduleMC = moduleMC.trim();
             }
             modulePrerequisite = st.nextToken().trim(); //modulePrerequisite;
         }
     }
+
+    private static ArrayList<SingleModule> tempList = new ArrayList<>();
 
     /**
      * Master List of module is being created here.
@@ -128,6 +133,7 @@ public class ReadFile {
         } catch (IOException e) {
             System.out.println("Opps");
         }
+
         return tempList;
     }
 }
