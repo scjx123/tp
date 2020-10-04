@@ -102,10 +102,4 @@ public class ParentModules {
         ui.printMcTitle(totalMC);
     }
 
-    /**
-     *
-     */
-    public void timetableForToday(){
-
-    }
 }
