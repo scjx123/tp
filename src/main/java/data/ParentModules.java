@@ -16,7 +16,7 @@ public class ParentModules {
     /**
      * The Module list.
      */
-    static ArrayList<SingleModule> moduleList;
+    public static ArrayList<SingleModule> moduleList;
     /**
      * The Ui.
      */

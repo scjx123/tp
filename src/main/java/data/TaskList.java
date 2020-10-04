@@ -12,7 +12,7 @@ public class TaskList {
     /**
      * The Tasks.
      */
-    public ArrayList<Task> tasks;
+    public static ArrayList<Task> tasks;
     /**
      * The Index option.
      */

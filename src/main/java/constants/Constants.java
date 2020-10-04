@@ -2,6 +2,7 @@ package constants;
 
 import command.action.Action;
 import command.action.ByeAction;
+import command.action.CalculateCapAction;
 import command.action.ClearAction;
 import command.action.DeadlineAction;
 import command.action.DeleteAction;
@@ -336,6 +337,10 @@ public class Constants {
      */
     public static final String HELP_HEADING = "Here are all available commands:" + WIN_NEWLINE;
     /**
+     * The constant HELP_HEADING.
+     */
+    public static final String SHOW_CAP = "Here is your existing CAP: ";
+    /**
      * The constant BMP_LIST_SWITCH.
      */
     public static final String BMP_LIST_SWITCH = "LIST";
@@ -343,6 +348,10 @@ public class Constants {
      * The constant BMP_SEL_SWITCH.
      */
     public static final String BMP_SEL_SWITCH = "SEL";
+    /**
+     * Signals CAP command.
+     */
+    public static final String CAP = "cap";
 
     /**
      * The constant LINE_REPETITION.
@@ -393,6 +402,8 @@ public class Constants {
      */
     public static final int BANNER = 1;
 
+
+
     /**
      * The constant actionMap.
      */
@@ -411,6 +422,7 @@ public class Constants {
             Map.entry(UNKNOWN, new UnknownAction()),
             Map.entry(PREV, new PrevAction()),
             Map.entry(NEXT, new NextAction()),
+            Map.entry(CAP, new CalculateCapAction()),
             Map.entry(FANCY, new FancyAction()),
             Map.entry(PLAIN, new PlainAction()));
     /**
@@ -431,6 +443,7 @@ public class Constants {
             Map.entry(UNKNOWN, HelpText.UNKNOWN),
             Map.entry(PREV, HelpText.PREV),
             Map.entry(NEXT, HelpText.NEXT),
+            Map.entry(CAP, HelpText.CAP),
             Map.entry(FANCY, HelpText.FANCY),
             Map.entry(PLAIN, HelpText.PLAIN));
     /**
