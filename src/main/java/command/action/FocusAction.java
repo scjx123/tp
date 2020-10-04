@@ -76,15 +76,6 @@ public class FocusAction extends Action{
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
         } else{
             StringBuilder builder = new StringBuilder(Constants.UNIDENTIED_TYPE);
-            for (Task task : tasks.tasks) {
-                builder.append(task.toString()).append(Constants.WIN_NEWLINE);
-                tasks.indices.add(tasks.indexOf(task));
-            }
-            if (builder.toString().equals(Constants.UNIDENTIED_TYPE)) {
-                builder.append(Constants.NOT_FOUND);
-            } else {
-                tasks.indexOption = MessageOptions.INDEXED_NUM;
-            }
             return builder.toString();
         }
     }
