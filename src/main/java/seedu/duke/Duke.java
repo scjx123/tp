@@ -111,7 +111,6 @@ public class Duke {
             }
         }
     }
-
     public String testSut(String command) {
         try {
             String fullCommand = command;
@@ -131,5 +130,25 @@ public class Duke {
             ui.showText(message);
         }
         return "0";
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(String[] args) {
+
+        // Starts up using colored CLI on mac or linux, and pure text on windows (for now).
+        // This is because ansi sequences needed to be enabled on programs started by cmd in recent windows versions.
+        // this is an intended behaviour brought by microsoft developers, so that programs called by cmd
+        // do not inherit the appearance of cmd.exe (which by default supports ansi escape sequences).
+        // when cmd runs "java -jar xxx", the javac.exe is started by cmd.exe
+        // which does not enable the ansi mode by default.
+        // if the jar was started by something else such as gitbash or intelliJ shell, there is no such problem
+        // thus, we need to find a way to reliable call the windows api to set such mode
+        // However, no matter what mode it starts in, I have created switching commands.
+        // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
+        // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
+        // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        // new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
     }
 }

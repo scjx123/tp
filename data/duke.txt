@@ -31,3 +31,6 @@
 [T][X] borrow book
 [D][X] eat (by: 9pm)
 [T][V] slepp
+[T][X] watch power rangers!
+[T][X] eat
+[E][X] adsfa adsf (at: 9pm)
