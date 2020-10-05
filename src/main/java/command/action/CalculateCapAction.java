@@ -53,6 +53,8 @@ public class CalculateCapAction extends Action {
                 modulesWithGrades.put(module, grade);
                 currData = currData.thisData.thisData;
             }
+        } else {
+            // retrieve module data from user data
         }
     }
 
