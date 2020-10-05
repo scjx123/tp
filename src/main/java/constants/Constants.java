@@ -7,6 +7,7 @@ import command.action.CalculateCapAction;
 import command.action.ClearAction;
 import command.action.DeadlineAction;
 import command.action.DeleteAction;
+import command.action.DetailAction;
 import command.action.DoneAction;
 import command.action.EventAction;
 import command.action.FancyAction;
@@ -443,6 +444,7 @@ public class Constants {
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
             Map.entry(MC, new McAction()),
+            Map.entry(DETAIL, new DetailAction()),
             Map.entry(TODO, new TodoAction()),
             Map.entry(UNDONE, new UndoneAction()),
             Map.entry(UNKNOWN, new UnknownAction()),
@@ -487,7 +489,7 @@ public class Constants {
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"p", "d"}),
-
+            Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec","mod"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
