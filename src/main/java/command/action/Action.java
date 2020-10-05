@@ -2,6 +2,7 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
+import data.ParentModules;
 import data.TaskList;
 
 /**
@@ -36,7 +37,7 @@ public class Action {
     }
 
     /**
-     * Act string.
+     * Act or execute the action.
      *
      * @param tasks the tasks
      * @return the string
@@ -46,7 +47,17 @@ public class Action {
     }
 
     /**
-     * Prepare.
+     * Act or execute the action.
+     *
+     * @param modules modules taken by user
+     * @return message to be displayed on screen
+     */
+    public String act(ParentModules modules) {
+        return Constants.messageMap.getOrDefault(args.name, Constants.INVALID);
+    }
+
+    /**
+     * Prepare parameters for task to act.
      *
      * @param args the args
      * @throws Exception the exception

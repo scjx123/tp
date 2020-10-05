@@ -16,7 +16,7 @@ public class ParentModules {
     /**
      * The Module list.
      */
-    public static ArrayList<SingleModule> moduleList;
+    public static ArrayList<SingleModule> moduleList = new ArrayList<>(TaskList.mods);
     /**
      * The Ui.
      */
