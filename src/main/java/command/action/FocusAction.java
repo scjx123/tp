@@ -34,6 +34,7 @@ public class FocusAction extends Action {
             return builder.toString();
         } else if (typeTask.equals(Constants.DEADLINE)) {
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
+            // remove non-deadline task
             filtered.removeIf(t -> !(t instanceof Deadline));
             StringBuilder builder = new StringBuilder();
             for (Task task : filtered) {
@@ -49,6 +50,7 @@ public class FocusAction extends Action {
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
         } else if (typeTask.equals(Constants.TODO)) {
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
+            // remove non-todo task
             filtered.removeIf(t -> !(t instanceof ToDo));
             StringBuilder builder = new StringBuilder();
             for (Task task : filtered) {
@@ -64,6 +66,7 @@ public class FocusAction extends Action {
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
         } else if (typeTask.equals(Constants.EVENT)) {
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
+            // remove non-event task
             filtered.removeIf(t -> !(t instanceof Event));
             StringBuilder builder = new StringBuilder();
             for (Task task : filtered) {
