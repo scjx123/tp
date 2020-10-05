@@ -2,6 +2,7 @@ package jobs;
 
 import constants.Constants;
 import exceptions.CommandException;
+import jdk.jfr.Description;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -110,6 +111,15 @@ public class Task {
     protected void setDateTime(String date) {
         dateTime = parseDateTime(date);
         isDated = dateTime != null;
+    }
+
+    /**
+     * Gets description of the task.
+     *
+     * @return description
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**
