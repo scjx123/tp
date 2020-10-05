@@ -3,22 +3,27 @@ package command.action;
 import constants.Constants;
 import data.ParentModules;
 import data.SingleModule;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import seedu.duke.Duke;
 
 import java.util.HashMap;
 
 /**
- * Test class for CAP calculator.
+ * Test for CAP calculator.
  */
 class CalculateCapActionTest {
 
-//    @Test
-//    void act_customModuleInputs_calculatedCapValue() {
-//        CalculateCapAction capCalculator = new CalculateCapAction();
-//        HashMap<String, Double> testModulesWithGrades = new HashMap<>();
-//        testModulesWithGrades.put()
-//        assertEquals(Constants.SHOW_CAP + "4.8", capCalculator.act(new ParentModules));
-//    }
+    private Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.FILENAME);
 
+    @Test
+    public void act_customModuleInputs_calculatedCapValue() {
+        String testModulesWithGrades = "cs1231 a MA1511 B+ Cs2040C d";
+        String expectedOutput = "Here is your existing CAP: 3.2";
+        String testCustomInputsCommand = "cap -m " + testModulesWithGrades;
+        assertEquals(expectedOutput, d.testSut(testCustomInputsCommand), "Calculate CAP custom input fails");
+    }
 }
