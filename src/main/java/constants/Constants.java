@@ -3,6 +3,7 @@ package constants;
 
 import command.action.Action;
 import command.action.ByeAction;
+import command.action.CalculateCapAction;
 import command.action.ClearAction;
 import command.action.DeadlineAction;
 import command.action.DeleteAction;
@@ -276,7 +277,14 @@ public class Constants {
      * The constant MC.
      */
     public static final String MC = "mc";
-
+    /**
+     * The constant DETAIL.
+     */
+    public static final String DETAIL = "detail";
+    /**
+     * Signals CAP command.
+     */
+    public static final String CAP = "cap";
     /**
      * The constant INDEX_OUT.
      */
@@ -356,6 +364,10 @@ public class Constants {
      */
     public static final String HELP_HEADING = "Here are all available commands:" + WIN_NEWLINE;
     /**
+     * The constant HELP_HEADING.
+     */
+    public static final String SHOW_CAP = "Here is your existing CAP: ";
+    /**
      * The constant BMP_LIST_SWITCH.
      */
     public static final String BMP_LIST_SWITCH = "LIST";
@@ -363,6 +375,7 @@ public class Constants {
      * The constant BMP_SEL_SWITCH.
      */
     public static final String BMP_SEL_SWITCH = "SEL";
+
 
     /**
      * The constant LINE_REPETITION.
@@ -413,6 +426,8 @@ public class Constants {
      */
     public static final int BANNER = 1;
 
+
+
     /**
      * The constant actionMap.
      */
@@ -433,6 +448,7 @@ public class Constants {
             Map.entry(UNKNOWN, new UnknownAction()),
             Map.entry(PREV, new PrevAction()),
             Map.entry(NEXT, new NextAction()),
+            Map.entry(CAP, new CalculateCapAction()),
             Map.entry(FANCY, new FancyAction()),
             Map.entry(PLAIN, new PlainAction()));
     /**
@@ -454,9 +470,11 @@ public class Constants {
             Map.entry(UNKNOWN, HelpText.UNKNOWN),
             Map.entry(PREV, HelpText.PREV),
             Map.entry(NEXT, HelpText.NEXT),
+            Map.entry(CAP, HelpText.CAP),
             Map.entry(FANCY, HelpText.FANCY),
             Map.entry(PLAIN, HelpText.PLAIN),
-            Map.entry(MC,HelpText.MC));
+            Map.entry(MC,HelpText.MC),
+            Map.entry(DETAIL,HelpText.DETAIL));
     /**
      * The constant paramMap.
      */
@@ -467,7 +485,9 @@ public class Constants {
      * The constant optionalParamMap.
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
+            Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"p", "d"}),
+
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec","mod"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
@@ -476,7 +496,7 @@ public class Constants {
      * The constant messageMap.
      */
     public static final Map<String, String> messageMap = Map.ofEntries(
-            Map.entry(BYE,"Bye. Hope to see you again soon!"),
+            Map.entry(BYE, "Bye. Hope to see you again soon!"),
             Map.entry(CLEAR, "Nice! I've cleared everything in the list."),
             Map.entry(DEADLINE, ADDED + CHANGED),
             Map.entry(DELETE, REMOVED + CHANGED),

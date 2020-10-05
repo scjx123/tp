@@ -19,7 +19,11 @@ public class McAction extends Action {
     public String act(TaskList tasks) {
         StringBuilder builder = new StringBuilder(Constants.MC_HEAD);
         ArrayList<SingleModule> moduleList = new ArrayList<>(tasks.mods);
-        if (isSelect) {
+        if (isBoth) {
+            for (SingleModule m : moduleList) {
+                builder.append(m.getModuleMC().trim()).append(Constants.WIN_NEWLINE);
+            }
+        } else if (isSelect) {
             int selectionSum = 0;
             for (SingleModule m : moduleList) {
                 selectionSum += Integer.parseInt(m.getModuleMC().trim());
@@ -27,10 +31,6 @@ public class McAction extends Action {
             builder.append(selectionSum).append(Constants.WIN_NEWLINE); //build a string
 
         } else if (isDetail) {
-            for (SingleModule m : moduleList) {
-                builder.append(m.getModuleMC().trim()).append(Constants.WIN_NEWLINE);
-            }
-        } else if (isBoth) {
             for (SingleModule m : moduleList) {
                 builder.append(m.getModuleMC().trim()).append(Constants.WIN_NEWLINE);
             }
@@ -58,21 +58,33 @@ public class McAction extends Action {
             String[] optionalParams = Constants.optionalParamMap.get(args.name);
             String selection = optionalParams[0];
             String detail = optionalParams[1];
-            isSelect = userInput.contains(selection);
+            isSelect = userInput.equals(selection);
 
             if (isSelect) {
-                userInput = flattenedArgs[1].toFlatString();
-                if (userInput.contains(detail)) {
-                    isBoth = true;
-                    isSelect = false;
-                    isDetail = false;
-                } else {
+                if (flattenedArgs.length > 1) {
                     userInput = flattenedArgs[1].toFlatString();
+                    if (userInput.equals(detail)) {
+                        isBoth = true;
+                        userInput = "";
+                    } else {
+                        throw new Exception();
+                    }
+                } else {
+                    isSelect = true;
+                    isDetail = false;
+                    isBoth = false;
                 }
-            } else if (userInput.contains(detail)) {
+            } else if (userInput.equals(detail)) {
+                if (flattenedArgs.length > 1) {
+                    throw new Exception();
+                }
                 isDetail = true;
-                isBoth = false;
                 isSelect = false;
+                isBoth = false;
+                userInput = "";
+
+            } else {
+                throw new Exception();
             }
         }
     }
