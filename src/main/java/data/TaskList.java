@@ -12,10 +12,9 @@ public class TaskList {
     /**
      * The Tasks.
      */
-    public ArrayList<Task> tasks;
+    public static ArrayList<Task> tasks;
 
-    public ArrayList<SingleModule> mods;
-
+    public static ArrayList<SingleModule> mods;
     /**
      * The Index option.
      */
