@@ -32,7 +32,7 @@ public class FocusAction extends Action {
                 tasks.indexOption = MessageOptions.INDEXED_NUM;
             }
             return builder.toString();
-        } else if (typeTask.equals(Constants.DEADLINE)) {
+        } else if (typeTask.toLowerCase().equals(Constants.DEADLINE)) {
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
             // remove non-deadline task
             filtered.removeIf(t -> !(t instanceof Deadline));
@@ -48,7 +48,7 @@ public class FocusAction extends Action {
             }
             String result = super.act(tasks);
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
-        } else if (typeTask.equals(Constants.TODO)) {
+        } else if (typeTask.toLowerCase().equals(Constants.TODO)) {
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
             // remove non-todo task
             filtered.removeIf(t -> !(t instanceof ToDo));
@@ -64,7 +64,7 @@ public class FocusAction extends Action {
             }
             String result = super.act(tasks);
             return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
-        } else if (typeTask.equals(Constants.EVENT)) {
+        } else if (typeTask.toLowerCase().equals(Constants.EVENT)) {
             ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
             // remove non-event task
             filtered.removeIf(t -> !(t instanceof Event));
