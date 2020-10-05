@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Module Credits Test
+ * Module Credits Test.
  */
 public class McActionTest {
 
