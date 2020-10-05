@@ -90,6 +90,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Test.
+     * @param command Command of user
+     * @return
+     */
     public String testSut(String command) {
         try {
             String fullCommand = command;

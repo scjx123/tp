@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Module Credits Test.
+ */
 public class McActionTest {
 
     private String[] testCommand = {"mc", "mc -p", "mc -d", "mc -p -d"};
