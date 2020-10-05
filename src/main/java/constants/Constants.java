@@ -276,6 +276,10 @@ public class Constants {
      * The constant MC.
      */
     public static final String MC = "mc";
+    /**
+     * The constant DETAIL.
+     */
+    public static final String DETAIL = "detail";
 
     /**
      * The constant INDEX_OUT.
@@ -456,7 +460,8 @@ public class Constants {
             Map.entry(NEXT, HelpText.NEXT),
             Map.entry(FANCY, HelpText.FANCY),
             Map.entry(PLAIN, HelpText.PLAIN),
-            Map.entry(MC,HelpText.MC));
+            Map.entry(MC,HelpText.MC),
+            Map.entry(DETAIL,HelpText.DETAIL));
     /**
      * The constant paramMap.
      */

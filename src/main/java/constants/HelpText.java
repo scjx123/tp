@@ -275,6 +275,23 @@ public enum HelpText {
                 "3. \"mc -p -d \" >> print the detailed MC composition of the selection region",
                 "4. \"mc -help\" >> print the detailed help text for the \"mc\" command"
             }),
+    /**
+     * The Mc.
+     */
+    DETAIL(
+            "detail",
+            "Print MCs: Print the number of MCs based on selected option.",
+            new String[]{
+                "mc [-option] [-detail]",
+                "option: {-mod -task -cmd(commands) -all -help(default)}",
+                "detail: {-all(total, default), -sel(detailed)}"
+            },
+            new String[]{
+                "1. \"detail -mod CS2113\" >> print the detail of CS2113 in the item list region",
+                "2. \"detail -task Exam\" >> print the detail of Exam in the item list region\n",
+                "3. \"detail -cmd edit\" >> prints the usage of “edit” command in the command I/O region\n",
+                "4. \"detail -help\" >> prints the usage of \"detail\" command in the command I/O region"
+            }),
     /*LIST(
             "list",
             "List items: print the list of items in the list region.",
