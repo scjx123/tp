@@ -92,7 +92,10 @@ public class ReadFile {
             tempString = s.nextLine();
             parseFile(tempString);
             SingleModule m = new SingleModule(moduleCode,moduleName,moduleDescription,moduleMC,modulePrerequisite);
-            masterList.add(m);
+            if (moduleCode != null) {
+                masterList.add(m);
+            }
+            moduleCode = null;
         }
         return masterList;
     }
@@ -120,20 +123,5 @@ public class ReadFile {
             }
             modulePrerequisite = st.nextToken().trim(); //modulePrerequisite;
         }
-    }
-
-    private static ArrayList<SingleModule> tempList = new ArrayList<>();
-
-    /**
-     * Master List of module is being created here.
-     */
-    public static ArrayList<SingleModule> loadModules() {
-        try {
-            tempList = load();
-        } catch (IOException e) {
-            System.out.println("Opps");
-        }
-
-        return tempList;
     }
 }

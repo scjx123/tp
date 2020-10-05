@@ -35,7 +35,6 @@ public class Duke {
      * @param directory the directory
      * @param fileName  the file name
      */
-
     public Duke(boolean isFancy, PrintStream stream, InputStream input, String directory, String fileName) {
         fui = new FancyCli(stream, input);
         pui = new Cli(stream, input);
