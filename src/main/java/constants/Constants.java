@@ -278,10 +278,13 @@ public class Constants {
      */
     public static final String MC = "mc";
     /**
+     * The constant DETAIL.
+     */
+    public static final String DETAIL = "detail";
+    /**
      * Signals CAP command.
      */
     public static final String CAP = "cap";
-
     /**
      * The constant INDEX_OUT.
      */
@@ -470,7 +473,8 @@ public class Constants {
             Map.entry(CAP, HelpText.CAP),
             Map.entry(FANCY, HelpText.FANCY),
             Map.entry(PLAIN, HelpText.PLAIN),
-            Map.entry(MC, HelpText.MC));
+            Map.entry(MC,HelpText.MC),
+            Map.entry(DETAIL,HelpText.DETAIL));
     /**
      * The constant paramMap.
      */
