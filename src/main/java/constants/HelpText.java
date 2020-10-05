@@ -252,8 +252,8 @@ public enum HelpText {
                 "type: {-mod, -task, -help(default)}"
             },
             new String[]{
-                "1. \"add -mod CS2113T\" >> adds a single module CS2113T to item list",
-                "2. \"add -task deadline\" >> adds a single task deadline to the item list",
+                "1. \"add -mod CS2113T\" >> add a single module CS2113T to item list",
+                "2. \"add -task deadline\" >> add a single task deadline to the item list",
                 "3. \"add -m -mod M1 M2 -task T1 T2 \" >> add multiple items: "
                         + "modules M1, M2 and tasks T1, T2 to the item list",
                 "4. \"add -help\" >> print the detailed help text for the \"add\" command"
@@ -274,6 +274,22 @@ public enum HelpText {
                 "2. \"mc -p\" >> print the total number of MCs in the selection region",
                 "3. \"mc -p -d \" >> print the detailed MC composition of the selection region",
                 "4. \"mc -help\" >> print the detailed help text for the \"mc\" command"
+            }),
+    /**
+     * Help commands for CAP.
+     */
+    CAP(
+            "cap",
+            "Calculate CAP: Calculate CAP for courses based on selected option.",
+            new String[]{
+                "cap [-option] [module] [grade] {[module] [grade]...}",
+                "option: {-u(user, default), -m(multiple/custom modules), -help}"
+            },
+            new String[]{
+                "1. \"cap\" >> calculate user CAP from their past data",
+                "2. \"cap -m M1 G1 M2 G2 \" >> calculate cap based on input modules: "
+                        + "modules M1 with grade G1, module M2 with grade G2 correspondingly.",
+                "3. \"cap -help\" >> print the detailed help text for the \"cap\" command"
             }),
     /*LIST(
             "list",
