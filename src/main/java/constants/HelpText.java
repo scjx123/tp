@@ -123,6 +123,20 @@ public enum HelpText {
                 "4. \"list mod\" >> list all the modules"
             }),
     /**
+     * The Focus.
+     */
+    FOCUS(
+            "focus",
+            "Print a list of all added tasks/modules based on task type",
+            new String[]{
+                "focus",
+                "focus [deadline / todo / event]"
+            },
+            new String[]{
+                "1. \"focus\" >> list all tasks",
+                "2. \"focus deadline\" >> list all deadline tasks"
+            }),
+    /**
      * The Todo.
      */
     TODO(
