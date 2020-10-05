@@ -17,7 +17,7 @@ public class McActionTest {
     private String[] testCommand = {"mc", "mc -p", "mc -d", "mc -p -d"};
 
     @Test
-    public void act_moduleCommandsInputs_suitableMCDisplayed() {
+    public void act_moduleCommandsInputs_suitableMcDisplayed() {
         Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.FILENAME);
 
         assertAll("McActionTest", () -> assertTrue(d.testSut(testCommand[0]).contains("619")),
