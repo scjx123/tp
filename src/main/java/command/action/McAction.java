@@ -61,7 +61,7 @@ public class McAction extends Action {
             isSelect = userInput.equals(selection);
 
             if (isSelect) {
-                if (flattenedArgs.length>1) {
+                if (flattenedArgs.length > 1) {
                     userInput = flattenedArgs[1].toFlatString();
                     if (userInput.equals(detail)) {
                         isBoth = true;
@@ -75,7 +75,7 @@ public class McAction extends Action {
                     isBoth = false;
                 }
             } else if (userInput.equals(detail)) {
-                if (flattenedArgs.length>1) {
+                if (flattenedArgs.length > 1) {
                     throw new Exception();
                 }
                 isDetail = true;
