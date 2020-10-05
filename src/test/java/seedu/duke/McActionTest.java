@@ -18,8 +18,8 @@ public class McActionTest {
     @DisplayName("uWu")
     public void mcTest() {
         Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.FILENAME);
-        assertAll("testCommand", () -> assertTrue(d.testSut(testCommand[0]).contains("721")),
-            () -> assertTrue(d.testSut(testCommand[1]).contains("721")),
+        assertAll("testCommand", () -> assertTrue(d.testSut(testCommand[0]).contains("619")),
+            () -> assertTrue(d.testSut(testCommand[1]).contains("619")),
             () -> assertTrue(d.testSut(testCommand[2]).contains("12")),
             () -> assertTrue(d.testSut(testCommand[2]).contains("12")),
             () -> assertTrue(d.testSut(testCommand[2]).contains("12"))

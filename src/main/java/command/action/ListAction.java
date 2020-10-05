@@ -21,7 +21,7 @@ public class ListAction extends Action {
     private boolean isAsc = false;
     private boolean isDesc = false;
     private boolean isMod = false;
-
+    private int sum = 0;
     private String stringDate = "";
 
     @Override
@@ -58,6 +58,7 @@ public class ListAction extends Action {
         }
         if (isMod) {
             for (SingleModule m : moduleList) {
+                sum += 1;
                 builder.append(m.getName()).append(Constants.WIN_NEWLINE); //build a string
             }
         }

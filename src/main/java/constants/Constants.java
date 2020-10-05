@@ -1,7 +1,27 @@
 package constants;
 
 
-import command.action.*;
+import command.action.Action;
+import command.action.ByeAction;
+import command.action.CalculateCapAction;
+import command.action.ClearAction;
+import command.action.DeadlineAction;
+import command.action.DeleteAction;
+import command.action.DetailAction;
+import command.action.DoneAction;
+import command.action.EventAction;
+import command.action.FancyAction;
+import command.action.FindAction;
+import command.action.FocusAction;
+import command.action.HelpAction;
+import command.action.ListAction;
+import command.action.McAction;
+import command.action.NextAction;
+import command.action.PlainAction;
+import command.action.PrevAction;
+import command.action.TodoAction;
+import command.action.UndoneAction;
+import command.action.UnknownAction;
 
 import java.util.Map;
 
