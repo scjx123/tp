@@ -47,16 +47,6 @@ public class Action {
     }
 
     /**
-     * Act or execute the action.
-     *
-     * @param modules modules taken by user
-     * @return message to be displayed on screen
-     */
-    public String act(ParentModules modules) {
-        return Constants.messageMap.getOrDefault(args.name, Constants.INVALID);
-    }
-
-    /**
      * Prepare parameters for task to act.
      *
      * @param args the args

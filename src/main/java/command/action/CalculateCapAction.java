@@ -3,13 +3,12 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 
-import data.ParentModules;
-import static data.ParentModules.moduleList;
 import data.SingleModule;
 import data.TaskList;
 import exceptions.ModuleNotFoundException;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +18,8 @@ import java.util.Map;
 public class CalculateCapAction extends Action {
 
     private HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
+    ArrayList<SingleModule> moduleList = new ArrayList<>(TaskList.mods);
+
     private double capValue = 0;
 
     @Override
