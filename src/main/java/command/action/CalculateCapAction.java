@@ -3,8 +3,6 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 
-import data.ParentModules;
-import static data.ParentModules.moduleList;
 import data.SingleModule;
 import data.TaskList;
 import exceptions.ModuleNotFoundException;
@@ -18,7 +16,8 @@ import java.util.Map;
  */
 public class CalculateCapAction extends Action {
 
-    private HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
+    private final HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
+
     private double capValue = 0;
 
     @Override
@@ -59,7 +58,7 @@ public class CalculateCapAction extends Action {
     }
 
     private SingleModule matchModule(String moduleCode) throws ModuleNotFoundException {
-        for (SingleModule module : moduleList) {
+        for (SingleModule module : TaskList.mods) {
             if (moduleCode.equals(module.getName())) {
                 return module;
             }
