@@ -162,6 +162,7 @@ public class Constants {
     /**
      * The constant TEXT_PLACEHOLDER.
      */
+
     public static final String TEXT_PLACEHOLDER = "_t_";
     /**
      * The constant NUMBER_PLACEHOLDER.
@@ -229,6 +230,10 @@ public class Constants {
      * The constant TODO.
      */
     public static final String TODO = "todo";
+    /**
+     * The constant ALL.
+     */
+    public static final String ALL = "all";
     /**
      * The constant UNDONE.
      */
@@ -352,6 +357,17 @@ public class Constants {
      */
     public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
             + WIN_NEWLINE;
+
+    /**
+     * The constant FOCUS_HELP.
+     */
+    public static final String FOCUS_HELP = FOCUS + SYNTAX_OR + FOCUS + CHAR_SPACE + ICON_LEFT + DEADLINE + CHAR_SPACE
+            + PARAM + CHAR_SPACE + TODO + CHAR_SPACE + PARAM + CHAR_SPACE + EVENT + CHAR_SPACE + PARAM + CHAR_SPACE
+            + ALL + ICON_RIGHT + WIN_NEWLINE;
+    /**
+     * The constant CONTEXT_MSG.
+     */
+    public static final String CONTEXT_MSG = "Changing context to ";
     /**
      * The constant LIST_HEAD.
      */
