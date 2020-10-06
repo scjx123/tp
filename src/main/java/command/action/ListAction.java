@@ -2,8 +2,13 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
+import data.ParentModules;
+import data.SingleModule;
 import data.TaskList;
 import jobs.Task;
+import jobs.Deadline;
+import jobs.Event;
+import jobs.ToDo;
 import messages.MessageOptions;
 
 import java.time.LocalDate;
@@ -18,13 +23,30 @@ public class ListAction extends Action {
 
     private boolean isAsc = false;
     private boolean isDesc = false;
+    private boolean isMod = false;
+    private int sum = 0;
     private String stringDate = "";
+    private String taskFlag = Constants.ALL;
+    FocusAction focus = new FocusAction();
 
     @Override
     public String act(TaskList tasks) {
         tasks.indices = new ArrayList<>();
         StringBuilder builder = new StringBuilder(Constants.LIST_HEAD);
         ArrayList<Task> displayList = new ArrayList<>(tasks.tasks);
+        ArrayList<SingleModule> moduleList = new ArrayList<>(tasks.mods);
+        taskFlag = focus.getTaskFlag();
+
+        if (taskFlag.equals(Constants.DEADLINE)) {
+            displayList.removeIf(t -> !(t instanceof Deadline));
+        } else if (taskFlag.equals(Constants.EVENT)) {
+            displayList.removeIf(t -> !(t instanceof Event));
+        } else if (taskFlag.equals(Constants.TODO)) {
+            displayList.removeIf(t -> !(t instanceof ToDo));
+        } else if (taskFlag.equals(Constants.ALL)) {
+            displayList = new ArrayList<>(tasks.tasks);
+        }
+
         if (!stringDate.equals("")) {
             LocalDateTime dateTime = Task.parseDateTime(stringDate);
             if (dateTime != null) {
@@ -50,6 +72,12 @@ public class ListAction extends Action {
                 tasks.indices.add(tasks.indexOf(task));
             }
         }
+        if (isMod) {
+            for (SingleModule m : moduleList) {
+                sum += 1;
+                builder.append(m.getName()).append(Constants.WIN_NEWLINE); //build a string
+            }
+        }
         if (builder.toString().equals(Constants.LIST_HEAD)) {
             builder.append(Constants.NOT_FOUND);
         } else {
@@ -58,6 +86,12 @@ public class ListAction extends Action {
         return builder.toString();
     }
 
+    /**
+     * Picking up optional parameter and check if user entered.
+     *
+     * @param args the args
+     * @throws Exception to handle prepare exceptions.
+     */
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
@@ -73,7 +107,10 @@ public class ListAction extends Action {
             String asc = optionalParams[1];
             String desc = optionalParams[2];
             String spec = optionalParams[3];
+            String mod = optionalParams[4];
             boolean isDated = stringDate.contains(optionalParam);
+            isMod = stringDate.contains(mod);
+
             if (isDated) {
                 stringDate = stringDate.replace(optionalParam, Constants.ZERO_LENGTH_STRING).trim();
                 String[] options = stringDate.split(Constants.SPACE);
@@ -100,7 +137,7 @@ public class ListAction extends Action {
                 }
             } else if (stringDate.trim().length() == 0) {
                 stringDate = "";
-            } else {
+            } else if (!stringDate.trim().equals("mod")) {
                 throw new Exception();
             }
         }

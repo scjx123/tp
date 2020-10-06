@@ -16,7 +16,7 @@ public class ParentModules {
     /**
      * The Module list.
      */
-    static ArrayList<SingleModule> moduleList;
+    public static ArrayList<SingleModule> moduleList = new ArrayList<>(TaskList.mods);
     /**
      * The Ui.
      */
@@ -101,4 +101,5 @@ public class ParentModules {
         }
         ui.printMcTitle(totalMC);
     }
+
 }

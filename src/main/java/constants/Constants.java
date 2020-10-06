@@ -1,22 +1,27 @@
 package constants;
 
+
 import command.action.Action;
 import command.action.ByeAction;
+import command.action.CalculateCapAction;
 import command.action.ClearAction;
 import command.action.DeadlineAction;
 import command.action.DeleteAction;
+import command.action.DetailAction;
 import command.action.DoneAction;
 import command.action.EventAction;
+import command.action.FancyAction;
 import command.action.FindAction;
+import command.action.FocusAction;
 import command.action.HelpAction;
 import command.action.ListAction;
+import command.action.McAction;
+import command.action.NextAction;
+import command.action.PlainAction;
+import command.action.PrevAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
 import command.action.UnknownAction;
-import command.action.PlainAction;
-import command.action.FancyAction;
-import command.action.NextAction;
-import command.action.PrevAction;
 
 import java.util.Map;
 
@@ -157,6 +162,7 @@ public class Constants {
     /**
      * The constant TEXT_PLACEHOLDER.
      */
+
     public static final String TEXT_PLACEHOLDER = "_t_";
     /**
      * The constant NUMBER_PLACEHOLDER.
@@ -209,6 +215,10 @@ public class Constants {
      */
     public static final String FIND = "find";
     /**
+     * The constant FOCUS.
+     */
+    public static final String FOCUS = "focus";
+    /**
      * The constant HELP.
      */
     public static final String HELP = "help";
@@ -220,6 +230,10 @@ public class Constants {
      * The constant TODO.
      */
     public static final String TODO = "todo";
+    /**
+     * The constant ALL.
+     */
+    public static final String ALL = "all";
     /**
      * The constant UNDONE.
      */
@@ -269,7 +283,14 @@ public class Constants {
      * The constant MC.
      */
     public static final String MC = "mc";
-
+    /**
+     * The constant DETAIL.
+     */
+    public static final String DETAIL = "detail";
+    /**
+     * Signals CAP command.
+     */
+    public static final String CAP = "cap";
     /**
      * The constant INDEX_OUT.
      */
@@ -328,13 +349,41 @@ public class Constants {
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all tasks:" + WIN_NEWLINE;
     /**
+     * The constant NO_TASK_TYPE.
+     */
+    public static final String NO_TASK_TYPE = "No task type provided, listing all tasks:" + WIN_NEWLINE;
+    /**
+     * The constant UNIDENTIFIED_TYPE.
+     */
+    public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
+            + WIN_NEWLINE;
+
+    /**
+     * The constant FOCUS_HELP.
+     */
+    public static final String FOCUS_HELP = FOCUS + SYNTAX_OR + FOCUS + CHAR_SPACE + ICON_LEFT + DEADLINE + CHAR_SPACE
+            + PARAM + CHAR_SPACE + TODO + CHAR_SPACE + PARAM + CHAR_SPACE + EVENT + CHAR_SPACE + PARAM + CHAR_SPACE
+            + ALL + ICON_RIGHT + WIN_NEWLINE;
+    /**
+     * The constant CONTEXT_MSG.
+     */
+    public static final String CONTEXT_MSG = "Changing context to ";
+    /**
      * The constant LIST_HEAD.
      */
     public static final String LIST_HEAD = "Here is the list of tasks:" + WIN_NEWLINE;
     /**
+     * The constant MC_HEAD.
+     */
+    public static final String MC_HEAD = "Here is the total MC:" + WIN_NEWLINE;
+    /**
      * The constant HELP_HEADING.
      */
     public static final String HELP_HEADING = "Here are all available commands:" + WIN_NEWLINE;
+    /**
+     * The constant HELP_HEADING.
+     */
+    public static final String SHOW_CAP = "Here is your existing CAP: ";
     /**
      * The constant BMP_LIST_SWITCH.
      */
@@ -343,6 +392,7 @@ public class Constants {
      * The constant BMP_SEL_SWITCH.
      */
     public static final String BMP_SEL_SWITCH = "SEL";
+
 
     /**
      * The constant LINE_REPETITION.
@@ -393,6 +443,8 @@ public class Constants {
      */
     public static final int BANNER = 1;
 
+
+
     /**
      * The constant actionMap.
      */
@@ -406,11 +458,15 @@ public class Constants {
             Map.entry(FIND, new FindAction()),
             Map.entry(HELP, new HelpAction()),
             Map.entry(LIST, new ListAction()),
+            Map.entry(FOCUS, new FocusAction()),
+            Map.entry(MC, new McAction()),
+            Map.entry(DETAIL, new DetailAction()),
             Map.entry(TODO, new TodoAction()),
             Map.entry(UNDONE, new UndoneAction()),
             Map.entry(UNKNOWN, new UnknownAction()),
             Map.entry(PREV, new PrevAction()),
             Map.entry(NEXT, new NextAction()),
+            Map.entry(CAP, new CalculateCapAction()),
             Map.entry(FANCY, new FancyAction()),
             Map.entry(PLAIN, new PlainAction()));
     /**
@@ -424,6 +480,7 @@ public class Constants {
             Map.entry(DONE, HelpText.DONE),
             Map.entry(EVENT, HelpText.EVENT),
             Map.entry(FIND, HelpText.FIND),
+            Map.entry(FOCUS, HelpText.FOCUS),
             Map.entry(HELP, HelpText.HELP),
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
@@ -431,8 +488,11 @@ public class Constants {
             Map.entry(UNKNOWN, HelpText.UNKNOWN),
             Map.entry(PREV, HelpText.PREV),
             Map.entry(NEXT, HelpText.NEXT),
+            Map.entry(CAP, HelpText.CAP),
             Map.entry(FANCY, HelpText.FANCY),
-            Map.entry(PLAIN, HelpText.PLAIN));
+            Map.entry(PLAIN, HelpText.PLAIN),
+            Map.entry(MC,HelpText.MC),
+            Map.entry(DETAIL,HelpText.DETAIL));
     /**
      * The constant paramMap.
      */
@@ -443,14 +503,18 @@ public class Constants {
      * The constant optionalParamMap.
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
-            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
+            Map.entry(CAP, new String[]{"u", "m"}),
+            Map.entry(MC, new String[]{"p", "d"}),
+            Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
+            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec","mod"}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
      * The constant messageMap.
      */
     public static final Map<String, String> messageMap = Map.ofEntries(
-            Map.entry(BYE,"Bye. Hope to see you again soon!"),
+            Map.entry(BYE, "Bye. Hope to see you again soon!"),
             Map.entry(CLEAR, "Nice! I've cleared everything in the list."),
             Map.entry(DEADLINE, ADDED + CHANGED),
             Map.entry(DELETE, REMOVED + CHANGED),
@@ -458,6 +522,8 @@ public class Constants {
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(EVENT, ADDED + CHANGED),
             Map.entry(FIND, "Tasks with the specified keyword are:"
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(FOCUS, "Tasks with the specified task type are:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
