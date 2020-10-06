@@ -37,13 +37,13 @@ public class ListAction extends Action {
         ArrayList<SingleModule> moduleList = new ArrayList<>(tasks.mods);
         taskFlag = focus.getTaskFlag();
 
-        if(taskFlag.equals(Constants.DEADLINE)){
+        if (taskFlag.equals(Constants.DEADLINE)) {
             displayList.removeIf(t -> !(t instanceof Deadline));
-        }else if(taskFlag.equals(Constants.EVENT)){
+        } else if (taskFlag.equals(Constants.EVENT)) {
             displayList.removeIf(t -> !(t instanceof Event));
-        }else if(taskFlag.equals(Constants.TODO)){
+        } else if (taskFlag.equals(Constants.TODO)) {
             displayList.removeIf(t -> !(t instanceof ToDo));
-        }else if(taskFlag.equals(Constants.ALL)){
+        } else if (taskFlag.equals(Constants.ALL)) {
             displayList = new ArrayList<>(tasks.tasks);
         }
 

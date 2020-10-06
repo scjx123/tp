@@ -60,13 +60,13 @@ public class FocusAction extends Action {
             builder.append(Constants.CONTEXT_MSG);
             builder.append(Constants.EVENT);
             return builder.toString();
-        } else if (typeTask.toLowerCase().equals(Constants.ALL)){
+        } else if (typeTask.toLowerCase().equals(Constants.ALL)) {
             setTaskFlag(Constants.ALL);
             StringBuilder builder = new StringBuilder();
             builder.append(Constants.CONTEXT_MSG);
             builder.append(Constants.ALL);
             return builder.toString();
-        }else{
+        } else {
             StringBuilder builder = new StringBuilder();
             builder.append(Constants.INVALID);
             builder.append(Constants.FOCUS_HELP);
