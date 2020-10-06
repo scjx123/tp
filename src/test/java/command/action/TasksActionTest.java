@@ -19,22 +19,6 @@ class TasksActionTest {
     private Duke duke = new Duke(false, System.out, System.in, Constants.PATH, Constants.FILENAME);
 
     @Test
-    /**
-     * Main method to test all task actions under expected usage.
-     */
-    public void testAllTaskActions_normalCases_expectedResponses() {
-        actClear_normalCase_clearResponseMessage();
-        actDeadline_dateTimeFormat_formattedTimeDeadline();
-        actDeadline_randomByTime_customTimeDeadline();
-        actEvent_dateTimeFormat_formattedTimeDeadline();
-        actEvent_randomAtTime_customTimeDeadline();
-        actTodo_normalTodo_todoRespondMessage();
-        actDone_indexInList_doneResponseMessage();
-        actList_filledList_listResponseMessage();
-        actUndone_indexInList_undoneResponseMessage();
-    }
-
-    @Test
     public void actClear_normalCase_clearResponseMessage() {
         String expectedOutput = "Nice! I've cleared everything in the list.";
         String testCustomInputsCommand = "clear";
@@ -143,6 +127,7 @@ class TasksActionTest {
 
     @Test
     public void actList_filledList_listResponseMessage() {
+        TaskList.tasks.removeAll(TaskList.tasks);
         TaskList.tasks.add(new Deadline("watch Spongebob roundpants s3", "22-01-2001 12:00"));
         TaskList.tasks.add(new ToDo("eat banana while watching Minions s4"));
         TaskList.tasks.add(new Event("Tinder meetingg!!", "THE END OF TIME TT"));

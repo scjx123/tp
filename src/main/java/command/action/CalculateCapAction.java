@@ -8,7 +8,6 @@ import data.TaskList;
 import exceptions.ModuleNotFoundException;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +16,7 @@ import java.util.Map;
  */
 public class CalculateCapAction extends Action {
 
-    private HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
-    ArrayList<SingleModule> moduleList = new ArrayList<>(TaskList.mods);
+    private final HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
 
     private double capValue = 0;
 
@@ -60,7 +58,7 @@ public class CalculateCapAction extends Action {
     }
 
     private SingleModule matchModule(String moduleCode) throws ModuleNotFoundException {
-        for (SingleModule module : moduleList) {
+        for (SingleModule module : TaskList.mods) {
             if (moduleCode.equals(module.getName())) {
                 return module;
             }
