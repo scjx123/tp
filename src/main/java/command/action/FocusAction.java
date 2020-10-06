@@ -16,6 +16,16 @@ import java.util.ArrayList;
  */
 public class FocusAction extends Action {
     private String typeTask;
+    public static String taskFlag = Constants.ALL;
+    private ListAction list;
+
+    public String getTaskFlag() {
+        return taskFlag;
+    }
+
+    public void setTaskFlag(String taskFlag) {
+        this.taskFlag = taskFlag;
+    }
 
     @Override
     public String act(TaskList tasks) {
@@ -33,55 +43,33 @@ public class FocusAction extends Action {
             }
             return builder.toString();
         } else if (typeTask.toLowerCase().equals(Constants.DEADLINE)) {
-            ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
-            // remove non-deadline task
-            filtered.removeIf(t -> !(t instanceof Deadline));
             StringBuilder builder = new StringBuilder();
-            for (Task task : filtered) {
-                builder.append(task.toString()).append(Constants.WIN_NEWLINE);
-                tasks.indices.add(tasks.indexOf(task));
-            }
-            if (builder.toString().equals(Constants.ZERO_LENGTH_STRING)) {
-                builder.append(Constants.NOT_FOUND);
-            } else {
-                tasks.indexOption = MessageOptions.INDEXED_NUM;
-            }
-            String result = super.act(tasks);
-            return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
+            builder.append(Constants.CONTEXT_MSG);
+            builder.append(Constants.DEADLINE);
+            setTaskFlag(Constants.DEADLINE);
+            return builder.toString();
         } else if (typeTask.toLowerCase().equals(Constants.TODO)) {
-            ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
-            // remove non-todo task
-            filtered.removeIf(t -> !(t instanceof ToDo));
+            setTaskFlag(Constants.TODO);
             StringBuilder builder = new StringBuilder();
-            for (Task task : filtered) {
-                builder.append(task.toString()).append(Constants.WIN_NEWLINE);
-                tasks.indices.add(tasks.indexOf(task));
-            }
-            if (builder.toString().equals(Constants.ZERO_LENGTH_STRING)) {
-                builder.append(Constants.NOT_FOUND);
-            } else {
-                tasks.indexOption = MessageOptions.INDEXED_NUM;
-            }
-            String result = super.act(tasks);
-            return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
+            builder.append(Constants.CONTEXT_MSG);
+            builder.append(Constants.TODO);
+            return builder.toString();
+
         } else if (typeTask.toLowerCase().equals(Constants.EVENT)) {
-            ArrayList<Task> filtered = new ArrayList<>(tasks.tasks);
-            // remove non-event task
-            filtered.removeIf(t -> !(t instanceof Event));
+            setTaskFlag(Constants.EVENT);
             StringBuilder builder = new StringBuilder();
-            for (Task task : filtered) {
-                builder.append(task.toString()).append(Constants.WIN_NEWLINE);
-                tasks.indices.add(tasks.indexOf(task));
-            }
-            if (builder.toString().equals(Constants.ZERO_LENGTH_STRING)) {
-                builder.append(Constants.NOT_FOUND);
-            } else {
-                tasks.indexOption = MessageOptions.INDEXED_NUM;
-            }
-            String result = super.act(tasks);
-            return result.replace(Constants.TEXT_PLACEHOLDER, builder.toString());
-        } else {
-            StringBuilder builder = new StringBuilder(Constants.UNIDENTIFIED_TYPE);
+            builder.append(Constants.CONTEXT_MSG);
+            builder.append(Constants.EVENT);
+            return builder.toString();
+        } else if (typeTask.toLowerCase().equals(Constants.ALL)){
+            setTaskFlag(Constants.ALL);
+            StringBuilder builder = new StringBuilder();
+            builder.append(Constants.CONTEXT_MSG);
+            builder.append(Constants.ALL);
+            return builder.toString();
+        }else{
+            StringBuilder builder = new StringBuilder();
+            builder.append(Constants.UNIDENTIFIED_TYPE);
             return builder.toString();
         }
     }
