@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class FocusAction extends Action {
     private String typeTask;
     public static String taskFlag = Constants.ALL;
-    private ListAction list;
 
     public String getTaskFlag() {
         return taskFlag;
@@ -69,7 +68,8 @@ public class FocusAction extends Action {
             return builder.toString();
         }else{
             StringBuilder builder = new StringBuilder();
-            builder.append(Constants.UNIDENTIFIED_TYPE);
+            builder.append(Constants.INVALID);
+            builder.append(Constants.FOCUS_HELP);
             return builder.toString();
         }
     }
