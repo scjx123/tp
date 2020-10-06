@@ -3,7 +3,6 @@ package visualize;
 import constants.Constants;
 import data.SingleModule;
 import data.TaskList;
-import messages.MessageOptions;
 
 import java.io.InputStream;
 import java.io.PrintStream;

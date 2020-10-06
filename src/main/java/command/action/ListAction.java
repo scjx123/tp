@@ -6,6 +6,9 @@ import data.ParentModules;
 import data.SingleModule;
 import data.TaskList;
 import jobs.Task;
+import jobs.Deadline;
+import jobs.Event;
+import jobs.ToDo;
 import messages.MessageOptions;
 
 import java.time.LocalDate;
@@ -23,6 +26,8 @@ public class ListAction extends Action {
     private boolean isMod = false;
     private int sum = 0;
     private String stringDate = "";
+    private String taskFlag = Constants.ALL;
+    FocusAction focus = new FocusAction();
 
     @Override
     public String act(TaskList tasks) {
@@ -30,6 +35,17 @@ public class ListAction extends Action {
         StringBuilder builder = new StringBuilder(Constants.LIST_HEAD);
         ArrayList<Task> displayList = new ArrayList<>(tasks.tasks);
         ArrayList<SingleModule> moduleList = new ArrayList<>(tasks.mods);
+        taskFlag = focus.getTaskFlag();
+
+        if (taskFlag.equals(Constants.DEADLINE)) {
+            displayList.removeIf(t -> !(t instanceof Deadline));
+        } else if (taskFlag.equals(Constants.EVENT)) {
+            displayList.removeIf(t -> !(t instanceof Event));
+        } else if (taskFlag.equals(Constants.TODO)) {
+            displayList.removeIf(t -> !(t instanceof ToDo));
+        } else if (taskFlag.equals(Constants.ALL)) {
+            displayList = new ArrayList<>(tasks.tasks);
+        }
 
         if (!stringDate.equals("")) {
             LocalDateTime dateTime = Task.parseDateTime(stringDate);
