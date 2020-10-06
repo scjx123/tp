@@ -4,7 +4,7 @@ import command.ParamNode;
 import data.TaskList;
 
 /**
- * The type Add action.
+ * The type Add action (on progress).
  */
 public class AddAction extends Action {
 
