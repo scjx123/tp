@@ -2,7 +2,8 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
-import data.TaskList;
+import data.Data;
+import data.Item;
 import jobs.Task;
 
 /**
@@ -13,14 +14,17 @@ public class UndoneAction extends Action {
     private int index;
 
     @Override
-    public String act(TaskList tasks) {
-        Task task = tasks.get(index);
-        if (task == null) {
+    public String act(Data data) {
+        Item item = data.get(index);
+        if (item == null) {
             return Constants.INDEX_OUT;
+        } else if (item instanceof Task) {
+            ((Task)item).markAsUndone();
+            data.updateItem(index, item);
+            String result = super.act(data);
+            return result.replace(Constants.TEXT_PLACEHOLDER, item.toString());
         } else {
-            task.markAsUndone();
-            String result = super.act(tasks);
-            return result.replace(Constants.TEXT_PLACEHOLDER, task.toString());
+            return Constants.NOT_TASK;
         }
     }
 

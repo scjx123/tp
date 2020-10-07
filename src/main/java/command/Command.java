@@ -4,7 +4,7 @@ import command.action.UnknownAction;
 import command.action.Action;
 import constants.Constants;
 import constants.HelpText;
-import data.TaskList;
+import data.Data;
 import exceptions.InvalidCommandException;
 
 /**
@@ -71,13 +71,13 @@ public class Command implements Help {
     /**
      * Execute.
      *
-     * @param tasks the tasks
+     * @param data the data
      */
-    public void execute(TaskList tasks) {
+    public void execute(Data data) {
         try {
             if (isArgsValid()) {
                 action.prepare(args);
-                result = action.act(tasks);
+                result = action.act(data);
             } else {
                 throw new InvalidCommandException();
             }

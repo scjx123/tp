@@ -282,7 +282,7 @@ public enum HelpText {
             "detail",
             "Print Details: Print the number of MCs based on selected option.",
             new String[]{
-                "mc [-option] [-detail]",
+                "detail [-option] [-detail]",
                 "option: {-mod -task -cmd(commands) -all -help(default)}",
                 "detail: {-all(total, default), -sel(detailed)}"
             },

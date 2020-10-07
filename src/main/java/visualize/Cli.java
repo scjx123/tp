@@ -1,7 +1,7 @@
 package visualize;
 
 import constants.Constants;
-import data.TaskList;
+import data.Data;
 import messages.MessageFormat;
 import messages.MessageOptions;
 import messages.MessageWrapper;
@@ -77,10 +77,10 @@ public class Cli extends UI {
     }
 
     @Override
-    public void update(String input, TaskList tasks) {
+    public void update(String input, Data data) {
         if (freshlySwitched) {
-            String replay = tasks.lastInput;
-            MessageOptions replayOption = tasks.lastIndexOption;
+            String replay = data.lastInput;
+            MessageOptions replayOption = data.lastIndexOption;
             if (replay == null || replay.equals(Constants.ZERO_LENGTH_STRING)) {
                 showWelcome();
             } else {
@@ -93,15 +93,15 @@ public class Cli extends UI {
             showText(Constants.ZERO_LENGTH_STRING);
         } else if (input.contains(Constants.BMP_LIST_SWITCH)
                 || input.contains(Constants.BMP_SEL_SWITCH)) {
-            if (!tasks.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
-                showListText(tasks.lastInput, tasks.lastIndexOption);
+            if (!data.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
+                showListText(data.lastInput, data.lastIndexOption);
             }
         } else {
-            showListText(input, tasks.indexOption);
-            tasks.lastInput = input;
-            tasks.lastIndexOption = tasks.indexOption;
+            showListText(input, data.indexOption);
+            data.lastInput = input;
+            data.lastIndexOption = data.indexOption;
         }
-        tasks.indexOption = MessageOptions.NOT_INDEXED;
+        data.indexOption = MessageOptions.NOT_INDEXED;
     }
 
 }

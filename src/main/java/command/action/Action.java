@@ -2,8 +2,7 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
-import data.ParentModules;
-import data.TaskList;
+import data.Data;
 
 /**
  * The type Action.
@@ -39,10 +38,10 @@ public class Action {
     /**
      * Act or execute the action.
      *
-     * @param tasks the tasks
+     * @param data the data
      * @return the string
      */
-    public String act(TaskList tasks) {
+    public String act(Data data) {
         return Constants.messageMap.getOrDefault(args.name, Constants.INVALID);
     }
 

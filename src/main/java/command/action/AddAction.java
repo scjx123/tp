@@ -1,7 +1,7 @@
 package command.action;
 
 import command.ParamNode;
-import data.TaskList;
+import data.Data;
 
 /**
  * The type Add action (on progress).
@@ -11,7 +11,7 @@ public class AddAction extends Action {
     private ParamNode args;
 
     @Override
-    public String act(TaskList tasks) {
+    public String act(Data data) {
         // do stuff
         return "";
     }
