@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * The type Task.
  */
-public class Task extends Item{
+public class Task extends Item {
 
     /**
      * The Is done.
@@ -33,7 +33,6 @@ public class Task extends Item{
         dateTime = null;
         isDated = false;
     }
-
 
 
     /**
