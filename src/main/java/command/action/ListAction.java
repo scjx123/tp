@@ -2,16 +2,20 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
-import data.ParentModules;
+import data.Item;
 import data.SingleModule;
-import data.TaskList;
+import data.Data;
 import jobs.Task;
+import jobs.Deadline;
+import jobs.Event;
+import jobs.ToDo;
 import messages.MessageOptions;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 /**
  * The type List action.
@@ -20,51 +24,42 @@ public class ListAction extends Action {
 
     private boolean isAsc = false;
     private boolean isDesc = false;
-    private boolean isMod = false;
-
     private String stringDate = "";
 
     @Override
-    public String act(TaskList tasks) {
-        tasks.indices = new ArrayList<>();
+    public String act(Data data) {
         StringBuilder builder = new StringBuilder(Constants.LIST_HEAD);
-        ArrayList<Task> displayList = new ArrayList<>(tasks.tasks);
-        ArrayList<SingleModule> moduleList = new ArrayList<>(tasks.mods);
+        ArrayList<Item> target = new ArrayList<>(data.getTarget());
 
-        if (!stringDate.equals("")) {
-            LocalDateTime dateTime = Task.parseDateTime(stringDate);
+        if (!stringDate.equals("")) { // this means it's in specific mode
+            LocalDateTime dateTime = Item.parseDateTime(stringDate);
             if (dateTime != null) {
                 LocalDate date = dateTime.toLocalDate();
-                for (Task task : displayList) {
-                    if (date.equals(task.getDate())) {
-                        builder.append(task.toString()).append(Constants.WIN_NEWLINE);
-                        tasks.indices.add(tasks.indexOf(task));
-                    }
+                data.target = target.stream().filter(x -> x instanceof Task && x.getDate() != null
+                        && date.compareTo(x.getDate()) == 0).collect(Collectors.toCollection(ArrayList::new));
+                for (Item item : data.target) {
+                    builder.append(item.toString()).append(Constants.WIN_NEWLINE);
                 }
             }
         } else {
             if (isAsc) {
-                displayList.removeIf(x -> x.getDateTime() == null);
-                displayList.sort(Comparator.comparing(Task::getDateTime));
+                target.removeIf(x -> x.getDateTime() == null);
+                target.sort(Comparator.comparing(Item::getDateTime));
             }
             if (isDesc) {
-                displayList.removeIf(x -> x.getDateTime() == null);
-                displayList.sort((x, y) -> -x.getDateTime().compareTo(y.getDateTime()));
+                target.removeIf(x -> x.getDateTime() == null);
+                target.sort((x, y) -> -x.getDateTime().compareTo(y.getDateTime()));
             }
-            for (Task task : displayList) {
-                builder.append(task.toString()).append(Constants.WIN_NEWLINE);
-                tasks.indices.add(tasks.indexOf(task));
-            }
-        }
-        if (isMod) {
-            for (SingleModule m : moduleList) {
-                builder.append(m.getName()).append(Constants.WIN_NEWLINE); //build a string
+            data.target = target;
+            for (Item item : target) {
+                builder.append(item.toString()).append(Constants.WIN_NEWLINE);
             }
         }
+
         if (builder.toString().equals(Constants.LIST_HEAD)) {
             builder.append(Constants.NOT_FOUND);
         } else {
-            tasks.indexOption = MessageOptions.INDEXED_NUM;
+            data.indexOption = MessageOptions.INDEXED_NUM;
         }
         return builder.toString();
     }
@@ -90,9 +85,7 @@ public class ListAction extends Action {
             String asc = optionalParams[1];
             String desc = optionalParams[2];
             String spec = optionalParams[3];
-            String mod = optionalParams[4];
             boolean isDated = stringDate.contains(optionalParam);
-            isMod = stringDate.contains(mod);
 
             if (isDated) {
                 stringDate = stringDate.replace(optionalParam, Constants.ZERO_LENGTH_STRING).trim();
@@ -120,7 +113,7 @@ public class ListAction extends Action {
                 }
             } else if (stringDate.trim().length() == 0) {
                 stringDate = "";
-            } else if (!stringDate.trim().equals("mod")) {
+            } else {
                 throw new Exception();
             }
         }

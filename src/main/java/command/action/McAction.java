@@ -2,9 +2,9 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
+import data.Item;
 import data.SingleModule;
-import data.TaskList;
-import jobs.Task;
+import data.Data;
 
 import java.util.ArrayList;
 
@@ -16,27 +16,31 @@ public class McAction extends Action {
     private String userInput = "";
 
     @Override
-    public String act(TaskList tasks) {
+    public String act(Data data) {
         StringBuilder builder = new StringBuilder(Constants.MC_HEAD);
-        ArrayList<SingleModule> moduleList = new ArrayList<>(tasks.mods);
-        if (isSelect) {
+        ArrayList<Item> moduleList = new ArrayList<>(data.mods);
+        if (isBoth) {
+            for (Item item : moduleList) {
+                SingleModule m = (SingleModule)item;
+                builder.append(m.getModuleMC().trim()).append(Constants.WIN_NEWLINE);
+            }
+        } else if (isSelect) {
             int selectionSum = 0;
-            for (SingleModule m : moduleList) {
+            for (Item item : moduleList) {
+                SingleModule m = (SingleModule)item;
                 selectionSum += Integer.parseInt(m.getModuleMC().trim());
             }
             builder.append(selectionSum).append(Constants.WIN_NEWLINE); //build a string
 
         } else if (isDetail) {
-            for (SingleModule m : moduleList) {
-                builder.append(m.getModuleMC().trim()).append(Constants.WIN_NEWLINE);
-            }
-        } else if (isBoth) {
-            for (SingleModule m : moduleList) {
+            for (Item item : moduleList) {
+                SingleModule m = (SingleModule)item;
                 builder.append(m.getModuleMC().trim()).append(Constants.WIN_NEWLINE);
             }
         } else {
             int sum = 0;
-            for (SingleModule m : moduleList) {
+            for (Item item : moduleList) {
+                SingleModule m = (SingleModule)item;
                 sum += Integer.parseInt(m.getModuleMC().trim());
             }
             builder.append(sum).append(Constants.WIN_NEWLINE); //build a string
@@ -58,21 +62,33 @@ public class McAction extends Action {
             String[] optionalParams = Constants.optionalParamMap.get(args.name);
             String selection = optionalParams[0];
             String detail = optionalParams[1];
-            isSelect = userInput.contains(selection);
+            isSelect = userInput.equals(selection);
 
             if (isSelect) {
-                userInput = flattenedArgs[1].toFlatString();
-                if (userInput.contains(detail)) {
-                    isBoth = true;
-                    isSelect = false;
-                    isDetail = false;
-                } else {
+                if (len > 1) {
                     userInput = flattenedArgs[1].toFlatString();
+                    if (userInput.equals(detail)) {
+                        isBoth = true;
+                        userInput = "";
+                    } else {
+                        throw new Exception();
+                    }
+                } else {
+                    isSelect = true;
+                    isDetail = false;
+                    isBoth = false;
                 }
-            } else if (userInput.contains(detail)) {
+            } else if (userInput.equals(detail)) {
+                if (len > 1) {
+                    throw new Exception();
+                }
                 isDetail = true;
-                isBoth = false;
                 isSelect = false;
+                isBoth = false;
+                userInput = "";
+
+            } else {
+                throw new Exception();
             }
         }
     }

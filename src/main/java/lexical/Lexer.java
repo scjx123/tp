@@ -1,7 +1,8 @@
 package lexical;
 
-import java.util.ArrayList;
 import constants.Constants;
+
+import java.util.ArrayList;
 
 /**
  * The type Lexer.

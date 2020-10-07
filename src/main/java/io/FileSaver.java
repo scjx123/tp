@@ -1,5 +1,6 @@
 package io;
 
+import data.Item;
 import jobs.Task;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -28,10 +29,11 @@ public class FileSaver extends IO {
      * @param tasks the tasks
      * @return the boolean
      */
-    public boolean save(ArrayList<Task> tasks) {
+    public boolean save(ArrayList<Item> tasks) {
         try {
             StringBuilder strBuilder = new StringBuilder();
-            for (Task task: tasks) {
+            for (Item item: tasks) {
+                Task task = (Task)item;
                 strBuilder.append(task.toString()).append(System.lineSeparator());
             }
             if (isFileInvalid()) {

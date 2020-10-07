@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import command.Command;
 import constants.Constants;
-import data.TaskList;
+import data.Data;
 import io.Storage;
 import lexical.Parser;
 import visualize.Cli;
@@ -18,11 +18,11 @@ import visualize.FancyCli;
  */
 public class Duke {
 
-    private TaskList tasks;
     private final Storage storage;
     private final FancyCli fui; // fancy ui
     private final Cli pui; //plain ui
     private final Parser parser;
+    private Data data;
     private Cli ui;
     private boolean isFancy;
 
@@ -35,7 +35,6 @@ public class Duke {
      * @param directory the directory
      * @param fileName  the file name
      */
-
     public Duke(boolean isFancy, PrintStream stream, InputStream input, String directory, String fileName) {
         fui = new FancyCli(stream, input);
         pui = new Cli(stream, input);
@@ -45,10 +44,10 @@ public class Duke {
         parser = new Parser();
         storage = new Storage(directory, fileName, parser);
         try {
-            tasks = storage.load();
+            data = storage.load();
         } catch (Exception e) {
             ui.showText(e.getMessage());
-            tasks = new TaskList();
+            data = new Data();
         }
     }
 
@@ -74,11 +73,11 @@ public class Duke {
                 String fullCommand = ui.nextLine();
                 ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
                 for (Command c : commands) {
-                    c.execute(tasks);
+                    c.execute(data);
                     reattachUI(c.isFancy(), c.isPlain());
-                    ui.update(c.result, tasks);
+                    ui.update(c.result, data);
                     isExit = c.isBye();
-                    storage.saveTasks(tasks.tasks);
+                    storage.saveTasks(data.tasks);
                 }
             } catch (Exception e) {
                 String message = e.getMessage();
@@ -91,12 +90,37 @@ public class Duke {
     }
 
     /**
+     * Test.
+     * @param command Command of user
+     * @return
+     */
+    public String testSut(String command) {
+        try {
+            String fullCommand = command;
+            ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
+            for (Command c : commands) {
+                c.execute(data);
+                reattachUI(c.isFancy(), c.isPlain());
+                ui.update(c.result, data);
+                storage.saveTasks(data.tasks);
+                return c.result;
+            }
+        } catch (Exception e) {
+            String message = e.getMessage();
+            if (message == null) {
+                message = Constants.INDEX_OUT;
+            }
+            ui.showText(message);
+        }
+        return "0";
+    }
+
+    /**
      * The entry point of application.
      *
      * @param args the input arguments
      */
     public static void main(String[] args) {
-
         // Starts up using colored CLI on mac or linux, and pure text on windows (for now).
         // This is because ansi sequences needed to be enabled on programs started by cmd in recent windows versions.
         // this is an intended behaviour brought by microsoft developers, so that programs called by cmd

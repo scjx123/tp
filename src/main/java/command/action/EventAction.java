@@ -1,7 +1,7 @@
 package command.action;
 
 import command.ParamNode;
-import data.TaskList;
+import data.Data;
 import jobs.Event;
 
 /**
@@ -13,11 +13,11 @@ public class EventAction extends Action {
     private String at;
 
     @Override
-    public String act(TaskList tasks) {
-        String result = super.act(tasks);
+    public String act(Data data) {
+        String result = super.act(data);
         Event event = new Event(description, at);
-        tasks.tasks.add(event);
-        return replaceStrings(result, event.toString(), tasks.tasks.size());
+        data.addTask(event);
+        return replaceStrings(result, event.toString(), data.tasks.size());
     }
 
     @Override

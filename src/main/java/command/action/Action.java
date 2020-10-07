@@ -2,7 +2,7 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
-import data.TaskList;
+import data.Data;
 
 /**
  * The type Action.
@@ -36,17 +36,17 @@ public class Action {
     }
 
     /**
-     * Act string.
+     * Act or execute the action.
      *
-     * @param tasks the tasks
+     * @param data the data
      * @return the string
      */
-    public String act(TaskList tasks) {
+    public String act(Data data) {
         return Constants.messageMap.getOrDefault(args.name, Constants.INVALID);
     }
 
     /**
-     * Prepare.
+     * Prepare parameters for task to act.
      *
      * @param args the args
      * @throws Exception the exception
