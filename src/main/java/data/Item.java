@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Item {
 
     /**
-     * The Description.
+     * Item description.
      */
     protected String description;
 
@@ -27,7 +27,7 @@ public class Item {
     protected boolean isDated;
 
     /**
-     * The Date time.
+     * Item Date time.
      */
     protected LocalDateTime dateTime;
 
@@ -74,7 +74,7 @@ public class Item {
     /**
      * Parse date time local date time.
      *
-     * @param input the input
+     * @param input date time in string
      * @return the local date time
      */
     public static LocalDateTime parseDateTime(String input) {
@@ -157,7 +157,7 @@ public class Item {
     /**
      * Gets date time string.
      *
-     * @param input the input
+     * @param input date time input
      * @return the date time string
      */
     protected String getDateTimeString(String input) {

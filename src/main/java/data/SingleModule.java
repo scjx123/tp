@@ -31,11 +31,11 @@ public class SingleModule extends Item {
     /**
      * Instantiates a new Single module.
      *
-     * @param code        the code
-     * @param name        the name
-     * @param description the description
-     * @param mc          the mc
-     * @param prereq      the prereq
+     * @param code        module code
+     * @param name        module name
+     * @param description module description
+     * @param mc          number of mc
+     * @param prereq      module prerequisite
      */
     public SingleModule(String code, String name, String description, String mc, String prereq) {
         super(code); //moduleDescription is handle here.
