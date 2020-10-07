@@ -3,10 +3,6 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 import data.Data;
-import jobs.Task;
-import messages.MessageOptions;
-
-import java.util.ArrayList;
 
 /**
  * The type Focus action.
