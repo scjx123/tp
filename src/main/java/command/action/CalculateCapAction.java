@@ -18,7 +18,6 @@ import java.util.Map;
  */
 public class CalculateCapAction extends Action {
 
-    //private HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
     private HashMap<String, Double> modulesWithGrades = new HashMap<>();
     private double capValue = 0;
 
@@ -54,8 +53,6 @@ public class CalculateCapAction extends Action {
                 SingleModule module;
                 String moduleCode = currData.thisData.name.toUpperCase();
                 Double grade = numerateGrade(currData.thisData.thisData.name.toUpperCase());
-                //module = matchModule(moduleCode);
-                //modulesWithGrades.put(module, grade);
                 modulesWithGrades.put(moduleCode, grade);
                 currData = currData.thisData.thisData;
             }
@@ -64,7 +61,13 @@ public class CalculateCapAction extends Action {
         }
     }
 
-    //this is clearly not part of prepare but part of act.
+    /**
+     * Match module code to module.
+     *
+     * @param moduleCode input module code
+     * @param mods module list
+     * @return module selected
+     */
     private SingleModule matchModule(String moduleCode, ArrayList<Item> mods) {
         for (Item item : mods) {
             SingleModule module = (SingleModule) item;
