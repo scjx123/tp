@@ -20,7 +20,7 @@ public class TodoActionTest {
         Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.FILENAME);
 
         assertAll("TodoActionTest", () -> assertTrue(d.testSut(testCommand[0]).contains("abc")),
-                () -> assertTrue(d.testSut(testCommand[1]).contains("def"))
+            () -> assertTrue(d.testSut(testCommand[1]).contains("def"))
         );
     }
 }
