@@ -38,7 +38,7 @@ public class FocusAction extends Action {
                 }
             }
             if (count == options.length) {
-                typeTask = Constants.TASK;
+                throw new Exception();
             }
         }
     }

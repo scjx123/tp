@@ -130,7 +130,7 @@ public enum HelpText {
             "Print a list of all added tasks/modules based on task type",
             new String[]{
                 "focus",
-                "focus [deadline / todo / event]"
+                "focus [deadline / todo / event / task]"
             },
             new String[]{
                 "1. \"focus\" >> list all tasks",
