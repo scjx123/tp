@@ -3,13 +3,13 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 
-import data.ParentModules;
-import static data.ParentModules.moduleList;
+import data.Item;
 import data.SingleModule;
-import data.TaskList;
+import data.Data;
 import exceptions.ModuleNotFoundException;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,16 +18,21 @@ import java.util.Map;
  */
 public class CalculateCapAction extends Action {
 
-    private HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
+    //private HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
+    private HashMap<String, Double> modulesWithGrades = new HashMap<>();
     private double capValue = 0;
 
     @Override
-    public String act(TaskList tasks) {
+    public String act(Data data) {
         double totalScore = 0;
         double totalMC = 0;
-        for (Map.Entry<SingleModule, Double> m : modulesWithGrades.entrySet()) {
+        for (Map.Entry<String, Double> m : modulesWithGrades.entrySet()) {
             Double grade = m.getValue();
-            SingleModule module = m.getKey();
+            String moduleCode = m.getKey();
+            SingleModule module = matchModule(moduleCode, data.mods);
+            if (module == null) {
+                continue;
+            }
             totalMC += Double.parseDouble(module.getModuleMC());
             totalScore += Double.parseDouble(module.getModuleMC()) * grade;
         }
@@ -49,8 +54,9 @@ public class CalculateCapAction extends Action {
                 SingleModule module;
                 String moduleCode = currData.thisData.name.toUpperCase();
                 Double grade = numerateGrade(currData.thisData.thisData.name.toUpperCase());
-                module = matchModule(moduleCode);
-                modulesWithGrades.put(module, grade);
+                //module = matchModule(moduleCode);
+                //modulesWithGrades.put(module, grade);
+                modulesWithGrades.put(moduleCode, grade);
                 currData = currData.thisData.thisData;
             }
         } else {
@@ -58,13 +64,15 @@ public class CalculateCapAction extends Action {
         }
     }
 
-    private SingleModule matchModule(String moduleCode) throws ModuleNotFoundException {
-        for (SingleModule module : moduleList) {
+    //this is clearly not part of prepare but part of act.
+    private SingleModule matchModule(String moduleCode, ArrayList<Item> mods) {
+        for (Item item : mods) {
+            SingleModule module = (SingleModule) item;
             if (moduleCode.equals(module.getName())) {
                 return module;
             }
         }
-        throw new ModuleNotFoundException();
+        return null;
     }
 
     /**
