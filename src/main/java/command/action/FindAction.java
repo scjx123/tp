@@ -36,7 +36,7 @@ public class FindAction extends Action {
                 return result.replace(Constants.TEXT_PLACEHOLDER, Constants.NOT_FOUND);
             }
             data.target = data.target.stream().filter(
-                    x -> x.toString().contains(keyword)).collect(Collectors.toCollection(ArrayList::new));
+                x -> x.toString().contains(keyword)).collect(Collectors.toCollection(ArrayList::new));
             StringBuilder builder = new StringBuilder();
             for (Item item : data.target) {
                 builder.append(item.toString()).append(Constants.WIN_NEWLINE);

@@ -63,6 +63,7 @@ public class CalculateCapAction extends Action {
             // retrieve module data from user data
         }
     }
+
     //this is clearly not part of prepare but part of act.
     private SingleModule matchModule(String moduleCode, ArrayList<Item> mods) {
         for (Item item : mods) {

@@ -6,6 +6,7 @@ import jobs.Event;
 import jobs.Task;
 import jobs.ToDo;
 import messages.MessageOptions;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -50,7 +51,7 @@ public class Data {
         flag = Constants.TASK;
     }
 
-    public void setFlag(String flag){
+    public void setFlag(String flag) {
         this.flag = flag;
         target = getTarget();
     }
@@ -58,13 +59,16 @@ public class Data {
     public ArrayList<Item> getTarget() {
         return getTarget(flag);
     }
+
     public ArrayList<Item> getTarget(String flag) {
         refreshTarget(flag);
         return target;
     }
+
     public void refreshTarget() {
         refreshTarget(flag);
     }
+
     public void refreshTarget(String flag) {
         switch (flag) {
         case Constants.DEADLINE: // break is unreachable
