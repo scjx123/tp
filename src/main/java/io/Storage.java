@@ -1,9 +1,10 @@
 package io;
 
 import command.Command;
+import data.Item;
 import lexical.Parser;
 import constants.Constants;
-import data.TaskList;
+import data.Data;
 import jobs.Task;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class Storage {
      *
      * @param tasks the tasks
      */
-    public void saveTasks(ArrayList<Task> tasks) {
+    public void saveTasks(ArrayList<Item> tasks) {
         saver.save(tasks);
     }
 
@@ -47,10 +48,10 @@ public class Storage {
      *
      * @return the task list
      */
-    public TaskList load() {
+    public Data load() {
         String[] lines = loader.loadAllLines();
         int index = 0;
-        TaskList list = new TaskList();
+        Data list = new Data();
         for (String line: lines) {
             String output = dataToCommand(line, index);
             if (!output.equals(Constants.ZERO_LENGTH_STRING)) {

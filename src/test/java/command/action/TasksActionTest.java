@@ -1,7 +1,7 @@
 package command.action;
 
 import constants.Constants;
-import data.TaskList;
+import data.Data;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,13 +22,13 @@ class TasksActionTest {
 
         assertAll("McActionTest",
             () -> assertEquals(expectedOutput, duke.testSut(testCustomInputsCommand), "Clear fails"),
-            () -> assertTrue(TaskList.tasks.size() == 0)
+            () -> assertTrue(Data.tasks.size() == 0)
         );
     }
 
     @Test
     public void actDeadline_randomByTime_customTimeDeadline() {
-        Integer prevListSize = TaskList.tasks.size();
+        Integer prevListSize = Data.tasks.size();
         String updatedListSize = Integer.toString(prevListSize + 1);
         String expectedOutput = "Got it. I've added this task:\r\n"
             + "[D][X] watch powerRangers episode 2 (by: TODAY!!)\r\n"
@@ -39,7 +39,7 @@ class TasksActionTest {
 
     @Test
     public void actDeadline_dateTimeFormat_formattedTimeDeadline() {
-        Integer prevListSize = TaskList.tasks.size();
+        Integer prevListSize = Data.tasks.size();
         String updatedListSize = Integer.toString(prevListSize + 1);
         String expectedOutput = "Got it. I've added this task:\r\n"
             + "[D][X] watch powerRangers episode 3 (by: Feb 23 2022 09:00)\r\n"
@@ -50,7 +50,7 @@ class TasksActionTest {
 
     @Test
     public void actTodo_normalTodo_todoRespondMessage() {
-        Integer prevListSize = TaskList.tasks.size();
+        Integer prevListSize = Data.tasks.size();
         String updatedListSize = Integer.toString(prevListSize + 1);
         String expectedOutput = "Got it. I've added this task:\r\n"
             + "[T][X] finish CS2113 Project!\r\n"
@@ -61,7 +61,7 @@ class TasksActionTest {
 
     @Test
     public void actEvent_randomAtTime_customTimeDeadline() {
-        Integer prevListSize = TaskList.tasks.size();
+        Integer prevListSize = Data.tasks.size();
         String updatedListSize = Integer.toString(prevListSize + 1);
         String expectedOutput = "Got it. I've added this task:\r\n"
             + "[E][X] watch Dora The Explorer episode 2 (at: your Free Time :))\r\n"
