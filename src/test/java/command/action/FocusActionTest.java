@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class FocusActionTest {
     private String[] testCommand = {"focus", "focus deadline", "focus todo", "focus event", "focus task",
-                                    "focus asdsds"};
+                                    "focus mod", "focus asdsds"};
 
     @Test
     void act_customFocusInput_testOutput() {
@@ -23,7 +23,8 @@ class FocusActionTest {
             () -> assertTrue(d.testSut(testCommand[2]).equals("Now we are focusing on:\r\ntodo")),
             () -> assertTrue(d.testSut(testCommand[3]).equals("Now we are focusing on:\r\nevent")),
             () -> assertTrue(d.testSut(testCommand[4]).equals("Now we are focusing on:\r\ntask")),
-            () -> assertTrue(d.testSut(testCommand[5]).equals("Invalid Command! Please check the syntax.\r\n"
+            () -> assertTrue(d.testSut(testCommand[5]).equals("Now we are focusing on:\r\nmod")),
+            () -> assertTrue(d.testSut(testCommand[6]).equals("Invalid Command! Please check the syntax.\r\n"
                     + "focus    OR    focus [deadline / todo / event / task]"))
         );
     }
