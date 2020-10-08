@@ -113,11 +113,12 @@ public enum HelpText {
             "Change context. Changes the target of other commands to the specified target",
             new String[]{
                 "focus",
-                "focus [deadline / todo / event / task / mod]"
+                "focus [deadline / todo / event / task / mod / selected]"
             },
             new String[]{
                 "1. \"focus\" >> focus on \"task\". e.g. \"list\" will list all tasks from now on",
-                "2. \"focus mod\" >> focus on \"mod\". e.g. \"list\" will list all modules from now on"
+                "2. \"focus mod\" >> focus on \"mod\". e.g. \"list\" will list all modules from now on",
+                "3. \"focus selected\" >> focus on \"selected\". e.g. \"list\" will list selected items from now on"
             }),
     /**
      * The List.
