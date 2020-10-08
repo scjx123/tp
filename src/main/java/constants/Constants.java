@@ -474,7 +474,7 @@ public class Constants {
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
             Map.entry(MC, new McAction()),
-     //       Map.entry(DETAIL, new DetailAction()),
+            Map.entry(DETAIL, new DetailAction()),
             Map.entry(TODO, new TodoAction()),
             Map.entry(UNDONE, new UndoneAction()),
             Map.entry(UNKNOWN, new UnknownAction()),
