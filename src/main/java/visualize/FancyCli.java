@@ -288,6 +288,8 @@ public class FancyCli extends Cli {
             separatePages(refreshBuilder.toString(), true);
             fixIndex();
             showText(getShownText(true), true, MessageOptions.INDEXED_NUM);
+        } else {
+            initializeList();
         }
     }
 
