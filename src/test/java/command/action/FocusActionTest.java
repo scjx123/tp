@@ -25,7 +25,7 @@ class FocusActionTest {
             () -> assertTrue(d.testSut(testCommand[4]).equals("Now we are focusing on:\r\ntask")),
             () -> assertTrue(d.testSut(testCommand[5]).equals("Now we are focusing on:\r\nmod")),
             () -> assertTrue(d.testSut(testCommand[6]).equals("Invalid Command! Please check the syntax.\r\n"
-                    + "focus    OR    focus [deadline / todo / event / task]"))
+                    + "focus    OR    focus [deadline / todo / event / task / mod / selected / taken]"))
         );
     }
 }
