@@ -1,14 +1,18 @@
 package command.action;
 
 import command.ParamNode;
+import constants.Constants;
 import data.Data;
+
+import java.util.ArrayList;
 
 /**
  * The type Add action (on progress).
  */
 public class AddAction extends Action {
 
-    private ParamNode args;
+    private ArrayList<String> taskNames;
+    private ArrayList<String> modNames;
 
     @Override
     public String act(Data data) throws Exception {
@@ -18,6 +22,12 @@ public class AddAction extends Action {
 
     @Override
     public void prepare(ParamNode args) throws Exception {
-        this.args = args;
+        for (ParamNode arg : flattenedArgs) {
+            if (arg.name.equals(Constants.MOD)) {
+                modNames.add(arg.toFlatString());
+            } else if (arg.name.equals(Constants.TASK)) {
+                modNames.add(arg.toFlatString());
+            }
+        }
     }
 }

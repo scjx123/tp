@@ -18,9 +18,9 @@ public class DetailAction extends Action {
 
     @Override
     public String act(Data data) throws Exception {
-        StringBuilder builder = new StringBuilder(Constants.DETAIL);
+        StringBuilder builder = new StringBuilder(Constants.DETAIL + Constants.WIN_NEWLINE);
         if (index > 0) { // index reference mode
-            Item item = data.get(index);
+            Item item = data.get(index - 1);
             builder.append(item.getDetails());
         } else { // find object mode
             if (isMod) {

@@ -61,7 +61,7 @@ public class SingleModule extends Item {
 
     @Override
     public String toString() {
-        return moduleCode + Constants.SPACE + moduleName + Constants.SPACE + moduleMC;
+        return moduleCode + Constants.SPACE + moduleName + Constants.SPACE  + moduleMC + (isTaken ? "MC Taken" : "MC");
     }
 
     /**

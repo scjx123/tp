@@ -51,13 +51,15 @@ public class Command implements Help {
     }
 
     private boolean isArgsValid() {
-        String targetArg = Constants.paramMap.get(name);
-        if (targetArg == null) {
+        String[] targetArgs = Constants.paramMap.get(name);
+        if (targetArgs == null) {
             return true; // does not need any parameter
         } else {
             for (ParamNode node : flattenedArgs) {
-                if (targetArg.equals(node.name)) {
-                    return true;
+                for (String arg : targetArgs) {
+                    if (arg.equals(node.name)) {
+                        return true;
+                    }
                 }
             }
             return false;

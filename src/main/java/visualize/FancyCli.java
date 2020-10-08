@@ -380,8 +380,9 @@ public class FancyCli extends Cli {
         StringBuilder[] builders = new StringBuilder[groups];
         String heading = strings[0];
         for (int i = 0; i < groups; i++) {
-            builders[i] = new StringBuilder(heading).append(Constants.SPACE).append(
-                    Constants.PARAM_LEFT).append(i + 1).append(Constants.PARAM_RIGHT).append(Constants.WIN_NEWLINE);
+            String bracket = Constants.SPACE + Constants.PARAM_LEFT + (i + 1) + Constants.PARAM_RIGHT;
+            builders[i] = new StringBuilder(heading.replace(bracket, Constants.ZERO_LENGTH_STRING)).append(
+                    bracket).append(Constants.WIN_NEWLINE);
         }
         for (int i = 1; i < strings.length; i++) {
             int currentGroup = (i - 1) / groupLength;
