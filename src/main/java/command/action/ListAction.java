@@ -3,12 +3,8 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 import data.Item;
-import data.SingleModule;
 import data.Data;
-import jobs.Task;
-import jobs.Deadline;
-import jobs.Event;
-import jobs.ToDo;
+import data.jobs.Task;
 import messages.MessageOptions;
 
 import java.time.LocalDate;
@@ -27,7 +23,7 @@ public class ListAction extends Action {
     private String stringDate = "";
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.LIST_HEAD);
         ArrayList<Item> target = new ArrayList<>(data.getTarget());
 

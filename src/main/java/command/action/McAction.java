@@ -16,7 +16,7 @@ public class McAction extends Action {
     private String userInput = "";
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.MC_HEAD);
         ArrayList<Item> moduleList = new ArrayList<>(data.mods);
         if (isBoth) {

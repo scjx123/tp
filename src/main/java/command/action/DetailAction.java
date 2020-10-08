@@ -5,10 +5,9 @@ import constants.Constants;
 import data.Item;
 import data.SingleModule;
 import data.Data;
-import jobs.Task;
+import data.jobs.Task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DetailAction extends Action {
     private boolean isMod = false;
@@ -18,7 +17,7 @@ public class DetailAction extends Action {
     private int index = -1;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.DETAIL);
         if (index > 0) { // index reference mode
             Item item = data.get(index);

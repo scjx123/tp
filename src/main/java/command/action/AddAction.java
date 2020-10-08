@@ -11,7 +11,7 @@ public class AddAction extends Action {
     private ParamNode args;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         // do stuff
         return "";
     }

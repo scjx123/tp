@@ -2,6 +2,8 @@ package data;
 
 import constants.Constants;
 
+import java.util.ArrayList;
+
 /**
  * The type Single module.
  */
@@ -27,6 +29,12 @@ public class SingleModule extends Item {
      * The Module prerequisite.
      */
     public String modulePrerequisite;
+
+    public ArrayList<Item> taskList;
+
+    public boolean isSelected;
+
+    public boolean isTaken;
 
     /**
      * Instantiates a new Single module.

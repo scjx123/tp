@@ -1,10 +1,10 @@
 package data;
 
 import constants.Constants;
-import jobs.Deadline;
-import jobs.Event;
-import jobs.Task;
-import jobs.ToDo;
+import data.jobs.Deadline;
+import data.jobs.Event;
+import data.jobs.Task;
+import data.jobs.ToDo;
 import messages.MessageOptions;
 
 import java.util.ArrayList;

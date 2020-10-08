@@ -11,7 +11,7 @@ public class FocusAction extends Action {
     private String typeTask;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         data.setFlag(typeTask);
         String output = super.act(data);
         return output.replace(Constants.TEXT_PLACEHOLDER, typeTask);

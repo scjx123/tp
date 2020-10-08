@@ -16,7 +16,7 @@ public class PlainAction extends Action {
     }
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         return Constants.WELCOME;
     }
 

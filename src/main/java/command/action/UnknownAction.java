@@ -9,7 +9,7 @@ import data.Data;
 public class UnknownAction extends Action {
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         return Constants.messageMap.getOrDefault(Constants.UNKNOWN, Constants.INVALID);
     }
 
