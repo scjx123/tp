@@ -19,7 +19,7 @@ public class SelectAction extends Action {
         data.refreshTarget();
         StringBuilder builder = new StringBuilder();
         if (codes != null && codes.size() > 0) {
-            data.mods.stream().filter(x -> codes.contains(((SingleModule)x).moduleCode)).forEach(m -> {
+            data.mods.stream().filter(x -> codes.contains(((SingleModule) x).moduleCode)).forEach(m -> {
                 m.isSelected = true;
                 builder.append("Item: ").append(m.getName()).append(Constants.WIN_NEWLINE);
             });
@@ -30,8 +30,8 @@ public class SelectAction extends Action {
                     throw new IndexOutOfBoundsException();
                 }
                 data.target.get(i).isSelected = true;
-                builder.append("Item ").append(i + 1).append(": ").
-                        append(data.get(i).getName()).append(Constants.WIN_NEWLINE);
+                builder.append("Item ").append(i + 1).append(": ")
+                        .append(data.get(i).getName()).append(Constants.WIN_NEWLINE);
             }
         }
         String result = super.act(data);
@@ -58,7 +58,7 @@ public class SelectAction extends Action {
                 if (string.length() == 1) {
                     char ch = string.toUpperCase().toCharArray()[0];
                     if (Character.isLetter(ch)) {
-                        indices.add((int)ch - Constants.LETTER_OFFSET - 1);
+                        indices.add((int) ch - Constants.LETTER_OFFSET - 1);
                     }
                 } else {
                     codes.add(string);

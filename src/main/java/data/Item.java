@@ -30,6 +30,7 @@ public class Item {
     protected LocalDateTime dateTime;
 
     public boolean isSelected;
+
     /**
      * Instantiates a new Item.
      *
