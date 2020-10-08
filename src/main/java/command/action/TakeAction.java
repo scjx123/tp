@@ -73,7 +73,12 @@ public class TakeAction extends Action {
             try {
                 indices.add(Integer.parseInt(id) - 1);
             } catch (Exception e) {
-                codes.add(id);
+                char ch = id.toUpperCase().toCharArray()[0];
+                if (id.length() == 1 && Character.isLetter(ch)) {
+                    indices.add((int)ch - Constants.LETTER_OFFSET - 1);
+                } else {
+                    codes.add(id);
+                }
             }
         }
         boolean isCodes = codes != null && codes.size() > 0;

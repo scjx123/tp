@@ -3,30 +3,91 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 import data.Data;
+import data.Item;
+import data.SingleModule;
+import data.jobs.Task;
+import exceptions.CommandException;
+import exceptions.ModuleNotFoundException;
+import exceptions.TaskNotSpecifiedException;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The type Add action (on progress).
  */
 public class AddAction extends Action {
 
-    private ArrayList<String> taskNames;
+    private ArrayList<Integer> taskIndices;
     private ArrayList<String> modNames;
 
     @Override
     public String act(Data data) throws Exception {
-        // do stuff
-        return "";
+        String result = super.act(data);
+        ArrayList<Item> targetTasks = new ArrayList<>();
+        taskIndices.forEach(i -> {
+            if (i < 0 || i > data.tasks.size() - 1) {
+                throw new IndexOutOfBoundsException();
+            }
+            targetTasks.add(data.tasks.get(i));
+        });
+        if (targetTasks.size() < 1) {
+            throw new TaskNotSpecifiedException();
+        }
+        String flag = data.flag;
+        ArrayList<Item> targetMods = new ArrayList<>();
+        data.mods.stream().filter(x -> modNames.contains(x.getName())).forEach(targetMods::add);
+        if (targetMods.size() < 1) {
+            throw new ModuleNotFoundException();
+        }
+        targetMods.forEach(m -> ((SingleModule)m).taskList.addAll(targetTasks));
+        data.refreshTarget(flag);
+        StringBuilder builder = new StringBuilder();
+        for (Item item : targetMods) {
+            StringBuilder sb = new StringBuilder(item.getName() + " << tasks: ");
+            for (Item i : targetTasks) {
+                sb.append(((Task)i).getDescription()).append(Constants.SPACE);
+            }
+            builder.append(sb.append(Constants.WIN_NEWLINE).toString());
+        }
+        String addStatus = builder.toString();
+        if (addStatus.length() < 1) {
+            throw new ModuleNotFoundException();
+        }
+        return result.replace(Constants.TEXT_PLACEHOLDER, addStatus);
     }
 
     @Override
     public void prepare(ParamNode args) throws Exception {
+        super.prepare(args);
+        taskIndices = new ArrayList<>();
+        modNames = new ArrayList<>();
+        ArrayList<String> taskNames = new ArrayList<>();
         for (ParamNode arg : flattenedArgs) {
+            if (arg.thisData == null) {
+                throw new CommandException();
+            }
             if (arg.name.equals(Constants.MOD)) {
-                modNames.add(arg.toFlatString());
+                String[] strings = arg.thisData.toFlatString().split(Constants.SPACE);
+                modNames.addAll(Arrays.asList(strings));
             } else if (arg.name.equals(Constants.TASK)) {
-                modNames.add(arg.toFlatString());
+                String[] strings = arg.thisData.toFlatString().split(Constants.SPACE);
+                taskNames.addAll(Arrays.asList(strings));
+            } else {
+                throw new CommandException();
+            }
+        }
+        for (String name : taskNames) {
+            try {
+                taskIndices.add(Integer.parseInt(name) - 1);
+            } catch (Exception e) {
+                char ch = name.toUpperCase().toCharArray()[0];
+                if (name.length() == 1 && Character.isLetter(ch)) {
+                    taskIndices.add((int)ch - Constants.LETTER_OFFSET - 1);
+                } else {
+                    throw new TaskNotSpecifiedException();
+                }
             }
         }
     }

@@ -6,3 +6,4 @@
 [T][X] b
 [E][X] test4 (at: Mon 2-4 pm)
 [E][X] test (at: MONDAY 18:30)
+[D][X] ddl (by: Feb 02 2020 00:00)

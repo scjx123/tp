@@ -1,6 +1,7 @@
 package data;
 
 import constants.Constants;
+import data.jobs.Task;
 
 import java.util.ArrayList;
 
@@ -50,6 +51,7 @@ public class SingleModule extends Item {
         this.moduleName = name;
         this.moduleMC = mc;
         this.modulePrerequisite = prereq;
+        taskList = new ArrayList<>();
     }
 
 
@@ -61,7 +63,24 @@ public class SingleModule extends Item {
 
     @Override
     public String toString() {
-        return moduleCode + Constants.SPACE + moduleName + Constants.SPACE  + moduleMC + (isTaken ? "MC Taken" : "MC");
+        return moduleCode + Constants.SPACE + moduleName + Constants.SPACE
+                + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
+    }
+
+    @Override
+    public String getDetails() {
+        String result = moduleCode + Constants.SPACE + moduleName + Constants.SPACE
+                + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
+        StringBuilder builder = new StringBuilder(result);
+        builder.append(Constants.WIN_NEWLINE).append("Tasks: ");
+        if (taskList != null && taskList.size() > 0) {
+            for (Item item : taskList) {
+                builder.append(((Task)item).getDescription()).append(Constants.SPACE);
+            }
+        } else {
+            builder.append(Constants.NOT_FOUND);
+        }
+        return builder.toString();
     }
 
     /**
@@ -91,5 +110,8 @@ public class SingleModule extends Item {
         return modulePrerequisite;
     }
 
+    public void addTasks(ArrayList<Item> tasks) {
+        taskList.addAll(tasks);
+    }
 
 }

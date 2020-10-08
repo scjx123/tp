@@ -333,6 +333,9 @@ public class Constants {
      * The constant NO_KEYWORD.
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all tasks:" + WIN_NEWLINE;
+    public static final String MOD_NOT_FOUND =
+            "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
+    public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
@@ -528,5 +531,7 @@ public class Constants {
             Map.entry(NEXT, TEXT_PLACEHOLDER),
             Map.entry(FANCY, FANCY),
             Map.entry(PLAIN, PLAIN),
-            Map.entry(TAKE, "I have marked these modules as taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
+            Map.entry(TAKE, "I have marked these modules as taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(ADD, "I have added the specified tasks to the specified modules."
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER));
 }
