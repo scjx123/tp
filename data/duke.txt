@@ -6,3 +6,7 @@
 [T][X] b
 [E][X] test4 (at: Mon 2-4 pm)
 [E][X] test (at: MONDAY 18:30)
+[T][X] abc
+[T][X] def
+[T][X] abc
+[T][X] def
