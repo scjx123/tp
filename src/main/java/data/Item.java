@@ -22,7 +22,7 @@ public class Item {
     /**
      * The Is dated.
      */
-    protected boolean isDated;
+    public boolean isDated = false;
 
     /**
      * Item Date time.

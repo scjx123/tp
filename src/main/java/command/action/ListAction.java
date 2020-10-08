@@ -32,7 +32,7 @@ public class ListAction extends Action {
             LocalDateTime dateTime = Item.parseDateTime(stringDate);
             if (dateTime != null) {
                 LocalDate date = dateTime.toLocalDate();
-                data.target = target.stream().filter(x -> x instanceof Task && x.getDate() != null
+                data.target = target.stream().filter(x -> x instanceof Task && x.isDated
                         && date.compareTo(x.getDate()) == 0).collect(Collectors.toCollection(ArrayList::new));
                 for (Item item : data.target) {
                     builder.append(item.toString()).append(Constants.WIN_NEWLINE);
@@ -40,11 +40,11 @@ public class ListAction extends Action {
             }
         } else {
             if (isAsc) {
-                target.removeIf(x -> x.getDateTime() == null);
+                target.removeIf(x -> !x.isDated);
                 target.sort(Comparator.comparing(Item::getDateTime));
             }
             if (isDesc) {
-                target.removeIf(x -> x.getDateTime() == null);
+                target.removeIf(x -> !x.isDated);
                 target.sort((x, y) -> -x.getDateTime().compareTo(y.getDateTime()));
             }
             data.target = target;
