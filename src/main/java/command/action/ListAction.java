@@ -5,6 +5,7 @@ import constants.Constants;
 import data.Item;
 import data.Data;
 import data.jobs.Task;
+import exceptions.CommandException;
 import messages.MessageOptions;
 
 import java.time.LocalDate;
@@ -110,7 +111,7 @@ public class ListAction extends Action {
             } else if (stringDate.trim().length() == 0) {
                 stringDate = "";
             } else {
-                throw new Exception();
+                throw new CommandException();
             }
         }
     }

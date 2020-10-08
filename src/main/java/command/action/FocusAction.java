@@ -3,6 +3,7 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 import data.Data;
+import exceptions.CommandException;
 
 /**
  * The type Focus action.
@@ -34,7 +35,7 @@ public class FocusAction extends Action {
                 }
             }
             if (count == options.length) {
-                throw new Exception();
+                throw new CommandException();
             }
         }
     }

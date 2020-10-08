@@ -82,7 +82,7 @@ public class Command implements Help {
                 throw new InvalidCommandException();
             }
         } catch (Exception e) {
-            StringBuilder builder = new StringBuilder(Constants.INVALID);
+            StringBuilder builder = new StringBuilder(e.getMessage());
             String[] syntax = getSyntax();
             for (int i = 0; i < syntax.length; i++) {
                 builder.append(syntax[i]);
