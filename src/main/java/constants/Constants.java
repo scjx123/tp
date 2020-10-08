@@ -1,27 +1,7 @@
 package constants;
 
 
-import command.action.Action;
-import command.action.ByeAction;
-import command.action.CalculateCapAction;
-import command.action.ClearAction;
-import command.action.DeadlineAction;
-import command.action.DeleteAction;
-import command.action.DetailAction;
-import command.action.DoneAction;
-import command.action.EventAction;
-import command.action.FancyAction;
-import command.action.FindAction;
-import command.action.FocusAction;
-import command.action.HelpAction;
-import command.action.ListAction;
-import command.action.McAction;
-import command.action.NextAction;
-import command.action.PlainAction;
-import command.action.PrevAction;
-import command.action.TodoAction;
-import command.action.UndoneAction;
-import command.action.UnknownAction;
+import command.action.*;
 
 import java.util.Map;
 
@@ -283,6 +263,7 @@ public class Constants {
      * The constant MC.
      */
     public static final String MC = "mc";
+    public static final String TAKE = "take";
     /**
      * The constant DETAIL.
      */
@@ -293,6 +274,8 @@ public class Constants {
     public static final String CAP = "cap";
     public static final String MOD = "mod";
     public static final String TASK = "task";
+    public static final String SELECTED = "selected";
+    public static final String TAKEN = "taken";
     /**
      * The constant INDEX_OUT.
      */
@@ -350,6 +333,10 @@ public class Constants {
      * The constant NO_KEYWORD.
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all tasks:" + WIN_NEWLINE;
+    public static final String MOD_NOT_FOUND =
+            "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
+    public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
+    public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
@@ -474,7 +461,10 @@ public class Constants {
             Map.entry(NEXT, new NextAction()),
             Map.entry(CAP, new CalculateCapAction()),
             Map.entry(FANCY, new FancyAction()),
-            Map.entry(PLAIN, new PlainAction()));
+            Map.entry(PLAIN, new PlainAction()),
+            Map.entry(TAKE, new TakeAction()),
+            Map.entry(ADD, new AddAction()),
+            Map.entry(SEL, new SelectAction()));
     /**
      * The constant helpMap.
      */
@@ -498,13 +488,17 @@ public class Constants {
             Map.entry(FANCY, HelpText.FANCY),
             Map.entry(PLAIN, HelpText.PLAIN),
             Map.entry(MC,HelpText.MC),
-            Map.entry(DETAIL,HelpText.DETAIL));
+            Map.entry(DETAIL,HelpText.DETAIL),
+            Map.entry(TAKE, HelpText.TAKE),
+            Map.entry(ADD, HelpText.ADD),
+            Map.entry(SEL, HelpText.SEL));
     /**
      * The constant paramMap.
      */
-    public static final Map<String, String> paramMap = Map.ofEntries(
-            Map.entry(DEADLINE, "by"),
-            Map.entry(EVENT, "at"));
+    public static final Map<String, String[]> paramMap = Map.ofEntries(
+            Map.entry(DEADLINE, new String[]{"by"}),
+            Map.entry(EVENT, new String[]{"at"}),
+            Map.entry(ADD, new String[]{MOD, TASK}));
     /**
      * The constant optionalParamMap.
      */
@@ -513,7 +507,7 @@ public class Constants {
             Map.entry(MC, new String[]{"p", "d"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
-            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
@@ -534,11 +528,14 @@ public class Constants {
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
             Map.entry(TODO, ADDED + CHANGED),
-            Map.entry(UNDONE, "Nice! I've marked this task as undone:"
-                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNDONE, "Nice! I've marked this task as undone:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNKNOWN, "OOPS, I don't know what that means :-( Try \"help\"!"),
             Map.entry(PREV, TEXT_PLACEHOLDER),
             Map.entry(NEXT, TEXT_PLACEHOLDER),
-            Map.entry(FANCY, WELCOME),
-            Map.entry(PLAIN, WELCOME));
+            Map.entry(FANCY, FANCY),
+            Map.entry(PLAIN, PLAIN),
+            Map.entry(TAKE, "I have marked these modules as taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(ADD, "I have added the specified tasks to the specified modules."
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
 }

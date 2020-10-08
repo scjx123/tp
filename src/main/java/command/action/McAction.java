@@ -5,6 +5,7 @@ import constants.Constants;
 import data.Item;
 import data.SingleModule;
 import data.Data;
+import exceptions.CommandException;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class McAction extends Action {
     private String userInput = "";
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.MC_HEAD);
         ArrayList<Item> moduleList = new ArrayList<>(data.mods);
         if (isBoth) {
@@ -71,7 +72,7 @@ public class McAction extends Action {
                         isBoth = true;
                         userInput = "";
                     } else {
-                        throw new Exception();
+                        throw new CommandException();
                     }
                 } else {
                     isSelect = true;
@@ -80,7 +81,7 @@ public class McAction extends Action {
                 }
             } else if (userInput.equals(detail)) {
                 if (len > 1) {
-                    throw new Exception();
+                    throw new CommandException();
                 }
                 isDetail = true;
                 isSelect = false;
@@ -88,7 +89,7 @@ public class McAction extends Action {
                 userInput = "";
 
             } else {
-                throw new Exception();
+                throw new CommandException();
             }
         }
     }

@@ -2,7 +2,7 @@ package command.action;
 
 import command.ParamNode;
 import data.Data;
-import jobs.Deadline;
+import data.jobs.Deadline;
 
 /**
  * The type Deadline action.
@@ -13,7 +13,7 @@ public class DeadlineAction extends Action {
     private String by;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         String result = super.act(data);
         Deadline ddl = new Deadline(description, by);
         data.addTask(ddl);

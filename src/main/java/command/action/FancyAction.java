@@ -15,9 +15,4 @@ public class FancyAction extends Action {
         super();
     }
 
-    @Override
-    public String act(Data data) {
-        return Constants.WELCOME;
-    }
-
 }

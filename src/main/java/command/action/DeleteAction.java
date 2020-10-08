@@ -4,9 +4,6 @@ import command.ParamNode;
 import constants.Constants;
 import data.Data;
 import data.Item;
-import jobs.Task;
-
-import java.util.ArrayList;
 
 /**
  * The type Delete action.
@@ -16,7 +13,7 @@ public class DeleteAction extends Action {
     private int index;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         if (index < 0 || index >= data.target.size()) {
             return Constants.INDEX_OUT;
         }
