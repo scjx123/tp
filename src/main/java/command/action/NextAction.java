@@ -2,7 +2,7 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
-import data.TaskList;
+import data.Data;
 
 /**
  * The type Next action.
@@ -12,10 +12,10 @@ public class NextAction extends Action {
     private String arg = "a";
 
     @Override
-    public String act(TaskList tasks) {
+    public String act(Data data) {
         String result = PrevAction.getTargetString(Constants.optionalParamMap.get(args.name), arg);
         result = result + "1";
-        return super.act(tasks).replace(Constants.TEXT_PLACEHOLDER, result);
+        return super.act(data).replace(Constants.TEXT_PLACEHOLDER, result);
     }
 
     @Override

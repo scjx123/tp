@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import command.Command;
 import constants.Constants;
-import data.TaskList;
+import data.Data;
 import io.Storage;
 import lexical.Parser;
 import visualize.Cli;
@@ -22,7 +22,7 @@ public class Duke {
     private final FancyCli fui; // fancy ui
     private final Cli pui; //plain ui
     private final Parser parser;
-    private TaskList tasks;
+    private Data data;
     private Cli ui;
     private boolean isFancy;
 
@@ -44,10 +44,10 @@ public class Duke {
         parser = new Parser();
         storage = new Storage(directory, fileName, parser);
         try {
-            tasks = storage.load();
+            data = storage.load();
         } catch (Exception e) {
             ui.showText(e.getMessage());
-            tasks = new TaskList();
+            data = new Data();
         }
     }
 
@@ -73,11 +73,11 @@ public class Duke {
                 String fullCommand = ui.nextLine();
                 ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
                 for (Command c : commands) {
-                    c.execute(tasks);
+                    c.execute(data);
                     reattachUI(c.isFancy(), c.isPlain());
-                    ui.update(c.result, tasks);
+                    ui.update(c.result, data);
                     isExit = c.isBye();
-                    storage.saveTasks(tasks.tasks);
+                    storage.saveTasks(data.tasks);
                 }
             } catch (Exception e) {
                 String message = e.getMessage();
@@ -89,15 +89,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Test.
+     * @param command Command of user
+     * @return
+     */
     public String testSut(String command) {
         try {
             String fullCommand = command;
             ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
             for (Command c : commands) {
-                c.execute(tasks);
+                c.execute(data);
                 reattachUI(c.isFancy(), c.isPlain());
-                ui.update(c.result, tasks);
-                storage.saveTasks(tasks.tasks);
+                ui.update(c.result, data);
+                storage.saveTasks(data.tasks);
                 return c.result;
             }
         } catch (Exception e) {
@@ -127,7 +132,7 @@ public class Duke {
         // However, no matter what mode it starts in, I have created switching commands.
         // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
-        //boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        //new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
+        // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        // new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
     }
 }

@@ -162,6 +162,7 @@ public class Constants {
     /**
      * The constant TEXT_PLACEHOLDER.
      */
+
     public static final String TEXT_PLACEHOLDER = "_t_";
     /**
      * The constant NUMBER_PLACEHOLDER.
@@ -230,6 +231,10 @@ public class Constants {
      */
     public static final String TODO = "todo";
     /**
+     * The constant ALL.
+     */
+    public static final String ALL = "all";
+    /**
      * The constant UNDONE.
      */
     public static final String UNDONE = "undone";
@@ -286,6 +291,8 @@ public class Constants {
      * Signals CAP command.
      */
     public static final String CAP = "cap";
+    public static final String MOD = "mod";
+    public static final String TASK = "task";
     /**
      * The constant INDEX_OUT.
      */
@@ -352,6 +359,17 @@ public class Constants {
      */
     public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
             + WIN_NEWLINE;
+
+    /**
+     * The constant FOCUS_HELP.
+     */
+    public static final String FOCUS_HELP = FOCUS + SYNTAX_OR + FOCUS + CHAR_SPACE + ICON_LEFT + DEADLINE + CHAR_SPACE
+            + PARAM + CHAR_SPACE + TODO + CHAR_SPACE + PARAM + CHAR_SPACE + EVENT + CHAR_SPACE + PARAM + CHAR_SPACE
+            + ALL + ICON_RIGHT + WIN_NEWLINE;
+    /**
+     * The constant CONTEXT_MSG.
+     */
+    public static final String CONTEXT_MSG = "Changing context to ";
     /**
      * The constant LIST_HEAD.
      */
@@ -368,6 +386,10 @@ public class Constants {
      * The constant HELP_HEADING.
      */
     public static final String SHOW_CAP = "Here is your existing CAP: ";
+    public static final String NOT_TASK = "The specified item is not a Task, "
+            + "so it cannot be marked as done or undone." + WIN_NEWLINE;
+    public static final String INIT_LIST = "Welcome to DomSun! This is the item list.";
+    public static final String INIT_SEL = "This is the selection list.";
     /**
      * The constant BMP_LIST_SWITCH.
      */
@@ -490,8 +512,8 @@ public class Constants {
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"p", "d"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
-            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec","mod"}),
-            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT}),
+            Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
@@ -507,7 +529,7 @@ public class Constants {
             Map.entry(EVENT, ADDED + CHANGED),
             Map.entry(FIND, "Tasks with the specified keyword are:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(FOCUS, "Tasks with the specified task type are:"
+            Map.entry(FOCUS, "Now we are focusing on:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),

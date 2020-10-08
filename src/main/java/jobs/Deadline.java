@@ -8,15 +8,15 @@ import constants.Constants;
 public class Deadline extends Task {
 
     /**
-     * The By.
+     * Deadline due time.
      */
     protected String by;
 
     /**
      * Instantiates a new Deadline.
      *
-     * @param description the description
-     * @param by          the by
+     * @param description deadline description
+     * @param by          deadline due time
      */
     public Deadline(String description, String by) {
         super(description);

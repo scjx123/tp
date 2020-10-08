@@ -1,9 +1,9 @@
 package command.action;
 
+import constants.Constants;
 import constants.HelpText;
 import command.ParamNode;
-import constants.Constants;
-import data.TaskList;
+import data.Data;
 
 /**
  * The type Help action.
@@ -20,7 +20,7 @@ public class HelpAction extends Action {
     HelpText helpText = null;
 
     @Override
-    public String act(TaskList tasks) {
+    public String act(Data data) {
         if (isDetailed && helpText != null) {
             isDetailed = false;
             return helpText.toString();

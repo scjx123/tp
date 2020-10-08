@@ -1,7 +1,7 @@
 package command.action;
 
 import constants.Constants;
-import data.TaskList;
+import data.Data;
 
 /**
  * The type Plain action.
@@ -16,7 +16,7 @@ public class PlainAction extends Action {
     }
 
     @Override
-    public String act(TaskList tasks) {
+    public String act(Data data) {
         return Constants.WELCOME;
     }
 
