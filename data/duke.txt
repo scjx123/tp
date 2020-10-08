@@ -1,9 +1,9 @@
-[E][V] test3 (at: Jan 01 2021 00:00)
+[E][X] test3 (at: Jan 01 2021 00:00)
 [E][X] test (at: May 05 2021 00:00)
 [T][X] abs
 [T][X] test
 [T][X] a
 [T][X] b
-[E][X] test4 (at: Mon 2-4 pm)
-[E][X] test (at: MONDAY 18:30)
+[E][V] test4 (at: Mon 2-4 pm)
+[E][V] test (at: MONDAY 18:30)
 [D][X] ddl (by: Feb 02 2020 00:00)

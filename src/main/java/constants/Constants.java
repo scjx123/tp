@@ -507,7 +507,7 @@ public class Constants {
             Map.entry(MC, new String[]{"p", "d"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
-            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
