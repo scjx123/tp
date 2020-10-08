@@ -35,7 +35,6 @@ public class CalculateCapAction extends Action {
             totalMC += Double.parseDouble(module.getModuleMC());
             totalScore += Double.parseDouble(module.getModuleMC()) * grade;
         }
-
         capValue = totalScore / totalMC;
         return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
     }
@@ -121,4 +120,6 @@ public class CalculateCapAction extends Action {
         }
         return gradeValue;
     }
+
+
 }

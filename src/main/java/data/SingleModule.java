@@ -2,6 +2,8 @@ package data;
 
 import constants.Constants;
 
+import java.util.ArrayList;
+
 /**
  * The type Single module.
  */
@@ -46,7 +48,8 @@ public class SingleModule extends Item {
         this.modulePrerequisite = prereq;
     }
 
-
+    ArrayList<Item> taskList = new ArrayList<>();
+    boolean isSelected = false;
 
     @Override
     public String getName() {

@@ -23,8 +23,6 @@ public class DetailAction extends Action {
     @Override
     public String act(Data data) { //data can be list of module or tasks
         StringBuilder builder = new StringBuilder(Constants.DETAIL_HEAD);
-        ArrayList<Item> mods = data.mods;
-
         if (isMod) { //user chosen module
             for (Item item : mods) {
                 SingleModule m = (SingleModule) item;

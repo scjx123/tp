@@ -21,6 +21,9 @@ public class Data {
      */
     public ArrayList<Item> tasks;
 
+    /**
+     * The default list of modules read in from courselist11.txt.
+     */
     public ArrayList<Item> mods;
     /**
      * The Index option.
