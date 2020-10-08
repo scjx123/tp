@@ -25,17 +25,19 @@ public class AddAction extends Action {
     @Override
     public String act(Data data) throws Exception {
         String result = super.act(data);
+        String flag = data.flag;
+        String tasksFlag = !flag.equals(Constants.MOD) ? flag : Constants.TASK;
         ArrayList<Item> targetTasks = new ArrayList<>();
+        ArrayList<Item> tasksInContext = data.getTarget(tasksFlag);
         taskIndices.forEach(i -> {
             if (i < 0 || i > data.tasks.size() - 1) {
                 throw new IndexOutOfBoundsException();
             }
-            targetTasks.add(data.tasks.get(i));
+            targetTasks.add(tasksInContext.get(i));
         });
         if (targetTasks.size() < 1) {
             throw new TaskNotSpecifiedException();
         }
-        String flag = data.flag;
         ArrayList<Item> targetMods = new ArrayList<>();
         data.mods.stream().filter(x -> modNames.contains(x.getName())).forEach(targetMods::add);
         if (targetMods.size() < 1) {

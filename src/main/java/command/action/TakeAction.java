@@ -5,6 +5,7 @@ import constants.Constants;
 import data.Data;
 import data.SingleModule;
 import exceptions.CommandException;
+import exceptions.ItemNotSpecifiedException;
 
 import java.util.ArrayList;
 
@@ -18,31 +19,35 @@ public class TakeAction extends Action {
         String flag = data.flag;
         StringBuilder builder = new StringBuilder();
         if (isBlind) {
-            builder.append("Your selected modules");
+            StringBuilder testContent = new StringBuilder();
             data.getTarget(Constants.SELECTED).forEach(x -> {
                 if(x instanceof SingleModule) {
                     ((SingleModule)x).isTaken = true;
+                    testContent.append(x.getName());
                 }
             });
+            if (testContent.toString().length() > 0) {
+                builder.append("Your selected modules");
+            } else {
+                builder.append("No modules in your selection.");
+            }
         } else {
             if (!indices.isEmpty()) {
                 for (int i : indices) {
-                    if (data.get(i) instanceof SingleModule) {
-                        ((SingleModule)data.get(i)).isTaken = true;
+                    if (i < 0 || i > data.mods.size() - 1) {
+                        throw new IndexOutOfBoundsException();
+                    }
+                    if (data.mods.get(i) instanceof SingleModule) {
+                        ((SingleModule)data.mods.get(i)).isTaken = true;
                         builder.append("Module ").append(i + 1).append(": ").
-                                append(((SingleModule)data.get(i)).moduleCode).append(Constants.WIN_NEWLINE);
+                                append(((SingleModule)data.mods.get(i)).moduleCode).append(Constants.WIN_NEWLINE);
                     }
                 }
             }
             if (!codes.isEmpty()) {
-                data.getTarget(Constants.MOD).forEach(x -> { // always is a module
-                    codes.forEach(c -> {
-                        if (c.equals(((SingleModule)x).moduleCode)) {
-                            ((SingleModule)x).isTaken = true;
-                            builder.append("Module: ").append(((SingleModule)x).moduleCode).
-                                    append(Constants.WIN_NEWLINE);
-                        }
-                    });
+                data.mods.stream().filter(x -> codes.contains(((SingleModule)x).moduleCode)).forEach(x -> {
+                    ((SingleModule)x).isTaken = true;
+                    builder.append("Module: ").append(((SingleModule)x).moduleCode).append(Constants.WIN_NEWLINE);
                 });
             }
         }
@@ -50,7 +55,7 @@ public class TakeAction extends Action {
         String result = super.act(data);
         String execution = builder.toString();
         if (execution.equals(Constants.ZERO_LENGTH_STRING)) {
-            execution = execution.concat("Target Module Not Found");
+            execution = execution.concat(Constants.NOT_FOUND);
         }
         return result.replace(Constants.TEXT_PLACEHOLDER, execution);
     }
@@ -65,10 +70,6 @@ public class TakeAction extends Action {
             return;
         }
         String[] identifiers = args.thisData.toFlatString().split(Constants.SPACE);
-        if (identifiers.length < 1) {
-            isBlind = true;
-            return;
-        }
         for (String id : identifiers) {
             try {
                 indices.add(Integer.parseInt(id) - 1);

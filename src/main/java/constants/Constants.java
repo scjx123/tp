@@ -336,6 +336,7 @@ public class Constants {
     public static final String MOD_NOT_FOUND =
             "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
+    public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
@@ -462,7 +463,8 @@ public class Constants {
             Map.entry(FANCY, new FancyAction()),
             Map.entry(PLAIN, new PlainAction()),
             Map.entry(TAKE, new TakeAction()),
-            Map.entry(ADD, new AddAction()));
+            Map.entry(ADD, new AddAction()),
+            Map.entry(SEL, new SelectAction()));
     /**
      * The constant helpMap.
      */
@@ -488,7 +490,8 @@ public class Constants {
             Map.entry(MC,HelpText.MC),
             Map.entry(DETAIL,HelpText.DETAIL),
             Map.entry(TAKE, HelpText.TAKE),
-            Map.entry(ADD, HelpText.ADD));
+            Map.entry(ADD, HelpText.ADD),
+            Map.entry(SEL, HelpText.SEL));
     /**
      * The constant paramMap.
      */
@@ -533,5 +536,6 @@ public class Constants {
             Map.entry(PLAIN, PLAIN),
             Map.entry(TAKE, "I have marked these modules as taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(ADD, "I have added the specified tasks to the specified modules."
-                    + WIN_NEWLINE + TEXT_PLACEHOLDER));
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
 }

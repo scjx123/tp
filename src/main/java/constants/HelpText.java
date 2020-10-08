@@ -229,7 +229,7 @@ public enum HelpText {
             "sel",
             "Make selection: Add specified item(s) to the selection.",
             new String[]{
-                "sel [index(es) / module code(s) (for modules only)]",
+                "sel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
             },
             new String[]{
                 "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
