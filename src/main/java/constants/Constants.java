@@ -293,6 +293,8 @@ public class Constants {
     public static final String CAP = "cap";
     public static final String MOD = "mod";
     public static final String TASK = "task";
+    public static final String SELECTED = "selected";
+    public static final String TAKEN = "taken";
     /**
      * The constant INDEX_OUT.
      */

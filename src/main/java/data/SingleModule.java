@@ -32,8 +32,6 @@ public class SingleModule extends Item {
 
     public ArrayList<Item> taskList;
 
-    public boolean isSelected;
-
     public boolean isTaken;
 
     /**
