@@ -2,7 +2,7 @@ package command.action;
 
 import command.ParamNode;
 import data.Data;
-import jobs.ToDo;
+import data.jobs.ToDo;
 
 /**
  * The type Todo action.
@@ -12,7 +12,7 @@ public class TodoAction extends Action {
     private String description;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         String result = super.act(data);
         ToDo todo = new ToDo(description);
         data.addTask(todo);
