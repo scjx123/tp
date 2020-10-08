@@ -88,8 +88,8 @@ public class Data {
             target.addAll(tasks.stream().filter(x -> x.isSelected).collect(Collectors.toList()));
             break;
         case Constants.TAKEN:
-            target = mods.stream().filter(x
-                    -> ((SingleModule)x).isTaken).collect(Collectors.toCollection(ArrayList::new));
+            target = mods.stream().filter(
+                x -> ((SingleModule)x).isTaken).collect(Collectors.toCollection(ArrayList::new));
             break;
         default:
             target = tasks;

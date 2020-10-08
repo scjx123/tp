@@ -24,7 +24,6 @@ public class AddAction extends Action {
 
     @Override
     public String act(Data data) throws Exception {
-        String result = super.act(data);
         String flag = data.flag;
         String tasksFlag = !flag.equals(Constants.MOD) ? flag : Constants.TASK;
         ArrayList<Item> targetTasks = new ArrayList<>();
@@ -43,13 +42,13 @@ public class AddAction extends Action {
         if (targetMods.size() < 1) {
             throw new ModuleNotFoundException();
         }
-        targetMods.forEach(m -> ((SingleModule)m).taskList.addAll(targetTasks));
+        targetMods.forEach(m -> ((SingleModule) m).taskList.addAll(targetTasks));
         data.refreshTarget(flag);
         StringBuilder builder = new StringBuilder();
         for (Item item : targetMods) {
             StringBuilder sb = new StringBuilder(item.getName() + " << tasks: ");
             for (Item i : targetTasks) {
-                sb.append(((Task)i).getDescription()).append(Constants.SPACE);
+                sb.append(((Task) i).getDescription()).append(Constants.SPACE);
             }
             builder.append(sb.append(Constants.WIN_NEWLINE).toString());
         }
@@ -57,6 +56,7 @@ public class AddAction extends Action {
         if (addStatus.length() < 1) {
             throw new ModuleNotFoundException();
         }
+        String result = super.act(data);
         return result.replace(Constants.TEXT_PLACEHOLDER, addStatus);
     }
 
@@ -86,7 +86,7 @@ public class AddAction extends Action {
             } catch (Exception e) {
                 char ch = name.toUpperCase().toCharArray()[0];
                 if (name.length() == 1 && Character.isLetter(ch)) {
-                    taskIndices.add((int)ch - Constants.LETTER_OFFSET - 1);
+                    taskIndices.add((int) ch - Constants.LETTER_OFFSET - 1);
                 } else {
                     throw new TaskNotSpecifiedException();
                 }

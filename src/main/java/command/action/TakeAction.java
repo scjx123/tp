@@ -21,8 +21,8 @@ public class TakeAction extends Action {
         if (isBlind) {
             StringBuilder testContent = new StringBuilder();
             data.getTarget(Constants.SELECTED).forEach(x -> {
-                if(x instanceof SingleModule) {
-                    ((SingleModule)x).isTaken = true;
+                if (x instanceof SingleModule) {
+                    ((SingleModule) x).isTaken = true;
                     testContent.append(x.getName());
                 }
             });
@@ -38,16 +38,16 @@ public class TakeAction extends Action {
                         throw new IndexOutOfBoundsException();
                     }
                     if (data.mods.get(i) instanceof SingleModule) {
-                        ((SingleModule)data.mods.get(i)).isTaken = true;
-                        builder.append("Module ").append(i + 1).append(": ").
-                                append(((SingleModule)data.mods.get(i)).moduleCode).append(Constants.WIN_NEWLINE);
+                        ((SingleModule) data.mods.get(i)).isTaken = true;
+                        builder.append("Module ").append(i + 1).append(": ")
+                                .append(((SingleModule) data.mods.get(i)).moduleCode).append(Constants.WIN_NEWLINE);
                     }
                 }
             }
             if (!codes.isEmpty()) {
-                data.mods.stream().filter(x -> codes.contains(((SingleModule)x).moduleCode)).forEach(x -> {
-                    ((SingleModule)x).isTaken = true;
-                    builder.append("Module: ").append(((SingleModule)x).moduleCode).append(Constants.WIN_NEWLINE);
+                data.mods.stream().filter(x -> codes.contains(((SingleModule) x).moduleCode)).forEach(x -> {
+                    ((SingleModule) x).isTaken = true;
+                    builder.append("Module: ").append(((SingleModule) x).moduleCode).append(Constants.WIN_NEWLINE);
                 });
             }
         }
@@ -76,7 +76,7 @@ public class TakeAction extends Action {
             } catch (Exception e) {
                 char ch = id.toUpperCase().toCharArray()[0];
                 if (id.length() == 1 && Character.isLetter(ch)) {
-                    indices.add((int)ch - Constants.LETTER_OFFSET - 1);
+                    indices.add((int) ch - Constants.LETTER_OFFSET - 1);
                 } else {
                     codes.add(id);
                 }
