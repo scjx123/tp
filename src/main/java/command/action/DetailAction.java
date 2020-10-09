@@ -6,7 +6,9 @@ import data.Item;
 import data.SingleModule;
 import data.Data;
 import data.jobs.Task;
+import exceptions.ModuleNotFoundException;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 public class DetailAction extends Action {
@@ -14,7 +16,8 @@ public class DetailAction extends Action {
     private boolean isTask = false;
     private boolean isCmd = false;
     private String userInput = "";
-    private int index = -1;
+    private boolean noModule = true;
+    private static ArrayList<Item> mods;
 
     @Override
     public String act(Data data) throws Exception {
@@ -32,23 +35,13 @@ public class DetailAction extends Action {
                     }
                 }
             }
-            if (isTask) {
-                ArrayList<Item> tasks = data.tasks;
-                for (Item item : data.tasks) {
-                    Task t = (Task)item;
-                    if (t.getDescription().contains(userInput)) {
-                        builder.append(t.toString());
-                    }
-                    builder.append(Constants.WIN_NEWLINE);
-                }
-            }
         }
         return builder.toString();
     }
 
     @Override
-    public void prepare(ParamNode args) throws Exception {
-        super.prepare(args);
+    public void checkError(ParamNode args, Data data) throws ModuleNotFoundException {
+        super.checkError(args,data);
         int len = flattenedArgs.length;
         if (len == 0) {
             isMod = false;
@@ -62,20 +55,25 @@ public class DetailAction extends Action {
             String command = optionalParams[2];
             isMod = argString.contains(mod);
             isTask = argString.contains(task);
-            char[] charArr = flattenedArgs[0].name.toCharArray();
-            StringBuilder numBuilder = new StringBuilder();
-            for (char c : charArr) {
-                if (Character.isDigit(c)) {
-                    numBuilder.append(c);
-                } else { //if any char is non-numeric, the whole thing is non-numeric
-                    numBuilder = new StringBuilder("-1");
-                    break;
-                }
+            if (isMod) {
+                userInput = argString.replace("mod","");
+            } else if (isTask) {
+                userInput = argString.replace("task","");
             }
-            index = Integer.parseInt(numBuilder.toString());
-            if (index < 1) { // non-numeric
-                userInput = flattenedArgs[1].toFlatString();
+            checkExist(userInput,data);
+        }
+    }
+
+    public void checkExist(String moduleToBeChecked,Data data) throws ModuleNotFoundException {
+        mods = data.mods;
+        for (Item item : mods) {
+            SingleModule m = (SingleModule) item;
+            if (m.moduleCode.equals(moduleToBeChecked.trim())) {
+                noModule = false;
             }
+        }
+        if (noModule) {
+            throw new ModuleNotFoundException();
         }
     }
 }
