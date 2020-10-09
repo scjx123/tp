@@ -5,90 +5,89 @@ import constants.Constants;
 import data.Data;
 import data.Item;
 import data.SingleModule;
-import data.UserData;
+import data.jobs.Task;
+import exceptions.CommandException;
 import exceptions.ModuleNotFoundException;
-
+import exceptions.TaskNotSpecifiedException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.Arrays;
 
 /**
  * The type Add action (on progress).
  */
 public class AddAction extends Action {
-    private static ArrayList<Item> mods;
-    private static int indexOfModule;
-    private boolean isMod = false;
-    private boolean isTask = false;
-    private boolean isCmd = false;
-    private String userInput = "";
-    private boolean noModule = true;
-    private UserData user = new UserData();
-    private static int numberOfMods;
-    private static StringTokenizer st;
+
+    private ArrayList<Integer> taskIndices;
+    private ArrayList<String> modNames;
 
     @Override
-    public String act(Data data) {
-        StringBuilder builder = new StringBuilder();
-        if (isMod) {
-            while(st.hasMoreTokens()) {
-                getModIndex(userInput);
-                SingleModule m = (SingleModule) data.mods.get(indexOfModule);
-                if (indexOfModule != -1 && !user.data.containsKey(m)) {
-                    user.data.put(data.mods.get(indexOfModule), null);
-                    builder.append(Constants.ADD_HEAD).append(Constants.WIN_NEWLINE).append(userInput);
-                } else {
-                    builder.append(Constants.ITEM_EXIST).append(Constants.WIN_NEWLINE);
-                }
+    public String act(Data data) throws Exception {
+        String flag = data.flag;
+        String tasksFlag = !flag.equals(Constants.MOD) ? flag : Constants.TASK;
+        ArrayList<Item> targetTasks = new ArrayList<>();
+        ArrayList<Item> tasksInContext = data.getTarget(tasksFlag);
+        taskIndices.forEach(i -> {
+            if (i < 0 || i > data.tasks.size() - 1) {
+                throw new IndexOutOfBoundsException();
             }
+            targetTasks.add(tasksInContext.get(i));
+        });
+        if (targetTasks.size() < 1) {
+            throw new TaskNotSpecifiedException();
         }
-        return builder.toString();
-    }
-
-    @Override
-    public void checkError(ParamNode args, Data data) throws ModuleNotFoundException {
-        super.checkError(args, data);
-        int len = flattenedArgs.length;
-        if (len == 0) {
-            isMod = false;
-            isTask = false;
-            userInput = "";
-        } else {
-            String argString = flattenedArgs[0].toFlatString();
-            String[] optionalParams = Constants.optionalParamMap.get(args.name);
-            String mod = optionalParams[0];
-            String task = optionalParams[1];
-            String command = optionalParams[2];
-            isMod = argString.contains(mod);
-            isTask = argString.contains(task);
-            if (isMod) {
-                userInput = argString.replace("mod", "");
-                //check if user entered multiple mod or a single mod
-                st = new StringTokenizer(userInput);
-                numberOfMods = st.countTokens();
-            } else if (isTask) {
-                userInput = argString.replace("task", "");
-            }
-        }
-    }
-
-    public void checkExist(String moduleToBeChecked, Data data) throws ModuleNotFoundException {
-        mods = data.mods;
-        for (Item item : mods) {
-            SingleModule m = (SingleModule) item;
-            if (m.moduleCode.equals(moduleToBeChecked.trim())) {
-                noModule = false;
-            }
-        }
-        if (noModule) {
+        ArrayList<Item> targetMods = new ArrayList<>();
+        data.mods.stream().filter(x -> modNames.contains(x.getName())).forEach(targetMods::add);
+        if (targetMods.size() < 1) {
             throw new ModuleNotFoundException();
         }
+        targetMods.forEach(m -> ((SingleModule) m).taskList.addAll(targetTasks));
+        data.refreshTarget(flag);
+        StringBuilder builder = new StringBuilder();
+        for (Item item : targetMods) {
+            StringBuilder sb = new StringBuilder(item.getName() + " << tasks: ");
+            for (Item i : targetTasks) {
+                sb.append(((Task) i).getDescription()).append(Constants.SPACE);
+            }
+            builder.append(sb.append(Constants.WIN_NEWLINE).toString());
+        }
+        String addStatus = builder.toString();
+        if (addStatus.length() < 1) {
+            throw new ModuleNotFoundException();
+        }
+        String result = super.act(data);
+        return result.replace(Constants.TEXT_PLACEHOLDER, addStatus);
     }
 
-    public void getModIndex(String moduleCode) {
-        for (Item item : mods) {
-            SingleModule m = (SingleModule) item;
-            if (m.moduleCode.equals(moduleCode.trim())) {
-                indexOfModule = mods.indexOf(m);
+    @Override
+    public void prepare(ParamNode args) throws Exception {
+        super.prepare(args);
+        taskIndices = new ArrayList<>();
+        modNames = new ArrayList<>();
+        ArrayList<String> taskNames = new ArrayList<>();
+        for (ParamNode arg : flattenedArgs) {
+            if (arg.thisData == null) {
+                throw new CommandException();
+            }
+            if (arg.name.equals(Constants.MOD)) {
+                String[] strings = arg.thisData.toFlatString().split(Constants.SPACE);
+                modNames.addAll(Arrays.asList(strings));
+            } else if (arg.name.equals(Constants.TASK)) {
+                String[] strings = arg.thisData.toFlatString().split(Constants.SPACE);
+                taskNames.addAll(Arrays.asList(strings));
+            } else {
+                throw new CommandException();
+            }
+        }
+        for (String name : taskNames) {
+            try {
+                taskIndices.add(Integer.parseInt(name) - 1);
+            } catch (Exception e) {
+                char ch = name.toUpperCase().toCharArray()[0];
+                if (name.length() == 1 && Character.isLetter(ch)) {
+                    taskIndices.add((int) ch - Constants.LETTER_OFFSET - 1);
+                } else {
+                    throw new TaskNotSpecifiedException();
+                }
             }
         }
     }

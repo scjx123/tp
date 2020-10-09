@@ -84,7 +84,7 @@ public class Duke {
                 if (message == null) {
                     message = Constants.INDEX_OUT;
                 }
-                ui.showText(message);
+                ui.update(message, data);
             }
         }
     }

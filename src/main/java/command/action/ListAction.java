@@ -3,12 +3,9 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 import data.Item;
-import data.SingleModule;
 import data.Data;
-import jobs.Task;
-import jobs.Deadline;
-import jobs.Event;
-import jobs.ToDo;
+import data.jobs.Task;
+import exceptions.CommandException;
 import messages.MessageOptions;
 
 import java.time.LocalDate;
@@ -27,7 +24,7 @@ public class ListAction extends Action {
     private String stringDate = "";
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.LIST_HEAD);
         ArrayList<Item> target = new ArrayList<>(data.getTarget());
 
@@ -35,7 +32,7 @@ public class ListAction extends Action {
             LocalDateTime dateTime = Item.parseDateTime(stringDate);
             if (dateTime != null) {
                 LocalDate date = dateTime.toLocalDate();
-                data.target = target.stream().filter(x -> x instanceof Task && x.getDate() != null
+                data.target = target.stream().filter(x -> x instanceof Task && x.isDated
                         && date.compareTo(x.getDate()) == 0).collect(Collectors.toCollection(ArrayList::new));
                 for (Item item : data.target) {
                     builder.append(item.toString()).append(Constants.WIN_NEWLINE);
@@ -43,11 +40,11 @@ public class ListAction extends Action {
             }
         } else {
             if (isAsc) {
-                target.removeIf(x -> x.getDateTime() == null);
+                target.removeIf(x -> !x.isDated);
                 target.sort(Comparator.comparing(Item::getDateTime));
             }
             if (isDesc) {
-                target.removeIf(x -> x.getDateTime() == null);
+                target.removeIf(x -> !x.isDated);
                 target.sort((x, y) -> -x.getDateTime().compareTo(y.getDateTime()));
             }
             data.target = target;
@@ -115,7 +112,7 @@ public class ListAction extends Action {
             } else if (stringDate.trim().length() == 0) {
                 stringDate = "";
             } else {
-                throw new Exception();
+                throw new CommandException();
             }
         }
     }

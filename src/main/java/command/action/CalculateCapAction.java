@@ -6,7 +6,6 @@ import constants.Constants;
 import data.Item;
 import data.SingleModule;
 import data.Data;
-import exceptions.ModuleNotFoundException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class CalculateCapAction extends Action {
     private double capValue = 0;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         double totalScore = 0;
         double totalMC = 0;
         for (Map.Entry<String, Double> m : modulesWithGrades.entrySet()) {

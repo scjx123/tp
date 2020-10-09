@@ -1,10 +1,10 @@
 package data;
 
 import constants.Constants;
-import jobs.Deadline;
-import jobs.Event;
-import jobs.Task;
-import jobs.ToDo;
+import data.jobs.Deadline;
+import data.jobs.Event;
+import data.jobs.Task;
+import data.jobs.ToDo;
 import messages.MessageOptions;
 
 import java.util.ArrayList;
@@ -85,6 +85,14 @@ public class Data {
             break;
         case Constants.MOD:
             target = mods;
+            break;
+        case Constants.SELECTED:
+            target = mods.stream().filter(x -> x.isSelected).collect(Collectors.toCollection(ArrayList::new));
+            target.addAll(tasks.stream().filter(x -> x.isSelected).collect(Collectors.toList()));
+            break;
+        case Constants.TAKEN:
+            target = mods.stream().filter(
+                x -> ((SingleModule)x).isTaken).collect(Collectors.toCollection(ArrayList::new));
             break;
         default:
             target = tasks;

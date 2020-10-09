@@ -42,7 +42,7 @@ public class Action {
      * @param data the data
      * @return the string
      */
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         return Constants.messageMap.getOrDefault(args.name, Constants.INVALID);
     }
 
@@ -53,20 +53,6 @@ public class Action {
      * @throws Exception the exception
      */
     public void prepare(ParamNode args) throws Exception {
-        this.args = args;
-        flattenedArgs = new ParamNode[0];
-        if (args.thisData != null) {
-            flattenedArgs = args.thisData.flatten().toArray(flattenedArgs);
-        }
-    }
-
-    /**
-     * Prepare parameters for task to act.
-     *
-     * @param args the args
-     * @throws Exception the exception
-     */
-    public void checkError(ParamNode args,Data data) throws ModuleNotFoundException {
         this.args = args;
         flattenedArgs = new ParamNode[0];
         if (args.thisData != null) {

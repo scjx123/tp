@@ -3,6 +3,7 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 import data.Data;
+import exceptions.CommandException;
 
 /**
  * The type Focus action.
@@ -11,7 +12,7 @@ public class FocusAction extends Action {
     private String typeTask;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         data.setFlag(typeTask);
         String output = super.act(data);
         return output.replace(Constants.TEXT_PLACEHOLDER, typeTask);
@@ -34,7 +35,7 @@ public class FocusAction extends Action {
                 }
             }
             if (count == options.length) {
-                throw new Exception();
+                throw new CommandException();
             }
         }
     }
