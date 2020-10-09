@@ -33,7 +33,7 @@ public class DetailAction extends Action {
                     noModule = false;
                 }
             }
-            if(noModule){
+            if (noModule) {
                 builder.append(Constants.NO_MODULE);
             }
         }
