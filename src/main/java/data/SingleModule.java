@@ -56,7 +56,6 @@ public class SingleModule extends Item {
         taskList = new ArrayList<>();
     }
 
-    ArrayList<Item> taskList = new ArrayList<>();
     boolean isSelected = false;
 
     @Override

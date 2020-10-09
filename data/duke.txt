@@ -1,17 +1,13 @@
 [E][X] test3 (at: Jan 01 2021 00:00)
+[D][X] eat (by: Dec 12 2020 18:30)
 [E][X] test (at: May 05 2021 00:00)
 [T][X] abs
 [T][X] test
 [T][X] a
 [T][X] b
-[E][X] test4 (at: Mon 2-4 pm)
-[E][X] test (at: MONDAY 18:30)
-<<<<<<< HEAD
-=======
+[E][X] test (at: May 05 2021 00:00)
 [T][X] def
 [T][X] abc
->>>>>>> bc4bf6ce7b29c2e05134439262d743af8c8f6af9
 [T][X] def
-[D][X] eat (by: Dec 12 2020 18:30)
 [T][X] abc
 [T][X] def

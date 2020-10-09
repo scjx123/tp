@@ -101,7 +101,11 @@ public class Data {
     }
 
     public void addTask(Task task) {
-        tasks.add(task);
+        ArrayList<Item> tempList = new ArrayList<>(getTarget(Constants.DEADLINE));
+        ClashChecker cc = new ClashChecker(tempList,task);
+        if(!cc.isClash) {
+            tasks.add(task);
+        }
         refreshTarget();
     }
 

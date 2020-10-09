@@ -14,10 +14,10 @@ public class DetailAction extends Action {
     private String userInput = "";
     private boolean noModule = true;
     private static ArrayList<Item> mods;
-    public StringBuilder builder = new StringBuilder();
 
     @Override
     public String act(Data data) throws Exception { //data can be list of module or tasks
+        StringBuilder builder = new StringBuilder();
         ArrayList<Item> mods = data.mods;
         if (isMod) { //user chosen module
             for (Item item : mods) {

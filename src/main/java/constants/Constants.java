@@ -502,7 +502,6 @@ public class Constants {
             Map.entry(FANCY, new FancyAction()),
             Map.entry(PLAIN, new PlainAction()),
             Map.entry(TAKE, new TakeAction()),
-            Map.entry(ADD, new AddAction()),
             Map.entry(SEL, new SelectAction()));
     /**
      * The constant helpMap.
