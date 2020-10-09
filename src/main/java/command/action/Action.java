@@ -61,20 +61,6 @@ public class Action {
     }
 
     /**
-     * Prepare parameters for task to act.
-     *
-     * @param args the args
-     * @throws Exception the exception
-     */
-    public void checkError(ParamNode args,Data data) throws ModuleNotFoundException {
-        this.args = args;
-        flattenedArgs = new ParamNode[0];
-        if (args.thisData != null) {
-            flattenedArgs = args.thisData.flatten().toArray(flattenedArgs);
-        }
-    }
-
-    /**
      * Replace strings string.
      *
      * @param source the source

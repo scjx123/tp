@@ -81,14 +81,10 @@ public class Command implements Help {
         try {
             if (isArgsValid()) {
                 action.prepare(args);
-                action.checkError(args,data);
                 result = action.act(data);
             } else {
                 throw new InvalidCommandException();
             }
-        } catch (ModuleNotFoundException me) {
-            StringBuilder builder = new StringBuilder(Constants.NO_MODULE);
-            result = builder.toString();
         } catch (Exception e) {
             StringBuilder builder = new StringBuilder(e.getMessage());
             String[] syntax = getSyntax();

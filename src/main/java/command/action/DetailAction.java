@@ -7,7 +7,7 @@ import data.SingleModule;
 import data.Data;
 import data.jobs.Task;
 import exceptions.ModuleNotFoundException;
-import jobs.Task;
+import data.jobs.Task;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -19,27 +19,30 @@ public class DetailAction extends Action {
     private String userInput = "";
     private boolean noModule = true;
     private static ArrayList<Item> mods;
+    public StringBuilder builder = new StringBuilder();
 
     @Override
     public String act(Data data) throws Exception { //data can be list of module or tasks
-        StringBuilder builder = new StringBuilder(Constants.DETAIL_HEAD);
         ArrayList<Item> mods = data.mods;
-
         if (isMod) { //user chosen module
             for (Item item : mods) {
                 SingleModule m = (SingleModule) item;
                 if (m.moduleCode.equals(userInput.trim())) {
+                    builder = new StringBuilder(Constants.DETAIL_HEAD);
                     builder.append(m.toString()).append(Constants.WIN_NEWLINE);
                     noModule = false;
                 }
+            }
+            if(noModule){
+                builder.append(Constants.NO_MODULE);
             }
         }
         return builder.toString();
     }
 
     @Override
-    public void checkError(ParamNode args, Data data) throws ModuleNotFoundException {
-        super.checkError(args,data);
+    public void prepare(ParamNode args) throws Exception {
+        super.prepare(args);
         int len = flattenedArgs.length;
         if (len == 0) {
             isMod = false;
@@ -58,20 +61,6 @@ public class DetailAction extends Action {
             } else if (isTask) {
                 userInput = argString.replace("task","");
             }
-            checkExist(userInput,data);
-        }
-    }
-
-    public void checkExist(String moduleToBeChecked,Data data) throws ModuleNotFoundException {
-        mods = data.mods;
-        for (Item item : mods) {
-            SingleModule m = (SingleModule) item;
-            if (m.moduleCode.equals(moduleToBeChecked.trim())) {
-                noModule = false;
-            }
-        }
-        if (noModule) {
-            throw new ModuleNotFoundException();
         }
     }
 }
