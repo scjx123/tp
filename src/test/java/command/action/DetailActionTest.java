@@ -19,6 +19,6 @@ public class DetailActionTest {
 
     @Test
     public void doesNotContainModuleTest() {
-        assertEquals(Constants.NO_MODULE,duke.testSut(testCommand[1]));
+        assertEquals(Constants.DETAIL_HEAD + Constants.NOT_FOUND,duke.testSut(testCommand[1]));
     }
 }
