@@ -12,7 +12,7 @@ public class PrevAction extends Action {
     private String arg = "a";
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         String result = getTargetString(Constants.optionalParamMap.get(args.name), arg);
         result = result + "-1";
         return super.act(data).replace(Constants.TEXT_PLACEHOLDER, result);

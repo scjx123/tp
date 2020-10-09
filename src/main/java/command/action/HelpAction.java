@@ -20,7 +20,7 @@ public class HelpAction extends Action {
     HelpText helpText = null;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         if (isDetailed && helpText != null) {
             isDetailed = false;
             return helpText.toString();

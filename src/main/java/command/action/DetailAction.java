@@ -5,12 +5,12 @@ import constants.Constants;
 import data.Item;
 import data.SingleModule;
 import data.Data;
+import data.jobs.Task;
 import exceptions.ModuleNotFoundException;
 import jobs.Task;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DetailAction extends Action {
     private boolean isMod = false;
@@ -21,7 +21,7 @@ public class DetailAction extends Action {
     private static ArrayList<Item> mods;
 
     @Override
-    public String act(Data data) { //data can be list of module or tasks
+    public String act(Data data) throws Exception { //data can be list of module or tasks
         StringBuilder builder = new StringBuilder(Constants.DETAIL_HEAD);
         ArrayList<Item> mods = data.mods;
 

@@ -42,7 +42,7 @@ public class Action {
      * @param data the data
      * @return the string
      */
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         return Constants.messageMap.getOrDefault(args.name, Constants.INVALID);
     }
 

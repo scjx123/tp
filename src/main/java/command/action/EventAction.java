@@ -2,7 +2,7 @@ package command.action;
 
 import command.ParamNode;
 import data.Data;
-import jobs.Event;
+import data.jobs.Event;
 
 /**
  * The type Event action.
@@ -13,7 +13,7 @@ public class EventAction extends Action {
     private String at;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         String result = super.act(data);
         Event event = new Event(description, at);
         data.addTask(event);

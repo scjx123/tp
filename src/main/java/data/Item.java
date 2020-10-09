@@ -2,8 +2,6 @@ package data;
 
 import constants.Constants;
 import exceptions.CommandException;
-import jobs.Task;
-import messages.MessageOptions;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,12 +22,14 @@ public class Item {
     /**
      * The Is dated.
      */
-    protected boolean isDated;
+    public boolean isDated = false;
 
     /**
      * Item Date time.
      */
     protected LocalDateTime dateTime;
+
+    public boolean isSelected;
 
     /**
      * Instantiates a new Item.
