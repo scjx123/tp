@@ -1,30 +1,7 @@
 package constants;
 
 
-import command.action.Action;
-import command.action.AddAction;
-import command.action.ByeAction;
-import command.action.CalculateCapAction;
-import command.action.ClearAction;
-import command.action.DeadlineAction;
-import command.action.DeleteAction;
-import command.action.DetailAction;
-import command.action.DoneAction;
-import command.action.EventAction;
-import command.action.FancyAction;
-import command.action.FindAction;
-import command.action.FocusAction;
-import command.action.HelpAction;
-import command.action.ListAction;
-import command.action.McAction;
-import command.action.NextAction;
-import command.action.PlainAction;
-import command.action.PrevAction;
-import command.action.SelectAction;
-import command.action.TakeAction;
-import command.action.TodoAction;
-import command.action.UndoneAction;
-import command.action.UnknownAction;
+import command.action.*;
 
 import java.util.Map;
 
@@ -287,6 +264,8 @@ public class Constants {
      */
     public static final String MC = "mc";
     public static final String TAKE = "take";
+    public static final String UNSEL = "unsel";
+    public static final String UNTAKE = "untake";
     /**
      * The constant DETAIL.
      */
@@ -495,7 +474,9 @@ public class Constants {
             Map.entry(PLAIN, new PlainAction()),
             Map.entry(TAKE, new TakeAction()),
             Map.entry(ADD, new AddAction()),
-            Map.entry(SEL, new SelectAction()));
+            Map.entry(SEL, new SelectAction()),
+            Map.entry(UNSEL, new UnselectAction()),
+            Map.entry(UNTAKE, new UntakeAction()));
     /**
      * The constant helpMap.
      */
@@ -522,7 +503,9 @@ public class Constants {
             Map.entry(DETAIL,HelpText.DETAIL),
             Map.entry(TAKE, HelpText.TAKE),
             Map.entry(ADD, HelpText.ADD),
-            Map.entry(SEL, HelpText.SEL));
+            Map.entry(SEL, HelpText.SEL),
+            Map.entry(UNSEL, HelpText.UNSEL),
+            Map.entry(UNTAKE, HelpText.UNTAKE));
     /**
      * The constant paramMap.
      */
@@ -568,5 +551,7 @@ public class Constants {
             Map.entry(ADD, "I have added the specified tasks to the specified modules."
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(DETAIL, DETAIL_HEAD + TEXT_PLACEHOLDER));
+            Map.entry(DETAIL, DETAIL_HEAD + TEXT_PLACEHOLDER),
+            Map.entry(UNSEL, "I have un-selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNTAKE, "I have marked these modules as not taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
 }

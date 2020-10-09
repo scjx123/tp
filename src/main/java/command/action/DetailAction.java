@@ -2,7 +2,7 @@ package command.action;
 
 import data.Item;
 
-public class DetailAction extends TakeAction {
+public class DetailAction extends SelectAction {
 
     @Override
     protected void modifyObject(Item item) {

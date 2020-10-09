@@ -76,7 +76,7 @@ public class TakeAction extends Action {
         codes = new ArrayList<>();
         super.prepare(args);
         if (args.thisData == null || flattenedArgs.length < 1) {
-            isBlind = true;
+            safetyCheck();
             return;
         }
         String[] identifiers = args.thisData.toFlatString().split(Constants.SPACE);
@@ -97,5 +97,13 @@ public class TakeAction extends Action {
         if (!isCodes && !isIndices) {
             throw new CommandException();
         }
+    }
+
+    protected void safetyCheck() throws Exception {
+        isBlind = true;
+    }
+
+    protected String superAct(Data data) throws Exception {
+        return super.act(data);
     }
 }
