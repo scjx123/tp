@@ -3,16 +3,16 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 import data.Data;
+import data.Item;
 import data.SingleModule;
 import exceptions.CommandException;
-import exceptions.ItemNotSpecifiedException;
 
 import java.util.ArrayList;
 
 public class TakeAction extends Action {
-    private ArrayList<Integer> indices;
-    private ArrayList<String> codes;
-    boolean isBlind = false;
+    protected ArrayList<Integer> indices;
+    protected ArrayList<String> codes;
+    protected boolean isBlind = false;
 
     @Override
     public String act(Data data) throws Exception {
@@ -22,12 +22,13 @@ public class TakeAction extends Action {
             StringBuilder testContent = new StringBuilder();
             data.getTarget(Constants.SELECTED).forEach(x -> {
                 if (x instanceof SingleModule) {
-                    ((SingleModule) x).isTaken = true;
-                    testContent.append(x.getName());
+                    modifyObject(x);
+                    testContent.append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
                 }
             });
             if (testContent.toString().length() > 0) {
-                builder.append("Your selected modules");
+                builder.append("Your selected modules:").append(Constants.WIN_NEWLINE)
+                        .append(testContent.toString());
             } else {
                 builder.append("No modules in your selection.");
             }
@@ -38,16 +39,17 @@ public class TakeAction extends Action {
                         throw new IndexOutOfBoundsException();
                     }
                     if (data.mods.get(i) instanceof SingleModule) {
-                        ((SingleModule) data.mods.get(i)).isTaken = true;
+                        Item module = data.mods.get(i);
+                        modifyObject(module);
                         builder.append("Module ").append(i + 1).append(": ")
-                                .append(((SingleModule) data.mods.get(i)).moduleCode).append(Constants.WIN_NEWLINE);
+                                .append(getObjectInfo(module)).append(Constants.WIN_NEWLINE);
                     }
                 }
             }
             if (!codes.isEmpty()) {
                 data.mods.stream().filter(x -> codes.contains(((SingleModule) x).moduleCode)).forEach(x -> {
-                    ((SingleModule) x).isTaken = true;
-                    builder.append("Module: ").append(((SingleModule) x).moduleCode).append(Constants.WIN_NEWLINE);
+                    modifyObject(x);
+                    builder.append("Module: ").append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
                 });
             }
         }
@@ -58,6 +60,14 @@ public class TakeAction extends Action {
             execution = execution.concat(Constants.NOT_FOUND);
         }
         return result.replace(Constants.TEXT_PLACEHOLDER, execution);
+    }
+
+    protected void modifyObject(Item item) {
+        ((SingleModule)item).isTaken = true;
+    }
+
+    protected String getObjectInfo(Item item) {
+        return item.getName();
     }
 
     @Override
@@ -84,7 +94,7 @@ public class TakeAction extends Action {
         }
         boolean isCodes = codes != null && codes.size() > 0;
         boolean isIndices = indices != null && indices.size() > 0;
-        if (!isBlind && !isCodes && !isIndices) {
+        if (!isCodes && !isIndices) {
             throw new CommandException();
         }
     }

@@ -536,7 +536,6 @@ public class Constants {
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"p", "d"}),
-            Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
@@ -568,5 +567,6 @@ public class Constants {
             Map.entry(TAKE, "I have marked these modules as taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(ADD, "I have added the specified tasks to the specified modules."
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
+            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(DETAIL, DETAIL_HEAD + TEXT_PLACEHOLDER));
 }
