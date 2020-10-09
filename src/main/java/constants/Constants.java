@@ -369,6 +369,10 @@ public class Constants {
      */
     public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
             + WIN_NEWLINE;
+    /**
+     * The constant DETAIL.
+     */
+    public static final String NO_MODULE = "Sorry, no such module in the list!" + WIN_NEWLINE;
 
     /**
      * The constant FOCUS_HELP.
@@ -388,6 +392,10 @@ public class Constants {
      * The constant MC_HEAD.
      */
     public static final String MC_HEAD = "Here is the total MC:" + WIN_NEWLINE;
+    /**
+     * The constant DETAIL.
+     */
+    public static final String DETAIL_HEAD = "Here are the details you requested:" + WIN_NEWLINE;
     /**
      * The constant HELP_HEADING.
      */
@@ -476,7 +484,7 @@ public class Constants {
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
             Map.entry(MC, new McAction()),
-            Map.entry(DETAIL, new DetailAction()),
+     //       Map.entry(DETAIL, new DetailAction()),
             Map.entry(TODO, new TodoAction()),
             Map.entry(UNDONE, new UndoneAction()),
             Map.entry(UNKNOWN, new UnknownAction()),

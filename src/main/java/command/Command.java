@@ -1,11 +1,13 @@
 package command;
 
+import com.sun.nio.sctp.AbstractNotificationHandler;
 import command.action.UnknownAction;
 import command.action.Action;
 import constants.Constants;
 import constants.HelpText;
 import data.Data;
 import exceptions.InvalidCommandException;
+import exceptions.ModuleNotFoundException;
 
 /**
  * The type Command.
@@ -79,10 +81,14 @@ public class Command implements Help {
         try {
             if (isArgsValid()) {
                 action.prepare(args);
+                action.checkError(args,data);
                 result = action.act(data);
             } else {
                 throw new InvalidCommandException();
             }
+        } catch (ModuleNotFoundException me) {
+            StringBuilder builder = new StringBuilder(Constants.NO_MODULE);
+            result = builder.toString();
         } catch (Exception e) {
             StringBuilder builder = new StringBuilder(e.getMessage());
             String[] syntax = getSyntax();
