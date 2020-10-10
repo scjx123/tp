@@ -2,16 +2,20 @@ package data;
 
 import data.jobs.Deadline;
 import data.jobs.Event;
+import jdk.jfr.Description;
+
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class ClashChecker {
+public class Checker {
     private Item item;
     public boolean isClash = false;
     public String listType = "tasks";
     private ArrayList<Item> list;
 
-    public ClashChecker(ArrayList<Item> list, Item item){
+    public Checker(ArrayList<Item> list, Item item){
         if(item instanceof Deadline || item instanceof Event){
             this.list = list;
             this.item = item;
@@ -27,9 +31,12 @@ public class ClashChecker {
         switch (listType) {
         case "tasks":
             for (Item t : list) {
-                LocalDateTime first = item.getDateTime();
-                LocalDateTime second = t.getDateTime();
-                if (first != null && second != null && first.isEqual(second)) {
+                LocalDateTime firstDateTime = item.getDateTime();
+                LocalDateTime secondDateTime = t.getDateTime();
+                String firstDescription = item.getName();
+                String secondDescription = t.getName();
+                if (firstDescription.equals(secondDescription)
+                        && firstDateTime.isEqual(secondDateTime)) {
                     isClash = true;
                     break;
                 }
@@ -40,4 +47,6 @@ public class ClashChecker {
             break;
         }
     }
+
+
 }
