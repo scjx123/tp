@@ -238,6 +238,20 @@ public enum HelpText {
                 "2. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
             }),
     /**
+     * The Unsel.
+     */
+    UNSEL(
+            "unsel",
+            "Cancel selection: Make specified item(s) no longer selected.",
+            new String[]{
+                "unsel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
+            },
+            new String[]{
+                "1. \"unsel 1 2 3\" >> make items with indices 1, 2and 3 no longer selected",
+                "2. \"unsel CS1010 CS2113\" >> make modules CS1010 and CS2113 no longer selected",
+                "2. \"unsel 5 CS2113\" >> make the item with index 5 and module CS2113 no longer selected"
+            }),
+    /**
      * The Add.
      */
     ADD(
@@ -251,7 +265,7 @@ public enum HelpText {
                         + "the modules CS2113 and CS2113T",
             }),
     /**
-     * The Add.
+     * The Take.
      */
     TAKE(
             "take",
@@ -264,6 +278,21 @@ public enum HelpText {
                 "2. \"take 1 2\" >> mark module 1 and module 2 as taken",
                 "3. \"take CS2113T\" >> mark module CS2113T as taken",
                 "4. \"take 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as taken",
+            }),
+    /**
+     * The Untake.
+     */
+    UNTAKE(
+            "untake",
+            "Untake module(s): Mark specified module(s) as not taken.",
+            new String[]{
+                "untake [index(es) / module code(s) (for modules only)]",
+            },
+            new String[]{
+                "1. \"untake\" >> if there is any module selected but not taken, mark it as not taken",
+                "2. \"untake 1 2\" >> mark module 1 and module 2 as not taken",
+                "3. \"untake CS2113T\" >> mark module CS2113T as not taken",
+                "4. \"untake 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as not taken"
             }),
     /**
      * The Mc.

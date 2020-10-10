@@ -25,6 +25,8 @@ import command.action.TakeAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
 import command.action.UnknownAction;
+import command.action.UnselectAction;
+import command.action.UntakeAction;
 
 import java.util.Map;
 
@@ -287,6 +289,8 @@ public class Constants {
      */
     public static final String MC = "mc";
     public static final String TAKE = "take";
+    public static final String UNSEL = "unsel";
+    public static final String UNTAKE = "untake";
     /**
      * The constant DETAIL.
      */
@@ -369,6 +373,10 @@ public class Constants {
      */
     public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
             + WIN_NEWLINE;
+    /**
+     * The constant DETAIL.
+     */
+    public static final String NO_MODULE = "Sorry, no such module in the list!" + WIN_NEWLINE;
 
     /**
      * The constant FOCUS_HELP.
@@ -388,6 +396,10 @@ public class Constants {
      * The constant MC_HEAD.
      */
     public static final String MC_HEAD = "Here is the total MC:" + WIN_NEWLINE;
+    /**
+     * The constant DETAIL.
+     */
+    public static final String DETAIL_HEAD = "Here are the details you requested:" + WIN_NEWLINE;
     /**
      * The constant HELP_HEADING.
      */
@@ -487,7 +499,9 @@ public class Constants {
             Map.entry(PLAIN, new PlainAction()),
             Map.entry(TAKE, new TakeAction()),
             Map.entry(ADD, new AddAction()),
-            Map.entry(SEL, new SelectAction()));
+            Map.entry(SEL, new SelectAction()),
+            Map.entry(UNSEL, new UnselectAction()),
+            Map.entry(UNTAKE, new UntakeAction()));
     /**
      * The constant helpMap.
      */
@@ -514,7 +528,9 @@ public class Constants {
             Map.entry(DETAIL,HelpText.DETAIL),
             Map.entry(TAKE, HelpText.TAKE),
             Map.entry(ADD, HelpText.ADD),
-            Map.entry(SEL, HelpText.SEL));
+            Map.entry(SEL, HelpText.SEL),
+            Map.entry(UNSEL, HelpText.UNSEL),
+            Map.entry(UNTAKE, HelpText.UNTAKE));
     /**
      * The constant paramMap.
      */
@@ -528,7 +544,6 @@ public class Constants {
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"p", "d"}),
-            Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
@@ -560,5 +575,8 @@ public class Constants {
             Map.entry(TAKE, "I have marked these modules as taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(ADD, "I have added the specified tasks to the specified modules."
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
+            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(DETAIL, DETAIL_HEAD + TEXT_PLACEHOLDER),
+            Map.entry(UNSEL, "I have un-selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNTAKE, "I have marked these modules as not taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
 }
