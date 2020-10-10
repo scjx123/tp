@@ -119,14 +119,14 @@ public class ParamNode {
      * @return the string
      */
     public String toFlatString() {
-        String myName = name == null ? "" : name + " ";
-        String nextName = thisData == null ? "" : thisData.toFlatString();
+        String myName = name == null ? Constants.ZERO_LENGTH_STRING : name + Constants.SPACE;
+        String nextName = thisData == null ? Constants.ZERO_LENGTH_STRING : thisData.toFlatString();
         return (myName + nextName).trim();
     }
 
     @Override
     public String toString() {
-        String data = "";
+        String data = Constants.ZERO_LENGTH_STRING;
         if (thisData != null) {
             data = " {" + Constants.WIN_NEWLINE + shiftTab(thisData.toString()) + "}";
         }

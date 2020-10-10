@@ -17,7 +17,7 @@ public class FindAction extends Action {
     private String keyword;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         if (keyword == null || keyword.length() == 0) {
             StringBuilder builder = new StringBuilder(Constants.NO_KEYWORD);
             data.refreshTarget();
