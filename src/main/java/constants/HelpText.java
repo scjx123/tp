@@ -120,6 +120,16 @@ public enum HelpText {
                 "2. \"focus mod\" >> focus on \"mod\". e.g. \"list\" will list all modules from now on",
                 "3. \"focus selected\" >> focus on \"selected\". e.g. \"list\" will list selected items from now on"
             }),
+
+    REMINDER(
+            "reminder",
+            "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
+            new String[]{
+                "reminder"
+            },
+            new String[]{
+                "1. \\\"list\\\" >> list all added tasks\","
+            }),
     /**
      * The List.
      */

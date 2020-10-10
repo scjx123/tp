@@ -20,6 +20,7 @@ import command.action.McAction;
 import command.action.NextAction;
 import command.action.PlainAction;
 import command.action.PrevAction;
+import command.action.ReminderAction;
 import command.action.SelectAction;
 import command.action.TakeAction;
 import command.action.TodoAction;
@@ -224,6 +225,10 @@ public class Constants {
      */
     public static final String FOCUS = "focus";
     /**
+     * The constant REMINDER.
+     */
+    public static final String REMINDER = "reminder";
+    /**
      * The constant HELP.
      */
     public static final String HELP = "help";
@@ -393,6 +398,11 @@ public class Constants {
      */
     public static final String LIST_HEAD = "Here is the list of tasks:" + WIN_NEWLINE;
     /**
+     * The constant REMINDER_HEAD.
+     */
+    public static final String REMINDER_HEAD = "Here are the tasks due within " + Constants.REMINDER_RANGE + " days: "
+            + WIN_NEWLINE;
+    /**
      * The constant MC_HEAD.
      */
     public static final String MC_HEAD = "Here is the total MC:" + WIN_NEWLINE;
@@ -470,6 +480,10 @@ public class Constants {
      * The constant BANNER.
      */
     public static final int BANNER = 1;
+    /**
+     * The constant REMINDER_RANGE.
+     */
+    public static final int REMINDER_RANGE = 3;
 
 
 
@@ -487,6 +501,7 @@ public class Constants {
             Map.entry(HELP, new HelpAction()),
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
+            Map.entry(REMINDER, new ReminderAction()),
             Map.entry(MC, new McAction()),
             Map.entry(DETAIL, new DetailAction()),
             Map.entry(TODO, new TodoAction()),
@@ -514,6 +529,7 @@ public class Constants {
             Map.entry(EVENT, HelpText.EVENT),
             Map.entry(FIND, HelpText.FIND),
             Map.entry(FOCUS, HelpText.FOCUS),
+            Map.entry(REMINDER, HelpText.REMINDER),
             Map.entry(HELP, HelpText.HELP),
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
