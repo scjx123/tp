@@ -27,6 +27,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         String atTime = getDateTimeString(at);
-        return Constants.EVENT_ICON + super.toString() + " (at: " + atTime + ")";
+        if (isWeekly) {
+            return Constants.EVENT_ICON + super.toString() + " (at: " + atTime + ")" + " Weekly";
+        } else {
+            return Constants.EVENT_ICON + super.toString() + " (at: " + atTime + ")";
+        }
     }
 }

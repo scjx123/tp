@@ -1,8 +1,13 @@
 package data;
 
 import constants.Constants;
+import data.jobs.Deadline;
+import data.jobs.Event;
+import data.jobs.Task;
+import data.jobs.ToDo;
 import exceptions.CommandException;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -24,6 +29,13 @@ public class Item {
      */
     public boolean isDated = false;
 
+    /**
+     * The Is Weekly.
+     */
+    public boolean isWeekly = false;/**
+     * The Is Weekly.
+     */
+    public static boolean WeeklyFlag = false;
     /**
      * Item Date time.
      */
@@ -78,6 +90,10 @@ public class Item {
      * @return the local date time
      */
     public static LocalDateTime parseDateTime(String input) {
+        if (input.contains("Weekly")) {
+            WeeklyFlag = true;
+            input = input.replace("Weekly","");
+        }
         LocalDateTime dateTime = null;
         ArrayList<String> patterns = getPatterns(false);
         for (String pattern : patterns) {
@@ -130,6 +146,18 @@ public class Item {
     protected void setDateTime(String date) {
         dateTime = parseDateTime(date);
         isDated = dateTime != null;
+        isWeekly = WeeklyFlag;
+    }
+
+    /**
+     * Sets date time using LocalDatetime.
+     *
+     * @param date the date
+     */
+    protected void setDateTime(LocalDateTime date) {
+        dateTime = date;
+        isDated = dateTime != null;
+        isWeekly = true;
     }
 
     /**
@@ -144,6 +172,7 @@ public class Item {
             return dateTime.toLocalTime();
         }
     }
+
 
     /**
      * Gets date time.
@@ -176,4 +205,10 @@ public class Item {
     public String getDetails() {
         return toString().concat(isSelected ? " Selected" : "");
     }
+
+    public DayOfWeek getDay() {
+        LocalDateTime theDate = getDateTime();
+        return theDate.getDayOfWeek();
+    }
+
 }

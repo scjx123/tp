@@ -51,7 +51,6 @@ public class CalculateCapAction extends Action {
                 }
             }
         }
-
         capValue = totalScore / totalMC;
         return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
     }
@@ -139,4 +138,6 @@ public class CalculateCapAction extends Action {
         }
         return gradeValue;
     }
+
+
 }
