@@ -1,4 +1,4 @@
-package jobs;
+package data.jobs;
 
 import constants.Constants;
 

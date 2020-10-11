@@ -4,7 +4,7 @@ import command.ParamNode;
 import constants.Constants;
 import data.Data;
 import data.Item;
-import jobs.Task;
+import data.jobs.Task;
 
 /**
  * The type Done action.
@@ -14,7 +14,7 @@ public class DoneAction extends Action {
     private int index;
 
     @Override
-    public String act(Data data) {
+    public String act(Data data) throws Exception {
         Item item = data.get(index);
         if (item == null) {
             return Constants.INDEX_OUT;

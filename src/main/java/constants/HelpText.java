@@ -106,35 +106,34 @@ public enum HelpText {
                 "2. \"help event\" >> prints the details of the \"event\" command"
             }),
     /**
-     * The List.
-     */
-    LIST(
-            "list",
-            "Print a list of all added tasks/modules",
-            new String[]{
-                "list",
-                "list date [asc / desc / spec \"date\"(any common date format)]",
-                "list mod"
-            },
-            new String[]{
-                "1. \"list\" >> list all added tasks",
-                "2. \"list date asc\" >> list tasks with a \"date\" field in ascending order",
-                "3. \"list date spec Oct 5 2020\" >> list tasks with specific \"date\" field of Oct 5 2020",
-                "4. \"list mod\" >> list all the modules"
-            }),
-    /**
      * The Focus.
      */
     FOCUS(
             "focus",
-            "Print a list of all added tasks/modules based on task type",
+            "Change context. Changes the target of other commands to the specified target",
             new String[]{
                 "focus",
-                "focus [deadline / todo / event / task]"
+                "focus [deadline / todo / event / task / mod / selected / taken]"
             },
             new String[]{
-                "1. \"focus\" >> list all tasks",
-                "2. \"focus deadline\" >> list all deadline tasks"
+                "1. \"focus\" >> focus on \"task\". e.g. \"list\" will list all tasks from now on",
+                "2. \"focus mod\" >> focus on \"mod\". e.g. \"list\" will list all modules from now on",
+                "3. \"focus selected\" >> focus on \"selected\". e.g. \"list\" will list selected items from now on"
+            }),
+    /**
+     * The List.
+     */
+    LIST(
+            "list",
+            "Print a list of tasks/modules depending on the current Focus",
+            new String[]{
+                "list",
+                "list date [asc / desc / spec \"date\"(any common date format)]"
+            },
+            new String[]{
+                "1. \"list\" >> list all added tasks",
+                "2. \"list date asc\" >> list tasks with a \"date\" field in ascending order",
+                "3. \"list date spec Oct 5 2020\" >> list tasks with specific \"date\" field of Oct 5 2020"
             }),
     /**
      * The Todo.
@@ -183,8 +182,8 @@ public enum HelpText {
                 "region: i(item list), s(selection), a(all, default)"
             },
             new String[]{
-                "1. \"next\" >> switch both item list and selection region to the next page (default)",
-                "2. \"next s\" >> switch only the selection region to the next page"
+                "1. \"next\" >> switch both item list (top) and selection (bottom) region to the next page (default)",
+                "2. \"next s\" >> switch only the selection (bottom) region to the next page"
             }),
     /**
      * The Prev.
@@ -194,11 +193,11 @@ public enum HelpText {
             "Switch the target region to the previous page, keeping other regions unchanged.",
             new String[]{
                 "prev [region]",
-                "region: i(items, default), s(selection), a(all)"
+                "region: i(items), s(selection), a(all, default)"
             },
             new String[]{
-                "1. \"prev\" >> switch item list to the previous page (default)",
-                "2. \"prev s\" >> switch the selection to the previous page"
+                "1. \"prev\" >> switch both item list (top) and selection (bottom) to the previous page (default)",
+                "2. \"prev s\" >> switch the selection (bottom) to the previous page"
             }),
     /**
      * The Fancy.
@@ -229,34 +228,71 @@ public enum HelpText {
      */
     SEL(
             "sel",
-            "Make selection: Add specified items to the selection. If no target is specified, print help.",
+            "Make selection: Add specified item(s) to the selection.",
             new String[]{
-                "sel [-option] [target(s)]",
-                "option: {-s(single, default), -m(multiple), -help}"
+                "sel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
             },
             new String[]{
-                "1. \"sel CS2113T\" >> add the item CS2113T on the item list to the selection",
-                "2. \"sel -m CS1010 CS2113\" >> add the multiple items: "
-                        + "CS1010 and CS2113 on the item list to the selection",
-                "3. \"sel -help\" >> print the detailed help text for the \"sel\" command"
+                "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
+                "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
+                "2. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
+            }),
+    /**
+     * The Unsel.
+     */
+    UNSEL(
+            "unsel",
+            "Cancel selection: Make specified item(s) no longer selected.",
+            new String[]{
+                "unsel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
+            },
+            new String[]{
+                "1. \"unsel 1 2 3\" >> make items with indices 1, 2and 3 no longer selected",
+                "2. \"unsel CS1010 CS2113\" >> make modules CS1010 and CS2113 no longer selected",
+                "2. \"unsel 5 CS2113\" >> make the item with index 5 and module CS2113 no longer selected"
             }),
     /**
      * The Add.
      */
     ADD(
             "add",
-            "Add item(s): Add specified item(s) to item list. If item already exists, update it.",
+            "Add task(s) to module(s): Add specified task(s) to specified module(s).",
             new String[]{
-                "add [-option] [-type] [target(s)] {[-type] [target(s)] ...}",
-                "option: {-s(single, default), -m(multiple), -help}",
-                "type: {-mod, -task, -help(default)}"
+                "add -task [index(es)] -mod [module code(s)]",
             },
             new String[]{
-                "1. \"add -mod CS2113T\" >> add a single module CS2113T to item list",
-                "2. \"add -task deadline\" >> add a single task deadline to the item list",
-                "3. \"add -m -mod M1 M2 -task T1 T2 \" >> add multiple items: "
-                        + "modules M1, M2 and tasks T1, T2 to the item list",
-                "4. \"add -help\" >> print the detailed help text for the \"add\" command"
+                "1. \"add -task 1 2 -mod CS2113 CS2113T \" >> add task 1 and task 2 in the current list to "
+                        + "the modules CS2113 and CS2113T",
+            }),
+    /**
+     * The Take.
+     */
+    TAKE(
+            "take",
+            "Take module(s): Mark specified module(s) as taken.",
+            new String[]{
+                "take [index(es) / module code(s) (for modules only)]",
+            },
+            new String[]{
+                "1. \"take\" >> if there is any module selected but not taken, mark it as taken",
+                "2. \"take 1 2\" >> mark module 1 and module 2 as taken",
+                "3. \"take CS2113T\" >> mark module CS2113T as taken",
+                "4. \"take 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as taken",
+            }),
+    /**
+     * The Untake.
+     */
+    UNTAKE(
+            "untake",
+            "Untake module(s): Mark specified module(s) as not taken.",
+            new String[]{
+                "untake [index(es) / module code(s) (for modules only)]",
+            },
+            new String[]{
+                "1. \"untake\" >> if there is any module selected but not taken, mark it as not taken",
+                "2. \"untake 1 2\" >> mark module 1 and module 2 as not taken",
+                "3. \"untake CS2113T\" >> mark module CS2113T as not taken",
+                "4. \"untake 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as not taken"
             }),
     /**
      * The Mc.
@@ -273,24 +309,19 @@ public enum HelpText {
                 "1. \"mc\" >> print the total number of MCs currently taking",
                 "2. \"mc -p\" >> print the total number of MCs in the selection region",
                 "3. \"mc -p -d \" >> print the detailed MC composition of the selection region",
-                "4. \"mc -help\" >> print the detailed help text for the \"mc\" command"
             }),
     /**
      * The Mc.
      */
     DETAIL(
             "detail",
-            "Print Details: Print the number of MCs based on selected option.",
+            "Print Details: Print the details of a specified module.",
             new String[]{
-                "detail [-option] [-detail]",
-                "option: {-mod -task -cmd(commands) -all -help(default)}",
-                "detail: {-all(total, default), -sel(detailed)}"
+                "detail [module code / index]",
             },
             new String[]{
-                "1. \"detail -mod CS2113\" >> print the detail of CS2113 in the item list region",
-                "2. \"detail -task Exam\" >> print the detail of Exam in the item list region\n",
-                "3. \"detail -cmd edit\" >> prints the usage of \"edit\" command in the command I/O region\n",
-                "4. \"detail -help\" >> prints the usage of \"detail\" command in the command I/O region"
+                "1. \"detail 1\" >> print the detail of module 1 in the list",
+                "2. \"detail CS2113T\" >> print the detail of module CS2113T",
             }),
     /**
      * Help commands for CAP.
@@ -303,25 +334,10 @@ public enum HelpText {
                 "option: {-u(user, default), -m(multiple/custom modules), -help}"
             },
             new String[]{
-                "1. \"cap\" >> calculate user CAP from their past data",
+                "1. \"cap\" >> calculate user CAP from their taken modules",
                 "2. \"cap -m M1 G1 M2 G2 \" >> calculate cap based on input modules: "
                         + "modules M1 with grade G1, module M2 with grade G2 correspondingly.",
-                "3. \"cap -help\" >> print the detailed help text for the \"cap\" command"
             }),
-    /*LIST(
-            "list",
-            "List items: print the list of items in the list region.",
-            new String[]{
-                "list [-option] [-range]",
-                "option: {-mod, -task, -cmd(commands), -all, -help(default)}",
-                "range: {-all(default), -sel(selected)}"
-            },
-            new String[]{
-                "1. \"list -mod -all\" >> list all modules available",
-                "2. \"list -task -sel\" >> list selected tasks",
-                "3. \"list -cmd\" >> list all possible commands",
-                "4. \"list -help\" >> print the detailed help text for the \"list\" command"
-            })*/
     ;
 
     /**
