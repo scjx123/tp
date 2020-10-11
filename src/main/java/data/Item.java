@@ -174,6 +174,6 @@ public class Item {
     }
 
     public String getDetails() {
-        return toString();
+        return toString().concat(isSelected ? " Selected" : "");
     }
 }

@@ -3,7 +3,6 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 import data.Data;
-import exceptions.ModuleNotFoundException;
 
 /**
  * The type Action.
@@ -53,20 +52,6 @@ public class Action {
      * @throws Exception the exception
      */
     public void prepare(ParamNode args) throws Exception {
-        this.args = args;
-        flattenedArgs = new ParamNode[0];
-        if (args.thisData != null) {
-            flattenedArgs = args.thisData.flatten().toArray(flattenedArgs);
-        }
-    }
-
-    /**
-     * Prepare parameters for task to act.
-     *
-     * @param args the args
-     * @throws Exception the exception
-     */
-    public void checkError(ParamNode args,Data data) throws ModuleNotFoundException {
         this.args = args;
         flattenedArgs = new ParamNode[0];
         if (args.thisData != null) {
