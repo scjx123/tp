@@ -5,6 +5,7 @@ import data.jobs.Task;
 
 import java.util.ArrayList;
 
+
 /**
  * The type Single module.
  */
@@ -35,6 +36,8 @@ public class SingleModule extends Item {
 
     public boolean isTaken;
 
+    public String grade;
+
     /**
      * Instantiates a new Single module.
      *
@@ -54,7 +57,7 @@ public class SingleModule extends Item {
         taskList = new ArrayList<>();
     }
 
-
+    boolean isSelected = false;
 
     @Override
     public String getName() {

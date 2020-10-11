@@ -6,6 +6,9 @@ import data.Item;
 import data.SingleModule;
 import exceptions.ItemNotSpecifiedException;
 
+/**
+ * The type Select action.
+ */
 public class SelectAction extends TakeAction {
 
     @Override

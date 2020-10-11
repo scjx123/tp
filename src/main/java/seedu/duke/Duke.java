@@ -67,6 +67,7 @@ public class Duke {
      * Run.
      */
     public void run() {
+        ui.showReminder(data);
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -90,11 +91,12 @@ public class Duke {
     }
 
     /**
-     * Test.
+     * Execute JUnit test with output.
+     *
      * @param command Command of user
-     * @return
+     * @return Duke's response
      */
-    public String testSut(String command) {
+    public String testOutputSut(String command) {
         try {
             String fullCommand = command;
             ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
@@ -102,7 +104,32 @@ public class Duke {
                 c.execute(data);
                 reattachUI(c.isFancy(), c.isPlain());
                 ui.update(c.result, data);
-                storage.saveTasks(data.tasks);
+                // uncomment when want to test for storage only
+                // storage.saveTasks(data.tasks);
+                return c.result;
+            }
+        } catch (Exception e) {
+            String message = e.getMessage();
+            if (message == null) {
+                message = Constants.INDEX_OUT;
+            }
+            ui.showText(message);
+        }
+        return "0";
+    }
+
+    /**
+     * Execution command for JUnit tests.
+     *
+     * @param command Command of user
+     * @return Duke's response
+     */
+    public String testExecuteSut(String command) {
+        try {
+            String fullCommand = command;
+            ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
+            for (Command c : commands) {
+                c.execute(data);
                 return c.result;
             }
         } catch (Exception e) {
