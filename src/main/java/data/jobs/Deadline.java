@@ -27,7 +27,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String byTime = getDateTimeString(by);
-        return Constants.DDL_ICON + super.toString() + " (by: " + byTime + ")";
+        if (isWeekly) {
+            return Constants.DDL_ICON + super.toString() + " (by: " + byTime + ")" + " Weekly";
+        } else {
+            return Constants.DDL_ICON + super.toString() + " (by: " + byTime + ")";
+        }
     }
 
 }
