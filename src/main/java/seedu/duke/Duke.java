@@ -67,6 +67,7 @@ public class Duke {
      * Run.
      */
     public void run() {
+        ui.showReminder(data);
         boolean isExit = false;
         while (!isExit) {
             try {
