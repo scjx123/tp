@@ -1,8 +1,8 @@
 package command.action;
 
 import command.ParamNode;
-import data.TaskList;
-import jobs.Deadline;
+import data.Data;
+import data.jobs.Deadline;
 
 /**
  * The type Deadline action.
@@ -13,11 +13,11 @@ public class DeadlineAction extends Action {
     private String by;
 
     @Override
-    public String act(TaskList tasks) {
-        String result = super.act(tasks);
+    public String act(Data data) throws Exception {
+        String result = super.act(data);
         Deadline ddl = new Deadline(description, by);
-        tasks.tasks.add(ddl);
-        return replaceStrings(result, ddl.toString(), tasks.tasks.size());
+        data.addTask(ddl);
+        return replaceStrings(result, ddl.toString(), data.tasks.size());
     }
 
     @Override

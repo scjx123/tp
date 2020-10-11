@@ -1,7 +1,8 @@
 package visualize;
 
 import constants.Constants;
-import data.TaskList;
+import data.Data;
+import data.Item;
 import messages.MessageOptions;
 
 import java.io.InputStream;
@@ -57,7 +58,7 @@ public class FancyCli extends Cli {
      */
     public void initializeList() {
         bmpList.flush(listBackground);
-        bmpList.drawLine(0, 0, maxX, 0, "Welcome to DomSun! This is the item list.",
+        bmpList.drawLine(0, 0, maxX, 0, Constants.INIT_LIST,
                 Color.DarkGreen, Color.White, false);
     }
 
@@ -77,7 +78,7 @@ public class FancyCli extends Cli {
      */
     public void initializeSel() {
         bmpSel.flush(selBackground);
-        bmpSel.drawLine(0, 0, maxX, 0, "This is the selection list.",
+        bmpSel.drawLine(0, 0, maxX, 0, Constants.INIT_SEL,
                 Color.LightCyan, Color.Black, false);
     }
 
@@ -110,8 +111,7 @@ public class FancyCli extends Cli {
         bmpList.drawSprite(78, Constants.BANNER, 1, 1, Sprite.S, foreground, foreground);
         bmpList.drawSprite(84, Constants.BANNER, 1, 1, Sprite.u, foreground, foreground);
         bmpList.drawSprite(90, Constants.BANNER, 1, 1, Sprite.n, foreground, foreground);
-        stream.print(bmpList.get());
-        stream.print(bmpSel.get());
+        draw();
     }
 
     /**
@@ -221,7 +221,6 @@ public class FancyCli extends Cli {
                 break;
             }
         }
-        draw();
     }
 
     @Override
@@ -233,19 +232,25 @@ public class FancyCli extends Cli {
      * Update.
      *
      * @param input         the input
-     * @param tasks         the tasks
+     * @param data         the data
      */
-    public void update(String input, TaskList tasks) {
+    public void update(String input, Data data) {
         if (freshlySwitched) {
-            String replay = tasks.lastInput;
-            MessageOptions replayOption = tasks.lastIndexOption;
+            String replay = data.lastInput;
+            MessageOptions replayOption = data.lastIndexOption;
             if (replay == null || replay.equals(Constants.ZERO_LENGTH_STRING)) {
                 showWelcome();
             } else {
                 boolean displayMode = replayOption != MessageOptions.NOT_INDEXED;
                 separatePages(replay, displayMode);
                 fixIndex();
+                if (displayMode) {
+                    initializeSel();
+                } else {
+                    refreshList(data);
+                }
                 showText(getShownText(displayMode), displayMode, replayOption);
+                draw();
             }
             freshlySwitched = false;
             return;
@@ -254,19 +259,38 @@ public class FancyCli extends Cli {
             showText(Constants.ZERO_LENGTH_STRING);
         } else if (input.contains(Constants.BMP_LIST_SWITCH) || input.contains(Constants.BMP_SEL_SWITCH)) {
             flipPage(input);
-            if (!tasks.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
-                boolean displayMode = tasks.indexOption != MessageOptions.NOT_INDEXED;
-                showText(getShownText(displayMode), displayMode, tasks.indexOption);
+            if (!data.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
+                showText(getShownText(true), true, MessageOptions.INDEXED_NUM);
+                showText(getShownText(false), false, MessageOptions.NOT_INDEXED);
             }
         } else {
-            boolean displayMode = tasks.indexOption != MessageOptions.NOT_INDEXED;
+            boolean displayMode = data.indexOption != MessageOptions.NOT_INDEXED;
+            if (!displayMode) {
+                refreshList(data);
+            }
             separatePages(input, displayMode);
             fixIndex();
-            showText(getShownText(displayMode), displayMode, tasks.indexOption);
-            tasks.lastInput = input;
-            tasks.lastIndexOption = tasks.indexOption;
+            showText(getShownText(displayMode), displayMode, data.indexOption);
+            data.lastInput = input;
+            data.lastIndexOption = data.indexOption;
         }
-        tasks.indexOption = MessageOptions.NOT_INDEXED;
+        data.indexOption = MessageOptions.NOT_INDEXED;
+        draw();
+    }
+
+    private void refreshList(Data data) {
+        if (listString != null && listString.length > 0) {
+            StringBuilder refreshBuilder = new StringBuilder(listString[0].split(Constants.WIN_NEWLINE)[0]);
+            refreshBuilder.append(Constants.WIN_NEWLINE);
+            for (Item item : data.target) {
+                refreshBuilder.append(item.toString()).append(Constants.WIN_NEWLINE);
+            }
+            separatePages(refreshBuilder.toString(), true);
+            fixIndex();
+            showText(getShownText(true), true, MessageOptions.INDEXED_NUM);
+        } else {
+            initializeList();
+        }
     }
 
     private void flipPage(String input) {
@@ -358,8 +382,9 @@ public class FancyCli extends Cli {
         StringBuilder[] builders = new StringBuilder[groups];
         String heading = strings[0];
         for (int i = 0; i < groups; i++) {
-            builders[i] = new StringBuilder(heading).append(Constants.SPACE).append(
-                    Constants.PARAM_LEFT).append(i + 1).append(Constants.PARAM_RIGHT).append(Constants.WIN_NEWLINE);
+            String bracket = Constants.SPACE + Constants.PARAM_LEFT + (i + 1) + Constants.PARAM_RIGHT;
+            builders[i] = new StringBuilder(heading.replace(bracket, Constants.ZERO_LENGTH_STRING)).append(
+                    bracket).append(Constants.WIN_NEWLINE);
         }
         for (int i = 1; i < strings.length; i++) {
             int currentGroup = (i - 1) / groupLength;

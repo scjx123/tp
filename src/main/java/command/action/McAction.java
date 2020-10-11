@@ -2,8 +2,10 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
+import data.Item;
 import data.SingleModule;
-import data.TaskList;
+import data.Data;
+import exceptions.CommandException;
 
 import java.util.ArrayList;
 
@@ -15,27 +17,31 @@ public class McAction extends Action {
     private String userInput = "";
 
     @Override
-    public String act(TaskList tasks) {
+    public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.MC_HEAD);
-        ArrayList<SingleModule> moduleList = new ArrayList<>(tasks.mods);
+        ArrayList<Item> moduleList = new ArrayList<>(data.mods);
         if (isBoth) {
-            for (SingleModule m : moduleList) {
+            for (Item item : moduleList) {
+                SingleModule m = (SingleModule)item;
                 builder.append(m.getModuleMC().trim()).append(Constants.WIN_NEWLINE);
             }
         } else if (isSelect) {
             int selectionSum = 0;
-            for (SingleModule m : moduleList) {
+            for (Item item : moduleList) {
+                SingleModule m = (SingleModule)item;
                 selectionSum += Integer.parseInt(m.getModuleMC().trim());
             }
             builder.append(selectionSum).append(Constants.WIN_NEWLINE); //build a string
 
         } else if (isDetail) {
-            for (SingleModule m : moduleList) {
+            for (Item item : moduleList) {
+                SingleModule m = (SingleModule)item;
                 builder.append(m.getModuleMC().trim()).append(Constants.WIN_NEWLINE);
             }
         } else {
             int sum = 0;
-            for (SingleModule m : moduleList) {
+            for (Item item : moduleList) {
+                SingleModule m = (SingleModule)item;
                 sum += Integer.parseInt(m.getModuleMC().trim());
             }
             builder.append(sum).append(Constants.WIN_NEWLINE); //build a string
@@ -66,7 +72,7 @@ public class McAction extends Action {
                         isBoth = true;
                         userInput = "";
                     } else {
-                        throw new Exception();
+                        throw new CommandException();
                     }
                 } else {
                     isSelect = true;
@@ -75,7 +81,7 @@ public class McAction extends Action {
                 }
             } else if (userInput.equals(detail)) {
                 if (len > 1) {
-                    throw new Exception();
+                    throw new CommandException();
                 }
                 isDetail = true;
                 isSelect = false;
@@ -83,7 +89,7 @@ public class McAction extends Action {
                 userInput = "";
 
             } else {
-                throw new Exception();
+                throw new CommandException();
             }
         }
     }

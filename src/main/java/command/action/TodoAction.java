@@ -1,8 +1,8 @@
 package command.action;
 
 import command.ParamNode;
-import data.TaskList;
-import jobs.ToDo;
+import data.Data;
+import data.jobs.ToDo;
 
 /**
  * The type Todo action.
@@ -12,11 +12,11 @@ public class TodoAction extends Action {
     private String description;
 
     @Override
-    public String act(TaskList tasks) {
-        String result = super.act(tasks);
+    public String act(Data data) throws Exception {
+        String result = super.act(data);
         ToDo todo = new ToDo(description);
-        tasks.tasks.add(todo);
-        return replaceStrings(result, todo.toString(), tasks.tasks.size());
+        data.addTask(todo);
+        return replaceStrings(result, todo.toString(), data.tasks.size());
     }
 
     @Override

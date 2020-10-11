@@ -1,7 +1,7 @@
 package command.action;
 
 import constants.Constants;
-import data.TaskList;
+import data.Data;
 
 /**
  * The type Fancy action.
@@ -13,11 +13,6 @@ public class FancyAction extends Action {
      */
     public FancyAction() {
         super();
-    }
-
-    @Override
-    public String act(TaskList tasks) {
-        return Constants.WELCOME;
     }
 
 }

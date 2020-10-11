@@ -1,6 +1,6 @@
 package command.action;
 
-import data.TaskList;
+import data.Data;
 
 /**
  * The type Clear action.
@@ -8,9 +8,9 @@ import data.TaskList;
 public class ClearAction extends Action {
 
     @Override
-    public String act(TaskList tasks) {
-        tasks.tasks.clear();
-        return super.act(tasks);
+    public String act(Data data) throws Exception {
+        data.getTarget().clear();
+        return super.act(data);
     }
 
 }

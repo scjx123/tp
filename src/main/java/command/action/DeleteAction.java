@@ -2,8 +2,8 @@ package command.action;
 
 import command.ParamNode;
 import constants.Constants;
-import data.TaskList;
-import jobs.Task;
+import data.Data;
+import data.Item;
 
 /**
  * The type Delete action.
@@ -13,14 +13,14 @@ public class DeleteAction extends Action {
     private int index;
 
     @Override
-    public String act(TaskList tasks) {
-        if (index < 0 || index >= tasks.tasks.size()) {
+    public String act(Data data) throws Exception {
+        if (index < 0 || index >= data.target.size()) {
             return Constants.INDEX_OUT;
         }
-        Task task = tasks.get(index);
-        String result = super.act(tasks);
-        tasks.tasks.remove(task);
-        return replaceStrings(result, task.toString(), tasks.tasks.size());
+        Item item = data.get(index);
+        String result = super.act(data);
+        data.removeItem(index);
+        return replaceStrings(result, item.toString(), data.tasks.size());
     }
 
     @Override

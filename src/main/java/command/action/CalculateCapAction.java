@@ -3,11 +3,14 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 
+import data.Item;
 import data.SingleModule;
-import data.TaskList;
+import data.Data;
+import exceptions.GradeNotSpecifiedException;
 import exceptions.ModuleNotFoundException;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,19 +19,37 @@ import java.util.Map;
  */
 public class CalculateCapAction extends Action {
 
-    private final HashMap<SingleModule, Double> modulesWithGrades = new HashMap<>();
-
+    private HashMap<String, Double> modulesWithGrades = new HashMap<>();
     private double capValue = 0;
+    private boolean isCustom = true;
 
     @Override
-    public String act(TaskList tasks) {
+    public String act(Data data) throws Exception {
         double totalScore = 0;
         double totalMC = 0;
-        for (Map.Entry<SingleModule, Double> m : modulesWithGrades.entrySet()) {
-            Double grade = m.getValue();
-            SingleModule module = m.getKey();
-            totalMC += Double.parseDouble(module.getModuleMC());
-            totalScore += Double.parseDouble(module.getModuleMC()) * grade;
+        if (isCustom) {
+            for (Map.Entry<String, Double> m : modulesWithGrades.entrySet()) {
+                Double grade = m.getValue();
+                String moduleCode = m.getKey();
+                SingleModule module = matchModule(moduleCode, data.mods);
+                if (module == null) {
+                    throw new ModuleNotFoundException();
+                }
+                totalMC += Double.parseDouble(module.getModuleMC());
+                totalScore += Double.parseDouble(module.getModuleMC()) * grade;
+            }
+        } else {
+            for (Item item : data.mods) {
+                SingleModule module = (SingleModule) item;
+                if (module.isTaken) {
+                    if (module.grade == null) {
+                        throw new GradeNotSpecifiedException();
+                    }
+                    Double gradeValue = numerateGrade(module.grade.toUpperCase());
+                    totalMC += Double.parseDouble(module.getModuleMC());
+                    totalScore += Double.parseDouble(module.getModuleMC()) * gradeValue;
+                }
+            }
         }
 
         capValue = totalScore / totalMC;
@@ -44,26 +65,35 @@ public class CalculateCapAction extends Action {
         currData = flattenedArgs[0];
         //input custom modules
         if (flattenedArgs[0].name.equals("m")) {
+            isCustom = true;
             while (currData.thisData != null) {
                 SingleModule module;
                 String moduleCode = currData.thisData.name.toUpperCase();
                 Double grade = numerateGrade(currData.thisData.thisData.name.toUpperCase());
-                module = matchModule(moduleCode);
-                modulesWithGrades.put(module, grade);
+                modulesWithGrades.put(moduleCode, grade);
                 currData = currData.thisData.thisData;
             }
         } else {
             // retrieve module data from user data
+            isCustom = false;
         }
     }
 
-    private SingleModule matchModule(String moduleCode) throws ModuleNotFoundException {
-        for (SingleModule module : TaskList.mods) {
+    /**
+     * Match module code to module.
+     *
+     * @param moduleCode input module code
+     * @param mods module list
+     * @return module selected
+     */
+    private SingleModule matchModule(String moduleCode, ArrayList<Item> mods) {
+        for (Item item : mods) {
+            SingleModule module = (SingleModule) item;
             if (moduleCode.equals(module.getName())) {
                 return module;
             }
         }
-        throw new ModuleNotFoundException();
+        return null;
     }
 
     /**
