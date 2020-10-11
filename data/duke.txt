@@ -1,7 +1,7 @@
-[E][X] test3 (at: Jan 01 2021 00:00)
-[D][X] eat1 (by: Dec 12 2020 18:30)
-[D][X] eat2 (by: Dec 12 2020 18:30)
-[E][X] test (at: May 05 2021 00:00)
+[E][X] test3 (at: Jan 01 2021 00:00) Weekly
+[D][X] eat1 (by: Dec 12 2020 18:30) Weekly
+[D][X] eat2 (by: Dec 12 2020 18:30) Weekly
+[E][X] test (at: May 05 2021 00:00) Weekly
 [T][X] abs
 [T][X] test
 [T][X] a
@@ -9,5 +9,8 @@
 [T][X] def
 [T][X] abc
 [T][X] def
+[T][X] abc
+[T][X] def
+[D][X] CS2113 Assignment (by: Oct 17 2020 09:00) Weekly
 [T][X] abc
 [T][X] def

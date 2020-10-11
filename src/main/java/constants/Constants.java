@@ -374,7 +374,7 @@ public class Constants {
      */
     public static final String NO_MODULE = "Sorry, no such module in the list!" + WIN_NEWLINE;
     /**
-     * The constant ITEM_EXIST
+     * The constant ITEM_EXIST.
      */
     public static final String ITEM_EXIST = "Sorry, this item is already in your list!" + WIN_NEWLINE;
     /**
