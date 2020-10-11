@@ -1,5 +1,6 @@
 package visualize;
 
+import command.action.ReminderAction;
 import constants.Constants;
 import data.SingleModule;
 import data.Data;
@@ -88,5 +89,11 @@ public class UI {
         freshlySwitched = true;
     }
 
-
+    /**
+     * Shows Reminder.
+     * @param data the data
+     */
+    public void showReminder(Data data) {
+        update(new ReminderAction().act(data), data);
+    }
 }
