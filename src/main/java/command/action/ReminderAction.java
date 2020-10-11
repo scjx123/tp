@@ -3,11 +3,15 @@ package command.action;
 import constants.Constants;
 import data.Data;
 import data.Item;
+import messages.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.time.LocalDateTime;
 
+/**
+ * The type Reminder Tasks Action.
+ */
 public class ReminderAction extends Action {
 
     @Override
@@ -34,6 +38,9 @@ public class ReminderAction extends Action {
 
         for (Item item : tasks) {
             builder.append(item.toString()).append(Constants.WIN_NEWLINE);
+        }
+        if (builder.toString().equals(Constants.ZERO_LENGTH_STRING)) {
+            builder.append(Constants.NO_URGENT_TASKS);
         }
 
         data.setFlag(flag);
