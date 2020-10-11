@@ -25,6 +25,8 @@ import command.action.TakeAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
 import command.action.UnknownAction;
+import command.action.UnselectAction;
+import command.action.UntakeAction;
 
 import java.util.Map;
 
@@ -287,6 +289,8 @@ public class Constants {
      */
     public static final String MC = "mc";
     public static final String TAKE = "take";
+    public static final String UNSEL = "unsel";
+    public static final String UNTAKE = "untake";
     /**
      * The constant DETAIL.
      */
@@ -357,9 +361,11 @@ public class Constants {
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all tasks:" + WIN_NEWLINE;
     public static final String MOD_NOT_FOUND =
-            "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
+        "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
+    public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
+        + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
@@ -368,7 +374,7 @@ public class Constants {
      * The constant UNIDENTIFIED_TYPE.
      */
     public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
-            + WIN_NEWLINE;
+        + WIN_NEWLINE;
     /**
      * The constant DETAIL.
      */
@@ -502,7 +508,9 @@ public class Constants {
             Map.entry(FANCY, new FancyAction()),
             Map.entry(PLAIN, new PlainAction()),
             Map.entry(TAKE, new TakeAction()),
-            Map.entry(SEL, new SelectAction()));
+            Map.entry(SEL, new SelectAction()),
+            Map.entry(UNSEL, new UnselectAction()),
+            Map.entry(UNTAKE, new UntakeAction()));
     /**
      * The constant helpMap.
      */
@@ -529,7 +537,9 @@ public class Constants {
             Map.entry(DETAIL,HelpText.DETAIL),
             Map.entry(TAKE, HelpText.TAKE),
             Map.entry(ADD, HelpText.ADD),
-            Map.entry(SEL, HelpText.SEL));
+            Map.entry(SEL, HelpText.SEL),
+            Map.entry(UNSEL, HelpText.UNSEL),
+            Map.entry(UNTAKE, HelpText.UNTAKE));
     /**
      * The constant paramMap.
      */
@@ -576,5 +586,8 @@ public class Constants {
             Map.entry(TAKE, "I have marked these modules as taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(ADD, "I have added the specified tasks to the specified modules."
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
+            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(DETAIL, DETAIL_HEAD + TEXT_PLACEHOLDER),
+            Map.entry(UNSEL, "I have un-selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNTAKE, "I have marked these modules as not taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
 }

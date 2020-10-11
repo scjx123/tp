@@ -6,6 +6,8 @@ import constants.Constants;
 import data.Item;
 import data.SingleModule;
 import data.Data;
+import exceptions.GradeNotSpecifiedException;
+import exceptions.ModuleNotFoundException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -19,20 +21,35 @@ public class CalculateCapAction extends Action {
 
     private HashMap<String, Double> modulesWithGrades = new HashMap<>();
     private double capValue = 0;
+    private boolean isCustom = true;
 
     @Override
     public String act(Data data) throws Exception {
         double totalScore = 0;
         double totalMC = 0;
-        for (Map.Entry<String, Double> m : modulesWithGrades.entrySet()) {
-            Double grade = m.getValue();
-            String moduleCode = m.getKey();
-            SingleModule module = matchModule(moduleCode, data.mods);
-            if (module == null) {
-                continue;
+        if (isCustom) {
+            for (Map.Entry<String, Double> m : modulesWithGrades.entrySet()) {
+                Double grade = m.getValue();
+                String moduleCode = m.getKey();
+                SingleModule module = matchModule(moduleCode, data.mods);
+                if (module == null) {
+                    throw new ModuleNotFoundException();
+                }
+                totalMC += Double.parseDouble(module.getModuleMC());
+                totalScore += Double.parseDouble(module.getModuleMC()) * grade;
             }
-            totalMC += Double.parseDouble(module.getModuleMC());
-            totalScore += Double.parseDouble(module.getModuleMC()) * grade;
+        } else {
+            for (Item item : data.mods) {
+                SingleModule module = (SingleModule) item;
+                if (module.isTaken) {
+                    if (module.grade == null) {
+                        throw new GradeNotSpecifiedException();
+                    }
+                    Double gradeValue = numerateGrade(module.grade.toUpperCase());
+                    totalMC += Double.parseDouble(module.getModuleMC());
+                    totalScore += Double.parseDouble(module.getModuleMC()) * gradeValue;
+                }
+            }
         }
         capValue = totalScore / totalMC;
         return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
@@ -47,6 +64,7 @@ public class CalculateCapAction extends Action {
         currData = flattenedArgs[0];
         //input custom modules
         if (flattenedArgs[0].name.equals("m")) {
+            isCustom = true;
             while (currData.thisData != null) {
                 SingleModule module;
                 String moduleCode = currData.thisData.name.toUpperCase();
@@ -56,6 +74,7 @@ public class CalculateCapAction extends Action {
             }
         } else {
             // retrieve module data from user data
+            isCustom = false;
         }
     }
 

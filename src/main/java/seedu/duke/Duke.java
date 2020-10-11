@@ -90,11 +90,12 @@ public class Duke {
     }
 
     /**
-     * Test.
+     * Execute JUnit test with output.
+     *
      * @param command Command of user
-     * @return
+     * @return Duke's response
      */
-    public String testSut(String command) {
+    public String testOutputSut(String command) {
         try {
             String fullCommand = command;
             ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
@@ -102,7 +103,32 @@ public class Duke {
                 c.execute(data);
                 reattachUI(c.isFancy(), c.isPlain());
                 ui.update(c.result, data);
-                storage.saveTasks(data.tasks);
+                // uncomment when want to test for storage only
+                // storage.saveTasks(data.tasks);
+                return c.result;
+            }
+        } catch (Exception e) {
+            String message = e.getMessage();
+            if (message == null) {
+                message = Constants.INDEX_OUT;
+            }
+            ui.showText(message);
+        }
+        return "0";
+    }
+
+    /**
+     * Execution command for JUnit tests.
+     *
+     * @param command Command of user
+     * @return Duke's response
+     */
+    public String testExecuteSut(String command) {
+        try {
+            String fullCommand = command;
+            ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
+            for (Command c : commands) {
+                c.execute(data);
                 return c.result;
             }
         } catch (Exception e) {
@@ -132,7 +158,7 @@ public class Duke {
         // However, no matter what mode it starts in, I have created switching commands.
         // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
-        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
+        //boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        //new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
     }
 }
