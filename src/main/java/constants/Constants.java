@@ -366,9 +366,11 @@ public class Constants {
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all tasks:" + WIN_NEWLINE;
     public static final String MOD_NOT_FOUND =
-            "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
+        "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
+    public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
+        + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
@@ -381,7 +383,7 @@ public class Constants {
      * The constant UNIDENTIFIED_TYPE.
      */
     public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
-            + WIN_NEWLINE;
+        + WIN_NEWLINE;
     /**
      * The constant DETAIL.
      */

@@ -35,6 +35,8 @@ public class SingleModule extends Item {
 
     public boolean isTaken;
 
+    public String grade;
+
     /**
      * Instantiates a new Single module.
      *
