@@ -147,6 +147,7 @@ public class Item {
         dateTime = parseDateTime(date);
         isDated = dateTime != null;
         isWeekly = WeeklyFlag;
+        WeeklyFlag = false;
     }
 
     /**
