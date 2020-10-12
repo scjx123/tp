@@ -9,6 +9,9 @@ import exceptions.CommandException;
 
 import java.util.ArrayList;
 
+/**
+ * The type Take action.
+ */
 public class TakeAction extends Action {
     protected ArrayList<Integer> indices;
     protected ArrayList<String> codes;
