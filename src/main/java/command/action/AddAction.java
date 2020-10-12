@@ -9,8 +9,6 @@ import data.jobs.Task;
 import exceptions.CommandException;
 import exceptions.ModuleNotFoundException;
 import exceptions.TaskNotSpecifiedException;
-
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 

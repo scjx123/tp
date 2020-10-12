@@ -388,7 +388,10 @@ public class Constants {
      * The constant DETAIL.
      */
     public static final String NO_MODULE = "Sorry, no such module in the list!" + WIN_NEWLINE;
-
+    /**
+     * The constant ITEM_EXIST.
+     */
+    public static final String ITEM_EXIST = "Sorry, this item is already in your list!" + WIN_NEWLINE;
     /**
      * The constant FOCUS_HELP.
      */
@@ -399,6 +402,10 @@ public class Constants {
      * The constant CONTEXT_MSG.
      */
     public static final String CONTEXT_MSG = "Changing context to ";
+    /**
+     * The constant ADD_HEAD.
+     */
+    public static final String ADD_HEAD = "I've added this module to your list:" + WIN_NEWLINE;
     /**
      * The constant LIST_HEAD.
      */
@@ -504,6 +511,7 @@ public class Constants {
             Map.entry(DONE, new DoneAction()),
             Map.entry(EVENT, new EventAction()),
             Map.entry(FIND, new FindAction()),
+            Map.entry(ADD, new AddAction()),
             Map.entry(HELP, new HelpAction()),
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
@@ -519,7 +527,6 @@ public class Constants {
             Map.entry(FANCY, new FancyAction()),
             Map.entry(PLAIN, new PlainAction()),
             Map.entry(TAKE, new TakeAction()),
-            Map.entry(ADD, new AddAction()),
             Map.entry(SEL, new SelectAction()),
             Map.entry(UNSEL, new UnselectAction()),
             Map.entry(UNTAKE, new UntakeAction()));
@@ -566,6 +573,8 @@ public class Constants {
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"p", "d"}),
+            Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
+            Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
