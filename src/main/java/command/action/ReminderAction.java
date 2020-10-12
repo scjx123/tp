@@ -41,7 +41,7 @@ public class ReminderAction extends Action {
         if (builder.toString().equals(Constants.ZERO_LENGTH_STRING)) {
             builder.append(Constants.NO_URGENT_TASKS);
         }
-
+      
         data.setFlag(flag);
         return builder.toString();
     }
