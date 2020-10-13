@@ -5,16 +5,23 @@ import constants.Constants;
 import data.Data;
 import exceptions.CommandException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * The type Focus action.
  */
 public class FocusAction extends Action {
+    private static final Logger LOGGER = Logger.getLogger(ReminderAction.class.getName());
     private String typeTask;
 
     @Override
     public String act(Data data) throws Exception {
+        LOGGER.entering(getClass().getName(), "changeFocus");
+        LOGGER.log(Level.INFO, "Type changed");
         data.setFlag(typeTask);
         String output = super.act(data);
+        LOGGER.exiting(getClass().getName(), "changeFocus");
         return output.replace(Constants.TEXT_PLACEHOLDER, typeTask);
     }
 
