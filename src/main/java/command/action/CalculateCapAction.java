@@ -24,7 +24,7 @@ public class CalculateCapAction extends Action {
 
     @Override
     public String act(Data data) throws Exception {
-        assert data == null : "No data is found";
+        assert data != null : "Data cannot be null";
         double totalScore = 0;
         double totalMC = 0;
         if (isCustom) {
@@ -52,6 +52,7 @@ public class CalculateCapAction extends Action {
             }
         }
         double capValue = totalScore / totalMC;
+        assert capValue > 0 : "CAP need to be more than zero";
         return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
     }
 
