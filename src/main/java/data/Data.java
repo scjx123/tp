@@ -134,18 +134,14 @@ public class Data {
     }
 
     public void removeItem(int index) {
-        LOGGER.entering(getClass().getName(), "removeItem");
         Item currentItem = target.get(index);
         target.remove(currentItem);
         if (currentItem instanceof SingleModule) {
             mods.remove(currentItem);
-            LOGGER.log(Level.INFO, "Module was removed to data");
         } else {
             tasks.remove(currentItem);
-            LOGGER.log(Level.INFO, "Task was removed to data");
         }
         refreshTarget();
-        LOGGER.exiting(getClass().getName(), "removeItem");
     }
 
     public void updateItem(int index, Item newItem) {
