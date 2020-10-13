@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * The type Focus action.
  */
 public class FocusAction extends Action {
-    private static final Logger LOGGER = Logger.getLogger(ReminderAction.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(FocusAction.class.getName());
     private String typeTask;
 
     @Override
