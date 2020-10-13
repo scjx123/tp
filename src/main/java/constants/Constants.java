@@ -188,9 +188,13 @@ public class Constants {
      */
     public static final String PATH = "./data";
     /**
-     * The constant FILENAME.
+     * Duke FILENAME.
      */
     public static final String FILENAME = "duke.txt";
+    /**
+     * Test Duke FILENAME.
+     */
+    public static final String TEST_FILENAME = "duke_test.txt";
 
     /**
      * The constant BYE.

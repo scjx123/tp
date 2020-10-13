@@ -29,7 +29,7 @@ public class Duke {
     /**
      * Instantiates a new Duke.
      *
-     * @param isFancy   the is fancy
+     * @param isFancy   toggle between fancy and normal layout
      * @param stream    the stream
      * @param input     the input
      * @param directory the directory
@@ -91,45 +91,26 @@ public class Duke {
     }
 
     /**
-     * Execute JUnit test with output.
+     * Execute JUnit test.
      *
-     * @param command Command of user
+     * @param command   Command of user
+     * @param isStored  determines if output will be stored in duke.txt
+     * @param isPrinted determines if output will be to console
      * @return Duke's response
      */
-    public String testOutputSut(String command) {
+    public String testSut(String command, boolean isStored, boolean isPrinted) {
         try {
             String fullCommand = command;
             ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
             for (Command c : commands) {
                 c.execute(data);
-                reattachUI(c.isFancy(), c.isPlain());
-                ui.update(c.result, data);
-                // uncomment when want to test for storage only
-                // storage.saveTasks(data.tasks);
-                return c.result;
-            }
-        } catch (Exception e) {
-            String message = e.getMessage();
-            if (message == null) {
-                message = Constants.INDEX_OUT;
-            }
-            ui.showText(message);
-        }
-        return "0";
-    }
-
-    /**
-     * Execution command for JUnit tests.
-     *
-     * @param command Command of user
-     * @return Duke's response
-     */
-    public String testExecuteSut(String command) {
-        try {
-            String fullCommand = command;
-            ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
-            for (Command c : commands) {
-                c.execute(data);
+                if (isPrinted) {
+                    reattachUI(c.isFancy(), c.isPlain());
+                    ui.update(c.result, data);
+                }
+                if (isStored) {
+                    storage.saveTasks(data.tasks);
+                }
                 return c.result;
             }
         } catch (Exception e) {
