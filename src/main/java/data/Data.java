@@ -7,6 +7,9 @@ import data.jobs.Task;
 import data.jobs.ToDo;
 import messages.MessageOptions;
 
+import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -15,20 +18,23 @@ import java.util.stream.Collectors;
  */
 public class Data {
 
+    private static final Logger LOGGER = Logger.getLogger(Data.class.getName());
+
+    private static ArrayList<Item> tempList;
     public String flag;
     /**
      * The Tasks.
      */
     public ArrayList<Item> tasks;
-
+    /**
+     * The default list of modules read in from courselist11.txt.
+     */
     public ArrayList<Item> mods;
     /**
      * The Index option.
      */
     public MessageOptions indexOption;
-
     public ArrayList<Item> target;
-
     /**
      * The Last input.
      */
@@ -37,6 +43,7 @@ public class Data {
      * The Last index option.
      */
     public MessageOptions lastIndexOption;
+    private String dataType;
 
     /**
      * Instantiates a new Task list.
@@ -81,7 +88,8 @@ public class Data {
             target = tasks.stream().filter(x -> x instanceof ToDo).collect(Collectors.toCollection(ArrayList::new));
             break;
         case Constants.MOD:
-            target = mods;
+            target = mods.stream().filter(x -> x instanceof SingleModule)
+                    .collect(Collectors.toCollection(ArrayList::new));
             break;
         case Constants.SELECTED:
             target = mods.stream().filter(x -> x.isSelected).collect(Collectors.toCollection(ArrayList::new));
@@ -89,30 +97,65 @@ public class Data {
             break;
         case Constants.TAKEN:
             target = mods.stream().filter(
-                x -> ((SingleModule)x).isTaken).collect(Collectors.toCollection(ArrayList::new));
+                x -> ((SingleModule) x).isTaken).collect(Collectors.toCollection(ArrayList::new));
+            break;
+        case Constants.FOUND: // should not refresh target.
             break;
         default:
-            target = tasks;
+            target = tasks.stream().filter(x -> x instanceof Task).collect(Collectors.toCollection(ArrayList::new));
             break;
         }
     }
 
+    private String getTaskType(Task task) {
+        if (task instanceof Deadline) {
+            return Constants.DEADLINE;
+        } else if (task instanceof Event) {
+            return Constants.EVENT;
+        }
+        return "task";
+    }
+
+
     public void addTask(Task task) {
-        tasks.add(task);
+        LOGGER.entering(getClass().getName(), "addTask");
+        tempList = new ArrayList<>(getTarget(getTaskType(task)));
+        Checker cc = new Checker(tempList, task);
+        LocalDateTime newDate = cc.checkRecurrenceDate(task);
+        if (newDate != null) {
+            task.setDateTime(newDate);
+        }
+        if (!cc.checkDuplicates()) {
+            LOGGER.log(Level.INFO, "Task was added to data");
+            tasks.add(task);
+        }
         refreshTarget();
+        LOGGER.exiting(getClass().getName(), "addTask");
     }
 
     public void removeItem(int index) {
         Item currentItem = target.get(index);
-        refreshTarget();
         target.remove(currentItem);
+        if (currentItem instanceof SingleModule) {
+            mods.remove(currentItem);
+        } else {
+            tasks.remove(currentItem);
+        }
         refreshTarget();
     }
 
     public void updateItem(int index, Item newItem) {
         Item currentItem = target.get(index);
-        refreshTarget();
         target.set(target.indexOf(currentItem), newItem);
+        if (currentItem instanceof SingleModule) {
+            if (mods.contains(currentItem)) {
+                mods.set(mods.indexOf(currentItem), newItem);
+            }
+        } else {
+            if (tasks.contains(currentItem)) {
+                tasks.set(tasks.indexOf(currentItem), newItem);
+            }
+        }
         refreshTarget();
     }
 

@@ -9,6 +9,9 @@ import exceptions.CommandException;
 
 import java.util.ArrayList;
 
+/**
+ * The type Take action.
+ */
 public class TakeAction extends Action {
     protected ArrayList<Integer> indices;
     protected ArrayList<String> codes;
@@ -17,6 +20,7 @@ public class TakeAction extends Action {
     @Override
     public String act(Data data) throws Exception {
         String flag = data.flag;
+        ArrayList<Item> targetBackup = data.target;
         StringBuilder builder = new StringBuilder();
         if (isBlind) {
             StringBuilder testContent = new StringBuilder();
@@ -38,11 +42,14 @@ public class TakeAction extends Action {
                     if (i < 0 || i > data.mods.size() - 1) {
                         throw new IndexOutOfBoundsException();
                     }
-                    if (data.mods.get(i) instanceof SingleModule) {
-                        Item module = data.mods.get(i);
+                    if (data.target.get(i) instanceof SingleModule) {
+                        Item module = data.target.get(i);
                         modifyObject(module);
                         builder.append("Module ").append(i + 1).append(": ")
                                 .append(getObjectInfo(module)).append(Constants.WIN_NEWLINE);
+                    } else {
+                        builder.append("Item ").append(i + 1).append(" is not a module, "
+                                + "therefore cannot be taken or untaken").append(Constants.WIN_NEWLINE);
                     }
                 }
             }
@@ -53,7 +60,8 @@ public class TakeAction extends Action {
                 });
             }
         }
-        data.refreshTarget(flag);
+        data.setFlag(flag);
+        data.target = targetBackup;
         String result = super.act(data);
         String execution = builder.toString();
         if (execution.equals(Constants.ZERO_LENGTH_STRING)) {

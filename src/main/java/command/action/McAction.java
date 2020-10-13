@@ -6,6 +6,7 @@ import data.Item;
 import data.SingleModule;
 import data.Data;
 import exceptions.CommandException;
+import exceptions.InvalidCommandException;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,10 @@ public class McAction extends Action {
     @Override
     public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.MC_HEAD);
-        ArrayList<Item> moduleList = new ArrayList<>(data.mods);
+        ArrayList<Item> moduleList = new ArrayList<>(data.getTarget());
+        if (moduleList.equals(data.tasks)) {
+            moduleList = new ArrayList<>(data.mods);
+        }
         if (isBoth) {
             for (Item item : moduleList) {
                 SingleModule m = (SingleModule)item;
