@@ -10,7 +10,7 @@ class ReminderActionTest {
 
     @Test
     public void act_reminderInput_testOutput() {
-        Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.FILENAME);
-        assertTrue(d.testOutputSut("reminder").contains(Constants.REMINDER_HEAD));
+        Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.TEST_FILENAME);
+        assertTrue(d.testSut("reminder", false, true).contains(Constants.REMINDER_HEAD));
     }
 }
