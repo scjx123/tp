@@ -20,11 +20,11 @@ import java.util.Map;
 public class CalculateCapAction extends Action {
 
     private HashMap<String, Double> modulesWithGrades = new HashMap<>();
+    private double capValue = 0;
     private boolean isCustom = true;
 
     @Override
     public String act(Data data) throws Exception {
-        assert data == null : "No data is found";
         double totalScore = 0;
         double totalMC = 0;
         if (isCustom) {
@@ -45,13 +45,13 @@ public class CalculateCapAction extends Action {
                     if (module.grade == null) {
                         throw new GradeNotSpecifiedException();
                     }
-                    double gradeValue = numerateGrade(module.grade.toUpperCase());
+                    Double gradeValue = numerateGrade(module.grade.toUpperCase());
                     totalMC += Double.parseDouble(module.getModuleMC());
                     totalScore += Double.parseDouble(module.getModuleMC()) * gradeValue;
                 }
             }
         }
-        double capValue = totalScore / totalMC;
+        capValue = totalScore / totalMC;
         return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
     }
 
@@ -66,6 +66,7 @@ public class CalculateCapAction extends Action {
         if (flattenedArgs[0].name.equals("m")) {
             isCustom = true;
             while (currData.thisData != null) {
+                SingleModule module;
                 String moduleCode = currData.thisData.name.toUpperCase();
                 Double grade = numerateGrade(currData.thisData.thisData.name.toUpperCase());
                 modulesWithGrades.put(moduleCode, grade);
@@ -100,8 +101,8 @@ public class CalculateCapAction extends Action {
      * @param grade grade alphabet
      * @return grade value in number
      */
-    private double numerateGrade(String grade) throws GradeNotSpecifiedException {
-        double gradeValue;
+    private double numerateGrade(String grade) {
+        double gradeValue = 0;
         switch (grade) {
         case "A+":
         case "A":
@@ -132,8 +133,11 @@ public class CalculateCapAction extends Action {
             gradeValue = 1;
             break;
         default:
-            throw new GradeNotSpecifiedException();
+            gradeValue = 0;
+            break;
         }
         return gradeValue;
     }
+
+
 }
