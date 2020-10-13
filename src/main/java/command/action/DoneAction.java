@@ -32,5 +32,6 @@ public class DoneAction extends Action {
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
         index = getIndex(args.thisData.name);
+        assert index > -1 : "index should be same as input";
     }
 }
