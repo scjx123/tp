@@ -188,9 +188,13 @@ public class Constants {
      */
     public static final String PATH = "./data";
     /**
-     * The constant FILENAME.
+     * Duke FILENAME.
      */
     public static final String FILENAME = "duke.txt";
+    /**
+     * Test Duke FILENAME.
+     */
+    public static final String TEST_FILENAME = "duke_test.txt";
 
     /**
      * The constant BYE.
@@ -308,6 +312,7 @@ public class Constants {
     public static final String TASK = "task";
     public static final String SELECTED = "selected";
     public static final String TAKEN = "taken";
+    public static final String FOUND = "found";
     /**
      * The constant INDEX_OUT.
      */
@@ -364,7 +369,7 @@ public class Constants {
     /**
      * The constant NO_KEYWORD.
      */
-    public static final String NO_KEYWORD = "No keyword provided, listing all tasks:" + WIN_NEWLINE;
+    public static final String NO_KEYWORD = "No keyword provided, listing all items:" + WIN_NEWLINE;
     public static final String MOD_NOT_FOUND =
         "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
@@ -409,7 +414,7 @@ public class Constants {
     /**
      * The constant LIST_HEAD.
      */
-    public static final String LIST_HEAD = "Here is the list of tasks:" + WIN_NEWLINE;
+    public static final String LIST_HEAD = "Here is the list of items:" + WIN_NEWLINE;
     /**
      * The constant REMINDER_HEAD.
      */
