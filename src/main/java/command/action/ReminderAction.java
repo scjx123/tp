@@ -50,6 +50,7 @@ public class ReminderAction extends Action {
         }
       
         data.setFlag(flag);
+        //assert flag != savedData.flag : "flag is different";
         return builder.toString();
     }
 }
