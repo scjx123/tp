@@ -25,6 +25,7 @@ public class Task extends Item {
         this.description = description;
         dateTime = null;
         isDated = false;
+        isWeekly = false;
     }
 
 

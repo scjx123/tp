@@ -20,6 +20,7 @@ import command.action.McAction;
 import command.action.NextAction;
 import command.action.PlainAction;
 import command.action.PrevAction;
+import command.action.ReminderAction;
 import command.action.SelectAction;
 import command.action.TakeAction;
 import command.action.TodoAction;
@@ -224,6 +225,10 @@ public class Constants {
      */
     public static final String FOCUS = "focus";
     /**
+     * The constant REMINDER.
+     */
+    public static final String REMINDER = "reminder";
+    /**
      * The constant HELP.
      */
     public static final String HELP = "help";
@@ -361,23 +366,32 @@ public class Constants {
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all tasks:" + WIN_NEWLINE;
     public static final String MOD_NOT_FOUND =
-            "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
+        "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
+    public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
+        + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
     public static final String NO_TASK_TYPE = "No task type provided, listing all tasks:" + WIN_NEWLINE;
     /**
+     * The constant NO_URGENT_TASKS.
+     */
+    public static final String NO_URGENT_TASKS = "No task in 3 days from now" + WIN_NEWLINE;
+    /**
      * The constant UNIDENTIFIED_TYPE.
      */
     public static final String UNIDENTIFIED_TYPE = "Unidentified task type! Please provide the correct task type."
-            + WIN_NEWLINE;
+        + WIN_NEWLINE;
     /**
      * The constant DETAIL.
      */
     public static final String NO_MODULE = "Sorry, no such module in the list!" + WIN_NEWLINE;
-
+    /**
+     * The constant ITEM_EXIST.
+     */
+    public static final String ITEM_EXIST = "Sorry, this item is already in your list!" + WIN_NEWLINE;
     /**
      * The constant FOCUS_HELP.
      */
@@ -389,9 +403,18 @@ public class Constants {
      */
     public static final String CONTEXT_MSG = "Changing context to ";
     /**
+     * The constant ADD_HEAD.
+     */
+    public static final String ADD_HEAD = "I've added this module to your list:" + WIN_NEWLINE;
+    /**
      * The constant LIST_HEAD.
      */
     public static final String LIST_HEAD = "Here is the list of tasks:" + WIN_NEWLINE;
+    /**
+     * The constant REMINDER_HEAD.
+     */
+    public static final String REMINDER_HEAD = "Here are the tasks due within " + Constants.REMINDER_RANGE + " days: "
+            + WIN_NEWLINE;
     /**
      * The constant MC_HEAD.
      */
@@ -470,6 +493,10 @@ public class Constants {
      * The constant BANNER.
      */
     public static final int BANNER = 1;
+    /**
+     * The constant REMINDER_RANGE.
+     */
+    public static final int REMINDER_RANGE = 3;
 
 
 
@@ -484,9 +511,11 @@ public class Constants {
             Map.entry(DONE, new DoneAction()),
             Map.entry(EVENT, new EventAction()),
             Map.entry(FIND, new FindAction()),
+            Map.entry(ADD, new AddAction()),
             Map.entry(HELP, new HelpAction()),
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
+            Map.entry(REMINDER, new ReminderAction()),
             Map.entry(MC, new McAction()),
             Map.entry(DETAIL, new DetailAction()),
             Map.entry(TODO, new TodoAction()),
@@ -498,7 +527,6 @@ public class Constants {
             Map.entry(FANCY, new FancyAction()),
             Map.entry(PLAIN, new PlainAction()),
             Map.entry(TAKE, new TakeAction()),
-            Map.entry(ADD, new AddAction()),
             Map.entry(SEL, new SelectAction()),
             Map.entry(UNSEL, new UnselectAction()),
             Map.entry(UNTAKE, new UntakeAction()));
@@ -514,6 +542,7 @@ public class Constants {
             Map.entry(EVENT, HelpText.EVENT),
             Map.entry(FIND, HelpText.FIND),
             Map.entry(FOCUS, HelpText.FOCUS),
+            Map.entry(REMINDER, HelpText.REMINDER),
             Map.entry(HELP, HelpText.HELP),
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
@@ -544,6 +573,8 @@ public class Constants {
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"p", "d"}),
+            Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
+            Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
