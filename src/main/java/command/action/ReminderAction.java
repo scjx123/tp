@@ -34,9 +34,9 @@ public class ReminderAction extends Action {
         for (int i = 0; i < tasks.size(); i++) {
             if (!(tasks.get(i).getDateTime().isAfter(lt) && tasks.get(i).getDateTime().isBefore(upper))) {
                 LOGGER.log(Level.INFO, "Non-urgent task is eliminated");
-                assert i != -1;
                 tasks.remove(i);
                 i--;
+                assert i != -1 : "i should be non-negative";
             }
         }
         tasks.sort(Comparator.comparing(Item::getDateTime));
