@@ -1,5 +1,0 @@
-[T][X] jumping
-[E][X] project group (at: 6 pm)
-[D][X] submission (by: Oct 21 2020 01:30)
-[D][X] submission 2 (by: Oct 15 2020 02:00)
-[D][X] homework (by: Mon 2 pm)
