@@ -19,9 +19,11 @@ import command.action.ListAction;
 import command.action.McAction;
 import command.action.NextAction;
 import command.action.PlainAction;
+import command.action.PostponeAction;
 import command.action.PrevAction;
 import command.action.ReminderAction;
 import command.action.SelectAction;
+import command.action.SnoozeAction;
 import command.action.TakeAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
@@ -232,6 +234,14 @@ public class Constants {
      * The constant REMINDER.
      */
     public static final String REMINDER = "reminder";
+    /**
+     * The constant POSTPONE.
+     */
+    public static final String POSTPONE = "postpone";
+    /**
+     * The constant SNOOZE.
+     */
+    public static final String SNOOZE = "snooze";
     /**
      * The constant HELP.
      */
@@ -521,6 +531,8 @@ public class Constants {
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
             Map.entry(REMINDER, new ReminderAction()),
+            Map.entry(POSTPONE, new PostponeAction()),
+            Map.entry(SNOOZE, new SnoozeAction()),
             Map.entry(MC, new McAction()),
             Map.entry(DETAIL, new DetailAction()),
             Map.entry(TODO, new TodoAction()),
