@@ -133,16 +133,20 @@ public class Data {
         LOGGER.exiting(getClass().getName(), "addTask");
     }
 
-    public void removeItem(int index) {
-        Item currentItem = target.get(index);
-        target.remove(currentItem);
-        if (currentItem instanceof SingleModule) {
-            mods.remove(currentItem);
+    public void removeItem(Item item) {
+        target.remove(item);
+        if (item instanceof SingleModule) {
+            mods.remove(item);
         } else {
-            tasks.remove(currentItem);
-            assert !tasks.contains(currentItem) : "Task has been removed!";
+            tasks.remove(item);
+            assert !tasks.contains(item) : "Task removal failed!";
         }
         refreshTarget();
+    }
+
+    public void removeItem(int index) {
+        Item currentItem = target.get(index);
+        removeItem(currentItem);
     }
 
     public void updateItem(int index, Item newItem) {
