@@ -128,22 +128,22 @@ public enum HelpText {
                 "reminder"
             },
             new String[]{
-                "1. \\\"list\\\" >> list all added tasks\","
+                "1. \"reminder\" >> list tasks that are due within the set period of time"
             }),
     /**
      * The List.
      */
     LIST(
             "list",
-            "Print a list of tasks/modules depending on the current Focus",
+            "Print a list of items depending on the current Focus",
             new String[]{
                 "list",
                 "list date [asc / desc / spec \"date\"(any common date format)]"
             },
             new String[]{
-                "1. \"list\" >> list all added tasks",
-                "2. \"list date asc\" >> list tasks with a \"date\" field in ascending order",
-                "3. \"list date spec Oct 5 2020\" >> list tasks with specific \"date\" field of Oct 5 2020"
+                "1. \"list\" >> list all added items",
+                "2. \"list date asc\" >> list items with a \"date\" field in ascending order",
+                "3. \"list date spec Oct 5 2020\" >> list items with specific \"date\" field of Oct 5 2020"
             }),
     /**
      * The Todo.
@@ -309,11 +309,11 @@ public enum HelpText {
      */
     MC(
             "mc",
-            "Print MCs: Print the number of MCs based on selected option.",
+            "Print the number of MCs based on selected option.",
             new String[]{
                 "mc [-option] [-detail]",
-                "option: {-c(current, default), -p(prospective), -help}",
-                "detail: {-t(total, default), -d(detailed)}"
+                "option: -c(current, default), -p(prospective)",
+                "detail: -t(total, default), -d(detailed)"
             },
             new String[]{
                 "1. \"mc\" >> print the total number of MCs currently taking",
@@ -325,12 +325,12 @@ public enum HelpText {
      */
     DETAIL(
             "detail",
-            "Print Details: Print the details of a specified module.",
+            "Print the details of a specified item.",
             new String[]{
-                "detail [module code / index]",
+                "detail [module code (for modules only) / index]",
             },
             new String[]{
-                "1. \"detail 1\" >> print the detail of module 1 in the list",
+                "1. \"detail 1\" >> print the detail of item 1 in the list",
                 "2. \"detail CS2113T\" >> print the detail of module CS2113T",
             }),
     /**
@@ -338,15 +338,15 @@ public enum HelpText {
      */
     CAP(
             "cap",
-            "Calculate CAP: Calculate CAP for courses based on selected option.",
+            "Calculate CAP for courses based on selected option.",
             new String[]{
                 "cap [-option] [module] [grade] {[module] [grade]...}",
-                "option: {-u(user, default), -m(multiple/custom modules), -help}"
+                "option: -u(user, default), -m(multiple/custom modules)"
             },
             new String[]{
                 "1. \"cap\" >> calculate user CAP from their taken modules",
-                "2. \"cap -m M1 G1 M2 G2 \" >> calculate cap based on input modules: "
-                        + "modules M1 with grade G1, module M2 with grade G2 correspondingly.",
+                "2. \"cap -m CS2113 A CS1010 B\" >> calculate cap based on input modules: "
+                        + "modules CS2113 with grade A, module CS1010 with grade B correspondingly.",
             }),
     ;
 
