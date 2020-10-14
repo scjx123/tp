@@ -17,7 +17,10 @@ public class FancyCli extends Cli {
     private Bitmap bmpSel;
     private final Color listBackground = Color.DarkBlue;
     private final Color selBackground = Color.DarkMagenta;
-    private final Color foreground = Color.White;
+    private final Color foreground = Color.getFromCode(255); // greyscale white
+    private final Color listBarColor = Color.DarkGreen;
+    private final Color selBarColor = Color.LightCyan;
+    private final Color selBarText = Color.getFromCode(232); // greyscale black
     private final int maxX = Constants.BITMAP_W - 1;
     private final int maxListY = Constants.BITMAP_LIST_H - 1;
     private final int maxSelY = Constants.BITMAP_SEL_H - 1;
@@ -36,7 +39,7 @@ public class FancyCli extends Cli {
      */
     public FancyCli(PrintStream stream, InputStream input) {
         super(stream, input);
-        currentColor = 1;
+        currentColor = 29;
         this.bmpList = new Bitmap(Constants.BITMAP_W, Constants.BITMAP_LIST_H);
         this.bmpSel = new Bitmap(Constants.BITMAP_W, Constants.BITMAP_SEL_H);
         listString = new String[0];
@@ -58,8 +61,7 @@ public class FancyCli extends Cli {
      */
     public void initializeList() {
         bmpList.flush(listBackground);
-        bmpList.drawLine(0, 0, maxX, 0, Constants.INIT_LIST,
-                Color.DarkGreen, Color.White, false);
+        bmpList.drawLine(0, 0, maxX, 0, Constants.INIT_LIST, listBarColor, foreground, false);
     }
 
     /**
@@ -69,8 +71,7 @@ public class FancyCli extends Cli {
      */
     public void initializeList(String text) {
         bmpList.flush(listBackground);
-        bmpList.drawLine(0, 0, maxX, 0, text,
-                Color.DarkGreen, Color.White, false);
+        bmpList.drawLine(0, 0, maxX, 0, text, listBarColor, foreground, false);
     }
 
     /**
@@ -78,8 +79,7 @@ public class FancyCli extends Cli {
      */
     public void initializeSel() {
         bmpSel.flush(selBackground);
-        bmpSel.drawLine(0, 0, maxX, 0, Constants.INIT_SEL,
-                Color.LightCyan, Color.Black, false);
+        bmpSel.drawLine(0, 0, maxX, 0, Constants.INIT_SEL, selBarColor, selBarText, false);
     }
 
     /**
@@ -89,8 +89,7 @@ public class FancyCli extends Cli {
      */
     public void initializeSel(String text) {
         bmpSel.flush(selBackground);
-        bmpSel.drawLine(0, 0, maxX, 0, text,
-                Color.LightCyan, Color.Black, false);
+        bmpSel.drawLine(0, 0, maxX, 0, text, selBarColor, selBarText, false);
     }
 
     @Override
@@ -133,6 +132,25 @@ public class FancyCli extends Cli {
         int maxLen = Math.min(myWidth * myHeight, rawInput.length());
         String input = rawInput.substring(0, maxLen);
         boolean isBroken = false;
+        if (isDisplayMode) {
+            if ((y - 1) / Constants.CELL_H % 2 == 0) { // even lines
+                if (currentColor == 61 || currentColor == 55) {
+                    currentColor = 23;
+                } else if (currentColor == 23) {
+                    currentColor = 29;
+                } else {
+                    currentColor = 23;
+                }
+            } else {
+                if (currentColor == 23 || currentColor == 29) {
+                    currentColor = 55;
+                } else if (currentColor == 61) {
+                    currentColor = 55;
+                } else {
+                    currentColor = 61;
+                }
+            }
+        }
         while (startIndex + myWidth - 1 < input.length()) {
             if (y + deltaY > maxY) {
                 isBroken = true;
@@ -153,12 +171,6 @@ public class FancyCli extends Cli {
         if (!isBroken) {
             String string = input.substring(startIndex);
             fillCellLine(x, y + deltaY, myWidth, isDisplayMode, string);
-        }
-        if (isDisplayMode) {
-            currentColor++;
-            if (currentColor > 255) {
-                currentColor = 1;
-            }
         }
     }
 
