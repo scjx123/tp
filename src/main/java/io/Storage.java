@@ -17,7 +17,7 @@ public class Storage {
     private FileLoader loader;
     private FileSaver saver;
     private Parser parser;
-    private ReadFile moduleloader;
+    private ModuleParser moduleloader;
 
     /**
      * Instantiates a new Storage.
@@ -30,7 +30,7 @@ public class Storage {
         loader = new FileLoader(directory, fileName);
         saver = new FileSaver(directory, fileName);
         this.parser = parser;
-        this.moduleloader = new ReadFile("data/courselist11.txt");
+        this.moduleloader = new ModuleParser("data/courselist11.txt");
     }
 
     /**

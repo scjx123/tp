@@ -62,6 +62,7 @@ public class Checker {
             LocalDateTime endDate = task.getDateTime();
             if (todayDate.isAfter(endDate)) {
                 newDate = endDate.plus(recurrence);
+                assert newDate.isAfter(endDate) : "Updated date should be later than previous date";
             }
         }
         return newDate;
