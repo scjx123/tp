@@ -36,7 +36,7 @@ public class ReminderAction extends Action {
                 LOGGER.log(Level.INFO, "Non-urgent task is eliminated");
                 tasks.remove(i);
                 i--;
-                assert i != -1 : "i should be non-negative";
+                //assert i != -1 : "i should be non-negative";
             }
         }
         tasks.sort(Comparator.comparing(Item::getDateTime));
