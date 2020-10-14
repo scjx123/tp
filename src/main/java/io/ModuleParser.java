@@ -1,6 +1,7 @@
 package io;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -80,12 +81,9 @@ public class ModuleParser {
      * @throws IOException are being thrown here.
      */
     public ArrayList<Item> load() throws IOException {
-        if (!Files.exists(p2)) {
-            Files.createFile(p2);
-        }
-
+        InputStream is = getClass().getResourceAsStream("courselist11.txt");
         ArrayList<Item> masterList = new ArrayList<>();
-        Scanner s = new Scanner(p2);
+        Scanner s = new Scanner(is);
 
         while (s.hasNext()) {
             tempString = s.nextLine();
