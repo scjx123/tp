@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class UI {
 
-    protected final Logger LOGGER = Logger.getLogger(UI.class.getName());
+    protected final Logger logger = Logger.getLogger(UI.class.getName());
 
     /**
      * The Stream.
@@ -46,7 +46,7 @@ public class UI {
     public UI(PrintStream stream, InputStream input) {
         assert stream != null : "Null output stream";
         assert input != null : "Null input stream";
-        LOGGER.log(Level.INFO, "UI instantiated");
+        logger.log(Level.INFO, "UI instantiated");
         this.stream = stream;
         this.input = input;
         inputGetter = new Scanner(input);
