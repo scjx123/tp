@@ -6,6 +6,19 @@ package constants;
 public enum HelpText {
 
     /**
+     * The Add.
+     */
+    ADD(
+            "add",
+            "Add task(s) to module(s): Add specified task(s) to specified module(s).",
+            new String[]{
+                "add -task [index(es)] -mod [module code(s)]",
+            },
+            new String[]{
+                "1. \"add -task 1 2 -mod CS2113 CS2113T \" >> add task 1 and task 2 in the current list to "
+                        + "the modules CS2113 and CS2113T",
+            }),
+    /**
      * The Bye.
      */
     BYE(
@@ -16,6 +29,21 @@ public enum HelpText {
             },
             new String[]{
                 "1. \"bye\" >> quits the program"
+            }),
+    /**
+     * Help commands for CAP.
+     */
+    CAP(
+            "cap",
+            "Calculate CAP for courses based on selected option.",
+            new String[]{
+                "cap [-option] [module] [grade] {[module] [grade]...}",
+                "option: -u(user, default), -m(multiple/custom modules)"
+            },
+            new String[]{
+                "1. \"cap\" >> calculate user CAP from their taken modules",
+                "2. \"cap -m CS2113 A CS1010 B\" >> calculate cap based on input modules: "
+                        + "modules CS2113 with grade A, module CS1010 with grade B correspondingly.",
             }),
     /**
      * The Clear.
@@ -55,6 +83,19 @@ public enum HelpText {
                 "1. \"delete 1\" >> deletes the task with index 1 from the current list"
             }),
     /**
+     * The Detail.
+     */
+    DETAIL(
+            "detail",
+            "Print the details of a specified item.",
+            new String[]{
+                "detail [module code (for modules only) / index]",
+            },
+            new String[]{
+                "1. \"detail 1\" >> print the detail of item 1 in the list",
+                "2. \"detail CS2113T\" >> print the detail of module CS2113T",
+            }),
+    /**
      * The Done.
      */
     DONE(
@@ -80,6 +121,18 @@ public enum HelpText {
                         + "adds an event with description \"e\" and time \"May 13 2020 8:00\""
             }),
     /**
+     * The Fancy.
+     */
+    FANCY(
+            "fancy",
+            "Switch to a fancy Cli (requires the shell to support ansi codes).",
+            new String[]{
+                "fancy"
+            },
+            new String[]{
+                "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
+            }),
+    /**
      * The Find.
      */
     FIND(
@@ -90,20 +143,6 @@ public enum HelpText {
             },
             new String[]{
                 "1. \"find exam\" >> finds all tasks with the \"exam\" keyword from the task list"
-            }),
-    /**
-     * The Help.
-     */
-    HELP(
-            "help",
-            "Print the list of available commands, or print the details of a specified command",
-            new String[]{
-                "help [target]",
-                "target: the name of the target command"
-            },
-            new String[]{
-                "1. \"help\" >> prints the list of available commands",
-                "2. \"help event\" >> prints the details of the \"event\" command"
             }),
     /**
      * The Focus.
@@ -120,15 +159,19 @@ public enum HelpText {
                 "2. \"focus mod\" >> focus on \"mod\". e.g. \"list\" will list all modules from now on",
                 "3. \"focus selected\" >> focus on \"selected\". e.g. \"list\" will list selected items from now on"
             }),
-
-    REMINDER(
-            "reminder",
-            "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
+    /**
+     * The Help.
+     */
+    HELP(
+            "help",
+            "Print the list of available commands, or print the details of a specified command",
             new String[]{
-                "reminder"
+                "help [target]",
+                "target: the name of the target command"
             },
             new String[]{
-                "1. \"reminder\" >> list tasks that are due within the set period of time"
+                "1. \"help\" >> prints the list of available commands",
+                "2. \"help event\" >> prints the details of the \"event\" command"
             }),
     /**
      * The List.
@@ -144,6 +187,103 @@ public enum HelpText {
                 "1. \"list\" >> list all added items",
                 "2. \"list date asc\" >> list items with a \"date\" field in ascending order",
                 "3. \"list date spec Oct 5 2020\" >> list items with specific \"date\" field of Oct 5 2020"
+            }),
+    /**
+     * The Mc.
+     */
+    MC(
+            "mc",
+            "Print the number of MCs based on selected option.",
+            new String[]{
+                "mc [-option] [-detail]",
+                "option: -c(current, default), -p(prospective)",
+                "detail: -t(total, default), -d(detailed)"
+            },
+            new String[]{
+                "1. \"mc\" >> print the total number of MCs currently taking",
+                "2. \"mc -p\" >> print the total number of MCs in the selection region",
+                "3. \"mc -p -d \" >> print the detailed MC composition of the selection region",
+            }),
+    /**
+     * The Next.
+     */
+    NEXT(
+            "next",
+            "Switch the target region to the next page, keeping other regions unchanged.",
+            new String[]{
+                "next [region]",
+                "region: i(item list), s(selection), a(all, default)"
+            },
+            new String[]{
+                "1. \"next\" >> switch both item list (top) and selection (bottom) region to the next page (default)",
+                "2. \"next s\" >> switch only the selection (bottom) region to the next page"
+            }),
+    /**
+     * The Plain.
+     */
+    PLAIN(
+            "plain",
+            "Switch to a plain Cli.",
+            new String[]{
+                "plain"
+            },
+            new String[]{
+                "1. \"plain\" >> switch to a plain pure-text Cli. Use \"fancy\" to switch to fancy Cli"
+            }),
+    /**
+     * The Prev.
+     */
+    PREV(
+            "prev",
+            "Switch the target region to the previous page, keeping other regions unchanged.",
+            new String[]{
+                "prev [region]",
+                "region: i(items), s(selection), a(all, default)"
+            },
+            new String[]{
+                "1. \"prev\" >> switch both item list (top) and selection (bottom) to the previous page (default)",
+                "2. \"prev s\" >> switch the selection (bottom) to the previous page"
+            }),
+    /**
+     * The Reminder.
+     */
+    REMINDER(
+            "reminder",
+            "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
+            new String[]{
+                "reminder"
+            },
+            new String[]{
+                "1. \"reminder\" >> list tasks that are due within the set period of time"
+            }),
+    /**
+     * The Sel.
+     */
+    SEL(
+            "sel",
+            "Make selection: Add specified item(s) to the selection.",
+            new String[]{
+                "sel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
+            },
+            new String[]{
+                "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
+                "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
+                "2. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
+            }),
+    /**
+     * The Take.
+     */
+    TAKE(
+            "take",
+            "Take module(s): Mark specified module(s) as taken.",
+            new String[]{
+                "take [index(es) / module code(s) (for modules only)]",
+            },
+            new String[]{
+                "1. \"take\" >> if there is any module selected but not taken, mark it as taken",
+                "2. \"take 1 2\" >> mark module 1 and module 2 as taken",
+                "3. \"take CS2113T\" >> mark module CS2113T as taken",
+                "4. \"take 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as taken",
             }),
     /**
      * The Todo.
@@ -182,72 +322,6 @@ public enum HelpText {
                 "1. \"unknown\" >> prints \"OOPS, I don't know what that means :-( Try \"help\"!\""
             }),
     /**
-     * The Next.
-     */
-    NEXT(
-            "next",
-            "Switch the target region to the next page, keeping other regions unchanged.",
-            new String[]{
-                "next [region]",
-                "region: i(item list), s(selection), a(all, default)"
-            },
-            new String[]{
-                "1. \"next\" >> switch both item list (top) and selection (bottom) region to the next page (default)",
-                "2. \"next s\" >> switch only the selection (bottom) region to the next page"
-            }),
-    /**
-     * The Prev.
-     */
-    PREV(
-            "prev",
-            "Switch the target region to the previous page, keeping other regions unchanged.",
-            new String[]{
-                "prev [region]",
-                "region: i(items), s(selection), a(all, default)"
-            },
-            new String[]{
-                "1. \"prev\" >> switch both item list (top) and selection (bottom) to the previous page (default)",
-                "2. \"prev s\" >> switch the selection (bottom) to the previous page"
-            }),
-    /**
-     * The Fancy.
-     */
-    FANCY(
-            "fancy",
-            "Switch to a fancy Cli (requires the shell to support ansi codes).",
-            new String[]{
-                "fancy"
-            },
-            new String[]{
-                "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
-            }),
-    /**
-     * The Plain.
-     */
-    PLAIN(
-            "plain",
-            "Switch to a plain Cli.",
-            new String[]{
-                "plain"
-            },
-            new String[]{
-                "1. \"plain\" >> switch to a plain pure-text Cli. Use \"fancy\" to switch to fancy Cli"
-            }),
-    /**
-     * The Sel.
-     */
-    SEL(
-            "sel",
-            "Make selection: Add specified item(s) to the selection.",
-            new String[]{
-                "sel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
-            },
-            new String[]{
-                "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
-                "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
-                "2. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
-            }),
-    /**
      * The Unsel.
      */
     UNSEL(
@@ -260,34 +334,6 @@ public enum HelpText {
                 "1. \"unsel 1 2 3\" >> make items with indices 1, 2and 3 no longer selected",
                 "2. \"unsel CS1010 CS2113\" >> make modules CS1010 and CS2113 no longer selected",
                 "2. \"unsel 5 CS2113\" >> make the item with index 5 and module CS2113 no longer selected"
-            }),
-    /**
-     * The Add.
-     */
-    ADD(
-            "add",
-            "Add task(s) to module(s): Add specified task(s) to specified module(s).",
-            new String[]{
-                "add -task [index(es)] -mod [module code(s)]",
-            },
-            new String[]{
-                "1. \"add -task 1 2 -mod CS2113 CS2113T \" >> add task 1 and task 2 in the current list to "
-                        + "the modules CS2113 and CS2113T",
-            }),
-    /**
-     * The Take.
-     */
-    TAKE(
-            "take",
-            "Take module(s): Mark specified module(s) as taken.",
-            new String[]{
-                "take [index(es) / module code(s) (for modules only)]",
-            },
-            new String[]{
-                "1. \"take\" >> if there is any module selected but not taken, mark it as taken",
-                "2. \"take 1 2\" >> mark module 1 and module 2 as taken",
-                "3. \"take CS2113T\" >> mark module CS2113T as taken",
-                "4. \"take 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as taken",
             }),
     /**
      * The Untake.
@@ -303,50 +349,6 @@ public enum HelpText {
                 "2. \"untake 1 2\" >> mark module 1 and module 2 as not taken",
                 "3. \"untake CS2113T\" >> mark module CS2113T as not taken",
                 "4. \"untake 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as not taken"
-            }),
-    /**
-     * The Mc.
-     */
-    MC(
-            "mc",
-            "Print the number of MCs based on selected option.",
-            new String[]{
-                "mc [-option] [-detail]",
-                "option: -c(current, default), -p(prospective)",
-                "detail: -t(total, default), -d(detailed)"
-            },
-            new String[]{
-                "1. \"mc\" >> print the total number of MCs currently taking",
-                "2. \"mc -p\" >> print the total number of MCs in the selection region",
-                "3. \"mc -p -d \" >> print the detailed MC composition of the selection region",
-            }),
-    /**
-     * The Mc.
-     */
-    DETAIL(
-            "detail",
-            "Print the details of a specified item.",
-            new String[]{
-                "detail [module code (for modules only) / index]",
-            },
-            new String[]{
-                "1. \"detail 1\" >> print the detail of item 1 in the list",
-                "2. \"detail CS2113T\" >> print the detail of module CS2113T",
-            }),
-    /**
-     * Help commands for CAP.
-     */
-    CAP(
-            "cap",
-            "Calculate CAP for courses based on selected option.",
-            new String[]{
-                "cap [-option] [module] [grade] {[module] [grade]...}",
-                "option: -u(user, default), -m(multiple/custom modules)"
-            },
-            new String[]{
-                "1. \"cap\" >> calculate user CAP from their taken modules",
-                "2. \"cap -m CS2113 A CS1010 B\" >> calculate cap based on input modules: "
-                        + "modules CS2113 with grade A, module CS1010 with grade B correspondingly.",
             }),
     ;
 
