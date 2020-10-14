@@ -140,6 +140,7 @@ public class Data {
             mods.remove(currentItem);
         } else {
             tasks.remove(currentItem);
+            assert !tasks.contains(currentItem) : "Task has been removed!";
         }
         refreshTarget();
     }

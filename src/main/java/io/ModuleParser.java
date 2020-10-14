@@ -16,7 +16,7 @@ import data.SingleModule;
  * This class contains parseFile() which is specifically used to read in contents from courselist text file.
  * DO NOT ALTER THE parseFILE() list under any circumstance.
  */
-public class ReadFile {
+public class ModuleParser {
     /**
      * The Module name.
      */
@@ -52,7 +52,7 @@ public class ReadFile {
      *
      * @param filePath the file path
      */
-    public ReadFile(String filePath) {
+    public ModuleParser(String filePath) {
         dir = filePath.split("/",2);
         filedir = dir[0];
         filename = dir[1];
