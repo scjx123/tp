@@ -40,7 +40,8 @@ public class McAction extends Action {
         } else if (isDetail) {
             for (Item item : moduleList) {
                 SingleModule m = (SingleModule)item;
-                builder.append(m.getModuleMC().trim()).append(Constants.WIN_NEWLINE);
+                builder.append(m.moduleCode).append(Constants.DETAILS_SIGNATURE)
+                        .append(m.getModuleMC().trim()).append("MCs").append(Constants.WIN_NEWLINE);
             }
         } else {
             int sum = 0;

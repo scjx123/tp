@@ -46,7 +46,7 @@ public class Duke {
         try {
             data = storage.load();
         } catch (Exception e) {
-            ui.showText(e.getMessage());
+            ui.showText("The save file is corrupted.");
             data = new Data();
         }
     }

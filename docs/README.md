@@ -48,33 +48,50 @@ Prerequisites: JRE 11
 * Type `help` to see the following screen:
    ```
     ____________________________________________________________
-        Command: bye        Description: Quit the program
-        Command: clear      Description: Clear the task list
-        Command: deadline   Description: Add a deadline to the task list
-        Command: delete     Description: Delete a task from the task list
-        Command: done       Description: Mark a task as done
-        Command: event      Description: Add an event to the task list
-        Command: find       Description: Find an event in the task list with the specified keyword
-        Command: help       Description: Print the list of available commands, or print the details of a specified command
-        Command: list       Description: Print a list of all added tasks
-        Command: todo       Description: Add a todo to the task list
-        Command: undone     Description: Mark a task as undone
-        Command: unknown    Description: Prints the error message for an unrecognized command
+        Here are all available commands:
+        Command: add  Description: Add task(s) to module(s): Add specified task(s) to specified module(s).
+        Command: bye  Description: Quit the program
+        Command: cap  Description: Calculate CAP for courses based on selected option.
+        Command: clear  Description: Clear the task list
+        Command: deadline  Description: Add a deadline to the task list
+        Command: delete  Description: Delete a task from the task list
+        Command: detail  Description: Print the details of a specified item.
+        Command: done  Description: Mark a task as done
+        Command: event  Description: Add an event to the task list
+        Command: fancy  Description: Switch to a fancy Cli (requires the shell to support ansi codes).
+        Command: find  Description: Find an event in the task list with the specified keyword
+        Command: focus  Description: Change context. Changes the target of other commands to the specified target
+        Command: help  Description: Print the list of available commands, or print the details of a specified command
+        Command: list  Description: Print a list of items depending on the current Focus
+        Command: mc  Description: Print the number of MCs based on selected option.
+        Command: next  Description: Switch the target region to the next page, keeping other regions unchanged.
+        Command: plain  Description: Switch to a plain Cli.
+        Command: prev  Description: Switch the target region to the previous page, keeping other regions unchanged.
+        Command: reminder  Description: List out events and deadlines tasks that are due within 3 days
+        Command: sel  Description: Make selection: Add specified item(s) to the selection.
+        Command: take  Description: Take module(s): Mark specified module(s) as taken.
+        Command: todo  Description: Add a todo to the task list
+        Command: undone  Description: Mark a task as undone
+        Command: unknown  Description: Prints the error message for an unrecognized command for debugging purposes
+        Command: unsel  Description: Cancel selection: Make specified item(s) no longer selected.
+        Command: untake  Description: Untake module(s): Mark specified module(s) as not taken.
         Use "help [target]" to see details :) Try "help help"!
+	____________________________________________________________
+
     ____________________________________________________________
    ```
 * Type `help list` to see the detailed usages of the `list` command:
    ```
     ____________________________________________________________
         Name: list
-        Description: Print a list of all added tasks
+        Description: Print a list of items depending on the current Focus
         Syntax:
         list
-        list date [asc / desc / spec MMM dd yyyy]
+        list date [asc / desc / spec "date"(any common date format)]
         Usages:
-        1. "list" >> list all added tasks
-        2. "list date asc" >> list tasks with a "date" field in ascending order
-        3. "list date spec Oct 5 2020" >> list tasks with specific "date" field of October 5 2020
+        1. "list" >> list all added items
+        2. "list date asc" >> list items with a "date" field in ascending order
+        3. "list date spec Oct 5 2020" >> list items with specific "date" field of Oct 5 2020
     ____________________________________________________________
 
    ```

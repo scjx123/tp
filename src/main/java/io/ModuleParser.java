@@ -79,7 +79,7 @@ public class ModuleParser {
      *
      * @throws IOException are being thrown here.
      */
-    public static ArrayList<Item> load() throws IOException {
+    public ArrayList<Item> load() throws IOException {
         if (!Files.exists(p2)) {
             Files.createFile(p2);
         }
@@ -105,7 +105,7 @@ public class ModuleParser {
      *
      * @param tempString A single line of data read from the content list text file.
      */
-    private static void parseFile(String tempString) {
+    private void parseFile(String tempString) {
         if (tempString.indexOf("EE") == 0 || tempString.indexOf("CG") == 0
                 || tempString.indexOf("MA") == 0 || tempString.indexOf("CS") == 0 || tempString.indexOf("EG") == 0) {
             st = new StringTokenizer(tempString,"_");

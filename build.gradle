@@ -16,6 +16,7 @@ dependencies {
 }
 
 test {
+    enableAssertions = true
     useJUnitPlatform()
 
     testLogging {
@@ -43,5 +44,6 @@ checkstyle {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }

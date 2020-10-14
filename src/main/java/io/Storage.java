@@ -55,10 +55,10 @@ public class Storage {
             String output = dataToCommand(line, index);
             if (!output.equals(Constants.ZERO_LENGTH_STRING)) {
                 index++;
-            }
-            ArrayList<Command> commands = parser.parse(output);
-            for (Command c: commands) {
-                c.execute(list);
+                ArrayList<Command> commands = parser.parse(output);
+                for (Command c: commands) {
+                    c.execute(list);
+                }
             }
         }
         try {
