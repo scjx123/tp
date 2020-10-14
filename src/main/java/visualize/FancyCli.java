@@ -394,13 +394,36 @@ public class FancyCli extends Cli {
         }
     }
 
+    private boolean isIntString(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int d = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
     private String[] groupStrings(String[] strings, int groups, int groupLength) {
         StringBuilder[] builders = new StringBuilder[groups];
         String heading = strings[0];
         for (int i = 0; i < groups; i++) {
+            String head;
+            String oldBracket = " ()";
+            if (heading.contains(Constants.PARAM_SIGNATURE)) {
+                String[] heads = heading.replace(Constants.PARAM_SIGNATURE, Constants.LINE_UNIT)
+                        .split(Constants.LINE_UNIT);
+                head = heads[heads.length - 1].replace(Constants.PARAM_RIGHT, Constants.ZERO_LENGTH_STRING).trim();
+                if (isIntString(head)) {
+                    oldBracket = Constants.SPACE + Constants.PARAM_LEFT + head + Constants.PARAM_RIGHT;
+                }
+            }
             String bracket = Constants.SPACE + Constants.PARAM_LEFT + (i + 1) + Constants.PARAM_RIGHT;
-            builders[i] = new StringBuilder(heading.replace(bracket, Constants.ZERO_LENGTH_STRING)).append(
-                    bracket).append(Constants.WIN_NEWLINE);
+            builders[i] = new StringBuilder(heading.replace(oldBracket, Constants.ZERO_LENGTH_STRING))
+                    .append(bracket).append(Constants.WIN_NEWLINE);
+
         }
         for (int i = 1; i < strings.length; i++) {
             int currentGroup = (i - 1) / groupLength;
