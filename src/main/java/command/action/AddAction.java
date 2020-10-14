@@ -46,7 +46,7 @@ public class AddAction extends Action {
         for (Item item : targetMods) {
             StringBuilder sb = new StringBuilder(item.getName() + " << tasks: ");
             for (Item i : targetTasks) {
-                sb.append(((Task) i).getDescription()).append(Constants.SPACE);
+                sb.append(((Task) i).getDescription()).append(Constants.CMD_END).append(Constants.SPACE);
             }
             builder.append(sb.append(Constants.WIN_NEWLINE).toString());
         }
