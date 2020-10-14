@@ -272,8 +272,12 @@ public class FancyCli extends Cli {
         } else if (input.contains(Constants.BMP_LIST_SWITCH) || input.contains(Constants.BMP_SEL_SWITCH)) {
             flipPage(input);
             if (!data.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
-                showText(getShownText(true), true, MessageOptions.INDEXED_NUM);
-                showText(getShownText(false), false, MessageOptions.NOT_INDEXED);
+                if (listString.length > 0) {
+                    showText(getShownText(true), true, MessageOptions.INDEXED_NUM);
+                }
+                if (selString.length > 0) {
+                    showText(getShownText(false), false, MessageOptions.NOT_INDEXED);
+                }
             }
         } else {
             boolean displayMode = data.indexOption != MessageOptions.NOT_INDEXED;
