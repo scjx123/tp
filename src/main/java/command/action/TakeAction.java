@@ -83,6 +83,7 @@ public class TakeAction extends Action {
         indices = new ArrayList<>();
         codes = new ArrayList<>();
         super.prepare(args);
+        isBlind = false;
         if (args.thisData == null || flattenedArgs.length < 1) {
             safetyCheck();
             return;
