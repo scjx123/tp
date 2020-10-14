@@ -135,9 +135,7 @@ public class Data {
 
     public void removeItem(Item item) {
         target.remove(item);
-        if (item instanceof SingleModule) {
-            mods.remove(item);
-        } else {
+        if (item instanceof Task) { //modules are not removable from mods list.
             tasks.remove(item);
             assert !tasks.contains(item) : "Task removal failed!";
         }

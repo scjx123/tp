@@ -10,7 +10,12 @@ create reminders and calculate their MCs / CAPs.
 
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [Our Release Page](http://link.to/duke).
+2. Download the latest version of `Duke` from [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).
+3. Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.
+4. Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS. 
+5. Navigate to your home folder and type ‘java -jar domnus.jar’
+6. Type ‘bye’ to terminate your session.  
+
 
 ## Features 
 
@@ -388,32 +393,32 @@ Expected outcome:
    ```
     ____________________________________________________________
         Here are all available commands:
+        Command: add  Description: Add task(s) to module(s): Add specified task(s) to specified module(s).
         Command: bye  Description: Quit the program
+        Command: cap  Description: Calculate CAP for courses based on selected option.
         Command: clear  Description: Clear the task list
         Command: deadline  Description: Add a deadline to the task list
         Command: delete  Description: Delete a task from the task list
+        Command: detail  Description: Print the details of a specified item.
         Command: done  Description: Mark a task as done
         Command: event  Description: Add an event to the task list
+        Command: fancy  Description: Switch to a fancy Cli (requires the shell to support ansi codes).
         Command: find  Description: Find an event in the task list with the specified keyword
-        Command: help  Description: Print the list of available commands, or print the details of a specified command
         Command: focus  Description: Change context. Changes the target of other commands to the specified target
+        Command: help  Description: Print the list of available commands, or print the details of a specified command
+        Command: list  Description: Print a list of items depending on the current Focus
+        Command: mc  Description: Print the number of MCs based on selected option.
+        Command: next  Description: Switch the target region to the next page, keeping other regions unchanged.
+        Command: plain  Description: Switch to a plain Cli.
+        Command: prev  Description: Switch the target region to the previous page, keeping other regions unchanged.
         Command: reminder  Description: List out events and deadlines tasks that are due within 3 days
-        Command: list  Description: Print a list of tasks/modules depending on the current Focus
+        Command: sel  Description: Make selection: Add specified item(s) to the selection.
+        Command: take  Description: Take module(s): Mark specified module(s) as taken.
         Command: todo  Description: Add a todo to the task list
         Command: undone  Description: Mark a task as undone
         Command: unknown  Description: Prints the error message for an unrecognized command for debugging purposes
-        Command: next  Description: Switch the target region to the next page, keeping other regions unchanged.
-        Command: prev  Description: Switch the target region to the previous page, keeping other regions unchanged.
-        Command: fancy  Description: Switch to a fancy Cli (requires the shell to support ansi codes).
-        Command: plain  Description: Switch to a plain Cli.
-        Command: sel  Description: Make selection: Add specified item(s) to the selection.
         Command: unsel  Description: Cancel selection: Make specified item(s) no longer selected.
-        Command: add  Description: Add task(s) to module(s): Add specified task(s) to specified module(s).
-        Command: take  Description: Take module(s): Mark specified module(s) as taken.
         Command: untake  Description: Untake module(s): Mark specified module(s) as not taken.
-        Command: mc  Description: Print MCs: Print the number of MCs based on selected option.
-        Command: detail  Description: Print Details: Print the details of a specified module.
-        Command: cap  Description: Calculate CAP: Calculate CAP for courses based on selected option.
         Use "help [target]" to see details :) Try "help help"!
     ____________________________________________________________
    ```
@@ -819,14 +824,31 @@ Expected outcome:
 ## Command Summary
 
 A cheat sheet of commonly used commands:
-
-* Add todo `todo mytask`
-* Add deadline `deadline mydeadline /by 2020/5/7 13:44`
-* Add event `event myevent /at 2020-6-19 0:20`
-* Focus on modules `focus mod`
-* Find items with keyword `Engineering`: `find Engineering`
-* Select the first 3 items in the current list `sel 1 2 3`
-* Take all modules in the selection `take`
-* Untake CS2113T `untake CS2113T`
-* Mark the first item in the current list as done `done 1`
-* Add the first 2 tasks to CS1010 `add -task 1 2 -mod CS1010`
+**Action** | **Format, Examples**
+------------ | -------------
+**add **|`add -task [index] -mod [module code]` <br>e.g. `add -task 1 -mod CS2113`
+**bye**| `bye`
+**cap**|`cap [-option] [module] [grade] {[module] [grade]...}` <br>e.g. `cap -m M1 G1 M2 G2`
+**clear** | `clear`
+**deadline**|`deadline [description] -by [time]` <br>e.g. `deadline project submission -by 21/9/15 1:12`
+**delete**|`delete [index]` <br>e.g. `delete 2`
+**detail **|`detail [index / module code]` <br>e.g. `detail CS2113T`
+**done **|`delete [index]` <br>e.g. `done 2`
+**edit**|`edit [-options][-target]` <br>e.g. `edit`
+**event**|`event [description] -at [time]` <br>e.g. `event concert -at May 13 2020 8:00`
+**fancy**|`fancy [option]` <br>e.g. `fancy`
+**find**|`find [keyword]` <br>e.g. `find exam`
+**focus**|`focus [deadline / todo / event / task / mod / selected / taken]` <br>e.g. `focus deadline`
+**help**|`help [options]` <br>e.g. `help deadline`
+**list **|`list date [asc / desc / spec “date”]` <br>e.g. `list date asc`
+**mc**|`mc [-option] [-details]` <br>e.g. `mc -p`
+**next**|`next [option]` <br>e.g. `next`
+**plain**|`plain [option]` <br>e.g. `plain`
+**prev**|`prev [option]` <br>e.g. `prev`
+**reminder**|`reminder` <br>e.g. `reminder`
+**sel**|`sel [index / module code]` <br>e.g. `sel 1 2 3`
+**take**|`take [index / module code]` <br>e.g. `take CS2113T`
+**todo**|`todo [description]` <br>e.g. `todo borrow book`
+**undone**|`undone [index]` <br>e.g. `undone 2`
+**unsel**|`unsel [index / module code]` <br>e.g. `unsel CS1010 CS2113`
+**untake**|`untake [index / module code]` <br>e.g. `untake CS2113T`
