@@ -88,7 +88,8 @@ public class Data {
             target = tasks.stream().filter(x -> x instanceof ToDo).collect(Collectors.toCollection(ArrayList::new));
             break;
         case Constants.MOD:
-            target = mods;
+            target = mods.stream().filter(x -> x instanceof SingleModule)
+                    .collect(Collectors.toCollection(ArrayList::new));
             break;
         case Constants.SELECTED:
             target = mods.stream().filter(x -> x.isSelected).collect(Collectors.toCollection(ArrayList::new));
@@ -98,8 +99,10 @@ public class Data {
             target = mods.stream().filter(
                 x -> ((SingleModule) x).isTaken).collect(Collectors.toCollection(ArrayList::new));
             break;
+        case Constants.FOUND: // should not refresh target.
+            break;
         default:
-            target = tasks;
+            target = tasks.stream().filter(x -> x instanceof Task).collect(Collectors.toCollection(ArrayList::new));
             break;
         }
     }
@@ -132,15 +135,27 @@ public class Data {
 
     public void removeItem(int index) {
         Item currentItem = target.get(index);
-        refreshTarget();
         target.remove(currentItem);
+        if (currentItem instanceof SingleModule) {
+            mods.remove(currentItem);
+        } else {
+            tasks.remove(currentItem);
+        }
         refreshTarget();
     }
 
     public void updateItem(int index, Item newItem) {
         Item currentItem = target.get(index);
-        refreshTarget();
         target.set(target.indexOf(currentItem), newItem);
+        if (currentItem instanceof SingleModule) {
+            if (mods.contains(currentItem)) {
+                mods.set(mods.indexOf(currentItem), newItem);
+            }
+        } else {
+            if (tasks.contains(currentItem)) {
+                tasks.set(tasks.indexOf(currentItem), newItem);
+            }
+        }
         refreshTarget();
     }
 
