@@ -2,7 +2,9 @@
 
 ## Introduction
 
-{Give a product intro: to be done}
+Domsun is a CLI program that allows users to manage tasks and modules. <br>
+Users will be able to browse and select modules, create and arrange tasks, add tasks to modules,<br>
+create reminders and calculate their MCs / CAPs.
 
 ## Quick Start
 
@@ -62,6 +64,28 @@ The program allows user to set reminders at certain time, or remind themselves o
 
 ## Usage (alphabetical order)
 
+### `add` - Add task(s) to module(s)
+
+Typing `add` adds specified task(s) to specified module(s).
+
+Syntax:
+
+`add -task [index(es)] -mod [module code(s)]`
+
+Example of usage: 
+
+`add -task 1 2 -mod CS2113 CS2113T`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		I have added the specified tasks to the specified modules.
+		CS2113 << tasks: borrow book; eat; 
+		CS2113T << tasks: borrow book; eat; 
+    ____________________________________________________________
+   ```
+
 ### `bye` - Quit the program
 
 Typing `bye` results in the program saving the current task list to a local file named 
@@ -76,6 +100,38 @@ Expected outcome:
    ```	
     ____________________________________________________________
         Bye. Hope to see you again soon!
+    ____________________________________________________________
+   ```
+
+### `cap` - Prints CAPs
+
+Typing `mc` prints the calculated CAP for courses based on selected option.
+
+Syntax:
+
+`cap [-option] [module] [grade] {[module] [grade]...}`
+`option: -u(user, default), -m(multiple/custom modules)`
+
+Example of usage (when there are modules in the target): 
+
+`cap`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		Here is your existing CAP: 4.00
+    ____________________________________________________________
+   ```
+Example of usage (when there are modules in the target): 
+
+`cap -m CS2113 A CS1010 B`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		Here is your existing CAP: 4.25
     ____________________________________________________________
    ```
 
@@ -141,6 +197,47 @@ Expected outcome:
     ____________________________________________________________
    ```
 
+### `detail` - Prints item detail
+
+Typing `unknown` prints the details of a specified item.
+
+Syntax:
+
+`detail [module code (for modules only) / index]`
+
+Example of usage: 
+
+`detail 1`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		Here are the details you requested:
+		Item 1: [T][X] borrow book
+    ____________________________________________________________
+   ```
+
+Example of usage: 
+
+`detail CS2113T`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		Here are the details you requested:
+		Item: CS2113T Software Engineering & Object-Oriented Programming 4MC
+		"This module introduces the necessary skills for systematic and rigorous development of software sys
+		tems. It covers requirements, design, implementation, quality assurance, and project management aspe
+		cts of small-to-medium size multi-person software projects. The module uses the Object Oriented Prog
+		ramming paradigm. Students of this module will receive hands-on practice of tools commonly used in t
+		he industry, such as test automation tools, build automation tools, and code revisioning tools will 
+		be covered.
+		Tasks: [NOT FOUND]
+    ____________________________________________________________
+   ```
+
 ### `done` - Mark a task as done
 
 Typing `done` allows the user to mark the task at a specified *index* as **done**.<br>
@@ -186,6 +283,24 @@ Expected outcome:
     ____________________________________________________________
    ```
 
+### `fancy` - Switch the UI to the fancy mode (GUI-like CLI)
+
+Typing `fancy` switches the UI to the fancy mode (GUI-like CLI interface).<br>
+This command has no effect if the UI is already in fancy mode.<br>
+The fancy mode only shows correctly if your terminal supports ansi escape codes.
+
+Syntax:
+
+`fancy`
+
+Example of usage: 
+
+`fancy`
+
+Expected outcome:
+
+the UI switches to fancy mode (GUI-like CLI interface).
+
 ### `find` - Find an event in the task list
 
 Typing `find` commands the program to search through the task list and print all tasks with the
@@ -216,6 +331,42 @@ Expected outcome (not found):
     ____________________________________________________________
         Tasks with the specified keyword are:
         [NOT FOUND]
+    ____________________________________________________________
+   ```
+
+### `focus` - Change the context of the program
+
+Typing `focus` changes the context that all other commands are based on to the specified target. <br>
+If no parameter is provided, the program will focus on `task`. <br>
+Other commands such as `list`, `done`, `sel`, etc. all operated based on the current focused context.
+
+Syntax:
+
+`focus`
+`focus [deadline / todo / event / task / mod / selected / taken]`
+
+Example of usage: 
+
+`focus mod`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		Now we are focusing on:
+		mod
+    ____________________________________________________________
+   ```
+Example of usage: 
+
+`focus`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		Now we are focusing on:
+		task
     ____________________________________________________________
    ```
 
@@ -287,63 +438,6 @@ Expected outcome:
 
    ```
 
-### `focus` - Change the context of the program
-
-Typing `focus` changes the context that all other commands are based on to the specified target. <br>
-If no parameter is provided, the program will focus on `task`. <br>
-Other commands such as `list`, `done`, `sel`, etc. all operated based on the current focused context.
-
-Syntax:
-
-`focus`
-`focus [deadline / todo / event / task / mod / selected / taken]`
-
-Example of usage: 
-
-`focus mod`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		Now we are focusing on:
-		mod
-    ____________________________________________________________
-   ```
-Example of usage: 
-
-`focus`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		Now we are focusing on:
-		task
-    ____________________________________________________________
-   ```
-
-### `reminder` - Print tasks that are due soon
-
-Typing `reminder` prints the tasks that are due within a certain time range. 
-
-Syntax:
-
-`reminder`
-
-Example of usage: 
-
-`reminder`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		Here are the tasks due within 3 days: 
-		[D][X] submission 2 (by: Oct 15 2020 02:00)
-    ____________________________________________________________
-   ```
-
 ### `list` - Print a list of added tasks
 
 Typing `list` commands the program to print either all added tasks or tasks at a specified *date*.<br>
@@ -402,6 +496,181 @@ Expected outcome:
     ____________________________________________________________
         Here is the list of tasks:
         1.[D][X] math exam (by: Oct 15 2020 10:30)
+    ____________________________________________________________
+   ```
+
+### `mc` - Prints MCs
+
+Typing `mc` prints the number of MCs based on selected option.
+
+Syntax:
+
+`mc [-option] [-detail]`
+`option: -c(current, default), -p(prospective)`
+`detail: -t(total, default), -d(detailed)`
+
+Example of usage (when there are modules in the target): 
+
+`mc`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		Here is the total MC:
+		22
+    ____________________________________________________________
+   ```
+Example of usage (when there are modules in the target): 
+
+`mc -d`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		Here is the total MC:
+		EE1001: 4MCs
+		EE1001X: 4MCs
+		EE1002: 4MCs
+		EE1003: 4MCs
+		EE1111: 6MCs
+    ____________________________________________________________
+   ```
+
+### `next` - Switch the target region to the next page ***(GUI mode only)***
+
+Typing `next` switches the target region to the next page, should a next page exist.<br>
+This command has no effect on pure text CLI mode.
+
+Syntax:
+
+`next [region]`
+`region: i(item list), s(selection), a(all, default)`
+
+Example of usage: 
+
+`next`
+
+Expected outcome ***(GUI mode only)***:
+
+The both regions of the GUI are switched to the next page if a next page is available.
+
+Example of usage: 
+
+`next i`
+
+Expected outcome ***(GUI mode only)***:
+
+The item list region (top) of the GUI is switched to the next page if a next page is available.
+
+### `plain` - Switch the UI to the plain mode (pure-text CLI)
+
+Typing `plain` switches the UI to the plain mode (pure-text CLI interface). <br>
+This command has no effect if the UI is already in plain mode.<br>
+The plain mode shows correctly on all terminals.
+
+Syntax:
+
+`plain`
+
+Example of usage: 
+
+`plain`
+
+Expected outcome:
+
+The UI switches to plain mode (pure-text CLI interface).
+
+### `prev` - Switch the target region to the previous page ***(GUI mode only)***
+
+Typing `prev` switches the target region to the previous page, should a previous page exist.<br>
+This command has no effect on pure text CLI mode.
+
+Syntax:
+
+`prev [region]`
+`region: i(item list), s(selection), a(all, default)`
+
+Example of usage: 
+
+`prev`
+
+Expected outcome ***(GUI mode only)***:
+
+The both regions of the GUI are switched to the pevious page if a previous page is available.
+
+Example of usage: 
+
+`prev i`
+
+Expected outcome ***(GUI mode only)***:
+
+The item list region (top) of the GUI is switched to the previous page if a previous page is available.
+
+### `reminder` - Print tasks that are due soon
+
+Typing `reminder` prints the tasks that are due within a certain time range. 
+
+Syntax:
+
+`reminder`
+
+Example of usage: 
+
+`reminder`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		Here are the tasks due within 3 days: 
+		[D][X] submission 2 (by: Oct 15 2020 02:00)
+    ____________________________________________________________
+   ```
+
+### `sel` - Select items by index
+
+Typing `sel` selects the items specified.
+
+Syntax:
+
+`sel [index(es) (for the currently listed items) / module code(s) (for modules only)]`
+
+Example of usage: 
+
+`sel 1 2 3`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		I have selected the items you specified:
+		Item 1: borrow book
+		Item 2: eat
+		Item 3: jumping
+    ____________________________________________________________
+   ```
+
+### `take` - Take module(s)
+
+Typing `take` marks specified module(s) as taken.
+
+Syntax:
+
+`take [index(es) / module code(s) (for modules only)]`
+
+Example of usage: 
+
+`take CS2113 CS2113T`
+
+Expected outcome:
+
+   ```	
+    ____________________________________________________________
+		I have marked these modules as taken:
+		Module: CS2113
+		Module: CS2113T
     ____________________________________________________________
    ```
 
@@ -476,117 +745,6 @@ Expected outcome:
     ____________________________________________________________
    ```
 
-### `next` - Switch the target region to the next page ***(GUI mode only)***
-
-Typing `next` switches the target region to the next page, should a next page exist.<br>
-This command has no effect on pure text CLI mode.
-
-Syntax:
-
-`next [region]`
-`region: i(item list), s(selection), a(all, default)`
-
-Example of usage: 
-
-`next`
-
-Expected outcome ***(GUI mode only)***:
-
-The both regions of the GUI are switched to the next page if a next page is available.
-
-Example of usage: 
-
-`next i`
-
-Expected outcome ***(GUI mode only)***:
-
-The item list region (top) of the GUI is switched to the next page if a next page is available.
-
-### `prev` - Switch the target region to the previous page ***(GUI mode only)***
-
-Typing `prev` switches the target region to the previous page, should a previous page exist.<br>
-This command has no effect on pure text CLI mode.
-
-Syntax:
-
-`prev [region]`
-`region: i(item list), s(selection), a(all, default)`
-
-Example of usage: 
-
-`prev`
-
-Expected outcome ***(GUI mode only)***:
-
-The both regions of the GUI are switched to the pevious page if a previous page is available.
-
-Example of usage: 
-
-`prev i`
-
-Expected outcome ***(GUI mode only)***:
-
-The item list region (top) of the GUI is switched to the previous page if a previous page is available.
-
-### `fancy` - Switch the UI to the fancy mode (GUI-like CLI)
-
-Typing `fancy` switches the UI to the fancy mode (GUI-like CLI interface).<br>
-This command has no effect if the UI is already in fancy mode.<br>
-The fancy mode only shows correctly if your terminal supports ansi escape codes.
-
-Syntax:
-
-`fancy`
-
-Example of usage: 
-
-`fancy`
-
-Expected outcome:
-
-the UI switches to fancy mode (GUI-like CLI interface).
-
-### `plain` - Switch the UI to the plain mode (pure-text CLI)
-
-Typing `plain` switches the UI to the plain mode (pure-text CLI interface). <br>
-This command has no effect if the UI is already in plain mode.<br>
-The plain mode shows correctly on all terminals.
-
-Syntax:
-
-`plain`
-
-Example of usage: 
-
-`plain`
-
-Expected outcome:
-
-The UI switches to plain mode (pure-text CLI interface).
-
-### `sel` - Select items by index
-
-Typing `sel` selects the items specified.
-
-Syntax:
-
-`sel [index(es) (for the currently listed items) / module code(s) (for modules only)]`
-
-Example of usage: 
-
-`sel 1 2 3`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		I have selected the items you specified:
-		Item 1: borrow book
-		Item 2: eat
-		Item 3: jumping
-    ____________________________________________________________
-   ```
-
 ### `unsel` - Unselect items
 
 Typing `unsel` marks items specified as unselected.
@@ -610,50 +768,6 @@ Expected outcome:
     ____________________________________________________________
    ```
 
-### `add` - Add task(s) to module(s)
-
-Typing `add` adds specified task(s) to specified module(s).
-
-Syntax:
-
-`add -task [index(es)] -mod [module code(s)]`
-
-Example of usage: 
-
-`add -task 1 2 -mod CS2113 CS2113T`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		I have added the specified tasks to the specified modules.
-		CS2113 << tasks: borrow book; eat; 
-		CS2113T << tasks: borrow book; eat; 
-    ____________________________________________________________
-   ```
-
-### `take` - Take module(s)
-
-Typing `take` marks specified module(s) as taken.
-
-Syntax:
-
-`take [index(es) / module code(s) (for modules only)]`
-
-Example of usage: 
-
-`take CS2113 CS2113T`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		I have marked these modules as taken:
-		Module: CS2113
-		Module: CS2113T
-    ____________________________________________________________
-   ```
-
 ### `untake` - Untake module(s)
 
 Typing `untake` marks specified module(s) as not taken.
@@ -672,118 +786,6 @@ Expected outcome:
     ____________________________________________________________
 		I have marked these modules as not taken:
 		Module: CS2113T
-    ____________________________________________________________
-   ```
-
-### `mc` - Prints MCs
-
-Typing `mc` prints the number of MCs based on selected option.
-
-Syntax:
-
-`mc [-option] [-detail]`
-`option: -c(current, default), -p(prospective)`
-`detail: -t(total, default), -d(detailed)`
-
-Example of usage (when there are modules in the target): 
-
-`mc`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		Here is the total MC:
-		22
-    ____________________________________________________________
-   ```
-Example of usage (when there are modules in the target): 
-
-`mc -d`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		Here is the total MC:
-		EE1001: 4MCs
-		EE1001X: 4MCs
-		EE1002: 4MCs
-		EE1003: 4MCs
-		EE1111: 6MCs
-    ____________________________________________________________
-   ```
-
-### `detail` - Prints item detail
-
-Typing `unknown` prints the details of a specified item.
-
-Syntax:
-
-`detail [module code (for modules only) / index]`
-
-Example of usage: 
-
-`detail 1`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		Here are the details you requested:
-		Item 1: [T][X] borrow book
-    ____________________________________________________________
-   ```
-
-Example of usage: 
-
-`detail CS2113T`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		Here are the details you requested:
-		Item: CS2113T Software Engineering & Object-Oriented Programming 4MC
-		"This module introduces the necessary skills for systematic and rigorous development of software sys
-		tems. It covers requirements, design, implementation, quality assurance, and project management aspe
-		cts of small-to-medium size multi-person software projects. The module uses the Object Oriented Prog
-		ramming paradigm. Students of this module will receive hands-on practice of tools commonly used in t
-		he industry, such as test automation tools, build automation tools, and code revisioning tools will 
-		be covered.
-		Tasks: [NOT FOUND]
-    ____________________________________________________________
-   ```
-
-### `cap` - Prints CAPs
-
-Typing `mc` prints the calculated CAP for courses based on selected option.
-
-Syntax:
-
-`cap [-option] [module] [grade] {[module] [grade]...}`
-`option: -u(user, default), -m(multiple/custom modules)`
-
-Example of usage (when there are modules in the target): 
-
-`cap`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		Here is your existing CAP: 4.00
-    ____________________________________________________________
-   ```
-Example of usage (when there are modules in the target): 
-
-`cap -m CS2113 A CS1010 B`
-
-Expected outcome:
-
-   ```	
-    ____________________________________________________________
-		Here is your existing CAP: 4.25
     ____________________________________________________________
    ```
 
