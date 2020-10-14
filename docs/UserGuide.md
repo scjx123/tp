@@ -388,32 +388,32 @@ Expected outcome:
    ```
     ____________________________________________________________
         Here are all available commands:
+        Command: add  Description: Add task(s) to module(s): Add specified task(s) to specified module(s).
         Command: bye  Description: Quit the program
+        Command: cap  Description: Calculate CAP for courses based on selected option.
         Command: clear  Description: Clear the task list
         Command: deadline  Description: Add a deadline to the task list
         Command: delete  Description: Delete a task from the task list
+        Command: detail  Description: Print the details of a specified item.
         Command: done  Description: Mark a task as done
         Command: event  Description: Add an event to the task list
+        Command: fancy  Description: Switch to a fancy Cli (requires the shell to support ansi codes).
         Command: find  Description: Find an event in the task list with the specified keyword
-        Command: help  Description: Print the list of available commands, or print the details of a specified command
         Command: focus  Description: Change context. Changes the target of other commands to the specified target
+        Command: help  Description: Print the list of available commands, or print the details of a specified command
+        Command: list  Description: Print a list of items depending on the current Focus
+        Command: mc  Description: Print the number of MCs based on selected option.
+        Command: next  Description: Switch the target region to the next page, keeping other regions unchanged.
+        Command: plain  Description: Switch to a plain Cli.
+        Command: prev  Description: Switch the target region to the previous page, keeping other regions unchanged.
         Command: reminder  Description: List out events and deadlines tasks that are due within 3 days
-        Command: list  Description: Print a list of tasks/modules depending on the current Focus
+        Command: sel  Description: Make selection: Add specified item(s) to the selection.
+        Command: take  Description: Take module(s): Mark specified module(s) as taken.
         Command: todo  Description: Add a todo to the task list
         Command: undone  Description: Mark a task as undone
         Command: unknown  Description: Prints the error message for an unrecognized command for debugging purposes
-        Command: next  Description: Switch the target region to the next page, keeping other regions unchanged.
-        Command: prev  Description: Switch the target region to the previous page, keeping other regions unchanged.
-        Command: fancy  Description: Switch to a fancy Cli (requires the shell to support ansi codes).
-        Command: plain  Description: Switch to a plain Cli.
-        Command: sel  Description: Make selection: Add specified item(s) to the selection.
         Command: unsel  Description: Cancel selection: Make specified item(s) no longer selected.
-        Command: add  Description: Add task(s) to module(s): Add specified task(s) to specified module(s).
-        Command: take  Description: Take module(s): Mark specified module(s) as taken.
         Command: untake  Description: Untake module(s): Mark specified module(s) as not taken.
-        Command: mc  Description: Print MCs: Print the number of MCs based on selected option.
-        Command: detail  Description: Print Details: Print the details of a specified module.
-        Command: cap  Description: Calculate CAP: Calculate CAP for courses based on selected option.
         Use "help [target]" to see details :) Try "help help"!
     ____________________________________________________________
    ```

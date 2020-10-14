@@ -15,7 +15,7 @@ class TaskActionTest {
 
     @Test
     public void actClear_normalCase_clearResponseMessage() {
-        String expectedOutput = "Nice! I've cleared everything in the list.";
+        String expectedOutput = "Nice! I've cleared all tasks from the list and left modules alone.";
         String testCustomInputsCommand = "clear";
 
         assertAll("McActionTest",
