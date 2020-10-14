@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class UI {
 
-    protected final static Logger LOGGER = Logger.getLogger(UI.class.getName());
+    protected final Logger LOGGER = Logger.getLogger(UI.class.getName());
 
     /**
      * The Stream.
