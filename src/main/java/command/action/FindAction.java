@@ -15,11 +15,15 @@ import java.util.stream.Collectors;
 public class    FindAction extends Action {
 
     private String keyword;
+    private String beforeFound;
 
     @Override
     public String act(Data data) throws Exception {
         if (keyword == null || keyword.length() == 0) {
             StringBuilder builder = new StringBuilder(Constants.NO_KEYWORD);
+            if (beforeFound != null) {
+                data.setFlag(beforeFound);
+            }
             data.refreshTarget();
             for (Item item : data.target) {
                 builder.append(item.toString()).append(Constants.WIN_NEWLINE);
@@ -35,8 +39,11 @@ public class    FindAction extends Action {
             if (data.target == null) {
                 return result.replace(Constants.TEXT_PLACEHOLDER, Constants.NOT_FOUND);
             }
-            data.target = data.target.stream().filter(
-                x -> x.toString().contains(keyword)).collect(Collectors.toCollection(ArrayList::new));
+            if (!data.flag.equals(Constants.FOUND)) {
+                beforeFound = data.flag;
+                data.setFlag(Constants.FOUND);
+            }
+            data.target.removeIf(x -> !x.toString().contains(keyword));
             StringBuilder builder = new StringBuilder();
             for (Item item : data.target) {
                 builder.append(item.toString()).append(Constants.WIN_NEWLINE);
