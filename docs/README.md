@@ -69,11 +69,7 @@ Steps for publishing documentation to the public:
 
 ## Site Map
 
-* [User Guide](UserGuide.md)
-* [Developer Guide](DeveloperGuide.md)
-* [About Us](AboutUs.md)
-* [Contact Us](ContactUs.md)
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4Mjk1MzI1MjgsLTE1NDYzMTAwOTAsMT
-YzNTY1MjI0NV19
--->
+* [User Guide](https://github.com/AY2021S1-CS2113-T13-2/tp/blob/master/docs/UserGuide.md)
+* [Developer Guide](https://github.com/AY2021S1-CS2113-T13-2/tp/blob/master/docs/DeveloperGuide.md)
+* [About Us](https://github.com/AY2021S1-CS2113-T13-2/tp/blob/master/docs/AboutUs.md)
+* [Contact Us](https://github.com/AY2021S1-CS2113-T13-2/tp/blob/master/docs/ContactUs.md)
