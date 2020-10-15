@@ -76,7 +76,6 @@ Prerequisites: JRE 11
         Command: unsel  Description: Cancel selection: Make specified item(s) no longer selected.
         Command: untake  Description: Untake module(s): Mark specified module(s) as not taken.
         Use "help [target]" to see details :) Try "help help"!
-	____________________________________________________________
 
     ____________________________________________________________
    ```

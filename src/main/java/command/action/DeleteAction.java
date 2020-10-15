@@ -4,6 +4,7 @@ import command.ParamNode;
 import constants.Constants;
 import data.Data;
 import data.Item;
+import data.SingleModule;
 
 /**
  * The type Delete action.
@@ -20,7 +21,17 @@ public class DeleteAction extends Action {
         Item item = data.get(index);
         String result = super.act(data);
         data.removeItem(index);
-        return replaceStrings(result, item.toString(), data.tasks.size());
+        String notice = "";
+        if (item instanceof SingleModule) {
+            result = result.replace(Constants.REMOVED, Constants.REMOVE_MOD);
+            if (item.isSelected) {
+                notice = Constants.WIN_NEWLINE + "The module is still selected, you may want to \"unsel\" it.";
+            }
+            if (((SingleModule) item).isTaken) {
+                notice = notice + Constants.WIN_NEWLINE + "The module is still taken, you may want to \"untake\" it.";
+            }
+        }
+        return replaceStrings(result, item.toString() + notice, data.tasks.size());
     }
 
     @Override
