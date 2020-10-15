@@ -1,6 +1,7 @@
 package io;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,13 +80,10 @@ public class ModuleParser {
      *
      * @throws IOException are being thrown here.
      */
-    public static ArrayList<Item> load() throws IOException {
-        if (!Files.exists(p2)) {
-            Files.createFile(p2);
-        }
-
+    public ArrayList<Item> load() throws IOException {
+        InputStream is = getClass().getResourceAsStream("courselist11.txt");
         ArrayList<Item> masterList = new ArrayList<>();
-        Scanner s = new Scanner(p2);
+        Scanner s = new Scanner(is);
 
         while (s.hasNext()) {
             tempString = s.nextLine();
@@ -105,7 +103,7 @@ public class ModuleParser {
      *
      * @param tempString A single line of data read from the content list text file.
      */
-    private static void parseFile(String tempString) {
+    private void parseFile(String tempString) {
         if (tempString.indexOf("EE") == 0 || tempString.indexOf("CG") == 0
                 || tempString.indexOf("MA") == 0 || tempString.indexOf("CS") == 0 || tempString.indexOf("EG") == 0) {
             st = new StringTokenizer(tempString,"_");

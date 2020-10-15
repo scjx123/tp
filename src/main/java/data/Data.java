@@ -133,16 +133,18 @@ public class Data {
         LOGGER.exiting(getClass().getName(), "addTask");
     }
 
-    public void removeItem(int index) {
-        Item currentItem = target.get(index);
-        target.remove(currentItem);
-        if (currentItem instanceof SingleModule) {
-            mods.remove(currentItem);
-        } else {
-            tasks.remove(currentItem);
-            assert !tasks.contains(currentItem) : "Task has been removed!";
+    public void removeItem(Item item) {
+        target.remove(item);
+        if (item instanceof Task) { //modules are not removable from mods list.
+            tasks.remove(item);
+            assert !tasks.contains(item) : "Task removal failed!"
         }
         refreshTarget();
+    }
+
+    public void removeItem(int index) {
+        Item currentItem = target.get(index);
+        removeItem(currentItem);
     }
 
     public void updateItem(int index, Item newItem) {

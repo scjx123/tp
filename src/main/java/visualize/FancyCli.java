@@ -17,7 +17,10 @@ public class FancyCli extends Cli {
     private Bitmap bmpSel;
     private final Color listBackground = Color.DarkBlue;
     private final Color selBackground = Color.DarkMagenta;
-    private final Color foreground = Color.White;
+    private final Color foreground = Color.getFromCode(255); // greyscale white
+    private final Color listBarColor = Color.DarkGreen;
+    private final Color selBarColor = Color.LightCyan;
+    private final Color selBarText = Color.getFromCode(232); // greyscale black
     private final int maxX = Constants.BITMAP_W - 1;
     private final int maxListY = Constants.BITMAP_LIST_H - 1;
     private final int maxSelY = Constants.BITMAP_SEL_H - 1;
@@ -36,7 +39,7 @@ public class FancyCli extends Cli {
      */
     public FancyCli(PrintStream stream, InputStream input) {
         super(stream, input);
-        currentColor = 1;
+        currentColor = 29;
         this.bmpList = new Bitmap(Constants.BITMAP_W, Constants.BITMAP_LIST_H);
         this.bmpSel = new Bitmap(Constants.BITMAP_W, Constants.BITMAP_SEL_H);
         listString = new String[0];
@@ -58,8 +61,7 @@ public class FancyCli extends Cli {
      */
     public void initializeList() {
         bmpList.flush(listBackground);
-        bmpList.drawLine(0, 0, maxX, 0, Constants.INIT_LIST,
-                Color.DarkGreen, Color.White, false);
+        bmpList.drawLine(0, 0, maxX, 0, Constants.INIT_LIST, listBarColor, foreground, false);
     }
 
     /**
@@ -69,8 +71,7 @@ public class FancyCli extends Cli {
      */
     public void initializeList(String text) {
         bmpList.flush(listBackground);
-        bmpList.drawLine(0, 0, maxX, 0, text,
-                Color.DarkGreen, Color.White, false);
+        bmpList.drawLine(0, 0, maxX, 0, text, listBarColor, foreground, false);
     }
 
     /**
@@ -78,8 +79,7 @@ public class FancyCli extends Cli {
      */
     public void initializeSel() {
         bmpSel.flush(selBackground);
-        bmpSel.drawLine(0, 0, maxX, 0, Constants.INIT_SEL,
-                Color.LightCyan, Color.Black, false);
+        bmpSel.drawLine(0, 0, maxX, 0, Constants.INIT_SEL, selBarColor, selBarText, false);
     }
 
     /**
@@ -89,8 +89,7 @@ public class FancyCli extends Cli {
      */
     public void initializeSel(String text) {
         bmpSel.flush(selBackground);
-        bmpSel.drawLine(0, 0, maxX, 0, text,
-                Color.LightCyan, Color.Black, false);
+        bmpSel.drawLine(0, 0, maxX, 0, text, selBarColor, selBarText, false);
     }
 
     @Override
@@ -133,6 +132,25 @@ public class FancyCli extends Cli {
         int maxLen = Math.min(myWidth * myHeight, rawInput.length());
         String input = rawInput.substring(0, maxLen);
         boolean isBroken = false;
+        if (isDisplayMode) {
+            if ((y - 1) / Constants.CELL_H % 2 == 0) { // even lines
+                if (currentColor == 61 || currentColor == 55) {
+                    currentColor = 23;
+                } else if (currentColor == 23) {
+                    currentColor = 29;
+                } else {
+                    currentColor = 23;
+                }
+            } else {
+                if (currentColor == 23 || currentColor == 29) {
+                    currentColor = 55;
+                } else if (currentColor == 61) {
+                    currentColor = 55;
+                } else {
+                    currentColor = 61;
+                }
+            }
+        }
         while (startIndex + myWidth - 1 < input.length()) {
             if (y + deltaY > maxY) {
                 isBroken = true;
@@ -154,12 +172,6 @@ public class FancyCli extends Cli {
             String string = input.substring(startIndex);
             fillCellLine(x, y + deltaY, myWidth, isDisplayMode, string);
         }
-        if (isDisplayMode) {
-            currentColor++;
-            if (currentColor > 255) {
-                currentColor = 1;
-            }
-        }
     }
 
     private void fillCellLine(int x, int y, int width, boolean isDisplayMode, String string) {
@@ -179,6 +191,7 @@ public class FancyCli extends Cli {
      * @param indexState    the index state
      */
     public void showText(String input, boolean isDisplayMode, MessageOptions indexState) {
+        currentColor = 29;
         String[] lines = input.split(Constants.WIN_NEWLINE);
         if (lines.length == 0) {
             return;
@@ -260,8 +273,12 @@ public class FancyCli extends Cli {
         } else if (input.contains(Constants.BMP_LIST_SWITCH) || input.contains(Constants.BMP_SEL_SWITCH)) {
             flipPage(input);
             if (!data.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
-                showText(getShownText(true), true, MessageOptions.INDEXED_NUM);
-                showText(getShownText(false), false, MessageOptions.NOT_INDEXED);
+                if (listString.length > 0) {
+                    showText(getShownText(true), true, MessageOptions.INDEXED_NUM);
+                }
+                if (selString.length > 0) {
+                    showText(getShownText(false), false, MessageOptions.NOT_INDEXED);
+                }
             }
         } else {
             boolean displayMode = data.indexOption != MessageOptions.NOT_INDEXED;
@@ -378,13 +395,36 @@ public class FancyCli extends Cli {
         }
     }
 
+    private boolean isIntString(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int d = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
     private String[] groupStrings(String[] strings, int groups, int groupLength) {
         StringBuilder[] builders = new StringBuilder[groups];
         String heading = strings[0];
         for (int i = 0; i < groups; i++) {
+            String head;
+            String oldBracket = " ()";
+            if (heading.contains(Constants.PARAM_SIGNATURE)) {
+                String[] heads = heading.replace(Constants.PARAM_SIGNATURE, Constants.LINE_UNIT)
+                        .split(Constants.LINE_UNIT);
+                head = heads[heads.length - 1].replace(Constants.PARAM_RIGHT, Constants.ZERO_LENGTH_STRING).trim();
+                if (isIntString(head)) {
+                    oldBracket = Constants.SPACE + Constants.PARAM_LEFT + head + Constants.PARAM_RIGHT;
+                }
+            }
             String bracket = Constants.SPACE + Constants.PARAM_LEFT + (i + 1) + Constants.PARAM_RIGHT;
-            builders[i] = new StringBuilder(heading.replace(bracket, Constants.ZERO_LENGTH_STRING)).append(
-                    bracket).append(Constants.WIN_NEWLINE);
+            builders[i] = new StringBuilder(heading.replace(oldBracket, Constants.ZERO_LENGTH_STRING))
+                    .append(bracket).append(Constants.WIN_NEWLINE);
+
         }
         for (int i = 1; i < strings.length; i++) {
             int currentGroup = (i - 1) / groupLength;

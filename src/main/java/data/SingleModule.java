@@ -49,12 +49,21 @@ public class SingleModule extends Item {
      */
     public SingleModule(String code, String name, String description, String mc, String prereq) {
         super(code); //moduleDescription is handle here.
-        this.moduleCode = code;
-        this.moduleDescription = description;
-        this.moduleName = name;
-        this.moduleMC = mc;
-        this.modulePrerequisite = prereq;
+        this.moduleCode = replaceBlanks(code);
+        this.moduleDescription = replaceBlanks(description);
+        this.moduleName = replaceBlanks(name);
+        this.moduleMC = replaceBlanks(mc);
+        this.modulePrerequisite = replaceBlanks(prereq);
         taskList = new ArrayList<>();
+    }
+
+    public String replaceBlanks(String input) {
+        if (input != null) {
+            return input.replace(Constants.TAB, Constants.SPACE).replace(Constants.NEWLINE, Constants.SPACE)
+                    .replace(Constants.RETURN, Constants.SPACE).replace("  ", Constants.SPACE).trim();
+        } else {
+            return null;
+        }
     }
 
     boolean isSelected = false;

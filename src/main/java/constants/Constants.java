@@ -340,6 +340,7 @@ public class Constants {
      * The constant REMOVED.
      */
     public static final String REMOVED = "Noted. I've removed this task:";
+    public static final String REMOVE_MOD = "Noted. I've removed this module from your current list:";
     /**
      * The constant COUNT_PREFIX.
      */
@@ -608,7 +609,7 @@ public class Constants {
      */
     public static final Map<String, String> messageMap = Map.ofEntries(
             Map.entry(BYE, "Bye. Hope to see you again soon!"),
-            Map.entry(CLEAR, "Nice! I've cleared everything in the list."),
+            Map.entry(CLEAR, "Nice! I've cleared all tasks from the list and left modules alone."),
             Map.entry(DEADLINE, ADDED + CHANGED),
             Map.entry(DELETE, REMOVED + CHANGED),
             Map.entry(DONE, "Nice! I've marked this task as done:"
@@ -632,6 +633,8 @@ public class Constants {
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(DETAIL, DETAIL_HEAD + TEXT_PLACEHOLDER),
-            Map.entry(UNSEL, "I have un-selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(UNTAKE, "I have marked these modules as not taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
+            Map.entry(UNSEL, "I have un-selected these items you specified. "
+                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNTAKE, "I have un-taken these modules you specified. "
+                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER));
 }
