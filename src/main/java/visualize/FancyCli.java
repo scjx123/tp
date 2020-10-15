@@ -191,6 +191,7 @@ public class FancyCli extends Cli {
      * @param indexState    the index state
      */
     public void showText(String input, boolean isDisplayMode, MessageOptions indexState) {
+        currentColor = 29;
         String[] lines = input.split(Constants.WIN_NEWLINE);
         if (lines.length == 0) {
             return;

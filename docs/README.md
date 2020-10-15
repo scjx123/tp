@@ -1,6 +1,6 @@
 # Domnus - An easy way to track your schedules!
 
-![here](UI.png)
+![here](../UI.png)
 
  - This is a desktop tasks tracker application. It comes with a fancy and plain mode of display in which user can switch anytime between them.
  - It is a Java application intended for students to track their modules, mc, daily task, as well as assignments for the individual modules. 
