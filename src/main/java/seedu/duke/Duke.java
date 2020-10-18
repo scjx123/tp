@@ -3,6 +3,8 @@ package seedu.duke;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 import command.Command;
@@ -49,6 +51,16 @@ public class Duke {
             ui.showText("The save file is corrupted.");
             data = new Data();
         }
+
+        // schedule reminder every 10 minutes
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                ui.showReminder(data);
+            }
+        },Constants.REMINDER_DELAY,Constants.REMINDER_INTERVAL);
+
     }
 
     private void reattachUI(boolean isFancy, boolean isPlain) {
@@ -67,7 +79,7 @@ public class Duke {
      * Run.
      */
     public void run() {
-        ui.showReminder(data);
+        //ui.showReminder(data);
         boolean isExit = false;
         while (!isExit) {
             try {
