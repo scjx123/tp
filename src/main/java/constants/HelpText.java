@@ -268,7 +268,7 @@ public enum HelpText {
             new String[]{
                 "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
                 "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
-                "2. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
+                "3. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
             }),
     /**
      * The Take.
