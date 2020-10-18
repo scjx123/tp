@@ -1,15 +1,16 @@
 # User Guide
 
-## Introduction
+## 1. Introduction
 
-Domsun is a CLI program that allows users to manage tasks and modules. <br>
-Users will be able to browse and select modules, create and arrange tasks, add tasks to modules,<br>
-create reminders and calculate their MCs / CAPs.
+Our project aims to develop a CLI application that can be used for task tracking and modules assignment managing. The application enable users who are fast typers like you,  to browse and select modules, create and arrange tasks, add tasks to modules,create reminders and calculate their MCs / CAPs. This convenient application,  greatly reduces the stress of juggling a busy schedule for students who manages the overwhelming schedule of school and personal life.   <br>
 
-## Quick Start
+This user guide will bring you through the various commands in our app, and it also aims to provide a smooth learning process such that you can fully utilize it to help in your task management. Lets wait no further and get started! 
 
 
-1. Ensure that you have Java 11 or above installed.
+## 2. Quick Start
+
+
+1. Ensure that you have Java 11 or above and Gradle installed on your Computer
 2. Download the latest version of `Duke` from [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).
 3. Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.
 4. Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS. 
@@ -17,7 +18,7 @@ create reminders and calculate their MCs / CAPs.
 6. Type ‘bye’ to terminate your session.  
 
 
-## Features 
+## 3. Features 
 
 #### Addition and removal of tasks
 The program allows user to add or delete tasks from the task list.<br>
@@ -67,7 +68,7 @@ The program allows users to add some tasks to modules using the `add` command.
 #### Reminders
 The program allows user to set reminders at certain time, or remind themselves of the most urgent tasks on start-up.
 
-## Usage (alphabetical order)
+## 4. Usage (alphabetical order)
 
 ### `add` - Add task(s) to module(s)
 
@@ -159,18 +160,18 @@ Expected outcome:
 ### `deadline` - Add a deadline to the task list
 
 Typing `deadline` allows the program to parse user's input and create a ***deadline*** object with 
-specified *description* and *time*. It will be appended to the end of the task list.
+specified *description* and *time*. It will be appended to the end of the task list. For recurring task, type in word 'Weekly' at the end of your task. 
 
 Syntax: 
 
-`deadline [description] /by [time]`
+`deadline [description] /by [time] <Weekly>`
 
 Example of usage:
 
-`deadline ddl /by 21/9/15 1:12`
-
+`deadline ddl /by 21/9/20 1:12`
+or 
+`deadline ddl /by 21/9/20 1:12 Weekly`
 Expected outcome:
-
    ```	
     ____________________________________________________________
         Got it. I've added this task:
@@ -268,7 +269,7 @@ Expected outcome:
 ### `event` - Add an event to the task list
 
 Typing `event` allows the program to parse user's input and create an ***event*** object with 
-specified *description* and *time*. It will be appended to the end of the task list.
+specified *description* and *time*. It will be appended to the end of the task list. For recurring task, type in word 'Weekly' at the end of your task. 
 
 Syntax:
 
@@ -277,6 +278,8 @@ Syntax:
 Example of usage: 
 
 `event midterm exam /at May 13 2020 8:00`
+or 
+`event midterm exam /at 13/15/2020 8:00 Weekly`
 
 Expected outcome:
 
@@ -815,13 +818,17 @@ Expected outcome:
     ____________________________________________________________
    ```
 
-## FAQ
+## 5. FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
 **A**: Send the `data` folder in your program directory to the program directory on your new device.
 
-## Command Summary
+**Q**: Where do i install java 11 from? 
+
+**A**: Java 11 can be downloaded from the Oracle website. [https://www.oracle.com/technetwork/java/javase/downloads/index.html](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
+## 6. Command Summary
 
 A cheat sheet of commonly used commands:
 

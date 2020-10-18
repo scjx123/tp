@@ -1,119 +1,75 @@
-# TP Project Duke
+# Domnus - An easy way to track your schedules!
 
-###### by TomLBZ, ~, ~, ~
+![here](../UI.png)
 
-This is our TP project for *CS2113T*. It is a task management system based on the CLI interface. 
-It is written in *Java*. Given below are instructions on how to use it.
+ - This is a desktop tasks tracker application. It comes with a fancy and plain mode of display in which user can switch anytime between them.
+ - It is a Java application intended for students to track their modules, mc, daily task, as well as assignments for the individual modules. 
 
-## For Developers
+## Setting up in Intellij
 
-#### Set up IntelliJ
+Prerequisites: JDK 11 (use the exact version), update Intellij to the most recent version.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()`. If the setup is correct, you should see something like the below:
+1. **Configure Intellij for JDK 11**, as described [here](https://se-education.org/guides/tutorials/intellijJdk.html).
+1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
+1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
    ```
-    ____________________________________________________________
-        Hello, I'm Duke. What can I do for you?
-    ____________________________________________________________
+   > Task :compileJava
+   > Task :processResources NO-SOURCE
+   > Task :classes
+   
+   > Task :Duke.main()
+   Hello from
+    ____        _        
+   |  _ \ _   _| | _____ 
+   | | | | | | | |/ / _ \
+   | |_| | |_| |   <  __/
+   |____/ \__,_|_|\_\___|
+   
+   What is your name?
    ```
-1. Now you are all set.
+   Type some word and press enter to let the execution proceed to the end.
 
-## For Users
+## Build automation using Gradle
 
-#### Run the Program
+* This project uses Gradle for build automation and dependency management. It includes a basic build script as well (i.e. the `build.gradle` file).
+* If you are new to Gradle, refer to the [Gradle Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/gradle.html).
 
-Prerequisites: JRE 11
+## Testing
 
-1. Install JRE if you haven't.
-   1. In case you have multiple Java Runtime installed, please modify the PATH variable such that 
-   the path for JRE 11 is ***in front of*** the path for other JREs.
-1. Download the jar file from Github, go to `Release` and download the latest version.
-1. Open a shell, such as _bashrc_, _cmd_, _gitbash_, etc.
-1. Move the focus to the directory of the jar file.
-1. Run the jar using 'java -jar tp.jar'.
-1. Enjoy.
+### I/O redirection tests
 
-#### Useful Commands
+* To run _I/O redirection_ tests (aka _Text UI tests_), navigate to the `text-ui-test` and run the `runtest(.bat/.sh)` script.
 
-* Type `help` to see the following screen:
-   ```
-    ____________________________________________________________
-        Here are all available commands:
-        Command: add  Description: Add task(s) to module(s): Add specified task(s) to specified module(s).
-        Command: bye  Description: Quit the program
-        Command: cap  Description: Calculate CAP for courses based on selected option.
-        Command: clear  Description: Clear the task list
-        Command: deadline  Description: Add a deadline to the task list
-        Command: delete  Description: Delete a task from the task list
-        Command: detail  Description: Print the details of a specified item.
-        Command: done  Description: Mark a task as done
-        Command: event  Description: Add an event to the task list
-        Command: fancy  Description: Switch to a fancy Cli (requires the shell to support ansi codes).
-        Command: find  Description: Find an event in the task list with the specified keyword
-        Command: focus  Description: Change context. Changes the target of other commands to the specified target
-        Command: help  Description: Print the list of available commands, or print the details of a specified command
-        Command: list  Description: Print a list of items depending on the current Focus
-        Command: mc  Description: Print the number of MCs based on selected option.
-        Command: next  Description: Switch the target region to the next page, keeping other regions unchanged.
-        Command: plain  Description: Switch to a plain Cli.
-        Command: prev  Description: Switch the target region to the previous page, keeping other regions unchanged.
-        Command: reminder  Description: List out events and deadlines tasks that are due within 3 days
-        Command: sel  Description: Make selection: Add specified item(s) to the selection.
-        Command: take  Description: Take module(s): Mark specified module(s) as taken.
-        Command: todo  Description: Add a todo to the task list
-        Command: undone  Description: Mark a task as undone
-        Command: unknown  Description: Prints the error message for an unrecognized command for debugging purposes
-        Command: unsel  Description: Cancel selection: Make specified item(s) no longer selected.
-        Command: untake  Description: Untake module(s): Mark specified module(s) as not taken.
-        Use "help [target]" to see details :) Try "help help"!
+### JUnit tests
 
-    ____________________________________________________________
-   ```
-* Type `help list` to see the detailed usages of the `list` command:
-   ```
-    ____________________________________________________________
-        Name: list
-        Description: Print a list of items depending on the current Focus
-        Syntax:
-        list
-        list date [asc / desc / spec "date"(any common date format)]
-        Usages:
-        1. "list" >> list all added items
-        2. "list date asc" >> list items with a "date" field in ascending order
-        3. "list date spec Oct 5 2020" >> list items with specific "date" field of Oct 5 2020
-    ____________________________________________________________
+* A skeleton JUnit test (`src/test/java/seedu/duke/DukeTest.java`) is provided with this project template. 
+* If you are new to JUnit, refer to the [JUnit Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/junit.html).
 
-   ```
-* Type `help deadline` to see the detailed usage of the `deadline` command:
-   ```
-    ____________________________________________________________
-        Name: deadline
-        Description: Add a deadline to the task list
-        Syntax:
-        deadline [description] /by [time]
-        Usages:
-        1. "deadline ddl /by 21/9/15 1:12" >> adds a deadline with description "ddl" and time "September 15 2021 1:12"
-    ____________________________________________________________
-   ```
-* Feel free to explore other commands!
-* If you found a bug, please raise an ***issue*** on Github.
+## Checkstyle
+
+* A sample CheckStyle rule configuration is provided in this project.
+* If you are new to Checkstyle, refer to the [Checkstyle Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/checkstyle.html).
+
+## CI using GitHub Actions
+
+The project uses [GitHub actions](https://github.com/features/actions) for CI. When you push a commit to this repo or PR against it, GitHub actions will run automatically to build and verify the code as updated by the commit/PR.
+
+## Documentation
+
+`/docs` folder contains a skeleton version of the project documentation.
+
+Steps for publishing documentation to the public: 
+1. If you are using this project template for an individual project, go your fork on GitHub.<br>
+   If you are using this project template for a team project, go to the team fork on GitHub.
+2. Click on the `settings` tab.
+3. Scroll down to the `GitHub Pages` section.
+4. Set the `source` as `master branch /docs folder`.
+5. Optionally, use the `choose a theme` button to choose a theme for your documentation.
 
 
-# Duke
+## Site Map
 
-{Give product intro here}
-
-Useful links:
-* [User Guide](UserGuide.md)
-* [Developer Guide](DeveloperGuide.md)
-* [About Us](AboutUs.md)
+* [User Guide](https://github.com/AY2021S1-CS2113-T13-2/tp/blob/master/docs/UserGuide.md)
+* [Developer Guide](https://github.com/AY2021S1-CS2113-T13-2/tp/blob/master/docs/DeveloperGuide.md)
+* [About Us](https://github.com/AY2021S1-CS2113-T13-2/tp/blob/master/docs/AboutUs.md)
+* [Contact Us](https://github.com/AY2021S1-CS2113-T13-2/tp/blob/master/docs/ContactUs.md)
