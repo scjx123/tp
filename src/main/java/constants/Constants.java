@@ -506,7 +506,7 @@ public class Constants {
     /**
      * The constant REMINDER_INTERVAL.
      */
-    public static final int REMINDER_INTERVAL = 1000*600;
+    public static final int REMINDER_INTERVAL = 1000 * 60;
 
     /**
      * The constant REMINDER_DELAY.
