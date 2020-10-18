@@ -503,8 +503,15 @@ public class Constants {
      * The constant REMINDER_RANGE.
      */
     public static final int REMINDER_RANGE = 3;
+    /**
+     * The constant REMINDER_INTERVAL.
+     */
+    public static final int REMINDER_INTERVAL = 1000*600;
 
-
+    /**
+     * The constant REMINDER_DELAY.
+     */
+    public static final int REMINDER_DELAY = 0;
 
     /**
      * The constant actionMap.

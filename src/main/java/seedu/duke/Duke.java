@@ -3,6 +3,8 @@ package seedu.duke;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 import command.Command;
@@ -25,6 +27,38 @@ public class Duke {
     private Data data;
     private Cli ui;
     private boolean isFancy;
+
+    class RemindTask extends TimerTask {
+        public void run () {
+            // your code here...
+            ui.showReminder(data);
+            boolean isExit = false;
+            while (!isExit) {
+                try {
+                    String fullCommand = ui.nextLine();
+                    ArrayList<Command> commands = parser.parse(fullCommand); //array list of commands
+                    for (Command c : commands) {
+                        c.execute(data);
+                        reattachUI(c.isFancy(), c.isPlain());
+                        ui.update(c.result, data);
+                        isExit = c.isBye();
+                        storage.saveTasks(data.tasks);
+                    }
+                } catch (Exception e) {
+                    String message = e.getMessage();
+                    if (message == null) {
+                        message = Constants.INDEX_OUT;
+                    }
+                    ui.update(message, data);
+                }
+            }
+            System.out.println("Timer !");
+            Timer timer = new Timer ();
+// schedule the task to run starting now and then every hour...
+            timer.schedule (new RemindTask(), 100*60);
+        }
+
+    }
 
     /**
      * Instantiates a new Duke.
@@ -49,6 +83,16 @@ public class Duke {
             ui.showText("The save file is corrupted.");
             data = new Data();
         }
+
+        // schedule reminder every 10 minutes
+        Timer timer = new Timer ();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                ui.showReminder(data);
+            }
+        },Constants.REMINDER_DELAY,Constants.REMINDER_INTERVAL);
+
     }
 
     private void reattachUI(boolean isFancy, boolean isPlain) {
@@ -67,7 +111,7 @@ public class Duke {
      * Run.
      */
     public void run() {
-        ui.showReminder(data);
+        //ui.showReminder(data);
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -89,7 +133,6 @@ public class Duke {
             }
         }
     }
-
     /**
      * Execute JUnit test.
      *
@@ -140,7 +183,7 @@ public class Duke {
         // However, no matter what mode it starts in, I have created switching commands.
         // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
-        //boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        //new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
+        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
     }
 }
