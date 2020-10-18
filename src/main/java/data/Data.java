@@ -137,7 +137,7 @@ public class Data {
         target.remove(item);
         if (item instanceof Task) { //modules are not removable from mods list.
             tasks.remove(item);
-            assert !tasks.contains(item) : "Task removal failed!"
+            assert !tasks.contains(item) : "Task removal failed!";
         }
         refreshTarget();
     }
