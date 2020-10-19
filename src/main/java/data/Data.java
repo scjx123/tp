@@ -124,10 +124,14 @@ public class Data {
         LocalDateTime newDate = cc.checkRecurrenceDate(task);
         if (newDate != null) {
             task.setDateTime(newDate);
+        } else {
+            LOGGER.log(Level.INFO, "New date was null! Invalid Date");
         }
         if (!cc.checkDuplicates()) {
             LOGGER.log(Level.INFO, "Task was added to data");
             tasks.add(task);
+        } else {
+            LOGGER.log(Level.INFO, "Duplicate found! Task was not added to data");
         }
         refreshTarget();
         LOGGER.exiting(getClass().getName(), "addTask");
@@ -137,7 +141,6 @@ public class Data {
         target.remove(item);
         if (item instanceof Task) { //modules are not removable from mods list.
             tasks.remove(item);
-            assert !tasks.contains(item) : "Task removal failed!";
         }
         refreshTarget();
     }
