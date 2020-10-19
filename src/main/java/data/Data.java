@@ -56,7 +56,7 @@ public class Data {
         lastInput = "";
         lastIndexOption = MessageOptions.NOT_INDEXED;
         tasks = new ArrayList<>();
-        takenCourses= new ArrayList<>();
+        takenCourses = new ArrayList<>();
         indexOption = MessageOptions.NOT_INDEXED;
         target = tasks;
         mods = new ArrayList<>();

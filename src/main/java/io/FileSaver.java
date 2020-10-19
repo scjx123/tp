@@ -53,6 +53,22 @@ public class FileSaver extends IO {
     }
 
     /**
+     * Save boolean.
+     *
+     * @param string the string
+     * @return the boolean
+     */
+    public boolean saveTask(String string) {
+        try {
+            Files.writeString(Paths.get(path + "/" + fileName),
+                string, StandardCharsets.UTF_8);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    /**
      * Save tasks to storage.
      *
      * @param courses the tasks
@@ -63,7 +79,8 @@ public class FileSaver extends IO {
             StringBuilder strBuilder = new StringBuilder();
             for (Item item: courses) {
                 SingleModule module = (SingleModule) item;
-                strBuilder.append(module.moduleCode).append(Constants.SPACE).append(module.grade).append(System.lineSeparator());
+                strBuilder.append(module.moduleCode).append(Constants.SPACE)
+                    .append(module.grade).append(System.lineSeparator());
             }
             if (isFileInvalid()) {
                 throw new IOException();
@@ -71,22 +88,6 @@ public class FileSaver extends IO {
             Files.writeString(
                 Paths.get(path + "/" + fileName),
                 strBuilder.toString(), StandardCharsets.UTF_8);
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Save boolean.
-     *
-     * @param string the string
-     * @return the boolean
-     */
-    public boolean saveTask(String string) {
-        try {
-            Files.writeString(Paths.get(path + "/" + fileName),
-                    string, StandardCharsets.UTF_8);
             return true;
         } catch (IOException e) {
             return false;

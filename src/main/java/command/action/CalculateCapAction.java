@@ -24,7 +24,6 @@ public class CalculateCapAction extends Action {
 
     @Override
     public String act(Data data) throws Exception {
-        assert data == null : "No data is found";
         double totalScore = 0;
         double totalMC = 0;
         if (isCustom) {
