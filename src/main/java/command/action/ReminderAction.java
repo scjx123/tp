@@ -18,7 +18,7 @@ public class ReminderAction extends Action {
 
     @Override
     public String act(Data data) {
-        LOGGER.entering(getClass().getName(), "addReminder");
+        // LOGGER.entering(getClass().getName(), "addReminder");
         Data savedData = data;
         final String flag = savedData.flag;
         StringBuilder builder = new StringBuilder(Constants.REMINDER_HEAD);
@@ -33,14 +33,14 @@ public class ReminderAction extends Action {
 
         for (int i = 0; i < tasks.size(); i++) {
             if (!(tasks.get(i).getDateTime().isAfter(lt) && tasks.get(i).getDateTime().isBefore(upper))) {
-                LOGGER.log(Level.INFO, "Non-urgent task is eliminated");
+                // LOGGER.log(Level.INFO, "Non-urgent task is eliminated");
                 tasks.remove(i);
                 i--;
                 //assert i != -1 : "i should be non-negative";
             }
         }
         tasks.sort(Comparator.comparing(Item::getDateTime));
-        LOGGER.exiting(getClass().getName(), "addReminder");
+        // LOGGER.exiting(getClass().getName(), "addReminder");
 
         for (Item item : tasks) {
             builder.append(item.toString()).append(Constants.WIN_NEWLINE);
