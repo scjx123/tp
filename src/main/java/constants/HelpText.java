@@ -133,6 +133,20 @@ public enum HelpText {
                 "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
             }),
     /**
+     * Help text to add grade to a course.
+     */
+    GRADE(
+        "grade",
+        "Add grade to a user's taken course/module.",
+        new String[]{
+            "grade [-option] [module] [grade] {[module] [grade]...}",
+            "option: -s(show, default), -a(add)"
+        },
+        new String[]{
+            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade to a user's taken course/module",
+            "2. \"grade\" >> show grades of all taken modules"
+        }),
+    /**
      * The Find.
      */
     FIND(

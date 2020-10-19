@@ -24,7 +24,6 @@ public class CalculateCapAction extends Action {
 
     @Override
     public String act(Data data) throws Exception {
-        assert data != null : "Data cannot be null";
         double totalScore = 0;
         double totalMC = 0;
         if (isCustom) {
@@ -52,19 +51,16 @@ public class CalculateCapAction extends Action {
             }
         }
         double capValue = totalScore / totalMC;
-        assert capValue > 0 : "CAP need to be more than zero";
         return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
     }
 
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
-        ParamNode currData;
-
-        //extract modules name
-        currData = flattenedArgs[0];
+        ParamNode currData = flattenedArgs[0];
+        String option = flattenedArgs[0].name;
         //input custom modules
-        if (flattenedArgs[0].name.equals("m")) {
+        if (option.equals("m")) {
             isCustom = true;
             while (currData.thisData != null) {
                 String moduleCode = currData.thisData.name.toUpperCase();

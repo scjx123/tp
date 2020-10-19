@@ -14,62 +14,86 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    private FileLoader loader;
-    private FileSaver saver;
+    private FileLoader taskLoader;
+    private FileSaver taskSaver;
+    private FileLoader courseLoader;
+    private FileSaver courseSaver;
     private Parser parser;
     private ModuleParser moduleloader;
 
     /**
      * Instantiates a new Storage.
      *
-     * @param directory the directory
-     * @param fileName  the file name
-     * @param parser    the parser
+     * @param directory    the directory
+     * @param taskFileName the file name
+     * @param parser       the parser
      */
-    public Storage(String directory, String fileName, Parser parser) {
-        loader = new FileLoader(directory, fileName);
-        saver = new FileSaver(directory, fileName);
+    public Storage(String directory, String taskFileName, String courseFileName, Parser parser) {
+        taskLoader = new FileLoader(directory, taskFileName);
+        taskSaver = new FileSaver(directory, taskFileName);
+        courseLoader = new FileLoader(directory, courseFileName);
+        courseSaver = new FileSaver(directory, courseFileName);
         this.parser = parser;
         this.moduleloader = new ModuleParser();
     }
 
     /**
-     * Save tasks.
+     * Save user's data.
      *
-     * @param tasks the tasks
+     * @param tasks user's tasks
      */
-    public void saveTasks(ArrayList<Item> tasks) {
-        saver.save(tasks);
+    public void save(ArrayList<Item> tasks, ArrayList<Item> courses) {
+        taskSaver.saveTask(tasks);
+        courseSaver.saveCourse(courses);
     }
 
     /**
-     * Load task list.
+     * Load all storage data.
      *
      * @return the task list
      */
     public Data load() {
-        String[] lines = loader.loadAllLines();
+        String[] lines = taskLoader.loadAllLines();
         int index = 0;
         Data list = new Data();
-        for (String line: lines) {
-            String output = dataToCommand(line, index);
+
+        //load stored tasks
+        for (String line : lines) {
+            String output = taskDataToCommand(line, index);
             if (!output.equals(Constants.ZERO_LENGTH_STRING)) {
                 index++;
                 ArrayList<Command> commands = parser.parse(output);
-                for (Command c: commands) {
+                for (Command c : commands) {
                     c.execute(list);
                 }
             }
         }
+
+        //load module list
         try {
             list.mods = moduleloader.load();
         } catch (IOException e) {
             e.addSuppressed(new IOException());
         }
+
+        //load stored courses
+        String[] coursesWithGrades = courseLoader.loadAllLines();
+        String dataInput = Constants.ZERO_LENGTH_STRING;
+        for (String course : coursesWithGrades) {
+            dataInput = dataInput + course + Constants.SPACE;
+        }
+        String output = courseDataToCommand(dataInput);
+        if (!output.equals(Constants.ZERO_LENGTH_STRING)) {
+            ArrayList<Command> commands = parser.parse(output);
+            for (Command c : commands) {
+                c.execute(list);
+            }
+        }
+
         return list;
     }
 
-    private String dataToCommand(String input, int index) {
+    private String taskDataToCommand(String input, int index) {
         boolean isDone = false;
         String output = Constants.ZERO_LENGTH_STRING;
         String iconCleared = input.replace(Constants.ICON_SIGNATURE, Constants.ICON_SEPARATOR);
@@ -99,7 +123,7 @@ public class Storage {
         } else {
             output += bodySeparated[0] + Constants.SPACE;
             String params = bodySeparated[1].replace(Constants.PARAM_LEFT, Constants.ZERO_LENGTH_STRING).replace(
-                    Constants.PARAM_RIGHT,Constants.ZERO_LENGTH_STRING).trim();
+                Constants.PARAM_RIGHT, Constants.ZERO_LENGTH_STRING).trim();
             output += Constants.PARAM + params.replace(Constants.DETAILS_SIGNATURE, Constants.SPACE);
         }
         if (isDone) {
@@ -108,4 +132,14 @@ public class Storage {
         return output;
     }
 
+    private String courseDataToCommand(String input) {
+        String output = Constants.ZERO_LENGTH_STRING;
+        String[] iconSeparated = input.split(Constants.SPACE);
+        String courseName = iconSeparated[0];
+        // String grade = iconSeparated[1];
+        if (!courseName.isEmpty()) {
+            output = Constants.GRADE + Constants.SPACE + "-a" + Constants.SPACE + input;
+        }
+        return output;
+    }
 }
