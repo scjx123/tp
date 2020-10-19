@@ -5,26 +5,26 @@ The Architecture Diagram below represents a high-level design overview of the Ap
 
 ![here](Architecture_Diagram.PNG)
 
-**Main**
+**Main**<br>
 For the main layer, it contains a single class known as *Duke*. 
-Main's interaction with Storage 
+Main's interaction with Storage<br>
 When the app launches, Duke loads any previous data from storage and then connects the components of the app in sequence. Upon shutting down,  Duke calls upon method to save user's data automatically.  
 
-Main's interaction with UI
+Main's interaction with UI<br>
 Main gets user input and displays messages through the use of UI component. 
 
-Main's interaction with Command Interpreter 
+Main's interaction with Command Interpreter<br>
 Upon receiving command from the UI, Duke would pass the entire user input into Command Interpreter (CI)
 
-Main's interaction with Execute 
+Main's interaction with Execute<br>
 Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
 
-**UI**
-**Command Interpreter**
-**Executer**
-**Storage**
+**UI**<br>
+**Command Interpreter**<br>
+**Executer**<br>
+**Storage**<br>
 
-## Implementation
+## Implementation<br>
 [add ur individual features here]
 
 
