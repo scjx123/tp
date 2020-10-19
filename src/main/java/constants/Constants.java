@@ -19,9 +19,12 @@ import command.action.ListAction;
 import command.action.McAction;
 import command.action.NextAction;
 import command.action.PlainAction;
+import command.action.PostponeAction;
 import command.action.PrevAction;
+import command.action.RemindAction;
 import command.action.ReminderAction;
 import command.action.SelectAction;
+import command.action.SnoozeAction;
 import command.action.TakeAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
@@ -233,6 +236,18 @@ public class Constants {
      */
     public static final String REMINDER = "reminder";
     /**
+     * The constant REMIND.
+     */
+    public static final String REMIND = "remind";
+    /**
+     * The constant POSTPONE.
+     */
+    public static final String POSTPONE = "postpone";
+    /**
+     * The constant SNOOZE.
+     */
+    public static final String SNOOZE = "snooze";
+    /**
      * The constant HELP.
      */
     public static final String HELP = "help";
@@ -395,6 +410,10 @@ public class Constants {
      */
     public static final String NO_MODULE = "Sorry, no such module in the list!" + WIN_NEWLINE;
     /**
+     * The constant NOT_DEADLINE_OR_EVENT.
+     */
+    public static final String NOT_DEADLINE_OR_EVENT = "Sorry, there is no date in todo task!" + WIN_NEWLINE;
+    /**
      * The constant ITEM_EXIST.
      */
     public static final String ITEM_EXIST = "Sorry, this item is already in your list!" + WIN_NEWLINE;
@@ -503,8 +522,15 @@ public class Constants {
      * The constant REMINDER_RANGE.
      */
     public static final int REMINDER_RANGE = 3;
+    /**
+     * The constant REMINDER_INTERVAL.
+     */
+    public static final int REMINDER_INTERVAL = 1000 * 60;
 
-
+    /**
+     * The constant REMINDER_DELAY.
+     */
+    public static final int REMINDER_DELAY = 0;
 
     /**
      * The constant actionMap.
@@ -522,6 +548,9 @@ public class Constants {
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
             Map.entry(REMINDER, new ReminderAction()),
+            Map.entry(REMIND, new RemindAction()),
+            Map.entry(POSTPONE, new PostponeAction()),
+            Map.entry(SNOOZE, new SnoozeAction()),
             Map.entry(MC, new McAction()),
             Map.entry(DETAIL, new DetailAction()),
             Map.entry(TODO, new TodoAction()),
@@ -549,6 +578,7 @@ public class Constants {
             Map.entry(FIND, HelpText.FIND),
             Map.entry(FOCUS, HelpText.FOCUS),
             Map.entry(REMINDER, HelpText.REMINDER),
+            Map.entry(POSTPONE, HelpText.POSTPONE),
             Map.entry(HELP, HelpText.HELP),
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
@@ -583,6 +613,8 @@ public class Constants {
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
+            Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
+            Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
@@ -617,5 +649,6 @@ public class Constants {
             Map.entry(UNSEL, "I have un-selected these items you specified. "
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNTAKE, "I have un-taken these modules you specified. "
-                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER));
+                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
 }

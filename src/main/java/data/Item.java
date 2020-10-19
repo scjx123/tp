@@ -212,4 +212,25 @@ public class Item {
         return theDate.getDayOfWeek();
     }
 
+    public void resetDateTime(String opt) {
+        switch (opt) {
+        case "d":
+            dateTime = dateTime.plusDays(1);
+            break;
+        case "h":
+            dateTime = dateTime.plusHours(1);
+            break;
+        case "w":
+            dateTime = dateTime.plusWeeks(1);
+            break;
+        case "m":
+            dateTime = dateTime.plusMonths(1);
+            break;
+        case "y":
+            dateTime = dateTime.plusYears(1);
+            break;
+        default:
+            break;
+        }
+    }
 }
