@@ -30,7 +30,7 @@ public class Storage {
         loader = new FileLoader(directory, fileName);
         saver = new FileSaver(directory, fileName);
         this.parser = parser;
-        this.moduleloader = new ModuleParser("data/courselist11.txt");
+        this.moduleloader = new ModuleParser();
     }
 
     /**
