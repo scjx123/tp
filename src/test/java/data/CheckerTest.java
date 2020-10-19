@@ -32,7 +32,7 @@ public class CheckerTest {
     }
 
     private String[] testCommand = {"todo eat /by 12-12-2020 18:30",
-            "deadline CS2113 Assignment /by 12-12-2020 18:30"};
+        "deadline CS2113 Assignment /by 12-12-2020 18:30"};
 
     @Test
     public void checkClash_hasDuplicate_BooleanFalse() {
