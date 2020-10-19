@@ -194,7 +194,7 @@ public class Constants {
     /**
      * Duke FILENAME.
      */
-    public static final String TAKS_FILENAME = "duke.txt";
+    public static final String TASK_FILENAME = "duke.txt";
     /**
      * Module FILENAME.
      */
@@ -402,6 +402,8 @@ public class Constants {
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
     public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
         + WIN_NEWLINE;
+    public static final String COURSE_NOT_SPEC = "You have not registered modules that you have taken."
+        + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
@@ -470,7 +472,7 @@ public class Constants {
      * The constant HELP_HEADING.
      */
     public static final String SHOW_CAP = "Here is your existing CAP: ";
-    public static final String GRADE_REGISTERED = "Your grade has been registered successfully.";
+    public static final String GRADE_REGISTERED = "Here are your existing grades:";
     public static final String NOT_TASK = "The specified item is not a Task, "
             + "so it cannot be marked as done or undone." + WIN_NEWLINE;
     public static final String INIT_LIST = "Welcome to DomSun! This is the item list.";
