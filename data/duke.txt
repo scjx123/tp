@@ -1,5 +1,5 @@
-[T][X] testa
-[T][X] testb
+[T][V] testa
+[T][V] testb
 [T][X] testc
 [D][X] ddla (by: 1 1 1 1:1)
 [D][X] ddlb (by: Jan 01 2011 01:01)

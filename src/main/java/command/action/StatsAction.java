@@ -42,18 +42,23 @@ public class StatsAction extends Action {
             }
             builder.append((double)doneItem/tempModule.getTaskList().size()).append(Constants.WIN_NEWLINE);
         } else {
-            if(targetList == null){
+            if (targetList == null) {
                 throw new ModuleNotFoundException();
-            }
-            else {
-                for(Item item : targetList){
-                    Task t = (Task)item;
-                    if (t.getStatusIcon().equals(Constants.TICK)){
-                        doneItem+=1;
+            } else {
+                for (Item item : targetList) {
+                    Task t = (Task) item;
+                    if (t.getStatusIcon().equals(Constants.TICK)) {
+                        doneItem += 1;
                     }
                 }
             }
-            builder.append((double)doneItem/tempModule.getTaskList().size()).append(Constants.WIN_NEWLINE);
+            double ratio=0;
+            if (doneItem > 0) {
+                ratio = (double)doneItem/targetList.size();
+                builder.append(ratio).append(Constants.WIN_NEWLINE);
+            }else {
+
+            }
         }
         return builder.toString();
 
