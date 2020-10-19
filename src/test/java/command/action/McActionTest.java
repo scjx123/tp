@@ -16,7 +16,8 @@ public class McActionTest {
 
     @Test
     public void act_moduleCommandsInputs_suitableMcDisplayed() {
-        Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.TEST_FILENAME);
+        Duke d = new Duke(false, System.out, System.in, Constants.PATH,
+            Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 
         assertAll("McActionTest", () -> assertTrue(d.testSut(testCommand[0], false, true)
                 .contains("619")),

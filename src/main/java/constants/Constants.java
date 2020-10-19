@@ -14,6 +14,7 @@ import command.action.EventAction;
 import command.action.FancyAction;
 import command.action.FindAction;
 import command.action.FocusAction;
+import command.action.GradeAction;
 import command.action.HelpAction;
 import command.action.ListAction;
 import command.action.McAction;
@@ -193,11 +194,19 @@ public class Constants {
     /**
      * Duke FILENAME.
      */
-    public static final String FILENAME = "duke.txt";
+    public static final String TAKS_FILENAME = "duke.txt";
     /**
-     * Test Duke FILENAME.
+     * Module FILENAME.
      */
-    public static final String TEST_FILENAME = "duke_test.txt";
+    public static final String COURSE_FILENAME = "course.txt";
+    /**
+     * Test Duke TASK_FILENAME.
+     */
+    public static final String TEST_TASK_FILENAME = "duke_task_test.txt";
+    /**
+     * Test Duke COURSE_FILENAME.
+     */
+    public static final String TEST_COURSE_FILENAME = "duke_course_test.txt";
 
     /**
      * The constant BYE.
@@ -324,6 +333,7 @@ public class Constants {
      */
     public static final String CAP = "cap";
     public static final String MOD = "mod";
+    public static final String GRADE = "grade";
     public static final String TASK = "task";
     public static final String SELECTED = "selected";
     public static final String TAKEN = "taken";
@@ -436,6 +446,10 @@ public class Constants {
      */
     public static final String LIST_HEAD = "Here is the list of items:" + WIN_NEWLINE;
     /**
+     * The constant GRADE_HEAD.
+     */
+    public static final String GRADE_HEAD = "These are your grades so far:" + WIN_NEWLINE;
+    /**
      * The constant REMINDER_HEAD.
      */
     public static final String REMINDER_HEAD = "Here are the tasks due within " + Constants.REMINDER_RANGE + " days: "
@@ -456,6 +470,7 @@ public class Constants {
      * The constant HELP_HEADING.
      */
     public static final String SHOW_CAP = "Here is your existing CAP: ";
+    public static final String GRADE_REGISTERED = "Your grade has been registered successfully.";
     public static final String NOT_TASK = "The specified item is not a Task, "
             + "so it cannot be marked as done or undone." + WIN_NEWLINE;
     public static final String INIT_LIST = "Welcome to DomSun! This is the item list.";
@@ -545,6 +560,7 @@ public class Constants {
             Map.entry(FIND, new FindAction()),
             Map.entry(ADD, new AddAction()),
             Map.entry(HELP, new HelpAction()),
+            Map.entry(GRADE, new GradeAction()),
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
             Map.entry(REMINDER, new ReminderAction()),
@@ -580,6 +596,7 @@ public class Constants {
             Map.entry(REMINDER, HelpText.REMINDER),
             Map.entry(POSTPONE, HelpText.POSTPONE),
             Map.entry(HELP, HelpText.HELP),
+            Map.entry(GRADE, HelpText.GRADE),
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
             Map.entry(UNDONE, HelpText.UNDONE),
@@ -608,6 +625,7 @@ public class Constants {
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
+            Map.entry(GRADE, new String[]{"a", "s"}),
             Map.entry(MC, new String[]{"p", "d"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
