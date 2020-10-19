@@ -22,9 +22,10 @@ public class GradeAction extends Action {
 
     @Override
     public String act(Data data) throws Exception {
-        assert data == null : "No data is found";
         StringBuilder stringBuilder = new StringBuilder();
+        int index = 1;
         if (option.equals("a")) {
+            stringBuilder.append(Constants.GRADE_HEAD);
             for (Map.Entry<String, String> m : modulesWithGrades.entrySet()) {
                 String moduleCode = m.getKey();
                 SingleModule module = matchModule(moduleCode, data.mods);
@@ -33,10 +34,13 @@ public class GradeAction extends Action {
                 }
                 if (data.takenCourses == null || !data.takenCourses.contains(module)) {
                     data.takenCourses.add(module);
+                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
+                        .append(Constants.TAB).append(m.getValue()).append(Constants.WIN_NEWLINE);
+                    index++;
                 }
                 module.grade = m.getValue();
+                module.isTaken = true;
             }
-            stringBuilder.append(Constants.GRADE_REGISTERED);
         } else if (option.equals("s")) {
             ArrayList<SingleModule> modules = new ArrayList<>();
             for (Item item : data.mods) {
@@ -46,7 +50,6 @@ public class GradeAction extends Action {
                 }
             }
             stringBuilder.append(Constants.GRADE_HEAD);
-            int index = 1;
             for (SingleModule module : modules) {
                 String moduleCode = module.moduleCode;
                 String grade = module.grade;
