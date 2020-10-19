@@ -1,8 +1,32 @@
 # Developer Guide
 
-## Design & implementation
+## Design
+The Architecture Diagram below represents a high-level design overview of the App. Specifically, it is done with an n-tier architectural style, where the higher layers make use of services provided by lower layers. 
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+![here](Architecture_Diagram.PNG)
+
+**Main**
+For the main layer, it contains a single class known as *Duke*. 
+Main's interaction with Storage 
+When the app launches, Duke loads any previous data from storage and then connects the components of the app in sequence. Upon shutting down,  Duke calls upon method to save user's data automatically.  
+
+Main's interaction with UI
+Main gets user input and displays messages through the use of UI component. 
+
+Main's interaction with Command Interpreter 
+Upon receiving command from the UI, Duke would pass the entire user input into Command Interpreter (CI)
+
+Main's interaction with Execute 
+Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
+
+**UI**
+**Command Interpreter**
+**Executer**
+**Storage**
+
+## Implementation
+[add ur individual features here]
+
 
 
 ## Product scope
