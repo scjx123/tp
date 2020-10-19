@@ -626,7 +626,7 @@ public class Constants {
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(GRADE, new String[]{"a", "s"}),
-            Map.entry(MC, new String[]{"p", "d"}),
+            Map.entry(MC, new String[]{"d"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),

@@ -33,8 +33,8 @@ public class Storage {
         taskSaver = new FileSaver(directory, taskFileName);
         courseLoader = new FileLoader(directory, courseFileName);
         courseSaver = new FileSaver(directory, courseFileName);
-        moduleloader = new ModuleParser("data/courselist11.txt");
         this.parser = parser;
+        this.moduleloader = new ModuleParser();
     }
 
     /**
