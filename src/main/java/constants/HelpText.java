@@ -160,6 +160,22 @@ public enum HelpText {
                 "3. \"focus selected\" >> focus on \"selected\". e.g. \"list\" will list selected items from now on"
             }),
     /**
+     * The Postpone.
+     */
+    POSTPONE(
+            "postpone",
+            "postpone task a day by default",
+            new String[]{
+                "postpone [index]",
+                "postpone [h / w / y] [index]"
+            },
+            new String[]{
+                "1. \"postpone 1\" >> postpone the task with index 1 by a day",
+                "2. \"postpone h 1\" >> postpone the task with index 1 by an hour",
+                "3. \"postpone w 1\" >> postpone the task with index 1 by a week",
+                "4. \"postpone y 1\" >> postpone the task with index 1 by a year"
+            }),
+    /**
      * The Help.
      */
     HELP(
@@ -266,7 +282,7 @@ public enum HelpText {
             new String[]{
                 "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
                 "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
-                "2. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
+                "3. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
             }),
     /**
      * The Take.

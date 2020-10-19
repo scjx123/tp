@@ -101,6 +101,6 @@ public class UI {
      * @param data the data
      */
     public void showReminder(Data data) {
-        update(new ReminderAction().act(data), data);
+        showText(new ReminderAction().act(data));
     }
 }
