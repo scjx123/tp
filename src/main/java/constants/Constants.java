@@ -25,6 +25,7 @@ import command.action.RemindAction;
 import command.action.ReminderAction;
 import command.action.SelectAction;
 import command.action.SnoozeAction;
+import command.action.StatsAction;
 import command.action.TakeAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
@@ -256,6 +257,10 @@ public class Constants {
      */
     public static final String LIST = "list";
     /**
+     * The constant LIST.
+     */
+    public static final String STATS = "stats";
+    /**
      * The constant TODO.
      */
     public static final String TODO = "todo";
@@ -436,6 +441,10 @@ public class Constants {
      */
     public static final String LIST_HEAD = "Here is the list of items:" + WIN_NEWLINE;
     /**
+     * The constant LIST_HEAD.
+     */
+    public static final String STATS_HEAD = "Here are the statistics: " + WIN_NEWLINE;
+    /**
      * The constant REMINDER_HEAD.
      */
     public static final String REMINDER_HEAD = "Here are the tasks due within " + Constants.REMINDER_RANGE + " days: "
@@ -564,6 +573,7 @@ public class Constants {
             Map.entry(TAKE, new TakeAction()),
             Map.entry(SEL, new SelectAction()),
             Map.entry(UNSEL, new UnselectAction()),
+            Map.entry(STATS, new StatsAction()),
             Map.entry(UNTAKE, new UntakeAction()));
     /**
      * The constant helpMap.
@@ -579,6 +589,7 @@ public class Constants {
             Map.entry(FOCUS, HelpText.FOCUS),
             Map.entry(REMINDER, HelpText.REMINDER),
             Map.entry(POSTPONE, HelpText.POSTPONE),
+            Map.entry(STATS, HelpText.STATS),
             Map.entry(HELP, HelpText.HELP),
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
@@ -609,6 +620,7 @@ public class Constants {
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"d"}),
+            Map.entry(STATS, new String[]{"mod"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
@@ -622,6 +634,7 @@ public class Constants {
      */
     public static final Map<String, String> messageMap = Map.ofEntries(
             Map.entry(BYE, "Bye. Hope to see you again soon!"),
+            Map.entry(STATS, "Here are the statistics for your tasks: " + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(CLEAR, "Nice! I've cleared all tasks from the list and left modules alone."),
             Map.entry(DEADLINE, ADDED + CHANGED),
             Map.entry(DELETE, REMOVED + CHANGED),
