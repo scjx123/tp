@@ -4,7 +4,7 @@
 * [Quick Start](#Quick-Start)
 * [Features](#Features)
 * [Usage (alphabetical order)](#Usage-(alphabetical-order))
-    * [`add` - Add task(s) to module(s)](#add---Addtask-to-module)
+    * [`add` - Add task(s) to module(s)](#add---Add-task-to-module)
     * [`bye` - Quit the program](#bye---Quit-the-program)
     * [`cap` - Prints CAPs](#cap---Prints-CAPs)
     * [`clear` - Clear the task list](#clear---Clear-the-task-list)
@@ -104,7 +104,7 @@ The program allows user to set reminders at certain time, or remind themselves o
 
 ## Usage (alphabetical order)
 
-### `add` - Add task(s) to module(s)
+### `add` - Add task to module
 
 Typing `add` adds specified task(s) to specified module(s).
 
