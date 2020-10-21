@@ -55,7 +55,7 @@ A typical flow of execution would be:
 
 ### CAP calculator feature
 
-The proposed undo/redo mechanism is facilitated by `CalculateCapAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` fod display. 
+The proposed undo/redo mechanism is facilitated by `CalculateCapAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
 
 * `CalculateCapAction#act()` - Calculate the user CAP based on stored user grades / input modules.
@@ -74,6 +74,30 @@ Step 4. CAP value is calculated and returned to the user through `Ui`.
 The following activity diagram summarizes what happens when a user executes a new command:
 
 ![cap uml diagram](./Cap_Calculator_Diagram.JPG)
+
+
+### Reminder Feature
+
+The proposed undo/redo mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
+
+* `ReminderAction#act()` — List out the deadlines and events tasks that are due within 3 days
+
+Given below is an example usage scenario and how the reminder mechanism behaves at each step.
+
+Step 1. The user executes `reminder` command to list out tasks due within 3 days. Command is then parsed by `ReminderAction#act()`.
+
+Step 2. `ReminderAction#act` retrieves tasklist data from the user's list
+
+Step 3. `ReminderAction#act` then sorts the due dates in ascending order
+
+Step 4: Tasks due within 3 days are returned to the user through Ui
+
+The following sequence diagram diagram shows how the reminder operation works
+
+![Reminder_Sequence_Diagram](./ReminderAction_Sequence_Diagram.png)
+
+
+These operations are exposed in the Model interface as Model#commitAddressBook(), Model#undoAddressBook() and Model#redoAddressBook() respectively.
 
 ## Product scope
 ### Target user profile
