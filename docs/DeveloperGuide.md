@@ -20,12 +20,38 @@ Main's interaction with Execute<br>
 Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
 
 **UI**<br>
+The UI layer entails the package *visualize*, which contains classes *ColoredString*, *Bitmap*, *UI*, *Cli*, 
+*FancyCli* and enumerations *Color* and *Sprite* in the following structure:
+![uml](Package%20visualize.png)
+
+UI's interaction with user<br>
+UI gets user input through *nextline()*, and renders strings as a user-comprehensible interface through 
+*update(String, Data)*.
+
+UI's interaction with the rest of the program<br>
+UI passes the user's input string out to the Duke object, which then passes the string to the Command Interpreter layer.
+UI also reads data from the Data object for refreshing purposes, but does not modify it.
+
 **Command Interpreter**<br>
 **Executer**<br>
 **Storage**<br>
 
 ## Implementation<br>
 [add ur individual features here]
+
+### module planner feature
+
+The module planner feature entails many *Actions* which extend `Action`. Their functionalities and usages
+are in the table below:
+
+|Table|To|Be|Filled|
+|-----|---|---|------|
+|blah|blah|blah|blah|
+
+A typical flow of execution would be:
+1. blah
+1. blah
+1. blah
 
 ### CAP calculator feature
 
