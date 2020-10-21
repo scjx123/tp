@@ -20,6 +20,18 @@ Main's interaction with Execute<br>
 Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
 
 **UI**<br>
+The UI layer entails the package *visualize*, which contains classes *ColoredString*, *Bitmap*, *UI*, *Cli*, 
+*FancyCli* and enumerations *Color* and *Sprite* in the following structure:
+![uml](Package%20visualize.png)
+
+UI's interaction with user<br>
+UI gets user input through *nextline()*, and renders strings as a user-comprehensible interface through 
+*update(String, Data)*.
+
+UI's interaction with the rest of the program<br>
+UI passes the user's input string out to the Duke object, which then passes the string to the Command Interpreter layer.
+UI also reads data from the Data object for refreshing purposes, but does not modify it.
+
 **Command Interpreter**<br>
 **Executer**<br>
 **Storage**<br>
@@ -27,7 +39,65 @@ Once CI processed the user input, duke proceeds to redirect the input to Execute
 ## Implementation<br>
 [add ur individual features here]
 
+### module planner feature
 
+The module planner feature entails many *Actions* which extend `Action`. Their functionalities and usages
+are in the table below:
+
+|Table|To|Be|Filled|
+|-----|---|---|------|
+|blah|blah|blah|blah|
+
+A typical flow of execution would be:
+1. blah
+1. blah
+1. blah
+
+### CAP calculator feature
+
+The proposed undo/redo mechanism is facilitated by `CalculateCapAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+Additionally, it implements the following operations:
+
+* `CalculateCapAction#act()` - Calculate the user CAP based on stored user grades / input modules.
+* `CalculateCapAction#prepare()` - Parse user command to suitable parameter for `CalculateCapAction#act()` function.
+
+Given below is an example usage scenario and how thecap calculator mechanism behaves at each step.
+
+Step 1. The user executes `cap` command find his current CAP grade. Command is then parsed by `CalculateCapAction#prepare()` to be passed as arguments for `CalculateCapAction#act()`.
+
+Step 2. `CalculateCapAction#act()` retrieves data from the stored user's grades.
+
+Step 3. `CalculateCapAction#act()` then retrieves module data from the `modulelist.txt` to determine Modular Credit (MC) allocation.
+
+Step 4. CAP value is calculated and returned to the user through `Ui`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![cap uml diagram](./Cap_Calculator_Diagram.JPG)
+
+
+### Reminder Feature
+
+The proposed undo/redo mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
+
+* `ReminderAction#act()` — List out the deadlines and events tasks that are due within 3 days
+
+Given below is an example usage scenario and how the reminder mechanism behaves at each step.
+
+Step 1. The user executes `reminder` command to list out tasks due within 3 days. Command is then parsed by `ReminderAction#act()`.
+
+Step 2. `ReminderAction#act` retrieves tasklist data from the user's list
+
+Step 3. `ReminderAction#act` then sorts the due dates in ascending order
+
+Step 4: Tasks due within 3 days are returned to the user through Ui
+
+The following sequence diagram diagram shows how the reminder operation works
+
+![Reminder_Sequence_Diagram](./ReminderAction_Sequence_Diagram.png)
+
+
+These operations are exposed in the Model interface as Model#commitAddressBook(), Model#undoAddressBook() and Model#redoAddressBook() respectively.
 
 ## Product scope
 ### Target user profile
