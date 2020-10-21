@@ -133,6 +133,34 @@ public enum HelpText {
                 "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
             }),
     /**
+     * Help text to add grade to a course.
+     */
+    GRADE(
+        "grade",
+        "Add grade to the user's taken course/module.",
+        new String[]{
+            "grade [-option] [module] [grade] {[module] [grade]...}",
+            "option: -s(show, default), -a(add)"
+        },
+        new String[]{
+            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade to a user's taken course/module",
+            "2. \"grade\" >> show grades of all taken modules"
+        }),
+    /**
+     * Help text for goal action.
+     */
+    GOAL(
+        "goal",
+        "Display how far/near the user to his/her goal.",
+        new String[]{
+            "goal [option]",
+            "option: cap(cap, default), mc(modular credit)"
+        },
+        new String[]{
+            "1. \"goal\" >> add grade to a user's taken course/module",
+            "2. \"goal mc\" >> show how many MC left for graduation"
+        }),
+    /**
      * The Find.
      */
     FIND(
@@ -158,6 +186,22 @@ public enum HelpText {
                 "1. \"focus\" >> focus on \"task\". e.g. \"list\" will list all tasks from now on",
                 "2. \"focus mod\" >> focus on \"mod\". e.g. \"list\" will list all modules from now on",
                 "3. \"focus selected\" >> focus on \"selected\". e.g. \"list\" will list selected items from now on"
+            }),
+    /**
+     * The Postpone.
+     */
+    POSTPONE(
+            "postpone",
+            "postpone task a day by default",
+            new String[]{
+                "postpone [index]",
+                "postpone [h / w / y] [index]"
+            },
+            new String[]{
+                "1. \"postpone 1\" >> postpone the task with index 1 by a day",
+                "2. \"postpone h 1\" >> postpone the task with index 1 by an hour",
+                "3. \"postpone w 1\" >> postpone the task with index 1 by a week",
+                "4. \"postpone y 1\" >> postpone the task with index 1 by a year"
             }),
     /**
      * The Help.
@@ -195,14 +239,12 @@ public enum HelpText {
             "mc",
             "Print the number of MCs based on selected option.",
             new String[]{
-                "mc [-option] [-detail]",
-                "option: -c(current, default), -p(prospective)",
-                "detail: -t(total, default), -d(detailed)"
+                "mc [-option]",
+                "option: -t(total, default), -d(detailed)"
             },
             new String[]{
                 "1. \"mc\" >> print the total number of MCs currently taking",
-                "2. \"mc -p\" >> print the total number of MCs in the selection region",
-                "3. \"mc -p -d \" >> print the detailed MC composition of the selection region",
+                "2. \"mc -d\" >> print the detailed MC composition of the selection region"
             }),
     /**
      * The Next.
@@ -268,7 +310,7 @@ public enum HelpText {
             new String[]{
                 "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
                 "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
-                "2. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
+                "3. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
             }),
     /**
      * The Take.

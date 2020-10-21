@@ -3,6 +3,8 @@ package seedu.duke;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 import command.Command;
@@ -29,26 +31,38 @@ public class Duke {
     /**
      * Instantiates a new Duke.
      *
-     * @param isFancy   toggle between fancy and normal layout
-     * @param stream    the stream
-     * @param input     the input
-     * @param directory the directory
-     * @param fileName  the file name
+     * @param isFancy        toggle between fancy and normal layout
+     * @param stream         the stream
+     * @param input          the input
+     * @param directory      the directory
+     * @param taskFileName   task file name
+     * @param courseFileName course file name
      */
-    public Duke(boolean isFancy, PrintStream stream, InputStream input, String directory, String fileName) {
+    public Duke(boolean isFancy, PrintStream stream, InputStream input, String directory,
+                String taskFileName, String courseFileName) {
         fui = new FancyCli(stream, input);
         pui = new Cli(stream, input);
         ui = isFancy ? fui : pui;
         this.isFancy = isFancy;
         ui.showWelcome();
         parser = new Parser();
-        storage = new Storage(directory, fileName, parser);
+        storage = new Storage(directory, taskFileName, courseFileName, parser);
         try {
             data = storage.load();
         } catch (Exception e) {
             ui.showText("The save file is corrupted.");
             data = new Data();
         }
+
+        // schedule reminder every 10 minutes
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                ui.showReminder(data);
+            }
+        },Constants.REMINDER_DELAY,Constants.REMINDER_INTERVAL);
+
     }
 
     private void reattachUI(boolean isFancy, boolean isPlain) {
@@ -67,7 +81,7 @@ public class Duke {
      * Run.
      */
     public void run() {
-        ui.showReminder(data);
+        //ui.showReminder(data);
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -78,7 +92,7 @@ public class Duke {
                     reattachUI(c.isFancy(), c.isPlain());
                     ui.update(c.result, data);
                     isExit = c.isBye();
-                    storage.saveTasks(data.tasks);
+                    storage.save(data.tasks, data.takenCourses);
                 }
             } catch (Exception e) {
                 String message = e.getMessage();
@@ -109,7 +123,8 @@ public class Duke {
                     ui.update(c.result, data);
                 }
                 if (isStored) {
-                    storage.saveTasks(data.tasks);
+                    //check the taken_course path
+                    //storage.save(data.tasks, data.takenCourse);
                 }
                 return c.result;
             }
@@ -140,7 +155,8 @@ public class Duke {
         // However, no matter what mode it starts in, I have created switching commands.
         // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
-        //boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        //new Duke(!isWindows, System.out, System.in, Constants.PATH, Constants.FILENAME).run();
+        // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        // new Duke(!isWindows, System.out, System.in, Constants.PATH,
+        //    Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
     }
 }

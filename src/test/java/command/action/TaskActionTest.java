@@ -11,7 +11,8 @@ import seedu.duke.Duke;
  */
 class TaskActionTest {
 
-    private Duke duke = new Duke(false, System.out, System.in, Constants.PATH, Constants.TEST_FILENAME);
+    private Duke duke = new Duke(false, System.out, System.in, Constants.PATH,
+        Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 
     @Test
     public void actClear_normalCase_clearResponseMessage() {

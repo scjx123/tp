@@ -14,14 +14,18 @@ import command.action.EventAction;
 import command.action.FancyAction;
 import command.action.FindAction;
 import command.action.FocusAction;
+import command.action.GradeAction;
 import command.action.HelpAction;
 import command.action.ListAction;
 import command.action.McAction;
 import command.action.NextAction;
 import command.action.PlainAction;
+import command.action.PostponeAction;
 import command.action.PrevAction;
+import command.action.RemindAction;
 import command.action.ReminderAction;
 import command.action.SelectAction;
+import command.action.SnoozeAction;
 import command.action.TakeAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
@@ -190,11 +194,19 @@ public class Constants {
     /**
      * Duke FILENAME.
      */
-    public static final String FILENAME = "duke.txt";
+    public static final String TASK_FILENAME = "duke.txt";
     /**
-     * Test Duke FILENAME.
+     * Module FILENAME.
      */
-    public static final String TEST_FILENAME = "duke_test.txt";
+    public static final String COURSE_FILENAME = "course.txt";
+    /**
+     * Test Duke TASK_FILENAME.
+     */
+    public static final String TEST_TASK_FILENAME = "duke_task_test.txt";
+    /**
+     * Test Duke COURSE_FILENAME.
+     */
+    public static final String TEST_COURSE_FILENAME = "duke_course_test.txt";
 
     /**
      * The constant BYE.
@@ -232,6 +244,18 @@ public class Constants {
      * The constant REMINDER.
      */
     public static final String REMINDER = "reminder";
+    /**
+     * The constant REMIND.
+     */
+    public static final String REMIND = "remind";
+    /**
+     * The constant POSTPONE.
+     */
+    public static final String POSTPONE = "postpone";
+    /**
+     * The constant SNOOZE.
+     */
+    public static final String SNOOZE = "snooze";
     /**
      * The constant HELP.
      */
@@ -309,6 +333,7 @@ public class Constants {
      */
     public static final String CAP = "cap";
     public static final String MOD = "mod";
+    public static final String GRADE = "grade";
     public static final String TASK = "task";
     public static final String SELECTED = "selected";
     public static final String TAKEN = "taken";
@@ -377,6 +402,8 @@ public class Constants {
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
     public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
         + WIN_NEWLINE;
+    public static final String COURSE_NOT_SPEC = "You have not registered modules that you have taken."
+        + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
@@ -394,6 +421,10 @@ public class Constants {
      * The constant DETAIL.
      */
     public static final String NO_MODULE = "Sorry, no such module in the list!" + WIN_NEWLINE;
+    /**
+     * The constant NOT_DEADLINE_OR_EVENT.
+     */
+    public static final String NOT_DEADLINE_OR_EVENT = "Sorry, there is no date in todo task!" + WIN_NEWLINE;
     /**
      * The constant ITEM_EXIST.
      */
@@ -417,6 +448,10 @@ public class Constants {
      */
     public static final String LIST_HEAD = "Here is the list of items:" + WIN_NEWLINE;
     /**
+     * The constant GRADE_HEAD.
+     */
+    public static final String GRADE_HEAD = "These are your grades so far:" + WIN_NEWLINE;
+    /**
      * The constant REMINDER_HEAD.
      */
     public static final String REMINDER_HEAD = "Here are the tasks due within " + Constants.REMINDER_RANGE + " days: "
@@ -437,6 +472,7 @@ public class Constants {
      * The constant HELP_HEADING.
      */
     public static final String SHOW_CAP = "Here is your existing CAP: ";
+    public static final String GRADE_REGISTERED = "Here are your existing grades:";
     public static final String NOT_TASK = "The specified item is not a Task, "
             + "so it cannot be marked as done or undone." + WIN_NEWLINE;
     public static final String INIT_LIST = "Welcome to DomSun! This is the item list.";
@@ -503,8 +539,15 @@ public class Constants {
      * The constant REMINDER_RANGE.
      */
     public static final int REMINDER_RANGE = 3;
+    /**
+     * The constant REMINDER_INTERVAL.
+     */
+    public static final int REMINDER_INTERVAL = 1000 * 60;
 
-
+    /**
+     * The constant REMINDER_DELAY.
+     */
+    public static final int REMINDER_DELAY = 0;
 
     /**
      * The constant actionMap.
@@ -519,9 +562,13 @@ public class Constants {
             Map.entry(FIND, new FindAction()),
             Map.entry(ADD, new AddAction()),
             Map.entry(HELP, new HelpAction()),
+            Map.entry(GRADE, new GradeAction()),
             Map.entry(LIST, new ListAction()),
             Map.entry(FOCUS, new FocusAction()),
             Map.entry(REMINDER, new ReminderAction()),
+            Map.entry(REMIND, new RemindAction()),
+            Map.entry(POSTPONE, new PostponeAction()),
+            Map.entry(SNOOZE, new SnoozeAction()),
             Map.entry(MC, new McAction()),
             Map.entry(DETAIL, new DetailAction()),
             Map.entry(TODO, new TodoAction()),
@@ -549,7 +596,9 @@ public class Constants {
             Map.entry(FIND, HelpText.FIND),
             Map.entry(FOCUS, HelpText.FOCUS),
             Map.entry(REMINDER, HelpText.REMINDER),
+            Map.entry(POSTPONE, HelpText.POSTPONE),
             Map.entry(HELP, HelpText.HELP),
+            Map.entry(GRADE, HelpText.GRADE),
             Map.entry(LIST, HelpText.LIST),
             Map.entry(TODO, HelpText.TODO),
             Map.entry(UNDONE, HelpText.UNDONE),
@@ -578,11 +627,14 @@ public class Constants {
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
-            Map.entry(MC, new String[]{"p", "d"}),
+            Map.entry(GRADE, new String[]{"a", "s"}),
+            Map.entry(MC, new String[]{"d"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
+            Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
+            Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}));
     /**
@@ -617,5 +669,6 @@ public class Constants {
             Map.entry(UNSEL, "I have un-selected these items you specified. "
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNTAKE, "I have un-taken these modules you specified. "
-                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER));
+                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
 }

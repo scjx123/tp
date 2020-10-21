@@ -39,30 +39,13 @@ public class ModuleParser {
      */
     static String modulePrerequisite;
 
-    /**
-     * Temporary stores the file directory and the name of the text file itself given in the filePath.
-     */
-    static String[] dir = new String[2];
-
-    private static String filename = "courselist11.txt";
-    private static String filedir = "data";
-
 
     /**
-     * Instantiates a new Read file.
-     *
-     * @param filePath the file path
+     * Constructor of ModuleParser.
      */
-    public ModuleParser(String filePath) {
-        dir = filePath.split("/",2);
-        filedir = dir[0];
-        filename = dir[1];
+    public ModuleParser() {
+
     }
-
-    /**
-     * The P 2.
-     */
-    static Path p2 = Paths.get(filedir,filename);
 
     /**
      * The St.
@@ -77,8 +60,6 @@ public class ModuleParser {
      * New modules are being created here.
      * Master list of modules are being created here.
      * New modules are being added here to the masterList.
-     *
-     * @throws IOException are being thrown here.
      */
     public ArrayList<Item> load() throws IOException {
         InputStream is = getClass().getResourceAsStream("courselist11.txt");

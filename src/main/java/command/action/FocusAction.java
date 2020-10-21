@@ -17,11 +17,11 @@ public class FocusAction extends Action {
 
     @Override
     public String act(Data data) throws Exception {
-        LOGGER.entering(getClass().getName(), "changeFocus");
-        LOGGER.log(Level.INFO, "Type changed");
+        // LOGGER.entering(getClass().getName(), "changeFocus");
+        // LOGGER.log(Level.INFO, "Type changed");
         data.setFlag(typeTask);
         String output = super.act(data);
-        LOGGER.exiting(getClass().getName(), "changeFocus");
+        // LOGGER.exiting(getClass().getName(), "changeFocus");
         return output.replace(Constants.TEXT_PLACEHOLDER, typeTask);
     }
 

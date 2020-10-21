@@ -16,7 +16,8 @@ class FocusActionTest {
 
     @Test
     void act_customFocusInput_testOutput() {
-        Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.TEST_FILENAME);
+        Duke d = new Duke(false, System.out, System.in, Constants.PATH,
+            Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
         assertAll("FocusActionTest",
             () -> assertTrue(d.testSut(testCommand[0], false, true)
                 .equals("Now we are focusing on:\r\ntask")),
