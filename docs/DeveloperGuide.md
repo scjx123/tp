@@ -96,6 +96,27 @@ The following sequence diagram diagram shows how the reminder operation works
 
 ![Reminder_Sequence_Diagram](./ReminderAction_Sequence_Diagram.png)
 
+### Postpone Feature
+
+The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+Additionally, it implements the following operations:
+
+* `PostponeAction#act()` - Postpone the deadline or event task by the chosen parameter.
+* `PostponeAction#prepare()` - Parse user command to suitable parameter for `PostponeAction#act()` function.
+
+Given below is an example usage scenario and how thecap calculator mechanism behaves at each step.
+
+Step 1. The user executes `postpone [index]` command to postpone the targeted task. Command is then parsed by `PostponeAction#prepare()` to be passed as arguments for `PostponeAction#act()`.
+
+Step 2. `PostponeAction#act()` re-sets the date of the targeted task from the stored user's tasks by default a day.
+
+Step 3. `PostponeAction#act()` then updates the stored user's data.
+
+Step 4. Postponed target task is returned to the user through `Ui`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![Postpone_Sequence_Diagram](./PostponeAction_Sequence_Diagram.png)
 
 These operations are exposed in the Model interface as Model#commitAddressBook(), Model#undoAddressBook() and Model#redoAddressBook() respectively.
 
