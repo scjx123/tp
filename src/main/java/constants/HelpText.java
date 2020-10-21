@@ -133,6 +133,20 @@ public enum HelpText {
                 "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
             }),
     /**
+     * Help text to add grade to a course.
+     */
+    GRADE(
+        "grade",
+        "Add grade to a user's taken course/module.",
+        new String[]{
+            "grade [-option] [module] [grade] {[module] [grade]...}",
+            "option: -s(show, default), -a(add)"
+        },
+        new String[]{
+            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade to a user's taken course/module",
+            "2. \"grade\" >> show grades of all taken modules"
+        }),
+    /**
      * The Find.
      */
     FIND(
@@ -211,14 +225,12 @@ public enum HelpText {
             "mc",
             "Print the number of MCs based on selected option.",
             new String[]{
-                "mc [-option] [-detail]",
-                "option: -c(current, default), -p(prospective)",
-                "detail: -t(total, default), -d(detailed)"
+                "mc [-option]",
+                "option: -t(total, default), -d(detailed)"
             },
             new String[]{
                 "1. \"mc\" >> print the total number of MCs currently taking",
-                "2. \"mc -p\" >> print the total number of MCs in the selection region",
-                "3. \"mc -p -d \" >> print the detailed MC composition of the selection region",
+                "2. \"mc -d\" >> print the detailed MC composition of the selection region"
             }),
     /**
      * The Next.
