@@ -133,6 +133,34 @@ public enum HelpText {
                 "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
             }),
     /**
+     * Help text to add grade to a course.
+     */
+    GRADE(
+        "grade",
+        "Add grade to the user's taken course/module.",
+        new String[]{
+            "grade [-option] [module] [grade] {[module] [grade]...}",
+            "option: -s(show, default), -a(add)"
+        },
+        new String[]{
+            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade to a user's taken course/module",
+            "2. \"grade\" >> show grades of all taken modules"
+        }),
+    /**
+     * Help text for goal action.
+     */
+    GOAL(
+        "goal",
+        "Display how far/near the user to his/her goal.",
+        new String[]{
+            "goal [option]",
+            "option: cap(cap, default), mc(modular credit)"
+        },
+        new String[]{
+            "1. \"goal\" >> add grade to a user's taken course/module",
+            "2. \"goal mc\" >> show how many MC left for graduation"
+        }),
+    /**
      * The Find.
      */
     FIND(

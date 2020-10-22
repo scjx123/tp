@@ -6,6 +6,7 @@ import constants.Constants;
 import data.Item;
 import data.SingleModule;
 import data.Data;
+import exceptions.CommandException;
 import exceptions.GradeNotSpecifiedException;
 import exceptions.ModuleNotFoundException;
 
@@ -20,61 +21,71 @@ import java.util.Map;
 public class CalculateCapAction extends Action {
 
     private HashMap<String, Double> modulesWithGrades = new HashMap<>();
-    private boolean isCustom = true;
+    private String option;
 
     @Override
     public String act(Data data) throws Exception {
-        assert data != null : "Data cannot be null";
         double totalScore = 0;
         double totalMC = 0;
-        if (isCustom) {
+        double gradeValue;
+        if (option.equals("m")) {
             for (Map.Entry<String, Double> m : modulesWithGrades.entrySet()) {
-                Double grade = m.getValue();
+                gradeValue = m.getValue();
                 String moduleCode = m.getKey();
                 SingleModule module = matchModule(moduleCode, data.mods);
                 if (module == null) {
                     throw new ModuleNotFoundException();
                 }
                 totalMC += Double.parseDouble(module.getModuleMC());
-                totalScore += Double.parseDouble(module.getModuleMC()) * grade;
+                totalScore += Double.parseDouble(module.getModuleMC()) * gradeValue;
             }
-        } else {
+        } else if (option.equals("u")) {
+            boolean isNew = true;
             for (Item item : data.mods) {
                 SingleModule module = (SingleModule) item;
                 if (module.isTaken) {
+                    isNew = false;
                     if (module.grade == null) {
                         throw new GradeNotSpecifiedException();
                     }
-                    double gradeValue = numerateGrade(module.grade.toUpperCase());
+                    gradeValue = numerateGrade(module.grade.toUpperCase());
                     totalMC += Double.parseDouble(module.getModuleMC());
                     totalScore += Double.parseDouble(module.getModuleMC()) * gradeValue;
                 }
             }
+
+            if (isNew) {
+                return Constants.COURSE_NOT_SPEC;
+            }
         }
         double capValue = totalScore / totalMC;
-        assert capValue > 0 : "CAP need to be more than zero";
         return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
     }
 
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
-        ParamNode currData;
+        option = "u";
 
-        //extract modules name
-        currData = flattenedArgs[0];
+        if (args.thisData == null) {
+            return;
+        }
+
+        ParamNode currData = flattenedArgs[0];
+        option = flattenedArgs[0].name;
+
         //input custom modules
-        if (flattenedArgs[0].name.equals("m")) {
-            isCustom = true;
+        if (option.equals("m")) {
             while (currData.thisData != null) {
                 String moduleCode = currData.thisData.name.toUpperCase();
                 Double grade = numerateGrade(currData.thisData.thisData.name.toUpperCase());
                 modulesWithGrades.put(moduleCode, grade);
                 currData = currData.thisData.thisData;
             }
+        } else if (option.equals("u")) {
+            return;
         } else {
-            // retrieve module data from user data
-            isCustom = false;
+            throw new CommandException();
         }
     }
 

@@ -8,6 +8,7 @@ import data.jobs.ToDo;
 import messages.MessageOptions;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
@@ -27,6 +28,10 @@ public class Data {
      */
     public ArrayList<Item> tasks;
     /**
+     * The list of taken modules read in from course.txt.
+     */
+    public ArrayList<Item> takenCourses;
+    /**
      * The default list of modules read in from courselist11.txt.
      */
     public ArrayList<Item> mods;
@@ -43,7 +48,6 @@ public class Data {
      * The Last index option.
      */
     public MessageOptions lastIndexOption;
-    private String dataType;
 
     /**
      * Instantiates a new Task list.
@@ -52,6 +56,7 @@ public class Data {
         lastInput = "";
         lastIndexOption = MessageOptions.NOT_INDEXED;
         tasks = new ArrayList<>();
+        takenCourses = new ArrayList<>();
         indexOption = MessageOptions.NOT_INDEXED;
         target = tasks;
         mods = new ArrayList<>();
@@ -118,7 +123,7 @@ public class Data {
 
 
     public void addTask(Task task) {
-        LOGGER.entering(getClass().getName(), "addTask");
+        // LOGGER.entering(getClass().getName(), "addTask");
         tempList = new ArrayList<>(getTarget(getTaskType(task)));
         Checker cc = new Checker(tempList, task);
         LocalDateTime newDate = cc.checkRecurrenceDate(task);
@@ -128,13 +133,13 @@ public class Data {
             LOGGER.log(Level.INFO, "New date was null! Invalid Date");
         }
         if (!cc.checkDuplicates()) {
-            LOGGER.log(Level.INFO, "Task was added to data");
+            // LOGGER.log(Level.INFO, "Task was added to data");
             tasks.add(task);
         } else {
             LOGGER.log(Level.INFO, "Duplicate found! Task was not added to data");
         }
         refreshTarget();
-        LOGGER.exiting(getClass().getName(), "addTask");
+        //LOGGER.exiting(getClass().getName(), "addTask");
     }
 
     public void removeItem(Item item) {

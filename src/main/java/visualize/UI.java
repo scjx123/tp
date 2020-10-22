@@ -46,7 +46,7 @@ public class UI {
     public UI(PrintStream stream, InputStream input) {
         assert stream != null : "Null output stream";
         assert input != null : "Null input stream";
-        logger.log(Level.INFO, "UI instantiated");
+        // logger.log(Level.INFO, "UI instantiated");
         this.stream = stream;
         this.input = input;
         inputGetter = new Scanner(input);
