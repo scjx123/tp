@@ -97,7 +97,7 @@ public class Duke {
                         // stops timer
                         timer.cancel();
                     }
-                    storage.save(data.tasks, data.takenCourses);
+                    storage.save(data.tasks, data.mods);
                 }
             } catch (Exception e) {
                 String message = e.getMessage();

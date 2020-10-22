@@ -8,6 +8,7 @@ import data.SingleModule;
 import exceptions.CommandException;
 import exceptions.ModuleNotFoundException;
 
+import java.security.CodeSigner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,47 +16,46 @@ import java.util.Map;
 /**
  * Grade input action.
  */
-public class GradeAction extends Action {
+public class GradeAction extends TakeAction {
 
     private HashMap<String, String> modulesWithGrades = new HashMap<>();
     private String option;
 
     @Override
     public String act(Data data) throws Exception {
+
         StringBuilder stringBuilder = new StringBuilder();
         int index = 1;
+        stringBuilder.append(Constants.GRADE_HEAD);
+
         if (option.equals("a")) {
-            stringBuilder.append(Constants.GRADE_HEAD);
             for (Map.Entry<String, String> m : modulesWithGrades.entrySet()) {
-                String moduleCode = m.getKey();
-                SingleModule module = matchModule(moduleCode, data.mods);
+                SingleModule module = matchModule(m.getKey(), data.mods);
                 if (module == null) {
                     throw new ModuleNotFoundException();
                 }
-                if (data.takenCourses == null || !data.takenCourses.contains(module)) {
-                    data.takenCourses.add(module);
-                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
+                if (module.isTaken) {
+                    modifyObject(module, m.getValue());
+                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(m.getKey())
                         .append(Constants.TAB).append(m.getValue()).append(Constants.WIN_NEWLINE);
                     index++;
+                } else {
+                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(m.getKey())
+                        .append(Constants.TAB).append(Constants.MOD_NOT_TAKEN);
                 }
-                module.grade = m.getValue();
-                module.isTaken = true;
+
             }
         } else if (option.equals("s")) {
-            ArrayList<SingleModule> modules = new ArrayList<>();
-            for (Item item : data.mods) {
+
+            for (Item item : data.target) {
                 SingleModule module = (SingleModule) item;
                 if (module.grade != null && !module.grade.isBlank()) {
-                    modules.add(module);
+                    String moduleCode = module.moduleCode;
+                    String grade = module.grade;
+                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
+                        .append(Constants.TAB).append(grade).append(Constants.WIN_NEWLINE);
+                    index++;
                 }
-            }
-            stringBuilder.append(Constants.GRADE_HEAD);
-            for (SingleModule module : modules) {
-                String moduleCode = module.moduleCode;
-                String grade = module.grade;
-                stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-                    .append(Constants.TAB).append(grade).append(Constants.WIN_NEWLINE);
-                index++;
             }
         }
         return stringBuilder.toString();
@@ -68,6 +68,7 @@ public class GradeAction extends Action {
         if (args.thisData == null) {
             return;
         }
+
         ParamNode currData = flattenedArgs[0];
 
         //if user input custom option
@@ -93,6 +94,10 @@ public class GradeAction extends Action {
         }
     }
 
+    protected void modifyObject(Item item, String grade) {
+        ((SingleModule) item).grade = grade;
+    }
+
     /**
      * Match module code to module.
      *
@@ -100,6 +105,7 @@ public class GradeAction extends Action {
      * @param mods       module list
      * @return module selected
      */
+
     private SingleModule matchModule(String moduleCode, ArrayList<Item> mods) {
         for (Item item : mods) {
             SingleModule module = (SingleModule) item;
