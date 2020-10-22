@@ -28,7 +28,11 @@ public class Data {
      */
     public ArrayList<Item> tasks;
     /**
-     * The default list of modules read in from courselist11.txt.
+     * The list of taken modules read in from course.txt.
+     */
+    public ArrayList<Item> takenCourses;
+    /**
+     * The default list of modules read in from finalcourselist.txt.
      */
     public ArrayList<Item> mods;
     /**
@@ -90,6 +94,10 @@ public class Data {
         case Constants.MOD:
             target = mods.stream().filter(x -> x instanceof SingleModule)
                     .collect(Collectors.toCollection(ArrayList::new));
+            break;
+        case Constants.SU:
+            target = mods.stream().filter(
+                x -> ((SingleModule) x).hasSU).collect(Collectors.toCollection(ArrayList::new));
             break;
         case Constants.SELECTED:
             target = mods.stream().filter(x -> x.isSelected).collect(Collectors.toCollection(ArrayList::new));

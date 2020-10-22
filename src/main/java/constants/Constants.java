@@ -333,6 +333,7 @@ public class Constants {
      */
     public static final String CAP = "cap";
     public static final String MOD = "mod";
+    public static final String SU = "su";
     public static final String GRADE = "grade";
     public static final String TASK = "task";
     public static final String SELECTED = "selected";
@@ -635,7 +636,7 @@ public class Constants {
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
-            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN, SU}),
             Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
             Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
