@@ -212,6 +212,10 @@ public class Item {
         return theDate.getDayOfWeek();
     }
 
+    /**
+     * Re-set date time.
+     * @param opt option input
+     */
     public void resetDateTime(String opt) {
         switch (opt) {
         case "d":
