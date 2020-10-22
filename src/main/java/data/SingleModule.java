@@ -20,6 +20,10 @@ public class SingleModule extends Item {
      */
     public String moduleMC;
     /**
+     * The Module mc.
+     */
+    public String moduleSU;
+    /**
      * The Module name.
      */
     public String moduleName;
@@ -36,6 +40,8 @@ public class SingleModule extends Item {
 
     public boolean isTaken;
 
+    public boolean hasSU = false;
+
     public String grade;
 
     /**
@@ -47,13 +53,14 @@ public class SingleModule extends Item {
      * @param mc          number of mc
      * @param prereq      module prerequisite
      */
-    public SingleModule(String code, String name, String description, String mc, String prereq) {
+    public SingleModule(String code, String name, String description, String mc, String prereq,String su) {
         super(code); //moduleDescription is handle here.
         this.moduleCode = replaceBlanks(code);
         this.moduleDescription = replaceBlanks(description);
         this.moduleName = replaceBlanks(name);
         this.moduleMC = replaceBlanks(mc);
         this.modulePrerequisite = replaceBlanks(prereq);
+        this.moduleSU=replaceBlanks(su);
         taskList = new ArrayList<>();
     }
 
@@ -72,6 +79,7 @@ public class SingleModule extends Item {
     public String getName() {
         return moduleCode;
     }
+
 
     @Override
     public String toString() {
@@ -125,6 +133,7 @@ public class SingleModule extends Item {
     public String getModuleMC() {
         return moduleMC;
     }
+
 
     /**
      * Gets module prerequisite.
