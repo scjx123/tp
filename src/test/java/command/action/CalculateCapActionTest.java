@@ -32,3 +32,4 @@ class CalculateCapActionTest {
             "Calculate CAP user's modules fails");
     }
 }
+
