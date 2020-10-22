@@ -25,7 +25,7 @@ class CalculateCapActionTest {
     @Test
     public void act_userModule_calculatedCapValue() {
         duke.testSut("clear", true, false);
-        duke.testSut("grade -a cs1231 a cs1010 b ma1511 c+", true, false);
+        duke.testSut("grade -t cs1231 a cs1010 b ma1511 c+", true, false);
         String expectedOutput = "Here is your existing CAP: 3.9";
         String testInputsCommand = "cap";
         assertEquals(expectedOutput, duke.testSut(testInputsCommand, false, true),
