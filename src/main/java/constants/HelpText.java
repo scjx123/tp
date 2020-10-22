@@ -137,28 +137,16 @@ public enum HelpText {
      */
     GRADE(
         "grade",
-        "Add grade to the user's taken course/module.",
+        "Modify grade to the user's taken course/module.",
         new String[]{
             "grade [-option] [module] [grade] {[module] [grade]...}",
-            "option: -s(show, default), -a(add)"
+            "option: -s(show, default), -a(add), -t(take), -d(delete)"
         },
         new String[]{
-            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade to a user's taken course/module",
-            "2. \"grade\" >> show grades of all taken modules"
-        }),
-    /**
-     * Help text for goal action.
-     */
-    GOAL(
-        "goal",
-        "Display how far/near the user to his/her goal.",
-        new String[]{
-            "goal [option]",
-            "option: cap(cap, default), mc(modular credit)"
-        },
-        new String[]{
-            "1. \"goal\" >> add grade to a user's taken course/module",
-            "2. \"goal mc\" >> show how many MC left for graduation"
+            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade[s] to a user's taken course/module",
+            "2. \"grade -t CS2113 A CG1112 A-\" >> add grade[s] to a course/module and take the module simultaneously",
+            "3. \"grade -d CS2113 CG1112\" >> delete grade[s] of user's taken course/module",
+            "4. \"grade\" >> show grades of all taken modules"
         }),
     /**
      * The Find.

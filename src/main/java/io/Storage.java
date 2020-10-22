@@ -136,9 +136,9 @@ public class Storage {
         String output = Constants.ZERO_LENGTH_STRING;
         String[] iconSeparated = input.split(Constants.SPACE);
         String courseName = iconSeparated[0];
-        // String grade = iconSeparated[1];
-        if (!courseName.isEmpty()) {
-            output = Constants.GRADE + Constants.SPACE + "-a" + Constants.SPACE + input;
+        String grade = iconSeparated[1];
+        if (!courseName.isBlank()) {
+            output = Constants.GRADE + Constants.SPACE + "-t" + Constants.SPACE + input;
         }
         return output;
     }

@@ -399,6 +399,9 @@ public class Constants {
     public static final String NO_KEYWORD = "No keyword provided, listing all items:" + WIN_NEWLINE;
     public static final String MOD_NOT_FOUND =
         "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
+    public static final String MOD_NOT_TAKEN = "You have not taken this module yet" + WIN_NEWLINE;
+    public static final String MOD_NO_GRADE = "You have not input grade for this module yet" + WIN_NEWLINE;
+    public static final String NO_MOD_GRADED = "You have not input grade for any module yet" + WIN_NEWLINE;
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
     public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
