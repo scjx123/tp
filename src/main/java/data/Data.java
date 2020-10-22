@@ -28,10 +28,6 @@ public class Data {
      */
     public ArrayList<Item> tasks;
     /**
-     * The list of taken modules read in from course.txt.
-     */
-    public ArrayList<Item> takenCourses;
-    /**
      * The default list of modules read in from courselist11.txt.
      */
     public ArrayList<Item> mods;
@@ -56,7 +52,6 @@ public class Data {
         lastInput = "";
         lastIndexOption = MessageOptions.NOT_INDEXED;
         tasks = new ArrayList<>();
-        takenCourses = new ArrayList<>();
         indexOption = MessageOptions.NOT_INDEXED;
         target = tasks;
         mods = new ArrayList<>();
