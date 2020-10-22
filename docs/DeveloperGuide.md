@@ -60,7 +60,7 @@ The checker mechanism is facilitated by the utility class `Checker`. It is an in
  - `checkClash(ArrayList< item >, Item)`- Updates `isClash` once a duplicate item is found in the list.
  - `checkRecurrenceDate(Task)` - Checks if the current date is beyond the stated date in the list, and provides a new update for the date recurring date.
 
-Given below is an example usage scenario and how the checker mechanism behaves at each step. 
+Given below is an example usage scenario and how the checker mechanism behaves at each step. In this example, Deadline is being used, however, it can be replaced with other Tasks such as Todo and Event. 
 
 Step 1. A new `Deadline` object is created and needs to be added to the existing list of task. Hence it calls `addTask()` method under `Data` class. 
 
