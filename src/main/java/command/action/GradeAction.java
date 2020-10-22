@@ -15,47 +15,58 @@ import java.util.Map;
 /**
  * Grade input action.
  */
-public class GradeAction extends Action {
+public class GradeAction extends TakeAction {
 
     private HashMap<String, String> modulesWithGrades = new HashMap<>();
     private String option;
 
     @Override
     public String act(Data data) throws Exception {
+
         StringBuilder stringBuilder = new StringBuilder();
         int index = 1;
-        if (option.equals("a")) {
-            stringBuilder.append(Constants.GRADE_HEAD);
+        stringBuilder.append(Constants.GRADE_HEAD);
+
+        if (option.equals("a") || option.equals("d") || option.equals("t")) {
             for (Map.Entry<String, String> m : modulesWithGrades.entrySet()) {
-                String moduleCode = m.getKey();
-                SingleModule module = matchModule(moduleCode, data.mods);
+                SingleModule module = matchModule(m.getKey(), data.mods);
                 if (module == null) {
                     throw new ModuleNotFoundException();
                 }
-                if (data.takenCourses == null || !data.takenCourses.contains(module)) {
-                    data.takenCourses.add(module);
-                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-                        .append(Constants.TAB).append(m.getValue()).append(Constants.WIN_NEWLINE);
-                    index++;
+                if (module.isTaken || option.equals("t")) {
+                    modifyObject(module, m.getValue());
+                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(m.getKey())
+                        .append(Constants.TAB)
+                        .append(m.getValue().equals("NULL") ? Constants.MOD_NO_GRADE : m.getValue())
+                        .append(Constants.WIN_NEWLINE);
+                } else {
+                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(m.getKey())
+                        .append(Constants.TAB).append(Constants.MOD_NOT_TAKEN);
                 }
-                module.grade = m.getValue();
-                module.isTaken = true;
+                index++;
             }
         } else if (option.equals("s")) {
-            ArrayList<SingleModule> modules = new ArrayList<>();
-            for (Item item : data.mods) {
+            boolean isEmpty = true;
+
+            for (Item item : data.getTarget(Constants.MOD)) {
                 SingleModule module = (SingleModule) item;
                 if (module.grade != null && !module.grade.isBlank()) {
-                    modules.add(module);
+                    isEmpty = false;
+                    String moduleCode = module.moduleCode;
+                    String grade = module.grade;
+                    if (grade.equals("NULL")) {
+                        stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
+                            .append(Constants.TAB).append(Constants.MOD_NO_GRADE).append(Constants.WIN_NEWLINE);
+                    } else {
+                        stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
+                            .append(Constants.TAB).append(grade).append(Constants.WIN_NEWLINE);
+                    }
+                    index++;
                 }
             }
-            stringBuilder.append(Constants.GRADE_HEAD);
-            for (SingleModule module : modules) {
-                String moduleCode = module.moduleCode;
-                String grade = module.grade;
-                stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-                    .append(Constants.TAB).append(grade).append(Constants.WIN_NEWLINE);
-                index++;
+
+            if (isEmpty) {
+                return Constants.NO_MOD_GRADED;
             }
         }
         return stringBuilder.toString();
@@ -68,6 +79,7 @@ public class GradeAction extends Action {
         if (args.thisData == null) {
             return;
         }
+
         ParamNode currData = flattenedArgs[0];
 
         //if user input custom option
@@ -75,22 +87,37 @@ public class GradeAction extends Action {
             option = flattenedArgs[0].name.trim();
         }
 
+        currData = currData.thisData;
+
         //input custom modules
-        if (option.equals("a")) {
-            currData = currData.thisData;
+        if (option.equals("a") || option.equals("t")) {
             //match grades to modules
             while (currData != null) {
                 String moduleCode = currData.name.toUpperCase().trim();
                 String grade = currData.thisData.name.toUpperCase().trim();
-                modulesWithGrades.put(moduleCode, grade);
+                if (!grade.equals("NULL")) {
+                    modulesWithGrades.put(moduleCode, grade);
+                }
                 currData = currData.thisData.thisData;
             }
         } else if (option.equals("s")) {
             //should be do nothing
+        } else if (option.equals("d")) {
+            //match grades to modules
+            while (currData != null) {
+                String moduleCode = currData.name.toUpperCase().trim();
+                modulesWithGrades.put(moduleCode, "NULL");
+                currData = currData.thisData;
+            }
         } else {
             //unidentified option
             throw new CommandException();
         }
+    }
+
+    protected void modifyObject(Item item, String grade) {
+        ((SingleModule) item).grade = grade;
+        ((SingleModule) item).isTaken = true;
     }
 
     /**
@@ -100,6 +127,7 @@ public class GradeAction extends Action {
      * @param mods       module list
      * @return module selected
      */
+
     private SingleModule matchModule(String moduleCode, ArrayList<Item> mods) {
         for (Item item : mods) {
             SingleModule module = (SingleModule) item;
