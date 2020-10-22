@@ -1,0 +1,29 @@
+@startuml
+Deadline -> Data: addTask()
+Data -> Checker: Checker(tempList,task)
+Checker --> Data
+Data -> Checker:checkRecurrenceDate(task)
+Checker --> Data: newDate
+alt newDate!=null
+Data -> Task: setDateTime(newDate)
+Task -->Data
+else
+end
+Data -> Checker: checkDuplicates()
+Checker -> Checker:checkClash(list,item)
+Checker --> Checker
+note right: update isClash flag in Checker class
+
+alt
+Checker --> Data: false
+Data ->Data: add(task)
+note right: if no clash, add task to list
+Data-->Data:
+else
+Checker -->Data: true
+end
+
+Data -->Deadline
+
+
+@enduml

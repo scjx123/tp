@@ -94,6 +94,10 @@ public class Constants {
      */
     public static final String PARAM_RIGHT = ")";
     /**
+     * The constant PARAM_RIGHT.
+     */
+    public static final String PERCENT = "%";
+    /**
      * The constant TODO_ICON.
      */
     public static final String TODO_ICON = ICON_LEFT + "T" + ICON_RIGHT;

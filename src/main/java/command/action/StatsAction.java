@@ -18,7 +18,7 @@ public class StatsAction extends Action {
     String selectedModule;
     SingleModule tempModule = null;
     int doneItem = 0;
-
+    double ratio=0;
     @Override
     public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.STATS_HEAD);
@@ -40,7 +40,8 @@ public class StatsAction extends Action {
                     doneItem+=1;
                 }
             }
-            builder.append((double)doneItem/tempModule.getTaskList().size()).append(Constants.WIN_NEWLINE);
+            ratio = (double)doneItem/tempModule.getTaskList().size();
+            builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
         } else {
             if (targetList == null) {
                 throw new ModuleNotFoundException();
@@ -52,16 +53,19 @@ public class StatsAction extends Action {
                     }
                 }
             }
-            double ratio=0;
             if (doneItem > 0) {
                 ratio = (double)doneItem/targetList.size();
-                builder.append(ratio).append(Constants.WIN_NEWLINE);
+                builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
             }else {
 
             }
         }
         return builder.toString();
+    }
 
+    private String roundedRatioBar(double fraction){
+        double roundedRatio = Math.round((fraction * 100)*10)/10.0;
+        return Constants.ICON_LEFT+roundedRatio+Constants.PERCENT+Constants.ICON_RIGHT;
     }
 
     /**
@@ -82,10 +86,10 @@ public class StatsAction extends Action {
             userInput = flattenedArgs[0].toFlatString();
             String[] optionalParams = Constants.optionalParamMap.get(args.name);
             String mod = optionalParams[0];
-            isMod = userInput.equals(mod);
+            isMod = userInput.contains(mod);
 
             if (isMod) {
-                selectedModule =  flattenedArgs[1].toFlatString();
+                selectedModule =  userInput.replace("mod","").trim();
                 isMod = true;
                 userInput = "";
             } else {
