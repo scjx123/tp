@@ -1,16 +1,50 @@
 # User Guide
 
-## 1. Introduction
+* [Introduction](#Introduction)
+* [Quick Start](#Quick-Start)
+* [Features](#Features)
+* [Usage (alphabetical order)](#Usage-(alphabetical-order))
+    * [`add` - Add task(s) to module(s)](#add---Add-task-to-module)
+    * [`bye` - Quit the program](#bye---Quit-the-program)
+    * [`cap` - Prints CAPs](#cap---Prints-CAPs)
+    * [`clear` - Clear the task list](#clear---Clear-the-task-list)
+    * [`deadline` - Add a deadline to the task list](#deadline---Add-a-deadline-to-the-task-list)
+    * [`delete` - Delete a task from the task list](#delete---Delete-a-task-from-the-task-list)
+    * [`detail` - Prints item detail](#detail---Prints-item-detail)
+    * [`done` - Mark a task as done](#done---Mark-a-task-as-done)
+    * [`event` - Add an event to the task list](#event---Add-an-event-to-the-task-list)
+    * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---Switch-the-UI-to-the-fancy-mode-(GUI-like-CLI))
+    * [`find` - Find an event in the task list](#find---Find-an-event-in-the-task-list)
+    * [`focus` - Change the context of the program](#focus---Change-the-context-of-the-program) 
+    * [`help` - Print help text of the commands](#help---Print-help-text-of-the-commands)
+    * [`list` - Print a list of added tasks](#list---Print-a-list-of-added-tasks)
+    * [`mc` - Prints MCs](#mc---Prints-MCs)
+    * [`next` - Switch the target region to the next page ***(GUI mode only)***](#next---Switch-the-target-region-to-the-next-page)
+    * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---Switch-the-UI-to-the-plain-mode-(pure-text-CLI))
+    * [`prev` - Switch the target region to the previous page ***(GUI mode only)***](#prev---Switch-the-target-region-to-the-previous-page)
+    * [`reminder` - Print tasks that are due soon](#reminder---Print-tasks-that-are-due-soon)
+    * [`sel` - Select items by index](#sel---Select-items-by-index)
+    * [`take` - Take module(s)](#take---Take-module)
+    * [`todo` - Add a todo to the task list](#todo---Add-a-todo-to-the-task-list)
+    * [`undone` - Mark a task as undone](#undone---Mark-a-task-as-undone)
+    * [`unknown` - Prints error message](#unknown---Prints-error-message)
+    * [`unsel` - Unselect items](#unsel---Unselect-items)
+    * [`untake` - Untake module(s)](#untake---Untake-module)
+* [Triggering the syntax reminder](#Triggering-the-syntax-reminder)
+* [FAQ](#FAQ)
+* [Command Summary](#command-summary)
 
-Our project aims to develop a CLI application that can be used for task tracking and modules assignment managing. The application enable users who are fast typers like you,  to browse and select modules, create and arrange tasks, add tasks to modules,create reminders and calculate their MCs / CAPs. This convenient application,  greatly reduces the stress of juggling a busy schedule for students who manages the overwhelming schedule of school and personal life.   <br>
 
-This user guide will bring you through the various commands in our app, and it also aims to provide a smooth learning process such that you can fully utilize it to help in your task management. Lets wait no further and get started! 
+## Introduction
+
+Domsun is a CLI program that allows users to manage tasks and modules. <br>
+Users will be able to browse and select modules, create and arrange tasks, add tasks to modules,<br>
+create reminders and calculate their MCs / CAPs.
+
+## Quick Start
 
 
-## 2. Quick Start
-
-
-1. Ensure that you have Java 11 or above and Gradle installed on your Computer
+1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Duke` from [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).
 3. Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.
 4. Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS. 
@@ -18,7 +52,7 @@ This user guide will bring you through the various commands in our app, and it a
 6. Type ‘bye’ to terminate your session.  
 
 
-## 3. Features 
+## Features 
 
 #### Addition and removal of tasks
 The program allows user to add or delete tasks from the task list.<br>
@@ -68,9 +102,9 @@ The program allows users to add some tasks to modules using the `add` command.
 #### Reminders
 The program allows user to set reminders at certain time, or remind themselves of the most urgent tasks on start-up.
 
-## 4. Usage (alphabetical order)
+## Usage (alphabetical order)
 
-### `add` - Add task(s) to module(s)
+### `add` - Add task to module
 
 Typing `add` adds specified task(s) to specified module(s).
 
@@ -84,11 +118,11 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		I have added the specified tasks to the specified modules.
-		CS2113 << tasks: borrow book; eat; 
-		CS2113T << tasks: borrow book; eat; 
+    I have added the specified tasks to the specified modules.
+    CS2113 << tasks: borrow book; eat; 
+    CS2113T << tasks: borrow book; eat; 
     ____________________________________________________________
    ```
 
@@ -103,7 +137,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Bye. Hope to see you again soon!
     ____________________________________________________________
@@ -124,9 +158,9 @@ Example of usage (when there are modules in the target):
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		Here is your existing CAP: 4.00
+    Here is your existing CAP: 4.00
     ____________________________________________________________
    ```
 Example of usage (when there are modules in the target): 
@@ -135,9 +169,9 @@ Example of usage (when there are modules in the target):
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		Here is your existing CAP: 4.25
+    Here is your existing CAP: 4.25
     ____________________________________________________________
    ```
 
@@ -151,7 +185,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Nice! I've cleared everything in the list.
     ____________________________________________________________
@@ -160,19 +194,19 @@ Expected outcome:
 ### `deadline` - Add a deadline to the task list
 
 Typing `deadline` allows the program to parse user's input and create a ***deadline*** object with 
-specified *description* and *time*. It will be appended to the end of the task list. For recurring task, type in word 'Weekly' at the end of your task. 
+specified *description* and *time*. It will be appended to the end of the task list.
 
 Syntax: 
 
-`deadline [description] /by [time] <Weekly>`
+`deadline [description] /by [time]`
 
 Example of usage:
 
-`deadline ddl /by 21/9/20 1:12`
-or 
-`deadline ddl /by 21/9/20 1:12 Weekly`
+`deadline ddl /by 21/9/15 1:12`
+
 Expected outcome:
-   ```	
+
+   ```  
     ____________________________________________________________
         Got it. I've added this task:
         [D][X] ddl (by: Sep 15 2021 01:12)
@@ -195,7 +229,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Noted. I've removed this task:
         [D][X] ddl (by: Sep 15 2021 01:12)
@@ -217,10 +251,10 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		Here are the details you requested:
-		Item 1: [T][X] borrow book
+    Here are the details you requested:
+    Item 1: [T][X] borrow book
     ____________________________________________________________
    ```
 
@@ -230,17 +264,17 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		Here are the details you requested:
-		Item: CS2113T Software Engineering & Object-Oriented Programming 4MC
-		"This module introduces the necessary skills for systematic and rigorous development of software sys
-		tems. It covers requirements, design, implementation, quality assurance, and project management aspe
-		cts of small-to-medium size multi-person software projects. The module uses the Object Oriented Prog
-		ramming paradigm. Students of this module will receive hands-on practice of tools commonly used in t
-		he industry, such as test automation tools, build automation tools, and code revisioning tools will 
-		be covered.
-		Tasks: [NOT FOUND]
+    Here are the details you requested:
+    Item: CS2113T Software Engineering & Object-Oriented Programming 4MC
+    "This module introduces the necessary skills for systematic and rigorous development of software sys
+    tems. It covers requirements, design, implementation, quality assurance, and project management aspe
+    cts of small-to-medium size multi-person software projects. The module uses the Object Oriented Prog
+    ramming paradigm. Students of this module will receive hands-on practice of tools commonly used in t
+    he industry, such as test automation tools, build automation tools, and code revisioning tools will 
+    be covered.
+    Tasks: [NOT FOUND]
     ____________________________________________________________
    ```
 
@@ -259,7 +293,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Nice! I've marked this task as done:
         [D][V] ddl (by: Sep 15 2021 01:12)
@@ -269,7 +303,7 @@ Expected outcome:
 ### `event` - Add an event to the task list
 
 Typing `event` allows the program to parse user's input and create an ***event*** object with 
-specified *description* and *time*. It will be appended to the end of the task list. For recurring task, type in word 'Weekly' at the end of your task. 
+specified *description* and *time*. It will be appended to the end of the task list.
 
 Syntax:
 
@@ -278,12 +312,10 @@ Syntax:
 Example of usage: 
 
 `event midterm exam /at May 13 2020 8:00`
-or 
-`event midterm exam /at 13/15/2020 8:00 Weekly`
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Got it. I've added this task:
         [E][X] midterm exam (at: May 13 2020 08:00)
@@ -324,7 +356,7 @@ Example of usage:
 
 Expected outcome (found):
 
-   ```	
+   ```  
     ____________________________________________________________
         Tasks with the specified keyword are:
         1.[D][X] math exam (by: Oct 15 2020 10:30)
@@ -335,7 +367,7 @@ Expected outcome (found):
 
 Expected outcome (not found):
 
-   ```	
+   ```  
     ____________________________________________________________
         Tasks with the specified keyword are:
         [NOT FOUND]
@@ -359,10 +391,10 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		Now we are focusing on:
-		mod
+    Now we are focusing on:
+    mod
     ____________________________________________________________
    ```
 Example of usage: 
@@ -371,10 +403,10 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		Now we are focusing on:
-		task
+    Now we are focusing on:
+    task
     ____________________________________________________________
    ```
 
@@ -396,32 +428,32 @@ Expected outcome:
    ```
     ____________________________________________________________
         Here are all available commands:
-        Command: add  Description: Add task(s) to module(s): Add specified task(s) to specified module(s).
         Command: bye  Description: Quit the program
-        Command: cap  Description: Calculate CAP for courses based on selected option.
         Command: clear  Description: Clear the task list
         Command: deadline  Description: Add a deadline to the task list
         Command: delete  Description: Delete a task from the task list
-        Command: detail  Description: Print the details of a specified item.
         Command: done  Description: Mark a task as done
         Command: event  Description: Add an event to the task list
-        Command: fancy  Description: Switch to a fancy Cli (requires the shell to support ansi codes).
         Command: find  Description: Find an event in the task list with the specified keyword
-        Command: focus  Description: Change context. Changes the target of other commands to the specified target
         Command: help  Description: Print the list of available commands, or print the details of a specified command
-        Command: list  Description: Print a list of items depending on the current Focus
-        Command: mc  Description: Print the number of MCs based on selected option.
-        Command: next  Description: Switch the target region to the next page, keeping other regions unchanged.
-        Command: plain  Description: Switch to a plain Cli.
-        Command: prev  Description: Switch the target region to the previous page, keeping other regions unchanged.
+        Command: focus  Description: Change context. Changes the target of other commands to the specified target
         Command: reminder  Description: List out events and deadlines tasks that are due within 3 days
-        Command: sel  Description: Make selection: Add specified item(s) to the selection.
-        Command: take  Description: Take module(s): Mark specified module(s) as taken.
+        Command: list  Description: Print a list of tasks/modules depending on the current Focus
         Command: todo  Description: Add a todo to the task list
         Command: undone  Description: Mark a task as undone
         Command: unknown  Description: Prints the error message for an unrecognized command for debugging purposes
+        Command: next  Description: Switch the target region to the next page, keeping other regions unchanged.
+        Command: prev  Description: Switch the target region to the previous page, keeping other regions unchanged.
+        Command: fancy  Description: Switch to a fancy Cli (requires the shell to support ansi codes).
+        Command: plain  Description: Switch to a plain Cli.
+        Command: sel  Description: Make selection: Add specified item(s) to the selection.
         Command: unsel  Description: Cancel selection: Make specified item(s) no longer selected.
+        Command: add  Description: Add task(s) to module(s): Add specified task(s) to specified module(s).
+        Command: take  Description: Take module(s): Mark specified module(s) as taken.
         Command: untake  Description: Untake module(s): Mark specified module(s) as not taken.
+        Command: mc  Description: Print MCs: Print the number of MCs based on selected option.
+        Command: detail  Description: Print Details: Print the details of a specified module.
+        Command: cap  Description: Calculate CAP: Calculate CAP for courses based on selected option.
         Use "help [target]" to see details :) Try "help help"!
     ____________________________________________________________
    ```
@@ -470,7 +502,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Here is the list of tasks:
         1.[D][X] math exam (by: Oct 15 2020 10:30)
@@ -485,7 +517,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Here is the list of tasks:
         1.[E][X] exam review session (at: Oct 01 2020 08:00)
@@ -500,7 +532,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Here is the list of tasks:
         1.[D][X] math exam (by: Oct 15 2020 10:30)
@@ -523,10 +555,10 @@ Example of usage (when there are modules in the target):
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		Here is the total MC:
-		22
+    Here is the total MC:
+    22
     ____________________________________________________________
    ```
 Example of usage (when there are modules in the target): 
@@ -535,18 +567,18 @@ Example of usage (when there are modules in the target):
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		Here is the total MC:
-		EE1001: 4MCs
-		EE1001X: 4MCs
-		EE1002: 4MCs
-		EE1003: 4MCs
-		EE1111: 6MCs
+    Here is the total MC:
+    EE1001: 4MCs
+    EE1001X: 4MCs
+    EE1002: 4MCs
+    EE1003: 4MCs
+    EE1111: 6MCs
     ____________________________________________________________
    ```
 
-### `next` - Switch the target region to the next page ***(GUI mode only)***
+### `next` - Switch the target region to the next page
 
 Typing `next` switches the target region to the next page, should a next page exist.<br>
 This command has no effect on pure text CLI mode.
@@ -590,7 +622,7 @@ Expected outcome:
 
 The UI switches to plain mode (pure-text CLI interface).
 
-### `prev` - Switch the target region to the previous page ***(GUI mode only)***
+### `prev` - Switch the target region to the previous page
 
 Typing `prev` switches the target region to the previous page, should a previous page exist.<br>
 This command has no effect on pure text CLI mode.
@@ -630,10 +662,10 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		Here are the tasks due within 3 days: 
-		[D][X] submission 2 (by: Oct 15 2020 02:00)
+    Here are the tasks due within 3 days: 
+    [D][X] submission 2 (by: Oct 15 2020 02:00)
     ____________________________________________________________
    ```
 
@@ -651,16 +683,16 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		I have selected the items you specified:
-		Item 1: borrow book
-		Item 2: eat
-		Item 3: jumping
+    I have selected the items you specified:
+    Item 1: borrow book
+    Item 2: eat
+    Item 3: jumping
     ____________________________________________________________
    ```
 
-### `take` - Take module(s)
+### `take` - Take module
 
 Typing `take` marks specified module(s) as taken.
 
@@ -674,11 +706,11 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		I have marked these modules as taken:
-		Module: CS2113
-		Module: CS2113T
+    I have marked these modules as taken:
+    Module: CS2113
+    Module: CS2113T
     ____________________________________________________________
    ```
 
@@ -697,7 +729,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Got it. I've added this task:
         [T][X] class
@@ -720,7 +752,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Nice! I've marked this task as undone:
         [D][X] math exam (by: Oct 15 2020 10:30)
@@ -747,7 +779,7 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         OOPS, I don't know what that means :-( Try "help"!
     ____________________________________________________________
@@ -767,16 +799,16 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		I have un-selected the items you specified:
-		Item 1: borrow book
-		Item 2: eat
-		Item 3: jumping
+    I have un-selected the items you specified:
+    Item 1: borrow book
+    Item 2: eat
+    Item 3: jumping
     ____________________________________________________________
    ```
 
-### `untake` - Untake module(s)
+### `untake` - Untake module
 
 Typing `untake` marks specified module(s) as not taken.
 
@@ -790,10 +822,10 @@ Example of usage:
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
-		I have marked these modules as not taken:
-		Module: CS2113T
+    I have marked these modules as not taken:
+    Module: CS2113T
     ____________________________________________________________
    ```
 
@@ -807,31 +839,30 @@ Example of usage:
 
 Note that the command `deadline` is a correct command, but:<br>
 1. Description is missing
-1. Parameter name is wrong
+2. Parameter name is wrong
 
 Expected outcome:
 
-   ```	
+   ```  
     ____________________________________________________________
         Invalid Command! Please check the syntax.
         deadline [description] /by [time]
     ____________________________________________________________
    ```
 
-## 5. FAQ
+## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
 **A**: Send the `data` folder in your program directory to the program directory on your new device.
 
-**Q**: Where do i install java 11 from? 
+**Q**: How do I run this program ?
 
-**A**: Java 11 can be downloaded from the Oracle website. [https://www.oracle.com/technetwork/java/javase/downloads/index.html](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+**A**: To run this program execute the jar file by ‘java -jar domnus.jar’
 
-## 6. Command Summary
+## Command Summary
 
 A cheat sheet of commonly used commands:
-
 **Action** | **Format, Examples**
 ------------ | -------------
 **add**|`add -task [index] -mod [module code]` <br>e.g. `add -task 1 -mod CS2113`
