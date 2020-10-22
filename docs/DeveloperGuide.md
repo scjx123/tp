@@ -1,4 +1,5 @@
 
+
 # Developer Guide
 
 ## 1. Table of content
@@ -6,8 +7,8 @@
 **2. Setting Up**\
 **3. Design**\
 &nbsp;&nbsp;&nbsp;3.1 Architecture\
-&nbsp;&nbsp;&nbsp;3.2 Main Layer<br>
-&nbsp;&nbsp;&nbsp;3.3 UI Layer<br> 
+&nbsp;&nbsp;&nbsp;3.2 Main Layer\
+&nbsp;&nbsp;&nbsp;3.3 UI Layer\
 &nbsp;&nbsp;&nbsp;3.4 Command Interpreter Layer\
 &nbsp;&nbsp;&nbsp;3.5 Executor Layer\
 &nbsp;&nbsp;&nbsp;3.6 Storage Layer\
@@ -177,27 +178,49 @@ These operations are exposed in the Model interface as Model#commitAddressBook()
 ## Appendix A. Product scope
 ### Target user profile
 
-{Describe the target user profile}
+ - has a need to manage significant number of schedules 
+ - prefer desktop apps over other types 
+ - can type fast
+ - prefers typing to mouse interactions 
+ - is reasonably comfortable using CLI apps 
 
 ### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
+All in one app to track tasks and their dates, monitor productivity and calculate cap. 
 
 ## Appendix B. User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|Student before start of semester|List the modules MC|Follow the recommended MC |
+|v1.0|Student before start of semester|List of module available|Easily Choose which modules to take|
+|v1.0|Student before start of semester|Find the modules either by keyword, module code or even MC |Easily see the desired modules |
+|v1.0|Student before start of semester|Select the modules but not taking it yet |Easily whether the MC fits my requirement |
+|v1.0|Student before start of semester|Find out the etails of the Module|To find out more about the modules.|
+|v1.0|Student before start of semester|Take the desired modules|Mark the modules that i want to take as taken  |
+|v1.0|Student during the semester|Add tasks such as todo,deadline and event into my list|Easily keep track of all the task i have to complete  |
+|v1.0|Student during the semester|Have a Reminder of which deadline is due soon|Ensure that no task is missed out  |
+|v1.0|Student during the semester|Add task to modules |Easily know which tasks belongs to which modules  |
+|v1.0|Student during the semester|Delete task once they are completed |Remove unnecessary task on the list |
+|v1.0|Student after the semester|Calculate the CAP of my individual modules|Easily find out my performance this semester |
+|v1.0|Student after the semester|Clear the list of tasks and modules|Start afresh for the next semester |
 
+{More to be added}
 ## Appendix C. Non-Functional Requirements
 
-{Give non-functional requirements}
 
-## Appendix D. Glossary
+
+## Appendix D. Non-Functional Requirements
+
+1.  Should work on any  _mainstream OS_  as long as it has Java  `11`  or above installed.
+2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+_{More to be added}_
+
+## Appendix E. Glossary
 
 * *glossary item* - Definition
 
-## Appendix E. Instructions for manual testing
+## Appendix F. Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
