@@ -216,25 +216,25 @@ MSS:**
  3. User requests to mark a specific module as 'taken' 
  4. DOMNUS marks the module as taken
 
-Use case ends. 
-**Extensions** 
- - 3a. The module given is invalid 
-		 - Use case shows `[NOT FOUND]` message 
-		 - Use case resumes at step 3
-- 3b. User adds in the wrong module 
-		- The `untake` command can be used to untake the taken module 
+Use case ends.<br>
+**Extensions** \
+&nbsp;&nbsp;&nbsp;3a. The module given is invalid\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3a.1Use case shows `[NOT FOUND]` message\ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes at step 3\
+&nbsp;&nbsp;&nbsp;3b. User adds in the wrong module \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3b.1The `untake` command can be used to untake the taken module \
 
 **Use Case: List MC**
 **MSS:**
 
- 1. User requests to list total MC on the current list. 
- 2. DOMNUS shows the total MC of the current list. Default list is entire modules list. 
+ 1. User requests to list total MC on the current list. \
+ 2. DOMNUS shows the total MC of the current list. Default list is entire modules list. \
 
-Use case ends 
+Use case ends.<br> 
 **Extensions** 
 
- 1a. User not focusing on the correct list 
-	 1a1. DOMNUS shows the entire module list total MC instead of the 'taken' list MC 
+&nbsp;&nbsp;&nbsp;1a. User not focusing on the correct list \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. DOMNUS shows the entire module list total MC instead of the 'taken' list MC \
 
  
 Use Case: 
@@ -257,21 +257,21 @@ _{More to be added}_
 ## Appendix F. Instructions for manual testing
 
 1. Launch and Shutdown 
-Step 1: Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).
-Step 2: Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.
-Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.
-Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**
+Step 1: Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
+Step 2: Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.\
+Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
+Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**\
 
-2. Switching between Fancy and CLI 
-3. Focusing between different list
-	3.1 Focus mod 
-	3.2 Focus Task 
-	3.3 Focus Taken 
-4. List all Modules and Task 
-	4.1 List all module
-	4.2 List all task. 
-	4.3 List all taken module 
-5. Add Modules and Task 
-	2.1 Add modules
-	2.2 Add task
-	2.3 Add task to modules 
+2. Switching between Fancy and CLI \
+3. Focusing between different list\
+	3.1 Focus mod \
+	3.2 Focus Task \
+	3.3 Focus Taken \
+4. List all Modules and Task\ 
+	4.1 List all module\
+	4.2 List all task. \
+	4.3 List all taken module\ 
+5. Add Modules and Task \
+	2.1 Add modules\
+	2.2 Add task\
+	2.3 Add task to modules\ 
