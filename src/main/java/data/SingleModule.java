@@ -60,7 +60,7 @@ public class SingleModule extends Item {
         this.moduleName = replaceBlanks(name);
         this.moduleMC = replaceBlanks(mc);
         this.modulePrerequisite = replaceBlanks(prereq);
-        this.moduleSU=replaceBlanks(su);
+        this.moduleSU = replaceBlanks(su);
         taskList = new ArrayList<>();
     }
 

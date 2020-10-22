@@ -89,15 +89,15 @@ public class ModuleParser {
             parseFile(tempString);
             SingleModule m = new SingleModule(moduleCode, moduleName, "", moduleMC, "", moduleSU);
             if (moduleCode != null) {
-                if(moduleSU.equals("true")){
-                    m.hasSU=true;
-                }else{
-                    m.hasSU=false;
+                if (moduleSU.equals("true")) {
+                    m.hasSU = true;
+                } else {
+                    m.hasSU = false;
                 }
                 masterList.add(m);
             }
             moduleCode = null;
-            moduleSU="false";
+            moduleSU = "false";
         }
         return masterList;
     }

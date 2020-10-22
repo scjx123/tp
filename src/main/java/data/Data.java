@@ -98,7 +98,7 @@ public class Data {
             break;
         case Constants.SU:
             target = mods.stream().filter(
-                    x -> ((SingleModule) x).hasSU).collect(Collectors.toCollection(ArrayList::new));
+                x -> ((SingleModule) x).hasSU).collect(Collectors.toCollection(ArrayList::new));
             break;
         case Constants.SELECTED:
             target = mods.stream().filter(x -> x.isSelected).collect(Collectors.toCollection(ArrayList::new));
