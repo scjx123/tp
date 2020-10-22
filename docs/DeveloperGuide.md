@@ -1,25 +1,17 @@
 # Developer Guide
 
-## Design
+## 1. Design
 The Architecture Diagram below represents a high-level design overview of the App. Specifically, it is done with an n-tier architectural style, where the higher layers make use of services provided by lower layers. 
 
 ![here](Architecture_Diagram.PNG)
 
-**Main**<br>
+**1.1 Main**<br>
 For the main layer, it contains a single class known as *Duke*. 
 Main's interaction with Storage<br>
 When the app launches, Duke loads any previous data from storage and then connects the components of the app in sequence. Upon shutting down,  Duke calls upon method to save user's data automatically.  
 
-Main's interaction with UI<br>
+**1.2 Main's interaction with UI**<br>
 Main gets user input and displays messages through the use of UI component. 
-
-Main's interaction with Command Interpreter<br>
-Upon receiving command from the UI, Duke would pass the entire user input into Command Interpreter (CI)
-
-Main's interaction with Execute<br>
-Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
-
-**UI**<br>
 The UI layer entails the package *visualize*, which contains classes *ColoredString*, *Bitmap*, *UI*, *Cli*, 
 *FancyCli* and enumerations *Color* and *Sprite* in the following structure:
 ![uml](Package%20visualize.png)
@@ -32,14 +24,20 @@ UI's interaction with the rest of the program<br>
 UI passes the user's input string out to the Duke object, which then passes the string to the Command Interpreter layer.
 UI also reads data from the Data object for refreshing purposes, but does not modify it.
 
-**Command Interpreter**<br>
-**Executer**<br>
-**Storage**<br>
+**1.3 Main's interaction with Command Interpreter**<br>
+Upon receiving command from the UI, Duke would pass the entire user input into Command Interpreter (CI)
 
-## Implementation<br>
-[add ur individual features here]
+**1.4 Main's interaction with Execute**<br>
+Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
 
-### module planner feature
+**1.5 Main's interaction with Storage**<br>
+Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
+
+
+## 2. Implementation<br>
+This section highlights some of our project's key feature and its implementation. 
+
+### 2.1 Module Planner Feature
 
 The module planner feature entails many *Actions* which extend `Action`. Their functionalities and usages
 are in the table below:
@@ -53,7 +51,30 @@ A typical flow of execution would be:
 1. blah
 1. blah
 
-### CAP calculator feature
+### 2.2 Checker Feature 
+![here](Checker_Diagram.png)
+
+The checker mechanism is facilitated by the utility class `Checker`. It is an independent class on its own without extensions and is stored under the `Data` package of our app. The class implements the following operations: 
+
+ - `checkDuplicates()`- Calls the checkClash method and return the status of boolean variable `isClash` .
+ - `checkClash(ArrayList< item >, Item)`- Updates `isClash` once a duplicate item is found in the list.
+ - `checkRecurrenceDate(Task)` - Checks if the current date is beyond the stated date in the list, and provides a new update for the date recurring date.
+
+Given below is an example usage scenario and how the checker mechanism behaves at each step. In this example, Deadline is being used, however, it can be replaced with other Tasks such as Todo and Event. 
+
+Step 1. A new `Deadline` object is created and needs to be added to the existing list of task. Hence it calls `addTask()` method under `Data` class. 
+
+Step 2. Data instantiates a Checker with its existing list by calling its constructor, and the task to be added to the list 
+
+Step 3. Data proceeds to call the `checkRecurrenceDate(Task)` of the Checker class, to get a newDate if today's date is beyond the stated weekly date.
+ 
+Step 4. If `newDate` is not `null`it shows that there is a new updated date. Therefore, we proceed to update the object with our updated weekly date. 
+
+Step 5. Now we proceed to call `checkDuplicates()` of Checker class. 
+
+Step 6. If `false` , there is no duplicates in the existing list, and the task can be safely added. Otherwise, no action will be taken. 
+
+### 2.3 CAP calculator feature
 
 The proposed undo/redo mechanism is facilitated by `CalculateCapAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -76,7 +97,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 ![cap uml diagram](./Cap_Calculator_Diagram.JPG)
 
 
-### Reminder Feature
+### 2.4 Reminder Feature
 
 The proposed undo/redo mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
 
@@ -96,7 +117,7 @@ The following sequence diagram diagram shows how the reminder operation works
 
 ![Reminder_Sequence_Diagram](./ReminderAction_Sequence_Diagram.png)
 
-### Postpone Feature
+### 2.5 Postpone Feature
 
 The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -120,30 +141,30 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 These operations are exposed in the Model interface as Model#commitAddressBook(), Model#undoAddressBook() and Model#redoAddressBook() respectively.
 
-## Product scope
-### Target user profile
+## 3. Product scope
+### 3.1 Target user profile
 
 {Describe the target user profile}
 
-### Value proposition
+### 3.2 Value proposition
 
 {Describe the value proposition: what problem does it solve?}
 
-## User Stories
+## 4. User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## Non-Functional Requirements
+## 5. Non-Functional Requirements
 
 {Give non-functional requirements}
 
-## Glossary
+## 6. Glossary
 
 * *glossary item* - Definition
 
-## Instructions for manual testing
+## 7. Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
