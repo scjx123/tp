@@ -1,16 +1,50 @@
+
 # Developer Guide
 
-## 1. Design
-The Architecture Diagram below represents a high-level design overview of the App. Specifically, it is done with an n-tier architectural style, where the higher layers make use of services provided by lower layers. 
+## 1. Table of content
+**1. Table of content**\
+**2. Setting Up**\
+**3. Design**\
+&nbsp;&nbsp;&nbsp;3.1 Architecture\
+&nbsp;&nbsp;&nbsp;3.2 Main Layer<br>
+&nbsp;&nbsp;&nbsp;3.3 UI Layer<br> 
+&nbsp;&nbsp;&nbsp;3.4 Command Interpreter Layer\
+&nbsp;&nbsp;&nbsp;3.5 Executor Layer\
+&nbsp;&nbsp;&nbsp;3.6 Storage Layer\
+**4. Implementation**\
+&nbsp;&nbsp;&nbsp;4.1 Module Planner Feature\
+&nbsp;&nbsp;&nbsp;4.2 Checker Feature\
+&nbsp;&nbsp;&nbsp;4.3 Cap Caculator Feature\
+&nbsp;&nbsp;&nbsp;4.4 Reminder Feature\
+&nbsp;&nbsp;&nbsp;4.5 Postpone Feature\
+**5. Appendix A Product Scope**\
+**6. Appendix B User Stories** \
+**7. Appendix C Use Cases** \
+**8. Appendix D Non-funcitonal Requirements** \
+**9. Appendix E Glossary** \
+**10. Appendix F. Instruction for Manual Testing**
+
+## 2. Setting Up
+
+1.  Ensure that you have Java 11 or above installed.
+2.  Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).
+3.  Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.
+4.  Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.
+5.  Navigate to your home folder and type ‘java -jar domnus.jar’
+6.  Type ‘bye’ to terminate your session.
+
+## 3. Design
+
+### 3.1 Architecture
+The **Architecture Diagram** below represents a high-level design overview of the App. Specifically, it is done with an **N-tier architectural style**, where the higher layers make use of services provided by lower layers. 
 
 ![here](Architecture_Diagram.PNG)
 
-**1.1 Main**<br>
-For the main layer, it contains a single class known as *Duke*. 
-Main's interaction with Storage<br>
-When the app launches, Duke loads any previous data from storage and then connects the components of the app in sequence. Upon shutting down,  Duke calls upon method to save user's data automatically.  
 
-**1.2 Main's interaction with UI**<br>
+**3.2 Main Layer**<br>
+For the `main` layer, it contains a single class known as `Duke`. 
+
+**3.3 UI Layer**<br>
 Main gets user input and displays messages through the use of UI component. 
 The UI layer entails the package *visualize*, which contains classes *ColoredString*, *Bitmap*, *UI*, *Cli*, 
 *FancyCli* and enumerations *Color* and *Sprite* in the following structure:
@@ -22,22 +56,22 @@ UI gets user input through *nextline()*, and renders strings as a user-comprehen
 
 UI's interaction with the rest of the program<br>
 UI passes the user's input string out to the Duke object, which then passes the string to the Command Interpreter layer.
-UI also reads data from the Data object for refreshing purposes, but does not modify it.
+UI also reads data from the Data object for refreshing purposes, but does not modify it. 
 
-**1.3 Main's interaction with Command Interpreter**<br>
+**1.3 Command Interpreter Layer**<br>
 Upon receiving command from the UI, Duke would pass the entire user input into Command Interpreter (CI)
 
-**1.4 Main's interaction with Execute**<br>
+**1.4 Execute Layer**<br>
 Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
 
-**1.5 Main's interaction with Storage**<br>
+**1.5 Storage Layer**<br>
 Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
 
 
-## 2. Implementation<br>
+## 4. Implementation<br>
 This section highlights some of our project's key feature and its implementation. 
 
-### 2.1 Module Planner Feature
+### 4.1 Module Planner Feature
 
 The module planner feature entails many *Actions* which extend `Action`. Their functionalities and usages
 are in the table below:
@@ -51,7 +85,7 @@ A typical flow of execution would be:
 1. blah
 1. blah
 
-### 2.2 Checker Feature 
+### 4.2 Checker Feature 
 ![here](Checker_Diagram.png)
 
 The checker mechanism is facilitated by the utility class `Checker`. It is an independent class on its own without extensions and is stored under the `Data` package of our app. The class implements the following operations: 
@@ -74,7 +108,7 @@ Step 5. Now we proceed to call `checkDuplicates()` of Checker class.
 
 Step 6. If `false` , there is no duplicates in the existing list, and the task can be safely added. Otherwise, no action will be taken. 
 
-### 2.3 CAP calculator feature
+### 4.3 CAP calculator feature
 
 The proposed undo/redo mechanism is facilitated by `CalculateCapAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -97,7 +131,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 ![cap uml diagram](./Cap_Calculator_Diagram.JPG)
 
 
-### 2.4 Reminder Feature
+### 4.4 Reminder Feature
 
 The proposed undo/redo mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
 
@@ -117,7 +151,7 @@ The following sequence diagram diagram shows how the reminder operation works
 
 ![Reminder_Sequence_Diagram](./ReminderAction_Sequence_Diagram.png)
 
-### 2.5 Postpone Feature
+### 4.5 Postpone Feature
 
 The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -140,31 +174,30 @@ The following activity diagram summarizes what happens when a user executes a ne
 ![Postpone_Sequence_Diagram](./PostponeAction_Sequence_Diagram.png)
 
 These operations are exposed in the Model interface as Model#commitAddressBook(), Model#undoAddressBook() and Model#redoAddressBook() respectively.
-
-## 3. Product scope
-### 3.1 Target user profile
+## Appendix A. Product scope
+### Target user profile
 
 {Describe the target user profile}
 
-### 3.2 Value proposition
+### Value proposition
 
 {Describe the value proposition: what problem does it solve?}
 
-## 4. User Stories
+## Appendix B. User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## 5. Non-Functional Requirements
+## Appendix C. Non-Functional Requirements
 
 {Give non-functional requirements}
 
-## 6. Glossary
+## Appendix D. Glossary
 
 * *glossary item* - Definition
 
-## 7. Instructions for manual testing
+## Appendix E. Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
