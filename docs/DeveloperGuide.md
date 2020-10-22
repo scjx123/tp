@@ -272,6 +272,6 @@ Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**\
 	4.2 List all task. \
 	4.3 List all taken module\ 
 5. Add Modules and Task \
-	2.1 Add modules\
-	2.2 Add task\
-	2.3 Add task to modules\ 
+	5.1 Add modules\
+	5.2 Add task\
+	5.3 Add task to modules\ 
