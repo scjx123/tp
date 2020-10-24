@@ -34,6 +34,7 @@ public class Duke {
     private boolean isFancy;
     private Timer timer;
     private boolean isSnoozed = false;
+    private boolean isRemind = false;
 
     /**
      * Instantiates a new Duke.
@@ -86,6 +87,21 @@ public class Duke {
                         ui.showReminder(data);
                     }
                 }, Integer.parseInt(interval), Integer.parseInt(interval));
+            } else {
+                LocalDate date = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM");
+                String schedule = date + " " + interval;
+                System.out.println(schedule);
+                Date parseSchedule = (Date) formatter.parse(schedule);
+                System.out.println(parseSchedule);
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(new TimerTask() { // when it is snoozed
+                    @Override
+                    public void run() {
+                        ui.showReminder(data);
+                    }
+                }, parseSchedule);
             }
         } catch (NumberFormatException e) {
             ui.showText("Invalid interval. Reminder scheduler can not work properly.");
@@ -143,9 +159,12 @@ public class Duke {
                     ui.update(c.result, data);
                     isExit = c.isBye();
                     isSnoozed = c.isSnoozed();
-                    if (isSnoozed){
+                    isRemind = c.isRemind();
                     if (isSnoozed) {
                         snoozeReminder();
+                    }
+                    if (isRemind) {
+                        setReminderSchedule();
                     }
                     if (isExit) {
                         // stops timer
@@ -164,11 +183,18 @@ public class Duke {
     }
 
     /**
+     * Set reminder schedule.
+     */
+    public void setReminderSchedule() {
+        String schedule = new RemindAction().getSchedule();
+        reminderTimer(Constants.REMINDER_DELAY, schedule);
+    }
+
+    /**
      * Snooze Reminder.
      */
     public void snoozeReminder() {
         String newInterval = new SnoozeAction().getNewInterval();
-        reminderTimer(timer, Constants.REMINDER_DELAY, newInterval);
         reminderTimer(Constants.REMINDER_DELAY, newInterval);
     }
 

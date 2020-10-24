@@ -675,5 +675,7 @@ public class Constants {
             Map.entry(UNTAKE, "I have un-taken these modules you specified. "
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(SNOOZE, "I've snoozed the reminder for 30 seconds."));
+            Map.entry(SNOOZE, "I've snoozed the reminder for 30 seconds."),
+            Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));
+
 }
