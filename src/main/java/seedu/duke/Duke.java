@@ -54,16 +54,22 @@ public class Duke {
             ui.showText("The save file is corrupted.");
             data = new Data();
         }
+        // schedule reminder every 1 minutes
+        reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
+    }
 
-        // schedule reminder every 10 minutes
+    public void reminderTimer(int delay, String interval) {
         timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                ui.showReminder(data);
-            }
-        }, Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
-
+        try {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    ui.showReminder(data);
+                }
+            }, delay, Integer.parseInt(interval));
+        } catch (NumberFormatException e) {
+            ui.showText("Invalid interval. Reminder scheduler can not work properly.");
+        }
     }
 
     /**
