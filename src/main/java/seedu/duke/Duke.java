@@ -58,9 +58,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Make Reminder scheduler.
+     * @param timer
+     * @param delay
+     * @param interval
+     */
     public void reminderTimer(Timer timer, int delay, String interval) {
         try {
-            if (interval == Constants.REMINDER_INTERVAL) {
+            if (interval == Constants.REMINDER_INTERVAL) { // when the interval is default
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -68,7 +74,7 @@ public class Duke {
                     }
                 }, delay, Integer.parseInt(interval));
             } else {
-                timer.schedule(new TimerTask() {
+                timer.schedule(new TimerTask() { // when it is snoozed
                     @Override
                     public void run() {
                         ui.showReminder(data);
@@ -151,6 +157,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Snooze Reminder.
+     */
     public void snoozeReminder() {
         String newInterval = new SnoozeAction().getNewInterval();
         reminderTimer(timer, Constants.REMINDER_DELAY, newInterval);
