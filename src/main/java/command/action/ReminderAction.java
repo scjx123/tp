@@ -45,7 +45,7 @@ public class ReminderAction extends Action {
         for (Item item : tasks) {
             builder.append(item.toString()).append(Constants.WIN_NEWLINE);
         }
-        if (builder.toString().equals(Constants.ZERO_LENGTH_STRING)) {
+        if (tasks.size() == 0) {
             builder.append(Constants.NO_URGENT_TASKS);
         }
       

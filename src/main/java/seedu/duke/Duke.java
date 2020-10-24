@@ -2,12 +2,17 @@ package seedu.duke;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 import command.Command;
+import command.action.RemindAction;
+import command.action.SnoozeAction;
 import constants.Constants;
 import data.Data;
 import io.Storage;
@@ -28,6 +33,8 @@ public class Duke {
     private Cli ui;
     private boolean isFancy;
     private Timer timer;
+    private boolean isSnoozed = false;
+    private boolean isRemind = false;
 
     /**
      * Instantiates a new Duke.
@@ -54,16 +61,51 @@ public class Duke {
             ui.showText("The save file is corrupted.");
             data = new Data();
         }
+    }
 
-        // schedule reminder every 10 minutes
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                ui.showReminder(data);
+    /**
+     * Make Reminder scheduler.
+     * @param delay     the delay
+     * @param interval  the interval
+     */
+    public void reminderTimer(int delay, String interval) {
+        try {
+            if (interval == Constants.REMINDER_INTERVAL) { // when the interval is default
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        ui.showReminder(data);
+                    }
+                }, delay, Integer.parseInt(interval));
+            } else if (interval != Constants.REMINDER_INTERVAL) {
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(new TimerTask() { // when it is snoozed
+                    @Override
+                    public void run() {
+                        ui.showReminder(data);
+                    }
+                }, Integer.parseInt(interval), Integer.parseInt(interval));
+            } else {
+                LocalDate date = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM");
+                String schedule = date + " " + interval;
+                System.out.println(schedule);
+                Date parseSchedule = (Date) formatter.parse(schedule);
+                System.out.println(parseSchedule);
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(new TimerTask() { // when it is snoozed
+                    @Override
+                    public void run() {
+                        ui.showReminder(data);
+                    }
+                }, parseSchedule);
             }
-        }, Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
-
+        } catch (NumberFormatException e) {
+            ui.showText("Invalid interval. Reminder scheduler can not work properly.");
+        }
     }
 
     /**
@@ -85,7 +127,7 @@ public class Duke {
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
         //boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
         // new Duke(!isWindows, System.out, System.in, Constants.PATH,
-        //Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
+        // Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
     }
 
     private void reattachUI(boolean isFancy, boolean isPlain) {
@@ -104,7 +146,8 @@ public class Duke {
      * Run.
      */
     public void run() {
-        //ui.showReminder(data);
+        // schedule reminder every 1 minutes
+        reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -115,6 +158,14 @@ public class Duke {
                     reattachUI(c.isFancy(), c.isPlain());
                     ui.update(c.result, data);
                     isExit = c.isBye();
+                    isSnoozed = c.isSnoozed();
+                    isRemind = c.isRemind();
+                    if (isSnoozed) {
+                        snoozeReminder();
+                    }
+                    if (isRemind) {
+                        setReminderSchedule();
+                    }
                     if (isExit) {
                         // stops timer
                         timer.cancel();
@@ -129,6 +180,22 @@ public class Duke {
                 ui.update(message, data);
             }
         }
+    }
+
+    /**
+     * Set reminder schedule.
+     */
+    public void setReminderSchedule() {
+        String schedule = new RemindAction().getSchedule();
+        reminderTimer(Constants.REMINDER_DELAY, schedule);
+    }
+
+    /**
+     * Snooze Reminder.
+     */
+    public void snoozeReminder() {
+        String newInterval = new SnoozeAction().getNewInterval();
+        reminderTimer(Constants.REMINDER_DELAY, newInterval);
     }
 
     /**
