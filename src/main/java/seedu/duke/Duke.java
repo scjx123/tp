@@ -64,20 +64,19 @@ public class Duke {
 
     /**
      * Make Reminder scheduler.
-     * @param timer
      * @param delay
      * @param interval
      */
-    public void reminderTimer(Timer timer, int delay, String interval) {
+    public void reminderTimer(int delay, String interval) {
         try {
             if (interval == Constants.REMINDER_INTERVAL) { // when the interval is default
+                timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
                         ui.showReminder(data);
                     }
                 }, delay, Integer.parseInt(interval));
-            } else {
             } else if (interval != Constants.REMINDER_INTERVAL){
                 timer.cancel();
                 timer = new Timer();
@@ -132,8 +131,7 @@ public class Duke {
      */
     public void run() {
         // schedule reminder every 1 minutes
-        timer = new Timer();
-        reminderTimer(timer, Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
+        reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -146,6 +144,7 @@ public class Duke {
                     isExit = c.isBye();
                     isSnoozed = c.isSnoozed();
                     if (isSnoozed){
+                    if (isSnoozed) {
                         snoozeReminder();
                     }
                     if (isExit) {
@@ -170,6 +169,7 @@ public class Duke {
     public void snoozeReminder() {
         String newInterval = new SnoozeAction().getNewInterval();
         reminderTimer(timer, Constants.REMINDER_DELAY, newInterval);
+        reminderTimer(Constants.REMINDER_DELAY, newInterval);
     }
 
     /**
