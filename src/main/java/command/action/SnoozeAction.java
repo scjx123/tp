@@ -1,8 +1,10 @@
 package command.action;
 
 import constants.Constants;
-import data.Data;
 
+/**
+ * The type Snooze action.
+ */
 public class SnoozeAction extends Action {
 
     private String newInterval;
