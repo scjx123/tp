@@ -546,7 +546,7 @@ public class Constants {
     /**
      * The constant REMINDER_INTERVAL.
      */
-    public static final int REMINDER_INTERVAL = 1000 * 60;
+    public static final String REMINDER_INTERVAL = "60000";
 
     /**
      * The constant REMINDER_DELAY.
@@ -674,5 +674,6 @@ public class Constants {
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNTAKE, "I have un-taken these modules you specified. "
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
+            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(SNOOZE, "I've snoozed the reminder for " + TEXT_PLACEHOLDER + " milliseconds"));
 }
