@@ -15,7 +15,8 @@ public class SnoozeAction extends Action {
     }
 
     public String getNewInterval() {
-        newInterval = Integer.toString(Integer.parseInt(Constants.REMINDER_INTERVAL) + Integer.parseInt(addDefaultDelay));
+        newInterval = Integer.toString(Integer.parseInt(Constants.REMINDER_INTERVAL)
+                + Integer.parseInt(addDefaultDelay));
         return newInterval;
     }
 }

@@ -7,7 +7,7 @@ import data.Data;
 /**
  * The type Remind action.
  */
-public class RemindAction extends Action{
+public class RemindAction extends Action {
 
     private String remindAt;
 

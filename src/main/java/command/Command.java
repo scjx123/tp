@@ -124,7 +124,7 @@ public class Command implements Help {
     }
 
     /**
-     * Is TimerChanged boolean
+     * Is TimerChanged boolean.
      * @return the boolean
      */
     public boolean isSnoozed() {
