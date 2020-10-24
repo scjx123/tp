@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 
 import command.Command;
+import command.action.SnoozeAction;
 import constants.Constants;
 import data.Data;
 import io.Storage;
@@ -132,8 +133,7 @@ public class Duke {
                     isExit = c.isBye();
                     isSnoozed = c.isSnoozed();
                     if (isSnoozed){
-                        String newInterval = new SnoozeAction().getNewInterval();
-                        reminderTimer(timer, Constants.REMINDER_DELAY, newInterval);
+                        snoozeReminder();
                     }
                     if (isExit) {
                         // stops timer
@@ -149,6 +149,11 @@ public class Duke {
                 ui.update(message, data);
             }
         }
+    }
+
+    public void snoozeReminder() {
+        String newInterval = new SnoozeAction().getNewInterval();
+        reminderTimer(timer, Constants.REMINDER_DELAY, newInterval);
     }
 
     /**
