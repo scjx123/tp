@@ -415,7 +415,7 @@ public class Constants {
     /**
      * The constant NO_URGENT_TASKS.
      */
-    public static final String NO_URGENT_TASKS = "No task in 3 days from now" + WIN_NEWLINE;
+    public static final String NO_URGENT_TASKS = "No task within 3 days from now" + WIN_NEWLINE;
     /**
      * The constant UNIDENTIFIED_TYPE.
      */
