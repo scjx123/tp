@@ -1,10 +1,19 @@
 package command.action;
 
-public class SnoozeAction extends Action{
-//
-//    private int addDelay = 3;
-//    @Override
-//    public String act() {
-//
-//    }
+import constants.Constants;
+import data.Data;
+
+public class SnoozeAction extends Action {
+
+    private String newInterval;
+    private String addDefaultDelay = "30000"; // default delay for Snooze
+
+    public SnoozeAction() {
+        super();
+    }
+
+    public String getNewInterval() {
+        newInterval = Integer.toString(Integer.parseInt(Constants.REMINDER_INTERVAL) + Integer.parseInt(addDefaultDelay));
+        return newInterval;
+    }
 }
