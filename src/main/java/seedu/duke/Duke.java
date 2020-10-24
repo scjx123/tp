@@ -110,7 +110,8 @@ public class Duke {
      * Run.
      */
     public void run() {
-        //ui.showReminder(data);
+        // schedule reminder every 1 minutes
+        reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
         boolean isExit = false;
         while (!isExit) {
             try {
