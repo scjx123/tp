@@ -415,7 +415,7 @@ public class Constants {
     /**
      * The constant NO_URGENT_TASKS.
      */
-    public static final String NO_URGENT_TASKS = "No task in 3 days from now" + WIN_NEWLINE;
+    public static final String NO_URGENT_TASKS = "No task within 3 days from now" + WIN_NEWLINE;
     /**
      * The constant UNIDENTIFIED_TYPE.
      */
@@ -546,7 +546,7 @@ public class Constants {
     /**
      * The constant REMINDER_INTERVAL.
      */
-    public static final int REMINDER_INTERVAL = 1000 * 60;
+    public static final String REMINDER_INTERVAL = "60000";
 
     /**
      * The constant REMINDER_DELAY.
@@ -674,5 +674,8 @@ public class Constants {
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNTAKE, "I have un-taken these modules you specified. "
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
+            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(SNOOZE, "I've snoozed the reminder for 30 seconds."),
+            Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));
+
 }
