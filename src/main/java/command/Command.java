@@ -131,6 +131,10 @@ public class Command implements Help {
         return result.equals(Constants.messageMap.get(Constants.SNOOZE));
     }
 
+    public boolean isRemind() {
+        return result.equals(Constants.messageMap.get(Constants.REMIND));
+    }
+
     @Override
     public String getName() {
         return name;
