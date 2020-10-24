@@ -2,12 +2,16 @@ package seedu.duke;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 import command.Command;
+import command.action.RemindAction;
 import command.action.SnoozeAction;
 import constants.Constants;
 import data.Data;
@@ -74,6 +78,9 @@ public class Duke {
                     }
                 }, delay, Integer.parseInt(interval));
             } else {
+            } else if (interval != Constants.REMINDER_INTERVAL){
+                timer.cancel();
+                timer = new Timer();
                 timer.schedule(new TimerTask() { // when it is snoozed
                     @Override
                     public void run() {
