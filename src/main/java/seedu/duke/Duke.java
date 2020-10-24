@@ -28,6 +28,7 @@ public class Duke {
     private Cli ui;
     private boolean isFancy;
     private Timer timer;
+    private boolean isSnoozed = false;
 
     /**
      * Instantiates a new Duke.
@@ -54,19 +55,25 @@ public class Duke {
             ui.showText("The save file is corrupted.");
             data = new Data();
         }
-        // schedule reminder every 1 minutes
-        reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
     }
 
-    public void reminderTimer(int delay, String interval) {
-        timer = new Timer();
+    public void reminderTimer(Timer timer, int delay, String interval) {
         try {
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    ui.showReminder(data);
-                }
-            }, delay, Integer.parseInt(interval));
+            if (interval == Constants.REMINDER_INTERVAL) {
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        ui.showReminder(data);
+                    }
+                }, delay, Integer.parseInt(interval));
+            } else {
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        ui.showReminder(data);
+                    }
+                }, Integer.parseInt(interval), Integer.parseInt(interval));
+            }
         } catch (NumberFormatException e) {
             ui.showText("Invalid interval. Reminder scheduler can not work properly.");
         }
@@ -111,7 +118,8 @@ public class Duke {
      */
     public void run() {
         // schedule reminder every 1 minutes
-        reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
+        timer = new Timer();
+        reminderTimer(timer, Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -122,6 +130,11 @@ public class Duke {
                     reattachUI(c.isFancy(), c.isPlain());
                     ui.update(c.result, data);
                     isExit = c.isBye();
+                    isSnoozed = c.isSnoozed();
+                    if (isSnoozed){
+                        String newInterval = new SnoozeAction().getNewInterval();
+                        reminderTimer(timer, Constants.REMINDER_DELAY, newInterval);
+                    }
                     if (isExit) {
                         // stops timer
                         timer.cancel();
