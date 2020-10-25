@@ -307,10 +307,10 @@ public enum HelpText {
             "snooze",
             "Delay the reminder pop up by 30 seconds.",
             new String[]{
-                    "snooze",
+                "snooze",
             },
             new String[]{
-                    "1. \"snooze\" >> Delay reminder popup by 30 seconds"
+                "1. \"snooze\" >> Delay reminder popup by 30 seconds"
             }),
     /**
      * The Take.
@@ -396,10 +396,10 @@ public enum HelpText {
             "viewtrash",
             "View trash bin",
             new String[]{
-                    "viewtrash",
+                "viewtrash",
             },
             new String[]{
-                    "1.\"viewtrash\""
+                "1.\"viewtrash\""
             })
     ;
 
