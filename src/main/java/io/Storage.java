@@ -2,12 +2,14 @@ package io;
 
 import command.Command;
 import data.Item;
+import data.SingleModule;
 import lexical.Parser;
 import constants.Constants;
 import data.Data;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * The type Storage.
@@ -43,8 +45,11 @@ public class Storage {
      * @param tasks user's tasks
      */
     public void save(ArrayList<Item> tasks, ArrayList<Item> courses) {
+        ArrayList<Item> takenCourses = (ArrayList<Item>) courses.stream()
+            .filter(course -> (course instanceof SingleModule) && ((SingleModule) course).isTaken)
+            .collect(Collectors.toList());
         taskSaver.saveTask(tasks);
-        courseSaver.saveCourse(courses);
+        courseSaver.saveCourse(takenCourses);
     }
 
     /**
