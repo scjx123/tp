@@ -25,8 +25,9 @@ public class GradeAction extends TakeAction {
 
         StringBuilder stringBuilder = new StringBuilder();
         int index = 1;
-        stringBuilder.append(Constants.GRADE_HEAD);
 
+        boolean isEmpty = true;
+        stringBuilder.append(Constants.GRADE_HEAD);
         if (option.equals("a") || option.equals("d") || option.equals("t")) {
             for (Map.Entry<String, String> m : modulesWithGrades.entrySet()) {
                 SingleModule module = matchModule(m.getKey(), data.mods);
@@ -34,42 +35,37 @@ public class GradeAction extends TakeAction {
                     throw new ModuleNotFoundException();
                 }
                 if (module.isTaken || option.equals("t")) {
+                    isEmpty = false;
                     modifyObject(module, m.getValue());
-                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(m.getKey())
-                        .append(Constants.TAB)
-                        .append(m.getValue().equals("NULL") ? Constants.MOD_NO_GRADE : m.getValue())
-                        .append(Constants.WIN_NEWLINE);
+                    String message = m.getValue().equals("T") ? Constants.MOD_NO_GRADE : m.getValue();
+                    addGradeList(stringBuilder, index, m.getKey(), message);
                 } else {
-                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(m.getKey())
-                        .append(Constants.TAB).append(Constants.MOD_NOT_TAKEN);
+                    addGradeList(stringBuilder, index, m.getKey(), Constants.MOD_NOT_TAKEN);
                 }
                 index++;
             }
         } else if (option.equals("s")) {
-            boolean isEmpty = true;
-
             for (Item item : data.getTarget(Constants.MOD)) {
                 SingleModule module = (SingleModule) item;
                 if (module.grade != null && !module.grade.isBlank()) {
                     isEmpty = false;
                     String moduleCode = module.moduleCode;
                     String grade = module.grade;
-                    if (grade.equals("NULL")) {
-                        stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-                            .append(Constants.TAB).append(Constants.MOD_NO_GRADE).append(Constants.WIN_NEWLINE);
-                    } else {
-                        stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-                            .append(Constants.TAB).append(grade).append(Constants.WIN_NEWLINE);
-                    }
+                    String message = grade.equals("T") ? Constants.MOD_NO_GRADE : grade;
+                    addGradeList(stringBuilder, index, moduleCode, message);
                     index++;
                 }
             }
-
-            if (isEmpty) {
-                return Constants.NO_MOD_GRADED;
-            }
+        }
+        if (isEmpty) {
+            return Constants.NO_MOD_GRADED;
         }
         return stringBuilder.toString();
+    }
+
+    private void addGradeList(StringBuilder stringBuilder, int index, String moduleCode, String message) {
+        stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
+            .append(Constants.TAB).append(message).append(Constants.WIN_NEWLINE);
     }
 
     @Override
@@ -106,7 +102,7 @@ public class GradeAction extends TakeAction {
             //match grades to modules
             while (currData != null) {
                 String moduleCode = currData.name.toUpperCase().trim();
-                modulesWithGrades.put(moduleCode, "NULL");
+                modulesWithGrades.put(moduleCode, "T");
                 currData = currData.thisData;
             }
         } else {

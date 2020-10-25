@@ -217,8 +217,8 @@ public class Duke {
                     ui.update(c.result, data);
                 }
                 if (isStored) {
-                    //check the taken_course path
-                    //storage.save(data.tasks, data.takenCourse);
+                    // check the taken_course path
+                    storage.save(data.tasks, data.mods);
                 }
                 return c.result;
             }
