@@ -301,6 +301,18 @@ public enum HelpText {
                 "3. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
             }),
     /**
+     * The Snooze.
+     */
+    SNOOZE(
+            "snooze",
+            "Delay the reminder pop up by 30 seconds.",
+            new String[]{
+                    "snooze",
+            },
+            new String[]{
+                    "1. \"snooze\" >> Delay reminder popup by 30 seconds"
+            }),
+    /**
      * The Take.
      */
     TAKE(
@@ -380,6 +392,15 @@ public enum HelpText {
                 "3. \"untake CS2113T\" >> mark module CS2113T as not taken",
                 "4. \"untake 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as not taken"
             }),
+    VIEWTRASH(
+            "viewtrash",
+            "View trash bin",
+            new String[]{
+                    "viewtrash",
+            },
+            new String[]{
+                    "1.\"viewtrash\""
+            })
     ;
 
     /**

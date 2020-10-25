@@ -612,11 +612,12 @@ public class Constants {
             Map.entry(CAP, HelpText.CAP),
             Map.entry(FANCY, HelpText.FANCY),
             Map.entry(PLAIN, HelpText.PLAIN),
-            Map.entry(MC,HelpText.MC),
+            Map.entry(MC, HelpText.MC),
             Map.entry(DETAIL,HelpText.DETAIL),
             Map.entry(TAKE, HelpText.TAKE),
             Map.entry(ADD, HelpText.ADD),
             Map.entry(SEL, HelpText.SEL),
+            Map.entry(SNOOZE, HelpText.SNOOZE),
             Map.entry(UNSEL, HelpText.UNSEL),
             Map.entry(UNTAKE, HelpText.UNTAKE));
     /**
