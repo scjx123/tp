@@ -7,5 +7,6 @@ public class UntakeAction extends TakeAction {
     @Override
     protected void modifyObject(Item item) {
         ((SingleModule)item).isTaken = false;
+        ((SingleModule)item).grade = null;
     }
 }
