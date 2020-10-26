@@ -230,6 +230,7 @@ Use case ends.<br>
 **Use Case: List MC**
 **MSS:**
 
+
  1. User requests to list total MC on the current list. \
  2. DOMNUS shows the total MC of the current list. Default list is entire modules list. \
 
