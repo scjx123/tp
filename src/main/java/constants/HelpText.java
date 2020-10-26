@@ -228,7 +228,7 @@ public enum HelpText {
             "Print the number of MCs based on selected option.",
             new String[]{
                 "mc [-option]",
-                "option: -t(total, default), -d(detailed)"
+                "option: -d(detailed)"
             },
             new String[]{
                 "1. \"mc\" >> print the total number of MCs currently taking",
