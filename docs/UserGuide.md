@@ -589,8 +589,7 @@ Typing `mc` prints the number of MCs based on selected option.
 Syntax:
 
 `mc [-option] [-detail]`
-`option: -c(current, default), -p(prospective)`
-`detail: -t(total, default), -d(detailed)`
+`option: -d(detailed)`
 
 Example of usage (when there are modules in the target): 
 
