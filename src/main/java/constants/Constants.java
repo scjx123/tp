@@ -333,6 +333,7 @@ public class Constants {
      */
     public static final String CAP = "cap";
     public static final String MOD = "mod";
+    public static final String SU = "su";
     public static final String GRADE = "grade";
     public static final String TASK = "task";
     public static final String SELECTED = "selected";
@@ -398,6 +399,9 @@ public class Constants {
     public static final String NO_KEYWORD = "No keyword provided, listing all items:" + WIN_NEWLINE;
     public static final String MOD_NOT_FOUND =
         "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
+    public static final String MOD_NOT_TAKEN = "You have not taken this module yet";
+    public static final String MOD_NO_GRADE = "You have not input grade for this module yet";
+    public static final String NO_MOD_GRADED = "You have not input grade for any module yet";
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
     public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
@@ -411,7 +415,7 @@ public class Constants {
     /**
      * The constant NO_URGENT_TASKS.
      */
-    public static final String NO_URGENT_TASKS = "No task in 3 days from now" + WIN_NEWLINE;
+    public static final String NO_URGENT_TASKS = "No task within 3 days from now" + WIN_NEWLINE;
     /**
      * The constant UNIDENTIFIED_TYPE.
      */
@@ -542,7 +546,7 @@ public class Constants {
     /**
      * The constant REMINDER_INTERVAL.
      */
-    public static final int REMINDER_INTERVAL = 1000 * 60;
+    public static final String REMINDER_INTERVAL = "60000";
 
     /**
      * The constant REMINDER_DELAY.
@@ -608,11 +612,12 @@ public class Constants {
             Map.entry(CAP, HelpText.CAP),
             Map.entry(FANCY, HelpText.FANCY),
             Map.entry(PLAIN, HelpText.PLAIN),
-            Map.entry(MC,HelpText.MC),
+            Map.entry(MC, HelpText.MC),
             Map.entry(DETAIL,HelpText.DETAIL),
             Map.entry(TAKE, HelpText.TAKE),
             Map.entry(ADD, HelpText.ADD),
             Map.entry(SEL, HelpText.SEL),
+            Map.entry(SNOOZE, HelpText.SNOOZE),
             Map.entry(UNSEL, HelpText.UNSEL),
             Map.entry(UNTAKE, HelpText.UNTAKE));
     /**
@@ -632,7 +637,7 @@ public class Constants {
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
-            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN, SU}),
             Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
             Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
@@ -670,5 +675,8 @@ public class Constants {
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNTAKE, "I have un-taken these modules you specified. "
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
+            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(SNOOZE, "I've snoozed the reminder for 30 seconds."),
+            Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));
+
 }

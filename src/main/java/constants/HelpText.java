@@ -137,28 +137,16 @@ public enum HelpText {
      */
     GRADE(
         "grade",
-        "Add grade to the user's taken course/module.",
+        "Modify grade to the user's taken course/module.",
         new String[]{
             "grade [-option] [module] [grade] {[module] [grade]...}",
-            "option: -s(show, default), -a(add)"
+            "option: -s(show, default), -a(add), -t(take), -d(delete)"
         },
         new String[]{
-            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade to a user's taken course/module",
-            "2. \"grade\" >> show grades of all taken modules"
-        }),
-    /**
-     * Help text for goal action.
-     */
-    GOAL(
-        "goal",
-        "Display how far/near the user to his/her goal.",
-        new String[]{
-            "goal [option]",
-            "option: cap(cap, default), mc(modular credit)"
-        },
-        new String[]{
-            "1. \"goal\" >> add grade to a user's taken course/module",
-            "2. \"goal mc\" >> show how many MC left for graduation"
+            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade[s] to a user's taken course/module",
+            "2. \"grade -t CS2113 A CG1112 A-\" >> add grade[s] to a course/module and take the module simultaneously",
+            "3. \"grade -d CS2113 CG1112\" >> delete grade[s] of user's taken course/module",
+            "4. \"grade\" >> show grades of all taken modules"
         }),
     /**
      * The Find.
@@ -313,6 +301,18 @@ public enum HelpText {
                 "3. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
             }),
     /**
+     * The Snooze.
+     */
+    SNOOZE(
+            "snooze",
+            "Delay the reminder pop up by 30 seconds.",
+            new String[]{
+                "snooze",
+            },
+            new String[]{
+                "1. \"snooze\" >> Delay reminder popup by 30 seconds"
+            }),
+    /**
      * The Take.
      */
     TAKE(
@@ -392,6 +392,15 @@ public enum HelpText {
                 "3. \"untake CS2113T\" >> mark module CS2113T as not taken",
                 "4. \"untake 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as not taken"
             }),
+    VIEWTRASH(
+            "viewtrash",
+            "View trash bin",
+            new String[]{
+                "viewtrash",
+            },
+            new String[]{
+                "1.\"viewtrash\""
+            })
     ;
 
     /**
