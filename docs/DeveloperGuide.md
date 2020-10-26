@@ -70,7 +70,7 @@ Once CI processed the user input, duke proceeds to redirect the input to Execute
 
 **1.6 Flow of DOMSUM**<br>
 The sequence diagram below shows the main interaction of classes with each other throughout the whole lifecycle of DOMSUM.
-![uml](DOMSUM_Main_Flow.png)
+![uml](Images/DOMSUM_Main_Flow.png)
 
 ## 4. Implementation<br>
 This section highlights some of our project's key feature and its implementation. 
@@ -192,20 +192,20 @@ All in one app to track tasks and their dates, monitor productivity and calculat
 
 ## Appendix B. User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
+|Priority| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|Student before start of semester|List the modules MC|Follow the recommended MC |
-|v1.0|Student before start of semester|List of module available|Easily Choose which modules to take|
-|v1.0|Student before start of semester|Find the modules either by keyword, module code or even MC |Easily see the desired modules |
-|v1.0|Student before start of semester|Select the modules but not taking it yet |Easily whether the MC fits my requirement |
-|v1.0|Student before start of semester|Find out the etails of the Module|To find out more about the modules.|
-|v1.0|Student before start of semester|Take the desired modules|Mark the modules that i want to take as taken  |
-|v1.0|Student during the semester|Add tasks such as todo,deadline and event into my list|Easily keep track of all the task i have to complete  |
-|v1.0|Student during the semester|Have a Reminder of which deadline is due soon|Ensure that no task is missed out  |
-|v1.0|Student during the semester|Add task to modules |Easily know which tasks belongs to which modules  |
-|v1.0|Student during the semester|Delete task once they are completed |Remove unnecessary task on the list |
-|v1.0|Student after the semester|Calculate the CAP of my individual modules|Easily find out my performance this semester |
-|v1.0|Student after the semester|Clear the list of tasks and modules|Start afresh for the next semester |
+| *** |Student before start of semester|List the modules MC|Follow the recommended MC |
+| *** |Student before start of semester|List of module available|Easily Choose which modules to take|
+| ** |Student before start of semester|Find the modules either by keyword, module code or even MC |Easily see the desired modules |
+| ** |Student before start of semester|Select the modules but not taking it yet |Easily whether the MC fits my requirement |
+| *  |Student before start of semester|Find out the etails of the Module|To find out more about the modules.|
+| *** |Student before start of semester|Take the desired modules|Mark the modules that i want to take as taken  |
+| *** |Student during the semester|Add tasks such as todo,deadline and event into my list|Easily keep track of all the task i have to complete  |
+| ** |Student during the semester|Have a Reminder of which deadline is due soon|Ensure that no task is missed out  |
+| *** |Student during the semester|Add task to modules |Easily know which tasks belongs to which modules  |
+| *** |Student during the semester|Delete task once they are completed |Remove unnecessary task on the list |
+| ** |Student after the semester|Calculate the CAP of my individual modules|Easily find out my performance this semester |
+| * |Student after the semester|Clear the list of tasks and modules|Start afresh for the next semester |
 
 {More to be added}
 ## Appendix C. Use Cases: 
@@ -229,6 +229,7 @@ Use case ends.<br>
 
 **Use Case: List MC**
 **MSS:**
+
 
  1. User requests to list total MC on the current list. \
  2. DOMNUS shows the total MC of the current list. Default list is entire modules list. \
@@ -265,16 +266,60 @@ Step 2: Copy the file to the folder you want to use as the home folder for your 
 Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
 Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**\
 
-2. Switching between Fancy and CLI \
-3. Focusing between different list\
-	3.1 Focus mod \
-	3.2 Focus Task \
-	3.3 Focus Taken \
-4. List all Modules and Task\ 
-	4.1 List all module\
-	4.2 List all task. \
-	4.3 List all taken module\ 
-5. Add Modules and Task \
-	5.1 Add modules\
-	5.2 Add task\
-	5.3 Add task to modules\ 
+1. Launch and Shutdown 
+Step 1: Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
+Step 2: Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.\
+Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
+Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**\
+
+2. Switching between Fancy and CLI 
+Test case: `fancy`<br>
+Expected: Switches to fancy mode of display <br>
+Test case: `plain`<br>
+Expected: Switches to plain mode of display<br>
+Test case: `Fancy` ,`Plain`<br>
+Expected: Error message due to cap sensitive. <br>
+3. Focusing between different list
+	Test case: `focus mod`/`task`/`todo`/`deadline`/`event`/`selected`/`taken`<br>
+			   Expected : Shows the current list you are focused on. No list will be shown. <br>
+	Test case: `focus taken` <br>
+	Expected: Shows the current list of modules you have taken. <br>
+	Other incorrect focus commands to try: `focus 0` , `focus what?`, ... (focus on non-existent list) <br>
+	Expected : Error message due to invalid command. <br>
+	
+4. List Modules/Task
+Test case: `focus mod` -> `list`<br>
+	Expected: Shows the list of modules. <br>
+	Test case: `focus task` -> `list` <br>
+	Expected: Shows the current list of task. <br>
+	
+5. Find Modules 
+Test case: `focus mod` -> `find Engin`<br>
+Expected: Shows the list of available modules with keyword 'Engin' <br>
+Test case:  `focus mod` -> `find 2113`<br>
+Expected: Shows the list of modules with keyword '2113'<br>
+Test case: `focus task`-> find deadline <br>
+Expected: Show list of deadline modules 
+
+ 6. Details of Modules 
+ Test cases: `detail CS2113`<br>
+ Expected: Shows Module code, name, mc, and description. <br>
+Test cases: `detail 1`<br>
+Expected: Shows the information of the 1st task based on the current list focused on. <br>
+Test cases: `detail xyz` No detail of such item is found. <br>
+7. Take Modules 
+Test cases: `focus mod` -> `take 1 2` <br>
+Expected: Takes the 1st and 2nd module on the module list.<br>
+Test cases: `focus task` -> `take 1 2` <br>
+Expected: Task is not module, therefore it cannot be taken.<br>
+Test cases: `focus mod` -> `take CS2113` <br>
+Expected: Mark CS2113 as taken.<br>
+Test cases: `focus mod` -> `take cs2113`<br>
+Expected: Module not found as inputs are case sensitive. <br>
+7. Reminder <br>
+Test cases: `reminder `<br>
+Expected: Shows task that are due within 3 days. <br>
+
+8. Cap Calculation <br>
+Test cases: `cap -m CS2113 A+ EE2026 B CS1010 B-<br>
+Expected: Shows you the calculated cap. <br>

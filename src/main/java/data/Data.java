@@ -122,23 +122,18 @@ public class Data {
 
 
     public void addTask(Task task) {
-        // LOGGER.entering(getClass().getName(), "addTask");
         tempList = new ArrayList<>(getTarget(getTaskType(task)));
         Checker cc = new Checker(tempList, task);
         LocalDateTime newDate = cc.checkRecurrenceDate(task);
         if (newDate != null) {
             task.setDateTime(newDate);
-        } else {
-            LOGGER.log(Level.INFO, "New date was null! Invalid Date");
         }
         if (!cc.checkDuplicates()) {
-            // LOGGER.log(Level.INFO, "Task was added to data");
             tasks.add(task);
         } else {
             LOGGER.log(Level.INFO, "Duplicate found! Task was not added to data");
         }
         refreshTarget();
-        //LOGGER.exiting(getClass().getName(), "addTask");
     }
 
     public void removeItem(Item item) {
