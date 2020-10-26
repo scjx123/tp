@@ -45,7 +45,7 @@ public class GradeAction extends TakeAction {
                 index++;
             }
         } else if (option.equals("s")) {
-            for (Item item : data.getTarget(Constants.MOD)) {
+            for (Item item : data.getTarget(Constants.TAKEN)) {
                 SingleModule module = (SingleModule) item;
                 if (module.grade != null && !module.grade.isBlank()) {
                     isEmpty = false;

@@ -15,8 +15,6 @@ class CalculateCapActionTest {
 
     @Test
     public void act_customModuleInputs_calculatedCapValue() {
-        duke.testSut("focus mod", false, false);
-        duke.testSut("clear", true, false);
         String expectedOutput = "Here is your existing CAP: 3.67";
         String testCustomInputsCommand = "cap -m cs1231 a MA1511 B+ Cs2040C d ma1508e a- ee1001x b+";
         assertEquals(expectedOutput, duke.testSut(testCustomInputsCommand, false, true),
@@ -25,7 +23,7 @@ class CalculateCapActionTest {
 
     @Test
     public void act_userModule_calculatedCapValue() {
-        duke.testSut("focus mod", false, false);
+        duke.testSut("focus list", true, false);
         duke.testSut("clear", true, false);
         duke.testSut("grade -t cs1231 a cs1010 b ma1511 c+", true, false);
         String expectedOutput = "Here is your existing CAP: 3.9";

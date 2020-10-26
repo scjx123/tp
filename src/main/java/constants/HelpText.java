@@ -34,104 +34,121 @@ public enum HelpText {
      * Help commands for CAP.
      */
     CAP(
-            "cap",
-            "Calculate CAP for courses based on selected option.",
-            new String[]{
-                "cap [-option] [module] [grade] {[module] [grade]...}",
-                "option: -u(user, default), -m(multiple/custom modules)"
-            },
-            new String[]{
-                "1. \"cap\" >> calculate user CAP from their taken modules",
-                "2. \"cap -m CS2113 A CS1010 B\" >> calculate cap based on input modules: "
-                        + "modules CS2113 with grade A, module CS1010 with grade B correspondingly.",
-            }),
+        "cap",
+        "Calculate CAP for courses based on selected option.",
+        new String[]{
+            "cap [-option] [module] [grade] {[module] [grade]...}",
+            "option: -u(user, default), -m(multiple/custom modules)"
+        },
+        new String[]{
+            "1. \"cap\" >> calculate user CAP from their taken modules",
+            "2. \"cap -m CS2113 A CS1010 B\" >> calculate cap based on input modules: "
+                + "modules CS2113 with grade A, module CS1010 with grade B correspondingly.",
+        }),
     /**
      * The Clear.
      */
     CLEAR(
-            "clear",
-            "Clear the task list",
-            new String[]{
-                "clear"
-            },
-            new String[]{
-                "1. \"clear\" >> clears the task list"
-            }),
+        "clear",
+        "Clear the task list",
+        new String[]{
+            "clear"
+        },
+        new String[]{
+            "1. \"clear\" >> clears the task list"
+        }),
     /**
      * The Deadline.
      */
     DEADLINE(
-            "deadline",
-            "Add a deadline to the task list",
-            new String[]{
-                "deadline [description] -by [time]"
-            },
-            new String[]{
-                "1. \"deadline ddl -by 21/9/15 1:12\" >> "
-                        + "adds a deadline with description \"ddl\" and time \"Sep 15 2021 1:12\""
-            }),
+        "deadline",
+        "Add a deadline to the task list",
+        new String[]{
+            "deadline [description] -by [time]"
+        },
+        new String[]{
+            "1. \"deadline ddl -by 21/9/15 1:12\" >> "
+                + "adds a deadline with description \"ddl\" and time \"Sep 15 2021 1:12\""
+        }),
     /**
      * The Delete.
      */
     DELETE(
-            "delete",
-            "Delete a task from the task list",
-            new String[]{
-                "delete [index]"
-            },
-            new String[]{
-                "1. \"delete 1\" >> deletes the task with index 1 from the current list"
-            }),
+        "delete",
+        "Delete a task from the task list",
+        new String[]{
+            "delete [index]"
+        },
+        new String[]{
+            "1. \"delete 1\" >> deletes the task with index 1 from the current list"
+        }),
     /**
      * The Detail.
      */
     DETAIL(
-            "detail",
-            "Print the details of a specified item.",
-            new String[]{
-                "detail [module code (for modules only) / index]",
-            },
-            new String[]{
-                "1. \"detail 1\" >> print the detail of item 1 in the list",
-                "2. \"detail CS2113T\" >> print the detail of module CS2113T",
-            }),
+        "detail",
+        "Print the details of a specified item.",
+        new String[]{
+            "detail [module code (for modules only) / index]",
+        },
+        new String[]{
+            "1. \"detail 1\" >> print the detail of item 1 in the list",
+            "2. \"detail CS2113T\" >> print the detail of module CS2113T",
+        }),
+    /**
+     * Goal Planner
+     */
+    GOAL(
+        "goal",
+        "Calculate how far the user is from his/her target CAP",
+        new String[]{
+            "goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}",
+            "option: -u(user's cap and mc), -c(custom cap and mc)"
+        },
+        new String[]{
+            "1. \"goal -u 160 4.9\" >> comment on required average grade to achieve CAP of 4.9 with 160MC in total",
+            "2. \"goal -c 160 4.9 100 4.5\" >> " +
+                "comment on required average grade to achieve CAP of 4.9 with:\r\n" +
+                "- MC total for graduation: 160\r\n" + "- Target CAP: 4.9\r\n" +
+                "- MC taken: 100\r\n" + "- Current CAP: 4.5\r\n"
+        }),
     /**
      * The Done.
      */
     DONE(
-            "done",
-            "Mark a task as done",
-            new String[]{
-                "done [index]"
-            },
-            new String[]{
-                "1. \"done 1\" >> marks the task with index 1 as done"
-            }),
+        "done",
+        "Mark a task as done",
+        new String[]{
+            "done [index]"
+        },
+        new String[]{
+            "1. \"done 1\" >> marks the task with index 1 as done"
+        }),
     /**
      * The Event.
      */
     EVENT(
-            "event",
-            "Add an event to the task list",
-            new String[]{
-                "event [description] -at [time]"
-            },
-            new String[]{
-                "1. \"event e -at May 13 2020 8:00\" >> "
-                        + "adds an event with description \"e\" and time \"May 13 2020 8:00\""
-            }),
+        "event",
+        "Add an event to the task list",
+        new String[]{
+            "event [description] -at [time]"
+        },
+        new String[]{
+            "1. \"event e -at May 13 2020 8:00\" >> "
+                + "adds an event with description \"e\" and time \"May 13 2020 8:00\""
+        }),
     /**
      * The Fancy.
      */
     FANCY(
-            "fancy",
-            "Switch to a fancy Cli (requires the shell to support ansi codes).",
-            new String[]{
-                "fancy"
-            },
-            new String[]{
-                "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
-            }),
+        "fancy",
+        "Switch to a fancy Cli (requires the shell to support ansi codes).",
+        new String[]{
+            "fancy"
+        },
+        new String[]{
+            "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
+        }),
     /**
      * Help text to add grade to a course.
      */
