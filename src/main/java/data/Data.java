@@ -132,8 +132,6 @@ public class Data {
         LocalDateTime newDate = cc.checkRecurrenceDate(task);
         if (newDate != null) {
             task.setDateTime(newDate);
-        } else {
-            LOGGER.log(Level.INFO, "New date was null! Invalid Date");
         }
         if (!cc.checkDuplicates()) {
             // LOGGER.log(Level.INFO, "Task was added to data");

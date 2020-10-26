@@ -87,7 +87,7 @@ public class ModuleParser {
         while (s.hasNext()) {
             tempString = s.nextLine();
             parseFile(tempString);
-            SingleModule m = new SingleModule(moduleCode, moduleName, "", moduleMC, "", moduleSU);
+            SingleModule m = new SingleModule(moduleCode, moduleName, moduleDescription, moduleMC, modulePrerequisite, moduleSU);
             if (moduleCode != null) {
                 if (moduleSU.equals("true")) {
                     m.hasSU = true;
@@ -138,6 +138,7 @@ public class ModuleParser {
     }
 
     private void parseFile(String tempString) {
+
         if (tempString != null) {
             input = tempString.split("\t");
             //sum+=1;
@@ -148,7 +149,12 @@ public class ModuleParser {
             for (int i = 0; i < input.length; i++) {
                 if (input[i].matches("[0-9]+")) {
                     moduleMC = input[i];
-                    isDescriptionBuilder = false;
+                    moduleDescription=input[i - 1];
+                    //System.out.println(moduleDescription);
+                    if(i+3 <= input.length) {
+                        modulePrerequisite=input[i+2];
+                        //System.out.println(input[i + 2]);
+                    }
                     //System.out.println(input[i]);
                     //sum += 1;
                     //System.out.println(sum);
@@ -159,6 +165,11 @@ public class ModuleParser {
                 }
             }
         }
+
+//        do{
+//            characterScanner(mcIndex,tempString);
+//            mcIndex = 0;
+//        }while(isDescriptionBuilder);
 
         if (checkValidInput(input[0], "code")) {
             //System.out.println(input[0]);
