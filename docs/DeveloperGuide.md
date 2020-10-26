@@ -265,16 +265,60 @@ Step 2: Copy the file to the folder you want to use as the home folder for your 
 Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
 Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**\
 
-2. Switching between Fancy and CLI \
-3. Focusing between different list\
-	3.1 Focus mod \
-	3.2 Focus Task \
-	3.3 Focus Taken \
-4. List all Modules and Task\ 
-	4.1 List all module\
-	4.2 List all task. \
-	4.3 List all taken module\ 
-5. Add Modules and Task \
-	5.1 Add modules\
-	5.2 Add task\
-	5.3 Add task to modules\ 
+1. Launch and Shutdown 
+Step 1: Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
+Step 2: Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.\
+Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
+Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**\
+
+2. Switching between Fancy and CLI 
+Test case: `fancy`<br>
+Expected: Switches to fancy mode of display <br>
+Test case: `plain`<br>
+Expected: Switches to plain mode of display<br>
+Test case: `Fancy` ,`Plain`<br>
+Expected: Error message due to cap sensitive. <br>
+3. Focusing between different list
+	Test case: `focus mod`/`task`/`todo`/`deadline`/`event`/`selected`/`taken`<br>
+			   Expected : Shows the current list you are focused on. No list will be shown. <br>
+	Test case: `focus taken` <br>
+	Expected: Shows the current list of modules you have taken. <br>
+	Other incorrect focus commands to try: `focus 0` , `focus what?`, ... (focus on non-existent list) <br>
+	Expected : Error message due to invalid command. <br>
+	
+4. List Modules/Task
+Test case: `focus mod` -> `list`<br>
+	Expected: Shows the list of modules. <br>
+	Test case: `focus task` -> `list` <br>
+	Expected: Shows the current list of task. <br>
+	
+5. Find Modules 
+Test case: `focus mod` -> `find Engin`<br>
+Expected: Shows the list of available modules with keyword 'Engin' <br>
+Test case:  `focus mod` -> `find 2113`<br>
+Expected: Shows the list of modules with keyword '2113'<br>
+Test case: `focus task`-> find deadline <br>
+Expected: Show list of deadline modules 
+
+ 6. Details of Modules 
+ Test cases: `detail CS2113`<br>
+ Expected: Shows Module code, name, mc, and description. <br>
+Test cases: `detail 1`<br>
+Expected: Shows the information of the 1st task based on the current list focused on. <br>
+Test cases: `detail xyz` No detail of such item is found. <br>
+7. Take Modules 
+Test cases: `focus mod` -> `take 1 2` <br>
+Expected: Takes the 1st and 2nd module on the module list.<br>
+Test cases: `focus task` -> `take 1 2` <br>
+Expected: Task is not module, therefore it cannot be taken.<br>
+Test cases: `focus mod` -> `take CS2113` <br>
+Expected: Mark CS2113 as taken.<br>
+Test cases: `focus mod` -> `take cs2113`<br>
+Expected: Module not found as inputs are case sensitive. <br>
+7. Reminder <br>
+Test cases: `reminder `<br>
+Expected: Shows task that are due within 3 days. <br>
+
+8. Cap Calculation <br>
+Test cases: `cap -m CS2113 A+ EE2026 B CS1010 B-<br>
+Expected: Shows you the calculated cap. <br>
