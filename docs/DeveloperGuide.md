@@ -192,20 +192,20 @@ All in one app to track tasks and their dates, monitor productivity and calculat
 
 ## Appendix B. User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
+|Priority| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|Student before start of semester|List the modules MC|Follow the recommended MC |
-|v1.0|Student before start of semester|List of module available|Easily Choose which modules to take|
-|v1.0|Student before start of semester|Find the modules either by keyword, module code or even MC |Easily see the desired modules |
-|v1.0|Student before start of semester|Select the modules but not taking it yet |Easily whether the MC fits my requirement |
-|v1.0|Student before start of semester|Find out the etails of the Module|To find out more about the modules.|
-|v1.0|Student before start of semester|Take the desired modules|Mark the modules that i want to take as taken  |
-|v1.0|Student during the semester|Add tasks such as todo,deadline and event into my list|Easily keep track of all the task i have to complete  |
-|v1.0|Student during the semester|Have a Reminder of which deadline is due soon|Ensure that no task is missed out  |
-|v1.0|Student during the semester|Add task to modules |Easily know which tasks belongs to which modules  |
-|v1.0|Student during the semester|Delete task once they are completed |Remove unnecessary task on the list |
-|v1.0|Student after the semester|Calculate the CAP of my individual modules|Easily find out my performance this semester |
-|v1.0|Student after the semester|Clear the list of tasks and modules|Start afresh for the next semester |
+| *** |Student before start of semester|List the modules MC|Follow the recommended MC |
+| *** |Student before start of semester|List of module available|Easily Choose which modules to take|
+| ** |Student before start of semester|Find the modules either by keyword, module code or even MC |Easily see the desired modules |
+| ** |Student before start of semester|Select the modules but not taking it yet |Easily whether the MC fits my requirement |
+| *  |Student before start of semester|Find out the etails of the Module|To find out more about the modules.|
+| *** |Student before start of semester|Take the desired modules|Mark the modules that i want to take as taken  |
+| *** |Student during the semester|Add tasks such as todo,deadline and event into my list|Easily keep track of all the task i have to complete  |
+| ** |Student during the semester|Have a Reminder of which deadline is due soon|Ensure that no task is missed out  |
+| *** |Student during the semester|Add task to modules |Easily know which tasks belongs to which modules  |
+| *** |Student during the semester|Delete task once they are completed |Remove unnecessary task on the list |
+| ** |Student after the semester|Calculate the CAP of my individual modules|Easily find out my performance this semester |
+| * |Student after the semester|Clear the list of tasks and modules|Start afresh for the next semester |
 
 {More to be added}
 ## Appendix C. Use Cases: 
