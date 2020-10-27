@@ -8,6 +8,8 @@ import data.Item;
 import data.SingleModule;
 import data.jobs.Task;
 import exceptions.CommandException;
+import exceptions.InvalidCommandException;
+import exceptions.InvalidListException;
 import exceptions.ModuleNotFoundException;
 
 import java.util.ArrayList;
@@ -44,8 +46,8 @@ public class StatsAction extends Action {
             ratio = (double)doneItem / tempModule.getTaskList().size();
             builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
         } else {
-            if (targetList == null) {
-                throw new ModuleNotFoundException();
+            if (targetList.equals(data.mods)) {
+                throw new InvalidListException();
             } else {
                 for (Item item : targetList) {
                     Task t = (Task) item;
