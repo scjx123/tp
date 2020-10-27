@@ -14,7 +14,7 @@ public class DetailActionTest {
 
     @Test
     public void containsModuleTest() {
-        duke.testSut("focus mod", false, false);
+        duke.testSut("focus list", false, false);
         duke.testSut("clear", true, false);
         assertTrue(duke.testSut(testCommand[0], false, true)
             .contains("CS2113"));

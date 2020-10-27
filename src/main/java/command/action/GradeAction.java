@@ -17,8 +17,8 @@ import java.util.Map;
  */
 public class GradeAction extends TakeAction {
 
-    private HashMap<String, String> modulesWithGrades = new HashMap<>();
-    private String option;
+    protected HashMap<String, String> modulesWithGrades = new HashMap<>();
+    protected String option;
 
     @Override
     public String act(Data data) throws Exception {
@@ -45,7 +45,7 @@ public class GradeAction extends TakeAction {
                 index++;
             }
         } else if (option.equals("s")) {
-            for (Item item : data.getTarget(Constants.MOD)) {
+            for (Item item : data.getTarget(Constants.TAKEN)) {
                 SingleModule module = (SingleModule) item;
                 if (module.grade != null && !module.grade.isBlank()) {
                     isEmpty = false;
