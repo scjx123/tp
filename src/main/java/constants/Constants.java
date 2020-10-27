@@ -326,6 +326,8 @@ public class Constants {
      * The constant INDEX_OUT.
      */
     public static final String INDEX_OUT = "Index out of range.";
+    public static final String MODIFY_FAILED = "Failed to modify: ";
+    public static final String INVALID_GRADE = "Grade is invalid: ";
     /**
      * The constant ADDED.
      */
@@ -389,6 +391,8 @@ public class Constants {
         "date time"};
     public static final String[] DONE_ALIAS = {"done", "isdone", "do", "did"};
     public static final String[] WEEKLY_ALIAS = {"weekly", "isweekly", "week", "byweek", "reoccuring"};
+    public static final String[] VALID_GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-",
+        "D+", "D", "D-", "E", "F", "S", "U"};
     /**
      * The constant NO_KEYWORD.
      */
@@ -660,7 +664,7 @@ public class Constants {
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
-            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN, SU}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN, SU, COMPLETED}),
             Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
             Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),

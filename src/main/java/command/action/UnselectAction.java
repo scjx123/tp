@@ -5,7 +5,8 @@ import data.Item;
 
 public class UnselectAction extends SelectAction {
     @Override
-    protected void modifyObject(Item item) {
+    protected boolean modifyObject(Item item) {
         item.isSelected = false;
+        return true;
     }
 }

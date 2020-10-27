@@ -88,7 +88,14 @@ public class SingleModule extends Item {
                 + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
     }
 
-
+    public void complete() {
+        for (String grade : Constants.VALID_GRADES) {
+            if (grade.equals(this.grade.toUpperCase())) {
+                isCompleted = true;
+                break;
+            }
+        }
+    }
 
     @Override
     public String getDetails() {

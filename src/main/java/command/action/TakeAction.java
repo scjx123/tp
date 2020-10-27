@@ -27,8 +27,8 @@ public class TakeAction extends Action {
             StringBuilder testContent = new StringBuilder();
             data.getTarget(Constants.SELECTED).forEach(x -> {
                 if (x instanceof SingleModule) {
-                    modifyObject(x);
-                    testContent.append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
+                    String mResult = modifyObject(x) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
+                    testContent.append(mResult).append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
                 }
             });
             if (testContent.toString().length() > 0) {
@@ -45,8 +45,8 @@ public class TakeAction extends Action {
                     }
                     if (data.target.get(i) instanceof SingleModule) {
                         Item module = data.target.get(i);
-                        modifyObject(module);
-                        builder.append("Module ").append(i + 1).append(": ")
+                        String mResult = modifyObject(module) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
+                        builder.append(mResult).append("Module ").append(i + 1).append(": ")
                                 .append(getObjectInfo(module)).append(Constants.WIN_NEWLINE);
                     } else {
                         builder.append("Item ").append(i + 1).append(" is not a module, "
@@ -56,8 +56,8 @@ public class TakeAction extends Action {
             }
             if (!codes.isEmpty()) {
                 data.mods.stream().filter(x -> codes.contains(((SingleModule) x).moduleCode)).forEach(x -> {
-                    modifyObject(x);
-                    builder.append("Module: ").append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
+                    String mResult = modifyObject(x) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
+                    builder.append(mResult).append("Module: ").append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
                 });
             }
         }
@@ -71,9 +71,10 @@ public class TakeAction extends Action {
         return result.replace(Constants.TEXT_PLACEHOLDER, execution);
     }
 
-    protected void modifyObject(Item item) {
+    protected boolean modifyObject(Item item) {
         ((SingleModule)item).isTaken = true;
         ((SingleModule)item).grade = "T";
+        return true;
     }
 
     protected String getObjectInfo(Item item) {

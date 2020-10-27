@@ -31,7 +31,6 @@ public class FocusAction extends Action {
         super.prepare(args);
         if (args.thisData == null) {
             typeTask = Constants.TASK;
-            assert typeTask == Constants.TASK : "type should be task";
         } else {
             typeTask = args.thisData.name;
             String[] options = Constants.optionalParamMap.get(args.name);

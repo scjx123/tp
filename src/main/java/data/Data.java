@@ -105,6 +105,10 @@ public class Data {
             break;
         case Constants.FOUND: // should not refresh target.
             break;
+        case Constants.COMPLETED:
+            target = mods.stream().filter(
+                x -> ((SingleModule) x).isCompleted).collect(Collectors.toCollection(ArrayList::new));
+            break;
         default:
             target = tasks.stream().filter(x -> x instanceof Task).collect(Collectors.toCollection(ArrayList::new));
             break;

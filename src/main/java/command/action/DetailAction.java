@@ -6,8 +6,8 @@ import data.Item;
 public class DetailAction extends SelectAction {
 
     @Override
-    protected void modifyObject(Item item) {
-        // do nothing
+    protected boolean modifyObject(Item item) {
+        return true;
     }
 
     @Override

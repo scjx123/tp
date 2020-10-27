@@ -41,8 +41,9 @@ public class SelectAction extends TakeAction {
     }
 
     @Override
-    protected void modifyObject(Item item) {
+    protected boolean modifyObject(Item item) {
         item.isSelected = true;
+        return true;
     }
 
     @Override
