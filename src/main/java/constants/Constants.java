@@ -1,7 +1,39 @@
 package constants;
 
 
-import command.action.*;
+import command.action.Action;
+import command.action.AddAction;
+import command.action.ByeAction;
+import command.action.CalculateCapAction;
+import command.action.ClearAction;
+import command.action.DeadlineAction;
+import command.action.DeleteAction;
+import command.action.DetailAction;
+import command.action.DoneAction;
+import command.action.EventAction;
+import command.action.FancyAction;
+import command.action.FindAction;
+import command.action.FocusAction;
+import command.action.GoalAction;
+import command.action.GradeAction;
+import command.action.HelpAction;
+import command.action.ListAction;
+import command.action.McAction;
+import command.action.NextAction;
+import command.action.PlainAction;
+import command.action.PostponeAction;
+import command.action.PrevAction;
+import command.action.RemindAction;
+import command.action.ReminderAction;
+import command.action.SelectAction;
+import command.action.SnoozeAction;
+import command.action.StatsAction;
+import command.action.TakeAction;
+import command.action.TodoAction;
+import command.action.UndoneAction;
+import command.action.UnknownAction;
+import command.action.UnselectAction;
+import command.action.UntakeAction;
 
 import java.util.Map;
 
@@ -64,6 +96,10 @@ public class Constants {
      * The constant PARAM_RIGHT.
      */
     public static final String PARAM_RIGHT = ")";
+    /**
+     * The constant PARAM_RIGHT.
+     */
+    public static final String PERCENT = "%";
     /**
      * The constant TODO_ICON.
      */
@@ -237,6 +273,10 @@ public class Constants {
      */
     public static final String LIST = "list";
     /**
+     * The constant LIST.
+     */
+    public static final String STATS = "stats";
+    /**
      * The constant TODO.
      */
     public static final String TODO = "todo";
@@ -388,6 +428,7 @@ public class Constants {
     public static final String MOD_NOT_TAKEN = "You have not taken this module yet";
     public static final String MOD_NO_GRADE = "You have not input grade for this module yet";
     public static final String NO_MOD_GRADED = "You have not input grade for any module yet";
+    public static final String INVALID_LIST = "Please focus on task list by typing 'focus'" + WIN_NEWLINE;
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
     public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
@@ -446,6 +487,10 @@ public class Constants {
      * The constant GRADE_HEAD.
      */
     public static final String GRADE_HEAD = "These are your grades so far:" + WIN_NEWLINE;
+    /**
+     * The constant STATS_HEAD.
+     */
+    public static final String STATS_HEAD = "Here are the statistics: " + WIN_NEWLINE;
     /**
      * The constant REMINDER_HEAD.
      */
@@ -579,6 +624,7 @@ public class Constants {
         Map.entry(TAKE, new TakeAction()),
         Map.entry(SEL, new SelectAction()),
         Map.entry(UNSEL, new UnselectAction()),
+        Map.entry(STATS, new StatsAction()),
         Map.entry(UNTAKE, new UntakeAction()));
     /**
      * The constant helpMap.
@@ -614,6 +660,7 @@ public class Constants {
         Map.entry(SEL, HelpText.SEL),
         Map.entry(SNOOZE, HelpText.SNOOZE),
         Map.entry(UNSEL, HelpText.UNSEL),
+        Map.entry(STATS, HelpText.STATS),
         Map.entry(UNTAKE, HelpText.UNTAKE));
     /**
      * The constant paramMap.
@@ -630,6 +677,7 @@ public class Constants {
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(GRADE, new String[]{"a", "s"}),
             Map.entry(MC, new String[]{"d"}),
+            Map.entry(STATS, new String[]{"mod"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
@@ -643,6 +691,7 @@ public class Constants {
      */
     public static final Map<String, String> messageMap = Map.ofEntries(
             Map.entry(BYE, "Bye. Hope to see you again soon!"),
+            Map.entry(STATS, "Here are the statistics for your tasks: " + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(CLEAR, "Nice! I've cleared all tasks from the list and left modules alone."),
             Map.entry(DEADLINE, ADDED + CHANGED),
             Map.entry(DELETE, REMOVED + CHANGED),

@@ -3,6 +3,7 @@ package data;
 import constants.Constants;
 import data.jobs.Task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -85,6 +86,8 @@ public class SingleModule extends Item {
                 + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
     }
 
+
+
     @Override
     public String getDetails() {
         StringBuilder builder = new StringBuilder(toString());
@@ -113,15 +116,6 @@ public class SingleModule extends Item {
     }
 
     /**
-     * Gets module description.
-     *
-     * @return the module description
-     */
-    public String getModuleDescription() {
-        return moduleDescription;
-    }
-
-    /**
      * Gets module mc.
      *
      * @return the module mc
@@ -132,16 +126,12 @@ public class SingleModule extends Item {
 
 
     /**
-     * Gets module prerequisite.
+     * Gets module mc.
      *
-     * @return the module prerequisite
+     * @return the module mc
      */
-    public String getModulePrerequisite() {
-        return modulePrerequisite;
-    }
-
-    public void addTasks(ArrayList<Item> tasks) {
-        taskList.addAll(tasks);
+    public ArrayList<Item> getTaskList() {
+        return taskList;
     }
 
 }
