@@ -86,7 +86,9 @@ public class GradeAction extends TakeAction {
         currData = currData.thisData;
 
         //input custom modules
-        if (option.equals("a") || option.equals("t")) {
+        switch (option) {
+        case "a":
+        case "t":
             //match grades to modules
             while (currData != null) {
                 String moduleCode = currData.name.toUpperCase().trim();
@@ -96,16 +98,19 @@ public class GradeAction extends TakeAction {
                 }
                 currData = currData.thisData.thisData;
             }
-        } else if (option.equals("s")) {
+            break;
+        case "s":
             //should be do nothing
-        } else if (option.equals("d")) {
+            break;
+        case "d":
             //match grades to modules
             while (currData != null) {
                 String moduleCode = currData.name.toUpperCase().trim();
                 modulesWithGrades.put(moduleCode, "T");
                 currData = currData.thisData;
             }
-        } else {
+            break;
+        default:
             //unidentified option
             throw new CommandException();
         }

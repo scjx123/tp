@@ -10,6 +10,7 @@ import command.action.DeadlineAction;
 import command.action.DeleteAction;
 import command.action.DetailAction;
 import command.action.DoneAction;
+import command.action.EditAction;
 import command.action.EventAction;
 import command.action.FancyAction;
 import command.action.FindAction;
@@ -67,6 +68,7 @@ public class Constants {
      */
     public static final char CHAR_SPACE = ' ';
 
+    public static final String EQUALS = "=";
     /**
      * The constant LINE_UNIT.
      */
@@ -234,6 +236,7 @@ public class Constants {
      * The constant DONE.
      */
     public static final String DONE = "done";
+    public static final String EDIT = "edit";
     /**
      * The constant EVENT.
      */
@@ -404,7 +407,19 @@ public class Constants {
      */
     public static final String[] TIME_PATTERNS = {"HH:mm:ss", "H:mm:ss", "HH:m:ss", "HH:mm:s", "H:m:ss",
         "HH:m:s", "H:mm:s", "H:m:s", "HH:mm", "H:mm", "HH:m", "H:m", "HH", "H", ""};
-
+    public static final String[] SU_ALIAS = {"su", "s/u", "s", "u", "issu"};
+    public static final String[] GRADE_ALIAS = {"grade", "score", "grades", "scores", "letter grade", "letter",
+        "points", "point", "g"};
+    public static final String[] SELECTED_ALIAS = {"sel", "select", "selected", "isselect", "isselected", "selecting",
+        "s"};
+    public static final String[] TAKEN_ALIAS = {"taken", "take", "took", "taking", "istake", "istaken", "istaking",
+        "t"};
+    public static final String[] DESCRIPTION_ALIAS = {"description", "describe", "text", "string", "content", "d"};
+    public static final String[] TYPE_ALIAS = {"type", "category", "t", "types"};
+    public static final String[] DATE_ALIAS = {"date", "time", "dt", "d/t", "datetime", "date/time", "day",
+        "date time"};
+    public static final String[] DONE_ALIAS = {"done", "isdone", "do", "did"};
+    public static final String[] WEEKLY_ALIAS = {"weekly", "isweekly", "week", "byweek", "reoccuring"};
     /**
      * The constant NO_KEYWORD.
      */
@@ -421,6 +436,7 @@ public class Constants {
         + WIN_NEWLINE;
     public static final String COURSE_NOT_SPEC = "You have not registered modules that you have taken."
         + WIN_NEWLINE;
+    public static final String NO_OPERATION_NEEDED = "No operations needed." + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
@@ -583,6 +599,7 @@ public class Constants {
         Map.entry(DEADLINE, new DeadlineAction()),
         Map.entry(DELETE, new DeleteAction()),
         Map.entry(DONE, new DoneAction()),
+        Map.entry(EDIT, new EditAction()),
         Map.entry(EVENT, new EventAction()),
         Map.entry(FIND, new FindAction()),
         Map.entry(ADD, new AddAction()),
@@ -619,6 +636,7 @@ public class Constants {
         Map.entry(DEADLINE, HelpText.DEADLINE),
         Map.entry(DELETE, HelpText.DELETE),
         Map.entry(DONE, HelpText.DONE),
+        Map.entry(EDIT, HelpText.EDIT),
         Map.entry(EVENT, HelpText.EVENT),
         Map.entry(FIND, HelpText.FIND),
         Map.entry(FOCUS, HelpText.FOCUS),
@@ -648,10 +666,11 @@ public class Constants {
     /**
      * The constant paramMap.
      */
-    public static final Map<String, String[]> paramMap = Map.ofEntries(
+    public static final Map<String, String[]> compulsoryParamMap = Map.ofEntries(
         Map.entry(DEADLINE, new String[]{"by"}),
         Map.entry(EVENT, new String[]{"at"}),
-        Map.entry(ADD, new String[]{MOD, TASK}));
+        Map.entry(ADD, new String[]{MOD, TASK}),
+        Map.entry(EDIT, new String[]{MOD, TASK}));
     /**
      * The constant optionalParamMap.
      */
@@ -679,6 +698,7 @@ public class Constants {
             Map.entry(DELETE, REMOVED + CHANGED),
             Map.entry(DONE, "Nice! I've marked this task as done:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(EDIT, "Trying to modify the attribute(s) you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(EVENT, ADDED + CHANGED),
             Map.entry(FIND, "Tasks with the specified keyword are:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),

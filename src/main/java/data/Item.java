@@ -41,7 +41,7 @@ public class Item {
      */
     protected LocalDateTime dateTime;
 
-    public boolean isSelected;
+    public boolean isSelected = false;
 
 
     /**
@@ -182,6 +182,10 @@ public class Item {
      */
     public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    public void updateDateTime(LocalDateTime localDateTime) {
+        setDateTime(localDateTime);
     }
 
     /**
