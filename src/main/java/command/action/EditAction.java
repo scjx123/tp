@@ -105,7 +105,7 @@ public class EditAction extends Action {
                     operated = false;
                 }
                 if (operated) {
-                    builder.append(operation).append("; ");
+                    builder.append(op).append(Constants.CMD_END).append(Constants.SPACE);
                 }
             }
             operationResult = builder.toString();
@@ -193,7 +193,7 @@ public class EditAction extends Action {
                     operated = false;
                 }
                 if (operated) {
-                    builder.append(operation).append("; ");
+                    builder.append(op).append(Constants.CMD_END).append(Constants.SPACE);
                 }
             }
             operationResult = builder.toString();
@@ -204,7 +204,7 @@ public class EditAction extends Action {
         }
     }
 
-    private final ArrayList<Operation> operations = new ArrayList<>();
+    private ArrayList<Operation> operations;
 
     private Item findMod(ArrayList<Item> mods, ArrayList<Item> targets, int index, String code) {
         if (code != null) {
@@ -263,6 +263,7 @@ public class EditAction extends Action {
 
     @Override
     public void prepare(ParamNode args) throws Exception {
+        operations = new ArrayList<>();
         super.prepare(args);
         for (ParamNode arg : flattenedArgs) {
             if (arg.thisData == null) {

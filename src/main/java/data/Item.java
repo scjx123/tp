@@ -41,7 +41,7 @@ public class Item {
      */
     protected LocalDateTime dateTime;
 
-    public boolean isSelected;
+    public boolean isSelected = false;
 
 
     /**

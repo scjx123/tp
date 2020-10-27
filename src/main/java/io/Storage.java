@@ -83,15 +83,13 @@ public class Storage {
 
         //load stored courses
         String[] coursesWithGrades = courseLoader.loadAllLines();
-        String dataInput = Constants.ZERO_LENGTH_STRING;
-        for (String course : coursesWithGrades) {
-            dataInput = dataInput + course + Constants.SPACE;
-        }
-        String output = courseDataToCommand(dataInput);
-        if (!output.equals(Constants.ZERO_LENGTH_STRING)) {
-            ArrayList<Command> commands = parser.parse(output);
-            for (Command c : commands) {
-                c.execute(list);
+        for (String dataInput : coursesWithGrades) {
+            String output = courseDataToCommand(dataInput);
+            if (!output.equals(Constants.ZERO_LENGTH_STRING)) {
+                ArrayList<Command> commands = parser.parse(output);
+                for (Command c : commands) {
+                    c.execute(list);
+                }
             }
         }
 

@@ -31,7 +31,7 @@ public class SelectAction extends TakeAction {
                         .append(getObjectInfo(data.get(i))).append(Constants.WIN_NEWLINE);
             }
         }
-        String result = super.superAct(data);
+        String result = superAct(data);
         String execution = builder.toString();
         if (execution.equals(Constants.ZERO_LENGTH_STRING)) {
             execution = execution.concat(Constants.NOT_FOUND);
