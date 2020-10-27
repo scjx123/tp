@@ -526,7 +526,14 @@ public class Constants {
      * The constant BMP_SEL_SWITCH.
      */
     public static final String BMP_SEL_SWITCH = "SEL";
-
+    /**
+     * The constant REMINDER_ON.
+     */
+    public static final String REMINDER_ON = "on";
+    /**
+     * The constant REMINDER_OFF.
+     */
+    public static final String REMINDER_OFF = "off";
 
     /**
      * The constant LINE_REPETITION.
@@ -686,7 +693,8 @@ public class Constants {
             Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
             Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
-            Map.entry(NEXT, new String[]{"i", "s", "a"}));
+            Map.entry(NEXT, new String[]{"i", "s", "a"}),
+            Map.entry(REMINDER, new String[]{"on", "off"}));
     /**
      * The constant messageMap.
      */
