@@ -176,7 +176,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/Remind.png)
 
-### 4.6 Postpone Feature
+### 4.6 Snooze Feature
+
+The proposed snooze mechanism is facilitated by `SnoozeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+Additionally, it implements the following operations:
+
+* `RemindAction#getNewInterval` - Returns the new interval set by the user.
+
+Given below is an example usage scenario and how the snooze mechanism behaves at each step.
+
+Step 1. The user executes `snooze` command to snooze for the reminder. 
+
+Step 2. `SnoozeAction#getNewInterval` sets and returns the new interval.
+
+Step 3. The new interval is returned to the user through `Ui`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![Postpone_Sequence_Diagram](Images/Snooze.png)
+
+### 4.7 Postpone Feature
 
 The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -198,7 +217,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/PostponeAction_Sequence_Diagram.png)
 
-### 4.7 Focus Feature
+### 4.8 Focus Feature
 
 The proposed focus mechanism is facilitated by `FocusAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
