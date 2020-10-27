@@ -25,7 +25,7 @@ public class Command implements Help {
      * The Name.
      */
     public String name;
-    private HelpText helpText;
+    private final HelpText helpText;
     /**
      * The Action.
      */
@@ -90,7 +90,7 @@ public class Command implements Help {
             for (int i = 0; i < syntax.length; i++) {
                 builder.append(syntax[i]);
                 if (i < syntax.length - 1) {
-                    builder.append(Constants.SYNTAX_OR);
+                    builder.append(Constants.SYNTAX_OR).append(Constants.WIN_NEWLINE);
                 }
             }
             result = builder.toString();

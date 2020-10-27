@@ -72,6 +72,9 @@ public class TakeAction extends Action {
     }
 
     protected boolean modifyObject(Item item) {
+        if (((SingleModule)item).isCompleted) {
+            return false;
+        }
         ((SingleModule)item).isTaken = true;
         ((SingleModule)item).grade = "T";
         return true;

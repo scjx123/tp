@@ -17,7 +17,6 @@ public class CompleteAction extends TakeAction {
     @Override
     protected boolean modifyObject(Item item) {
         assert item instanceof SingleModule;
-        ((SingleModule) item).complete();
-        return ((SingleModule) item).isCompleted;
+        return ((SingleModule) item).complete();
     }
 }

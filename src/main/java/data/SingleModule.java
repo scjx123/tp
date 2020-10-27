@@ -78,23 +78,28 @@ public class SingleModule extends Item {
 
     @Override
     public String getName() {
-        return moduleCode;
+        return (isCompleted ? "[COMPLETED]" : "") + moduleCode;
     }
 
 
     @Override
     public String toString() {
-        return (isCompleted ? "[COMPLETED]" : "") + moduleCode + Constants.SPACE + moduleName + Constants.SPACE
+        return getName()+ Constants.SPACE + moduleName + Constants.SPACE
                 + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
     }
 
-    public void complete() {
+    public boolean complete() {
+        if (isCompleted) {
+            return false;
+        }
         for (String grade : Constants.VALID_GRADES) {
             if (grade.equals(this.grade.toUpperCase())) {
                 isCompleted = true;
+                isTaken = false;
                 break;
             }
         }
+        return isCompleted;
     }
 
     @Override

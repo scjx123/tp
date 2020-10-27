@@ -409,7 +409,7 @@ public class Constants {
         + WIN_NEWLINE;
     public static final String COURSE_NOT_SPEC = "You have not registered modules that you have taken."
         + WIN_NEWLINE;
-    public static final String NO_OPERATION_NEEDED = "No operations needed." + WIN_NEWLINE;
+    public static final String NO_OPERATION_POSSIBLE = "No operations possible." + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */

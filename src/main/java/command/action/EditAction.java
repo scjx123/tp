@@ -113,7 +113,7 @@ public class EditAction extends Action {
             }
             operationResult = builder.toString();
             if (operationResult.length() == 0) {
-                operationResult = Constants.NO_OPERATION_NEEDED;
+                operationResult = Constants.NO_OPERATION_POSSIBLE;
             }
             return mod;
         }
@@ -202,7 +202,7 @@ public class EditAction extends Action {
             }
             operationResult = builder.toString();
             if (operationResult.length() == 0) {
-                operationResult = Constants.NO_OPERATION_NEEDED;
+                operationResult = Constants.NO_OPERATION_POSSIBLE;
             }
             return task;
         }
@@ -213,7 +213,7 @@ public class EditAction extends Action {
     private Item findMod(ArrayList<Item> mods, ArrayList<Item> targets, int index, String code) {
         if (code != null) {
             for (Item item : mods) {
-                if (((SingleModule) item).moduleCode.equals(code)) {
+                if (item.getName().equals(code)) {
                     return item;
                 }
             }
@@ -247,7 +247,7 @@ public class EditAction extends Action {
         String defaultResult = super.act(data);
         StringBuilder stringBuilder = new StringBuilder();
         if (operations == null || operations.size() == 0) {
-            stringBuilder.append(Constants.NO_OPERATION_NEEDED);
+            stringBuilder.append(Constants.NO_OPERATION_POSSIBLE);
         } else {
             ArrayList<Item> targets = data.getTarget();
             for (Operation operation : operations) {
