@@ -186,6 +186,7 @@ public class Item {
 
     public void updateDateTime(LocalDateTime localDateTime) {
         setDateTime(localDateTime);
+        isWeekly = false;
     }
 
     /**
