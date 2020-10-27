@@ -65,7 +65,7 @@ public class GradeAction extends TakeAction {
 
     private void addGradeList(StringBuilder stringBuilder, int index, String moduleCode, String message) {
         stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-            .append(Constants.TAB).append(message).append(Constants.WIN_NEWLINE);
+            .append(Constants.SPACE.repeat(4)).append(message).append(Constants.WIN_NEWLINE);
     }
 
     @Override
@@ -86,7 +86,9 @@ public class GradeAction extends TakeAction {
         currData = currData.thisData;
 
         //input custom modules
-        if (option.equals("a") || option.equals("t")) {
+        switch (option) {
+        case "a":
+        case "t":
             //match grades to modules
             while (currData != null) {
                 String moduleCode = currData.name.toUpperCase().trim();
@@ -96,16 +98,19 @@ public class GradeAction extends TakeAction {
                 }
                 currData = currData.thisData.thisData;
             }
-        } else if (option.equals("s")) {
+            break;
+        case "s":
             //should be do nothing
-        } else if (option.equals("d")) {
+            break;
+        case "d":
             //match grades to modules
             while (currData != null) {
                 String moduleCode = currData.name.toUpperCase().trim();
                 modulesWithGrades.put(moduleCode, "T");
                 currData = currData.thisData;
             }
-        } else {
+            break;
+        default:
             //unidentified option
             throw new CommandException();
         }

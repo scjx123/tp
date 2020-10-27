@@ -1,8 +1,10 @@
 package command.action;
 
+import command.ParamNode;
 import constants.Constants;
 import data.Data;
 import data.Item;
+import exceptions.CommandException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,12 +17,13 @@ import java.util.logging.Logger;
  */
 public class ReminderAction extends Action {
     private static final Logger LOGGER = Logger.getLogger(ReminderAction.class.getName());
+    public static boolean TIMER_TRIGGER = true;
+    private String switches;
 
     @Override
     public String act(Data data) {
         // LOGGER.entering(getClass().getName(), "addReminder");
-        Data savedData = data;
-        final String flag = savedData.flag;
+        final String flag = data.flag;
         StringBuilder builder = new StringBuilder(Constants.REMINDER_HEAD);
         data.setFlag(Constants.EVENT);
         ArrayList<Item> tasks = new ArrayList<>(data.getTarget());
@@ -52,5 +55,34 @@ public class ReminderAction extends Action {
         data.setFlag(flag);
         //assert flag != savedData.flag : "flag is different";
         return builder.toString();
+    }
+
+    @Override
+    public void prepare(ParamNode args) throws Exception {
+        super.prepare(args);
+        if (args.thisData != null) {
+            switches = args.thisData.name;
+            String[] options = Constants.optionalParamMap.get(args.name);
+            int count = 0;
+            for (String opt : options) {
+                if (opt.equals(switches)) {
+                    if (opt.equals(Constants.REMINDER_ON)) {
+                        TIMER_TRIGGER = true;
+                    } else if (opt.equals(Constants.REMINDER_OFF)) {
+                        TIMER_TRIGGER = false;
+                    }
+                    break;
+                } else {
+                    count++;
+                }
+            }
+            if (count == options.length) {
+                throw new CommandException();
+            }
+        }
+    }
+
+    public Boolean getTimerStatus() {
+        return TIMER_TRIGGER;
     }
 }
