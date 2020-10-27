@@ -1,38 +1,7 @@
 package constants;
 
 
-import command.action.Action;
-import command.action.AddAction;
-import command.action.ByeAction;
-import command.action.CalculateCapAction;
-import command.action.ClearAction;
-import command.action.DeadlineAction;
-import command.action.DeleteAction;
-import command.action.DetailAction;
-import command.action.DoneAction;
-import command.action.EventAction;
-import command.action.FancyAction;
-import command.action.FindAction;
-import command.action.FocusAction;
-import command.action.GoalAction;
-import command.action.GradeAction;
-import command.action.HelpAction;
-import command.action.ListAction;
-import command.action.McAction;
-import command.action.NextAction;
-import command.action.PlainAction;
-import command.action.PostponeAction;
-import command.action.PrevAction;
-import command.action.RemindAction;
-import command.action.ReminderAction;
-import command.action.SelectAction;
-import command.action.SnoozeAction;
-import command.action.TakeAction;
-import command.action.TodoAction;
-import command.action.UndoneAction;
-import command.action.UnknownAction;
-import command.action.UnselectAction;
-import command.action.UntakeAction;
+import command.action.*;
 
 import java.util.Map;
 
@@ -229,6 +198,7 @@ public class Constants {
      * The constant DONE.
      */
     public static final String DONE = "done";
+    public static final String EDIT = "edit";
     /**
      * The constant EVENT.
      */
@@ -569,6 +539,7 @@ public class Constants {
         Map.entry(DEADLINE, new DeadlineAction()),
         Map.entry(DELETE, new DeleteAction()),
         Map.entry(DONE, new DoneAction()),
+        Map.entry(EDIT, new EditAction()),
         Map.entry(EVENT, new EventAction()),
         Map.entry(FIND, new FindAction()),
         Map.entry(ADD, new AddAction()),
@@ -604,6 +575,7 @@ public class Constants {
         Map.entry(DEADLINE, HelpText.DEADLINE),
         Map.entry(DELETE, HelpText.DELETE),
         Map.entry(DONE, HelpText.DONE),
+        Map.entry(EDIT, HelpText.EDIT),
         Map.entry(EVENT, HelpText.EVENT),
         Map.entry(FIND, HelpText.FIND),
         Map.entry(FOCUS, HelpText.FOCUS),
@@ -632,10 +604,11 @@ public class Constants {
     /**
      * The constant paramMap.
      */
-    public static final Map<String, String[]> paramMap = Map.ofEntries(
+    public static final Map<String, String[]> compulsoryParamMap = Map.ofEntries(
         Map.entry(DEADLINE, new String[]{"by"}),
         Map.entry(EVENT, new String[]{"at"}),
-        Map.entry(ADD, new String[]{MOD, TASK}));
+        Map.entry(ADD, new String[]{MOD, TASK}),
+        Map.entry(EDIT, new String[]{MOD, TASK}));
     /**
      * The constant optionalParamMap.
      */
@@ -661,6 +634,7 @@ public class Constants {
             Map.entry(DELETE, REMOVED + CHANGED),
             Map.entry(DONE, "Nice! I've marked this task as done:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(EDIT, "Trying to modify the attribute(s) you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(EVENT, ADDED + CHANGED),
             Map.entry(FIND, "Tasks with the specified keyword are:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
