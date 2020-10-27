@@ -127,6 +127,23 @@ public enum HelpText {
     /**
      * The Event.
      */
+    EDIT(
+        "edit",
+        "Modify the attributes of an item (task / module)",
+        new String[]{
+            "edit [-mod / -task] [index / code (for module only)] [field=new value] ...",
+            "No space allowed around \"=\". Use \"_\" in place of space for the \"[field=new value]\" parameters"
+        },
+        new String[]{
+            "1. \"edit -mod CS2113T grade=A\" >> changes the \"grade\" field of module \"CS2113T\" to be \"A\"",
+            "2. \"edit -task 1 description=do_homework\" >> "
+                + "changes the \"description\" field of the 1st task in the current list to \"do homework\"",
+            "3. \"edit -task 1 type=event\" >> changes the \"type\" of the 1st task in the current list to \"event\"",
+            "4. \"edit -mod CS2113 grade=A -task 1 description=do_homework type=event\" >> do 1 to 3 sequentially"
+        }),
+    /**
+     * The Event.
+     */
     EVENT(
         "event",
         "Add an event to the task list",
@@ -312,10 +329,15 @@ public enum HelpText {
         "reminder",
         "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
         new String[]{
-            "reminder"
+            "reminder",
+            "reminder on",
+            "reminder off"
         },
         new String[]{
-            "1. \"reminder\" >> list tasks that are due within the set period of time"
+            "1. \"reminder\" >> list tasks that are due within the set period of time",
+            "2. \"reminder on\" >> Switch on reminder",
+            "3. \"reminder off\" >> Switch off reminder"
+
         }),
     /**
      * The Sel.

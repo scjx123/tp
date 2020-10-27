@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 import command.Command;
 import command.action.RemindAction;
+import command.action.ReminderAction;
 import command.action.SnoozeAction;
 import constants.Constants;
 import data.Data;
@@ -33,8 +34,6 @@ public class Duke {
     private Cli ui;
     private boolean isFancy;
     private Timer timer;
-    private boolean isSnoozed = false;
-    private boolean isRemind = false;
 
     /**
      * Instantiates a new Duke.
@@ -70,15 +69,19 @@ public class Duke {
      */
     public void reminderTimer(int delay, String interval) {
         try {
-            if (interval == Constants.REMINDER_INTERVAL) { // when the interval is default
+            if (interval.equals(Constants.REMINDER_INTERVAL)) { // when the interval is default
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        ui.showReminder(data);
+                        Boolean status = reminderStatus();
+                        if (status) {
+                            ui.showReminder(data);
+                        }
+
                     }
                 }, delay, Integer.parseInt(interval));
-            } else if (interval != Constants.REMINDER_INTERVAL) {
+            } else {
                 timer.cancel();
                 timer = new Timer();
                 timer.schedule(new TimerTask() { // when it is snoozed
@@ -87,21 +90,6 @@ public class Duke {
                         ui.showReminder(data);
                     }
                 }, Integer.parseInt(interval), Integer.parseInt(interval));
-            } else {
-                LocalDate date = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM");
-                String schedule = date + " " + interval;
-                System.out.println(schedule);
-                Date parseSchedule = (Date) formatter.parse(schedule);
-                System.out.println(parseSchedule);
-                timer.cancel();
-                timer = new Timer();
-                timer.schedule(new TimerTask() { // when it is snoozed
-                    @Override
-                    public void run() {
-                        ui.showReminder(data);
-                    }
-                }, parseSchedule);
             }
         } catch (NumberFormatException e) {
             ui.showText("Invalid interval. Reminder scheduler can not work properly.");
@@ -125,9 +113,9 @@ public class Duke {
         // However, no matter what mode it starts in, I have created switching commands.
         // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
-        // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        // new Duke(!isWindows, System.out, System.in, Constants.PATH,
-        // Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
+          //boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+          //new Duke(!isWindows, System.out, System.in, Constants.PATH,
+          //Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
     }
 
     private void reattachUI(boolean isFancy, boolean isPlain) {
@@ -158,8 +146,8 @@ public class Duke {
                     reattachUI(c.isFancy(), c.isPlain());
                     ui.update(c.result, data);
                     isExit = c.isBye();
-                    isSnoozed = c.isSnoozed();
-                    isRemind = c.isRemind();
+                    boolean isSnoozed = c.isSnoozed();
+                    boolean isRemind = c.isRemind();
                     if (isSnoozed) {
                         snoozeReminder();
                     }
@@ -196,6 +184,11 @@ public class Duke {
     public void snoozeReminder() {
         String newInterval = new SnoozeAction().getNewInterval();
         reminderTimer(Constants.REMINDER_DELAY, newInterval);
+    }
+
+    public Boolean reminderStatus() {
+        Boolean status = new ReminderAction().getTimerStatus();
+        return status;
     }
 
     /**
