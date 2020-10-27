@@ -41,6 +41,8 @@ public class SingleModule extends Item {
 
     public boolean isTaken = false;
 
+    public boolean isCompleted = false;
+
     public boolean hasSU = false;
 
     public String grade;
@@ -82,7 +84,7 @@ public class SingleModule extends Item {
 
     @Override
     public String toString() {
-        return moduleCode + Constants.SPACE + moduleName + Constants.SPACE
+        return (isCompleted ? "[COMPLETED]" : "") + moduleCode + Constants.SPACE + moduleName + Constants.SPACE
                 + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
     }
 

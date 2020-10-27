@@ -59,6 +59,19 @@ public enum HelpText {
             "1. \"clear\" >> clears the task list"
         }),
     /**
+     * The Complete.
+     */
+    COMPLETE(
+        "complete",
+        "Mark a module as completed",
+        new String[]{
+            "complete [index / code]"
+        },
+        new String[]{
+            "1. \"complete CS2113\" >> marks module CS2113 as completed",
+            "2. \"complete 1\" >> marks the 1st item in the list as completed if it is a module"
+        }),
+    /**
      * The Deadline.
      */
     DEADLINE(
@@ -126,7 +139,7 @@ public enum HelpText {
             "1. \"done 1\" >> marks the task with index 1 as done"
         }),
     /**
-     * The Event.
+     * The Edit.
      */
     EDIT(
         "edit",

@@ -1,40 +1,7 @@
 //@@author TomLBZ
 package constants;
 
-import command.action.Action;
-import command.action.AddAction;
-import command.action.ByeAction;
-import command.action.CalculateCapAction;
-import command.action.ClearAction;
-import command.action.DeadlineAction;
-import command.action.DeleteAction;
-import command.action.DetailAction;
-import command.action.DoneAction;
-import command.action.EditAction;
-import command.action.EventAction;
-import command.action.FancyAction;
-import command.action.FindAction;
-import command.action.FocusAction;
-import command.action.GoalAction;
-import command.action.GradeAction;
-import command.action.HelpAction;
-import command.action.ListAction;
-import command.action.McAction;
-import command.action.NextAction;
-import command.action.PlainAction;
-import command.action.PostponeAction;
-import command.action.PrevAction;
-import command.action.RemindAction;
-import command.action.ReminderAction;
-import command.action.SelectAction;
-import command.action.SnoozeAction;
-import command.action.StatsAction;
-import command.action.TakeAction;
-import command.action.TodoAction;
-import command.action.UndoneAction;
-import command.action.UnknownAction;
-import command.action.UnselectAction;
-import command.action.UntakeAction;
+import command.action.*;
 
 import java.util.Map;
 
@@ -224,6 +191,7 @@ public class Constants {
      * The constant CLEAR.
      */
     public static final String CLEAR = "clear";
+    public static final String COMPLETE = "complete";
     /**
      * The constant DEADLINE.
      */
@@ -353,6 +321,7 @@ public class Constants {
     public static final String SELECTED = "selected";
     public static final String TAKEN = "taken";
     public static final String FOUND = "found";
+    public static final String COMPLETED = "completed";
     /**
      * The constant INDEX_OUT.
      */
@@ -603,6 +572,7 @@ public class Constants {
     public static final Map<String, Action> actionMap = Map.ofEntries(
         Map.entry(BYE, new ByeAction()),
         Map.entry(CLEAR, new ClearAction()),
+        Map.entry(COMPLETE, new CompleteAction()),
         Map.entry(DEADLINE, new DeadlineAction()),
         Map.entry(DELETE, new DeleteAction()),
         Map.entry(DONE, new DoneAction()),
@@ -640,6 +610,7 @@ public class Constants {
     public static final Map<String, HelpText> helpMap = Map.ofEntries(
         Map.entry(BYE, HelpText.BYE),
         Map.entry(CLEAR, HelpText.CLEAR),
+        Map.entry(COMPLETE, HelpText.COMPLETE),
         Map.entry(DEADLINE, HelpText.DEADLINE),
         Map.entry(DELETE, HelpText.DELETE),
         Map.entry(DONE, HelpText.DONE),
@@ -702,6 +673,8 @@ public class Constants {
             Map.entry(BYE, "Bye. Hope to see you again soon!"),
             Map.entry(STATS, "Here are the statistics for your tasks: " + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(CLEAR, "Nice! I've cleared all tasks from the list and left modules alone."),
+            Map.entry(COMPLETE, "Marking the specified module as Completed (final): "
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(DEADLINE, ADDED + CHANGED),
             Map.entry(DELETE, REMOVED + CHANGED),
             Map.entry(DONE, "Nice! I've marked this task as done:"
@@ -733,6 +706,4 @@ public class Constants {
             Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(SNOOZE, "I've snoozed the reminder for 30 seconds."),
             Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));
-
-
 }
