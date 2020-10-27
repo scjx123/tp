@@ -330,10 +330,15 @@ public enum HelpText {
         "reminder",
         "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
         new String[]{
-            "reminder"
+            "reminder",
+            "reminder on",
+            "reminder off"
         },
         new String[]{
-            "1. \"reminder\" >> list tasks that are due within the set period of time"
+            "1. \"reminder\" >> list tasks that are due within the set period of time",
+            "2. \"reminder on\" >> Switch on reminder",
+            "3. \"reminder off\" >> Switch off reminder"
+
         }),
     /**
      * The Sel.
