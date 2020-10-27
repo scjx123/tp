@@ -137,7 +137,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### 4.4 Reminder Feature
 
-The proposed undo/redo mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
+The proposed reminder mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
 
 * `ReminderAction#act()` — List out the deadlines and events tasks that are due within 3 days
 
@@ -155,7 +155,28 @@ The following sequence diagram diagram shows how the reminder operation works
 
 ![Reminder_Sequence_Diagram](Images/ReminderAction_Sequence_Diagram.png)
 
-### 4.5 Postpone Feature
+### 4.5 Remind Feature
+
+Another proposed manual reminder mechanism is facilitated by `RemindAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+Additionally, it implements the following operations:
+
+* `RemindAction#act()` - Set the reminder to be executed on the chosen time.
+* `RemindAction#prepare()` - Parse user command to suitable parameter for `RemindAction#act()` function.
+* `RemindAction#getSchedule` - Returns the schedule set by the user.
+
+Given below is an example usage scenario and how the remind mechanism behaves at each step.
+
+Step 1. The user executes `remind [time]` command to set schedule for the reminder. Command is then parsed by `RemindAction#prepare()` to be passed as arguments for `RemindAction#act()`.
+
+Step 2. `RemindAction#act()` calls `RemindAction#getSchedule` to pass the schedule later in `Ui`.
+
+Step 3. The schedule is returned to the user through `Ui`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![Postpone_Sequence_Diagram](Images/Remind.png)
+
+### 4.6 Postpone Feature
 
 The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -163,7 +184,7 @@ Additionally, it implements the following operations:
 * `PostponeAction#act()` - Postpone the deadline or event task by the chosen parameter.
 * `PostponeAction#prepare()` - Parse user command to suitable parameter for `PostponeAction#act()` function.
 
-Given below is an example usage scenario and how thecap calculator mechanism behaves at each step.
+Given below is an example usage scenario and how the postpone mechanism behaves at each step.
 
 Step 1. The user executes `postpone [index]` command to postpone the targeted task. Command is then parsed by `PostponeAction#prepare()` to be passed as arguments for `PostponeAction#act()`.
 
@@ -176,6 +197,26 @@ Step 4. Postponed target task is returned to the user through `Ui`.
 The following activity diagram summarizes what happens when a user executes a new command:
 
 ![Postpone_Sequence_Diagram](Images/PostponeAction_Sequence_Diagram.png)
+
+### 4.7 Focus Feature
+
+The proposed focus mechanism is facilitated by `FocusAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+Additionally, it implements the following operations:
+
+* `FocusAction#act()` - Sets the task flag by the chosen parameter.
+* `FocusAction#prepare()` - Parse user command to suitable parameter for `PostponeAction#act()` function.
+
+Given below is an example usage scenario and how the focus mechanism behaves at each step.
+
+Step 1. The user executes `focus [task type]` command to filter based on task type. Command is then parsed by `FocusAction#prepare()` to be passed as arguments for `FocusAction#act()`.
+
+Step 2. `FocusAction#act()` then sets flag in the data.
+
+Step 3. Changed context is returned to inform the user through `Ui`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![Postpone_Sequence_Diagram](Images/Focus.png)
 
 These operations are exposed in the Model interface as Model#commitAddressBook(), Model#undoAddressBook() and Model#redoAddressBook() respectively.
 ## Appendix A. Product scope
