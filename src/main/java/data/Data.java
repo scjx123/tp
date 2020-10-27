@@ -21,18 +21,13 @@ public class Data {
 
     private static final Logger LOGGER = Logger.getLogger(Data.class.getName());
 
-    private static ArrayList<Item> tempList;
     public String flag;
     /**
      * The Tasks.
      */
     public ArrayList<Item> tasks;
     /**
-     * The list of taken modules read in from course.txt.
-     */
-    public ArrayList<Item> takenCourses;
-    /**
-     * The default list of modules read in from courselist11.txt.
+     * The default list of modules read in from finalcourselist.txt.
      */
     public ArrayList<Item> mods;
     /**
@@ -56,7 +51,6 @@ public class Data {
         lastInput = "";
         lastIndexOption = MessageOptions.NOT_INDEXED;
         tasks = new ArrayList<>();
-        takenCourses = new ArrayList<>();
         indexOption = MessageOptions.NOT_INDEXED;
         target = tasks;
         mods = new ArrayList<>();
@@ -96,6 +90,10 @@ public class Data {
             target = mods.stream().filter(x -> x instanceof SingleModule)
                     .collect(Collectors.toCollection(ArrayList::new));
             break;
+        case Constants.SU:
+            target = mods.stream().filter(
+                x -> ((SingleModule) x).hasSU).collect(Collectors.toCollection(ArrayList::new));
+            break;
         case Constants.SELECTED:
             target = mods.stream().filter(x -> x.isSelected).collect(Collectors.toCollection(ArrayList::new));
             target.addAll(tasks.stream().filter(x -> x.isSelected).collect(Collectors.toList()));
@@ -123,23 +121,18 @@ public class Data {
 
 
     public void addTask(Task task) {
-        // LOGGER.entering(getClass().getName(), "addTask");
-        tempList = new ArrayList<>(getTarget(getTaskType(task)));
+        ArrayList<Item> tempList = new ArrayList<>(getTarget(getTaskType(task)));
         Checker cc = new Checker(tempList, task);
         LocalDateTime newDate = cc.checkRecurrenceDate(task);
         if (newDate != null) {
             task.setDateTime(newDate);
-        } else {
-            LOGGER.log(Level.INFO, "New date was null! Invalid Date");
         }
         if (!cc.checkDuplicates()) {
-            // LOGGER.log(Level.INFO, "Task was added to data");
             tasks.add(task);
         } else {
             LOGGER.log(Level.INFO, "Duplicate found! Task was not added to data");
         }
         refreshTarget();
-        //LOGGER.exiting(getClass().getName(), "addTask");
     }
 
     public void removeItem(Item item) {
@@ -156,6 +149,9 @@ public class Data {
     }
 
     public void updateItem(int index, Item newItem) {
+        if (index < 0 || index >= target.size()) {
+            return;
+        }
         Item currentItem = target.get(index);
         target.set(target.indexOf(currentItem), newItem);
         if (currentItem instanceof SingleModule) {
@@ -165,6 +161,22 @@ public class Data {
         } else {
             if (tasks.contains(currentItem)) {
                 tasks.set(tasks.indexOf(currentItem), newItem);
+            }
+        }
+        refreshTarget();
+    }
+
+    public void updateItem(Item oldItem, Item newItem) {
+        if (target.contains(oldItem)) {
+            target.set(target.indexOf(oldItem), newItem);
+        }
+        if (oldItem instanceof SingleModule) {
+            if (mods.contains(oldItem)) {
+                mods.set(mods.indexOf(oldItem), newItem);
+            }
+        } else {
+            if (tasks.contains(oldItem)) {
+                tasks.set(tasks.indexOf(oldItem), newItem);
             }
         }
         refreshTarget();

@@ -34,131 +34,153 @@ public enum HelpText {
      * Help commands for CAP.
      */
     CAP(
-            "cap",
-            "Calculate CAP for courses based on selected option.",
-            new String[]{
-                "cap [-option] [module] [grade] {[module] [grade]...}",
-                "option: -u(user, default), -m(multiple/custom modules)"
-            },
-            new String[]{
-                "1. \"cap\" >> calculate user CAP from their taken modules",
-                "2. \"cap -m CS2113 A CS1010 B\" >> calculate cap based on input modules: "
-                        + "modules CS2113 with grade A, module CS1010 with grade B correspondingly.",
-            }),
+        "cap",
+        "Calculate CAP for courses based on selected option.",
+        new String[]{
+            "cap [-option] [module] [grade] {[module] [grade]...}",
+            "option: -u(user, default), -m(multiple/custom modules)"
+        },
+        new String[]{
+            "1. \"cap\" >> calculate user CAP from their taken modules",
+            "2. \"cap -m CS2113 A CS1010 B\" >> calculate cap based on input modules: "
+                + "modules CS2113 with grade A, module CS1010 with grade B correspondingly.",
+        }),
     /**
      * The Clear.
      */
     CLEAR(
-            "clear",
-            "Clear the task list",
-            new String[]{
-                "clear"
-            },
-            new String[]{
-                "1. \"clear\" >> clears the task list"
-            }),
+        "clear",
+        "Clear the task list",
+        new String[]{
+            "clear"
+        },
+        new String[]{
+            "1. \"clear\" >> clears the task list"
+        }),
     /**
      * The Deadline.
      */
     DEADLINE(
-            "deadline",
-            "Add a deadline to the task list",
-            new String[]{
-                "deadline [description] -by [time]"
-            },
-            new String[]{
-                "1. \"deadline ddl -by 21/9/15 1:12\" >> "
-                        + "adds a deadline with description \"ddl\" and time \"Sep 15 2021 1:12\""
-            }),
+        "deadline",
+        "Add a deadline to the task list",
+        new String[]{
+            "deadline [description] -by [time]"
+        },
+        new String[]{
+            "1. \"deadline ddl -by 21/9/15 1:12\" >> "
+                + "adds a deadline with description \"ddl\" and time \"Sep 15 2021 1:12\""
+        }),
     /**
      * The Delete.
      */
     DELETE(
-            "delete",
-            "Delete a task from the task list",
-            new String[]{
-                "delete [index]"
-            },
-            new String[]{
-                "1. \"delete 1\" >> deletes the task with index 1 from the current list"
-            }),
+        "delete",
+        "Delete a task from the task list",
+        new String[]{
+            "delete [index]"
+        },
+        new String[]{
+            "1. \"delete 1\" >> deletes the task with index 1 from the current list"
+        }),
     /**
      * The Detail.
      */
     DETAIL(
-            "detail",
-            "Print the details of a specified item.",
-            new String[]{
-                "detail [module code (for modules only) / index]",
-            },
-            new String[]{
-                "1. \"detail 1\" >> print the detail of item 1 in the list",
-                "2. \"detail CS2113T\" >> print the detail of module CS2113T",
-            }),
+        "detail",
+        "Print the details of a specified item.",
+        new String[]{
+            "detail [module code (for modules only) / index]",
+        },
+        new String[]{
+            "1. \"detail 1\" >> print the detail of item 1 in the list",
+            "2. \"detail CS2113T\" >> print the detail of module CS2113T",
+        }),
+    /**
+     * Goal Planner.
+     */
+    GOAL(
+        "goal",
+        "Calculate how far the user is from his/her target CAP",
+        new String[]{
+            "goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}",
+            "option: -u(user's cap and mc), -c(custom cap and mc)"
+        },
+        new String[]{
+            "1. \"goal -u 160 4.9\" >> comment on required average grade to achieve CAP of 4.9 with 160MC in total",
+            "2. \"goal -c 160 4.9 100 4.5\" >> "
+                + "comment on required average grade to achieve CAP of 4.9 with:\r\n"
+                + "- MC total for graduation: 160\r\n" + "- Target CAP: 4.9\r\n"
+                + "- MC taken: 100\r\n" + "- Current CAP: 4.5\r\n"
+        }),
     /**
      * The Done.
      */
     DONE(
-            "done",
-            "Mark a task as done",
-            new String[]{
-                "done [index]"
-            },
-            new String[]{
-                "1. \"done 1\" >> marks the task with index 1 as done"
-            }),
+        "done",
+        "Mark a task as done",
+        new String[]{
+            "done [index]"
+        },
+        new String[]{
+            "1. \"done 1\" >> marks the task with index 1 as done"
+        }),
+    /**
+     * The Event.
+     */
+    EDIT(
+        "edit",
+        "Modify the attributes of an item (task / module)",
+        new String[]{
+            "edit [-mod / -task] [index / code (for module only)] [field=new value] ...",
+            "No space allowed around \"=\". Use \"_\" in place of space for the \"[field=new value]\" parameters"
+        },
+        new String[]{
+            "1. \"edit -mod CS2113T MC=4\" >> changes the \"mc\" field of module \"CS2113T\" to be \"4\"",
+            "2. \"edit -task 1 description=do_homework\" >> "
+                + "changes the \"description\" field of the 1st task in the current list to \"do homework\"",
+            "3. \"edit -task 1 type=event\" >> changes the \"type\" of the 1st task in the current list to \"event\"",
+            "4. \"edit -mod CS2113 MC=4 -task 1 description=do_homework type=event\" >> do usages 1 to 3 sequentially"
+        }),
     /**
      * The Event.
      */
     EVENT(
-            "event",
-            "Add an event to the task list",
-            new String[]{
-                "event [description] -at [time]"
-            },
-            new String[]{
-                "1. \"event e -at May 13 2020 8:00\" >> "
-                        + "adds an event with description \"e\" and time \"May 13 2020 8:00\""
-            }),
+        "event",
+        "Add an event to the task list",
+        new String[]{
+            "event [description] -at [time]"
+        },
+        new String[]{
+            "1. \"event e -at May 13 2020 8:00\" >> "
+                + "adds an event with description \"e\" and time \"May 13 2020 8:00\""
+        }),
     /**
      * The Fancy.
      */
     FANCY(
-            "fancy",
-            "Switch to a fancy Cli (requires the shell to support ansi codes).",
-            new String[]{
-                "fancy"
-            },
-            new String[]{
-                "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
-            }),
+        "fancy",
+        "Switch to a fancy Cli (requires the shell to support ansi codes).",
+        new String[]{
+            "fancy"
+        },
+        new String[]{
+            "1. \"fancy\" >> switch to a fancy Cli with graphics. Use \"plain\" to switch to plain Cli"
+        }),
     /**
      * Help text to add grade to a course.
      */
     GRADE(
         "grade",
-        "Add grade to the user's taken course/module.",
+        "Modify grade to the user's taken course/module.",
         new String[]{
             "grade [-option] [module] [grade] {[module] [grade]...}",
-            "option: -s(show, default), -a(add)"
+            "option: -s(show, default), -a(add), -t(take), -d(delete)"
         },
         new String[]{
-            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade to a user's taken course/module",
-            "2. \"grade\" >> show grades of all taken modules"
-        }),
-    /**
-     * Help text for goal action.
-     */
-    GOAL(
-        "goal",
-        "Display how far/near the user to his/her goal.",
-        new String[]{
-            "goal [option]",
-            "option: cap(cap, default), mc(modular credit)"
-        },
-        new String[]{
-            "1. \"goal\" >> add grade to a user's taken course/module",
-            "2. \"goal mc\" >> show how many MC left for graduation"
+            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade[s] to a user's taken course/module",
+            "2. \"grade -t CS2113 A CG1112 A-\" >> add grade[s] to a course/module and take the module simultaneously",
+            "3. \"grade -d CS2113 CG1112\" >> delete grade[s] of user's taken course/module",
+            "4. \"grade\" >> show grades of all taken modules"
         }),
     /**
      * The Find.
@@ -218,6 +240,20 @@ public enum HelpText {
                 "2. \"help event\" >> prints the details of the \"event\" command"
             }),
     /**
+     * Statistics help text.
+     */
+    STATS(
+            "stats",
+            "Print statistics for a given modules/tasks",
+            new String[]{
+                "stats [target]",
+                "target: todo / deadline / event / <module code>"
+            },
+            new String[]{
+                "1. \"stats\" >> prints statistics of task completed",
+                "2. \"stats -mod CS2113\" >> prints statistics of tasks completed under tasks of CS2113"
+            }),
+    /**
      * The List.
      */
     LIST(
@@ -240,7 +276,7 @@ public enum HelpText {
             "Print the number of MCs based on selected option.",
             new String[]{
                 "mc [-option]",
-                "option: -t(total, default), -d(detailed)"
+                "option: -d(detailed)"
             },
             new String[]{
                 "1. \"mc\" >> print the total number of MCs currently taking",
@@ -290,55 +326,67 @@ public enum HelpText {
      * The Reminder.
      */
     REMINDER(
-            "reminder",
-            "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
-            new String[]{
-                "reminder"
-            },
-            new String[]{
-                "1. \"reminder\" >> list tasks that are due within the set period of time"
-            }),
+        "reminder",
+        "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
+        new String[]{
+            "reminder"
+        },
+        new String[]{
+            "1. \"reminder\" >> list tasks that are due within the set period of time"
+        }),
     /**
      * The Sel.
      */
     SEL(
-            "sel",
-            "Make selection: Add specified item(s) to the selection.",
-            new String[]{
-                "sel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
-            },
-            new String[]{
-                "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
-                "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
-                "3. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
-            }),
+        "sel",
+        "Make selection: Add specified item(s) to the selection.",
+        new String[]{
+            "sel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
+        },
+        new String[]{
+            "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
+            "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
+            "3. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
+        }),
+    /**
+     * The Snooze.
+     */
+    SNOOZE(
+        "snooze",
+        "Delay the reminder pop up by 30 seconds.",
+        new String[]{
+            "snooze",
+        },
+        new String[]{
+            "1. \"snooze\" >> Delay reminder popup by 30 seconds"
+        }),
     /**
      * The Take.
      */
     TAKE(
-            "take",
-            "Take module(s): Mark specified module(s) as taken.",
-            new String[]{
-                "take [index(es) / module code(s) (for modules only)]",
-            },
-            new String[]{
-                "1. \"take\" >> if there is any module selected but not taken, mark it as taken",
-                "2. \"take 1 2\" >> mark module 1 and module 2 as taken",
-                "3. \"take CS2113T\" >> mark module CS2113T as taken",
-                "4. \"take 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as taken",
-            }),
+        "take",
+        "Take module(s): Mark specified module(s) as taken.",
+        new String[]{
+            "take [index(es) / module code(s) (for modules only)]",
+        },
+        new String[]{
+            "1. \"take\" >> if there is any module selected but not taken, mark it as taken",
+            "2. \"take 1 2\" >> mark module 1 and module 2 as taken",
+            "3. \"take CS2113T\" >> mark module CS2113T as taken",
+            "4. \"take 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as taken",
+        }),
     /**
      * The Todo.
      */
     TODO(
-            "todo",
-            "Add a todo to the task list",
-            new String[]{
-                "todo [description]"
-            },
-            new String[]{
-                "1. \"todo class\" >> adds a todo with description \"class\""
-            }),
+        "todo",
+        "Add a todo to the task list",
+        new String[]{
+            "todo [description]"
+        },
+        new String[]{
+            "1. \"todo class\" >> adds a todo with description \"class\""
+        }),
     /**
      * The Undone.
      */
@@ -367,32 +415,40 @@ public enum HelpText {
      * The Unsel.
      */
     UNSEL(
-            "unsel",
-            "Cancel selection: Make specified item(s) no longer selected.",
-            new String[]{
-                "unsel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
-            },
-            new String[]{
-                "1. \"unsel 1 2 3\" >> make items with indices 1, 2and 3 no longer selected",
-                "2. \"unsel CS1010 CS2113\" >> make modules CS1010 and CS2113 no longer selected",
-                "2. \"unsel 5 CS2113\" >> make the item with index 5 and module CS2113 no longer selected"
-            }),
+        "unsel",
+        "Cancel selection: Make specified item(s) no longer selected.",
+        new String[]{
+            "unsel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
+        },
+        new String[]{
+            "1. \"unsel 1 2 3\" >> make items with indices 1, 2and 3 no longer selected",
+            "2. \"unsel CS1010 CS2113\" >> make modules CS1010 and CS2113 no longer selected",
+            "2. \"unsel 5 CS2113\" >> make the item with index 5 and module CS2113 no longer selected"
+        }),
     /**
      * The Untake.
      */
     UNTAKE(
-            "untake",
-            "Untake module(s): Mark specified module(s) as not taken.",
-            new String[]{
-                "untake [index(es) / module code(s) (for modules only)]",
-            },
-            new String[]{
-                "1. \"untake\" >> if there is any module selected but not taken, mark it as not taken",
-                "2. \"untake 1 2\" >> mark module 1 and module 2 as not taken",
-                "3. \"untake CS2113T\" >> mark module CS2113T as not taken",
-                "4. \"untake 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as not taken"
-            }),
-    ;
+        "untake",
+        "Untake module(s): Mark specified module(s) as not taken.",
+        new String[]{
+            "untake [index(es) / module code(s) (for modules only)]",
+        },
+        new String[]{
+            "1. \"untake\" >> if there is any module selected but not taken, mark it as not taken",
+            "2. \"untake 1 2\" >> mark module 1 and module 2 as not taken",
+            "3. \"untake CS2113T\" >> mark module CS2113T as not taken",
+            "4. \"untake 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as not taken"
+        }),
+    VIEWTRASH(
+        "viewtrash",
+        "View trash bin",
+        new String[]{
+            "viewtrash",
+        },
+        new String[]{
+            "1.\"viewtrash\""
+        });
 
     /**
      * The Name.

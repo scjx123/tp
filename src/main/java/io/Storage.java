@@ -2,12 +2,14 @@ package io;
 
 import command.Command;
 import data.Item;
+import data.SingleModule;
 import lexical.Parser;
 import constants.Constants;
 import data.Data;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * The type Storage.
@@ -43,8 +45,11 @@ public class Storage {
      * @param tasks user's tasks
      */
     public void save(ArrayList<Item> tasks, ArrayList<Item> courses) {
+        ArrayList<Item> takenCourses = (ArrayList<Item>) courses.stream()
+            .filter(course -> (course instanceof SingleModule) && ((SingleModule) course).isTaken)
+            .collect(Collectors.toList());
         taskSaver.saveTask(tasks);
-        courseSaver.saveCourse(courses);
+        courseSaver.saveCourse(takenCourses);
     }
 
     /**
@@ -78,15 +83,13 @@ public class Storage {
 
         //load stored courses
         String[] coursesWithGrades = courseLoader.loadAllLines();
-        String dataInput = Constants.ZERO_LENGTH_STRING;
-        for (String course : coursesWithGrades) {
-            dataInput = dataInput + course + Constants.SPACE;
-        }
-        String output = courseDataToCommand(dataInput);
-        if (!output.equals(Constants.ZERO_LENGTH_STRING)) {
-            ArrayList<Command> commands = parser.parse(output);
-            for (Command c : commands) {
-                c.execute(list);
+        for (String dataInput : coursesWithGrades) {
+            String output = courseDataToCommand(dataInput);
+            if (!output.equals(Constants.ZERO_LENGTH_STRING)) {
+                ArrayList<Command> commands = parser.parse(output);
+                for (Command c : commands) {
+                    c.execute(list);
+                }
             }
         }
 
@@ -136,9 +139,9 @@ public class Storage {
         String output = Constants.ZERO_LENGTH_STRING;
         String[] iconSeparated = input.split(Constants.SPACE);
         String courseName = iconSeparated[0];
-        // String grade = iconSeparated[1];
-        if (!courseName.isEmpty()) {
-            output = Constants.GRADE + Constants.SPACE + "-a" + Constants.SPACE + input;
+        String grade = iconSeparated[1];
+        if (!courseName.isBlank()) {
+            output = Constants.GRADE + Constants.SPACE + "-t" + Constants.SPACE + input;
         }
         return output;
     }

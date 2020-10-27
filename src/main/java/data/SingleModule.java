@@ -3,6 +3,7 @@ package data;
 import constants.Constants;
 import data.jobs.Task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -20,6 +21,10 @@ public class SingleModule extends Item {
      */
     public String moduleMC;
     /**
+     * The Module mc.
+     */
+    public String moduleSU;
+    /**
      * The Module name.
      */
     public String moduleName;
@@ -34,7 +39,9 @@ public class SingleModule extends Item {
 
     public ArrayList<Item> taskList;
 
-    public boolean isTaken;
+    public boolean isTaken = false;
+
+    public boolean hasSU = false;
 
     public String grade;
 
@@ -47,13 +54,14 @@ public class SingleModule extends Item {
      * @param mc          number of mc
      * @param prereq      module prerequisite
      */
-    public SingleModule(String code, String name, String description, String mc, String prereq) {
+    public SingleModule(String code, String name, String description, String mc, String prereq, String su) {
         super(code); //moduleDescription is handle here.
         this.moduleCode = replaceBlanks(code);
         this.moduleDescription = replaceBlanks(description);
         this.moduleName = replaceBlanks(name);
         this.moduleMC = replaceBlanks(mc);
         this.modulePrerequisite = replaceBlanks(prereq);
+        this.moduleSU = replaceBlanks(su);
         taskList = new ArrayList<>();
     }
 
@@ -66,12 +74,11 @@ public class SingleModule extends Item {
         }
     }
 
-    boolean isSelected = false;
-
     @Override
     public String getName() {
         return moduleCode;
     }
+
 
     @Override
     public String toString() {
@@ -79,11 +86,11 @@ public class SingleModule extends Item {
                 + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
     }
 
+
+
     @Override
     public String getDetails() {
-        String result = moduleCode + Constants.SPACE + moduleName + Constants.SPACE
-                + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
-        StringBuilder builder = new StringBuilder(result);
+        StringBuilder builder = new StringBuilder(toString());
         builder.append(Constants.WIN_NEWLINE).append(wrap(moduleDescription.trim())).append("Tasks: ");
         if (taskList != null && taskList.size() > 0) {
             for (Item item : taskList) {
@@ -109,15 +116,6 @@ public class SingleModule extends Item {
     }
 
     /**
-     * Gets module description.
-     *
-     * @return the module description
-     */
-    public String getModuleDescription() {
-        return moduleDescription;
-    }
-
-    /**
      * Gets module mc.
      *
      * @return the module mc
@@ -126,17 +124,14 @@ public class SingleModule extends Item {
         return moduleMC;
     }
 
-    /**
-     * Gets module prerequisite.
-     *
-     * @return the module prerequisite
-     */
-    public String getModulePrerequisite() {
-        return modulePrerequisite;
-    }
 
-    public void addTasks(ArrayList<Item> tasks) {
-        taskList.addAll(tasks);
+    /**
+     * Gets module mc.
+     *
+     * @return the module mc
+     */
+    public ArrayList<Item> getTaskList() {
+        return taskList;
     }
 
 }

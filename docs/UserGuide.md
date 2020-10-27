@@ -15,15 +15,18 @@
     * [`event` - Add an event to the task list](#event---Add-an-event-to-the-task-list)
     * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---Switch-the-UI-to-the-fancy-mode-(GUI-like-CLI))
     * [`find` - Find an event in the task list](#find---Find-an-event-in-the-task-list)
-    * [`focus` - Change the context of the program](#focus---Change-the-context-of-the-program) 
+    * [`focus` - Change the context of the program](#focus---Change-the-context-of-the-program)
+    * [`grade` - Add grade to course or module](#grade---Add-grade-to-course-or-module)  
     * [`help` - Print help text of the commands](#help---Print-help-text-of-the-commands)
     * [`list` - Print a list of added tasks](#list---Print-a-list-of-added-tasks)
     * [`mc` - Prints MCs](#mc---Prints-MCs)
     * [`next` - Switch the target region to the next page ***(GUI mode only)***](#next---Switch-the-target-region-to-the-next-page)
     * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---Switch-the-UI-to-the-plain-mode-(pure-text-CLI))
     * [`prev` - Switch the target region to the previous page ***(GUI mode only)***](#prev---Switch-the-target-region-to-the-previous-page)
+    * [`postpone` - Postpone a task to a later date](#postpone---Postpone-a-task-to-a-later-date)
     * [`reminder` - Print tasks that are due soon](#reminder---Print-tasks-that-are-due-soon)
     * [`sel` - Select items by index](#sel---Select-items-by-index)
+    * [`snooze` - Delays reminder popup](#snooze---Delays-reminder-popup)
     * [`take` - Take module(s)](#take---Take-module)
     * [`todo` - Add a todo to the task list](#todo---Add-a-todo-to-the-task-list)
     * [`undone` - Mark a task as undone](#undone---Mark-a-task-as-undone)
@@ -410,6 +413,46 @@ Expected outcome:
     ____________________________________________________________
    ```
 
+### `grade` - Add grade to course or module
+
+Typing `grade` allows the user to add grade to the user's taken course or module.
+
+Syntax:
+
+`grade`
+`grade [-option] [module] [grade] {[module] [grade]...}` <br>
+
+`option: -s(show, default), -a(add)`
+
+Example of usage:
+
+`grade -a CS2113 A- CG1112 A-`
+
+Expected outcome:
+    ```
+    ____________________________________________________________
+        These are your grades so far:
+        1. CS2113   A-
+        2. CG1112   A-
+    ____________________________________________________________
+    ```
+Example of usage:
+
+`grade`
+
+Expected outcome:
+    ```
+    ____________________________________________________________
+        These are your grades so far:
+        1. CG1112   A-
+        2. CS1010   A
+        3. CS1231   B
+        4. CS2040C  A
+        5. CS2113   A-
+    ____________________________________________________________
+    ```
+
+
 ### `help` - Print help text of the commands
 
 Typing `help` allows the user to either print a list of available commands, 
@@ -546,8 +589,7 @@ Typing `mc` prints the number of MCs based on selected option.
 Syntax:
 
 `mc [-option] [-detail]`
-`option: -c(current, default), -p(prospective)`
-`detail: -t(total, default), -d(detailed)`
+`option: -d(detailed)`
 
 Example of usage (when there are modules in the target): 
 
@@ -648,6 +690,67 @@ Expected outcome ***(GUI mode only)***:
 
 The item list region (top) of the GUI is switched to the previous page if a previous page is available.
 
+### `postpone` - Postpone a task by index
+
+Typing `postpone` delays a task specified by the user or by default a day
+
+Syntax:
+
+`postpone [index]`
+`postpone [h/w/y] [index]` 
+
+Example of usage:
+
+`postpone 1`
+
+Expected outcome:
+ 
+    ```
+    ____________________________________________________________
+        I've postpone this task:
+        [D][X] project submission (by: Sep 16 2021 01:12)
+    ____________________________________________________________
+    ```
+
+Example of usage:
+
+`postpone h 1`
+
+Expected outcome:
+    
+    ```
+    ____________________________________________________________
+        I've postpone this task:
+        [D][X] project submission (by: Sep 16 2021 02:12)
+    ____________________________________________________________
+    ```
+
+Example of usage:
+
+`postpone w 1`
+
+Expected outcome:
+
+    ```
+    ____________________________________________________________
+        I've postpone this task:
+        [D][X] project submission (by: Sep 23 2021 02:12)
+    ____________________________________________________________
+    ```
+
+Example of usage:
+
+`postpone y 1`
+
+Expected outcome:
+
+    ```
+    ____________________________________________________________
+        I've postpone this task:
+        [D][X] project submission (by: Sep 23 2022 02:12)
+    ____________________________________________________________
+    ```
+
 ### `reminder` - Print tasks that are due soon
 
 Typing `reminder` prints the tasks that are due within a certain time range. 
@@ -691,6 +794,27 @@ Expected outcome:
     Item 3: jumping
     ____________________________________________________________
    ```
+
+### `snooze` - Delays reminder popup
+
+Typing `snooze` delays reminder popup by a default of 30 seconds
+
+Syntax:
+
+`snooze`
+
+Example of usage:
+
+`snooze`
+
+Expected outcome:
+
+    ```
+    ____________________________________________________________
+        I've snoozed the reminder for 30 seconds.
+    ____________________________________________________________    
+    ```
+
 
 ### `take` - Take module
 
@@ -878,14 +1002,17 @@ A cheat sheet of commonly used commands:
 **fancy**|`fancy [option]` <br>e.g. `fancy`
 **find**|`find [keyword]` <br>e.g. `find exam`
 **focus**|`focus [deadline / todo / event / task / mod / selected / taken]` <br>e.g. `focus deadline`
+**grade**|`grade [-option] [module] [grade] {[module] [grade]...}`<br>e.g. `grade -a CS2113 A CG1112 A-`  
 **help**|`help [options]` <br>e.g. `help deadline`
 **list**|`list date [asc / desc / spec “date”]` <br>e.g. `list date asc`
 **mc**|`mc [-option] [-details]` <br>e.g. `mc -p`
 **next**|`next [option]` <br>e.g. `next`
 **plain**|`plain [option]` <br>e.g. `plain`
 **prev**|`prev [option]` <br>e.g. `prev`
+**postpone**| `postpone [index]` <br>e.g. `postpone 1`
 **reminder**|`reminder` <br>e.g. `reminder`
 **sel**|`sel [index / module code]` <br>e.g. `sel 1 2 3`
+**snooze**|`snooze`
 **take**|`take [index / module code]` <br>e.g. `take CS2113T`
 **todo**|`todo [description]` <br>e.g. `todo borrow book`
 **undone**|`undone [index]` <br>e.g. `undone 2`

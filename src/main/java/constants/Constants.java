@@ -10,10 +10,12 @@ import command.action.DeadlineAction;
 import command.action.DeleteAction;
 import command.action.DetailAction;
 import command.action.DoneAction;
+import command.action.EditAction;
 import command.action.EventAction;
 import command.action.FancyAction;
 import command.action.FindAction;
 import command.action.FocusAction;
+import command.action.GoalAction;
 import command.action.GradeAction;
 import command.action.HelpAction;
 import command.action.ListAction;
@@ -26,6 +28,7 @@ import command.action.RemindAction;
 import command.action.ReminderAction;
 import command.action.SelectAction;
 import command.action.SnoozeAction;
+import command.action.StatsAction;
 import command.action.TakeAction;
 import command.action.TodoAction;
 import command.action.UndoneAction;
@@ -65,6 +68,7 @@ public class Constants {
      */
     public static final char CHAR_SPACE = ' ';
 
+    public static final String EQUALS = "=";
     /**
      * The constant LINE_UNIT.
      */
@@ -93,6 +97,10 @@ public class Constants {
      * The constant PARAM_RIGHT.
      */
     public static final String PARAM_RIGHT = ")";
+    /**
+     * The constant PARAM_RIGHT.
+     */
+    public static final String PERCENT = "%";
     /**
      * The constant TODO_ICON.
      */
@@ -228,6 +236,7 @@ public class Constants {
      * The constant DONE.
      */
     public static final String DONE = "done";
+    public static final String EDIT = "edit";
     /**
      * The constant EVENT.
      */
@@ -264,6 +273,10 @@ public class Constants {
      * The constant LIST.
      */
     public static final String LIST = "list";
+    /**
+     * The constant LIST.
+     */
+    public static final String STATS = "stats";
     /**
      * The constant TODO.
      */
@@ -332,7 +345,9 @@ public class Constants {
      * Signals CAP command.
      */
     public static final String CAP = "cap";
+    public static final String GOAL = "goal";
     public static final String MOD = "mod";
+    public static final String SU = "su";
     public static final String GRADE = "grade";
     public static final String TASK = "task";
     public static final String SELECTED = "selected";
@@ -351,6 +366,7 @@ public class Constants {
      */
     public static final String REMOVED = "Noted. I've removed this task:";
     public static final String REMOVE_MOD = "Noted. I've removed this module from your current list:";
+
     /**
      * The constant COUNT_PREFIX.
      */
@@ -391,27 +407,48 @@ public class Constants {
      */
     public static final String[] TIME_PATTERNS = {"HH:mm:ss", "H:mm:ss", "HH:m:ss", "HH:mm:s", "H:m:ss",
         "HH:m:s", "H:mm:s", "H:m:s", "HH:mm", "H:mm", "HH:m", "H:m", "HH", "H", ""};
-
+    public static final String[] SU_ALIAS = {"su", "s/u", "s", "u", "issu"};
+    public static final String[] GRADE_ALIAS = {"grade", "score", "grades", "scores", "letter grade", "letter",
+        "points", "point", "g"};
+    public static final String[] SELECTED_ALIAS = {"sel", "select", "selected", "isselect", "isselected", "selecting",
+        "s"};
+    public static final String[] TAKEN_ALIAS = {"taken", "take", "took", "taking", "istake", "istaken", "istaking",
+        "t"};
+    public static final String[] DESCRIPTION_ALIAS = {"description", "describe", "text", "string", "content", "d"};
+    public static final String[] TYPE_ALIAS = {"type", "category", "t", "types"};
+    public static final String[] DATE_ALIAS = {"date", "time", "dt", "d/t", "datetime", "date/time", "day",
+        "date time"};
+    public static final String[] DONE_ALIAS = {"done", "isdone", "do", "did"};
+    public static final String[] WEEKLY_ALIAS = {"weekly", "isweekly", "week", "byweek", "reoccuring"};
     /**
      * The constant NO_KEYWORD.
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all items:" + WIN_NEWLINE;
     public static final String MOD_NOT_FOUND =
         "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
+    public static final String MOD_NOT_TAKEN = "You have not taken this module yet";
+    public static final String MOD_NO_GRADE = "You have not input grade for this module yet";
+    public static final String NO_MOD_GRADED = "You have not input grade for any module yet";
+    public static final String INVALID_LIST = "Please focus on task list by typing 'focus'" + WIN_NEWLINE;
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
     public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
         + WIN_NEWLINE;
     public static final String COURSE_NOT_SPEC = "You have not registered modules that you have taken."
         + WIN_NEWLINE;
+    public static final String NO_OPERATION_NEEDED = "No operations needed." + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
     public static final String NO_TASK_TYPE = "No task type provided, listing all tasks:" + WIN_NEWLINE;
+    public static final String JIAYOU = "Jia you! :D" + WIN_NEWLINE;
+    public static final String LOW_CAP = "You might want too aim higher" + WIN_NEWLINE;
+    public static final String HIGH_CAP = "Looks like the target is a bit far away TT" + WIN_NEWLINE;
+    public static final String REQUIRED_CAP = "Your required average CAP is: ";
     /**
      * The constant NO_URGENT_TASKS.
      */
-    public static final String NO_URGENT_TASKS = "No task in 3 days from now" + WIN_NEWLINE;
+    public static final String NO_URGENT_TASKS = "No task within 3 days from now" + WIN_NEWLINE;
     /**
      * The constant UNIDENTIFIED_TYPE.
      */
@@ -451,6 +488,10 @@ public class Constants {
      * The constant GRADE_HEAD.
      */
     public static final String GRADE_HEAD = "These are your grades so far:" + WIN_NEWLINE;
+    /**
+     * The constant STATS_HEAD.
+     */
+    public static final String STATS_HEAD = "Here are the statistics: " + WIN_NEWLINE;
     /**
      * The constant REMINDER_HEAD.
      */
@@ -542,7 +583,7 @@ public class Constants {
     /**
      * The constant REMINDER_INTERVAL.
      */
-    public static final int REMINDER_INTERVAL = 1000 * 60;
+    public static final String REMINDER_INTERVAL = "60000";
 
     /**
      * The constant REMINDER_DELAY.
@@ -553,75 +594,83 @@ public class Constants {
      * The constant actionMap.
      */
     public static final Map<String, Action> actionMap = Map.ofEntries(
-            Map.entry(BYE, new ByeAction()),
-            Map.entry(CLEAR, new ClearAction()),
-            Map.entry(DEADLINE, new DeadlineAction()),
-            Map.entry(DELETE, new DeleteAction()),
-            Map.entry(DONE, new DoneAction()),
-            Map.entry(EVENT, new EventAction()),
-            Map.entry(FIND, new FindAction()),
-            Map.entry(ADD, new AddAction()),
-            Map.entry(HELP, new HelpAction()),
-            Map.entry(GRADE, new GradeAction()),
-            Map.entry(LIST, new ListAction()),
-            Map.entry(FOCUS, new FocusAction()),
-            Map.entry(REMINDER, new ReminderAction()),
-            Map.entry(REMIND, new RemindAction()),
-            Map.entry(POSTPONE, new PostponeAction()),
-            Map.entry(SNOOZE, new SnoozeAction()),
-            Map.entry(MC, new McAction()),
-            Map.entry(DETAIL, new DetailAction()),
-            Map.entry(TODO, new TodoAction()),
-            Map.entry(UNDONE, new UndoneAction()),
-            Map.entry(UNKNOWN, new UnknownAction()),
-            Map.entry(PREV, new PrevAction()),
-            Map.entry(NEXT, new NextAction()),
-            Map.entry(CAP, new CalculateCapAction()),
-            Map.entry(FANCY, new FancyAction()),
-            Map.entry(PLAIN, new PlainAction()),
-            Map.entry(TAKE, new TakeAction()),
-            Map.entry(SEL, new SelectAction()),
-            Map.entry(UNSEL, new UnselectAction()),
-            Map.entry(UNTAKE, new UntakeAction()));
+        Map.entry(BYE, new ByeAction()),
+        Map.entry(CLEAR, new ClearAction()),
+        Map.entry(DEADLINE, new DeadlineAction()),
+        Map.entry(DELETE, new DeleteAction()),
+        Map.entry(DONE, new DoneAction()),
+        Map.entry(EDIT, new EditAction()),
+        Map.entry(EVENT, new EventAction()),
+        Map.entry(FIND, new FindAction()),
+        Map.entry(ADD, new AddAction()),
+        Map.entry(HELP, new HelpAction()),
+        Map.entry(GRADE, new GradeAction()),
+        Map.entry(LIST, new ListAction()),
+        Map.entry(FOCUS, new FocusAction()),
+        Map.entry(REMINDER, new ReminderAction()),
+        Map.entry(REMIND, new RemindAction()),
+        Map.entry(POSTPONE, new PostponeAction()),
+        Map.entry(SNOOZE, new SnoozeAction()),
+        Map.entry(MC, new McAction()),
+        Map.entry(DETAIL, new DetailAction()),
+        Map.entry(TODO, new TodoAction()),
+        Map.entry(UNDONE, new UndoneAction()),
+        Map.entry(UNKNOWN, new UnknownAction()),
+        Map.entry(PREV, new PrevAction()),
+        Map.entry(NEXT, new NextAction()),
+        Map.entry(CAP, new CalculateCapAction()),
+        Map.entry(GOAL, new GoalAction()),
+        Map.entry(FANCY, new FancyAction()),
+        Map.entry(PLAIN, new PlainAction()),
+        Map.entry(TAKE, new TakeAction()),
+        Map.entry(SEL, new SelectAction()),
+        Map.entry(UNSEL, new UnselectAction()),
+        Map.entry(STATS, new StatsAction()),
+        Map.entry(UNTAKE, new UntakeAction()));
     /**
      * The constant helpMap.
      */
     public static final Map<String, HelpText> helpMap = Map.ofEntries(
-            Map.entry(BYE, HelpText.BYE),
-            Map.entry(CLEAR, HelpText.CLEAR),
-            Map.entry(DEADLINE, HelpText.DEADLINE),
-            Map.entry(DELETE, HelpText.DELETE),
-            Map.entry(DONE, HelpText.DONE),
-            Map.entry(EVENT, HelpText.EVENT),
-            Map.entry(FIND, HelpText.FIND),
-            Map.entry(FOCUS, HelpText.FOCUS),
-            Map.entry(REMINDER, HelpText.REMINDER),
-            Map.entry(POSTPONE, HelpText.POSTPONE),
-            Map.entry(HELP, HelpText.HELP),
-            Map.entry(GRADE, HelpText.GRADE),
-            Map.entry(LIST, HelpText.LIST),
-            Map.entry(TODO, HelpText.TODO),
-            Map.entry(UNDONE, HelpText.UNDONE),
-            Map.entry(UNKNOWN, HelpText.UNKNOWN),
-            Map.entry(PREV, HelpText.PREV),
-            Map.entry(NEXT, HelpText.NEXT),
-            Map.entry(CAP, HelpText.CAP),
-            Map.entry(FANCY, HelpText.FANCY),
-            Map.entry(PLAIN, HelpText.PLAIN),
-            Map.entry(MC,HelpText.MC),
-            Map.entry(DETAIL,HelpText.DETAIL),
-            Map.entry(TAKE, HelpText.TAKE),
-            Map.entry(ADD, HelpText.ADD),
-            Map.entry(SEL, HelpText.SEL),
-            Map.entry(UNSEL, HelpText.UNSEL),
-            Map.entry(UNTAKE, HelpText.UNTAKE));
+        Map.entry(BYE, HelpText.BYE),
+        Map.entry(CLEAR, HelpText.CLEAR),
+        Map.entry(DEADLINE, HelpText.DEADLINE),
+        Map.entry(DELETE, HelpText.DELETE),
+        Map.entry(DONE, HelpText.DONE),
+        Map.entry(EDIT, HelpText.EDIT),
+        Map.entry(EVENT, HelpText.EVENT),
+        Map.entry(FIND, HelpText.FIND),
+        Map.entry(FOCUS, HelpText.FOCUS),
+        Map.entry(REMINDER, HelpText.REMINDER),
+        Map.entry(POSTPONE, HelpText.POSTPONE),
+        Map.entry(HELP, HelpText.HELP),
+        Map.entry(GRADE, HelpText.GRADE),
+        Map.entry(LIST, HelpText.LIST),
+        Map.entry(TODO, HelpText.TODO),
+        Map.entry(UNDONE, HelpText.UNDONE),
+        Map.entry(UNKNOWN, HelpText.UNKNOWN),
+        Map.entry(PREV, HelpText.PREV),
+        Map.entry(NEXT, HelpText.NEXT),
+        Map.entry(CAP, HelpText.CAP),
+        Map.entry(GOAL, HelpText.GOAL),
+        Map.entry(FANCY, HelpText.FANCY),
+        Map.entry(PLAIN, HelpText.PLAIN),
+        Map.entry(MC, HelpText.MC),
+        Map.entry(DETAIL, HelpText.DETAIL),
+        Map.entry(TAKE, HelpText.TAKE),
+        Map.entry(ADD, HelpText.ADD),
+        Map.entry(SEL, HelpText.SEL),
+        Map.entry(SNOOZE, HelpText.SNOOZE),
+        Map.entry(UNSEL, HelpText.UNSEL),
+        Map.entry(STATS, HelpText.STATS),
+        Map.entry(UNTAKE, HelpText.UNTAKE));
     /**
      * The constant paramMap.
      */
-    public static final Map<String, String[]> paramMap = Map.ofEntries(
-            Map.entry(DEADLINE, new String[]{"by"}),
-            Map.entry(EVENT, new String[]{"at"}),
-            Map.entry(ADD, new String[]{MOD, TASK}));
+    public static final Map<String, String[]> compulsoryParamMap = Map.ofEntries(
+        Map.entry(DEADLINE, new String[]{"by"}),
+        Map.entry(EVENT, new String[]{"at"}),
+        Map.entry(ADD, new String[]{MOD, TASK}),
+        Map.entry(EDIT, new String[]{MOD, TASK}));
     /**
      * The constant optionalParamMap.
      */
@@ -629,10 +678,11 @@ public class Constants {
             Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(GRADE, new String[]{"a", "s"}),
             Map.entry(MC, new String[]{"d"}),
+            Map.entry(STATS, new String[]{"mod"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
-            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN, SU}),
             Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
             Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
@@ -642,11 +692,13 @@ public class Constants {
      */
     public static final Map<String, String> messageMap = Map.ofEntries(
             Map.entry(BYE, "Bye. Hope to see you again soon!"),
+            Map.entry(STATS, "Here are the statistics for your tasks: " + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(CLEAR, "Nice! I've cleared all tasks from the list and left modules alone."),
             Map.entry(DEADLINE, ADDED + CHANGED),
             Map.entry(DELETE, REMOVED + CHANGED),
             Map.entry(DONE, "Nice! I've marked this task as done:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(EDIT, "Trying to modify the attribute(s) you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(EVENT, ADDED + CHANGED),
             Map.entry(FIND, "Tasks with the specified keyword are:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
@@ -670,5 +722,9 @@ public class Constants {
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNTAKE, "I have un-taken these modules you specified. "
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER));
+            Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(SNOOZE, "I've snoozed the reminder for 30 seconds."),
+            Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));
+
+
 }

@@ -20,15 +20,17 @@ import java.util.Map;
  */
 public class CalculateCapAction extends Action {
 
-    private HashMap<String, Double> modulesWithGrades = new HashMap<>();
-    private String option;
+    protected HashMap<String, Double> modulesWithGrades = new HashMap<>();
+    protected String option;
+    protected double totalScore = 0;
+    protected double totalMC = 0;
 
     @Override
     public String act(Data data) throws Exception {
-        double totalScore = 0;
-        double totalMC = 0;
         double gradeValue;
         if (option.equals("m")) {
+            totalScore = 0;
+            totalMC = 0;
             for (Map.Entry<String, Double> m : modulesWithGrades.entrySet()) {
                 gradeValue = m.getValue();
                 String moduleCode = m.getKey();
@@ -40,26 +42,30 @@ public class CalculateCapAction extends Action {
                 totalScore += Double.parseDouble(module.getModuleMC()) * gradeValue;
             }
         } else if (option.equals("u")) {
-            boolean isNew = true;
-            for (Item item : data.mods) {
-                SingleModule module = (SingleModule) item;
-                if (module.isTaken) {
-                    isNew = false;
-                    if (module.grade == null) {
-                        throw new GradeNotSpecifiedException();
-                    }
-                    gradeValue = numerateGrade(module.grade.toUpperCase());
-                    totalMC += Double.parseDouble(module.getModuleMC());
-                    totalScore += Double.parseDouble(module.getModuleMC()) * gradeValue;
-                }
-            }
-
-            if (isNew) {
+            if (checkCalculateCap(data)) {
                 return Constants.COURSE_NOT_SPEC;
             }
         }
         double capValue = totalScore / totalMC;
         return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
+    }
+
+    protected boolean checkCalculateCap(Data data) throws GradeNotSpecifiedException {
+        boolean isNotSpec = true;
+        double gradeValue;
+        totalScore = 0;
+        totalMC = 0;
+
+        for (Item item : data.mods) {
+            SingleModule module = (SingleModule) item;
+            if (module.isTaken && module.grade != null) {
+                isNotSpec = false;
+                gradeValue = numerateGrade(module.grade.toUpperCase());
+                totalMC += Double.parseDouble(module.getModuleMC());
+                totalScore += Double.parseDouble(module.getModuleMC()) * gradeValue;
+            }
+        }
+        return isNotSpec;
     }
 
     @Override

@@ -41,7 +41,8 @@ public class Item {
      */
     protected LocalDateTime dateTime;
 
-    public boolean isSelected;
+    public boolean isSelected = false;
+
 
     /**
      * Instantiates a new Item.
@@ -60,7 +61,6 @@ public class Item {
     public String getName() {
         return description;
     }
-
 
     private static ArrayList<String> getPatterns(boolean isDateOnly) {
         ArrayList<String> patterns = new ArrayList<>();
@@ -182,6 +182,10 @@ public class Item {
      */
     public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    public void updateDateTime(LocalDateTime localDateTime) {
+        setDateTime(localDateTime);
     }
 
     /**

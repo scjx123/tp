@@ -19,8 +19,7 @@ public class ReminderAction extends Action {
     @Override
     public String act(Data data) {
         // LOGGER.entering(getClass().getName(), "addReminder");
-        Data savedData = data;
-        final String flag = savedData.flag;
+        final String flag = data.flag;
         StringBuilder builder = new StringBuilder(Constants.REMINDER_HEAD);
         data.setFlag(Constants.EVENT);
         ArrayList<Item> tasks = new ArrayList<>(data.getTarget());
@@ -45,7 +44,7 @@ public class ReminderAction extends Action {
         for (Item item : tasks) {
             builder.append(item.toString()).append(Constants.WIN_NEWLINE);
         }
-        if (builder.toString().equals(Constants.ZERO_LENGTH_STRING)) {
+        if (tasks.size() == 0) {
             builder.append(Constants.NO_URGENT_TASKS);
         }
       

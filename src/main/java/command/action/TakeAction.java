@@ -72,6 +72,7 @@ public class TakeAction extends Action {
 
     protected void modifyObject(Item item) {
         ((SingleModule)item).isTaken = true;
+        ((SingleModule)item).grade = "T";
     }
 
     protected String getObjectInfo(Item item) {
