@@ -184,6 +184,10 @@ public class Item {
         return dateTime;
     }
 
+    public void updateDateTime(LocalDateTime localDateTime) {
+        setDateTime(localDateTime);
+    }
+
     /**
      * Gets date time string.
      *

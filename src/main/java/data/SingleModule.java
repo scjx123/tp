@@ -38,7 +38,9 @@ public class SingleModule extends Item {
 
     public ArrayList<Item> taskList;
 
-    public boolean isTaken;
+    public boolean isTaken = false;
+
+    public boolean isSelected = false;
 
     public boolean hasSU = false;
 
@@ -53,7 +55,7 @@ public class SingleModule extends Item {
      * @param mc          number of mc
      * @param prereq      module prerequisite
      */
-    public SingleModule(String code, String name, String description, String mc, String prereq,String su) {
+    public SingleModule(String code, String name, String description, String mc, String prereq, String su) {
         super(code); //moduleDescription is handle here.
         this.moduleCode = replaceBlanks(code);
         this.moduleDescription = replaceBlanks(description);
@@ -72,8 +74,6 @@ public class SingleModule extends Item {
             return null;
         }
     }
-
-    boolean isSelected = false;
 
     @Override
     public String getName() {

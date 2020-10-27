@@ -35,6 +35,7 @@ public class Constants {
      */
     public static final char CHAR_SPACE = ' ';
 
+    public static final String EQUALS = "=";
     /**
      * The constant LINE_UNIT.
      */
@@ -365,7 +366,19 @@ public class Constants {
      */
     public static final String[] TIME_PATTERNS = {"HH:mm:ss", "H:mm:ss", "HH:m:ss", "HH:mm:s", "H:m:ss",
         "HH:m:s", "H:mm:s", "H:m:s", "HH:mm", "H:mm", "HH:m", "H:m", "HH", "H", ""};
-
+    public static final String[] SU_ALIAS = {"su", "s/u", "s", "u", "issu"};
+    public static final String[] GRADE_ALIAS = {"grade", "score", "grades", "scores", "letter grade", "letter",
+        "points", "point", "g"};
+    public static final String[] SELECTED_ALIAS = {"sel", "select", "selected", "isselect", "isselected", "selecting",
+        "s"};
+    public static final String[] TAKEN_ALIAS = {"taken", "take", "took", "taking", "istake", "istaken", "istaking",
+        "t"};
+    public static final String[] DESCRIPTION_ALIAS = {"description", "describe", "text", "string", "content", "d"};
+    public static final String[] TYPE_ALIAS = {"type", "category", "t", "types"};
+    public static final String[] DATE_ALIAS = {"date", "time", "dt", "d/t", "datetime", "date/time", "day",
+        "date time"};
+    public static final String[] DONE_ALIAS = {"done", "isdone", "do", "did"};
+    public static final String[] WEEKLY_ALIAS = {"weekly", "isweekly", "week", "byweek", "reoccuring"};
     /**
      * The constant NO_KEYWORD.
      */
@@ -381,6 +394,7 @@ public class Constants {
         + WIN_NEWLINE;
     public static final String COURSE_NOT_SPEC = "You have not registered modules that you have taken."
         + WIN_NEWLINE;
+    public static final String NO_OPERATION_NEEDED = "No operations needed." + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
