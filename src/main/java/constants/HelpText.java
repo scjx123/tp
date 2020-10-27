@@ -206,6 +206,20 @@ public enum HelpText {
                 "2. \"help event\" >> prints the details of the \"event\" command"
             }),
     /**
+     * Statistics help text.
+     */
+    STATS(
+            "stats",
+            "Print statistics for a given modules/tasks",
+            new String[]{
+                    "stats [target]",
+                    "target: todo / deadline / event / <module code>"
+            },
+            new String[]{
+                    "1. \"stats\" >> prints statistics of task completed",
+                    "2. \"stats CS2113\" >> prints statistics of tasks completed under tasks of CS2113"
+            }),
+    /**
      * The List.
      */
     LIST(
