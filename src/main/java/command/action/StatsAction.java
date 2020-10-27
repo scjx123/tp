@@ -18,7 +18,8 @@ public class StatsAction extends Action {
     String selectedModule;
     SingleModule tempModule = null;
     int doneItem = 0;
-    double ratio=0;
+    double ratio = 0;
+
     @Override
     public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.STATS_HEAD);
@@ -27,20 +28,20 @@ public class StatsAction extends Action {
         if (isMod) {
             targetList = new ArrayList<>(data.mods);
             for (Item item : targetList) {
-                if (item.getName().toLowerCase().equals(selectedModule.toLowerCase())){
+                if (item.getName().toLowerCase().equals(selectedModule.toLowerCase())) {
                     tempModule = (SingleModule)item;
                 }
             }
-            if(tempModule == null){
+            if (tempModule == null) {
                 throw new ModuleNotFoundException();
             }
-            for(Item item : tempModule.getTaskList()){
+            for (Item item : tempModule.getTaskList()) {
                 Task t = (Task)item;
-                if (t.getStatusIcon().equals(Constants.TICK)){
-                    doneItem+=1;
+                if (t.getStatusIcon().equals(Constants.TICK)) {
+                    doneItem += 1;
                 }
             }
-            ratio = (double)doneItem/tempModule.getTaskList().size();
+            ratio = (double)doneItem / tempModule.getTaskList().size();
             builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
         } else {
             if (targetList == null) {
@@ -54,18 +55,19 @@ public class StatsAction extends Action {
                 }
             }
             if (doneItem > 0) {
-                ratio = (double)doneItem/targetList.size();
+                ratio = (double) doneItem / targetList.size();
                 builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
-            }else {
-
+            } else if(doneItem ==0 ){
+                ratio = 0;
+                builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
             }
         }
         return builder.toString();
     }
 
-    private String roundedRatioBar(double fraction){
-        double roundedRatio = Math.round((fraction * 100)*10)/10.0;
-        return Constants.ICON_LEFT+roundedRatio+Constants.PERCENT+Constants.ICON_RIGHT;
+    private String roundedRatioBar(double fraction) {
+        double roundedRatio = Math.round((fraction * 100) * 10) / 10.0;
+        return Constants.ICON_LEFT + roundedRatio + Constants.PERCENT + Constants.ICON_RIGHT;
     }
 
     /**
@@ -96,7 +98,5 @@ public class StatsAction extends Action {
                 throw new CommandException();
             }
         }
-
     }
-
 }

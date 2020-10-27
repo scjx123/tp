@@ -465,7 +465,7 @@ public class Constants {
      */
     public static final String GRADE_HEAD = "These are your grades so far:" + WIN_NEWLINE;
     /**
-     * The constant STATS_HEAD
+     * The constant STATS_HEAD.
      */
     public static final String STATS_HEAD = "Here are the statistics: " + WIN_NEWLINE;
     /**

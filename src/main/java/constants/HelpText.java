@@ -212,12 +212,12 @@ public enum HelpText {
             "stats",
             "Print statistics for a given modules/tasks",
             new String[]{
-                    "stats [target]",
-                    "target: todo / deadline / event / <module code>"
+                "stats [target]",
+                "target: todo / deadline / event / <module code>"
             },
             new String[]{
-                    "1. \"stats\" >> prints statistics of task completed",
-                    "2. \"stats CS2113\" >> prints statistics of tasks completed under tasks of CS2113"
+                "1. \"stats\" >> prints statistics of task completed",
+                "2. \"stats -mod CS2113\" >> prints statistics of tasks completed under tasks of CS2113"
             }),
     /**
      * The List.
