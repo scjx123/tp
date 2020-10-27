@@ -34,6 +34,7 @@ public class Duke {
     private boolean isFancy;
     private Timer timer;
 
+    //@@author TomLBZ
     /**
      * Instantiates a new Duke.
      *
@@ -91,6 +92,7 @@ public class Duke {
         }
     }
 
+    //@@author TomLBZ
     /**
      * The entry point of application.
      *
@@ -113,6 +115,7 @@ public class Duke {
         // Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
     }
 
+    //@@author TomLBZ
     private void reattachUI(boolean isFancy, boolean isPlain) {
         if (this.isFancy && isPlain) {
             ui = pui;
@@ -125,6 +128,7 @@ public class Duke {
         }
     }
 
+    //@@author TomLBZ
     /**
      * Run.
      */
