@@ -8,7 +8,7 @@ import constants.Constants;
 public class SnoozeAction extends Action {
 
     private String newInterval;
-    private String addDefaultDelay = "30000"; // default delay for Snooze
+    private String addDefaultDelay = "60000"; // default delay for Snooze
 
     public SnoozeAction() {
         super();
