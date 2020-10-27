@@ -28,11 +28,7 @@ public class Data {
      */
     public ArrayList<Item> tasks;
     /**
-     * The list of taken modules read in from course.txt.
-     */
-    public ArrayList<Item> takenCourses;
-    /**
-     * The default list of modules read in from courselist11.txt.
+     * The default list of modules read in from finalcourselist.txt.
      */
     public ArrayList<Item> mods;
     /**
@@ -56,7 +52,6 @@ public class Data {
         lastInput = "";
         lastIndexOption = MessageOptions.NOT_INDEXED;
         tasks = new ArrayList<>();
-        takenCourses = new ArrayList<>();
         indexOption = MessageOptions.NOT_INDEXED;
         target = tasks;
         mods = new ArrayList<>();
@@ -96,6 +91,10 @@ public class Data {
             target = mods.stream().filter(x -> x instanceof SingleModule)
                     .collect(Collectors.toCollection(ArrayList::new));
             break;
+        case Constants.SU:
+            target = mods.stream().filter(
+                x -> ((SingleModule) x).hasSU).collect(Collectors.toCollection(ArrayList::new));
+            break;
         case Constants.SELECTED:
             target = mods.stream().filter(x -> x.isSelected).collect(Collectors.toCollection(ArrayList::new));
             target.addAll(tasks.stream().filter(x -> x.isSelected).collect(Collectors.toList()));
@@ -123,23 +122,18 @@ public class Data {
 
 
     public void addTask(Task task) {
-        // LOGGER.entering(getClass().getName(), "addTask");
         tempList = new ArrayList<>(getTarget(getTaskType(task)));
         Checker cc = new Checker(tempList, task);
         LocalDateTime newDate = cc.checkRecurrenceDate(task);
         if (newDate != null) {
             task.setDateTime(newDate);
-        } else {
-            LOGGER.log(Level.INFO, "New date was null! Invalid Date");
         }
         if (!cc.checkDuplicates()) {
-            // LOGGER.log(Level.INFO, "Task was added to data");
             tasks.add(task);
         } else {
             LOGGER.log(Level.INFO, "Duplicate found! Task was not added to data");
         }
         refreshTarget();
-        //LOGGER.exiting(getClass().getName(), "addTask");
     }
 
     public void removeItem(Item item) {

@@ -3,111 +3,61 @@ package command.action;
 import command.ParamNode;
 import constants.Constants;
 import data.Data;
-import data.Item;
-import data.SingleModule;
 import exceptions.CommandException;
-import exceptions.ModuleNotFoundException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.DecimalFormat;
 
 /**
- * Grade input action.
+ * Goal planner function.
  */
-public class GoalAction extends Action {
+public class GoalAction extends CalculateCapAction {
 
-    private HashMap<String, String> modulesWithGrades = new HashMap<>();
-    private String option;
+    String option;
+    double targetCap;
+    double mcGraduate;
 
     @Override
     public String act(Data data) throws Exception {
-        StringBuilder stringBuilder = new StringBuilder();
-        int index = 1;
-        if (option.equals("a")) {
-            stringBuilder.append(Constants.GRADE_HEAD);
-            for (Map.Entry<String, String> m : modulesWithGrades.entrySet()) {
-                String moduleCode = m.getKey();
-                SingleModule module = matchModule(moduleCode, data.mods);
-                if (module == null) {
-                    throw new ModuleNotFoundException();
-                }
-                if (data.takenCourses == null || !data.takenCourses.contains(module)) {
-                    data.takenCourses.add(module);
-                    stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-                        .append(Constants.TAB).append(m.getValue()).append(Constants.WIN_NEWLINE);
-                    index++;
-                }
-                module.grade = m.getValue();
-                module.isTaken = true;
-            }
-        } else if (option.equals("s")) {
-            ArrayList<SingleModule> modules = new ArrayList<>();
-            for (Item item : data.mods) {
-                SingleModule module = (SingleModule) item;
-                if (module.grade != null && !module.grade.isBlank()) {
-                    modules.add(module);
-                }
-            }
-            stringBuilder.append(Constants.GRADE_HEAD);
-            for (SingleModule module : modules) {
-                String moduleCode = module.moduleCode;
-                String grade = module.grade;
-                stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-                    .append(Constants.TAB).append(grade).append(Constants.WIN_NEWLINE);
-                index++;
-            }
+        double totalScoreGoal = mcGraduate * targetCap;
+        if (option.equals("u")) {
+            checkCalculateCap(data);
         }
-        return stringBuilder.toString();
+        double capRequired = (totalScoreGoal - totalScore) / (mcGraduate - totalMC);
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.REQUIRED_CAP + new DecimalFormat("#.##").format(capRequired) + Constants.WIN_NEWLINE);
+        if (capRequired <= 1.0) {
+            sb.append(Constants.LOW_CAP);
+        } else if (capRequired <= 5.0) {
+            sb.append(Constants.JIAYOU);
+        } else {
+            sb.append(Constants.HIGH_CAP);
+        }
+        return sb.toString();
     }
 
     @Override
     public void prepare(ParamNode args) throws Exception {
-        super.prepare(args);
-        option = "s";//set default option
+
         if (args.thisData == null) {
             return;
         }
-        ParamNode currData = flattenedArgs[0];
 
-        //if user input custom option
-        if (flattenedArgs[0].name.length() == 1) {
-            option = flattenedArgs[0].name.trim();
-        }
+        ParamNode currData = args.thisData;
+        option = currData.name;
 
-        //input custom modules
-        if (option.equals("a")) {
-            currData = currData.thisData;
-            //match grades to modules
-            while (currData != null) {
-                String moduleCode = currData.name.toUpperCase().trim();
-                String grade = currData.thisData.name.toUpperCase().trim();
-                modulesWithGrades.put(moduleCode, grade);
-                currData = currData.thisData.thisData;
-            }
-        } else if (option.equals("s")) {
-            //should be do nothing
+        mcGraduate = Integer.parseInt(currData.thisData.name);
+        targetCap = Double.parseDouble(currData.thisData.thisData.name);
+
+        //input custom mc and cap
+        if (option.equals("c")) {
+            currData = currData.thisData.thisData;
+            totalMC = Double.parseDouble(currData.thisData.name);
+            double currentCap = Double.parseDouble(currData.thisData.thisData.name);
+            totalScore = currentCap * totalMC;
+        } else if (option.equals("u")) {
+            //do nothing
         } else {
-            //unidentified option
             throw new CommandException();
         }
     }
-
-    /**
-     * Match module code to module.
-     *
-     * @param moduleCode input module code
-     * @param mods       module list
-     * @return module selected
-     */
-    private SingleModule matchModule(String moduleCode, ArrayList<Item> mods) {
-        for (Item item : mods) {
-            SingleModule module = (SingleModule) item;
-            if (moduleCode.equals(module.getName())) {
-                return module;
-            }
-        }
-        return null;
-    }
-
 }

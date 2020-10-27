@@ -2,12 +2,17 @@ package seedu.duke;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 import command.Command;
+import command.action.RemindAction;
+import command.action.SnoozeAction;
 import constants.Constants;
 import data.Data;
 import io.Storage;
@@ -28,6 +33,8 @@ public class Duke {
     private Cli ui;
     private boolean isFancy;
     private Timer timer;
+    private boolean isSnoozed = false;
+    private boolean isRemind = false;
 
     /**
      * Instantiates a new Duke.
@@ -54,16 +61,73 @@ public class Duke {
             ui.showText("The save file is corrupted.");
             data = new Data();
         }
+    }
 
-        // schedule reminder every 10 minutes
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                ui.showReminder(data);
+    /**
+     * Make Reminder scheduler.
+     * @param delay     the delay
+     * @param interval  the interval
+     */
+    public void reminderTimer(int delay, String interval) {
+        try {
+            if (interval == Constants.REMINDER_INTERVAL) { // when the interval is default
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        ui.showReminder(data);
+                    }
+                }, delay, Integer.parseInt(interval));
+            } else if (interval != Constants.REMINDER_INTERVAL) {
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(new TimerTask() { // when it is snoozed
+                    @Override
+                    public void run() {
+                        ui.showReminder(data);
+                    }
+                }, Integer.parseInt(interval), Integer.parseInt(interval));
+            } else {
+                LocalDate date = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM");
+                String schedule = date + " " + interval;
+                System.out.println(schedule);
+                Date parseSchedule = (Date) formatter.parse(schedule);
+                System.out.println(parseSchedule);
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(new TimerTask() { // when it is snoozed
+                    @Override
+                    public void run() {
+                        ui.showReminder(data);
+                    }
+                }, parseSchedule);
             }
-        },Constants.REMINDER_DELAY,Constants.REMINDER_INTERVAL);
+        } catch (NumberFormatException e) {
+            ui.showText("Invalid interval. Reminder scheduler can not work properly.");
+        }
+    }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(String[] args) {
+        // Starts up using colored CLI on mac or linux, and pure text on windows (for now).
+        // This is because ansi sequences needed to be enabled on programs started by cmd in recent windows versions.
+        // this is an intended behaviour brought by microsoft developers, so that programs called by cmd
+        // do not inherit the appearance of cmd.exe (which by default supports ansi escape sequences).
+        // when cmd runs "java -jar xxx", the javac.exe is started by cmd.exe
+        // which does not enable the ansi mode by default.
+        // if the jar was started by something else such as gitbash or intelliJ shell, there is no such problem
+        // thus, we need to find a way to reliable call the windows api to set such mode
+        // However, no matter what mode it starts in, I have created switching commands.
+        // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
+        // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
+        // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        // new Duke(!isWindows, System.out, System.in, Constants.PATH,
+        // Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
     }
 
     private void reattachUI(boolean isFancy, boolean isPlain) {
@@ -82,7 +146,8 @@ public class Duke {
      * Run.
      */
     public void run() {
-        //ui.showReminder(data);
+        // schedule reminder every 1 minutes
+        reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -93,11 +158,19 @@ public class Duke {
                     reattachUI(c.isFancy(), c.isPlain());
                     ui.update(c.result, data);
                     isExit = c.isBye();
+                    isSnoozed = c.isSnoozed();
+                    isRemind = c.isRemind();
+                    if (isSnoozed) {
+                        snoozeReminder();
+                    }
+                    if (isRemind) {
+                        setReminderSchedule();
+                    }
                     if (isExit) {
                         // stops timer
                         timer.cancel();
                     }
-                    storage.save(data.tasks, data.takenCourses);
+                    storage.save(data.tasks, data.mods);
                 }
             } catch (Exception e) {
                 String message = e.getMessage();
@@ -107,6 +180,22 @@ public class Duke {
                 ui.update(message, data);
             }
         }
+    }
+
+    /**
+     * Set reminder schedule.
+     */
+    public void setReminderSchedule() {
+        String schedule = new RemindAction().getSchedule();
+        reminderTimer(Constants.REMINDER_DELAY, schedule);
+    }
+
+    /**
+     * Snooze Reminder.
+     */
+    public void snoozeReminder() {
+        String newInterval = new SnoozeAction().getNewInterval();
+        reminderTimer(Constants.REMINDER_DELAY, newInterval);
     }
 
     /**
@@ -128,8 +217,8 @@ public class Duke {
                     ui.update(c.result, data);
                 }
                 if (isStored) {
-                    //check the taken_course path
-                    //storage.save(data.tasks, data.takenCourse);
+                    // check the taken_course path
+                    storage.save(data.tasks, data.mods);
                 }
                 return c.result;
             }
@@ -141,27 +230,5 @@ public class Duke {
             ui.showText(message);
         }
         return "0";
-    }
-
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
-    public static void main(String[] args) {
-        // Starts up using colored CLI on mac or linux, and pure text on windows (for now).
-        // This is because ansi sequences needed to be enabled on programs started by cmd in recent windows versions.
-        // this is an intended behaviour brought by microsoft developers, so that programs called by cmd
-        // do not inherit the appearance of cmd.exe (which by default supports ansi escape sequences).
-        // when cmd runs "java -jar xxx", the javac.exe is started by cmd.exe
-        // which does not enable the ansi mode by default.
-        // if the jar was started by something else such as gitbash or intelliJ shell, there is no such problem
-        // thus, we need to find a way to reliable call the windows api to set such mode
-        // However, no matter what mode it starts in, I have created switching commands.
-        // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
-        // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
-        //boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-         //new Duke(!isWindows, System.out, System.in, Constants.PATH,
-         //Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
     }
 }
