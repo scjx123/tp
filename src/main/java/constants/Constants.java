@@ -10,6 +10,7 @@ import command.action.DeadlineAction;
 import command.action.DeleteAction;
 import command.action.DetailAction;
 import command.action.DoneAction;
+import command.action.EditAction;
 import command.action.EventAction;
 import command.action.FancyAction;
 import command.action.FindAction;
