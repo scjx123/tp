@@ -135,11 +135,11 @@ public enum HelpText {
             "No space allowed around \"=\". Use \"_\" in place of space for the \"[field=new value]\" parameters"
         },
         new String[]{
-            "1. \"edit -mod CS2113T MC=4\" >> changes the \"mc\" field of module \"CS2113T\" to be \"4\"",
+            "1. \"edit -mod CS2113T grade=A\" >> changes the \"grade\" field of module \"CS2113T\" to be \"A\"",
             "2. \"edit -task 1 description=do_homework\" >> "
                 + "changes the \"description\" field of the 1st task in the current list to \"do homework\"",
             "3. \"edit -task 1 type=event\" >> changes the \"type\" of the 1st task in the current list to \"event\"",
-            "4. \"edit -mod CS2113 MC=4 -task 1 description=do_homework type=event\" >> do usages 1 to 3 sequentially"
+            "4. \"edit -mod CS2113 grade=A -task 1 description=do_homework type=event\" >> do 1 to 3 sequentially"
         }),
     /**
      * The Event.
