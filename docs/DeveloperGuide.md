@@ -1,5 +1,3 @@
-
-
 # Developer Guide
 
 ## 1. Table of content
@@ -114,7 +112,7 @@ Step 6. If `false` , there is no duplicates in the existing list, and the task c
 
 ### 4.3 CAP calculator feature
 
-The proposed undo/redo mechanism is facilitated by `CalculateCapAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+This feature extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
 
 * `CalculateCapAction#act()` - Calculate the user CAP based on stored user grades / input modules.
@@ -132,14 +130,13 @@ Step 4. CAP value is calculated and returned to the user through `Ui`.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![cap uml diagram](Images/Cap_Calculator_Diagram.JPG)
-
+![cap uml diagram](Images/CalculateCapSequence.png)
 
 ### 4.4 Reminder Feature
 
 The proposed reminder mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
 
-* `ReminderAction#act()` — List out the deadlines and events tasks that are due within 3 days
+* `ReminderAction#act()`- List out the deadlines and events tasks that are due within 3 days
 
 Given below is an example usage scenario and how the reminder mechanism behaves at each step.
 
@@ -217,7 +214,29 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/PostponeAction_Sequence_Diagram.png)
 
-### 4.8 Focus Feature
+### 4.8 Grade feature
+
+This extends `TakeAction` to register modules as `isTaken` from `moduleList.txt`, output are then passed on to `Ui` for display. 
+Additionally, it implements the following operations:
+
+* `GradeAction#act()` - Calculate the user CAP based on stored user grades / input modules.
+* `GradeAction#prepare()` - Parse user command to suitable parameter for `GradeAction#act()` function.
+
+Given below is an example usage scenario and how the grade feature mechanism behaves at each step.
+
+Step 1. The user executes `grade GER1000 A-` command find his current CAP grade. Command is then parsed by `GradeAction#prepare()` to be passed as arguments for `GradeAction#act()`.
+
+Step 2. `GradeAction#act()` takes in data prepared by `GradeAction#prepare()`.
+
+Step 3. `GradeAction#act()` then retrieves module data from the `modulelist.txt` to determine module details.
+
+Step 4. Grade is attributed to the corresponding modules and response message is returned to the user through `Ui`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![Grade_Sequence_Diagram](Images/GradeSequence.png)
+
+### 4.9 Focus Feature
 
 The proposed focus mechanism is facilitated by `FocusAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -237,7 +256,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/Focus.png)
 
-These operations are exposed in the Model interface as Model#commitAddressBook(), Model#undoAddressBook() and Model#redoAddressBook() respectively.
 ## Appendix A. Product scope
 ### Target user profile
 
@@ -340,18 +358,18 @@ Expected: Switches to plain mode of display<br>
 Test case: `Fancy` ,`Plain`<br>
 Expected: Error message due to cap sensitive. <br>
 3. Focusing between different list
-	Test case: `focus mod`/`task`/`todo`/`deadline`/`event`/`selected`/`taken`<br>
-			   Expected : Shows the current list you are focused on. No list will be shown. <br>
-	Test case: `focus taken` <br>
-	Expected: Shows the current list of modules you have taken. <br>
-	Other incorrect focus commands to try: `focus 0` , `focus what?`, ... (focus on non-existent list) <br>
-	Expected : Error message due to invalid command. <br>
+Test case: `focus mod`/`task`/`todo`/`deadline`/`event`/`selected`/`taken`<br>
+           Expected : Shows the current list you are focused on. No list will be shown. <br>
+Test case: `focus taken` <br>
+Expected: Shows the current list of modules you have taken. <br>
+Other incorrect focus commands to try: `focus 0` , `focus what?`, ... (focus on non-existent list) <br>
+Expected : Error message due to invalid command. <br>
 	
 4. List Modules/Task
 Test case: `focus mod` -> `list`<br>
-	Expected: Shows the list of modules. <br>
-	Test case: `focus task` -> `list` <br>
-	Expected: Shows the current list of task. <br>
+Expected: Shows the list of modules. <br>
+Test case: `focus task` -> `list` <br>
+Expected: Shows the current list of task. <br>
 	
 5. Find Modules 
 Test case: `focus mod` -> `find Engin`<br>
@@ -361,12 +379,13 @@ Expected: Shows the list of modules with keyword '2113'<br>
 Test case: `focus task`-> find deadline <br>
 Expected: Show list of deadline modules 
 
- 6. Details of Modules 
- Test cases: `detail CS2113`<br>
- Expected: Shows Module code, name, mc, and description. <br>
+6. Details of Modules 
+Test cases: `detail CS2113`<br>
+Expected: Shows Module code, name, mc, and description. <br>
 Test cases: `detail 1`<br>
 Expected: Shows the information of the 1st task based on the current list focused on. <br>
 Test cases: `detail xyz` No detail of such item is found. <br>
+
 7. Take Modules 
 Test cases: `focus mod` -> `take 1 2` <br>
 Expected: Takes the 1st and 2nd module on the module list.<br>
@@ -376,10 +395,13 @@ Test cases: `focus mod` -> `take CS2113` <br>
 Expected: Mark CS2113 as taken.<br>
 Test cases: `focus mod` -> `take cs2113`<br>
 Expected: Module not found as inputs are case sensitive. <br>
-7. Reminder <br>
+
+8. Reminder <br>
 Test cases: `reminder `<br>
 Expected: Shows task that are due within 3 days. <br>
 
-8. Cap Calculation <br>
-Test cases: `cap -m CS2113 A+ EE2026 B CS1010 B-<br>
-Expected: Shows you the calculated cap. <br>
+9. Cap Calculation <br>
+Test cases: `cap`<br>
+Expected: Shows you the calculated cap from stored useer data. <br>
+Test cases: `cap -m CS2113 A+ EE2026 B CS1010 B-`<br>
+Expected: Shows you the calculated cap from given input modules. <br>
