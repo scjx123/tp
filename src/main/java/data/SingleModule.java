@@ -39,7 +39,7 @@ public class SingleModule extends Item {
 
     public ArrayList<Item> taskList;
 
-    public boolean isTaken;
+    public boolean isTaken = false;
 
     public boolean hasSU = false;
 
@@ -54,7 +54,7 @@ public class SingleModule extends Item {
      * @param mc          number of mc
      * @param prereq      module prerequisite
      */
-    public SingleModule(String code, String name, String description, String mc, String prereq,String su) {
+    public SingleModule(String code, String name, String description, String mc, String prereq, String su) {
         super(code); //moduleDescription is handle here.
         this.moduleCode = replaceBlanks(code);
         this.moduleDescription = replaceBlanks(description);
@@ -74,8 +74,6 @@ public class SingleModule extends Item {
         }
     }
 
-    boolean isSelected = false;
-
     @Override
     public String getName() {
         return moduleCode;
@@ -92,9 +90,7 @@ public class SingleModule extends Item {
 
     @Override
     public String getDetails() {
-        String result = moduleCode + Constants.SPACE + moduleName + Constants.SPACE
-                + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
-        StringBuilder builder = new StringBuilder(result);
+        StringBuilder builder = new StringBuilder(toString());
         builder.append(Constants.WIN_NEWLINE).append(wrap(moduleDescription.trim())).append("Tasks: ");
         if (taskList != null && taskList.size() > 0) {
             for (Item item : taskList) {

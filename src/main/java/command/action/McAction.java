@@ -24,6 +24,7 @@ public class McAction extends Action {
     @Override
     public String act(Data data) throws Exception {
         StringBuilder builder = new StringBuilder(Constants.MC_HEAD);
+        String flag = data.flag;
         ArrayList<Item> moduleList = new ArrayList<>(data.getTarget());
         if (moduleList.equals(data.tasks)) {
             moduleList = new ArrayList<>(data.mods);
@@ -36,10 +37,12 @@ public class McAction extends Action {
             }
         } else {
             int sum = 0;
-            for (Item item : moduleList) {
+            data.getTarget(Constants.TAKEN);
+            for (Item item : data.target) {
                 SingleModule m = (SingleModule)item;
                 sum += Integer.parseInt(m.getModuleMC().trim());
             }
+            data.getTarget(flag);
             builder.append(sum).append(Constants.WIN_NEWLINE); //build a string
         }
         return builder.toString();

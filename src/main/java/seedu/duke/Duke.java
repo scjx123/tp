@@ -33,8 +33,6 @@ public class Duke {
     private Cli ui;
     private boolean isFancy;
     private Timer timer;
-    private boolean isSnoozed = false;
-    private boolean isRemind = false;
 
     /**
      * Instantiates a new Duke.
@@ -70,7 +68,7 @@ public class Duke {
      */
     public void reminderTimer(int delay, String interval) {
         try {
-            if (interval == Constants.REMINDER_INTERVAL) { // when the interval is default
+            if (interval.equals(Constants.REMINDER_INTERVAL)) { // when the interval is default
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -78,7 +76,7 @@ public class Duke {
                         ui.showReminder(data);
                     }
                 }, delay, Integer.parseInt(interval));
-            } else if (interval != Constants.REMINDER_INTERVAL) {
+            } else {
                 timer.cancel();
                 timer = new Timer();
                 timer.schedule(new TimerTask() { // when it is snoozed
@@ -87,21 +85,6 @@ public class Duke {
                         ui.showReminder(data);
                     }
                 }, Integer.parseInt(interval), Integer.parseInt(interval));
-            } else {
-                LocalDate date = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:MM");
-                String schedule = date + " " + interval;
-                System.out.println(schedule);
-                Date parseSchedule = (Date) formatter.parse(schedule);
-                System.out.println(parseSchedule);
-                timer.cancel();
-                timer = new Timer();
-                timer.schedule(new TimerTask() { // when it is snoozed
-                    @Override
-                    public void run() {
-                        ui.showReminder(data);
-                    }
-                }, parseSchedule);
             }
         } catch (NumberFormatException e) {
             ui.showText("Invalid interval. Reminder scheduler can not work properly.");
@@ -158,8 +141,8 @@ public class Duke {
                     reattachUI(c.isFancy(), c.isPlain());
                     ui.update(c.result, data);
                     isExit = c.isBye();
-                    isSnoozed = c.isSnoozed();
-                    isRemind = c.isRemind();
+                    boolean isSnoozed = c.isSnoozed();
+                    boolean isRemind = c.isRemind();
                     if (isSnoozed) {
                         snoozeReminder();
                     }
