@@ -21,7 +21,6 @@ public class Data {
 
     private static final Logger LOGGER = Logger.getLogger(Data.class.getName());
 
-    private static ArrayList<Item> tempList;
     public String flag;
     /**
      * The Tasks.
@@ -122,7 +121,7 @@ public class Data {
 
 
     public void addTask(Task task) {
-        tempList = new ArrayList<>(getTarget(getTaskType(task)));
+        ArrayList<Item> tempList = new ArrayList<>(getTarget(getTaskType(task)));
         Checker cc = new Checker(tempList, task);
         LocalDateTime newDate = cc.checkRecurrenceDate(task);
         if (newDate != null) {
