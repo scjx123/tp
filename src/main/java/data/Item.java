@@ -156,8 +156,7 @@ public class Item {
      * @param date the date
      */
     protected void setDateTime(LocalDateTime date) {
-        dateTime = date;
-        isDated = dateTime != null;
+        updateDateTime(date);
         isWeekly = true;
     }
 
@@ -185,8 +184,8 @@ public class Item {
     }
 
     public void updateDateTime(LocalDateTime localDateTime) {
-        setDateTime(localDateTime);
-        isWeekly = false;
+        dateTime = localDateTime;
+        isDated = dateTime != null;
     }
 
     /**
