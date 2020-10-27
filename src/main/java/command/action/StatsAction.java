@@ -57,7 +57,7 @@ public class StatsAction extends Action {
             if (doneItem > 0) {
                 ratio = (double) doneItem / targetList.size();
                 builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
-            } else if(doneItem ==0 ){
+            } else if (doneItem == 0) {
                 ratio = 0;
                 builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
             }
