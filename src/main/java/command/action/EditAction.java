@@ -86,18 +86,20 @@ public class EditAction extends Action {
         private SingleModule operateMod(SingleModule mod) {
             StringBuilder builder = new StringBuilder();
             for (String operation : operations) {
-                String op = operation.replace(Constants.LINE_UNIT, Constants.SPACE).toLowerCase().trim();
+                String op = operation.replace(Constants.LINE_UNIT, Constants.SPACE).trim();
                 boolean operated = true;
                 if (op.contains(Constants.EQUALS)) {
                     String[] split = op.split(Constants.EQUALS);
+                    split[0] = split[0].toLowerCase();
                     if (Arrays.stream(Constants.GRADE_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        mod.grade = split[1];
+                        mod.grade = split[1].toUpperCase();
+                        mod.isTaken = true; // must be taken in order to have a grade
                     } else if (Arrays.stream(Constants.SU_ALIAS).anyMatch(s -> s.equals(split[0]))) {
                         mod.moduleSU = split[1];
                     } else if (Arrays.stream(Constants.SELECTED_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        mod.isSelected = split[1].contains("t");
+                        mod.isSelected = split[1].toLowerCase().contains("t");
                     } else if (Arrays.stream(Constants.TAKEN_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        mod.isTaken = split[1].contains("t");
+                        mod.isTaken = split[1].toLowerCase().contains("t");
                     } else {
                         operated = false;
                     }
@@ -118,18 +120,19 @@ public class EditAction extends Action {
         private Task operateTask(Task task) {
             StringBuilder builder = new StringBuilder();
             for (String operation : operations) {
-                String op = operation.replace(Constants.LINE_UNIT, Constants.SPACE).toLowerCase().trim();
+                String op = operation.replace(Constants.LINE_UNIT, Constants.SPACE).trim();
                 boolean operated = true;
                 if (op.contains(Constants.EQUALS)) {
                     String[] split = op.split(Constants.EQUALS);
+                    split[0] = split[0].toLowerCase();
                     if (Arrays.stream(Constants.DESCRIPTION_ALIAS).anyMatch(s -> s.equals(split[0]))) {
                         task.setDescription(split[1]);
                     } else if (Arrays.stream(Constants.TYPE_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        String dateTime = "Oct 25 2020 00:00";
+                        String dateTime = "01 01 2021 00:00";
                         if (task.isDated) {
                             dateTime = task.getDateTimeString();
                         }
-                        switch (split[1]) {
+                        switch (split[1].toLowerCase()) {
                         case "deadline": // same as "ddl"
                         case "ddl": // same as "d"
                         case "d":
@@ -177,11 +180,11 @@ public class EditAction extends Action {
                             operated = false;
                         }
                     } else if (Arrays.stream(Constants.SELECTED_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        task.isSelected = split[1].contains("t");
+                        task.isSelected = split[1].toLowerCase().contains("t");
                     } else if (Arrays.stream(Constants.WEEKLY_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        task.isWeekly = split[1].contains("t");
+                        task.isWeekly = split[1].toLowerCase().contains("t");
                     } else if (Arrays.stream(Constants.DONE_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        if (split[1].contains("t")) {
+                        if (split[1].toLowerCase().contains("t")) {
                             task.markAsDone();
                         } else {
                             task.markAsUndone();

@@ -65,7 +65,7 @@ public class GradeAction extends TakeAction {
 
     private void addGradeList(StringBuilder stringBuilder, int index, String moduleCode, String message) {
         stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-            .append(Constants.TAB).append(message).append(Constants.WIN_NEWLINE);
+            .append(Constants.SPACE.repeat(4)).append(message).append(Constants.WIN_NEWLINE);
     }
 
     @Override
