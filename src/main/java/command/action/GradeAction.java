@@ -43,7 +43,7 @@ public class GradeAction extends TakeAction {
         for (String key : map.keySet()) {
             boolean notBlind = !isBlind
                     && (key.equals(((SingleModule) item).moduleCode) || key.equals(item.immediateData));
-            boolean blind = isBlind && key.equals("default");
+            boolean blind = isBlind && key.equals("DEFAULT");
             if (notBlind || blind) {
                 ArrayList<String> values = map.get(key);
                 String grade = "";

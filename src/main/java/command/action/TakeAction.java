@@ -60,8 +60,8 @@ public class TakeAction extends Action {
             }
             if (!codes.isEmpty()) {
                 data.mods.stream().filter(x -> codes.contains(((SingleModule) x).moduleCode)).forEach(x -> {
-                    String mResult = modifyObject(x) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
-                    builder.append(mResult).append("Module: ").append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
+                    String modResult = modifyObject(x) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
+                    builder.append(modResult).append("Module: ").append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
                 });
             }
         }
