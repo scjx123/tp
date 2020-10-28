@@ -73,22 +73,68 @@ The sequence diagram below shows the main interaction of classes with each other
 ## 4. Implementation<br>
 This section highlights some of our project's key feature and its implementation. 
 
-### 4.1 Module Planner Feature
+### 4.1 Take Feature
+The take mechanism is facilitated by the TakeAction class. It extends Action class, and internally it stores an arraylist of Item object in `targetBackup`. Additionally, it implements the following operation: 
 
-The module planner feature entails many *Actions* which extend `Action`. Their functionalities and usages
-are in the table below:
+ - `prepare()` - Validates user input and stores the codes/indices 
+ - `act()`- 
+ - `modifyObject`()
+ - `getObjectInfo`
+ - `safetyCheck()`- Sets the `isBlind()` flag if user's input is invalid. 
+ - `superAct()`
 
-|Table|To|Be|Filled|
-|-----|---|---|------|
-|blah|blah|blah|blah|
+Given below is an example usage scenario and how the statistic mechanism behaves at each step. 
 
-A typical flow of execution would be:
-1. blah
-1. blah
-1. blah
+Step 1. The user enters `take 1 2 CS2113`	once the execute layer executes the message and calls `action.prepare()` class, `TakeAction` will begin its `prepare()` operation
 
-### 4.2 Checker Feature 
-![here](Images/Checker_Diagram.png)
+Step 2. `prepare()` first verifies user's input by calling the `safetyCheck()` method to check if the specified codes/indices exist in the module list, else, it sets the `isBlind()` flag.
+
+Step 3. `prepare()` then maintains two ArrayList() known as `indices` and `codes` . In which, `indices` stores the index of the module that user have keyed in, while `codes` stores the module code on the other hand.
+
+Step 4. Next, execute layer will call `action.act()` which causes `TakeAction` to begin its `act()` operation which .... 
+
+**Design consideration:**
+
+**Aspect : How TakeAction executes**
+ - **Alternative 1 (current choice):** 
+ - **Alternative 2:** 
+
+
+
+### 4.2 Statistic Feature 
+The statistic mechanism is facilitated by the StatsAction class. It extends Action class, and internally stores an arraylist of Item object in `targetList`. Additionally, it implements the following operation: 
+
+ - `prepare()` - Sets `isMod` flag according to user's 
+ - `act()`- Gets `targetList` and calculates the raw ratio of the completed items.
+ - `roundedRatioBar()`- Returns a rounded ratio enclosed in square brackets for printing. 
+
+Given below is an example usage scenario and how the statistic mechanism behaves at each step. 
+
+Step 1. The user enters `stats -mod CS2113`	once the execute layer executes the message and calls `action.prepare()` class, `StatsAction` will begin its `prepare()` operation
+
+Step 2. `prepare()` looks at the input called `ParamNode args` which is user command processed by Command Intepreter layer, and starts to identify whether user has enter the keyword `mod ` if `userInput` contains the keyword, then `isMod` flag will be set. 
+
+Step 3. Next, execute layer will call `action.act()` which causes StatsAction to begin its `act()` operation. If `isMod` flag is set, `act()` will search for the user specified module and get the list of tasks tagged to it.
+
+Step 5. Once the list of task is obtain, the operation will loop through the task list and count the number of completed task followed by generating a ratio. 
+
+Step 6. This ratio will be passed into `roundedRatioBar` to return *String* of a rounded ratio to 1 decimal place enclosing it in square brackets. 
+
+Step 7. Now `StatsAction` is completed and it will return this string back to `Execute` for to be printed through `UI`. 
+
+
+**Design consideration:**
+
+**Aspect : How statistics executes**
+ - **Alternative 1 (current choice):** Create a separate class and get list of tasks/taken modules' task and scan through them to calculate statistics
+	 - Pros: Reduces Coupling and increase testability as a software unit itself. 
+	 - Cons: May have performance issues in terms of memory usage 
+
+ - **Alternative 2:** initialize statistics as zero and each task contains an aspect called statistics
+	 - Pros: Will use less memory since the task itself will be deleted. 
+	 - Cons: Stats will be updated constantly even though we do not need it. 
+
+### 4.3 Checker Feature 
 
 The checker mechanism is facilitated by the utility class `Checker`. It is an independent class on its own without extensions and is stored under the `Data` package of our app. The class implements the following operations: 
 
@@ -97,6 +143,8 @@ The checker mechanism is facilitated by the utility class `Checker`. It is an in
  - `checkRecurrenceDate(Task)` - Checks if the current date is beyond the stated date in the list, and provides a new update for the date recurring date.
 
 Given below is an example usage scenario and how the checker mechanism behaves at each step. 
+
+![here](Images/Checker_Diagram.png)
 
 Step 1. A new `Deadline` object is created and needs to be added to the existing list of task. Hence it calls `addTask()` method under `Data` class. 
 
@@ -110,7 +158,17 @@ Step 5. Now we proceed to call `checkDuplicates()` of Checker class.
 
 Step 6. If `false` , there is no duplicates in the existing list, and the task can be safely added. Otherwise, no action will be taken. 
 
-### 4.3 CAP calculator feature
+**Design consideration: 
+Aspect: How checker executes**
+
+ - **Alternative 1(current choice):** Check for clashes *before* adding task onto list: 
+	 - Pros: Easy to implement as we know specifically what to find in the list eg similar dates & description.
+	 - Cons: Delays the efficiency of adding tasks onto list. 
+ - **Alternative 2:** Check for clash after task is being added onto list 
+	 - Pros: Does not hinder the speed of task adding. 
+	 - Cons: Harder to implement as we have to loop through the entire list to look for duplicates. 
+
+### 4.4 CAP calculator feature
 
 This feature extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -132,7 +190,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![cap uml diagram](Images/CalculateCapSequence.png)
 
-### 4.4 Reminder Feature
+### 4.5 Reminder Feature
 
 The proposed reminder mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
 
@@ -152,7 +210,7 @@ The following sequence diagram diagram shows how the reminder operation works
 
 ![Reminder_Sequence_Diagram](Images/ReminderAction_Sequence_Diagram.png)
 
-### 4.5 Remind Feature
+### 4.6 Remind Feature
 
 Another proposed manual reminder mechanism is facilitated by `RemindAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -173,7 +231,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/Remind.png)
 
-### 4.6 Snooze Feature
+### 4.7 Snooze Feature
 
 The proposed snooze mechanism is facilitated by `SnoozeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -192,7 +250,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/Snooze.png)
 
-### 4.7 Postpone Feature
+### 4.8 Postpone Feature
 
 The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -214,7 +272,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/PostponeAction_Sequence_Diagram.png)
 
-### 4.8 Grade feature
+### 4.9 Grade feature
 
 This extends `TakeAction` to register modules as `isTaken` from `moduleList.txt`, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -236,7 +294,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Grade_Sequence_Diagram](Images/GradeSequence.png)
 
-### 4.9 Focus Feature
+### 4.10 Focus Feature
 
 The proposed focus mechanism is facilitated by `FocusAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -318,8 +376,6 @@ Use case ends.<br>
 &nbsp;&nbsp;&nbsp;1a. User not focusing on the correct list \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a1. DOMNUS shows the entire module list total MC instead of the 'taken' list MC
 
- 
-Use Case: 
 
 ## Appendix D. Non-Functional Requirements
 
