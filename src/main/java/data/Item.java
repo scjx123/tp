@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package data;
 
 import constants.Constants;
@@ -24,6 +26,7 @@ public class Item {
      */
     protected String description;
 
+    public String immediateData;
     /**
      * The Is dated.
      */

@@ -3,7 +3,6 @@ package data;
 import constants.Constants;
 import data.jobs.Task;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -41,6 +40,8 @@ public class SingleModule extends Item {
 
     public boolean isTaken = false;
 
+    public boolean isCompleted = false;
+
     public boolean hasSU = false;
 
     public String grade;
@@ -76,17 +77,29 @@ public class SingleModule extends Item {
 
     @Override
     public String getName() {
-        return moduleCode;
+        return (isCompleted ? Constants.COMPLETED_LABEL : Constants.ZERO_LENGTH_STRING) + moduleCode;
     }
 
 
     @Override
     public String toString() {
-        return moduleCode + Constants.SPACE + moduleName + Constants.SPACE
+        return getName() + Constants.SPACE + moduleName + Constants.SPACE
                 + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
     }
 
-
+    public boolean complete() {
+        if (isCompleted || !isTaken) {
+            return false;
+        }
+        for (String grade : Constants.VALID_GRADES) {
+            if (grade.equals(this.grade.toUpperCase())) {
+                isCompleted = true;
+                isTaken = false;
+                break;
+            }
+        }
+        return isCompleted;
+    }
 
     @Override
     public String getDetails() {

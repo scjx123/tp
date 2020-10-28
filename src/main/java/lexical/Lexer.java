@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package lexical;
 
 import constants.Constants;

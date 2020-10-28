@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package io;
 
 import constants.Constants;
@@ -79,7 +81,7 @@ public class FileSaver extends IO {
             StringBuilder strBuilder = new StringBuilder();
             for (Item item: courses) {
                 SingleModule module = (SingleModule) item;
-                strBuilder.append(module.moduleCode).append(Constants.SPACE)
+                strBuilder.append(module.getName()).append(Constants.SPACE)
                     .append(module.grade).append(System.lineSeparator());
             }
             if (isFileInvalid()) {
