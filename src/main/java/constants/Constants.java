@@ -327,7 +327,7 @@ public class Constants {
      */
     public static final String INDEX_OUT = "Index out of range.";
     public static final String MODIFY_FAILED = "Failed to modify: ";
-    public static final String INVALID_GRADE = "Grade is invalid: ";
+    public static final String NOT_COMPLETABLE = "Grade is invalid or module is not yet taken: ";
     /**
      * The constant ADDED.
      */

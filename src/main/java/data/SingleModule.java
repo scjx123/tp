@@ -89,7 +89,7 @@ public class SingleModule extends Item {
     }
 
     public boolean complete() {
-        if (isCompleted) {
+        if (isCompleted || !isTaken) {
             return false;
         }
         for (String grade : Constants.VALID_GRADES) {

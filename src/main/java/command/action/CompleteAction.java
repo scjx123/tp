@@ -11,7 +11,7 @@ public class CompleteAction extends TakeAction {
     @Override
     public String act(Data data) throws Exception {
         return super.act(data).replace("taken or untaken", "completed")
-                .replace(Constants.MODIFY_FAILED, Constants.INVALID_GRADE);
+                .replace(Constants.MODIFY_FAILED, Constants.NOT_COMPLETABLE);
     }
 
     @Override

@@ -36,6 +36,9 @@ public class GradeAction extends TakeAction {
     @Override
     protected boolean modifyObject(Item item) {
         assert item instanceof SingleModule;
+        if (((SingleModule) item).isCompleted) {
+            return false;
+        }
         for (String key : map.keySet()) {
             boolean notBlind = !isBlind
                     && (key.equals(((SingleModule) item).moduleCode) || key.equals(item.immediateData));
