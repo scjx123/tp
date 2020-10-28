@@ -48,8 +48,9 @@ public class TakeAction extends Action {
                     if (data.target.get(i) instanceof SingleModule) {
                         Item module = data.target.get(i);
                         module.immediateData = String.valueOf(i + 1);
-                        String mResult = modifyObject(module) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
-                        builder.append(mResult).append("Module ").append(i + 1).append(": ")
+                        String modResult =
+                                modifyObject(module) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
+                        builder.append(modResult).append("Module ").append(i + 1).append(": ")
                                 .append(getObjectInfo(module)).append(Constants.WIN_NEWLINE);
                     } else {
                         builder.append("Item ").append(i + 1).append(" is not a module, "

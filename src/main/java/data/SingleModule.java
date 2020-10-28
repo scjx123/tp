@@ -83,7 +83,7 @@ public class SingleModule extends Item {
 
     @Override
     public String toString() {
-        return getName()+ Constants.SPACE + moduleName + Constants.SPACE
+        return getName() + Constants.SPACE + moduleName + Constants.SPACE
                 + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
     }
 
