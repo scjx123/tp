@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package command.action;
 
 import command.ParamNode;
@@ -85,34 +87,36 @@ public class EditAction extends Action {
 
         private SingleModule operateMod(SingleModule mod) {
             StringBuilder builder = new StringBuilder();
-            for (String operation : operations) {
-                String op = operation.replace(Constants.LINE_UNIT, Constants.SPACE).trim();
-                boolean operated = true;
-                if (op.contains(Constants.EQUALS)) {
-                    String[] split = op.split(Constants.EQUALS);
-                    split[0] = split[0].toLowerCase();
-                    if (Arrays.stream(Constants.GRADE_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        mod.grade = split[1].toUpperCase();
-                        mod.isTaken = true; // must be taken in order to have a grade
-                    } else if (Arrays.stream(Constants.SU_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        mod.moduleSU = split[1];
-                    } else if (Arrays.stream(Constants.SELECTED_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        mod.isSelected = split[1].toLowerCase().contains("t");
-                    } else if (Arrays.stream(Constants.TAKEN_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        mod.isTaken = split[1].toLowerCase().contains("t");
+            if (!mod.isCompleted) {
+                for (String operation : operations) {
+                    String op = operation.replace(Constants.LINE_UNIT, Constants.SPACE).trim();
+                    boolean operated = true;
+                    if (op.contains(Constants.EQUALS)) {
+                        String[] split = op.split(Constants.EQUALS);
+                        split[0] = split[0].toLowerCase();
+                        if (Arrays.stream(Constants.GRADE_ALIAS).anyMatch(s -> s.equals(split[0]))) {
+                            mod.grade = split[1].toUpperCase();
+                            mod.isTaken = true; // must be taken in order to have a grade
+                        } else if (Arrays.stream(Constants.SU_ALIAS).anyMatch(s -> s.equals(split[0]))) {
+                            mod.moduleSU = split[1];
+                        } else if (Arrays.stream(Constants.SELECTED_ALIAS).anyMatch(s -> s.equals(split[0]))) {
+                            mod.isSelected = split[1].toLowerCase().contains("t");
+                        } else if (Arrays.stream(Constants.TAKEN_ALIAS).anyMatch(s -> s.equals(split[0]))) {
+                            mod.isTaken = split[1].toLowerCase().contains("t");
+                        } else {
+                            operated = false;
+                        }
                     } else {
                         operated = false;
                     }
-                } else {
-                    operated = false;
-                }
-                if (operated) {
-                    builder.append(op).append(Constants.CMD_END).append(Constants.SPACE);
+                    if (operated) {
+                        builder.append(op).append(Constants.CMD_END).append(Constants.SPACE);
+                    }
                 }
             }
             operationResult = builder.toString();
             if (operationResult.length() == 0) {
-                operationResult = Constants.NO_OPERATION_NEEDED;
+                operationResult = Constants.NO_OPERATION_POSSIBLE;
             }
             return mod;
         }
@@ -201,7 +205,7 @@ public class EditAction extends Action {
             }
             operationResult = builder.toString();
             if (operationResult.length() == 0) {
-                operationResult = Constants.NO_OPERATION_NEEDED;
+                operationResult = Constants.NO_OPERATION_POSSIBLE;
             }
             return task;
         }
@@ -212,7 +216,7 @@ public class EditAction extends Action {
     private Item findMod(ArrayList<Item> mods, ArrayList<Item> targets, int index, String code) {
         if (code != null) {
             for (Item item : mods) {
-                if (((SingleModule) item).moduleCode.equals(code)) {
+                if (item.getName().equals(code)) {
                     return item;
                 }
             }
@@ -246,7 +250,7 @@ public class EditAction extends Action {
         String defaultResult = super.act(data);
         StringBuilder stringBuilder = new StringBuilder();
         if (operations == null || operations.size() == 0) {
-            stringBuilder.append(Constants.NO_OPERATION_NEEDED);
+            stringBuilder.append(Constants.NO_OPERATION_POSSIBLE);
         } else {
             ArrayList<Item> targets = data.getTarget();
             for (Operation operation : operations) {
