@@ -322,6 +322,7 @@ public class Constants {
     public static final String TAKEN = "taken";
     public static final String FOUND = "found";
     public static final String COMPLETED = "completed";
+    public static final String COMPLETED_LABEL = "[COMPLETED]";
     /**
      * The constant INDEX_OUT.
      */

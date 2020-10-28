@@ -47,7 +47,8 @@ public class Storage {
      */
     public void save(ArrayList<Item> tasks, ArrayList<Item> courses) {
         ArrayList<Item> takenCourses = (ArrayList<Item>) courses.stream()
-            .filter(course -> (course instanceof SingleModule) && ((SingleModule) course).isTaken)
+            .filter(course -> (course instanceof SingleModule)
+                    && (((SingleModule) course).isTaken || ((SingleModule) course).isCompleted))
             .collect(Collectors.toList());
         taskSaver.saveTask(tasks);
         courseSaver.saveCourse(takenCourses);
@@ -140,8 +141,15 @@ public class Storage {
         String output = Constants.ZERO_LENGTH_STRING;
         String[] iconSeparated = input.split(Constants.SPACE);
         String courseName = iconSeparated[0];
+        boolean isCompleted = courseName.contains(Constants.COMPLETED_LABEL);
+        if (isCompleted) {
+            courseName = courseName.replace(Constants.COMPLETED_LABEL, Constants.ZERO_LENGTH_STRING);
+        }
         if (!courseName.isBlank()) {
-            output = Constants.GRADE + Constants.SPACE + input;
+            output = Constants.GRADE + Constants.SPACE + courseName + Constants.SPACE + iconSeparated[1];
+        }
+        if (isCompleted) {
+            output += Constants.CMD_END + Constants.COMPLETE + Constants.SPACE + courseName;
         }
         return output;
     }

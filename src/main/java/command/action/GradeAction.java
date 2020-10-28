@@ -84,23 +84,24 @@ public class GradeAction extends TakeAction {
             return;
         }
         String[] identifiers = args.thisData.toFlatString().split(Constants.SPACE);
-        String lastKey = "default";
+        String lastKey = "DEFAULT";
         for (String id : identifiers) {
+            String uid = id.toUpperCase();
             try {
-                indices.add(Integer.parseInt(id) - 1);
-                lastKey = id;
-                map.put(id, new ArrayList<>());
+                indices.add(Integer.parseInt(uid) - 1);
+                lastKey = uid;
+                map.put(uid, new ArrayList<>());
             } catch (Exception e) {
-                if (id.matches("([A-Z])+([0-9])+[A-Z]*")) {
-                    codes.add(id);
-                    lastKey = id;
-                    map.put(id, new ArrayList<>());
+                if (uid.matches("([A-Z])+([0-9])+[A-Z]*")) {
+                    codes.add(uid);
+                    lastKey = uid;
+                    map.put(uid, new ArrayList<>());
                 } else {
                     if (map.get(lastKey) == null) {
                         isBlind = true;
                         map.put(lastKey, new ArrayList<>());
                     }
-                    map.get(lastKey).add(id);
+                    map.get(lastKey).add(uid);
                 }
             }
         }

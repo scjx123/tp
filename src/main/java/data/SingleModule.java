@@ -3,7 +3,6 @@ package data;
 import constants.Constants;
 import data.jobs.Task;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -78,7 +77,7 @@ public class SingleModule extends Item {
 
     @Override
     public String getName() {
-        return (isCompleted ? "[COMPLETED]" : "") + moduleCode;
+        return (isCompleted ? Constants.COMPLETED_LABEL : Constants.ZERO_LENGTH_STRING) + moduleCode;
     }
 
 

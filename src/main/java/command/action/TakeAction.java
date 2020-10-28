@@ -105,7 +105,7 @@ public class TakeAction extends Action {
                 if (id.length() == 1 && Character.isLetter(ch)) {
                     indices.add((int) ch - Constants.LETTER_OFFSET - 1);
                 } else {
-                    codes.add(id);
+                    codes.add(id.toUpperCase());
                 }
             }
         }
