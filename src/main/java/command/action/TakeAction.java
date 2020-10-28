@@ -1,4 +1,5 @@
 //@@author TomLBZ
+
 package command.action;
 
 import command.ParamNode;
@@ -28,8 +29,8 @@ public class TakeAction extends Action {
             StringBuilder testContent = new StringBuilder();
             data.getTarget(blindSearch).forEach(x -> {
                 if (x instanceof SingleModule) {
-                    String mResult = modifyObject(x) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
-                    testContent.append(mResult).append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
+                    String modResult = modifyObject(x) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
+                    testContent.append(modResult).append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
                 }
             });
             if (testContent.toString().length() > 0) {

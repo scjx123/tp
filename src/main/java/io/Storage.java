@@ -1,4 +1,5 @@
 //@@author TomLBZ
+
 package io;
 
 import command.Command;
@@ -17,12 +18,12 @@ import java.util.stream.Collectors;
  */
 public class Storage {
 
-    private FileLoader taskLoader;
-    private FileSaver taskSaver;
-    private FileLoader courseLoader;
-    private FileSaver courseSaver;
-    private Parser parser;
-    private ModuleParser moduleloader;
+    private final FileLoader taskLoader;
+    private final FileSaver taskSaver;
+    private final FileLoader courseLoader;
+    private final FileSaver courseSaver;
+    private final Parser parser;
+    private final ModuleParser moduleLoader;
 
     /**
      * Instantiates a new Storage.
@@ -37,7 +38,7 @@ public class Storage {
         courseLoader = new FileLoader(directory, courseFileName);
         courseSaver = new FileSaver(directory, courseFileName);
         this.parser = parser;
-        this.moduleloader = new ModuleParser();
+        this.moduleLoader = new ModuleParser();
     }
 
     /**
@@ -78,7 +79,7 @@ public class Storage {
 
         //load module list
         try {
-            list.mods = moduleloader.load();
+            list.mods = moduleLoader.load();
         } catch (IOException e) {
             e.addSuppressed(new IOException());
         }
