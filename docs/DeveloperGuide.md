@@ -74,32 +74,82 @@ The sequence diagram below shows the main interaction of classes with each other
 This section highlights some of our project's key feature and its implementation. 
 
 ### 4.1 Take Feature
-The take mechanism is facilitated by the TakeAction class. It extends Action class, and internally it stores an arraylist of Item object in `targetBackup`. Additionally, it implements the following operation: 
+The take mechanism is facilitated by the `TakeAction` class and is extensively used by other classes via inheritance. 
+The take mechanism does the following: Comprehends user input and generate target identifiers, 
+filters the targets from data, and performs the specified operations on the targets. 
+The `TakeAction` class extends `Action` class, 
+and internally it stores an arraylist of `Item` object in `targetBackup` field to restore the disruptions to the 
+`data` object. Additionally, it implements the following operation: 
 
- - `prepare()` - Validates user input and stores the codes/indices 
- - `act()`- 
- - `modifyObject`()
- - `getObjectInfo`
- - `safetyCheck()`- Sets the `isBlind()` flag if user's input is invalid. 
- - `superAct()`
+ - `prepare()` - Interpret the `ParamNode` arguments and creates target identifiers for the `act()` function. 
+ In `TakeAction` the identifiers are `ArrayList` objects, `codes` and `indices`. 
+ - `act()`- Get the target items from `data` based on identifiers, do `modifyObject()` on each target, and return a 
+ `String` as the execution result for this action.
+ - `modifyObject()` - Performs the actual operation of modifying the target item. In `TakeAction`, it assigns the 
+ `isTaken` field of the target item as `true`.
+ - `getObjectInfo()` - Controls what is the text representation of the target object in the return string.
+ - `safetyCheck()`- Sets the `isBlind` flag if user's input has a void parameter tree, thereby specifying the default 
+ mode of action for this command. 
+ - `superAct()` - Returns `super.Act()`. Used as the break out node in the prototype chain for the inherited classes 
+ to be able to call the method `Act()` of the ancestor. In child classes of `TakeAction`, this method can be overloaded
+ to return `super.superAct()` to start the upward propogation.
+ - `superPrepare()` - Returns `super.Prepare()`. Used as the break out node in the prototype chain for the inherited 
+ classes to be able to call the method `Prepare()` of the ancestor. In child classes of `TakeAction`, this method can 
+ be overloaded to return `super.superPrepare()` to start the upward propogation.
 
-Given below is an example usage scenario and how the statistic mechanism behaves at each step. 
+Given below is an example usage scenario and how the take mechanism behaves at each step. 
 
-Step 1. The user enters `take 1 2 CS2113`	once the execute layer executes the message and calls `action.prepare()` class, `TakeAction` will begin its `prepare()` operation
+Step 1. The user enters `take 1 2 CS2113`. Once the execute layer (`Command` object) executes the message and calls 
+`action.prepare()`, `TakeAction` will begin its `prepare()` operation.
 
-Step 2. `prepare()` first verifies user's input by calling the `safetyCheck()` method to check if the specified codes/indices exist in the module list, else, it sets the `isBlind()` flag.
+Step 2. `prepare()` calls its prototype and extracts information from the `ParamNode` tree.
 
-Step 3. `prepare()` then maintains two ArrayList() known as `indices` and `codes` . In which, `indices` stores the index of the module that user have keyed in, while `codes` stores the module code on the other hand.
+Step 3. `prepare()` checks if the command has a void parameter tree. If so, it calls the `safetyCheck()` method to 
+ perform the default operation (sets the `isBlind` flag and ensure that the `act()` will execute in the `blind` 
+ mode in this case). Otherwise, it parses the user parameters into `codes` or `indices` depending on 
+ the most probable interpretations, and throws a custom exception `CommandException` object in case of exceptions.
+ In this case, `1` and `2` will be added to `indices` and `CS2113` will be added to `codes`.
 
-Step 4. Next, execute layer will call `action.act()` which causes `TakeAction` to begin its `act()` operation which .... 
+Step 4. Next, execute layer will call `action.act()` which causes `TakeAction` to begin its `act()` operation.
+
+Step 5. `act()` stores the current state of the `data` object into its `flag` field and `targetBackup` field to prevent 
+unwanted changes to the `data` object.
+
+Step 6. `act()` enters either the `blind` mode or the `normal` mode depending on the value of `isBlind`.
+
+Step 7. If in `blind` mode, `act()` filters out all items in `data` by using the `blindSearch` flag. 
+In this case this flag is set to `Constants.SELECTED` to search through all selected items. In the children classes
+of `TakeAction`, however, this variable may be reset to other values to have different blind search behaviours. 
+Otherwise, in `normal` mode, `act()` filters out items from `data` based on identifiers, 
+in this case `codes` and `indices`.
+
+Step 8. `act()` loops through all filtered items and calls `modifyObject()` on each of them.
+
+Step 9. `modidyObject()` modifies the objects of interest, in this case by setting the `isTaken` field to true.
+
+Step 10. Depending on the result of `modifyObject()`, `act()` parses the suitable string for output through the use of 
+a `StringBuilder` object, in the process calling `getObjectInfo()` to get the textual descriptions of the targets.
+
+Step 11. `act()` restores the previous state to the `data` object using the `flag` field and the `targetBackup` field.
+
+Step 12. `act()` replaces the string `Constants.TEXT_PLACEHOLDER` in the default output string for TakeAction 
+defined in `Constants.messageMap` with the actual result string, and returns it.
 
 **Design consideration:**
 
+1. Reuseable - functions such as `modyfiObject()` can be overloaded in child classes to achieve different functions.
+1. Low coupling - `prepare()` is not aware of the program `data`, and `act()` is not aware of the user input.
+1. Uniform - `TakeAction` as well as all other actions have uniform input and outputs, and can be mapped 
+indescriminatively to any `Command` object and executed indifferently.
+
 **Aspect : How TakeAction executes**
- - **Alternative 1 (current choice):** 
- - **Alternative 2:** 
-
-
+ - **Alternative 1 (current choice):** calls `getTarget()` method of `data` object using different flags 
+ to get wanted targets.
+    - Pros: Easy to implement and easy to read. Easily extendable by adding more flags in the `getTarget()` method.
+    - Cons: Slow. Everytime we `act()` on something, the `data` object needs to do the filtering again.
+ - **Alternative 2:** Have many different lists or maps, each stores one category of data
+    - Pros: Fast, no need filtering in most cases.
+    - Cons: Harder to implement and extend. Everytime we want a new functionality we would need to create a new list.
 
 ### 4.2 Statistic Feature 
 The statistic mechanism is facilitated by the StatsAction class. It extends Action class, and internally stores an arraylist of Item object in `targetList`. Additionally, it implements the following operation: 
