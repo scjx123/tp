@@ -452,6 +452,39 @@ Expected outcome:
     ____________________________________________________________
     ```
 
+### `goal` - Calculate how far the user is from his/her target CAP
+
+Typing `goal` allows the user to calculate how far the user is from his/her target CAP.
+
+Syntax:
+
+`goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}` <br>
+
+`option: -u(user's cap and mc), -c(custom cap and mc)`
+
+Example of usage:
+
+`goal -c 160 4.9 100 4.5`
+
+Expected outcome:
+    ```
+	____________________________________________________________
+		Your required average CAP is: 5.57
+		Looks like the target is a bit far away TT
+	____________________________________________________________
+    ```
+Example of usage:
+
+`goal -u 160 4.9`
+
+Expected outcome:
+    ```
+	____________________________________________________________
+		Your required average CAP is: 4.89
+		Jia you! :D
+	____________________________________________________________
+    ```
+
 
 ### `help` - Print help text of the commands
 
@@ -1027,6 +1060,7 @@ A cheat sheet of commonly used commands:
 **fancy**|`fancy [option]` <br>e.g. `fancy`
 **find**|`find [keyword]` <br>e.g. `find exam`
 **focus**|`focus [deadline / todo / event / task / mod / selected / taken]` <br>e.g. `focus deadline`
+**goal**|`goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}`<br>e.g. `goal -c 160 4.9 100 4.5`  
 **grade**|`grade [-option] [module] [grade] {[module] [grade]...}`<br>e.g. `grade -a CS2113 A CG1112 A-`  
 **help**|`help [options]` <br>e.g. `help deadline`
 **list**|`list date [asc / desc / spec “date”]` <br>e.g. `list date asc`
