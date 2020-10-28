@@ -753,11 +753,12 @@ Expected outcome:
 
 ### `reminder` - Print tasks that are due soon
 
-Typing `reminder` prints the tasks that are due within a certain time range. 
+Typing `reminder` prints the tasks that are due within a certain time range or to activate reminder. 
 
 Syntax:
 
 `reminder`
+`reminder [on/off]`
 
 Example of usage: 
 
@@ -769,6 +770,30 @@ Expected outcome:
     ____________________________________________________________
     Here are the tasks due within 3 days: 
     [D][X] submission 2 (by: Oct 15 2020 02:00)
+    ____________________________________________________________
+   ```
+Example of usage:
+
+`reminder on`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here are the tasks due within 3 days: 
+    [D][X] submission 2 (by: Oct 15 2020 02:00)
+    ____________________________________________________________
+   ```
+
+Example of usage:
+
+`reminder off`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+
     ____________________________________________________________
    ```
 
@@ -1010,7 +1035,7 @@ A cheat sheet of commonly used commands:
 **plain**|`plain [option]` <br>e.g. `plain`
 **prev**|`prev [option]` <br>e.g. `prev`
 **postpone**| `postpone [index]` <br>e.g. `postpone 1`
-**reminder**|`reminder` <br>e.g. `reminder`
+**reminder**|`reminder [on/off]` <br>e.g. `reminder`
 **sel**|`sel [index / module code]` <br>e.g. `sel 1 2 3`
 **snooze**|`snooze`
 **take**|`take [index / module code]` <br>e.g. `take CS2113T`

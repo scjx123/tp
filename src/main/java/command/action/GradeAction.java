@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package command.action;
 
 import command.ParamNode;
@@ -5,138 +7,104 @@ import constants.Constants;
 import data.Data;
 import data.Item;
 import data.SingleModule;
-import exceptions.CommandException;
-import exceptions.ModuleNotFoundException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Grade input action.
  */
 public class GradeAction extends TakeAction {
 
-    protected HashMap<String, String> modulesWithGrades = new HashMap<>();
-    protected String option;
+    private HashMap<String, ArrayList<String>> map;
+    private boolean isShown;
 
     @Override
     public String act(Data data) throws Exception {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        int index = 1;
-
-        boolean isEmpty = true;
-        stringBuilder.append(Constants.GRADE_HEAD);
-        if (option.equals("a") || option.equals("d") || option.equals("t")) {
-            for (Map.Entry<String, String> m : modulesWithGrades.entrySet()) {
-                SingleModule module = matchModule(m.getKey(), data.mods);
-                if (module == null) {
-                    throw new ModuleNotFoundException();
-                }
-                if (module.isTaken || option.equals("t")) {
-                    isEmpty = false;
-                    modifyObject(module, m.getValue());
-                    String message = m.getValue().equals("T") ? Constants.MOD_NO_GRADE : m.getValue();
-                    addGradeList(stringBuilder, index, m.getKey(), message);
-                } else {
-                    addGradeList(stringBuilder, index, m.getKey(), Constants.MOD_NOT_TAKEN);
-                }
-                index++;
-            }
-        } else if (option.equals("s")) {
-            for (Item item : data.getTarget(Constants.TAKEN)) {
-                SingleModule module = (SingleModule) item;
-                if (module.grade != null && !module.grade.isBlank()) {
-                    isEmpty = false;
-                    String moduleCode = module.moduleCode;
-                    String grade = module.grade;
-                    String message = grade.equals("T") ? Constants.MOD_NO_GRADE : grade;
-                    addGradeList(stringBuilder, index, moduleCode, message);
-                    index++;
-                }
-            }
+        if (isShown) {
+            blindSearch = Constants.TAKEN;
+        } else {
+            blindSearch = Constants.SELECTED;
         }
-        if (isEmpty) {
-            return Constants.NO_MOD_GRADED;
+        String output = super.act(data).replace("taken or untaken", "graded")
+                .replace(Constants.MODIFY_FAILED, Constants.MOD_NOT_FOUND);
+        if (isShown) {
+            output = output.replace("selected", "taken");
         }
-        return stringBuilder.toString();
+        return output;
     }
 
-    private void addGradeList(StringBuilder stringBuilder, int index, String moduleCode, String message) {
-        stringBuilder.append(index).append(".").append(Constants.SPACE).append(moduleCode)
-            .append(Constants.TAB).append(message).append(Constants.WIN_NEWLINE);
+    @Override
+    protected boolean modifyObject(Item item) {
+        assert item instanceof SingleModule;
+        if (((SingleModule) item).isCompleted) {
+            return false;
+        }
+        for (String key : map.keySet()) {
+            boolean notBlind = !isBlind
+                    && (key.equals(((SingleModule) item).moduleCode) || key.equals(item.immediateData));
+            boolean blind = isBlind && key.equals("DEFAULT");
+            if (notBlind || blind) {
+                ArrayList<String> values = map.get(key);
+                String grade = "";
+                if (values == null || values.size() == 0) {
+                    grade = null;
+                } else {
+                    grade = values.get(0);
+                }
+                ((SingleModule) item).grade = grade;
+                ((SingleModule) item).isTaken = true;
+                return true;
+            }
+        }
+        item.immediateData = null;
+        return isShown;
+    }
+
+    @Override
+    protected String getObjectInfo(Item item) {
+        return item.getName() + Constants.DETAILS_SIGNATURE + ((SingleModule)item).grade;
+    }
+
+    @Override
+    protected void safetyCheck() {
+        isBlind = true;
+        isShown = true;
     }
 
     @Override
     public void prepare(ParamNode args) throws Exception {
-        super.prepare(args);
-        option = "s";//set default option
-        if (args.thisData == null) {
+        isShown = false;
+        map = new HashMap<>();
+        indices = new ArrayList<>();
+        codes = new ArrayList<>();
+        super.superPrepare(args);
+        isBlind = false;
+        if (args.thisData == null || flattenedArgs.length < 1) {
+            safetyCheck();
             return;
         }
-
-        ParamNode currData = flattenedArgs[0];
-
-        //if user input custom option
-        if (flattenedArgs[0].name.length() == 1) {
-            option = flattenedArgs[0].name.trim();
-        }
-
-        currData = currData.thisData;
-
-        //input custom modules
-        switch (option) {
-        case "a":
-        case "t":
-            //match grades to modules
-            while (currData != null) {
-                String moduleCode = currData.name.toUpperCase().trim();
-                String grade = currData.thisData.name.toUpperCase().trim();
-                if (!grade.equals("NULL")) {
-                    modulesWithGrades.put(moduleCode, grade);
+        String[] identifiers = args.thisData.toFlatString().split(Constants.SPACE);
+        String lastKey = "DEFAULT";
+        for (String id : identifiers) {
+            String uid = id.toUpperCase();
+            try {
+                indices.add(Integer.parseInt(uid) - 1);
+                lastKey = uid;
+                map.put(uid, new ArrayList<>());
+            } catch (Exception e) {
+                if (uid.matches("([A-Z])+([0-9])+[A-Z]*")) {
+                    codes.add(uid);
+                    lastKey = uid;
+                    map.put(uid, new ArrayList<>());
+                } else {
+                    if (map.get(lastKey) == null) {
+                        isBlind = true;
+                        map.put(lastKey, new ArrayList<>());
+                    }
+                    map.get(lastKey).add(uid);
                 }
-                currData = currData.thisData.thisData;
-            }
-            break;
-        case "s":
-            //should be do nothing
-            break;
-        case "d":
-            //match grades to modules
-            while (currData != null) {
-                String moduleCode = currData.name.toUpperCase().trim();
-                modulesWithGrades.put(moduleCode, "T");
-                currData = currData.thisData;
-            }
-            break;
-        default:
-            //unidentified option
-            throw new CommandException();
-        }
-    }
-
-    protected void modifyObject(Item item, String grade) {
-        ((SingleModule) item).grade = grade;
-        ((SingleModule) item).isTaken = true;
-    }
-
-    /**
-     * Match module code to module.
-     *
-     * @param moduleCode input module code
-     * @param mods       module list
-     * @return module selected
-     */
-
-    private SingleModule matchModule(String moduleCode, ArrayList<Item> mods) {
-        for (Item item : mods) {
-            SingleModule module = (SingleModule) item;
-            if (moduleCode.equals(module.getName())) {
-                return module;
             }
         }
-        return null;
     }
-
 }

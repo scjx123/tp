@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package constants;
 
 /**
@@ -56,6 +58,19 @@ public enum HelpText {
         },
         new String[]{
             "1. \"clear\" >> clears the task list"
+        }),
+    /**
+     * The Complete.
+     */
+    COMPLETE(
+        "complete",
+        "Mark a module as completed",
+        new String[]{
+            "complete [index / code]"
+        },
+        new String[]{
+            "1. \"complete CS2113\" >> marks module CS2113 as completed",
+            "2. \"complete 1\" >> marks the 1st item in the list as completed if it is a module"
         }),
     /**
      * The Deadline.
@@ -125,7 +140,7 @@ public enum HelpText {
             "1. \"done 1\" >> marks the task with index 1 as done"
         }),
     /**
-     * The Event.
+     * The Edit.
      */
     EDIT(
         "edit",
@@ -135,11 +150,11 @@ public enum HelpText {
             "No space allowed around \"=\". Use \"_\" in place of space for the \"[field=new value]\" parameters"
         },
         new String[]{
-            "1. \"edit -mod CS2113T MC=4\" >> changes the \"mc\" field of module \"CS2113T\" to be \"4\"",
+            "1. \"edit -mod CS2113T grade=A\" >> changes the \"grade\" field of module \"CS2113T\" to be \"A\"",
             "2. \"edit -task 1 description=do_homework\" >> "
                 + "changes the \"description\" field of the 1st task in the current list to \"do homework\"",
             "3. \"edit -task 1 type=event\" >> changes the \"type\" of the 1st task in the current list to \"event\"",
-            "4. \"edit -mod CS2113 MC=4 -task 1 description=do_homework type=event\" >> do usages 1 to 3 sequentially"
+            "4. \"edit -mod CS2113 grade=A -task 1 description=do_homework type=event\" >> do 1 to 3 sequentially"
         }),
     /**
      * The Event.
@@ -173,13 +188,13 @@ public enum HelpText {
         "grade",
         "Modify grade to the user's taken course/module.",
         new String[]{
-            "grade [-option] [module] [grade] {[module] [grade]...}",
-            "option: -s(show, default), -a(add), -t(take), -d(delete)"
+            "grade [index / code (for modules only)] [grade] ...",
+            "grade [index(es) / codes (for modules only)]",
+            "grade"
         },
         new String[]{
-            "1. \"grade -a CS2113 A CG1112 A-\" >> add grade[s] to a user's taken course/module",
-            "2. \"grade -t CS2113 A CG1112 A-\" >> add grade[s] to a course/module and take the module simultaneously",
-            "3. \"grade -d CS2113 CG1112\" >> delete grade[s] of user's taken course/module",
+            "1. \"grade CS2113 A CG1112 A-\" >> make A and A- the grades of modules CS2113 and CG1112 respectively",
+            "3. \"grade CS2113 CG1112\" >> delete grade[s] of modules CS2113 and CG1112",
             "4. \"grade\" >> show grades of all taken modules"
         }),
     /**
@@ -329,10 +344,15 @@ public enum HelpText {
         "reminder",
         "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
         new String[]{
-            "reminder"
+            "reminder",
+            "reminder on",
+            "reminder off"
         },
         new String[]{
-            "1. \"reminder\" >> list tasks that are due within the set period of time"
+            "1. \"reminder\" >> list tasks that are due within the set period of time",
+            "2. \"reminder on\" >> Switch on reminder",
+            "3. \"reminder off\" >> Switch off reminder"
+
         }),
     /**
      * The Sel.

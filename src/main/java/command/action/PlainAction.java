@@ -1,7 +1,6 @@
-package command.action;
+//@@author TomLBZ
 
-import constants.Constants;
-import data.Data;
+package command.action;
 
 /**
  * The type Plain action.

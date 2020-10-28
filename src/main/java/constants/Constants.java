@@ -1,11 +1,13 @@
-package constants;
+//@@author TomLBZ
 
+package constants;
 
 import command.action.Action;
 import command.action.AddAction;
 import command.action.ByeAction;
 import command.action.CalculateCapAction;
 import command.action.ClearAction;
+import command.action.CompleteAction;
 import command.action.DeadlineAction;
 import command.action.DeleteAction;
 import command.action.DetailAction;
@@ -224,6 +226,7 @@ public class Constants {
      * The constant CLEAR.
      */
     public static final String CLEAR = "clear";
+    public static final String COMPLETE = "complete";
     /**
      * The constant DEADLINE.
      */
@@ -353,10 +356,14 @@ public class Constants {
     public static final String SELECTED = "selected";
     public static final String TAKEN = "taken";
     public static final String FOUND = "found";
+    public static final String COMPLETED = "completed";
+    public static final String COMPLETED_LABEL = "[COMPLETED]";
     /**
      * The constant INDEX_OUT.
      */
     public static final String INDEX_OUT = "Index out of range.";
+    public static final String MODIFY_FAILED = "Failed to modify: ";
+    public static final String NOT_COMPLETABLE = "Grade is invalid or module is not yet taken: ";
     /**
      * The constant ADDED.
      */
@@ -420,6 +427,8 @@ public class Constants {
         "date time"};
     public static final String[] DONE_ALIAS = {"done", "isdone", "do", "did"};
     public static final String[] WEEKLY_ALIAS = {"weekly", "isweekly", "week", "byweek", "reoccuring"};
+    public static final String[] VALID_GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-",
+        "D+", "D", "D-", "E", "F", "S", "U"};
     /**
      * The constant NO_KEYWORD.
      */
@@ -436,7 +445,7 @@ public class Constants {
         + WIN_NEWLINE;
     public static final String COURSE_NOT_SPEC = "You have not registered modules that you have taken."
         + WIN_NEWLINE;
-    public static final String NO_OPERATION_NEEDED = "No operations needed." + WIN_NEWLINE;
+    public static final String NO_OPERATION_POSSIBLE = "No operations possible." + WIN_NEWLINE;
     /**
      * The constant NO_TASK_TYPE.
      */
@@ -526,7 +535,14 @@ public class Constants {
      * The constant BMP_SEL_SWITCH.
      */
     public static final String BMP_SEL_SWITCH = "SEL";
-
+    /**
+     * The constant REMINDER_ON.
+     */
+    public static final String REMINDER_ON = "on";
+    /**
+     * The constant REMINDER_OFF.
+     */
+    public static final String REMINDER_OFF = "off";
 
     /**
      * The constant LINE_REPETITION.
@@ -583,7 +599,7 @@ public class Constants {
     /**
      * The constant REMINDER_INTERVAL.
      */
-    public static final String REMINDER_INTERVAL = "60000";
+    public static final String REMINDER_INTERVAL = "600000";
 
     /**
      * The constant REMINDER_DELAY.
@@ -596,6 +612,7 @@ public class Constants {
     public static final Map<String, Action> actionMap = Map.ofEntries(
         Map.entry(BYE, new ByeAction()),
         Map.entry(CLEAR, new ClearAction()),
+        Map.entry(COMPLETE, new CompleteAction()),
         Map.entry(DEADLINE, new DeadlineAction()),
         Map.entry(DELETE, new DeleteAction()),
         Map.entry(DONE, new DoneAction()),
@@ -633,6 +650,7 @@ public class Constants {
     public static final Map<String, HelpText> helpMap = Map.ofEntries(
         Map.entry(BYE, HelpText.BYE),
         Map.entry(CLEAR, HelpText.CLEAR),
+        Map.entry(COMPLETE, HelpText.COMPLETE),
         Map.entry(DEADLINE, HelpText.DEADLINE),
         Map.entry(DELETE, HelpText.DELETE),
         Map.entry(DONE, HelpText.DONE),
@@ -676,17 +694,17 @@ public class Constants {
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
-            Map.entry(GRADE, new String[]{"a", "s"}),
             Map.entry(MC, new String[]{"d"}),
             Map.entry(STATS, new String[]{"mod"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
             Map.entry(ADD, new String[]{"mod","task","cmd"}),
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
-            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN, SU}),
+            Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN, SU, COMPLETED}),
             Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
             Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
-            Map.entry(NEXT, new String[]{"i", "s", "a"}));
+            Map.entry(NEXT, new String[]{"i", "s", "a"}),
+            Map.entry(REMINDER, new String[]{"on", "off"}));
     /**
      * The constant messageMap.
      */
@@ -694,6 +712,8 @@ public class Constants {
             Map.entry(BYE, "Bye. Hope to see you again soon!"),
             Map.entry(STATS, "Here are the statistics for your tasks: " + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(CLEAR, "Nice! I've cleared all tasks from the list and left modules alone."),
+            Map.entry(COMPLETE, "Marking the specified module as Completed (final): "
+                    + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(DEADLINE, ADDED + CHANGED),
             Map.entry(DELETE, REMOVED + CHANGED),
             Map.entry(DONE, "Nice! I've marked this task as done:"
@@ -704,6 +724,7 @@ public class Constants {
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(FOCUS, "Now we are focusing on:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(GRADE, "Grade operation on the specified modules:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
             Map.entry(TODO, ADDED + CHANGED),
@@ -725,6 +746,4 @@ public class Constants {
             Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(SNOOZE, "I've snoozed the reminder for 30 seconds."),
             Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));
-
-
 }

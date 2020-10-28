@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package command.action;
 
 import constants.Constants;
@@ -37,7 +39,7 @@ class FocusActionTest {
                 .equals("Now we are focusing on:\r\ntaken")),
             () -> assertTrue(d.testSut(testCommand[8], false, true)
                 .equals("Invalid Command! Please check the syntax.\r\n"
-                + "focus    OR    focus [deadline / todo / event / task / mod / selected / taken]"))
+                + "focus    OR    \r\nfocus [deadline / todo / event / task / mod / selected / taken]"))
         );
     }
 }
