@@ -25,6 +25,7 @@ public class Item {
      */
     protected String description;
 
+    public String immediateData;
     /**
      * The Is dated.
      */

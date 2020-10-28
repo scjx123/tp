@@ -658,7 +658,6 @@ public class Constants {
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
             Map.entry(CAP, new String[]{"u", "m"}),
-            Map.entry(GRADE, new String[]{"a", "s"}),
             Map.entry(MC, new String[]{"d"}),
             Map.entry(STATS, new String[]{"mod"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
@@ -689,6 +688,7 @@ public class Constants {
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(FOCUS, "Now we are focusing on:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(GRADE, "Grade operation on the specified modules:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
             Map.entry(TODO, ADDED + CHANGED),

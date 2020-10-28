@@ -17,6 +17,7 @@ public class TakeAction extends Action {
     protected ArrayList<Integer> indices;
     protected ArrayList<String> codes;
     protected boolean isBlind = false;
+    protected String blindSearch = Constants.SELECTED;
 
     @Override
     public String act(Data data) throws Exception {
@@ -25,7 +26,7 @@ public class TakeAction extends Action {
         StringBuilder builder = new StringBuilder();
         if (isBlind) {
             StringBuilder testContent = new StringBuilder();
-            data.getTarget(Constants.SELECTED).forEach(x -> {
+            data.getTarget(blindSearch).forEach(x -> {
                 if (x instanceof SingleModule) {
                     String mResult = modifyObject(x) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
                     testContent.append(mResult).append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
@@ -40,11 +41,12 @@ public class TakeAction extends Action {
         } else {
             if (!indices.isEmpty()) {
                 for (int i : indices) {
-                    if (i < 0 || i > data.mods.size() - 1) {
+                    if (i < 0 || i > data.target.size() - 1) {
                         throw new IndexOutOfBoundsException();
                     }
                     if (data.target.get(i) instanceof SingleModule) {
                         Item module = data.target.get(i);
+                        module.immediateData = String.valueOf(i + 1);
                         String mResult = modifyObject(module) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
                         builder.append(mResult).append("Module ").append(i + 1).append(": ")
                                 .append(getObjectInfo(module)).append(Constants.WIN_NEWLINE);
@@ -120,5 +122,9 @@ public class TakeAction extends Action {
 
     protected String superAct(Data data) throws Exception {
         return super.act(data);
+    }
+
+    protected void superPrepare(ParamNode args) throws Exception {
+        super.prepare(args);
     }
 }
