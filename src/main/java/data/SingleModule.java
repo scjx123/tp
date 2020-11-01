@@ -3,7 +3,6 @@ package data;
 import constants.Constants;
 import data.jobs.Task;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -39,7 +38,9 @@ public class SingleModule extends Item {
 
     public ArrayList<Item> taskList;
 
-    public boolean isTaken;
+    public boolean isTaken = false;
+
+    public boolean isCompleted = false;
 
     public boolean hasSU = false;
 
@@ -54,7 +55,7 @@ public class SingleModule extends Item {
      * @param mc          number of mc
      * @param prereq      module prerequisite
      */
-    public SingleModule(String code, String name, String description, String mc, String prereq,String su) {
+    public SingleModule(String code, String name, String description, String mc, String prereq, String su) {
         super(code); //moduleDescription is handle here.
         this.moduleCode = replaceBlanks(code);
         this.moduleDescription = replaceBlanks(description);
@@ -74,27 +75,35 @@ public class SingleModule extends Item {
         }
     }
 
-    boolean isSelected = false;
-
     @Override
     public String getName() {
-        return moduleCode;
+        return (isCompleted ? Constants.COMPLETED_LABEL : Constants.ZERO_LENGTH_STRING) + moduleCode;
     }
 
 
     @Override
     public String toString() {
-        return moduleCode + Constants.SPACE + moduleName + Constants.SPACE
+        return getName() + Constants.SPACE + moduleName + Constants.SPACE
                 + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
     }
 
-
+    public boolean complete() {
+        if (isCompleted || !isTaken) {
+            return false;
+        }
+        for (String grade : Constants.VALID_GRADES) {
+            if (grade.equals(this.grade.toUpperCase())) {
+                isCompleted = true;
+                isTaken = false;
+                break;
+            }
+        }
+        return isCompleted;
+    }
 
     @Override
     public String getDetails() {
-        String result = moduleCode + Constants.SPACE + moduleName + Constants.SPACE
-                + moduleMC + (isTaken ? "MC Taken" : "MC") + (isSelected ? " Selected" : "");
-        StringBuilder builder = new StringBuilder(result);
+        StringBuilder builder = new StringBuilder(toString());
         builder.append(Constants.WIN_NEWLINE).append(wrap(moduleDescription.trim())).append("Tasks: ");
         if (taskList != null && taskList.size() > 0) {
             for (Item item : taskList) {

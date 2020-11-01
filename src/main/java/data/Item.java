@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package data;
 
 import constants.Constants;
@@ -24,6 +26,7 @@ public class Item {
      */
     protected String description;
 
+    public String immediateData;
     /**
      * The Is dated.
      */
@@ -41,7 +44,7 @@ public class Item {
      */
     protected LocalDateTime dateTime;
 
-    public boolean isSelected;
+    public boolean isSelected = false;
 
 
     /**
@@ -156,8 +159,7 @@ public class Item {
      * @param date the date
      */
     protected void setDateTime(LocalDateTime date) {
-        dateTime = date;
-        isDated = dateTime != null;
+        updateDateTime(date);
         isWeekly = true;
     }
 
@@ -182,6 +184,11 @@ public class Item {
      */
     public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    public void updateDateTime(LocalDateTime localDateTime) {
+        dateTime = localDateTime;
+        isDated = dateTime != null;
     }
 
     /**

@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package io;
 
 import command.Command;
@@ -16,12 +18,12 @@ import java.util.stream.Collectors;
  */
 public class Storage {
 
-    private FileLoader taskLoader;
-    private FileSaver taskSaver;
-    private FileLoader courseLoader;
-    private FileSaver courseSaver;
-    private Parser parser;
-    private ModuleParser moduleloader;
+    private final FileLoader taskLoader;
+    private final FileSaver taskSaver;
+    private final FileLoader courseLoader;
+    private final FileSaver courseSaver;
+    private final Parser parser;
+    private final ModuleParser moduleLoader;
 
     /**
      * Instantiates a new Storage.
@@ -36,7 +38,7 @@ public class Storage {
         courseLoader = new FileLoader(directory, courseFileName);
         courseSaver = new FileSaver(directory, courseFileName);
         this.parser = parser;
-        this.moduleloader = new ModuleParser();
+        this.moduleLoader = new ModuleParser();
     }
 
     /**
@@ -46,7 +48,8 @@ public class Storage {
      */
     public void save(ArrayList<Item> tasks, ArrayList<Item> courses) {
         ArrayList<Item> takenCourses = (ArrayList<Item>) courses.stream()
-            .filter(course -> (course instanceof SingleModule) && ((SingleModule) course).isTaken)
+            .filter(course -> (course instanceof SingleModule)
+                    && (((SingleModule) course).isTaken || ((SingleModule) course).isCompleted))
             .collect(Collectors.toList());
         taskSaver.saveTask(tasks);
         courseSaver.saveCourse(takenCourses);
@@ -76,22 +79,20 @@ public class Storage {
 
         //load module list
         try {
-            list.mods = moduleloader.load();
+            list.mods = moduleLoader.load();
         } catch (IOException e) {
             e.addSuppressed(new IOException());
         }
 
         //load stored courses
         String[] coursesWithGrades = courseLoader.loadAllLines();
-        String dataInput = Constants.ZERO_LENGTH_STRING;
-        for (String course : coursesWithGrades) {
-            dataInput = dataInput + course + Constants.SPACE;
-        }
-        String output = courseDataToCommand(dataInput);
-        if (!output.equals(Constants.ZERO_LENGTH_STRING)) {
-            ArrayList<Command> commands = parser.parse(output);
-            for (Command c : commands) {
-                c.execute(list);
+        for (String dataInput : coursesWithGrades) {
+            String output = courseDataToCommand(dataInput);
+            if (!output.equals(Constants.ZERO_LENGTH_STRING)) {
+                ArrayList<Command> commands = parser.parse(output);
+                for (Command c : commands) {
+                    c.execute(list);
+                }
             }
         }
 
@@ -141,9 +142,15 @@ public class Storage {
         String output = Constants.ZERO_LENGTH_STRING;
         String[] iconSeparated = input.split(Constants.SPACE);
         String courseName = iconSeparated[0];
-        String grade = iconSeparated[1];
+        boolean isCompleted = courseName.contains(Constants.COMPLETED_LABEL);
+        if (isCompleted) {
+            courseName = courseName.replace(Constants.COMPLETED_LABEL, Constants.ZERO_LENGTH_STRING);
+        }
         if (!courseName.isBlank()) {
-            output = Constants.GRADE + Constants.SPACE + "-t" + Constants.SPACE + input;
+            output = Constants.GRADE + Constants.SPACE + courseName + Constants.SPACE + iconSeparated[1];
+        }
+        if (isCompleted) {
+            output += Constants.CMD_END + Constants.COMPLETE + Constants.SPACE + courseName;
         }
         return output;
     }

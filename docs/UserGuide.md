@@ -452,6 +452,39 @@ Expected outcome:
     ____________________________________________________________
     ```
 
+### `goal` - Calculate how far the user is from his/her target CAP
+
+Typing `goal` allows the user to calculate how far the user is from his/her target CAP.
+
+Syntax:
+
+`goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}` <br>
+
+`option: -u(user's cap and mc), -c(custom cap and mc)`
+
+Example of usage:
+
+`goal -c 160 4.9 100 4.5`
+
+Expected outcome:
+    ```
+	____________________________________________________________
+		Your required average CAP is: 5.57
+		Looks like the target is a bit far away TT
+	____________________________________________________________
+    ```
+Example of usage:
+
+`goal -u 160 4.9`
+
+Expected outcome:
+    ```
+	____________________________________________________________
+		Your required average CAP is: 4.89
+		Jia you! :D
+	____________________________________________________________
+    ```
+
 
 ### `help` - Print help text of the commands
 
@@ -620,6 +653,42 @@ Expected outcome:
     ____________________________________________________________
    ```
 
+### `stats` - Prints Statistics
+
+Typing `stats` prints the percentage of the task completed.
+
+Syntax:
+
+`stats [-option] [-detail]`
+`option: -mod`
+`detail: [module code]`
+
+Example of usage (when focused on task list, and no task is completed): 
+
+`stats`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+	Here are the statistics: 
+	[0.0%]
+    ____________________________________________________________
+   ```
+Example of usage (when checking specific modules, with all task completed): 
+
+`stats -mod CS2113 `
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+	Here are the statistics: 
+	[100.0%]
+    ____________________________________________________________
+   ```
+
+
 ### `next` - Switch the target region to the next page
 
 Typing `next` switches the target region to the next page, should a next page exist.<br>
@@ -753,11 +822,12 @@ Expected outcome:
 
 ### `reminder` - Print tasks that are due soon
 
-Typing `reminder` prints the tasks that are due within a certain time range. 
+Typing `reminder` prints the tasks that are due within a certain time range or to activate reminder. 
 
 Syntax:
 
 `reminder`
+`reminder [on/off]`
 
 Example of usage: 
 
@@ -769,6 +839,30 @@ Expected outcome:
     ____________________________________________________________
     Here are the tasks due within 3 days: 
     [D][X] submission 2 (by: Oct 15 2020 02:00)
+    ____________________________________________________________
+   ```
+Example of usage:
+
+`reminder on`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here are the tasks due within 3 days: 
+    [D][X] submission 2 (by: Oct 15 2020 02:00)
+    ____________________________________________________________
+   ```
+
+Example of usage:
+
+`reminder off`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+
     ____________________________________________________________
    ```
 
@@ -1002,6 +1096,7 @@ A cheat sheet of commonly used commands:
 **fancy**|`fancy [option]` <br>e.g. `fancy`
 **find**|`find [keyword]` <br>e.g. `find exam`
 **focus**|`focus [deadline / todo / event / task / mod / selected / taken]` <br>e.g. `focus deadline`
+**goal**|`goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}`<br>e.g. `goal -c 160 4.9 100 4.5`  
 **grade**|`grade [-option] [module] [grade] {[module] [grade]...}`<br>e.g. `grade -a CS2113 A CG1112 A-`  
 **help**|`help [options]` <br>e.g. `help deadline`
 **list**|`list date [asc / desc / spec “date”]` <br>e.g. `list date asc`
@@ -1010,7 +1105,7 @@ A cheat sheet of commonly used commands:
 **plain**|`plain [option]` <br>e.g. `plain`
 **prev**|`prev [option]` <br>e.g. `prev`
 **postpone**| `postpone [index]` <br>e.g. `postpone 1`
-**reminder**|`reminder` <br>e.g. `reminder`
+**reminder**|`reminder [on/off]` <br>e.g. `reminder`
 **sel**|`sel [index / module code]` <br>e.g. `sel 1 2 3`
 **snooze**|`snooze`
 **take**|`take [index / module code]` <br>e.g. `take CS2113T`

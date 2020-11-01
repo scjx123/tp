@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package command;
 
 import command.action.UnknownAction;
@@ -24,7 +26,7 @@ public class Command implements Help {
      * The Name.
      */
     public String name;
-    private HelpText helpText;
+    private final HelpText helpText;
     /**
      * The Action.
      */
@@ -51,7 +53,7 @@ public class Command implements Help {
     }
 
     private boolean isArgsValid() {
-        String[] targetArgs = Constants.paramMap.get(name);
+        String[] targetArgs = Constants.compulsoryParamMap.get(name);
         if (targetArgs == null) {
             return true; // does not need any parameter
         } else {
@@ -89,7 +91,7 @@ public class Command implements Help {
             for (int i = 0; i < syntax.length; i++) {
                 builder.append(syntax[i]);
                 if (i < syntax.length - 1) {
-                    builder.append(Constants.SYNTAX_OR);
+                    builder.append(Constants.SYNTAX_OR).append(Constants.WIN_NEWLINE);
                 }
             }
             result = builder.toString();

@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package data;
 
 import constants.Constants;
@@ -21,7 +23,6 @@ public class Data {
 
     private static final Logger LOGGER = Logger.getLogger(Data.class.getName());
 
-    private static ArrayList<Item> tempList;
     public String flag;
     /**
      * The Tasks.
@@ -105,6 +106,10 @@ public class Data {
             break;
         case Constants.FOUND: // should not refresh target.
             break;
+        case Constants.COMPLETED:
+            target = mods.stream().filter(
+                x -> ((SingleModule) x).isCompleted).collect(Collectors.toCollection(ArrayList::new));
+            break;
         default:
             target = tasks.stream().filter(x -> x instanceof Task).collect(Collectors.toCollection(ArrayList::new));
             break;
@@ -122,7 +127,7 @@ public class Data {
 
 
     public void addTask(Task task) {
-        tempList = new ArrayList<>(getTarget(getTaskType(task)));
+        ArrayList<Item> tempList = new ArrayList<>(getTarget(getTaskType(task)));
         Checker cc = new Checker(tempList, task);
         LocalDateTime newDate = cc.checkRecurrenceDate(task);
         if (newDate != null) {
@@ -150,6 +155,9 @@ public class Data {
     }
 
     public void updateItem(int index, Item newItem) {
+        if (index < 0 || index >= target.size()) {
+            return;
+        }
         Item currentItem = target.get(index);
         target.set(target.indexOf(currentItem), newItem);
         if (currentItem instanceof SingleModule) {
@@ -159,6 +167,22 @@ public class Data {
         } else {
             if (tasks.contains(currentItem)) {
                 tasks.set(tasks.indexOf(currentItem), newItem);
+            }
+        }
+        refreshTarget();
+    }
+
+    public void updateItem(Item oldItem, Item newItem) {
+        if (target.contains(oldItem)) {
+            target.set(target.indexOf(oldItem), newItem);
+        }
+        if (oldItem instanceof SingleModule) {
+            if (mods.contains(oldItem)) {
+                mods.set(mods.indexOf(oldItem), newItem);
+            }
+        } else {
+            if (tasks.contains(oldItem)) {
+                tasks.set(tasks.indexOf(oldItem), newItem);
             }
         }
         refreshTarget();

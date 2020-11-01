@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package command.action;
 
 import constants.Constants;
@@ -31,7 +33,7 @@ public class SelectAction extends TakeAction {
                         .append(getObjectInfo(data.get(i))).append(Constants.WIN_NEWLINE);
             }
         }
-        String result = super.superAct(data);
+        String result = superAct(data);
         String execution = builder.toString();
         if (execution.equals(Constants.ZERO_LENGTH_STRING)) {
             execution = execution.concat(Constants.NOT_FOUND);
@@ -40,8 +42,9 @@ public class SelectAction extends TakeAction {
     }
 
     @Override
-    protected void modifyObject(Item item) {
+    protected boolean modifyObject(Item item) {
         item.isSelected = true;
+        return true;
     }
 
     @Override
