@@ -60,6 +60,7 @@ public class Domnus {
         }
     }
 
+    //@@author: johanesrafael
     /**
      * Make Reminder scheduler.
      * @param delay     the delay
@@ -171,6 +172,7 @@ public class Domnus {
         }
     }
 
+    //@@author: johanesrafael
     /**
      * Set reminder schedule.
      */
@@ -179,6 +181,7 @@ public class Domnus {
         reminderTimer(Constants.REMINDER_DELAY, schedule);
     }
 
+    //@@author: johanesrafael
     /**
      * Snooze Reminder.
      */

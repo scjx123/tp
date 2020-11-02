@@ -787,7 +787,8 @@ The item list region (top) of the GUI is switched to the previous page if a prev
 
 ### `postpone` - Postpone a task by index
 
-Typing `postpone` delays a task specified by the user or by default a day
+Typing `postpone` delays a task specified by the user or by default a day.<br>
+Note: Option `h` for an hour. Option `w` for a week. Option `y` for a year.
 
 Syntax:
 
@@ -848,7 +849,8 @@ Expected outcome:
 
 ### `reminder` - Print tasks that are due soon
 
-Typing `reminder` prints the tasks that are due within a certain time range or to activate reminder. 
+Typing `reminder` prints the tasks that are due within a certain time range or to activate the reminder.<br>
+Note: The reminder popup is set by default to emerge every 5 minutes.  
 
 Syntax:
 
@@ -917,7 +919,7 @@ Expected outcome:
 
 ### `snooze` - Delays reminder popup
 
-Typing `snooze` delays reminder popup by a default of 30 seconds
+Typing `snooze` delays reminder popup by a default of 1 minute.
 
 Syntax:
 
@@ -931,7 +933,7 @@ Expected outcome:
 
     ```
     ____________________________________________________________
-        I've snoozed the reminder for 30 seconds.
+        I've snoozed the reminder for 1 minute. Will remind you in 6 minutes.
     ____________________________________________________________    
     ```
 

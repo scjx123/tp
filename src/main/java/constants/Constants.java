@@ -226,6 +226,9 @@ public class Constants {
      * The constant CLEAR.
      */
     public static final String CLEAR = "clear";
+    /**
+     * The constant COMPLETE.
+     */
     public static final String COMPLETE = "complete";
     /**
      * The constant DEADLINE.
@@ -239,6 +242,9 @@ public class Constants {
      * The constant DONE.
      */
     public static final String DONE = "done";
+    /**
+     * The constant EDIT.
+     */
     public static final String EDIT = "edit";
     /**
      * The constant EVENT.
@@ -337,32 +343,77 @@ public class Constants {
      * The constant MC.
      */
     public static final String MC = "mc";
+    /**
+     * The constant TAKE.
+     */
     public static final String TAKE = "take";
+    /**
+     * The constant UNSEL.
+     */
     public static final String UNSEL = "unsel";
+    /**
+     * The constant UNTAKE.
+     */
     public static final String UNTAKE = "untake";
     /**
      * The constant DETAIL.
      */
     public static final String DETAIL = "detail";
     /**
-     * Signals CAP command.
+     * The constant CAP.
      */
     public static final String CAP = "cap";
+    /**
+     * The constant GOAL.
+     */
     public static final String GOAL = "goal";
+    /**
+     * The constant MOD.
+     */
     public static final String MOD = "mod";
+    /**
+     * The constant SU.
+     */
     public static final String SU = "su";
+    /**
+     * The constant GRADE.
+     */
     public static final String GRADE = "grade";
+    /**
+     * The constant TASK.
+     */
     public static final String TASK = "task";
+    /**
+     * The constant SELECTED.
+     */
     public static final String SELECTED = "selected";
+    /**
+     * The constant TAKEN.
+     */
     public static final String TAKEN = "taken";
+    /**
+     * The constant FOUND.
+     */
     public static final String FOUND = "found";
+    /**
+     * The constant COMPLETED.
+     */
     public static final String COMPLETED = "completed";
+    /**
+     * The constant COMPLETED_LABEL.
+     */
     public static final String COMPLETED_LABEL = "[COMPLETED]";
     /**
      * The constant INDEX_OUT.
      */
     public static final String INDEX_OUT = "Index out of range.";
+    /**
+     * The constant MODIFY_FAILED.
+     */
     public static final String MODIFY_FAILED = "Failed to modify: ";
+    /**
+     * The constant NOT_COMPLETABLE.
+     */
     public static final String NOT_COMPLETABLE = "Grade is invalid or module is not yet taken: ";
     /**
      * The constant ADDED.
@@ -372,6 +423,9 @@ public class Constants {
      * The constant REMOVED.
      */
     public static final String REMOVED = "Noted. I've removed this task:";
+    /**
+     * The constant REMOVE_MOD.
+     */
     public static final String REMOVE_MOD = "Noted. I've removed this module from your current list:";
 
     /**
@@ -414,49 +468,127 @@ public class Constants {
      */
     public static final String[] TIME_PATTERNS = {"HH:mm:ss", "H:mm:ss", "HH:m:ss", "HH:mm:s", "H:m:ss",
         "HH:m:s", "H:mm:s", "H:m:s", "HH:mm", "H:mm", "HH:m", "H:m", "HH", "H", ""};
+    /**
+     * The constant SU_ALIAS.
+     */
     public static final String[] SU_ALIAS = {"su", "s/u", "s", "u", "issu"};
+    /**
+     * The constant GRADE_ALIAS.
+     */
     public static final String[] GRADE_ALIAS = {"grade", "score", "grades", "scores", "letter grade", "letter",
         "points", "point", "g"};
+    /**
+     * The constant SELECTED_ALIAS.
+     */
     public static final String[] SELECTED_ALIAS = {"sel", "select", "selected", "isselect", "isselected", "selecting",
         "s"};
+    /**
+     * The constant TAKEN_ALIAS.
+     */
     public static final String[] TAKEN_ALIAS = {"taken", "take", "took", "taking", "istake", "istaken", "istaking",
         "t"};
+    /**
+     * The constant DESCRIPTION_ALIAS.
+     */
     public static final String[] DESCRIPTION_ALIAS = {"description", "describe", "text", "string", "content", "d"};
+    /**
+     * The constant TYPE_ALIAS.
+     */
     public static final String[] TYPE_ALIAS = {"type", "category", "t", "types"};
+    /**
+     * The constant DATE_ALIAS.
+     */
     public static final String[] DATE_ALIAS = {"date", "time", "dt", "d/t", "datetime", "date/time", "day",
         "date time"};
+    /**
+     * The constant DONE_ALIAS.
+     */
     public static final String[] DONE_ALIAS = {"done", "isdone", "do", "did"};
+    /**
+     * The constant WEEKLY_ALIAS.
+     */
     public static final String[] WEEKLY_ALIAS = {"weekly", "isweekly", "week", "byweek", "reoccuring"};
+    /**
+     * The constant VALID_GRADES.
+     */
     public static final String[] VALID_GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-",
         "D+", "D", "D-", "E", "F", "S", "U"};
     /**
      * The constant NO_KEYWORD.
      */
     public static final String NO_KEYWORD = "No keyword provided, listing all items:" + WIN_NEWLINE;
+    /**
+     * The constant MOD_NOT_FOUND.
+     */
     public static final String MOD_NOT_FOUND =
         "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
+    /**
+     * The constant MOD_NOT_TAKEN.
+     */
     public static final String MOD_NOT_TAKEN = "You have not taken this module yet";
+    /**
+     * The constant MOD_NO_GRADE.
+     */
     public static final String MOD_NO_GRADE = "You have not input grade for this module yet";
+    /**
+     * The constant GRADE_NOT_FOUND.
+     */
     public static final String GRADE_NOT_FOUND = "Do you input your grade (e.g. CS2113 A+) correctly?" + WIN_NEWLINE;
+    /**
+     * The constant INVALID_LIST.
+     */
     public static final String INVALID_LIST = "Please focus on task list by typing 'focus'" + WIN_NEWLINE;
+    /**
+     * The constant TASK_NOT_SPEC.
+     */
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
+    /**
+     * The constant ITEM_NOT_SPEC.
+     */
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
+    /**
+     * The constant GRADE_NOT_SPEC.
+     */
     public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
         + WIN_NEWLINE;
+    /**
+     * The constant MODULE_GRADE_CORRUPT.
+     */
     public static final String MODULE_GRADE_CORRUPT = "Your module / grade data has been corrupted!."
         + WIN_NEWLINE;
+    /**
+     * The constant NO_OPERATION_POSSIBLE.
+     */
     public static final String NO_OPERATION_POSSIBLE = "No operations possible." + WIN_NEWLINE;
 
     /**
      * The constant NO_TASK_TYPE.
      */
     public static final String NO_TASK_TYPE = "No task type provided, listing all tasks:" + WIN_NEWLINE;
+    /**
+     * The constant WORK_LESS.
+     */
     public static final String WORK_LESS = "This means you need to lower your grade to achieve your goal."
         + SPACE + "Tank the bell curve for us! :D" + WIN_NEWLINE;
+    /**
+     * The constant JIAYOU.
+     */
     public static final String JIAYOU = "Jia you! :D" + WIN_NEWLINE;
+    /**
+     * The constant LOW_CAP.
+     */
     public static final String LOW_CAP = "You might want too aim higher" + WIN_NEWLINE;
+    /**
+     * The constant HIGH_CAP.
+     */
     public static final String HIGH_CAP = "Looks like the target is a bit far away TT" + WIN_NEWLINE;
+    /**
+     * The constant REQUIRED_CAP.
+     */
     public static final String REQUIRED_CAP = "Your required average CAP is: ";
+    /**
+     * The constant CAN_GRADUATE.
+     */
     public static final String CAN_GRADUATE = "You have taken MC sufficient for your graduation! Goal is reached :D"
         + WIN_NEWLINE;
     /**
@@ -527,10 +659,22 @@ public class Constants {
      * The constant HELP_HEADING.
      */
     public static final String SHOW_CAP = "Here is your existing CAP: ";
+    /**
+     * The constant GRADE_REGISTERED.
+     */
     public static final String GRADE_REGISTERED = "Here are your existing grades:";
+    /**
+     * The constant NOT_TASK.
+     */
     public static final String NOT_TASK = "The specified item is not a Task, "
             + "so it cannot be marked as done or undone." + WIN_NEWLINE;
+    /**
+     * The constant INIT_LIST.
+     */
     public static final String INIT_LIST = "Welcome to DomSun! This is the item list.";
+    /**
+     * The constant INIT_SEL.
+     */
     public static final String INIT_SEL = "This is the selection list.";
     /**
      * The constant BMP_LIST_SWITCH.
@@ -604,7 +748,7 @@ public class Constants {
     /**
      * The constant REMINDER_INTERVAL.
      */
-    public static final String REMINDER_INTERVAL = "600000";
+    public static final String REMINDER_INTERVAL = "300000";
 
     /**
      * The constant REMINDER_DELAY.
@@ -749,6 +893,6 @@ public class Constants {
             Map.entry(UNTAKE, "I have un-taken these modules you specified. "
                     + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(SNOOZE, "I've snoozed the reminder for 30 seconds."),
+            Map.entry(SNOOZE, "I've snoozed the reminder for 1 minute. Will remind you in 6 minutes."),
             Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));
 }
