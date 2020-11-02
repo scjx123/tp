@@ -7,8 +7,6 @@ import data.Item;
 import data.SingleModule;
 import data.Data;
 import exceptions.CommandException;
-import exceptions.GradeNotSpecifiedException;
-import exceptions.ModuleNotFoundException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -27,30 +25,37 @@ public class CalculateCapAction extends Action {
 
     @Override
     public String act(Data data) throws Exception {
-        double gradeValue;
+        totalScore = 0;
+        totalMC = 0;
         if (option.equals("m")) {
-            totalScore = 0;
-            totalMC = 0;
             for (Map.Entry<String, Double> m : modulesWithGrades.entrySet()) {
-                gradeValue = m.getValue();
                 String moduleCode = m.getKey();
                 SingleModule module = matchModule(moduleCode, data.mods);
                 if (module == null) {
-                    throw new ModuleNotFoundException();
+                    return Constants.MOD_NOT_FOUND;
                 }
+
+                double gradeValue = m.getValue();
+                if(gradeValue == -1){
+                    return Constants.GRADE_NOT_FOUND;
+                }
+
                 totalMC += Double.parseDouble(module.getModuleMC());
                 totalScore += Double.parseDouble(module.getModuleMC()) * gradeValue;
             }
         } else if (option.equals("u")) {
             if (checkCalculateCap(data)) {
-                return Constants.COURSE_NOT_SPEC;
+                return Constants.MODULE_GRADE_CORRUPT;
             }
         }
         double capValue = totalScore / totalMC;
         return Constants.SHOW_CAP + new DecimalFormat("#.##").format(capValue);
     }
 
-    protected boolean checkCalculateCap(Data data) throws GradeNotSpecifiedException {
+    /**
+     * Calculate user totalScore and totalMC
+     */
+    protected boolean checkCalculateCap(Data data){
         boolean isNotSpec = true;
         double gradeValue;
         totalScore = 0;
@@ -71,6 +76,7 @@ public class CalculateCapAction extends Action {
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
+        modulesWithGrades.clear();
         option = "u";
 
         if (args.thisData == null) {
@@ -116,9 +122,9 @@ public class CalculateCapAction extends Action {
      * Turn grade alphabet to numbers.
      *
      * @param grade grade alphabet
-     * @return grade value in number
+     * @return numeric grade value
      */
-    private double numerateGrade(String grade) throws GradeNotSpecifiedException {
+    private double numerateGrade(String grade) {
         double gradeValue;
         switch (grade) {
         case "A+":
@@ -149,8 +155,11 @@ public class CalculateCapAction extends Action {
         case "D":
             gradeValue = 1;
             break;
+        case "F":
+            gradeValue = 0;
+            break;
         default:
-            throw new GradeNotSpecifiedException();
+            return -1;
         }
         return gradeValue;
     }

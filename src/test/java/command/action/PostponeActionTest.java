@@ -2,7 +2,7 @@
 //
 //import constants.Constants;
 //import org.junit.jupiter.api.Test;
-//import seedu.duke.Duke;
+//import seedu.duke.Domnus;
 //
 //import static org.junit.jupiter.api.Assertions.assertAll;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,7 +12,7 @@
 //    private String[] testCommand = {"postpone", "postpone 1", "postpone 5", "postpone h 5", "postpone a 5"};
 //    @Test
 //    void act_postponeInput_testOutput() {
-//        Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.TEST_FILENAME);
+//        Domnus d = new Domnus(false, System.out, System.in, Constants.PATH, Constants.TEST_FILENAME);
 //        assertAll("PostponeActionTest",
 //            () -> assertTrue(d.testSut(testCommand[0], true, true)
 //                    .contains(Constants.INDEX_OUT)),
