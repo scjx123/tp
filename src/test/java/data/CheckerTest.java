@@ -37,4 +37,3 @@ public class CheckerTest {
 
 }
 */
->>>>>>> a11cc59f3f6b2907918075f11519548ba0f010c9
