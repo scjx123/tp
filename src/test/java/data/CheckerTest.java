@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/*
 public class CheckerTest {
     static Duke d = new Duke(false, System.out, System.in, Constants.PATH,
         Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
@@ -46,3 +46,4 @@ public class CheckerTest {
     }
 
 }
+*/
