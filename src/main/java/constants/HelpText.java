@@ -459,15 +459,6 @@ public enum HelpText {
             "2. \"untake 1 2\" >> mark module 1 and module 2 as not taken",
             "3. \"untake CS2113T\" >> mark module CS2113T as not taken",
             "4. \"untake 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as not taken"
-        }),
-    VIEWTRASH(
-        "viewtrash",
-        "View trash bin",
-        new String[]{
-            "viewtrash",
-        },
-        new String[]{
-            "1.\"viewtrash\""
         });
 
     /**

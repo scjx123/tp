@@ -2,10 +2,7 @@ package seedu.duke;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,9 +19,9 @@ import visualize.Cli;
 import visualize.FancyCli;
 
 /**
- * The type Duke.
+ * The type Domnus.
  */
-public class Duke {
+public class Domnus {
 
     private final Storage storage;
     private final FancyCli fui; // fancy ui
@@ -37,7 +34,7 @@ public class Duke {
 
     //@@author TomLBZ
     /**
-     * Instantiates a new Duke.
+     * Instantiates a new Domnus.
      *
      * @param isFancy        toggle between fancy and normal layout
      * @param stream         the stream
@@ -46,8 +43,8 @@ public class Duke {
      * @param taskFileName   task file name
      * @param courseFileName course file name
      */
-    public Duke(boolean isFancy, PrintStream stream, InputStream input, String directory,
-                String taskFileName, String courseFileName) {
+    public Domnus(boolean isFancy, PrintStream stream, InputStream input, String directory,
+                  String taskFileName, String courseFileName) {
         fui = new FancyCli(stream, input);
         pui = new Cli(stream, input);
         ui = isFancy ? fui : pui;
@@ -116,7 +113,7 @@ public class Duke {
         // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
         // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        // new Duke(!isWindows, System.out, System.in, Constants.PATH,
+        // new Domnus(!isWindows, System.out, System.in, Constants.PATH,
         //        Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
     }
 
@@ -201,7 +198,7 @@ public class Duke {
      * @param command   Command of user
      * @param isStored  determines if output will be stored in duke.txt
      * @param isPrinted determines if output will be to console
-     * @return Duke's response
+     * @return Domnus's response
      */
     public String testSut(String command, boolean isStored, boolean isPrinted) {
         try {
