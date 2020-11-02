@@ -7,6 +7,7 @@ import data.Item;
 import data.SingleModule;
 import data.Data;
 import exceptions.CommandException;
+import exceptions.ModuleNotFoundException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class CalculateCapAction extends Action {
                 }
 
                 double gradeValue = m.getValue();
-                if(gradeValue == -1){
+                if (gradeValue == -1) {
                     return Constants.GRADE_NOT_FOUND;
                 }
 
@@ -53,9 +54,9 @@ public class CalculateCapAction extends Action {
     }
 
     /**
-     * Calculate user totalScore and totalMC
+     * Calculate user totalScore and totalMC.
      */
-    protected boolean checkCalculateCap(Data data){
+    protected boolean checkCalculateCap(Data data) {
         boolean isNotSpec = true;
         double gradeValue;
         totalScore = 0;
@@ -89,6 +90,9 @@ public class CalculateCapAction extends Action {
         //input custom modules
         if (option.equals("m")) {
             while (currData.thisData != null) {
+                if (currData.thisData.thisData == null) {
+                    throw new CommandException();
+                }
                 String moduleCode = currData.thisData.name.toUpperCase();
                 Double grade = numerateGrade(currData.thisData.thisData.name.toUpperCase());
                 modulesWithGrades.put(moduleCode, grade);

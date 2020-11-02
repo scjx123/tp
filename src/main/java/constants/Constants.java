@@ -446,14 +446,19 @@ public class Constants {
     public static final String MODULE_GRADE_CORRUPT = "Your module / grade data has been corrupted!."
         + WIN_NEWLINE;
     public static final String NO_OPERATION_POSSIBLE = "No operations possible." + WIN_NEWLINE;
+
     /**
      * The constant NO_TASK_TYPE.
      */
     public static final String NO_TASK_TYPE = "No task type provided, listing all tasks:" + WIN_NEWLINE;
+    public static final String WORK_LESS = "This means you need to lower your grade to achieve your goal."
+        + SPACE + "Tank the bell curve for us! :D" + WIN_NEWLINE;
     public static final String JIAYOU = "Jia you! :D" + WIN_NEWLINE;
     public static final String LOW_CAP = "You might want too aim higher" + WIN_NEWLINE;
     public static final String HIGH_CAP = "Looks like the target is a bit far away TT" + WIN_NEWLINE;
     public static final String REQUIRED_CAP = "Your required average CAP is: ";
+    public static final String CAN_GRADUATE = "You have taken MC sufficient for your graduation! Goal is reached :D"
+        + WIN_NEWLINE;
     /**
      * The constant NO_URGENT_TASKS.
      */
