@@ -653,6 +653,42 @@ Expected outcome:
     ____________________________________________________________
    ```
 
+### `stats` - Prints Statistics
+
+Typing `stats` prints the percentage of the task completed.
+
+Syntax:
+
+`stats [-option] [-detail]`
+`option: -mod`
+`detail: [module code]`
+
+Example of usage (when focused on task list, and no task is completed): 
+
+`stats`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+	Here are the statistics: 
+	[0.0%]
+    ____________________________________________________________
+   ```
+Example of usage (when checking specific modules, with all task completed): 
+
+`stats -mod CS2113 `
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+	Here are the statistics: 
+	[100.0%]
+    ____________________________________________________________
+   ```
+
+
 ### `next` - Switch the target region to the next page
 
 Typing `next` switches the target region to the next page, should a next page exist.<br>
