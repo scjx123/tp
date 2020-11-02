@@ -849,7 +849,8 @@ Expected outcome:
 
 ### `reminder` - Print tasks that are due soon
 
-Typing `reminder` prints the tasks that are due within a certain time range or to activate the reminder. 
+Typing `reminder` prints the tasks that are due within a certain time range or to activate the reminder.<br>
+Note: The reminder popup is set by default to emerge every 5 minutes.  
 
 Syntax:
 
