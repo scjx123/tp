@@ -202,7 +202,7 @@ public class Constants {
      */
     public static final String PATH = "./data";
     /**
-     * Duke FILENAME.
+     * Domnus FILENAME.
      */
     public static final String TASK_FILENAME = "duke.txt";
     /**
@@ -210,11 +210,11 @@ public class Constants {
      */
     public static final String COURSE_FILENAME = "course.txt";
     /**
-     * Test Duke TASK_FILENAME.
+     * Test Domnus TASK_FILENAME.
      */
     public static final String TEST_TASK_FILENAME = "duke_task_test.txt";
     /**
-     * Test Duke COURSE_FILENAME.
+     * Test Domnus COURSE_FILENAME.
      */
     public static final String TEST_COURSE_FILENAME = "duke_course_test.txt";
 
@@ -394,7 +394,7 @@ public class Constants {
     /**
      * The constant WELCOME.
      */
-    public static final String WELCOME = "Hello, I'm Duke. What can I do for you?";
+    public static final String WELCOME = "Hello, I'm Domnus. What can I do for you?";
     /**
      * The constant HELP_PROMPT.
      */
@@ -437,23 +437,28 @@ public class Constants {
         "Module Not Found! Did you put the module code (e.g. CS2113) correctly?" + WIN_NEWLINE;
     public static final String MOD_NOT_TAKEN = "You have not taken this module yet";
     public static final String MOD_NO_GRADE = "You have not input grade for this module yet";
-    public static final String NO_MOD_GRADED = "You have not input grade for any module yet";
+    public static final String GRADE_NOT_FOUND = "Do you input your grade (e.g. CS2113 A+) correctly?" + WIN_NEWLINE;
     public static final String INVALID_LIST = "Please focus on task list by typing 'focus'" + WIN_NEWLINE;
     public static final String TASK_NOT_SPEC = "You forgot to specify tasks by index!" + WIN_NEWLINE;
     public static final String ITEM_NOT_SPEC = "No item is specified, skipping this command." + WIN_NEWLINE;
     public static final String GRADE_NOT_SPEC = "You have not entered grade for some of your past modules."
         + WIN_NEWLINE;
-    public static final String COURSE_NOT_SPEC = "You have not registered modules that you have taken."
+    public static final String MODULE_GRADE_CORRUPT = "Your module / grade data has been corrupted!."
         + WIN_NEWLINE;
     public static final String NO_OPERATION_POSSIBLE = "No operations possible." + WIN_NEWLINE;
+
     /**
      * The constant NO_TASK_TYPE.
      */
     public static final String NO_TASK_TYPE = "No task type provided, listing all tasks:" + WIN_NEWLINE;
+    public static final String WORK_LESS = "This means you need to lower your grade to achieve your goal."
+        + SPACE + "Tank the bell curve for us! :D" + WIN_NEWLINE;
     public static final String JIAYOU = "Jia you! :D" + WIN_NEWLINE;
     public static final String LOW_CAP = "You might want too aim higher" + WIN_NEWLINE;
     public static final String HIGH_CAP = "Looks like the target is a bit far away TT" + WIN_NEWLINE;
     public static final String REQUIRED_CAP = "Your required average CAP is: ";
+    public static final String CAN_GRADUATE = "You have taken MC sufficient for your graduation! Goal is reached :D"
+        + WIN_NEWLINE;
     /**
      * The constant NO_URGENT_TASKS.
      */

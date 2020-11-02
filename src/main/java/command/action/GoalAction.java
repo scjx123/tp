@@ -22,10 +22,17 @@ public class GoalAction extends CalculateCapAction {
         if (option.equals("u")) {
             checkCalculateCap(data);
         }
+
+        if ((mcGraduate - totalMC) <= 0) {
+            return Constants.CAN_GRADUATE;
+        }
+
         double capRequired = (totalScoreGoal - totalScore) / (mcGraduate - totalMC);
         StringBuilder sb = new StringBuilder();
         sb.append(Constants.REQUIRED_CAP + new DecimalFormat("#.##").format(capRequired) + Constants.WIN_NEWLINE);
-        if (capRequired <= 1.0) {
+        if (capRequired < 0) {
+            sb.append(Constants.WORK_LESS);
+        } else if (capRequired <= 1.0) {
             sb.append(Constants.LOW_CAP);
         } else if (capRequired <= 5.0) {
             sb.append(Constants.JIAYOU);
@@ -45,12 +52,21 @@ public class GoalAction extends CalculateCapAction {
         ParamNode currData = args.thisData;
         option = currData.name;
 
+        if (currData == null || currData.thisData == null || currData.thisData.thisData == null) {
+            throw new CommandException();
+        }
+
         mcGraduate = Integer.parseInt(currData.thisData.name);
         targetCap = Double.parseDouble(currData.thisData.thisData.name);
 
         //input custom mc and cap
         if (option.equals("c")) {
             currData = currData.thisData.thisData;
+
+            if (currData.thisData == null || currData.thisData.thisData == null) {
+                throw new CommandException();
+            }
+
             totalMC = Double.parseDouble(currData.thisData.name);
             double currentCap = Double.parseDouble(currData.thisData.thisData.name);
             totalScore = currentCap * totalMC;
