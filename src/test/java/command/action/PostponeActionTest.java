@@ -1,15 +1,15 @@
-//@author: johanesrafael
-//package command.action;
-//
-//import constants.Constants;
-//import org.junit.jupiter.api.Test;
-//import seedu.duke.Domnus;
-//
-//import static org.junit.jupiter.api.Assertions.assertAll;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//
-//class PostponeActionTest {
-//
+//@@author: johanesrafael
+package command.action;
+
+import constants.Constants;
+import org.junit.jupiter.api.Test;
+import seedu.duke.Domnus;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class PostponeActionTest {
+
 //    private String[] testCommand = {"postpone", "postpone 1", "postpone 5", "postpone h 5", "postpone a 5"};
 //    @Test
 //    void act_postponeInput_testOutput() {
@@ -28,4 +28,4 @@
 //                    + "postpone [index]    OR    postpone [h / w / y] [index]"))
 //        );
 //    }
-//}
+}

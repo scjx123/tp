@@ -83,6 +83,10 @@ public class ReminderAction extends Action {
         }
     }
 
+    /**
+     * Gets timer status.
+     * @return TIMER_TRIGGER
+     */
     public Boolean getTimerStatus() {
         return TIMER_TRIGGER;
     }

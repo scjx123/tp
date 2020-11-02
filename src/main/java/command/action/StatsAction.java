@@ -14,6 +14,9 @@ import exceptions.ModuleNotFoundException;
 
 import java.util.ArrayList;
 
+/**
+ * The type Stats action.
+ */
 public class StatsAction extends Action {
     boolean isMod = false;
     String userInput = "";
