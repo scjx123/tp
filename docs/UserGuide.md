@@ -919,7 +919,7 @@ Expected outcome:
 
 ### `snooze` - Delays reminder popup
 
-Typing `snooze` delays reminder popup by a default of 30 seconds.
+Typing `snooze` delays reminder popup by a default of 1 minute.
 
 Syntax:
 
@@ -933,7 +933,7 @@ Expected outcome:
 
     ```
     ____________________________________________________________
-        I've snoozed the reminder for 30 seconds.
+        I've snoozed the reminder for 1 minute. Will remind you in 6 minutes.
     ____________________________________________________________    
     ```
 

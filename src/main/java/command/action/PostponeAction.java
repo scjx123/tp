@@ -1,4 +1,5 @@
 //@@author: johanesrafael
+
 package command.action;
 
 import command.ParamNode;
