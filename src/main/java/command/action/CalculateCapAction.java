@@ -7,6 +7,7 @@ import data.Item;
 import data.SingleModule;
 import data.Data;
 import exceptions.CommandException;
+import exceptions.ModuleNotFoundException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -89,6 +90,9 @@ public class CalculateCapAction extends Action {
         //input custom modules
         if (option.equals("m")) {
             while (currData.thisData != null) {
+                if(currData.thisData.thisData == null){
+                    throw new CommandException();
+                }
                 String moduleCode = currData.thisData.name.toUpperCase();
                 Double grade = numerateGrade(currData.thisData.thisData.name.toUpperCase());
                 modulesWithGrades.put(moduleCode, grade);
