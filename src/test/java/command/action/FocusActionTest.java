@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Focus Action Test.
  */
 class FocusActionTest {
+    //@author: johanesrafael
     private String[] testCommand = {"focus", "focus deadline", "focus todo", "focus event", "focus task",
                                     "focus mod", "focus selected", "focus taken", "focus asdsds"};
 

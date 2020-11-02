@@ -57,6 +57,7 @@ public class ReminderAction extends Action {
         return builder.toString();
     }
 
+    //@author: johanesrafael
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);

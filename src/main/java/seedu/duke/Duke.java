@@ -63,6 +63,7 @@ public class Duke {
         }
     }
 
+    //@author: johanesrafael
     /**
      * Make Reminder scheduler.
      * @param delay     the delay
@@ -174,6 +175,7 @@ public class Duke {
         }
     }
 
+    //@author: johanesrafael
     /**
      * Set reminder schedule.
      */
@@ -182,6 +184,7 @@ public class Duke {
         reminderTimer(Constants.REMINDER_DELAY, schedule);
     }
 
+    //@author: johanesrafael
     /**
      * Snooze Reminder.
      */
