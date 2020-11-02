@@ -34,7 +34,7 @@ create reminders and calculate their MCs / CAPs.
 ## 3. Setting Up
 
 1.  Ensure that you have Java 11 or above installed.
-2.  Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).
+2.  Download the latest version of  `DOMNUS`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).
 3.  Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.
 4.  Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.
 5.  Navigate to your home folder and type ‘java -jar domnus.jar’
@@ -49,7 +49,7 @@ The **Architecture Diagram** below represents a high-level design overview of th
 
 
 **4.2 Main Layer**<br>
-For the `main` layer, it contains a single class known as `Duke`. 
+For the `main` layer, it contains a single class known as `DOMNUS`. 
 
 **4.3 UI Layer**<br>
 Main gets user input and displays messages through the use of UI component. 
@@ -62,17 +62,17 @@ UI gets user input through *nextline()*, and renders strings as a user-comprehen
 *update(String, Data)*.
 
 UI's interaction with the rest of the program<br>
-UI passes the user's input string out to the Duke object, which then passes the string to the Command Interpreter layer.
+UI passes the user's input string out to the DOMNUS object, which then passes the string to the Command Interpreter layer.
 UI also reads data from the Data object for refreshing purposes, but does not modify it. 
 
 **4.4 Command Interpreter Layer**<br>
-Upon receiving command from the UI, Duke would pass the entire user input into Command Interpreter (CI)
+Upon receiving command from the UI, DOMNUS would pass the entire user input into Command Interpreter (CI)
 
 **4.5 Execute Layer**<br>
-Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
+Once CI processed the user input, DOMNUS proceeds to redirect the input to Execute for execution of action. 
 
 **4.6 Storage Layer**<br>
-Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
+Once CI processed the user input, DOMNUS proceeds to redirect the input to Execute for execution of action. 
 
 **4.7 Flow of DOMSUN**<br>
 The sequence diagram below shows the main interaction of classes with each other throughout the whole lifecycle of DOMSUM.
@@ -453,13 +453,13 @@ _{More to be added}_
 ## Appendix F. Instructions for manual testing
 
 1. Launch and Shutdown 
-Step 1: Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
+Step 1: Download the latest version of  `DOMNUS`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
 Step 2: Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.\
 Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
 Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**
 
 1. Launch and Shutdown 
-Step 1: Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
+Step 1: Download the latest version of  `DOMNUS`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
 Step 2: Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.\
 Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
 Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**
