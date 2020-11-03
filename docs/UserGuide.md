@@ -23,6 +23,7 @@ create reminders, calculate and set goals for their MCs / CAPs.
     * [`delete` - Delete a task from the task list](#delete---delete-a-task-from-the-task-list)
     * [`detail` - Prints item detail](#detail---Prints-item-detail)
     * [`done` - Mark a task as done](#done---mark-a-task-as-done)
+    * [`edit` - Modify attributes of an item](#edit---Modify-attributes-of-an-item)
     * [`event` - Add an event to the task list](#event---add-an-event-to-the-task-list)
     * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---switch-the-ui-to-the-fancy-mode-(gui-like-cli))
     * [`find` - Find an event in the task list](#find---find-an-event-in-the-task-list)
@@ -38,6 +39,7 @@ create reminders, calculate and set goals for their MCs / CAPs.
     * [`reminder` - Print tasks that are due soon](#reminder---print-tasks-that-are-due-soon)
     * [`sel` - Select items by index](#sel---select-items-by-index)
     * [`snooze` - Delays reminder popup](#snooze---delays-reminder-popup)
+    * [`stats` - Prints Statistics](#stats---Prints-Statistics)
     * [`take` - Take module(s)](#take---take-module)
     * [`todo` - Add a todo to the task list](#todo---add-a-todo-to-the-task-list)
     * [`undone` - Mark a task as undone](#undone---mark-a-task-as-undone)
@@ -207,6 +209,83 @@ Example of usage:
 Expected outcome:
 
    ```  
+
+### `edit` - Modify attributes of an item
+
+Typing `edit ` modifies the attributes of an task or module
+
+Syntax:
+
+`edit [-mod / -task] [index / code (for module only)] [field=new value]`
+
+`No space allowed around "=". Use "_" in place of space for the "[field=new value]" parameters`
+
+
+Example of usage:
+`edit -mod CS2113T grade=A`
+
+Exepected outcome:
+    
+    ```
+    ____________________________________________________________
+        Trying to modify the attribute(s) you specified:
+        grade=A; 
+    ____________________________________________________________
+    ```
+
+Example of usage:
+`edit -task 1 description=do_homework`
+
+Expected outcome:
+    
+    ```
+    ____________________________________________________________
+        Trying to modify the attribute(s) you specified:
+        description=do homework; 
+    ____________________________________________________________
+    list
+    ____________________________________________________________
+        Here is the list of items:
+        1.[T][X] do homework
+        2.[T][X] blah
+    ```
+
+Example of usage:
+`edit -task 1 type=event`
+    
+Expected outcome:
+    
+    ```
+    ____________________________________________________________
+        Trying to modify the attribute(s) you specified:
+        type=event; 
+    ____________________________________________________________
+    list
+    ____________________________________________________________
+        Here is the list of items:
+        1.[E][X] do homework (at: Jan 01 2021 00:00)
+        2.[T][X] blah    
+
+    ```
+
+Example of usage:
+`edit -mod CS2113 grade=A -task 1 description=do_homework type=event`
+
+Expected outcome:
+
+    ```
+    ____________________________________________________________
+        Trying to modify the attribute(s) you specified:
+        grade=A; 
+        description=do homework; type=event; 
+    ____________________________________________________________
+    list
+    ____________________________________________________________
+        Here is the list of items:
+        1.[E][X] do homework (at: Jan 01 2021 00:00)
+        2.[T][X] blah
+    ```
+
 
 ### `fancy` - Switch the UI to the fancy mode (GUI-like CLI)
 
@@ -399,6 +478,41 @@ Example of usage:
 Expected outcome ***(GUI mode only)***:
 
 The item list region (top) of the GUI is switched to the previous page if a previous page is available.
+
+### `stats` - Prints Statistics
+
+Typing `stats` prints the percentage of the task completed.
+
+Syntax:
+
+`stats [-option] [-detail]` <br>
+`option: -mod` <br>
+`detail: [module code]`
+
+Example of usage (when focused on task list, and no task is completed): 
+
+`stats`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here are the statistics: 
+    [0.0%]
+    ____________________________________________________________
+   ```
+Example of usage (when checking specific modules, with all task completed): 
+
+`stats -mod CS2113 `
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here are the statistics: 
+    [100.0%]
+    ____________________________________________________________
+   ```
 
 ### `unknown` - Prints error message
 
@@ -959,40 +1073,6 @@ Expected outcome:
     ____________________________________________________________
    ```
 
-### `stats` - Prints Statistics
-
-Typing `stats` prints the percentage of the task completed.
-
-Syntax:
-
-`stats [-option] [-detail]` <br>
-`option: -mod` <br>
-`detail: [module code]`
-
-Example of usage (when focused on task list, and no task is completed): 
-
-`stats`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-    Here are the statistics: 
-    [0.0%]
-    ____________________________________________________________
-   ```
-Example of usage (when checking specific modules, with all task completed): 
-
-`stats -mod CS2113 `
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-    Here are the statistics: 
-    [100.0%]
-    ____________________________________________________________
-   ```
 
 ### `sel` - Select items by index
 
@@ -1115,28 +1195,28 @@ Expected outcome:
 
 **A**: To run this program execute the jar file by ‘java -jar domnus.jar’
 
-### Command Summary
+## Command Summary
 
 A cheat sheet of commonly used commands:
 
-## General Features
+### General Features
 |**Action** | **Format**| **Examples**|
 |------------|-------------|-------------|
 |**add**|`add -task [index] -mod [module code]`|`add -task 1 -mod CS2113`|
 |**bye**|`bye`||
 |**clear** | `clear`||
 |**delete**|`delete [index]`|`delete 2`|
-|**edit**|`edit [-options][-target]`|`edit`|
+|**edit**|`edit [-mod / -task] [index / code (for module only)]`|`edit -mod CS2113 grade=A -task 1 description=do_homework type=event`|
 |**fancy**|`fancy [option]`|`fancy`|
 |**focus**|`focus [deadline / todo / event / task / mod / selected / taken]`|`focus deadline`|
 |**help**|`help [options]`|`help deadline`|
 |**next**|`next [option]`|`next`|
 |**plain**|`plain [option]`|`plain`|
 |**prev**|`prev [option]`|`prev`|
-|**stats**|`stats [option]`|
+|**stats**|`stats [target]`| `stats`|
 
 
-## Daily Tasks
+### Daily Tasks
 |**Action** | **Format**| **Examples**|
 |------------|-------------|-------------|
 |**deadline**|`deadline [description] -by [time]`|`deadline project submission -by 21/9/15 1:12`|
@@ -1151,7 +1231,7 @@ A cheat sheet of commonly used commands:
 |**undone**|`undone [index]`|`undone 2`|
 
 
-## Module Planner
+### Module Planner
 |**Action** | **Format**| **Examples**|
 |------------|-------------|-------------|
 |**cap**|`cap [-option] [module] [grade] {[module] [grade]...}`|`cap -m CS2113 A CG1112 A-`|

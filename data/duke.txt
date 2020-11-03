@@ -1,4 +1,4 @@
-[T][X] blah
+[E][X] do homework (at: Jan 01 2021 00:00)
 [T][X] blah
 [T][X] blah
 [D][X] shower (by: today)
