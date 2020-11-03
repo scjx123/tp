@@ -56,7 +56,7 @@ create reminders and calculate their MCs / CAPs.
 ## 4. Design
 
 ### 4.1 Architecture
-The **Architecture Diagram** below represents a high-level design overview of the App. Specifically, it is done with an **N-tier architectural style**, where the higher layers make use of services provided by lower layers. 
+The **Architecture Diagram** below represents a high-level design overview of the App. Specifically, it is done with an N-tier architectural style, where the higher layers make use of services provided by lower layers. 
 
 ![here](Images/Architecture_Diagram.PNG)
 
@@ -65,9 +65,9 @@ As shown in the above diagram, user only interacts with the UI layer and their c
 **4.2 Main Layer**<br>
 The `main` layer, it contains a single class known as `Domnus`. Its purpose can be split into 3 parts: 
 
-At Start Up: It calls upon the `storage` component to load user's past data and it also loads the complete module list that is packaged inside the JAR file. 
-At Operating: It connects the relevant component of the program to ensure the program is operating as per the intended logic flow. 
-At Shutdown: It exits the running loop of the program to shutdown the program successfully. 
+At Start Up: It calls upon the `storage` component to load user's past data and it also loads the complete module list that is packaged inside the JAR file. <br>
+At Operating: It connects the relevant component of the program to ensure the program is operating as per the intended logic flow. <br>
+At Shutdown: It exits the running loop of the program to shutdown the program successfully. <br>
 
 **4.3 UI Layer**<br>
 Main gets user input and displays messages through the use of UI component. 
