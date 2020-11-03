@@ -16,36 +16,36 @@ create reminders, calculate and set goals for their MCs / CAPs.
 - [Features](#features)
 - [Usage](#usage)
     * [`add` - Add task(s) to module(s)](#add---add-task-to-module)
-    * [`bye` - Quit the program](#bye---Quit-the-program)
-    * [`cap` - Prints CAPs](#cap---Prints-CAPs)
-    * [`clear` - Clear the task list](#clear---Clear-the-task-list)
-    * [`deadline` - Add a deadline to the task list](#deadline---Add-a-deadline-to-the-task-list)
-    * [`delete` - Delete a task from the task list](#delete---Delete-a-task-from-the-task-list)
+    * [`bye` - Quit the program](#bye---quit-the-program)
+    * [`cap` - Prints CAPs](#cap---calculate-caps)
+    * [`clear` - Clear the task list](#clear---clear-the-task-list)
+    * [`deadline` - Add a deadline to the task list](#deadline---add-a-deadline-to-the-task-list)
+    * [`delete` - Delete a task from the task list](#delete---delete-a-task-from-the-task-list)
     * [`detail` - Prints item detail](#detail---Prints-item-detail)
-    * [`done` - Mark a task as done](#done---Mark-a-task-as-done)
-    * [`event` - Add an event to the task list](#event---Add-an-event-to-the-task-list)
-    * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---Switch-the-UI-to-the-fancy-mode-(GUI-like-CLI))
-    * [`find` - Find an event in the task list](#find---Find-an-event-in-the-task-list)
-    * [`focus` - Change the context of the program](#focus---Change-the-context-of-the-program)
-    * [`grade` - Add grade to course or module](#grade---Add-grade-to-course-or-module)  
-    * [`help` - Print help text of the commands](#help---Print-help-text-of-the-commands)
-    * [`list` - Print a list of added tasks](#list---Print-a-list-of-added-tasks)
-    * [`mc` - Prints MCs](#mc---Prints-MCs)
-    * [`next` - Switch the target region to the next page ***(GUI mode only)***](#next---Switch-the-target-region-to-the-next-page)
-    * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---Switch-the-UI-to-the-plain-mode-(pure-text-CLI))
-    * [`prev` - Switch the target region to the previous page ***(GUI mode only)***](#prev---Switch-the-target-region-to-the-previous-page)
-    * [`postpone` - Postpone a task to a later date](#postpone---Postpone-a-task-to-a-later-date)
-    * [`reminder` - Print tasks that are due soon](#reminder---Print-tasks-that-are-due-soon)
-    * [`sel` - Select items by index](#sel---Select-items-by-index)
-    * [`snooze` - Delays reminder popup](#snooze---Delays-reminder-popup)
-    * [`take` - Take module(s)](#take---Take-module)
-    * [`todo` - Add a todo to the task list](#todo---Add-a-todo-to-the-task-list)
-    * [`undone` - Mark a task as undone](#undone---Mark-a-task-as-undone)
-    * [`unknown` - Prints error message](#unknown---Prints-error-message)
-    * [`unsel` - Unselect items](#unsel---Unselect-items)
-    * [`untake` - Untake module(s)](#untake---Untake-module)
-- [Triggering the syntax reminder](#Triggering-the-syntax-reminder)
-- [FAQ](#FAQ)
+    * [`done` - Mark a task as done](#done---mark-a-task-as-done)
+    * [`event` - Add an event to the task list](#event---add-an-event-to-the-task-list)
+    * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---switch-the-ui-to-the-fancy-mode-(gui-like-cli))
+    * [`find` - Find an event in the task list](#find---find-an-event-in-the-task-list)
+    * [`focus` - Change the context of the program](#focus---change-the-context-of-the-program)
+    * [`grade` - Add grade to course or module](#grade---add-grade-to-course-or-module)  
+    * [`help` - Print help text of the commands](#help---print-help-text-of-the-commands)
+    * [`list` - Print a list of added tasks](#list---print-a-list-of-added-tasks)
+    * [`mc` - Prints MCs](#mc---prints-mcs)
+    * [`next` - Switch the target region to the next page ***(GUI mode only)***](#next---switch-the-target-region-to-the-next-page)
+    * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---switch-the-ui-to-the-plain-mode-(pure-text-cli))
+    * [`prev` - Switch the target region to the previous page ***(GUI mode only)***](#prev---switch-the-target-region-to-the-previous-page)
+    * [`postpone` - Postpone a task to a later date](#postpone---postpone-a-task-to-a-later-date)
+    * [`reminder` - Print tasks that are due soon](#reminder---print-tasks-that-are-due-soon)
+    * [`sel` - Select items by index](#sel---select-items-by-index)
+    * [`snooze` - Delays reminder popup](#snooze---delays-reminder-popup)
+    * [`take` - Take module(s)](#take---take-module)
+    * [`todo` - Add a todo to the task list](#todo---add-a-todo-to-the-task-list)
+    * [`undone` - Mark a task as undone](#undone---mark-a-task-as-undone)
+    * [`unknown` - Prints error message](#unknown---prints-error-message)
+    * [`unsel` - Unselect items](#unsel---unselect-items)
+    * [`untake` - Untake module(s)](#untake---untake-module)
+- [Triggering the syntax reminder](#triggering-the-syntax-reminder)
+- [FAQ](#faq)
 - [Command Summary](#command-summary)
 
 ## Preliminaries
@@ -445,7 +445,7 @@ Typing `grade` allows the user to add grade to the user's taken course or module
 
 Syntax:
 
-`grade`
+`grade` <br>
 `grade [-option] [module] [grade] {[module] [grade]...}` <br>
 
 `option: -s(show, default), -a(add)`
@@ -455,19 +455,19 @@ Example of usage:
 `grade -a CS2113 A- CG1112 A-`
 
 Expected outcome:
-    ```
+
     ____________________________________________________________
         These are your grades so far:
         1. CS2113   A-
         2. CG1112   A-
     ____________________________________________________________
-    ```
+    
 Example of usage:
 
 `grade`
 
 Expected outcome:
-    ```
+
     ____________________________________________________________
         These are your grades so far:
         1. CG1112   A-
@@ -476,7 +476,7 @@ Expected outcome:
         4. CS2040C  A
         5. CS2113   A-
     ____________________________________________________________
-    ```
+    
 
 ### `goal` - Calculate how far the user is from his/her target CAP
 
@@ -493,24 +493,23 @@ Example of usage:
 `goal -c 160 4.9 100 4.5`
 
 Expected outcome:
-    ```
+
 	____________________________________________________________
 		Your required average CAP is: 5.57
 		Looks like the target is a bit far away TT
 	____________________________________________________________
-    ```
+	
 Example of usage:
 
 `goal -u 160 4.9`
 
 Expected outcome:
-    ```
+
 	____________________________________________________________
 		Your required average CAP is: 4.89
 		Jia you! :D
 	____________________________________________________________
-    ```
-
+	
 
 ### `help` - Print help text of the commands
 
@@ -647,7 +646,7 @@ Typing `mc` prints the number of MCs based on selected option.
 
 Syntax:
 
-`mc [-option] [-detail]`
+`mc [-option] [-detail]` <br>
 `option: -d(detailed)`
 
 Example of usage (when there are modules in the target): 
@@ -685,8 +684,8 @@ Typing `stats` prints the percentage of the task completed.
 
 Syntax:
 
-`stats [-option] [-detail]`
-`option: -mod`
+`stats [-option] [-detail]` <br>
+`option: -mod` <br>
 `detail: [module code]`
 
 Example of usage (when focused on task list, and no task is completed): 
@@ -722,7 +721,7 @@ This command has no effect on pure text CLI mode.
 
 Syntax:
 
-`next [region]`
+`next [region]` <br>
 `region: i(item list), s(selection), a(all, default)`
 
 Example of usage: 
@@ -766,7 +765,7 @@ This command has no effect on pure text CLI mode.
 
 Syntax:
 
-`prev [region]`
+`prev [region]` <br>
 `region: i(item list), s(selection), a(all, default)`
 
 Example of usage: 
@@ -792,7 +791,7 @@ Note: Option `h` for an hour. Option `w` for a week. Option `y` for a year.
 
 Syntax:
 
-`postpone [index]`
+`postpone [index]` <br>
 `postpone [h/w/y] [index]` 
 
 Example of usage:
@@ -854,7 +853,7 @@ Note: The reminder popup is set by default to emerge every 5 minutes.
 
 Syntax:
 
-`reminder`
+`reminder` <br>
 `reminder [on/off]`
 
 Example of usage: 
