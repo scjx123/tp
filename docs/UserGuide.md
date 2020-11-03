@@ -642,7 +642,7 @@ Expected outcome:
 
 ### `mc` - Prints MCs
 
-Typing `mc` prints the number of MCs based on selected option.
+Typing `mc` prints the number of MCs based on selected option. By default, this command focuses on the entire module list. In order to print the MC of taken modules, do remember to enter 'focus taken' before proceeding with this command. 
 
 Syntax:
 
