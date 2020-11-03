@@ -1108,6 +1108,7 @@ Expected outcome:
 ## Command Summary
 
 A cheat sheet of commonly used commands:
+
 |**Action** | **Format**| **Examples**|
 |------------|-------------|-------------|
 |**add**|`add -task [index] -mod [module code]`|`add -task 1 -mod CS2113`|
