@@ -133,6 +133,10 @@ public class Command implements Help {
         return result.equals(Constants.messageMap.get(Constants.SNOOZE));
     }
 
+    /**
+     * Is remind boolean.
+     * @return
+     */
     public boolean isRemind() {
         return result.equals(Constants.messageMap.get(Constants.REMIND));
     }

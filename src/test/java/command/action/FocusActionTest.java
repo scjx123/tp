@@ -4,7 +4,7 @@ package command.action;
 
 import constants.Constants;
 import org.junit.jupiter.api.Test;
-import seedu.duke.Duke;
+import seedu.duke.Domnus;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,12 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Focus Action Test.
  */
 class FocusActionTest {
+    //@author: johanesrafael
     private String[] testCommand = {"focus", "focus deadline", "focus todo", "focus event", "focus task",
                                     "focus mod", "focus selected", "focus taken", "focus asdsds"};
 
     @Test
     void act_customFocusInput_testOutput() {
-        Duke d = new Duke(false, System.out, System.in, Constants.PATH,
+        Domnus d = new Domnus(false, System.out, System.in, Constants.PATH,
             Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
         assertAll("FocusActionTest",
             () -> assertTrue(d.testSut(testCommand[0], false, true)

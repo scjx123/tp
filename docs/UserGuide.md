@@ -1,10 +1,21 @@
 # User Guide
 
-* [Introduction](#Introduction)
-* [Quick Start](#Quick-Start)
-* [Features](#Features)
-* [Usage (alphabetical order)](#Usage-(alphabetical-order))
-    * [`add` - Add task(s) to module(s)](#add---Add-task-to-module)
+## Introduction
+
+Domsun is a **Desktop Command Line Interface (CLI) program that allows users to manage tasks and modules.** <br>
+Domsun is targeted at busy NUS students who want to manage their tasks and modules well to achieve their dream CAP. <br>
+Users will be able to browse and select modules, create and arrange tasks, add tasks to modules,<br>
+create reminders, calculate and set goals for their MCs / CAPs.
+
+## Contents
+
+- [Preliminaries](#preliminaries)
+  * [Installation](#installation)
+  * [Running the program](#running-the-program)
+  * [Guide format](#guide-format)
+- [Features](#features)
+- [Usage](#usage)
+    * [`add` - Add task(s) to module(s)](#add---add-task-to-module)
     * [`bye` - Quit the program](#bye---Quit-the-program)
     * [`cap` - Prints CAPs](#cap---Prints-CAPs)
     * [`clear` - Clear the task list](#clear---Clear-the-task-list)
@@ -33,79 +44,94 @@
     * [`unknown` - Prints error message](#unknown---Prints-error-message)
     * [`unsel` - Unselect items](#unsel---Unselect-items)
     * [`untake` - Untake module(s)](#untake---Untake-module)
-* [Triggering the syntax reminder](#Triggering-the-syntax-reminder)
-* [FAQ](#FAQ)
-* [Command Summary](#command-summary)
+- [Triggering the syntax reminder](#Triggering-the-syntax-reminder)
+- [FAQ](#FAQ)
+- [Command Summary](#command-summary)
 
+## Preliminaries
 
-## Introduction
-
-Domsun is a CLI program that allows users to manage tasks and modules. <br>
-Users will be able to browse and select modules, create and arrange tasks, add tasks to modules,<br>
-create reminders and calculate their MCs / CAPs.
-
-## Quick Start
-
+### Installation
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Duke` from [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).
-3. Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.
-4. Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS. 
-5. Navigate to your home folder and type ‘java -jar domnus.jar’
-6. Type ‘bye’ to terminate your session.  
+2. Download the latest version of `Domsun` from [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases).
 
+> Java 11 and above is highly recommended, although Domsun might run on a lower version.
+
+### Running the program
+
+Open your command line or terminal and navigate to the folder where you downloaded the jar file (e.g., `~/downloads`). 
+Then simply run the command `java -jar domsun.jar`:
+
+```batch
+$ cd ~/downloads
+$ ls 
+domsun.jar
+$ java -jar domsun.jar
+```
+
+> Note: You can also run Domsun by double clicking the `domsun.jar` file directly.
+
+### Guide format
+
+Words in `[]` are parameters to be supplied by the user. 
+
+> Example: `done [index]`
+> 
+> Here, `index` is a parameter supplied by the user, in this case to specify which task will be marked as done.
+
+//can more stuff here -> we got a lot of this kind of stuff (eg: {}, ..., etc)
 
 ## Features 
 
-#### Addition and removal of tasks
+### Addition and removal of tasks
 The program allows user to add or delete tasks from the task list.<br>
 The program also provides shortcuts such as the `clear` command to delete tasks quickly.
 
-#### Mark tasks as done or undone
+### Mark tasks as done or undone
 The program allows user to mark tasks as done (denoted by `[V]`) or undone (denoted by `[X]`).
 
-#### List tasks and reorder them by their ***date*** field
+### List tasks and reorder them by their ***date*** field
 The program allows user to list tasks in ascending order or descending order with respect to their ***date*** values.<br>
 The program also allows the user to filter the task list and only display tasks within a specified date.
 
-#### Deadlines, Events and ToDo's
+### Deadlines, Events and ToDo's
 The program allows user to create 3 different kinds of tasks, *deadlines*, *events* and *todos*.<br>
 *deadline* and *event* consists of both *description* and *time*, while *todo* does not contain *time*.<br>
 The *time* field consists of a *date* part (such as `Oct 13 1998`), and a *time* part (such as `00:00`).<br>
 
-#### Fuzzy parsing
+### Fuzzy parsing
 The program fuzzily parses user's inputs with respect to date and time.<br>
 `"Oct 13 1998"`, `10/13/98`, `13-10-1998`, `13 Oct 98` and many more common date formats are all supported.<br>
 `1:1:0`, `01:01:00`, `1:01`, `01:1` and many more common time formats are all supported.
 
-#### Auto-save and auto-load
+### Auto-save and auto-load
 The program saves the tasks list automatically every time the list changes. <br>
 When the program loads up, it looks for the last saved tasks list first and tries to load it.
 
-#### Syntax reminder
+### Syntax reminder
 The program can remind the user of the syntax of a command if the command is correct but wrong syntax is present.
 
-#### Module operations
+### Module operations
 The program allows users to list modules, mark modules as taken or untaken, and score grades for each module.
 
-#### Find function
+### Find function
 The program allows users to find items (tasks or modules) by keyword using the `find` command. 
 
-#### Dynamic target
+### Dynamic target
 The program operates data dynamically. Users can operate on items as-is in the displayed sequence,<br>
 and need not follow the sequence of task creation or module addition.
 
-#### GUI inside CLI
+### GUI inside CLI
 The program has a GUI mode that accomplishes a GUI-like CLI interface using the ansi escape code sequence.<br> 
 The user can use `fancy` to switch to the GUI mode and use `plain` to switch to plain text CLI mode.
 
-#### Link tasks to Modules
+### Link tasks to Modules
 The program allows users to add some tasks to modules using the `add` command.
 
-#### Reminders
+### Reminders
 The program allows user to set reminders at certain time, or remind themselves of the most urgent tasks on start-up.
 
-## Usage (alphabetical order)
+## Usage
 
 ### `add` - Add task to module
 
@@ -761,7 +787,8 @@ The item list region (top) of the GUI is switched to the previous page if a prev
 
 ### `postpone` - Postpone a task by index
 
-Typing `postpone` delays a task specified by the user or by default a day
+Typing `postpone` delays a task specified by the user or by default a day.<br>
+Note: Option `h` for an hour. Option `w` for a week. Option `y` for a year.
 
 Syntax:
 
@@ -822,7 +849,8 @@ Expected outcome:
 
 ### `reminder` - Print tasks that are due soon
 
-Typing `reminder` prints the tasks that are due within a certain time range or to activate reminder. 
+Typing `reminder` prints the tasks that are due within a certain time range or to activate the reminder.<br>
+Note: The reminder popup is set by default to emerge every 5 minutes.  
 
 Syntax:
 
@@ -891,7 +919,7 @@ Expected outcome:
 
 ### `snooze` - Delays reminder popup
 
-Typing `snooze` delays reminder popup by a default of 30 seconds
+Typing `snooze` delays reminder popup by a default of 1 minute.
 
 Syntax:
 
@@ -905,7 +933,7 @@ Expected outcome:
 
     ```
     ____________________________________________________________
-        I've snoozed the reminder for 30 seconds.
+        I've snoozed the reminder for 1 minute. Will remind you in 6 minutes.
     ____________________________________________________________    
     ```
 
@@ -1081,35 +1109,35 @@ Expected outcome:
 ## Command Summary
 
 A cheat sheet of commonly used commands:
-**Action** | **Format, Examples**
------------- | -------------
-**add**|`add -task [index] -mod [module code]` <br>e.g. `add -task 1 -mod CS2113`
-**bye**| `bye`
-**cap**|`cap [-option] [module] [grade] {[module] [grade]...}` <br>e.g. `cap -m M1 G1 M2 G2`
-**clear** | `clear`
-**deadline**|`deadline [description] -by [time]` <br>e.g. `deadline project submission -by 21/9/15 1:12`
-**delete**|`delete [index]` <br>e.g. `delete 2`
-**detail**|`detail [index / module code]` <br>e.g. `detail CS2113T`
-**done**|`delete [index]` <br>e.g. `done 2`
-**edit**|`edit [-options][-target]` <br>e.g. `edit`
-**event**|`event [description] -at [time]` <br>e.g. `event concert -at May 13 2020 8:00`
-**fancy**|`fancy [option]` <br>e.g. `fancy`
-**find**|`find [keyword]` <br>e.g. `find exam`
-**focus**|`focus [deadline / todo / event / task / mod / selected / taken]` <br>e.g. `focus deadline`
-**goal**|`goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}`<br>e.g. `goal -c 160 4.9 100 4.5`  
-**grade**|`grade [-option] [module] [grade] {[module] [grade]...}`<br>e.g. `grade -a CS2113 A CG1112 A-`  
-**help**|`help [options]` <br>e.g. `help deadline`
-**list**|`list date [asc / desc / spec “date”]` <br>e.g. `list date asc`
-**mc**|`mc [-option] [-details]` <br>e.g. `mc -p`
-**next**|`next [option]` <br>e.g. `next`
-**plain**|`plain [option]` <br>e.g. `plain`
-**prev**|`prev [option]` <br>e.g. `prev`
-**postpone**| `postpone [index]` <br>e.g. `postpone 1`
-**reminder**|`reminder [on/off]` <br>e.g. `reminder`
-**sel**|`sel [index / module code]` <br>e.g. `sel 1 2 3`
-**snooze**|`snooze`
-**take**|`take [index / module code]` <br>e.g. `take CS2113T`
-**todo**|`todo [description]` <br>e.g. `todo borrow book`
-**undone**|`undone [index]` <br>e.g. `undone 2`
-**unsel**|`unsel [index / module code]` <br>e.g. `unsel CS1010 CS2113`
-**untake**|`untake [index / module code]` <br>e.g. `untake CS2113T`
+|**Action** | **Format**| **Examples**|
+|------------|-------------|-------------|
+|**add**|`add -task [index] -mod [module code]`|`add -task 1 -mod CS2113`|
+|**bye**|`bye`||
+|**cap**|`cap [-option] [module] [grade] {[module] [grade]...}`|`cap -m CS2113 A CG1112 A-`|
+|**clear** | `clear`||
+|**deadline**|`deadline [description] -by [time]`|`deadline project submission -by 21/9/15 1:12`|
+|**delete**|`delete [index]`|`delete 2`|
+|**detail**|`detail [index / module code]`|`detail CS2113T`|
+|**done**|`done [index]`|`done 2`|
+|**edit**|`edit [-options][-target]`|`edit`|
+|**event**|`event [description] -at [time]`|`event concert -at May 13 2020 8:00`|
+|**fancy**|`fancy [option]`|`fancy`|
+|**find**|`find [keyword]`|`find exam`|
+|**focus**|`focus [deadline / todo / event / task / mod / selected / taken]`|`focus deadline`|
+|**goal**|`goal [-option] [total MC] [target CAP] [taken MC] [current CAP]`|`goal -c 160 4.9 100 4.5`|
+|**grade**|`grade [-option] [module] [grade] {[module] [grade]...}`|`grade -a CS2113 A CG1112 A-`|
+|**help**|`help [options]`|`help deadline`|
+|**list**|`list date [asc / desc / spec “date”]`|`list date asc`|
+|**mc**|`mc [-option] [-details]`|`mc -p`|
+|**next**|`next [option]`|`next`|
+|**plain**|`plain [option]`|`plain`|
+|**prev**|`prev [option]`|`prev`|
+|**postpone**| `postpone [index]`|`postpone 1`|
+|**reminder**|`reminder [on/off]` |`reminder`|
+|**sel**|`sel [index / module code]`|`sel 1 2 3`|
+|**snooze**|`snooze`||
+|**take**|`take [index / module code]`|`take CS2113T`|
+|**todo**|`todo [description]`|`todo borrow book`|
+|**undone**|`undone [index]`|`undone 2`|
+|**unsel**|`unsel [index / module code]`|`unsel CS1010 CS2113`|
+|**untake**|`untake [index / module code]`|`untake CS2113T`|

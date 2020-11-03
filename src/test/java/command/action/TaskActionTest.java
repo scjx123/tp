@@ -4,14 +4,14 @@ import constants.Constants;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import seedu.duke.Duke;
+import seedu.duke.Domnus;
 
 /**
  * Tests for various task actions.
  */
 class TaskActionTest {
 
-    private Duke duke = new Duke(false, System.out, System.in, Constants.PATH,
+    private Domnus duke = new Domnus(false, System.out, System.in, Constants.PATH,
         Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 
     @Test
