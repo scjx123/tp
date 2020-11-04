@@ -202,7 +202,7 @@ public class Constants {
      */
     public static final String PATH = "./data";
     /**
-     * Domnus FILENAME.
+     * Domsun FILENAME.
      */
     public static final String TASK_FILENAME = "duke.txt";
     /**
@@ -210,11 +210,11 @@ public class Constants {
      */
     public static final String COURSE_FILENAME = "course.txt";
     /**
-     * Test Domnus TASK_FILENAME.
+     * Test Domsun TASK_FILENAME.
      */
     public static final String TEST_TASK_FILENAME = "duke_task_test.txt";
     /**
-     * Test Domnus COURSE_FILENAME.
+     * Test Domsun COURSE_FILENAME.
      */
     public static final String TEST_COURSE_FILENAME = "duke_course_test.txt";
 
@@ -446,9 +446,13 @@ public class Constants {
      */
     public static final String INVALID = "Invalid Command! Please check the syntax." + WIN_NEWLINE;
     /**
+     * The constant DUPLICATED_TASK.
+     */
+    public static final String DUPLICATED_TASK = "Duplicated Task was found. Task not added" + WIN_NEWLINE;
+    /**
      * The constant WELCOME.
      */
-    public static final String WELCOME = "Hello, I'm Domnus. What can I do for you?";
+    public static final String WELCOME = "Hello, I'm Domsun. What can I do for you?";
     /**
      * The constant HELP_PROMPT.
      */

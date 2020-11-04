@@ -2,6 +2,7 @@ package data;
 
 import data.jobs.Task;
 import data.jobs.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
@@ -11,6 +12,11 @@ public class Checker {
      * Status of clashing item.
      */
     public boolean isClash = false;
+
+    /**
+     * Status of clashing item.
+     */
+    public boolean isTodo = false;
 
     /**
      * used for checking of type of list being passed in.
@@ -48,12 +54,13 @@ public class Checker {
      */
     public boolean checkDuplicates() {
         if (item instanceof ToDo) {
-            return false;
-        } else {
-            checkClash(list, item);
-            return isClash;
+            isTodo = true;
         }
+
+        checkClash(list, item);
+        return isClash;
     }
+
 
     /**
      * Checks for duplicated when given a list and the item to be checked.
@@ -62,23 +69,20 @@ public class Checker {
      * @param item the item to be checked
      */
     public void checkClash(ArrayList<Item> list, Item item) {
-        switch (listType) {
-        case "tasks":
-            for (Item t : list) {
-                LocalDateTime firstDateTime = item.getDateTime();
-                LocalDateTime secondDateTime = t.getDateTime();
-                String firstDescription = item.getName();
-                String secondDescription = t.getName();
-                if (firstDescription.equals(secondDescription)
-                        && firstDateTime.isEqual(secondDateTime)) {
+        for (Item t : list) {
+            LocalDateTime firstDateTime = item.getDateTime();
+            LocalDateTime secondDateTime = t.getDateTime();
+            String firstDescription = item.getName();
+            String secondDescription = t.getName();
+
+            if (isTodo) {
+                if (firstDescription.equals(secondDescription)) {
                     isClash = true;
-                    break;
                 }
+            } else if (firstDescription.equals(secondDescription)
+                    && firstDateTime.isEqual(secondDateTime)) {
+                isClash = true;
             }
-            break;
-        case "mods":
-        default:
-            break;
         }
     }
 
