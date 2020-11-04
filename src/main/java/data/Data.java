@@ -7,6 +7,7 @@ import data.jobs.Deadline;
 import data.jobs.Event;
 import data.jobs.Task;
 import data.jobs.ToDo;
+import exceptions.DuplicateTaskException;
 import messages.MessageOptions;
 
 import java.time.LocalDateTime;
@@ -126,7 +127,7 @@ public class Data {
     }
 
 
-    public void addTask(Task task) {
+    public void addTask(Task task) throws Exception {
         ArrayList<Item> tempList = new ArrayList<>(getTarget(getTaskType(task)));
         Checker cc = new Checker(tempList, task);
         LocalDateTime newDate = cc.checkRecurrenceDate(task);
@@ -137,6 +138,7 @@ public class Data {
             tasks.add(task);
         } else {
             LOGGER.log(Level.INFO, "Duplicate found! Task was not added to data");
+            throw new DuplicateTaskException();
         }
         refreshTarget();
     }

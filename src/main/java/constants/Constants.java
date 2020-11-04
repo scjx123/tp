@@ -392,6 +392,10 @@ public class Constants {
      */
     public static final String INVALID = "Invalid Command! Please check the syntax." + WIN_NEWLINE;
     /**
+     * The constant DUPLICATED_TASK.
+     */
+    public static final String DUPLICATED_TASK = "Duplicated Task was found. Task not added" + WIN_NEWLINE;
+    /**
      * The constant WELCOME.
      */
     public static final String WELCOME = "Hello, I'm Duke. What can I do for you?";

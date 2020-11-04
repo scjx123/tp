@@ -93,6 +93,7 @@ public class Item {
      * @return the local date time
      */
     public static LocalDateTime parseDateTime(String input) {
+
         if (input.contains("Weekly")) {
             WeeklyFlag = true;
             input = input.replace("Weekly","");
