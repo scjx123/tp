@@ -23,6 +23,7 @@ create reminders, calculate and set goals for their MCs / CAPs.
     * [`delete` - Delete a task from the task list](#delete---delete-a-task-from-the-task-list)
     * [`detail` - Prints item detail](#detail---Prints-item-detail)
     * [`done` - Mark a task as done](#done---mark-a-task-as-done)
+    * [`edit` - Modify attributes of an item](#edit---Modify-attributes-of-an-item)
     * [`event` - Add an event to the task list](#event---add-an-event-to-the-task-list)
     * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---switch-the-ui-to-the-fancy-mode-(gui-like-cli))
     * [`find` - Find an event in the task list](#find---find-an-event-in-the-task-list)
@@ -38,6 +39,7 @@ create reminders, calculate and set goals for their MCs / CAPs.
     * [`reminder` - Print tasks that are due soon](#reminder---print-tasks-that-are-due-soon)
     * [`sel` - Select items by index](#sel---select-items-by-index)
     * [`snooze` - Delays reminder popup](#snooze---delays-reminder-popup)
+    * [`stats` - Prints Statistics](#stats---Prints-Statistics)
     * [`take` - Take module(s)](#take---take-module)
     * [`todo` - Add a todo to the task list](#todo---add-a-todo-to-the-task-list)
     * [`undone` - Mark a task as undone](#undone---mark-a-task-as-undone)
@@ -133,6 +135,8 @@ The program allows user to set reminders at certain time, or remind themselves o
 
 ## Usage
 
+## Features - General Features for both Daily Tasks & Module Planner
+
 ### `add` - Add task to module
 
 Typing `add` adds specified task(s) to specified module(s).
@@ -172,37 +176,6 @@ Expected outcome:
     ____________________________________________________________
    ```
 
-### `cap` - Prints CAPs
-
-Typing `mc` prints the calculated CAP for courses based on selected option.
-
-Syntax:
-
-`cap [-option] [module] [grade] {[module] [grade]...}`
-`option: -u(user, default), -m(multiple/custom modules)`
-
-Example of usage (when there are modules in the target): 
-
-`cap`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-    Here is your existing CAP: 4.00
-    ____________________________________________________________
-   ```
-Example of usage (when there are modules in the target): 
-
-`cap -m CS2113 A CS1010 B`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-    Here is your existing CAP: 4.25
-    ____________________________________________________________
-   ```
 
 ### `clear` - Clear the task list
 
@@ -217,29 +190,6 @@ Expected outcome:
    ```  
     ____________________________________________________________
         Nice! I've cleared everything in the list.
-    ____________________________________________________________
-   ```
-
-### `deadline` - Add a deadline to the task list
-
-Typing `deadline` allows the program to parse user's input and create a ***deadline*** object with 
-specified *description* and *time*. It will be appended to the end of the task list.
-
-Syntax: 
-
-`deadline [description] /by [time]`
-
-Example of usage:
-
-`deadline ddl /by 21/9/15 1:12`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-        Got it. I've added this task:
-        [D][X] ddl (by: Sep 15 2021 01:12)
-        Now you have 1 tasks in the list.
     ____________________________________________________________
    ```
 
@@ -259,98 +209,83 @@ Example of usage:
 Expected outcome:
 
    ```  
-    ____________________________________________________________
-        Noted. I've removed this task:
-        [D][X] ddl (by: Sep 15 2021 01:12)
-        Now you have 0 tasks in the list.
-    ____________________________________________________________
-   ```
 
-### `detail` - Prints item detail
+### `edit` - Modify attributes of an item
 
-Typing `unknown` prints the details of a specified item.
+Typing `edit ` modifies the attributes of an task or module
 
 Syntax:
 
-`detail [module code (for modules only) / index]`
+`edit [-mod / -task] [index / code (for module only)] [field=new value]`
 
-Example of usage: 
+`No space allowed around "=". Use "_" in place of space for the "[field=new value]" parameters`
 
-`detail 1`
+
+Example of usage:
+`edit -mod CS2113T grade=A`
+
+Exepected outcome:
+    
+    ```
+    ____________________________________________________________
+        Trying to modify the attribute(s) you specified:
+        grade=A; 
+    ____________________________________________________________
+    ```
+
+Example of usage:
+`edit -task 1 description=do_homework`
+
+Expected outcome:
+    
+    ```
+    ____________________________________________________________
+        Trying to modify the attribute(s) you specified:
+        description=do homework; 
+    ____________________________________________________________
+    list
+    ____________________________________________________________
+        Here is the list of items:
+        1.[T][X] do homework
+        2.[T][X] blah
+    ```
+
+Example of usage:
+`edit -task 1 type=event`
+    
+Expected outcome:
+    
+    ```
+    ____________________________________________________________
+        Trying to modify the attribute(s) you specified:
+        type=event; 
+    ____________________________________________________________
+    list
+    ____________________________________________________________
+        Here is the list of items:
+        1.[E][X] do homework (at: Jan 01 2021 00:00)
+        2.[T][X] blah    
+
+    ```
+
+Example of usage:
+`edit -mod CS2113 grade=A -task 1 description=do_homework type=event`
 
 Expected outcome:
 
-   ```  
+    ```
     ____________________________________________________________
-    Here are the details you requested:
-    Item 1: [T][X] borrow book
+        Trying to modify the attribute(s) you specified:
+        grade=A; 
+        description=do homework; type=event; 
     ____________________________________________________________
-   ```
-
-Example of usage: 
-
-`detail CS2113T`
-
-Expected outcome:
-
-   ```  
+    list
     ____________________________________________________________
-    Here are the details you requested:
-    Item: CS2113T Software Engineering & Object-Oriented Programming 4MC
-    "This module introduces the necessary skills for systematic and rigorous development of software sys
-    tems. It covers requirements, design, implementation, quality assurance, and project management aspe
-    cts of small-to-medium size multi-person software projects. The module uses the Object Oriented Prog
-    ramming paradigm. Students of this module will receive hands-on practice of tools commonly used in t
-    he industry, such as test automation tools, build automation tools, and code revisioning tools will 
-    be covered.
-    Tasks: [NOT FOUND]
-    ____________________________________________________________
-   ```
+        Here is the list of items:
+        1.[E][X] do homework (at: Jan 01 2021 00:00)
+        2.[T][X] blah
+    ```
 
-### `done` - Mark a task as done
-
-Typing `done` allows the user to mark the task at a specified *index* as **done**.<br>
-Note: *index* can be an integer number or a letter (`A` or `a` corresponds to 1).
-
-Syntax:
-
-`done [index]`
-
-Example of usage: 
-
-`done 1`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-        Nice! I've marked this task as done:
-        [D][V] ddl (by: Sep 15 2021 01:12)
-    ____________________________________________________________
-   ```
-
-### `event` - Add an event to the task list
-
-Typing `event` allows the program to parse user's input and create an ***event*** object with 
-specified *description* and *time*. It will be appended to the end of the task list.
-
-Syntax:
-
-`event [description] /at [time]`
-
-Example of usage: 
-
-`event midterm exam /at May 13 2020 8:00`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-        Got it. I've added this task:
-        [E][X] midterm exam (at: May 13 2020 08:00)
-        Now you have 1 tasks in the list.
-    ____________________________________________________________
-   ```
 
 ### `fancy` - Switch the UI to the fancy mode (GUI-like CLI)
 
@@ -370,38 +305,6 @@ Expected outcome:
 
 the UI switches to fancy mode (GUI-like CLI interface).
 
-### `find` - Find an event in the task list
-
-Typing `find` commands the program to search through the task list and print all tasks with the
-specified *keyword*. If there is no task with such a *keyword*, `[NOT FOUND]` will be printed instead.
-
-Syntax:
-
-`find [keyword]`
-
-Example of usage: 
-
-`find exam`
-
-Expected outcome (found):
-
-   ```  
-    ____________________________________________________________
-        Tasks with the specified keyword are:
-        1.[D][X] math exam (by: Oct 15 2020 10:30)
-        2.[D][X] CS exam (by: Oct 18 2020 15:00)
-        3.[E][X] exam review session (at: Oct 01 2020 08:00)
-    ____________________________________________________________
-   ```
-
-Expected outcome (not found):
-
-   ```  
-    ____________________________________________________________
-        Tasks with the specified keyword are:
-        [NOT FOUND]
-    ____________________________________________________________
-   ```
 
 ### `focus` - Change the context of the program
 
@@ -438,79 +341,6 @@ Expected outcome:
     task
     ____________________________________________________________
    ```
-
-### `grade` - Add grade to course or module
-
-Typing `grade` allows the user to add grade to the user's taken course or module.
-
-Syntax:
-
-`grade` <br>
-`grade [-option] [module] [grade] {[module] [grade]...}` <br>
-
-`option: -s(show, default), -a(add)`
-
-Example of usage:
-
-`grade -a CS2113 A- CG1112 A-`
-
-Expected outcome:
-
-    ____________________________________________________________
-        These are your grades so far:
-        1. CS2113   A-
-        2. CG1112   A-
-    ____________________________________________________________
-    
-Example of usage:
-
-`grade`
-
-Expected outcome:
-
-    ____________________________________________________________
-        These are your grades so far:
-        1. CG1112   A-
-        2. CS1010   A
-        3. CS1231   B
-        4. CS2040C  A
-        5. CS2113   A-
-    ____________________________________________________________
-    
-
-### `goal` - Calculate how far the user is from his/her target CAP
-
-Typing `goal` allows the user to calculate how far the user is from his/her target CAP.
-
-Syntax:
-
-`goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}` <br>
-
-`option: -u(user's cap and mc), -c(custom cap and mc)`
-
-Example of usage:
-
-`goal -c 160 4.9 100 4.5`
-
-Expected outcome:
-
-	____________________________________________________________
-		Your required average CAP is: 5.57
-		Looks like the target is a bit far away TT
-	____________________________________________________________
-	
-Example of usage:
-
-`goal -u 160 4.9`
-
-Expected outcome:
-
-	____________________________________________________________
-		Your required average CAP is: 4.89
-		Jia you! :D
-	____________________________________________________________
-	
-
 ### `help` - Print help text of the commands
 
 Typing `help` allows the user to either print a list of available commands, 
@@ -578,141 +408,6 @@ Expected outcome:
     ____________________________________________________________
 
    ```
-
-### `list` - Print a list of added tasks
-
-Typing `list` commands the program to print either all added tasks or tasks at a specified *date*.<br>
-The user can also control how the tasks printed are ordered with respect to *date*:<br>
-
-The `asc` parameter tells the program to list tasks in ascending order with respect to their *date* field.<br>
-The `desc` parameter tells the program to list tasks in descending order with respect to their *date* field.<br>
-The `spec` parameter tells the program to only list tasks with the specified value of the *date* field.<br>
-
-Note: with each execution of the `list` command, the indices of all tasks will be 
-dynamically changed to refer to the task in the current list with the current indices.<br>
-In other words, indices of tasks are not tied to their sequence of creation, allowing the user
-to use commands much more flexibly, especially with the `find` command or the reordering parameters.
-
-Syntax:
-
-`list` <br> `list date [asc / desc / spec "date"]`, where `"date"` can be in any common date format.
-
-Example of usage: 
-
-`list`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-        Here is the list of tasks:
-        1.[D][X] math exam (by: Oct 15 2020 10:30)
-        2.[D][X] CS exam (by: Oct 18 2020 15:00)
-        3.[E][X] exam review session (at: Oct 01 2020 08:00)
-    ____________________________________________________________
-   ```
-
-Example of usage: 
-
-`list date asc`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-        Here is the list of tasks:
-        1.[E][X] exam review session (at: Oct 01 2020 08:00)
-        2.[D][X] math exam (by: Oct 15 2020 10:30)
-        3.[D][X] CS exam (by: Oct 18 2020 15:00)
-    ____________________________________________________________
-   ```
-
-Example of usage: 
-
-`list date spec 10/15/20`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-        Here is the list of tasks:
-        1.[D][X] math exam (by: Oct 15 2020 10:30)
-    ____________________________________________________________
-   ```
-
-### `mc` - Prints MCs
-
-Typing `mc` prints the number of MCs based on selected option.
-
-Syntax:
-
-`mc [-option] [-detail]` <br>
-`option: -d(detailed)`
-
-Example of usage (when there are modules in the target): 
-
-`mc`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-    Here is the total MC:
-    22
-    ____________________________________________________________
-   ```
-Example of usage (when there are modules in the target): 
-
-`mc -d`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-    Here is the total MC:
-    EE1001: 4MCs
-    EE1001X: 4MCs
-    EE1002: 4MCs
-    EE1003: 4MCs
-    EE1111: 6MCs
-    ____________________________________________________________
-   ```
-
-### `stats` - Prints Statistics
-
-Typing `stats` prints the percentage of the task completed.
-
-Syntax:
-
-`stats [-option] [-detail]` <br>
-`option: -mod` <br>
-`detail: [module code]`
-
-Example of usage (when focused on task list, and no task is completed): 
-
-`stats`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-	Here are the statistics: 
-	[0.0%]
-    ____________________________________________________________
-   ```
-Example of usage (when checking specific modules, with all task completed): 
-
-`stats -mod CS2113 `
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-	Here are the statistics: 
-	[100.0%]
-    ____________________________________________________________
-   ```
-
 
 ### `next` - Switch the target region to the next page
 
@@ -783,6 +478,239 @@ Example of usage:
 Expected outcome ***(GUI mode only)***:
 
 The item list region (top) of the GUI is switched to the previous page if a previous page is available.
+
+### `stats` - Prints Statistics
+
+Typing `stats` prints the percentage of the task completed.
+
+Syntax:
+
+`stats [-option] [-detail]` <br>
+`option: -mod` <br>
+`detail: [module code]`
+
+Example of usage (when focused on task list, and no task is completed): 
+
+`stats`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here are the statistics: 
+    [0.0%]
+    ____________________________________________________________
+   ```
+Example of usage (when checking specific modules, with all task completed): 
+
+`stats -mod CS2113 `
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here are the statistics: 
+    [100.0%]
+    ____________________________________________________________
+   ```
+
+### `unknown` - Prints error message
+
+Typing `unknown` or any string that is not a command will trigger the `unknown` command.<br>
+The `unknown` command prints an error message for debug purposes, it is also the default behaviour of the program
+when it fails to recognize the user's command. <br>
+
+Note: If the program recognizes the command successfully, yet fails to find required parameters, 
+it will not trigger this `unknown` command. It will print a syntax error and remind the user of
+the correct syntax instead.
+
+Syntax:
+
+`unknown` <br> `[anything that is not a command]`
+
+Example of usage: 
+
+`who is duke?`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+        OOPS, I don't know what that means :-( Try "help"!
+    ____________________________________________________________
+   ```
+
+## Features - Daily Tasks 
+
+### `deadline` - Add a deadline to the task list
+
+Typing `deadline` allows the program to parse user's input and create a ***deadline*** object with 
+specified *description* and *time*. It will be appended to the end of the task list.
+
+Syntax: 
+
+`deadline [description] /by [time]`
+
+Example of usage:
+
+`deadline ddl /by 21/9/15 1:12`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+        Got it. I've added this task:
+        [D][X] ddl (by: Sep 15 2021 01:12)
+        Now you have 1 tasks in the list.
+    ____________________________________________________________
+   ```
+
+
+    ____________________________________________________________
+        Noted. I've removed this task:
+        [D][X] ddl (by: Sep 15 2021 01:12)
+        Now you have 0 tasks in the list.
+    ____________________________________________________________
+   ```
+
+### `done` - Mark a task as done
+
+Typing `done` allows the user to mark the task at a specified *index* as **done**.<br>
+Note: *index* can be an integer number or a letter (`A` or `a` corresponds to 1).
+
+Syntax:
+
+`done [index]`
+
+Example of usage: 
+
+`done 1`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+        Nice! I've marked this task as done:
+        [D][V] ddl (by: Sep 15 2021 01:12)
+    ____________________________________________________________
+   ```
+
+### `event` - Add an event to the task list
+
+Typing `event` allows the program to parse user's input and create an ***event*** object with 
+specified *description* and *time*. It will be appended to the end of the task list.
+
+Syntax:
+
+`event [description] /at [time]`
+
+Example of usage: 
+
+`event midterm exam /at May 13 2020 8:00`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+        Got it. I've added this task:
+        [E][X] midterm exam (at: May 13 2020 08:00)
+        Now you have 1 tasks in the list.
+    ____________________________________________________________
+   ```
+
+### `find` - Find an event in the task list
+
+Typing `find` commands the program to search through the task list and print all tasks with the
+specified *keyword*. If there is no task with such a *keyword*, `[NOT FOUND]` will be printed instead.
+
+Syntax:
+
+`find [keyword]`
+
+Example of usage: 
+
+`find exam`
+
+Expected outcome (found):
+
+   ```  
+    ____________________________________________________________
+        Tasks with the specified keyword are:
+        1.[D][X] math exam (by: Oct 15 2020 10:30)
+        2.[D][X] CS exam (by: Oct 18 2020 15:00)
+        3.[E][X] exam review session (at: Oct 01 2020 08:00)
+    ____________________________________________________________
+   ```
+
+Expected outcome (not found):
+
+   ```  
+    ____________________________________________________________
+        Tasks with the specified keyword are:
+        [NOT FOUND]
+    ____________________________________________________________
+   ```
+
+### `list` - Print a list of added tasks
+
+Typing `list` commands the program to print either all added tasks or tasks at a specified *date*.<br>
+The user can also control how the tasks printed are ordered with respect to *date*:<br>
+
+The `asc` parameter tells the program to list tasks in ascending order with respect to their *date* field.<br>
+The `desc` parameter tells the program to list tasks in descending order with respect to their *date* field.<br>
+The `spec` parameter tells the program to only list tasks with the specified value of the *date* field.<br>
+
+Note: with each execution of the `list` command, the indices of all tasks will be 
+dynamically changed to refer to the task in the current list with the current indices.<br>
+In other words, indices of tasks are not tied to their sequence of creation, allowing the user
+to use commands much more flexibly, especially with the `find` command or the reordering parameters.
+
+Syntax:
+
+`list` <br> `list date [asc / desc / spec "date"]`, where `"date"` can be in any common date format.
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+        Here is the list of tasks:
+        1.[D][X] math exam (by: Oct 15 2020 10:30)
+        2.[D][X] CS exam (by: Oct 18 2020 15:00)
+        3.[E][X] exam review session (at: Oct 01 2020 08:00)
+    ____________________________________________________________
+   ```
+
+Example of usage: 
+
+`list date asc`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+        Here is the list of tasks:
+        1.[E][X] exam review session (at: Oct 01 2020 08:00)
+        2.[D][X] math exam (by: Oct 15 2020 10:30)
+        3.[D][X] CS exam (by: Oct 18 2020 15:00)
+    ____________________________________________________________
+   ```
+
+Example of usage: 
+
+`list date spec 10/15/20`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+        Here is the list of tasks:
+        1.[D][X] math exam (by: Oct 15 2020 10:30)
+    ____________________________________________________________
+   ```
 
 ### `postpone` - Postpone a task by index
 
@@ -893,29 +821,6 @@ Expected outcome:
     ____________________________________________________________
    ```
 
-### `sel` - Select items by index
-
-Typing `sel` selects the items specified.
-
-Syntax:
-
-`sel [index(es) (for the currently listed items) / module code(s) (for modules only)]`
-
-Example of usage: 
-
-`sel 1 2 3`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-    I have selected the items you specified:
-    Item 1: borrow book
-    Item 2: eat
-    Item 3: jumping
-    ____________________________________________________________
-   ```
-
 ### `snooze` - Delays reminder popup
 
 Typing `snooze` delays reminder popup by a default of 1 minute.
@@ -935,29 +840,6 @@ Expected outcome:
         I've snoozed the reminder for 1 minute. Will remind you in 6 minutes.
     ____________________________________________________________    
     ```
-
-
-### `take` - Take module
-
-Typing `take` marks specified module(s) as taken.
-
-Syntax:
-
-`take [index(es) / module code(s) (for modules only)]`
-
-Example of usage: 
-
-`take CS2113 CS2113T`
-
-Expected outcome:
-
-   ```  
-    ____________________________________________________________
-    I have marked these modules as taken:
-    Module: CS2113
-    Module: CS2113T
-    ____________________________________________________________
-   ```
 
 ### `todo` - Add a todo to the task list
 
@@ -1004,29 +886,236 @@ Expected outcome:
     ____________________________________________________________
    ```
 
-### `unknown` - Prints error message
+## Features - Module Planner 
 
-Typing `unknown` or any string that is not a command will trigger the `unknown` command.<br>
-The `unknown` command prints an error message for debug purposes, it is also the default behaviour of the program
-when it fails to recognize the user's command. <br>
 
-Note: If the program recognizes the command successfully, yet fails to find required parameters, 
-it will not trigger this `unknown` command. It will print a syntax error and remind the user of
-the correct syntax instead.
+### `cap` - Prints CAPs
+
+Typing `mc` prints the calculated CAP for courses based on selected option.
 
 Syntax:
 
-`unknown` <br> `[anything that is not a command]`
+`cap [-option] [module] [grade] {[module] [grade]...}`
+`option: -u(user, default), -m(multiple/custom modules)`
 
-Example of usage: 
+Example of usage (when there are modules in the target): 
 
-`who is duke?`
+`cap`
 
 Expected outcome:
 
    ```  
     ____________________________________________________________
-        OOPS, I don't know what that means :-( Try "help"!
+    Here is your existing CAP: 4.00
+    ____________________________________________________________
+   ```
+Example of usage (when there are modules in the target): 
+
+`cap -m CS2113 A CS1010 B`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here is your existing CAP: 4.25
+    ____________________________________________________________
+   ```
+
+
+### `detail` - Prints item detail
+Typing `detail` prints the details of a specified item.
+
+Syntax:
+
+`detail [module code (for modules only) / index]`
+
+Example of usage: 
+
+`detail 1`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here are the details you requested:
+    Item 1: [T][X] borrow book
+    ____________________________________________________________
+   ```
+
+Example of usage: 
+
+`detail CS2113T`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here are the details you requested:
+    Item: CS2113T Software Engineering & Object-Oriented Programming 4MC
+    "This module introduces the necessary skills for systematic and rigorous development of software sys
+    tems. It covers requirements, design, implementation, quality assurance, and project management aspe
+    cts of small-to-medium size multi-person software projects. The module uses the Object Oriented Prog
+    ramming paradigm. Students of this module will receive hands-on practice of tools commonly used in t
+    he industry, such as test automation tools, build automation tools, and code revisioning tools will 
+    be covered.
+    Tasks: [NOT FOUND]
+    ____________________________________________________________
+   ```
+
+
+### `grade` - Add grade to course or module
+
+Typing `grade` allows the user to add grade to the user's taken course or module.
+
+Syntax:
+
+`grade` <br>
+`grade [-option] [module] [grade] {[module] [grade]...}` <br>
+
+`option: -s(show, default), -a(add)`
+
+Example of usage:
+
+`grade -a CS2113 A- CG1112 A-`
+
+Expected outcome:
+
+    ____________________________________________________________
+        These are your grades so far:
+        1. CS2113   A-
+        2. CG1112   A-
+    ____________________________________________________________
+    
+Example of usage:
+
+`grade`
+
+Expected outcome:
+
+    ____________________________________________________________
+        These are your grades so far:
+        1. CG1112   A-
+        2. CS1010   A
+        3. CS1231   B
+        4. CS2040C  A
+        5. CS2113   A-
+    ____________________________________________________________
+    
+
+### `goal` - Calculate how far the user is from his/her target CAP
+
+Typing `goal` allows the user to calculate how far the user is from his/her target CAP.
+
+Syntax:
+
+`goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}` <br>
+
+`option: -u(user's cap and mc), -c(custom cap and mc)`
+
+Example of usage:
+
+`goal -c 160 4.9 100 4.5`
+
+Expected outcome:
+
+    ____________________________________________________________
+        Your required average CAP is: 5.57
+        Looks like the target is a bit far away TT
+    ____________________________________________________________
+    
+Example of usage:
+
+`goal -u 160 4.9`
+
+Expected outcome:
+
+    ____________________________________________________________
+        Your required average CAP is: 4.89
+        Jia you! :D
+    ____________________________________________________________
+    
+
+### `mc` - Prints MCs
+
+Typing `mc` prints the number of MCs based on selected option. By default, this command focuses on the entire module list. In order to print the MC of taken modules, do remember to enter 'focus taken' before proceeding with this command. 
+
+Syntax:
+
+`mc [-option] [-detail]` <br>
+`option: -d(detailed)`
+
+Example of usage (when there are modules in the target): 
+
+`mc`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here is the total MC:
+    22
+    ____________________________________________________________
+   ```
+Example of usage (when there are modules in the target): 
+
+`mc -d`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    Here is the total MC:
+    EE1001: 4MCs
+    EE1001X: 4MCs
+    EE1002: 4MCs
+    EE1003: 4MCs
+    EE1111: 6MCs
+    ____________________________________________________________
+   ```
+
+
+### `sel` - Select items by index
+
+Typing `sel` selects the items specified.
+
+Syntax:
+
+`sel [index(es) (for the currently listed items) / module code(s) (for modules only)]`
+
+Example of usage: 
+
+`sel 1 2 3`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    I have selected the items you specified:
+    Item 1: borrow book
+    Item 2: eat
+    Item 3: jumping
+    ____________________________________________________________
+   ```
+
+### `take` - Take module
+
+Typing `take` marks specified module(s) as taken.
+
+Syntax:
+
+`take [index(es) / module code(s) (for modules only)]`
+
+Example of usage: 
+
+`take CS2113 CS2113T`
+
+Expected outcome:
+
+   ```  
+    ____________________________________________________________
+    I have marked these modules as taken:
+    Module: CS2113
+    Module: CS2113T
     ____________________________________________________________
    ```
 
@@ -1074,6 +1163,7 @@ Expected outcome:
     ____________________________________________________________
    ```
 
+
 ### Triggering the syntax reminder
 
 Typing a correct command with wrong syntax will trigger the syntax reminder.
@@ -1108,35 +1198,48 @@ Expected outcome:
 ## Command Summary
 
 A cheat sheet of commonly used commands:
+
+### General Features
 |**Action** | **Format**| **Examples**|
 |------------|-------------|-------------|
 |**add**|`add -task [index] -mod [module code]`|`add -task 1 -mod CS2113`|
 |**bye**|`bye`||
-|**cap**|`cap [-option] [module] [grade] {[module] [grade]...}`|`cap -m CS2113 A CG1112 A-`|
 |**clear** | `clear`||
-|**deadline**|`deadline [description] -by [time]`|`deadline project submission -by 21/9/15 1:12`|
 |**delete**|`delete [index]`|`delete 2`|
-|**detail**|`detail [index / module code]`|`detail CS2113T`|
-|**done**|`done [index]`|`done 2`|
-|**edit**|`edit [-options][-target]`|`edit`|
-|**event**|`event [description] -at [time]`|`event concert -at May 13 2020 8:00`|
+|**edit**|`edit [-mod / -task] [index / code (for module only)]`|`edit -mod CS2113 grade=A -task 1 description=do_homework type=event`|
 |**fancy**|`fancy [option]`|`fancy`|
-|**find**|`find [keyword]`|`find exam`|
 |**focus**|`focus [deadline / todo / event / task / mod / selected / taken]`|`focus deadline`|
-|**goal**|`goal [-option] [total MC] [target CAP] [taken MC] [current CAP]`|`goal -c 160 4.9 100 4.5`|
-|**grade**|`grade [-option] [module] [grade] {[module] [grade]...}`|`grade -a CS2113 A CG1112 A-`|
 |**help**|`help [options]`|`help deadline`|
-|**list**|`list date [asc / desc / spec “date”]`|`list date asc`|
-|**mc**|`mc [-option] [-details]`|`mc -p`|
 |**next**|`next [option]`|`next`|
 |**plain**|`plain [option]`|`plain`|
 |**prev**|`prev [option]`|`prev`|
+|**stats**|`stats [target]`| `stats`|
+
+
+### Daily Tasks
+|**Action** | **Format**| **Examples**|
+|------------|-------------|-------------|
+|**deadline**|`deadline [description] -by [time]`|`deadline project submission -by 21/9/15 1:12`|
+|**done**|`done [index]`|`done 2`|
+|**event**|`event [description] -at [time]`|`event concert -at May 13 2020 8:00`|
+|**find**|`find [keyword]`|`find exam`|
+|**list**|`list date [asc / desc / spec “date”]`|`list date asc`|
 |**postpone**| `postpone [index]`|`postpone 1`|
 |**reminder**|`reminder [on/off]` |`reminder`|
-|**sel**|`sel [index / module code]`|`sel 1 2 3`|
 |**snooze**|`snooze`||
-|**take**|`take [index / module code]`|`take CS2113T`|
 |**todo**|`todo [description]`|`todo borrow book`|
 |**undone**|`undone [index]`|`undone 2`|
+
+
+### Module Planner
+|**Action** | **Format**| **Examples**|
+|------------|-------------|-------------|
+|**cap**|`cap [-option] [module] [grade] {[module] [grade]...}`|`cap -m CS2113 A CG1112 A-`|
+|**detail**|`detail [index / module code]`|`detail CS2113T`|
+|**grade**|`grade [-option] [module] [grade] {[module] [grade]...}`|`grade -a CS2113 A CG1112 A-`|
+|**goal**|`goal [-option] [total MC] [target CAP] [taken MC] [current CAP]`|`goal -c 160 4.9 100 4.5`|
+|**mc**|`mc [-option] [-details]`|`mc -p`|
+|**sel**|`sel [index / module code]`|`sel 1 2 3`|
+|**take**|`take [index / module code]`|`take CS2113T`|
 |**unsel**|`unsel [index / module code]`|`unsel CS1010 CS2113`|
 |**untake**|`untake [index / module code]`|`untake CS2113T`|
