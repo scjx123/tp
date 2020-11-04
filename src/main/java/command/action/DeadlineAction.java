@@ -18,11 +18,7 @@ public class DeadlineAction extends Action {
     public String act(Data data) throws Exception {
         String result = super.act(data);
         Deadline ddl = new Deadline(description, by);
-        try {
-            data.addTask(ddl);
-        } finally {
-            result= "";
-        }
+        data.addTask(ddl);
         return replaceStrings(result, ddl.toString(), data.tasks.size());
     }
 

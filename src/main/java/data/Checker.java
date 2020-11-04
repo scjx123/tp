@@ -75,12 +75,12 @@ public class Checker {
             String firstDescription = item.getName();
             String secondDescription = t.getName();
 
-            if(isTodo) {
-                if(firstDescription.equals(secondDescription)) {
+            if (isTodo) {
+                if (firstDescription.equals(secondDescription)) {
                     isClash = true;
                 }
-            }else if (firstDescription.equals(secondDescription) &&
-                    firstDateTime.isEqual(secondDateTime)){
+            } else if (firstDescription.equals(secondDescription)
+                    && firstDateTime.isEqual(secondDateTime)) {
                 isClash = true;
             }
         }
