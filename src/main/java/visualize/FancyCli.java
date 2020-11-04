@@ -2,6 +2,7 @@
 
 package visualize;
 
+import command.action.FocusAction;
 import constants.Constants;
 import data.Data;
 import data.Item;
@@ -9,6 +10,8 @@ import messages.MessageOptions;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The type Fancy cli.
@@ -27,6 +30,7 @@ public class FancyCli extends Cli {
     private final int maxListY = Constants.BITMAP_LIST_H - 1;
     private final int maxSelY = Constants.BITMAP_SEL_H - 1;
     private int currentColor;
+    private static final Logger LOGGER = Logger.getLogger(FocusAction.class.getName());
 
     private String[] listString;
     private String[] selString;
@@ -134,6 +138,7 @@ public class FancyCli extends Cli {
         int maxLen = Math.min(myWidth * myHeight, rawInput.length());
         String input = rawInput.substring(0, maxLen);
         boolean isBroken = false;
+        LOGGER.entering(getClass().getName(), "UI fancy logger");
         if (isDisplayMode) {
             if ((y - 1) / Constants.CELL_H % 2 == 0) { // even lines
                 if (currentColor == 61 || currentColor == 55) {
@@ -177,6 +182,7 @@ public class FancyCli extends Cli {
     }
 
     private void fillCellLine(int x, int y, int width, boolean isDisplayMode, String string) {
+        LOGGER.log(Level.INFO, "Successfully filled cell");
         Color backColor = isDisplayMode ? Color.getFromCode(currentColor) : selBackground;
         if (isDisplayMode) {
             bmpList.drawLine(x, y, x + width - 1, y, string, backColor, foreground, false);

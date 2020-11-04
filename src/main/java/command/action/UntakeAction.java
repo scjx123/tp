@@ -5,6 +5,9 @@ package command.action;
 import data.Item;
 import data.SingleModule;
 
+/**
+ * The type Untake action.
+ */
 public class UntakeAction extends TakeAction {
     @Override
     protected boolean modifyObject(Item item) {
