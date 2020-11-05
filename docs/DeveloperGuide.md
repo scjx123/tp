@@ -487,12 +487,6 @@ Step 2: Copy the file to the folder you want to use as the home folder for your 
 Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
 Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**
 
-1. Launch and Shutdown 
-Step 1: Download the latest version of  `DOMNUS`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
-Step 2: Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.\
-Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
-Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**
-
 2. Switching between Fancy and CLI 
 Test case: `fancy`<br>
 Expected: Switches to fancy mode of display <br>
