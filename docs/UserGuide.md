@@ -1,5 +1,5 @@
 # User Guide
-
+![here](Images/Logo.PNG)
 ## Introduction
 
 Domsun is a **Desktop Command Line Interface (CLI) program that allows users to manage tasks and modules.** <br>
@@ -73,15 +73,23 @@ $ java -jar domsun.jar
 
 > Note: You can also run Domsun by double clicking the `domsun.jar` file directly.
 
-### Guide format
+### Domsun Tutorial 
+Here is an overview of how Domsun works. It maintains 3 key lists that you should take note. 
+![here](Images/Overview1.PNG)
 
-Words in `[]` are parameters to be supplied by the user. 
+1. `focus` command focuses the app onto the list of task that you currently have. 
+2. Likewise, `focus mod`focuses the app on the entire list of modules available in NUS, while `focus taken` is the list of taken modules of your choice. 
+3. To add a task under a module, you may enter the command `add -task 1 2 -mod CS2113`. 1 and 2 here are indices of the tasks in the task list. So be sure to have some task added BEFORE typing this command. 
+4. To mark a module as 'taken', you may enter `take CS2113 CS1010` while focusing on the module list by using `focus mod`. alternatively, you may use the indices method as before such as `take 1 2` to take the 1st and 2nd module available on the module list. 
+5. The `list` commands follows the app's current focus. If it is focusing on list of task, typing list will show all task. Likewise for modules and taken. 
+6. Typing `detail 1` when focusing on task list, will display the 1st index, task details. 
+7. Note that `detail 2` here will display different results as the two indicies of 2 represent different modules! 
 
-> Example: `done [index]`
-> 
-> Here, `index` is a parameter supplied by the user, in this case to specify which task will be marked as done.
-
-//can more stuff here -> we got a lot of this kind of stuff (eg: {}, ..., etc)
+**A point to note before venturing into the libraries of commands that we have.**<br>
+You can switch between fancy mode display, and plain display anytime during the program. 
+During `list` command, you will be able to toggle between pages of fancy by using `prev` and `next`
+However, the current version of fancy mode is still in beta, hence, it is expected to not be able to fully display certain commands that are too long. such as `help`, `detail`,`mc` etc. Do look forward to the next update!
+![here](Images/Overview2.PNG)
 
 ## Features 
 
