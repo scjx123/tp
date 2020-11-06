@@ -48,6 +48,8 @@ public class PrevAction extends Action {
         int len = flattenedArgs.length;
         if (len > 0) {
             arg = flattenedArgs[0].name.toLowerCase().trim();
+        } else {
+            arg = "a";
         }
     }
 }
