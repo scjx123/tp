@@ -7,6 +7,7 @@ import constants.Constants;
 import data.Data;
 import data.Item;
 import data.SingleModule;
+import exceptions.InvalidCommandException;
 
 /**
  * The type Delete action.
@@ -39,6 +40,9 @@ public class DeleteAction extends Action {
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
+        if (args.thisData == null || args.thisData.name == null) {
+            throw new InvalidCommandException();
+        }
         index = getIndex(args.thisData.name);
     }
 }

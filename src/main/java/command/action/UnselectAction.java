@@ -12,7 +12,7 @@ public class UnselectAction extends SelectAction {
         successes++;
         return true;
     }
-    
+
     @Override
     protected String getObjectInfo(Item item) {
         return item.getName() + ": no longer selected";
