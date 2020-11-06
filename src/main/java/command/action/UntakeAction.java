@@ -9,6 +9,7 @@ import data.SingleModule;
  * The type Untake action.
  */
 public class UntakeAction extends TakeAction {
+
     @Override
     protected boolean modifyObject(Item item) {
         if (((SingleModule)item).isCompleted) {
@@ -19,6 +20,7 @@ public class UntakeAction extends TakeAction {
         successes++;
         return true;
     }
+
     @Override
     protected String getObjectInfo(Item item) {
         return item.getName() + ": no longer taken";
