@@ -21,12 +21,13 @@ public class GradeAction extends TakeAction {
 
     @Override
     public String act(Data data) throws Exception {
+        successes = 0;
         if (isShown) {
             blindSearch = Constants.TAKEN;
         } else {
             blindSearch = Constants.SELECTED;
         }
-        String output = super.act(data).replace("taken or untaken", "graded")
+        String output = super.act(data).replace("taken", "graded")
                 .replace(Constants.MODIFY_FAILED, Constants.MOD_NOT_FOUND);
         if (isShown) {
             output = output.replace("selected", "taken");
@@ -54,10 +55,14 @@ public class GradeAction extends TakeAction {
                 }
                 ((SingleModule) item).grade = grade;
                 ((SingleModule) item).isTaken = true;
+                successes++;
                 return true;
             }
         }
         item.immediateData = null;
+        if (isShown) {
+            successes++;
+        }
         return isShown;
     }
 

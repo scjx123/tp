@@ -420,7 +420,14 @@ public class Constants {
     /**
      * The constant MODIFY_FAILED.
      */
-    public static final String MODIFY_FAILED = "Failed to modify: ";
+    public static final String MODIFY_FAILED = "This module is completed and you cannot modify it again: ";
+    public static final String TAKEN_CHANGED = "Your \"taken\" list has been changed,"
+            + " \"list\" it again to see effects.";
+    public static final String TAKEN_CHANGED_FAILED = "There is no Modules in your selected list to take or untake.";
+    public static final String TAKEN_NOT_MODIFIABLE = "This command is not applicable to your selected item because:";
+    public static final String SELECTED_CHANGED = "Your \"selected\" list has been changed,"
+            + " \"list\" it again to see effects.";
+    public static final String SELECTED_CHANGED_FAILED = "Your selection list is empty, there is no need for change.";
     /**
      * The constant NOT_COMPLETABLE.
      */
@@ -899,15 +906,13 @@ public class Constants {
             Map.entry(NEXT, TEXT_PLACEHOLDER),
             Map.entry(FANCY, FANCY),
             Map.entry(PLAIN, PLAIN),
-            Map.entry(TAKE, "I have marked these modules as taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(TAKE, TAKEN_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(ADD, "I have added the specified tasks to the specified modules."
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(SEL, SELECTED_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(DETAIL, DETAIL_HEAD + TEXT_PLACEHOLDER),
-            Map.entry(UNSEL, "I have un-selected these items you specified. "
-                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(UNTAKE, "I have un-taken these modules you specified. "
-                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNSEL, SELECTED_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNTAKE, TAKEN_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(SNOOZE, "I've snoozed the reminder for 1 minute. Will remind you in 6 minutes."),
             Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));

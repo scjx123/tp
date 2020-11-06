@@ -494,7 +494,7 @@ public enum HelpText {
         },
         new String[]{ "", },
         new String[]{
-            "1. \"untake\" >> if there is any module selected but not taken, mark it as not taken",
+            "1. \"untake\" >> if there is any module selected and taken, mark it as not taken",
             "2. \"untake 1 2\" >> mark module 1 and module 2 as not taken",
             "3. \"untake CS2113T\" >> mark module CS2113T as not taken",
             "4. \"untake 1 2 CS2113T\" >> mark module 1, module 2 and module CS2113T as not taken"
