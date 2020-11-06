@@ -86,36 +86,18 @@ public class Command implements Help {
                 throw new InvalidCommandException();
             }
         } catch (Exception e) {
-            result = wrapString(e.getMessage()) + wrapStringArray(getSyntax()) + Constants.WIN_NEWLINE
-                    + Constants.NOTES + Constants.WIN_NEWLINE + wrapStringArray(getNotes());
-        }
-    }
-
-    private String wrapString(String input) {
-        StringBuilder builder = new StringBuilder();
-        String[] words = input.split(Constants.SPACE);
-        int wordLength = 0;
-        for (String word : words) {
-            int incrementLength = word.length() + 1;
-            wordLength += incrementLength;
-            if (wordLength >= Constants.BITMAP_W) {
-                builder.append(Constants.WIN_NEWLINE);
-                wordLength -= Constants.BITMAP_W;
+            StringBuilder builder = new StringBuilder(e.getMessage());
+            String[] syntaxes = getSyntax();
+            for (String syntax : syntaxes) {
+                builder.append(Constants.SPACE.repeat(4)).append(syntax).append(Constants.WIN_NEWLINE);
             }
-            builder.append(word).append(Constants.SPACE);
-        }
-        return builder.toString();
-    }
-
-    private String wrapStringArray(String[] input) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < input.length; i++) {
-            builder.append(wrapString(input[i]));
-            if (i < input.length - 1) {
-                builder.append(Constants.WIN_NEWLINE);
+            builder.append(Constants.NOTES).append(Constants.WIN_NEWLINE);
+            String[] notes = getNotes();
+            for (String note : notes) {
+                builder.append(note).append(Constants.WIN_NEWLINE);
             }
+            result = builder.toString().replace(Constants.WIN_NEWLINE.repeat(2), Constants.WIN_NEWLINE);
         }
-        return builder.toString();
     }
 
     /**

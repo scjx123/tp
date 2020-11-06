@@ -405,6 +405,8 @@ public class Constants {
     public static final String COMPLETED_LABEL = "[COMPLETED]";
     public static final String NOTES = "Notes:";
     public static final String SAVE_CORRUPTED = "The save file is corrupted. Let's start afresh!";
+    public static final String PAGED = "Try \"next\" or \"prev\" to flip pages for the region below!";
+    public static final String TEXT_HEADER = "Current Page for Text Below:";
     /**
      * The constant INDEX_OUT.
      */

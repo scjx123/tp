@@ -18,8 +18,8 @@ import java.util.logging.Logger;
  */
 public class FancyCli extends Cli {
 
-    private Bitmap bmpList;
-    private Bitmap bmpSel;
+    private final Bitmap bmpList;
+    private final Bitmap bmpSel;
     private final Color listBackground = Color.DarkBlue;
     private final Color selBackground = Color.DarkMagenta;
     private final Color foreground = Color.getFromCode(255); // greyscale white
@@ -199,8 +199,9 @@ public class FancyCli extends Cli {
      * @param indexState    the index state
      */
     public void showText(String input, boolean isDisplayMode, MessageOptions indexState) {
+        String wrappedText = wrapStringArray(input.split(Constants.WIN_NEWLINE));
         currentColor = 29;
-        String[] lines = input.split(Constants.WIN_NEWLINE);
+        String[] lines = wrappedText.split(Constants.WIN_NEWLINE);
         if (lines.length == 0) {
             return;
         }
@@ -256,6 +257,7 @@ public class FancyCli extends Cli {
      * @param data         the data
      */
     public void update(String input, Data data) {
+        String wrappedInput = wrapStringArray(input.split(Constants.WIN_NEWLINE));
         if (freshlySwitched) {
             String replay = data.lastInput;
             MessageOptions replayOption = data.lastIndexOption;
@@ -276,10 +278,11 @@ public class FancyCli extends Cli {
             freshlySwitched = false;
             return;
         }
-        if (input == null || input.equals(Constants.ZERO_LENGTH_STRING)) {
+        if (wrappedInput.equals(Constants.ZERO_LENGTH_STRING)) {
             showText(Constants.ZERO_LENGTH_STRING);
-        } else if (input.contains(Constants.BMP_LIST_SWITCH) || input.contains(Constants.BMP_SEL_SWITCH)) {
-            flipPage(input);
+        } else if (wrappedInput.contains(Constants.BMP_LIST_SWITCH)
+                || wrappedInput.contains(Constants.BMP_SEL_SWITCH)) {
+            flipPage(wrappedInput);
             if (!data.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
                 if (listString.length > 0) {
                     showText(getShownText(true), true, MessageOptions.INDEXED_NUM);
@@ -293,10 +296,10 @@ public class FancyCli extends Cli {
             if (!displayMode) {
                 refreshList(data);
             }
-            separatePages(input, displayMode);
+            separatePages(wrappedInput, displayMode);
             fixIndex();
             showText(getShownText(displayMode), displayMode, data.indexOption);
-            data.lastInput = input;
+            data.lastInput = wrappedInput;
             data.lastIndexOption = data.indexOption;
         }
         data.indexOption = MessageOptions.NOT_INDEXED;
@@ -328,7 +331,7 @@ public class FancyCli extends Cli {
         if (isSel) {
             number = number.replace(Constants.BMP_SEL_SWITCH, Constants.ZERO_LENGTH_STRING);
         }
-        int num = Integer.parseInt(number);
+        int num = Integer.parseInt(number.trim());
         listIndex = flippedNumber(listIndex, isList, num, listString.length);
         selIndex = flippedNumber(selIndex, isSel, num, selString.length);
     }
@@ -391,7 +394,7 @@ public class FancyCli extends Cli {
                 return;
             }
             int pages = (int) Math.ceil((double) numLines / (double) cellNum);
-            listString = groupStrings(lines, pages, cellNum);
+            listString = groupStrings(lines, pages, cellNum, true);
         } else {
             int lineNum = bmpSel.height - 1;
             if (numLines <= lineNum) {
@@ -399,7 +402,7 @@ public class FancyCli extends Cli {
                 return;
             }
             int pages = (int) Math.ceil((double) numLines / (double) lineNum);
-            selString = groupStrings(lines, pages, lineNum);
+            selString = groupStrings(lines, pages, lineNum, false);
         }
     }
 
@@ -415,27 +418,34 @@ public class FancyCli extends Cli {
         return true;
     }
 
-    private String[] groupStrings(String[] strings, int groups, int groupLength) {
+    private String[] groupStrings(String[] strings, int groups, int groupLength, boolean isDisplayMode) {
         StringBuilder[] builders = new StringBuilder[groups];
-        String heading = strings[0];
-        for (int i = 0; i < groups; i++) {
-            String head;
-            String oldBracket = " ()";
-            if (heading.contains(Constants.PARAM_SIGNATURE)) {
-                String[] heads = heading.replace(Constants.PARAM_SIGNATURE, Constants.LINE_UNIT)
-                        .split(Constants.LINE_UNIT);
-                head = heads[heads.length - 1].replace(Constants.PARAM_RIGHT, Constants.ZERO_LENGTH_STRING).trim();
-                if (isIntString(head)) {
-                    oldBracket = Constants.SPACE + Constants.PARAM_LEFT + head + Constants.PARAM_RIGHT;
-                }
-            }
-            String bracket = Constants.SPACE + Constants.PARAM_LEFT + (i + 1) + Constants.PARAM_RIGHT;
-            builders[i] = new StringBuilder(heading.replace(oldBracket, Constants.ZERO_LENGTH_STRING))
-                    .append(bracket).append(Constants.WIN_NEWLINE);
-
+        String heading = isDisplayMode ? strings[0] : Constants.TEXT_HEADER;
+        String paged = Constants.PAGED;
+        if (isDisplayMode) {
+            paged = paged.replace("next", "next i").replace("prev", "prev i");
+        } else {
+            paged = paged.replace("next", "next s").replace("prev", "prev s");
         }
-        for (int i = 1; i < strings.length; i++) {
-            int currentGroup = (i - 1) / groupLength;
+        for (int i = 0; i < groups; i++) {
+            String numString;
+            String suffix;
+            String[] heads = heading.replace(Constants.PARAM_SIGNATURE, Constants.LINE_UNIT)
+                    .split(Constants.LINE_UNIT);
+            numString = heads[heads.length - 1].replace(Constants.PARAM_RIGHT, Constants.LINE_UNIT)
+                    .split(Constants.LINE_UNIT)[0];
+            if (isIntString(numString)) {
+                suffix = " (" + numString + ") " + paged;
+            } else {
+                suffix = heading.replace(heads[0], Constants.ZERO_LENGTH_STRING);
+            }
+            String bracket = Constants.SPACE + Constants.PARAM_LEFT + (i + 1) + Constants.PARAM_RIGHT + Constants.SPACE;
+            builders[i] = new StringBuilder(heading.replace(suffix, Constants.ZERO_LENGTH_STRING))
+                    .append(bracket).append(paged).append(Constants.WIN_NEWLINE);
+        }
+        for (int i = isDisplayMode ? 1 : 0; i < strings.length; i++) {
+            int counter = isDisplayMode ? (i - 1) : i;
+            int currentGroup = counter / groupLength;
             builders[currentGroup].append(strings[i]).append(Constants.WIN_NEWLINE);
         }
         String[] groupedStrings = new String[groups];
@@ -444,5 +454,4 @@ public class FancyCli extends Cli {
         }
         return groupedStrings;
     }
-
 }
