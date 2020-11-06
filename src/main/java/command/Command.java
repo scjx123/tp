@@ -86,7 +86,7 @@ public class Command implements Help {
                 throw new InvalidCommandException();
             }
         } catch (Exception e) {
-            StringBuilder builder = new StringBuilder(e.getMessage());
+            StringBuilder builder = new StringBuilder(e.getMessage()).append(Constants.WIN_NEWLINE);
             String[] syntax = getSyntax();
             for (int i = 0; i < syntax.length; i++) {
                 builder.append(syntax[i]);
@@ -94,7 +94,7 @@ public class Command implements Help {
                     builder.append(Constants.SYNTAX_OR).append(Constants.WIN_NEWLINE);
                 }
             }
-            result = builder.toString();
+            result = builder.toString().replace(Constants.WIN_NEWLINE.repeat(2), Constants.WIN_NEWLINE);
         }
     }
 

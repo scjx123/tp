@@ -126,6 +126,9 @@ public class Item {
                 }
             }
         }
+        if (dateTime == null) {
+            dateTime = LocalDateTime.now();
+        }
         return dateTime;
     }
 

@@ -408,6 +408,11 @@ public class Constants {
      */
     public static final String INDEX_OUT = "Index out of range.";
     /**
+     * The constant NO_DESCRIPTION.
+     */
+    public static final String NO_DESCRIPTION = "No description provided. Try \"help [command]\" if you are unsure of"
+            + "the command format.";
+    /**
      * The constant MODIFY_FAILED.
      */
     public static final String MODIFY_FAILED = "Failed to modify: ";
