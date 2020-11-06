@@ -403,15 +403,18 @@ public class Constants {
      * The constant COMPLETED_LABEL.
      */
     public static final String COMPLETED_LABEL = "[COMPLETED]";
+    public static final String NOTES = "Notes:";
+    public static final String SAVE_CORRUPTED = "The save file is corrupted. Let's start afresh!";
     /**
      * The constant INDEX_OUT.
      */
-    public static final String INDEX_OUT = "Index out of range.";
+    public static final String INDEX_OUT = "Index out of range. Index must be a positive integer referencing "
+            + "an existing item." + WIN_NEWLINE;
     /**
      * The constant NO_DESCRIPTION.
      */
-    public static final String NO_DESCRIPTION = "No description provided. Try \"help [command]\" if you are unsure of"
-            + "the command format.";
+    public static final String NO_DESCRIPTION = "No description provided. Try \"help [command]\" if you are unsure of "
+            + "the command format." + WIN_NEWLINE;
     /**
      * The constant MODIFY_FAILED.
      */
@@ -450,6 +453,8 @@ public class Constants {
      * The constant INVALID.
      */
     public static final String INVALID = "Invalid Command! Please check the syntax." + WIN_NEWLINE;
+    public static final String TYPE_MISMATCH = "The type of the item you specified does not match the Type needed."
+            + WIN_NEWLINE + "Are you trying to add a Module as a -task parameter?" + WIN_NEWLINE;
     /**
      * The constant DUPLICATED_TASK.
      */
