@@ -57,6 +57,7 @@ public class ReminderAction extends Action {
         return builder.toString();
     }
 
+    //@@author: johanesrafael
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
@@ -82,6 +83,10 @@ public class ReminderAction extends Action {
         }
     }
 
+    /**
+     * Gets timer status.
+     * @return TIMER_TRIGGER
+     */
     public Boolean getTimerStatus() {
         return TIMER_TRIGGER;
     }
