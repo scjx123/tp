@@ -48,7 +48,7 @@ public enum HelpText {
         "cap",
         "Calculate CAP for courses based on selected option.",
         new String[]{
-            "cap [index / code (for modules only)] [grade] ...",
+            "cap [index / code (for modules only)] [letter grade] ...",
             "cap [index(es) / codes (for modules only)]",
             "cap"
         },
@@ -216,7 +216,7 @@ public enum HelpText {
         "grade",
         "Modify grade to the user's taken course/module.",
         new String[]{
-            "grade [index / code (for modules only)] [grade] ...",
+            "grade [index / code (for modules only)] [letter grade] ...",
             "grade [index(es) / codes (for modules only)]",
             "grade"
         },

@@ -196,7 +196,7 @@ public class Constants {
     /**
      * The constant NOT_FOUND.
      */
-    public static final String NOT_FOUND = "Your specified item is not found in the current list.";
+    public static final String NOT_FOUND = "Your specified item is not found in the current list." + WIN_NEWLINE;
 
     /**
      * The constant PATH.
