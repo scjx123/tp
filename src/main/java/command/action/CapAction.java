@@ -38,7 +38,7 @@ public class CapAction extends GradeAction {
         return output + (capString.equals("NaN") ? "CAP calculation is skipped because there is no Module specified "
                 + "with valid grade." + Constants.WIN_NEWLINE + "Try \"grade [module code] [letter grade]\" "
                 + "to set grades to your modules, or " + Constants.WIN_NEWLINE
-                + "try \"help cap\" to see other usages using hypothetical grades!": "CAP = " + capString);
+                + "try \"help cap\" to see other usages using hypothetical grades!" : "CAP = " + capString);
     }
 
     @Override

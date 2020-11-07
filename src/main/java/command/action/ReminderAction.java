@@ -51,7 +51,7 @@ public class ReminderAction extends Action {
         if (tasks.size() == 0) {
             builder.append(Constants.NO_URGENT_TASKS);
         }
-      
+        builder.append("Reminder is currently ").append(ReminderAction.TIMER_TRIGGER ? "on." : "off.");
         data.setFlag(flag);
         //assert flag != savedData.flag : "flag is different";
         return builder.toString();
