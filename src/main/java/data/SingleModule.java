@@ -147,4 +147,17 @@ public class SingleModule extends Item {
         return taskList;
     }
 
+    public boolean isGraded() {
+        if (grade == null) {
+            return false;
+        } else {
+            for (String g : Constants.VALID_GRADES) {
+                if (g.equals(grade)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

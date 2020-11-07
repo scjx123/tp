@@ -111,6 +111,9 @@ public class Data {
             target = mods.stream().filter(
                 x -> ((SingleModule) x).isCompleted).collect(Collectors.toCollection(ArrayList::new));
             break;
+        case Constants.CAP_DATA:
+            target = mods.stream().filter(x -> ((SingleModule)x).isTaken)
+                    .filter(x -> ((SingleModule)x).isGraded()).collect(Collectors.toCollection(ArrayList::new));
         default:
             target = tasks.stream().filter(x -> x instanceof Task).collect(Collectors.toCollection(ArrayList::new));
             break;

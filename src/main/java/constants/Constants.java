@@ -5,7 +5,7 @@ package constants;
 import command.action.Action;
 import command.action.AddAction;
 import command.action.ByeAction;
-import command.action.CalculateCapAction;
+import command.action.CapAction;
 import command.action.ClearAction;
 import command.action.CompleteAction;
 import command.action.DeadlineAction;
@@ -195,7 +195,7 @@ public class Constants {
     /**
      * The constant NOT_FOUND.
      */
-    public static final String NOT_FOUND = "[NOT FOUND]";
+    public static final String NOT_FOUND = "Your specified item is not found in the current list.";
 
     /**
      * The constant PATH.
@@ -399,6 +399,7 @@ public class Constants {
      * The constant COMPLETED.
      */
     public static final String COMPLETED = "completed";
+    public static final String CAP_DATA = "capData";
     /**
      * The constant COMPLETED_LABEL.
      */
@@ -534,8 +535,7 @@ public class Constants {
     /**
      * The constant VALID_GRADES.
      */
-    public static final String[] VALID_GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-",
-        "D+", "D", "D-", "E", "F", "S", "U"};
+    public static final String[] VALID_GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U"};
     /**
      * The constant NO_KEYWORD.
      */
@@ -579,6 +579,7 @@ public class Constants {
      */
     public static final String MODULE_GRADE_CORRUPT = "Your module / grade data has been corrupted!."
         + WIN_NEWLINE;
+    public static final String TOO_MANY_ARGS = "Too many arguments. Please check the syntax." + WIN_NEWLINE;
     /**
      * The constant NO_OPERATION_POSSIBLE.
      */
@@ -604,7 +605,7 @@ public class Constants {
     /**
      * The constant HIGH_CAP.
      */
-    public static final String HIGH_CAP = "Looks like the target is a bit far away TT" + WIN_NEWLINE;
+    public static final String HIGH_CAP = "Looks like the target is a bit far away QAQ" + WIN_NEWLINE;
     /**
      * The constant REQUIRED_CAP.
      */
@@ -808,7 +809,7 @@ public class Constants {
         Map.entry(UNKNOWN, new UnknownAction()),
         Map.entry(PREV, new PrevAction()),
         Map.entry(NEXT, new NextAction()),
-        Map.entry(CAP, new CalculateCapAction()),
+        Map.entry(CAP, new CapAction()),
         Map.entry(GOAL, new GoalAction()),
         Map.entry(FANCY, new FancyAction()),
         Map.entry(PLAIN, new PlainAction()),
@@ -861,12 +862,12 @@ public class Constants {
         Map.entry(DEADLINE, new String[]{"by"}),
         Map.entry(EVENT, new String[]{"at"}),
         Map.entry(ADD, new String[]{MOD, TASK}),
-        Map.entry(EDIT, new String[]{MOD, TASK}));
+        Map.entry(EDIT, new String[]{MOD, TASK}),
+        Map.entry(GOAL, new String[]{"total"}));
     /**
      * The constant optionalParamMap.
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
-            Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"d"}),
             Map.entry(STATS, new String[]{"mod"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
@@ -877,7 +878,8 @@ public class Constants {
             Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}),
-            Map.entry(REMINDER, new String[]{"on", "off"}));
+            Map.entry(REMINDER, new String[]{"on", "off"}),
+            Map.entry(GOAL, new String[]{"taken"}));
     /**
      * The constant messageMap.
      */
@@ -898,6 +900,7 @@ public class Constants {
             Map.entry(FOCUS, "Now we are focusing on:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(GRADE, "Grade operation on the specified modules:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(CAP, "Calculate cap on specified modules:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
             Map.entry(TODO, ADDED + CHANGED),

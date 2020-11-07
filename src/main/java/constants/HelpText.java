@@ -48,14 +48,17 @@ public enum HelpText {
         "cap",
         "Calculate CAP for courses based on selected option.",
         new String[]{
-            "cap [-option] [module] [grade] {[module] [grade]...}",
-            "option: -u(user, default), -m(multiple/custom modules)"
+            "cap [index / code (for modules only)] [grade] ...",
+            "cap [index(es) / codes (for modules only)]",
+            "cap"
         },
         new String[]{ "", },
         new String[]{
-            "1. \"cap\" >> calculate user CAP from their taken modules",
-            "2. \"cap -m CS2113 A CS1010 B\" >> calculate cap based on input modules: "
-                + "modules CS2113 with grade A, module CS1010 with grade B correspondingly.",
+            "1. \"cap CS2113 A CG1112 A-\" >> calculate the cap using A for CS2113 and A- for CG1112",
+            "2. \"cap CS2113 CG1112\" >> calculate the cap using existing grades for CS2113 and CG1112 "
+                    + "if they have already been assigned a grade using the \"grade\" command",
+            "3. \"cap\" >> calculate the cap using all taken and graded modules",
+            "4. \"cap CG1111 CG1112 A\" >> calculated cap using existing grade for CG1111, and using A for CG1112",
         }),
     /**
      * The Clear.
@@ -132,14 +135,13 @@ public enum HelpText {
         "goal",
         "Calculate how far the user is from his/her target CAP",
         new String[]{
-            "goal [-option] [total MC] [target CAP] {[taken MC] [current CAP]}",
-            "option: -u(user's cap and mc), -c(custom cap and mc)"
+            "goal -total [total MC] [target CAP] {-taken [taken MC] [current CAP]}",
         },
         new String[]{ "", },
         new String[]{
-            "1. \"goal -u 160 4.9\" >> comment on required average grade to achieve CAP of 4.9 with 160MC in total",
-            "2. \"goal -c 160 4.9 100 4.5\" >> "
-                + "comment on required average grade to achieve CAP of 4.9 with:\r\n"
+            "1. \"goal -total 160 4.9\" >> comment on required average grade to achieve CAP of 4.9 with 160MC in total",
+            "2. \"goal -total 160 4.9 -taken 100 4.5\" >> "
+                + "comment on required average grade needed for:\r\n"
                 + "- MC total for graduation: 160\r\n" + "- Target CAP: 4.9\r\n"
                 + "- MC taken: 100\r\n" + "- Current CAP: 4.5\r\n"
         }),
@@ -215,8 +217,10 @@ public enum HelpText {
         new String[]{ "", },
         new String[]{
             "1. \"grade CS2113 A CG1112 A-\" >> make A and A- the grades of modules CS2113 and CG1112 respectively",
-            "3. \"grade CS2113 CG1112\" >> delete grade[s] of modules CS2113 and CG1112",
-            "4. \"grade\" >> show grades of all taken modules"
+            "2. \"grade CS2113 CG1112\" >> delete grade[s] of modules CS2113 and CG1112",
+            "3. \"grade\" >> show grades of all taken modules",
+            "4. \"grade CG1111 CG1112 A\" >> delete the grade of CG1111, and then set the grade of CG1112 to A, "
+                + "equivalent of executing \"grade CG1111\" followed by \"grade CG1112 A\" sequentially",
         }),
     /**
      * The Find.
@@ -405,13 +409,13 @@ public enum HelpText {
      */
     SNOOZE(
         "snooze",
-        "Delay the reminder pop up by 30 seconds.",
+        "Delay the reminder pop up by 1 minute.",
         new String[]{
             "snooze",
         },
         new String[]{ "", },
         new String[]{
-            "1. \"snooze\" >> Delay reminder popup by 30 seconds"
+            "1. \"snooze\" >> Delay reminder popup by 1 minute"
         }),
     /**
      * The Take.
