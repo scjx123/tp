@@ -65,13 +65,15 @@ public enum HelpText {
      */
     CLEAR(
         "clear",
-        "Clear the task list",
+        "Clear the task list, or clear the bottom text region for the fancy UI.",
         new String[]{
-            "clear"
+            "clear",
+            "clear fancy",
         },
         new String[]{ "", },
         new String[]{
-            "1. \"clear\" >> clears the task list"
+            "1. \"clear\" >> clears the task list",
+            "2. \"clear fancy\" >> clears the bottom region of the fancy UI",
         }),
     /**
      * The Complete.
