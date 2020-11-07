@@ -76,7 +76,7 @@ public class StatsAction extends Action {
     }
 
     private String roundedRatioBar(double fraction) {
-//        assert fraction >= 0.0 : "fraction is greater or equal to zero";
+        //assert fraction >= 0.0 : "fraction is greater or equal to zero";
         double roundedRatio = Math.round((fraction * 100) * 10) / 10.0;
         return Constants.ICON_LEFT + roundedRatio + Constants.PERCENT + Constants.ICON_RIGHT;
     }

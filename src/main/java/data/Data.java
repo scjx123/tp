@@ -126,11 +126,10 @@ public class Data {
         }
     }
 
-    LocalDateTime newDate;
     public void addTask(Task task) {
-        if(task.isWeekly){
-            newDate = checkRecurrenceDate(task);
-            if(newDate!=null){
+        if (task.isWeekly) {
+            LocalDateTime newDate = checkRecurrenceDate(task);
+            if (newDate != null) {
                 task.setDateTime(newDate);
             }
         }

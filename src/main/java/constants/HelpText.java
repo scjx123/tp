@@ -304,8 +304,8 @@ public enum HelpText {
             "option: -mod"
         },
         new String[]{
-                "1. Module entered should exist. Otherwise you should expect an \"Module Not Found\" error message",
-                "2. If the command entered is stats alone, ensure that you are focusing on task by typing \"focus\""
+            "1. Module entered should exist. Otherwise you should expect an \"Module Not Found\" error message",
+            "2. If the command entered is stats alone, ensure that you are focusing on task by typing \"focus\""
         },
         new String[]{
             "1. \"stats\" >> prints statistics of task completed",
@@ -338,9 +338,9 @@ public enum HelpText {
             "option: -d(detailed)"
         },
         new String[]{
-                "1. Default mc command prints the total mc that exist in the taken list of module",
-                "2. To print out a detailed list of mc belonging to the taken modules, ensure you have entered " +
-                        "\"focus taken\"."},
+            "1. Default mc command prints the total mc that exist in the taken list of module",
+            "2. To print out a detailed list of mc belonging to the taken modules, ensure you have entered "
+                + "\"focus taken\"."},
         new String[]{
             "1. \"mc\" >> print the total number of MCs currently taking",
             "2. \"mc -d\" >> print the detailed MC composition of the selection region"
