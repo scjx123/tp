@@ -15,6 +15,7 @@ public class SelectAction extends TakeAction {
 
     @Override
     public String act(Data data) throws Exception {
+        successes = 0;
         data.refreshTarget();
         StringBuilder builder = new StringBuilder();
         if (codes != null && codes.size() > 0) {
@@ -26,7 +27,7 @@ public class SelectAction extends TakeAction {
         if (!indices.isEmpty()) {
             for (int i : indices) {
                 if (i < 0 || i > data.target.size() - 1) {
-                    throw new IndexOutOfBoundsException();
+                    throw new IndexOutOfBoundsException(Constants.INDEX_OUT);
                 }
                 modifyObject(data.target.get(i));
                 builder.append("Item ").append(i + 1).append(": ")
@@ -44,7 +45,18 @@ public class SelectAction extends TakeAction {
     @Override
     protected boolean modifyObject(Item item) {
         item.isSelected = true;
+        successes++;
         return true;
+    }
+
+    @Override
+    protected String getObjectInfo(Item item) {
+        return item.getName() + ": now selected";
+    }
+
+    @Override
+    protected String getEmptySelectionMessage() {
+        return Constants.SELECTED_CHANGED_FAILED;
     }
 
     @Override

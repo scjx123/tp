@@ -1,18 +1,16 @@
-//package command.action;
-//
-//import constants.Constants;
-//import org.junit.jupiter.api.Test;
-//import seedu.duke.Duke;
-//
-//import static org.junit.jupiter.api.Assertions.assertAll;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//
-//class PostponeActionTest {
-//
+//@@author: johanesrafael
+
+package command.action;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class PostponeActionTest {
+
 //    private String[] testCommand = {"postpone", "postpone 1", "postpone 5", "postpone h 5", "postpone a 5"};
 //    @Test
 //    void act_postponeInput_testOutput() {
-//        Duke d = new Duke(false, System.out, System.in, Constants.PATH, Constants.TEST_FILENAME);
+//        Domsun d = new Domsun(false, System.out, System.in, Constants.PATH, Constants.TEST_FILENAME);
 //        assertAll("PostponeActionTest",
 //            () -> assertTrue(d.testSut(testCommand[0], true, true)
 //                    .contains(Constants.INDEX_OUT)),
@@ -27,4 +25,4 @@
 //                    + "postpone [index]    OR    postpone [h / w / y] [index]"))
 //        );
 //    }
-//}
+}

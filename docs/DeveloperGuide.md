@@ -2,48 +2,74 @@
 
 ## 1. Table of content
 **1. Table of content**\
-**2. Setting Up**\
-**3. Design**\
-&nbsp;&nbsp;&nbsp;3.1 Architecture\
-&nbsp;&nbsp;&nbsp;3.2 Main Layer\
-&nbsp;&nbsp;&nbsp;3.3 UI Layer\
-&nbsp;&nbsp;&nbsp;3.4 Command Interpreter Layer\
-&nbsp;&nbsp;&nbsp;3.5 Executor Layer\
-&nbsp;&nbsp;&nbsp;3.6 Storage Layer\
-**4. Implementation**\
-&nbsp;&nbsp;&nbsp;4.1 Module Planner Feature\
-&nbsp;&nbsp;&nbsp;4.2 Checker Feature\
-&nbsp;&nbsp;&nbsp;4.3 Cap Caculator Feature\
-&nbsp;&nbsp;&nbsp;4.4 Reminder Feature\
-&nbsp;&nbsp;&nbsp;4.5 Postpone Feature\
-**5. Appendix A Product Scope**\
-**6. Appendix B User Stories** \
-**7. Appendix C Use Cases** \
-**8. Appendix D Non-funcitonal Requirements** \
-**9. Appendix E Glossary** \
-**10. Appendix F. Instruction for Manual Testing**
+**2. Introduction**\
+**3. Setting Up**\
+**4. Design**\
+&nbsp;&nbsp;&nbsp;4.1 Architecture\
+&nbsp;&nbsp;&nbsp;4.2 Main Layer\
+&nbsp;&nbsp;&nbsp;4.3 UI Layer\
+&nbsp;&nbsp;&nbsp;4.4 Command Interpreter Layer\
+&nbsp;&nbsp;&nbsp;4.5 Executor Layer\
+&nbsp;&nbsp;&nbsp;4.6 Storage Layer\
+&nbsp;&nbsp;&nbsp;4.7 Flow of DOMSUN\
+**5. Implementation**\
+&nbsp;&nbsp;&nbsp;5.1 Module Planner Feature\
+&nbsp;&nbsp;&nbsp;5.2 Checker Feature\
+&nbsp;&nbsp;&nbsp;5.3 Cap Caculator Feature\
+&nbsp;&nbsp;&nbsp;5.4 Reminder Feature\
+&nbsp;&nbsp;&nbsp;5.5 Postpone Feature\
+**6. Appendix A Product Scope**\
+**7. Appendix B User Stories** \
+**8. Appendix C Use Cases** \
+**9. Appendix D Non-funcitonal Requirements** \
+**10. Appendix E Glossary** \
+**11. Appendix F. Instruction for Manual Testing**
 
-## 2. Setting Up
+## 2. Introduction
+Domsun is a CLI program that allows users to manage tasks and modules. <br>
+Users will be able to browse and select modules, create and arrange tasks, add tasks to modules,<br>
+create reminders and calculate their MCs / CAPs.
 
-1.  Ensure that you have Java 11 or above installed.
-2.  Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).
-3.  Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.
-4.  Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.
-5.  Navigate to your home folder and type ‘java -jar domnus.jar’
-6.  Type ‘bye’ to terminate your session.
+## 3. Setting Up
+1. **Configure Intellij for JDK 11**, as described [here](https://se-education.org/guides/tutorials/intellijJdk.html).
+1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
+1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Domnus.java` file, right-click it, and choose `Run Domnus.main()`. If the setup is correct, you should see something like the below:
+   ```
 
-## 3. Design
+    > Task :compileJava UP-TO-DATE
+    > Task :processResources UP-TO-DATE
+    > Task :classes UP-TO-DATE
+    
+    > Task :Domnus.main()
+    	____________________________________________________________
+    		Hello, I'm Domnus. What can I do for you?
+    	____________________________________________________________
+    	____________________________________________________________
+    		Here are the tasks due within 3 days: 
+    		No task within 3 days from now
+    	____________________________________________________________
 
-### 3.1 Architecture
-The **Architecture Diagram** below represents a high-level design overview of the App. Specifically, it is done with an **N-tier architectural style**, where the higher layers make use of services provided by lower layers. 
+   ```
+   
+ Type  `bye` to ensure there is no error saving or creating a new file when exiting. Re-launch and type `help` for all commands available in the program. 
+
+## 4. Design
+
+### 4.1 Architecture
+The **Architecture Diagram** below represents a high-level design overview of the App. Specifically, it is done with an N-tier architectural style, where the higher layers make use of services provided by lower layers. 
 
 ![here](Images/Architecture_Diagram.PNG)
 
+As shown in the above diagram, user only interacts with the UI layer and their commands, in turn will be passed to next adjacent layer. Given below is a quick overview of each component. 
 
-**3.2 Main Layer**<br>
-For the `main` layer, it contains a single class known as `Duke`. 
+**4.2 Main Layer**<br>
+The `main` layer, it contains a single class known as `Domnus`. Its purpose can be split into 3 parts: 
 
-**3.3 UI Layer**<br>
+At Start Up: It calls upon the `storage` component to load user's past data and it also loads the complete module list that is packaged inside the JAR file. <br>
+At Operating: It connects the relevant component of the program to ensure the program is operating as per the intended logic flow. <br>
+At Shutdown: It exits the running loop of the program to shutdown the program successfully. <br>
+
+**4.3 UI Layer**<br>
 Main gets user input and displays messages through the use of UI component. 
 The UI layer entails the package *visualize*, which contains classes *ColoredString*, *Bitmap*, *UI*, *Cli*, 
 *FancyCli* and enumerations *Color* and *Sprite* in the following structure:
@@ -54,26 +80,37 @@ UI gets user input through *nextline()*, and renders strings as a user-comprehen
 *update(String, Data)*.
 
 UI's interaction with the rest of the program<br>
-UI passes the user's input string out to the Duke object, which then passes the string to the Command Interpreter layer.
+UI passes the user's input string out to the DOMNUS object, which then passes the string to the Command Interpreter layer.
 UI also reads data from the Data object for refreshing purposes, but does not modify it. 
 
-**1.3 Command Interpreter Layer**<br>
-Upon receiving command from the UI, Duke would pass the entire user input into Command Interpreter (CI)
+**4.4 Command Interpreter Layer**<br>
+Upon receiving command from the UI, DOMNUS would pass the entire user input into Command Interpreter (CI)
 
-**1.4 Execute Layer**<br>
-Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
+**4.5 Execute Layer**<br>
+The `Execute` layer carries out the relevant actions required based on the analyzed input. All of the features in the program are stored under this layer which is under the package name `command`. To summarize, this layer is responsible for: 
 
-**1.5 Storage Layer**<br>
-Once CI processed the user input, duke proceeds to redirect the input to Execute for execution of action. 
+1) Match the user's command to the relevant actions.
+2) Throw any exception based on errorneous user input/invalid conditions. 
 
-**1.6 Flow of DOMSUN**<br>
+**4.6 Storage Layer**<br>
+The `Storage` layer loads, saves, and do pre-data processing before performing the two aforementioned action. It is active in 2 phases. 
+
+During loading phase: 
+1) For the user's task: This layer translates the previously (if any) saved data format into recognizable commands and loads these data as per how the app functions during runtime. 
+2) For the module list: This layer conducts simple parsing of the text file containing all the modules and stores them creates individual item known as `SingleModule` before loading them into an arraylist. 
+
+During saving phase: 
+1) For the user's task: This layer saves any changes that the user made to the task list onto a text file. 
+2) For the module list: This layer saves any module marked `TAKEN` by the user onto a text file, together with the relevant module information such as module's code, and grade attained (if any).  
+
+**4.7 Flow of DOMSUN**<br>
 The sequence diagram below shows the main interaction of classes with each other throughout the whole lifecycle of DOMSUM.
-![uml](Images/DOMSUM_Main_Flow.png)
+![uml](Images/DOMNUS_Main_Flow.png)
 
-## 4. Implementation<br>
+## 5. Implementation<br>
 This section highlights some of our project's key feature and its implementation. 
 
-### 4.1 Take Feature
+### 5.1 Take Feature
 The take mechanism is facilitated by the `TakeAction` class and is extensively used by other classes via inheritance. 
 The take mechanism does the following: Comprehends user input and generate target identifiers, 
 filters the targets from data, and performs the specified operations on the targets. 
@@ -151,8 +188,8 @@ indescriminatively to any `Command` object and executed indifferently.
     - Pros: Fast, no need filtering in most cases.
     - Cons: Harder to implement and extend. Everytime we want a new functionality we would need to create a new list.
 
-### 4.2 Statistic Feature 
-The statistic mechanism is facilitated by the StatsAction class. It extends Action class, and internally stores an arraylist of Item object in `targetList`. Additionally, it implements the following operation: 
+### 5.2 Statistic Feature 
+The statistic feature is facilitated by the StatsAction class. It extends `Action` class, and it functions under the architectural component `execute`. Internally, it stores an arraylist of Item object in `targetList`. This class implements the following operation: 
 
  - `prepare()` - Sets `isMod` flag according to user's 
  - `act()`- Gets `targetList` and calculates the raw ratio of the completed items.
@@ -170,7 +207,7 @@ Step 5. Once the list of task is obtain, the operation will loop through the tas
 
 Step 6. This ratio will be passed into `roundedRatioBar` to return *String* of a rounded ratio to 1 decimal place enclosing it in square brackets. 
 
-Step 7. Now `StatsAction` is completed and it will return this string back to `Execute` for to be printed through `UI`. 
+Step 7. Now `StatsAction` is completed and it will return this string back to `Command` to store it under the String variable `result`. The `Main` layer will retrieve `result`, before passing it onto `UI` layer for printing. 
 
 
 **Design consideration:**
@@ -184,9 +221,9 @@ Step 7. Now `StatsAction` is completed and it will return this string back to `E
 	 - Pros: Will use less memory since the task itself will be deleted. 
 	 - Cons: Stats will be updated constantly even though we do not need it. 
 
-### 4.3 Checker Feature 
+### 5.3 Checker Feature 
 
-The checker mechanism is facilitated by the utility class `Checker`. It is an independent class on its own without extensions and is stored under the `Data` package of our app. The class implements the following operations: 
+The checker feature is facilitated by the utility class `Checker`. It is an independent class on its own without extensions and is stored under the `Data` package of our app. The class implements the following operations: 
 
  - `checkDuplicates()`- Calls the checkClash method and return the status of boolean variable `isClash` .
  - `checkClash(ArrayList< item >, Item)`- Updates `isClash` once a duplicate item is found in the list.
@@ -218,7 +255,7 @@ Aspect: How checker executes**
 	 - Pros: Does not hinder the speed of task adding. 
 	 - Cons: Harder to implement as we have to loop through the entire list to look for duplicates. 
 
-### 4.4 CAP calculator feature
+### 5.4 CAP calculator feature
 
 This feature extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -240,7 +277,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![cap uml diagram](Images/CalculateCapSequence.png)
 
-### 4.5 Reminder Feature
+### 5.5 Reminder Feature
 
 The proposed reminder mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
 
@@ -260,7 +297,7 @@ The following sequence diagram diagram shows how the reminder operation works
 
 ![Reminder_Sequence_Diagram](Images/ReminderAction_Sequence_Diagram.png)
 
-### 4.6 Remind Feature
+### 5.6 Remind Feature
 
 Another proposed manual reminder mechanism is facilitated by `RemindAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -281,7 +318,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/Remind.png)
 
-### 4.7 Snooze Feature
+### 5.7 Snooze Feature
 
 The proposed snooze mechanism is facilitated by `SnoozeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -300,7 +337,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/Snooze.png)
 
-### 4.8 Postpone Feature
+### 5.8 Postpone Feature
 
 The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -322,7 +359,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/PostponeAction_Sequence_Diagram.png)
 
-### 4.9 Grade feature
+### 5.9 Grade feature
 
 This extends `TakeAction` to register modules as `isTaken` from `moduleList.txt`, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -344,7 +381,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Grade_Sequence_Diagram](Images/GradeSequence.png)
 
-### 4.10 Focus Feature
+### 5.10 Focus Feature
 
 The proposed focus mechanism is facilitated by `FocusAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -445,13 +482,7 @@ _{More to be added}_
 ## Appendix F. Instructions for manual testing
 
 1. Launch and Shutdown 
-Step 1: Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
-Step 2: Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.\
-Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
-Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**
-
-1. Launch and Shutdown 
-Step 1: Download the latest version of  `Duke`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
+Step 1: Download the latest version of  `DOMNUS`  from  [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases/tag/v1.0).\
 Step 2: Copy the file to the folder you want to use as the home folder for your Mobile Nusmod.\
 Step 3: Open the Command Prompt if you are running on Windows or Terminal if you are running on Mac OS.\
 Step 4: Navigate to your home folder and type  **‘java -jar domnus.jar’**

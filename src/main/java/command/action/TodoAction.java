@@ -5,6 +5,8 @@ package command.action;
 import command.ParamNode;
 import data.Data;
 import data.jobs.ToDo;
+import exceptions.InvalidCommandException;
+import exceptions.MissingDescriptionException;
 
 /**
  * The type Todo action.
@@ -24,6 +26,9 @@ public class TodoAction extends Action {
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
+        if (args.thisData == null) {
+            throw new MissingDescriptionException();
+        }
         description = args.thisData.toFlatString();
     }
 }

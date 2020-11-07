@@ -51,12 +51,13 @@ public class ReminderAction extends Action {
         if (tasks.size() == 0) {
             builder.append(Constants.NO_URGENT_TASKS);
         }
-      
+        builder.append("Reminder is currently ").append(ReminderAction.TIMER_TRIGGER ? "on." : "off.");
         data.setFlag(flag);
         //assert flag != savedData.flag : "flag is different";
         return builder.toString();
     }
 
+    //@@author: johanesrafael
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
@@ -82,6 +83,10 @@ public class ReminderAction extends Action {
         }
     }
 
+    /**
+     * Gets timer status.
+     * @return TIMER_TRIGGER
+     */
     public Boolean getTimerStatus() {
         return TIMER_TRIGGER;
     }

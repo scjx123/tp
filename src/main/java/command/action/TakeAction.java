@@ -18,10 +18,13 @@ public class TakeAction extends Action {
     protected ArrayList<Integer> indices;
     protected ArrayList<String> codes;
     protected boolean isBlind = false;
+    int successes = 0;
     protected String blindSearch = Constants.SELECTED;
 
     @Override
     public String act(Data data) throws Exception {
+        successes = 0;
+        boolean isEmptySelection = false;
         String flag = data.flag;
         ArrayList<Item> targetBackup = data.target;
         StringBuilder builder = new StringBuilder();
@@ -29,29 +32,37 @@ public class TakeAction extends Action {
             StringBuilder testContent = new StringBuilder();
             data.getTarget(blindSearch).forEach(x -> {
                 if (x instanceof SingleModule) {
-                    String modResult = modifyObject(x) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
-                    testContent.append(modResult).append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
+                    if (modifyObject(x)) {
+                        testContent.append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
+                    } else {
+                        testContent.append(Constants.MODIFY_FAILED)
+                                .append(x.getName()).append(Constants.WIN_NEWLINE);
+                    }
                 }
             });
             if (testContent.toString().length() > 0) {
-                builder.append("Your selected modules:").append(Constants.WIN_NEWLINE)
-                        .append(testContent.toString());
+                builder.append("You did not specify modules, looking for your selected modules...")
+                        .append(Constants.WIN_NEWLINE).append(testContent.toString());
             } else {
-                builder.append("No modules in your selection.");
+                isEmptySelection = true;
+                builder.append(getEmptySelectionMessage());
             }
         } else {
             if (!indices.isEmpty()) {
                 for (int i : indices) {
                     if (i < 0 || i > data.target.size() - 1) {
-                        throw new IndexOutOfBoundsException();
+                        throw new IndexOutOfBoundsException(Constants.INDEX_OUT);
                     }
                     if (data.target.get(i) instanceof SingleModule) {
                         Item module = data.target.get(i);
                         module.immediateData = String.valueOf(i + 1);
-                        String modResult =
-                                modifyObject(module) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
-                        builder.append(modResult).append("Module ").append(i + 1).append(": ")
-                                .append(getObjectInfo(module)).append(Constants.WIN_NEWLINE);
+                        if (modifyObject(module)) {
+                            builder.append("Module ").append(i + 1).append(": ")
+                                    .append(getObjectInfo(module)).append(Constants.WIN_NEWLINE);
+                        } else {
+                            builder.append(Constants.MODIFY_FAILED)
+                                    .append(((SingleModule) module).moduleCode).append(Constants.WIN_NEWLINE);
+                        }
                     } else {
                         builder.append("Item ").append(i + 1).append(" is not a module, "
                                 + "therefore cannot be taken or untaken").append(Constants.WIN_NEWLINE);
@@ -60,8 +71,12 @@ public class TakeAction extends Action {
             }
             if (!codes.isEmpty()) {
                 data.mods.stream().filter(x -> codes.contains(((SingleModule) x).moduleCode)).forEach(x -> {
-                    String modResult = modifyObject(x) ? Constants.ZERO_LENGTH_STRING : Constants.MODIFY_FAILED;
-                    builder.append(modResult).append("Module: ").append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
+                    if (modifyObject(x)) {
+                        builder.append("Module: ").append(getObjectInfo(x)).append(Constants.WIN_NEWLINE);
+                    } else {
+                        builder.append(Constants.MODIFY_FAILED)
+                                .append(x.getName()).append(Constants.WIN_NEWLINE);
+                    }
                 });
             }
         }
@@ -72,7 +87,13 @@ public class TakeAction extends Action {
         if (execution.equals(Constants.ZERO_LENGTH_STRING)) {
             execution = execution.concat(Constants.NOT_FOUND);
         }
-        return result.replace(Constants.TEXT_PLACEHOLDER, execution);
+        if (isEmptySelection) {
+            return execution;
+        } else if (successes == 0) {
+            return Constants.TAKEN_NOT_MODIFIABLE + Constants.WIN_NEWLINE + execution;
+        } else {
+            return result.replace(Constants.TEXT_PLACEHOLDER, execution);
+        }
     }
 
     protected boolean modifyObject(Item item) {
@@ -81,19 +102,25 @@ public class TakeAction extends Action {
         }
         ((SingleModule)item).isTaken = true;
         ((SingleModule)item).grade = "T";
+        successes++;
         return true;
     }
 
     protected String getObjectInfo(Item item) {
-        return item.getName();
+        return item.getName() + ": now taken";
+    }
+
+    protected String getEmptySelectionMessage() {
+        return Constants.TAKEN_CHANGED_FAILED + Constants.WIN_NEWLINE;
     }
 
     @Override
     public void prepare(ParamNode args) throws Exception {
+        isBlind = false;
+        blindSearch = Constants.SELECTED;
         indices = new ArrayList<>();
         codes = new ArrayList<>();
         super.prepare(args);
-        isBlind = false;
         if (args.thisData == null || flattenedArgs.length < 1) {
             safetyCheck();
             return;

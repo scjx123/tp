@@ -105,4 +105,32 @@ public class UI {
     public void showReminder(Data data) {
         showText(new ReminderAction().act(data));
     }
+
+    protected String wrapString(String input) {
+        StringBuilder builder = new StringBuilder();
+        String[] words = input.split(Constants.SPACE);
+        int wordLength = 0;
+        for (String word : words) {
+            int incrementLength = word.length() + 1;
+            wordLength += incrementLength;
+            if (wordLength >= Constants.BITMAP_W) {
+                builder.append(Constants.WIN_NEWLINE);
+                wordLength -= Constants.BITMAP_W;
+            }
+            builder.append(word).append(Constants.SPACE);
+        }
+        return builder.toString();
+    }
+
+    protected String wrapStringArray(String[] input) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < input.length; i++) {
+            builder.append(wrapString(input[i]));
+            if (i < input.length - 1) {
+                builder.append(Constants.WIN_NEWLINE);
+            }
+        }
+        return builder.toString();
+    }
+
 }
