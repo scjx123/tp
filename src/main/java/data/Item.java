@@ -163,7 +163,7 @@ public class Item {
      */
     protected void setDateTime(LocalDateTime date) {
         updateDateTime(date);
-        isWeekly = true;
+        //isWeekly = true;
     }
 
     /**
@@ -246,5 +246,17 @@ public class Item {
         default:
             break;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Item)) {
+            return false;
+        }
+        Item item = (Item)o;
+        return item.getDetails().equals(getDetails());
     }
 }
