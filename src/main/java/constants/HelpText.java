@@ -267,7 +267,12 @@ public enum HelpText {
             "postpone [index]",
             "postpone [h / w / y] [index]"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. When letter appears without a number as its parameter, the letter will be treated as a numeric value "
+                + "mapped A to 1 and Z to 26." + Constants.WIN_NEWLINE
+                + "For example, \"postpone boy\" is equivalent to \"postpone 2\" and "
+                +"\"postpone h\" is equivalent to \"postpone 8\".",
+        },
         new String[]{
             "1. \"postpone 1\" >> postpone the task with index 1 by a day",
             "2. \"postpone h 1\" >> postpone the task with index 1 by an hour",
