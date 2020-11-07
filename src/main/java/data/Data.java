@@ -7,9 +7,11 @@ import data.jobs.Deadline;
 import data.jobs.Event;
 import data.jobs.Task;
 import data.jobs.ToDo;
+import exceptions.DuplicateTaskException;
 import messages.MessageOptions;
 
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +34,10 @@ public class Data {
      * The default list of modules read in from finalcourselist.txt.
      */
     public ArrayList<Item> mods;
+    /**
+     * Default period of recurrence is 7 days.
+     */
+    Period recurrence = Period.ofDays(7);
     /**
      * The Index option.
      */
@@ -110,35 +116,41 @@ public class Data {
             target = mods.stream().filter(
                 x -> ((SingleModule) x).isCompleted).collect(Collectors.toCollection(ArrayList::new));
             break;
+        case Constants.CAP_DATA:
+            target = mods.stream().filter(x -> ((SingleModule)x).isTaken)
+                    .filter(x -> ((SingleModule)x).isGraded()).collect(Collectors.toCollection(ArrayList::new));
+            break;
         default:
             target = tasks.stream().filter(x -> x instanceof Task).collect(Collectors.toCollection(ArrayList::new));
             break;
         }
     }
 
-    private String getTaskType(Task task) {
-        if (task instanceof Deadline) {
-            return Constants.DEADLINE;
-        } else if (task instanceof Event) {
-            return Constants.EVENT;
-        }
-        return "task";
-    }
-
-
     public void addTask(Task task) {
-        ArrayList<Item> tempList = new ArrayList<>(getTarget(getTaskType(task)));
-        Checker cc = new Checker(tempList, task);
-        LocalDateTime newDate = cc.checkRecurrenceDate(task);
-        if (newDate != null) {
-            task.setDateTime(newDate);
+        if (task.isWeekly) {
+            LocalDateTime newDate = checkRecurrenceDate(task);
+            if (newDate != null) {
+                task.setDateTime(newDate);
+            }
         }
-        if (!cc.checkDuplicates()) {
-            tasks.add(task);
+        if (tasks.contains(task)) {
+            if (task instanceof ToDo) {
+                LOGGER.log(Level.INFO, "Duplicate found! Nudged the description of the task.");
+                task.description += Constants.LINE_UNIT;
+            } else {
+                if (task.dateTime != null) {
+                    LOGGER.log(Level.INFO, "Duplicate found! Nudged the dateTime of the task.");
+                    task.setDateTime(task.dateTime.plusSeconds(1));
+                } else {
+                    LOGGER.log(Level.INFO, "Duplicate found! Nudged the description of the task.");
+                    task.description += Constants.LINE_UNIT;
+                }
+            }
+            addTask(task);
         } else {
-            LOGGER.log(Level.INFO, "Duplicate found! Task was not added to data");
+            tasks.add(task);
+            refreshTarget();
         }
-        refreshTarget();
     }
 
     public void removeItem(Item item) {
@@ -194,8 +206,32 @@ public class Data {
      * @param index the index
      * @return the task
      */
-    public Item get(int index) {
+    public Item get(int index) throws Exception {
+        if (index < 0 || index >= target.size()) {
+            throw new Exception(Constants.INDEX_OUT);
+        }
         return target.get(index);
+    }
+
+    /**
+     * Check if today is the day for the tasks if yes, it will 'update' the
+     * assignment with a new deadline.
+     *
+     * @return true if today is the date of the assignment.
+     */
+    public LocalDateTime checkRecurrenceDate(Task task) {
+        LocalDateTime newDate = null;
+        if (task.isWeekly) {
+            //assuming 7 days recurrence
+            LocalDateTime todayDate = LocalDateTime.now();
+            LocalDateTime endDate = task.getDateTime();
+            if (todayDate.isAfter(endDate)) {
+                newDate = endDate.plus(recurrence);
+                assert newDate != null;
+                assert newDate.isAfter(endDate) : "Updated date should be later than previous date";
+            }
+        }
+        return newDate;
     }
 
 

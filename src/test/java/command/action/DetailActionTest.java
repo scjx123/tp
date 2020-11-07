@@ -4,14 +4,14 @@ package command.action;
 
 import constants.Constants;
 import org.junit.jupiter.api.Test;
-import seedu.duke.Domnus;
+import seedu.duke.Domsun;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DetailActionTest {
     private String[] testCommand = {"detail -mod CS2113", "detail -mod ST2334"};
-    Domnus duke = new Domnus(false, System.out, System.in, Constants.PATH,
+    Domsun duke = new Domsun(false, System.out, System.in, Constants.PATH,
         Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 
     @Test

@@ -5,7 +5,7 @@ package constants;
 import command.action.Action;
 import command.action.AddAction;
 import command.action.ByeAction;
-import command.action.CalculateCapAction;
+import command.action.CapAction;
 import command.action.ClearAction;
 import command.action.CompleteAction;
 import command.action.DeadlineAction;
@@ -69,6 +69,7 @@ public class Constants {
      * The constant CHAR_SPACE.
      */
     public static final char CHAR_SPACE = ' ';
+    public static final char CHAR_DOT = '.';
 
     public static final String EQUALS = "=";
     /**
@@ -195,14 +196,14 @@ public class Constants {
     /**
      * The constant NOT_FOUND.
      */
-    public static final String NOT_FOUND = "[NOT FOUND]";
+    public static final String NOT_FOUND = "Your specified item is not found in the current list.";
 
     /**
      * The constant PATH.
      */
     public static final String PATH = "./data";
     /**
-     * Domnus FILENAME.
+     * Domsun FILENAME.
      */
     public static final String TASK_FILENAME = "duke.txt";
     /**
@@ -210,11 +211,11 @@ public class Constants {
      */
     public static final String COURSE_FILENAME = "course.txt";
     /**
-     * Test Domnus TASK_FILENAME.
+     * Test Domsun TASK_FILENAME.
      */
     public static final String TEST_TASK_FILENAME = "duke_task_test.txt";
     /**
-     * Test Domnus COURSE_FILENAME.
+     * Test Domsun COURSE_FILENAME.
      */
     public static final String TEST_COURSE_FILENAME = "duke_course_test.txt";
 
@@ -399,18 +400,36 @@ public class Constants {
      * The constant COMPLETED.
      */
     public static final String COMPLETED = "completed";
+    public static final String CAP_DATA = "capData";
     /**
      * The constant COMPLETED_LABEL.
      */
     public static final String COMPLETED_LABEL = "[COMPLETED]";
+    public static final String NOTES = "Notes:";
+    public static final String SAVE_CORRUPTED = "The save file is corrupted. Let's start afresh!";
+    public static final String PAGED = "Try \"next\" or \"prev\" to flip pages for the region below!";
+    public static final String TEXT_HEADER = "Current Page for Text Below:";
     /**
      * The constant INDEX_OUT.
      */
-    public static final String INDEX_OUT = "Index out of range.";
+    public static final String INDEX_OUT = "Index out of range. Index must be a positive integer referencing "
+            + "an existing item." + WIN_NEWLINE;
+    /**
+     * The constant NO_DESCRIPTION.
+     */
+    public static final String NO_DESCRIPTION = "No description provided. Try \"help [command]\" if you are unsure of "
+            + "the command format." + WIN_NEWLINE;
     /**
      * The constant MODIFY_FAILED.
      */
-    public static final String MODIFY_FAILED = "Failed to modify: ";
+    public static final String MODIFY_FAILED = "This module is completed and you cannot modify it again: ";
+    public static final String TAKEN_CHANGED = "Your \"taken\" list has been changed,"
+            + " \"list\" it again to see effects.";
+    public static final String TAKEN_CHANGED_FAILED = "There is no Modules in your selected list to take or untake.";
+    public static final String TAKEN_NOT_MODIFIABLE = "This command is not applicable to your selected item because:";
+    public static final String SELECTED_CHANGED = "Your \"selected\" list has been changed,"
+            + " \"list\" it again to see effects.";
+    public static final String SELECTED_CHANGED_FAILED = "Your selection list is empty, there is no need for change.";
     /**
      * The constant NOT_COMPLETABLE.
      */
@@ -445,10 +464,16 @@ public class Constants {
      * The constant INVALID.
      */
     public static final String INVALID = "Invalid Command! Please check the syntax." + WIN_NEWLINE;
+    public static final String TYPE_MISMATCH = "The type of the item you specified does not match the Type needed."
+            + WIN_NEWLINE + "Are you trying to add a Module as a -task parameter?" + WIN_NEWLINE;
+    /**
+     * The constant DUPLICATED_TASK.
+     */
+    public static final String DUPLICATED_TASK = "Duplicated Task was found. Task not added" + WIN_NEWLINE;
     /**
      * The constant WELCOME.
      */
-    public static final String WELCOME = "Hello, I'm Domnus. What can I do for you?";
+    public static final String WELCOME = "Hello, I'm Domsun. What can I do for you?";
     /**
      * The constant HELP_PROMPT.
      */
@@ -511,8 +536,7 @@ public class Constants {
     /**
      * The constant VALID_GRADES.
      */
-    public static final String[] VALID_GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-",
-        "D+", "D", "D-", "E", "F", "S", "U"};
+    public static final String[] VALID_GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U"};
     /**
      * The constant NO_KEYWORD.
      */
@@ -556,6 +580,8 @@ public class Constants {
      */
     public static final String MODULE_GRADE_CORRUPT = "Your module / grade data has been corrupted!."
         + WIN_NEWLINE;
+    public static final String TOO_MANY_ARGS = "Too many arguments. Please check the syntax." + WIN_NEWLINE
+        + "Maybe you were trying negative parameters... too bad they are not allowed." + WIN_NEWLINE;
     /**
      * The constant NO_OPERATION_POSSIBLE.
      */
@@ -581,7 +607,7 @@ public class Constants {
     /**
      * The constant HIGH_CAP.
      */
-    public static final String HIGH_CAP = "Looks like the target is a bit far away TT" + WIN_NEWLINE;
+    public static final String HIGH_CAP = "Looks like the target is a bit far away QAQ" + WIN_NEWLINE;
     /**
      * The constant REQUIRED_CAP.
      */
@@ -641,7 +667,8 @@ public class Constants {
     /**
      * The constant REMINDER_HEAD.
      */
-    public static final String REMINDER_HEAD = "Here are the tasks due within " + Constants.REMINDER_RANGE + " days: "
+    public static final String REMINDER_HEAD = "Auto-reminder: Here are the tasks due within "
+            + Constants.REMINDER_RANGE + " days: " + WIN_NEWLINE + "(do not want to see this so often? try \"snooze\")"
             + WIN_NEWLINE;
     /**
      * The constant MC_HEAD.
@@ -784,7 +811,7 @@ public class Constants {
         Map.entry(UNKNOWN, new UnknownAction()),
         Map.entry(PREV, new PrevAction()),
         Map.entry(NEXT, new NextAction()),
-        Map.entry(CAP, new CalculateCapAction()),
+        Map.entry(CAP, new CapAction()),
         Map.entry(GOAL, new GoalAction()),
         Map.entry(FANCY, new FancyAction()),
         Map.entry(PLAIN, new PlainAction()),
@@ -837,12 +864,12 @@ public class Constants {
         Map.entry(DEADLINE, new String[]{"by"}),
         Map.entry(EVENT, new String[]{"at"}),
         Map.entry(ADD, new String[]{MOD, TASK}),
-        Map.entry(EDIT, new String[]{MOD, TASK}));
+        Map.entry(EDIT, new String[]{MOD, TASK}),
+        Map.entry(GOAL, new String[]{"total"}));
     /**
      * The constant optionalParamMap.
      */
     public static final Map<String, String[]> optionalParamMap = Map.ofEntries(
-            Map.entry(CAP, new String[]{"u", "m"}),
             Map.entry(MC, new String[]{"d"}),
             Map.entry(STATS, new String[]{"mod"}),
             Map.entry(DETAIL, new String[]{"mod","task","cmd"}),
@@ -853,7 +880,8 @@ public class Constants {
             Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}),
-            Map.entry(REMINDER, new String[]{"on", "off"}));
+            Map.entry(REMINDER, new String[]{"on", "off"}),
+            Map.entry(GOAL, new String[]{"taken"}));
     /**
      * The constant messageMap.
      */
@@ -874,6 +902,7 @@ public class Constants {
             Map.entry(FOCUS, "Now we are focusing on:"
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(GRADE, "Grade operation on the specified modules:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(CAP, "Calculate cap on specified modules:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
             Map.entry(TODO, ADDED + CHANGED),
@@ -883,15 +912,13 @@ public class Constants {
             Map.entry(NEXT, TEXT_PLACEHOLDER),
             Map.entry(FANCY, FANCY),
             Map.entry(PLAIN, PLAIN),
-            Map.entry(TAKE, "I have marked these modules as taken:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(TAKE, TAKEN_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(ADD, "I have added the specified tasks to the specified modules."
                     + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(SEL, "I have selected the items you specified:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(SEL, SELECTED_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(DETAIL, DETAIL_HEAD + TEXT_PLACEHOLDER),
-            Map.entry(UNSEL, "I have un-selected these items you specified. "
-                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(UNTAKE, "I have un-taken these modules you specified. "
-                    + "The list is obsolete, please \"list\" again." + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNSEL, SELECTED_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
+            Map.entry(UNTAKE, TAKEN_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(SNOOZE, "I've snoozed the reminder for 1 minute. Will remind you in 6 minutes."),
             Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));

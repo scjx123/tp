@@ -16,19 +16,20 @@ import java.util.HashMap;
  */
 public class GradeAction extends TakeAction {
 
-    private HashMap<String, ArrayList<String>> map;
-    private boolean isShown;
+    protected HashMap<String, ArrayList<String>> map;
+    protected boolean isShowing;
 
     @Override
     public String act(Data data) throws Exception {
-        if (isShown) {
+        successes = 0;
+        if (isShowing) {
             blindSearch = Constants.TAKEN;
         } else {
             blindSearch = Constants.SELECTED;
         }
-        String output = super.act(data).replace("taken or untaken", "graded")
-                .replace(Constants.MODIFY_FAILED, Constants.MOD_NOT_FOUND);
-        if (isShown) {
+        String output = super.act(data).replace("take or untake", "grade")
+                .replace("taken", "graded").replace(" or ungraded", Constants.ZERO_LENGTH_STRING);
+        if (isShowing) {
             output = output.replace("selected", "taken");
         }
         return output;
@@ -50,15 +51,32 @@ public class GradeAction extends TakeAction {
                 if (values == null || values.size() == 0) {
                     grade = null;
                 } else {
-                    grade = values.get(0);
+                    grade = filterGrade(values.get(0));
                 }
                 ((SingleModule) item).grade = grade;
                 ((SingleModule) item).isTaken = true;
+                successes++;
                 return true;
             }
         }
         item.immediateData = null;
-        return isShown;
+        if (isShowing) {
+            successes++;
+        }
+        return isShowing;
+    }
+
+    protected String filterGrade(String rawGrade) {
+        if (rawGrade == null) {
+            return null;
+        }
+        String myGrade = rawGrade.toUpperCase();
+        for (String grade : Constants.VALID_GRADES) {
+            if (grade.equals(myGrade)) {
+                return myGrade;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -69,12 +87,12 @@ public class GradeAction extends TakeAction {
     @Override
     protected void safetyCheck() {
         isBlind = true;
-        isShown = true;
+        isShowing = true;
     }
 
     @Override
     public void prepare(ParamNode args) throws Exception {
-        isShown = false;
+        isShowing = false;
         map = new HashMap<>();
         indices = new ArrayList<>();
         codes = new ArrayList<>();
