@@ -35,7 +35,8 @@ public class Item {
     /**
      * The Is Weekly.
      */
-    public boolean isWeekly = false;/**
+    public boolean isWeekly = false;
+    /**
      * The Is Weekly.
      */
     public static boolean WeeklyFlag = false;
