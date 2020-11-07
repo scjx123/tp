@@ -152,6 +152,7 @@ The program allows user to set reminders at certain time, or remind themselves o
 A cheat sheet of commonly used commands:
 
 ### Daily Tasks
+
 |**Action** | **Format**| **Examples**|
 |------------|-------------|-------------|
 |**todo**|`todo [description]`|`todo borrow book`|
@@ -165,8 +166,8 @@ A cheat sheet of commonly used commands:
 |**reminder**|`reminder [on/off]` |`reminder`|
 |**snooze**|`snooze`||
 
-
 ### Module Planner
+
 |**Action** | **Format**| **Examples**|
 |------------|-------------|-------------|
 |**take**|`take [index / module code]`|`take CS2113T`|
@@ -179,8 +180,8 @@ A cheat sheet of commonly used commands:
 |**mc**|`mc [-option] [-details]`|`mc -p`|
 |**cap**|`cap [-option] [module] [grade] {[module] [grade]...}`|`cap -m CS2113 A CG1112 A-`|
 
-
 ### General Features
+
 |**Action** | **Format**| **Examples**|
 |------------|-------------|-------------|
 |**add**|`add -task [index] -mod [module code]`|`add -task 1 -mod CS2113`|
