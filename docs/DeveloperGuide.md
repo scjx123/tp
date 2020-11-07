@@ -13,8 +13,8 @@
 &nbsp;&nbsp;&nbsp;4.6 Storage Layer\
 &nbsp;&nbsp;&nbsp;4.7 Flow of DOMSUN\
 **5. Implementation**\
-&nbsp;&nbsp;&nbsp;5.1 Module Planner Feature\
-&nbsp;&nbsp;&nbsp;5.2 Checker Feature\
+&nbsp;&nbsp;&nbsp;5.1 Take Feature\
+&nbsp;&nbsp;&nbsp;5.2 StatsAction Feature\
 &nbsp;&nbsp;&nbsp;5.3 Cap Caculator Feature\
 &nbsp;&nbsp;&nbsp;5.4 Reminder Feature\
 &nbsp;&nbsp;&nbsp;5.5 Postpone Feature\
