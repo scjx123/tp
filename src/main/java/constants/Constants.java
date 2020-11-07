@@ -144,6 +144,7 @@ public class Constants {
      * The constant DETAILS_SIGNATURE.
      */
     public static final String DETAILS_SIGNATURE = ": ";
+    public static final String COMMA = ",";
     /**
      * The constant TICK.
      */
@@ -512,6 +513,7 @@ public class Constants {
      */
     public static final String[] TAKEN_ALIAS = {"taken", "take", "took", "taking", "istake", "istaken", "istaking",
         "t"};
+    public static final String[] TASK_ALIAS = {"task", "tasks", "linked", "tsk", "tsks"};
     /**
      * The constant DESCRIPTION_ALIAS.
      */
