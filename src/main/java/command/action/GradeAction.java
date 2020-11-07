@@ -27,8 +27,8 @@ public class GradeAction extends TakeAction {
         } else {
             blindSearch = Constants.SELECTED;
         }
-        String output = super.act(data).replace("taken", "graded")
-                .replace(" or ungraded", Constants.ZERO_LENGTH_STRING);
+        String output = super.act(data).replace("take or untake", "grade")
+                .replace("taken", "graded").replace(" or ungraded", Constants.ZERO_LENGTH_STRING);
         if (isShowing) {
             output = output.replace("selected", "taken");
         }

@@ -1,3 +1,5 @@
+//@@author TomLBZ
+
 package command.action;
 
 import command.ParamNode;
@@ -38,7 +40,7 @@ public class GoalAction extends CapAction {
                 try {
                     mc = Double.parseDouble(((SingleModule) item).getModuleMC());
                 } catch (Exception e) {
-                    throw new Exception("One of your taken modules has invalid grade.");
+                    throw new Exception("One of your taken modules has invalid grade." + Constants.WIN_NEWLINE);
                 }
                 if (!score.equals("U")) {
                     takenGrade += parseGrade(score) * mc;
@@ -48,6 +50,8 @@ public class GoalAction extends CapAction {
                     }
                 }
             }
+            data.refreshTarget(flagBackup);
+            data.target = targetBackup;
             takenCap = takenGrade / totalCapMC;
             takenMC = totalTakenMC;
             currentScore = takenGrade;
@@ -57,8 +61,9 @@ public class GoalAction extends CapAction {
         }
         double capRequired = (goalScore - currentScore) / (targetMC - takenMC);
         StringBuilder sb = new StringBuilder();
-        sb.append(Constants.REQUIRED_CAP).append(new DecimalFormat("#.##")
-                .format(capRequired)).append(Constants.WIN_NEWLINE);
+        sb.append(Constants.REQUIRED_CAP).append(new DecimalFormat("#.##").format(capRequired))
+                .append(Constants.WIN_NEWLINE).append("Try \"cap\" to see your current cap!")
+                .append(Constants.WIN_NEWLINE);
         if (capRequired < 0) {
             sb.append(Constants.WORK_LESS);
         } else if (capRequired <= 1.0) {
@@ -78,35 +83,37 @@ public class GoalAction extends CapAction {
         takenMC = 0;
         takenCap = 0;
         isDefault = true;
+        flattenedArgs = args.thisData.flatten().toArray(new ParamNode[0]);
         if (flattenedArgs.length > 2) {
             throw new TooManyArgumentsException();
         }
         try {
-            targetMC = Double.parseDouble(flattenedArgs[0].thisData.toString());
-            targetCap = Double.parseDouble(flattenedArgs[0].nextData.toString());
+            targetMC = Double.parseDouble(flattenedArgs[0].thisData.name);
+            targetCap = Double.parseDouble(flattenedArgs[0].thisData.thisData.name);
             if (flattenedArgs.length == 2) {
                 isDefault = false;
-                takenMC = Double.parseDouble(flattenedArgs[1].thisData.toString());
-                takenCap = Double.parseDouble(flattenedArgs[1].nextData.toString());
+                takenMC = Double.parseDouble(flattenedArgs[1].thisData.name);
+                takenCap = Double.parseDouble(flattenedArgs[1].thisData.thisData.name);
             }
         } catch (Exception e) {
-            throw new Exception("Number is not parsable. Did you make a typo?");
+            throw new Exception("I do not see two parsable non-negative numbers. "
+                    + "Did you make a typo?" + Constants.WIN_NEWLINE);
         }
         if (takenMC < 0) {
-            throw new Exception("Your taken MC cannot be negative!");
+            throw new Exception("Your taken MC cannot be negative!" + Constants.WIN_NEWLINE);
         }
         if (takenCap < 0) {
-            throw new Exception("Your taken CAP cannot be negative!");
+            throw new Exception("Your taken CAP cannot be negative!" + Constants.WIN_NEWLINE);
         } else if (takenCap > 5) {
-            throw new Exception("Your taken CAP cannot be higher than 5.0!");
+            throw new Exception("Your taken CAP cannot be higher than 5.0!" + Constants.WIN_NEWLINE);
         }
         if (targetMC < 0) {
-            throw new Exception("Your total MC required cannot be negative!");
+            throw new Exception("Your total MC required cannot be negative!" + Constants.WIN_NEWLINE);
         }
         if (targetCap < 0) {
-            throw new Exception("Your target CAP cannot be negative!");
+            throw new Exception("Your target CAP cannot be negative!" + Constants.WIN_NEWLINE);
         } else if (targetCap > 5) {
-            throw new Exception("Your target CAP cannot be higher than 5.0!");
+            throw new Exception("Your target CAP cannot be higher than 5.0!" + Constants.WIN_NEWLINE);
         }
     }
 }

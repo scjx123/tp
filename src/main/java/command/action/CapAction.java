@@ -29,19 +29,21 @@ public class CapAction extends GradeAction {
         } else {
             blindSearch = Constants.SELECTED;
         }
-        String output = super.act(data).replace("taken", "graded");
+        String output = super.act(data).replace("for", "for graded modules in");
         if (isShowing) {
             output = output.replace("selected", "taken");
         }
         double cap = totalGrade / totalMc;
         String capString = new DecimalFormat("#.##").format(cap);
         return output + (capString.equals("NaN") ? "CAP calculation is skipped because there is no Module specified "
-                + "with valid grade. Try \"help cap\" to see usages!" : "CAP = " + capString);
+                + "with valid grade." + Constants.WIN_NEWLINE + "Try \"grade [module code] [letter grade]\" "
+                + "to set grades to your modules, or " + Constants.WIN_NEWLINE
+                + "try \"help cap\" to see other usages using hypothetical grades!": "CAP = " + capString);
     }
 
     @Override
     protected String getObjectInfo(Item item) {
-        String outputGrade = isAssigned ? "(temporary)" + assignedGrade : ((SingleModule)item).grade;
+        String outputGrade = isAssigned ? "(hypothetical)" + assignedGrade : ((SingleModule)item).grade;
         return item.getName() + Constants.DETAILS_SIGNATURE + outputGrade;
     }
 

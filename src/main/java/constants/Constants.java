@@ -579,7 +579,8 @@ public class Constants {
      */
     public static final String MODULE_GRADE_CORRUPT = "Your module / grade data has been corrupted!."
         + WIN_NEWLINE;
-    public static final String TOO_MANY_ARGS = "Too many arguments. Please check the syntax." + WIN_NEWLINE;
+    public static final String TOO_MANY_ARGS = "Too many arguments. Please check the syntax." + WIN_NEWLINE
+        + "Maybe you were trying negative parameters... too bad they are not allowed." + WIN_NEWLINE;
     /**
      * The constant NO_OPERATION_POSSIBLE.
      */

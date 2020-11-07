@@ -111,7 +111,7 @@ public class TakeAction extends Action {
     }
 
     protected String getEmptySelectionMessage() {
-        return Constants.TAKEN_CHANGED_FAILED;
+        return Constants.TAKEN_CHANGED_FAILED + Constants.WIN_NEWLINE;
     }
 
     @Override
