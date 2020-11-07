@@ -2,7 +2,7 @@
 //
 //import constants.Constants;
 //import org.junit.jupiter.api.Test;
-//import seedu.duke.Domnus;
+//import seedu.duke.Domsun;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 //import static org.junit.jupiter.api.Assertions.assertAll;
 //
@@ -16,7 +16,7 @@
 //
 //    @Test
 //    public void act_moduleCommandsInputs_suitableMcDisplayed() {
-//        Domnus d = new Domnus(false, System.out, System.in, Constants.PATH,
+//        Domsun d = new Domsun(false, System.out, System.in, Constants.PATH,
 //            Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 //
 //        assertAll("McActionTest", () -> assertTrue(d.testSut(testCommand[0], false, true)
@@ -27,7 +27,7 @@
 //
 //    @Test
 //    public void mcAction_ExceptionInput_PrintInvalidCommand() {
-//        Domnus d = new Domnus(false, System.out, System.in, Constants.PATH,
+//        Domsun d = new Domsun(false, System.out, System.in, Constants.PATH,
 //            Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 //        assertTrue(() -> d.testSut(testCommand[2], false, true).contains(Constants.INVALID));
 //        assertTrue(() -> d.testSut(testCommand[3], false, true).contains(Constants.INVALID));

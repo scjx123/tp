@@ -19,9 +19,9 @@ import visualize.Cli;
 import visualize.FancyCli;
 
 /**
- * The type Domnus.
+ * The type Domsun.
  */
-public class Domnus {
+public class Domsun {
 
     private final Storage storage;
     private final FancyCli fui; // fancy ui
@@ -34,7 +34,7 @@ public class Domnus {
 
     //@@author TomLBZ
     /**
-     * Instantiates a new Domnus.
+     * Instantiates a new Domsun.
      *
      * @param isFancy        toggle between fancy and normal layout
      * @param stream         the stream
@@ -43,7 +43,7 @@ public class Domnus {
      * @param taskFileName   task file name
      * @param courseFileName course file name
      */
-    public Domnus(boolean isFancy, PrintStream stream, InputStream input, String directory,
+    public Domsun(boolean isFancy, PrintStream stream, InputStream input, String directory,
                   String taskFileName, String courseFileName) {
         fui = new FancyCli(stream, input);
         pui = new Cli(stream, input);
@@ -55,7 +55,7 @@ public class Domnus {
         try {
             data = storage.load();
         } catch (Exception e) {
-            ui.showText("The save file is corrupted.");
+            ui.showText(Constants.SAVE_CORRUPTED);
             data = new Data();
         }
     }
@@ -114,8 +114,9 @@ public class Domnus {
         // you can use "fancy" command to switch to fancyCli, and use "plain" command to switch to plain Cli.
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
         // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        // new Domnus(!isWindows, System.out, System.in, Constants.PATH,
-        //       Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
+        // new Domsun(!isWindows, System.out, System.in, Constants.PATH,
+        //        Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
+
     }
 
     //@@author TomLBZ
@@ -201,7 +202,7 @@ public class Domnus {
      * @param command   Command of user
      * @param isStored  determines if output will be stored in duke.txt
      * @param isPrinted determines if output will be to console
-     * @return Domnus's response
+     * @return Domsun's response
      */
     public String testSut(String command, boolean isStored, boolean isPrinted) {
         try {

@@ -87,14 +87,16 @@ public class Command implements Help {
             }
         } catch (Exception e) {
             StringBuilder builder = new StringBuilder(e.getMessage());
-            String[] syntax = getSyntax();
-            for (int i = 0; i < syntax.length; i++) {
-                builder.append(syntax[i]);
-                if (i < syntax.length - 1) {
-                    builder.append(Constants.SYNTAX_OR).append(Constants.WIN_NEWLINE);
-                }
+            String[] syntaxes = getSyntax();
+            for (String syntax : syntaxes) {
+                builder.append(Constants.SPACE.repeat(4)).append(syntax).append(Constants.WIN_NEWLINE);
             }
-            result = builder.toString();
+            builder.append(Constants.NOTES).append(Constants.WIN_NEWLINE);
+            String[] notes = getNotes();
+            for (String note : notes) {
+                builder.append(note).append(Constants.WIN_NEWLINE);
+            }
+            result = builder.toString().replace(Constants.WIN_NEWLINE.repeat(2), Constants.WIN_NEWLINE);
         }
     }
 
@@ -154,6 +156,11 @@ public class Command implements Help {
     @Override
     public String[] getSyntax() {
         return helpText.syntax;
+    }
+
+    @Override
+    public String[] getNotes() {
+        return helpText.notes;
     }
 
     @Override

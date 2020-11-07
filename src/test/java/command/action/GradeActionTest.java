@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class GradeActionTest {
 
-//    private Domnus duke = new Domnus(false, System.out, System.in, Constants.PATH,
+//    private Domsun duke = new Domsun(false, System.out, System.in, Constants.PATH,
 //        Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 //
 //    @Test

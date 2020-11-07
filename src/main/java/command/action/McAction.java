@@ -41,6 +41,7 @@ public class McAction extends Action {
             for (Item item : data.target) {
                 SingleModule m = (SingleModule)item;
                 sum += Integer.parseInt(m.getModuleMC().trim());
+                assert sum != 0 : "sum should not be zero";
             }
             data.getTarget(flag);
             builder.append(sum).append(Constants.WIN_NEWLINE); //build a string
