@@ -101,7 +101,9 @@ public enum HelpText {
         new String[]{ "", },
         new String[]{
             "1. \"deadline ddl -by 21/9/15 1:12\" >> "
-                + "adds a deadline with description \"ddl\" and time \"Sep 15 2021 1:12\""
+                + "adds a deadline with description \"ddl\" and time \"Sep 15 2021 1:12\"",
+            "2. \"deadline ddl -by 21/9/15 1:12 Weekly\" >> "
+                    + "adds a weekly recurring deadline with description \"ddl\" and time \"Sep 15 2021 1:12\""
         }),
     /**
      * The Delete.
@@ -194,7 +196,9 @@ public enum HelpText {
         new String[]{ "", },
         new String[]{
             "1. \"event e -at May 13 2020 8:00\" >> "
-                + "adds an event with description \"e\" and time \"May 13 2020 8:00\""
+                + "adds an event with description \"e\" and time \"May 13 2020 8:00\"",
+            "2. \"event e -at May 13 2020 8:00 Weekly\" >> "
+                    + "adds an weekly recurring event with description \"e\" and time \"May 13 2020 8:00\""
         }),
     /**
      * The Fancy.
