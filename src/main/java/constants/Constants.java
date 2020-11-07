@@ -664,7 +664,8 @@ public class Constants {
     /**
      * The constant REMINDER_HEAD.
      */
-    public static final String REMINDER_HEAD = "Here are the tasks due within " + Constants.REMINDER_RANGE + " days: "
+    public static final String REMINDER_HEAD = "Auto-reminder: Here are the tasks due within "
+            + Constants.REMINDER_RANGE + " days: " + WIN_NEWLINE + "(do not want to see this so often? try \"snooze\")"
             + WIN_NEWLINE;
     /**
      * The constant MC_HEAD.
