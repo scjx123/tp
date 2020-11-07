@@ -200,7 +200,10 @@ public class Data {
      * @param index the index
      * @return the task
      */
-    public Item get(int index) {
+    public Item get(int index) throws Exception {
+        if (index < 0 || index >= target.size()) {
+            throw new Exception(Constants.INDEX_OUT);
+        }
         return target.get(index);
     }
 

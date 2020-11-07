@@ -156,7 +156,11 @@ public enum HelpText {
         new String[]{
             "done [index]"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Index must be a positive integer referencing an existing item.",
+            "2. If the index starts with a letter, it will be treated as a numerical value mapped A to 1 and Z to 26. "
+                + "For example, \"done apple\" is equivalent to \"done 1\" and \"done C4\" is equivalent to \"done 3\"."
+        },
         new String[]{
             "1. \"done 1\" >> marks the task with index 1 as done"
         }),
@@ -457,7 +461,12 @@ public enum HelpText {
         new String[]{
             "undone [index]"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Index must be a positive integer referencing an existing item.",
+            "2. If the index starts with a letter, it will be treated as a numerical value mapped A to 1 and Z to 26. "
+                    + "For example, \"undone apple\" is equivalent to \"undone 1\" "
+                    + "and \"undone C4\" is equivalent to \"undone 3\".",
+        },
         new String[]{
             "1. \"undone 1\" >> marks the task with index 1 as undone"
         }),

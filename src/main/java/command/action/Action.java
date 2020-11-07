@@ -81,19 +81,18 @@ public class Action {
      * @return the index
      */
     protected int getIndex(String input) {
-        int index = -1;
-        if (input.length() < 1) {
-            return index;
+        if (input == null || input.length() == 0) {
+            return -1;
         }
-        char character = input.toCharArray()[0];
-        if (Character.isDigit(character)) {
-            index = Integer.parseInt(input) - 1;
-        } else if (Character.isLetter(character)) {
-            character = Character.toUpperCase(character);
-            index = (int)character - Constants.LETTER_OFFSET - 1;
-        } else {
-            index = -1;
+        try {
+            return Integer.parseInt(input) - 1;
+        } catch (Exception e) {
+            char character = input.toCharArray()[0];
+            if (Character.isLetter(character)) {
+                character = Character.toUpperCase(character);
+                return (int)character - Constants.LETTER_OFFSET - 1;
+            }
+            return -1;
         }
-        return index;
     }
 }
