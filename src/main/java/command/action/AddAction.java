@@ -11,6 +11,8 @@ import data.jobs.Task;
 import exceptions.CommandException;
 import exceptions.ModuleNotFoundException;
 import exceptions.TaskNotSpecifiedException;
+import exceptions.TypeMismatchException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -28,12 +30,16 @@ public class AddAction extends Action {
         String tasksFlag = !flag.equals(Constants.MOD) ? flag : Constants.TASK;
         ArrayList<Item> targetTasks = new ArrayList<>();
         ArrayList<Item> tasksInContext = data.getTarget(tasksFlag);
-        taskIndices.forEach(i -> {
-            if (i < 0 || i > data.tasks.size() - 1) {
-                throw new IndexOutOfBoundsException();
+        for (Integer taskIndex : taskIndices) {
+            if (taskIndex < 0 || taskIndex > data.tasks.size() - 1) {
+                throw new IndexOutOfBoundsException(Constants.INDEX_OUT);
             }
-            targetTasks.add(tasksInContext.get(i));
-        });
+            Item task = tasksInContext.get(taskIndex);
+            if (!(task instanceof Task)) {
+                throw new TypeMismatchException();
+            }
+            targetTasks.add(tasksInContext.get(taskIndex));
+        }
         if (targetTasks.size() < 1) {
             throw new TaskNotSpecifiedException();
         }

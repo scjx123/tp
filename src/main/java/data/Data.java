@@ -111,36 +111,35 @@ public class Data {
             target = mods.stream().filter(
                 x -> ((SingleModule) x).isCompleted).collect(Collectors.toCollection(ArrayList::new));
             break;
+        case Constants.CAP_DATA:
+            target = mods.stream().filter(x -> ((SingleModule)x).isTaken)
+                    .filter(x -> ((SingleModule)x).isGraded()).collect(Collectors.toCollection(ArrayList::new));
+            break;
         default:
             target = tasks.stream().filter(x -> x instanceof Task).collect(Collectors.toCollection(ArrayList::new));
             break;
         }
     }
 
-    private String getTaskType(Task task) {
-        if (task instanceof Deadline) {
-            return Constants.DEADLINE;
-        } else if (task instanceof Event) {
-            return Constants.EVENT;
-        }
-        return "task";
-    }
-
-
-    public void addTask(Task task) throws Exception {
-        ArrayList<Item> tempList = new ArrayList<>(getTarget(getTaskType(task)));
-        Checker cc = new Checker(tempList, task);
-        LocalDateTime newDate = cc.checkRecurrenceDate(task);
-        if (newDate != null) {
-            task.setDateTime(newDate);
-        }
-        if (!cc.checkDuplicates()) {
-            tasks.add(task);
+    public void addTask(Task task) {
+        if (tasks.contains(task)) {
+            if (task instanceof ToDo) {
+                LOGGER.log(Level.INFO, "Duplicate found! Nudged the description of the task.");
+                task.description += Constants.LINE_UNIT;
+            } else {
+                if (task.dateTime != null) {
+                    LOGGER.log(Level.INFO, "Duplicate found! Nudged the dateTime of the task.");
+                    task.setDateTime(task.dateTime.plusSeconds(1));
+                } else {
+                    LOGGER.log(Level.INFO, "Duplicate found! Nudged the description of the task.");
+                    task.description += Constants.LINE_UNIT;
+                }
+            }
+            addTask(task);
         } else {
-            LOGGER.log(Level.INFO, "Duplicate found! Task was not added to data");
-            throw new DuplicateTaskException();
+            tasks.add(task);
+            refreshTarget();
         }
-        refreshTarget();
     }
 
     public void removeItem(Item item) {
@@ -196,7 +195,10 @@ public class Data {
      * @param index the index
      * @return the task
      */
-    public Item get(int index) {
+    public Item get(int index) throws Exception {
+        if (index < 0 || index >= target.size()) {
+            throw new Exception(Constants.INDEX_OUT);
+        }
         return target.get(index);
     }
 

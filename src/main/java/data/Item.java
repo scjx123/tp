@@ -72,6 +72,7 @@ public class Item {
                 patterns.add(datePattern);
                 patterns.add(datePattern.replace(Constants.PARAM_ALIAS, Constants.PARAM));
                 patterns.add(datePattern.replace(Constants.PARAM_ALIAS, Constants.CHAR_SPACE));
+                patterns.add(datePattern.replace(Constants.PARAM_ALIAS, Constants.CHAR_DOT));
             }
         } else {
             for (String datePattern : Constants.DATE_PATTERNS) {
@@ -80,6 +81,7 @@ public class Item {
                     patterns.add(concat);
                     patterns.add(concat.replace(Constants.PARAM_ALIAS, Constants.PARAM));
                     patterns.add(concat.replace(Constants.PARAM_ALIAS, Constants.CHAR_SPACE));
+                    patterns.add(datePattern.replace(Constants.PARAM_ALIAS, Constants.CHAR_DOT));
                 }
             }
         }
@@ -161,7 +163,7 @@ public class Item {
      */
     protected void setDateTime(LocalDateTime date) {
         updateDateTime(date);
-        isWeekly = true;
+        //isWeekly = true;
     }
 
     /**
@@ -244,5 +246,17 @@ public class Item {
         default:
             break;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Item)) {
+            return false;
+        }
+        Item item = (Item)o;
+        return item.getDetails().equals(getDetails());
     }
 }

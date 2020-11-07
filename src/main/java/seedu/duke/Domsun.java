@@ -55,7 +55,7 @@ public class Domsun {
         try {
             data = storage.load();
         } catch (Exception e) {
-            ui.showText("The save file is corrupted.");
+            ui.showText(Constants.SAVE_CORRUPTED);
             data = new Data();
         }
     }

@@ -28,6 +28,8 @@ public interface Help {
      */
     public String[] getSyntax();
 
+    public String[] getNotes();
+
     /**
      * Get usages string [ ].
      *
