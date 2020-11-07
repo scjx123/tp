@@ -221,41 +221,7 @@ Step 7. Now `StatsAction` is completed and it will return this string back to `C
 	 - Pros: Will use less memory since the task itself will be deleted. 
 	 - Cons: Stats will be updated constantly even though we do not need it. 
 
-### 5.3 Checker Feature 
-
-The checker feature is facilitated by the utility class `Checker`. It is an independent class on its own without extensions and is stored under the `Data` package of our app. The class implements the following operations: 
-
- - `checkDuplicates()`- Calls the checkClash method and return the status of boolean variable `isClash` .
- - `checkClash(ArrayList< item >, Item)`- Updates `isClash` once a duplicate item is found in the list.
- - `checkRecurrenceDate(Task)` - Checks if the current date is beyond the stated date in the list, and provides a new update for the date recurring date.
-
-Given below is an example usage scenario and how the checker mechanism behaves at each step. 
-
-![here](Images/Checker_Diagram.png)
-
-Step 1. A new `Deadline` object is created and needs to be added to the existing list of task. Hence it calls `addTask()` method under `Data` class. 
-
-Step 2. Data instantiates a Checker with its existing list by calling its constructor, and the task to be added to the list 
-
-Step 3. Data proceeds to call the `checkRecurrenceDate(Task)` of the Checker class, to get a newDate if today's date is beyond the stated weekly date.
- 
-Step 4. If `newDate` is not `null`it shows that there is a new updated date. Therefore, we proceed to update the object with our updated weekly date. 
-
-Step 5. Now we proceed to call `checkDuplicates()` of Checker class. 
-
-Step 6. If `false` , there is no duplicates in the existing list, and the task can be safely added. Otherwise, no action will be taken. 
-
-**Design consideration: 
-Aspect: How checker executes**
-
- - **Alternative 1(current choice):** Check for clashes *before* adding task onto list: 
-	 - Pros: Easy to implement as we know specifically what to find in the list eg similar dates & description.
-	 - Cons: Delays the efficiency of adding tasks onto list. 
- - **Alternative 2:** Check for clash after task is being added onto list 
-	 - Pros: Does not hinder the speed of task adding. 
-	 - Cons: Harder to implement as we have to loop through the entire list to look for duplicates. 
-
-### 5.4 CAP calculator feature
+### 5.3 CAP calculator feature
 
 This feature extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -277,7 +243,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![cap uml diagram](Images/CalculateCapSequence.png)
 
-### 5.5 Reminder Feature
+### 5.4 Reminder Feature
 
 The proposed reminder mechanism is facilitated by `ReminderAction`. It extends `Action` and the output is passed onto `UI` for display. Additionally, it implements the following operations:
 
@@ -297,7 +263,7 @@ The following sequence diagram diagram shows how the reminder operation works
 
 ![Reminder_Sequence_Diagram](Images/ReminderAction_Sequence_Diagram.png)
 
-### 5.6 Remind Feature
+### 5.5 Remind Feature
 
 Another proposed manual reminder mechanism is facilitated by `RemindAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -318,7 +284,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/Remind.png)
 
-### 5.7 Snooze Feature
+### 5.6 Snooze Feature
 
 The proposed snooze mechanism is facilitated by `SnoozeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -359,7 +325,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/PostponeAction_Sequence_Diagram.png)
 
-### 5.9 Grade feature
+### 5.7 Grade feature
 
 This extends `TakeAction` to register modules as `isTaken` from `moduleList.txt`, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -381,7 +347,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Grade_Sequence_Diagram](Images/GradeSequence.png)
 
-### 5.10 Focus Feature
+### 5.8 Focus Feature
 
 The proposed focus mechanism is facilitated by `FocusAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
