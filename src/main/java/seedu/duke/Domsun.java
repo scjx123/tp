@@ -8,7 +8,6 @@ import java.util.TimerTask;
 
 
 import command.Command;
-import command.action.RemindAction;
 import command.action.ReminderAction;
 import command.action.SnoozeAction;
 import constants.Constants;
@@ -150,12 +149,8 @@ public class Domsun {
                     ui.update(c.result, data);
                     isExit = c.isBye();
                     boolean isSnoozed = c.isSnoozed();
-                    boolean isRemind = c.isRemind();
                     if (isSnoozed) {
                         snoozeReminder();
-                    }
-                    if (isRemind) {
-                        setReminderSchedule();
                     }
                     if (isExit) {
                         // stops timer
@@ -173,14 +168,6 @@ public class Domsun {
         }
     }
 
-    //@@author: johanesrafael
-    /**
-     * Set reminder schedule.
-     */
-    public void setReminderSchedule() {
-        String schedule = new RemindAction().getSchedule();
-        reminderTimer(Constants.REMINDER_DELAY, schedule);
-    }
 
     //@@author: johanesrafael
     /**
