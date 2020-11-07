@@ -104,7 +104,7 @@ public class SingleModule extends Item {
     @Override
     public String getDetails() {
         StringBuilder builder = new StringBuilder(toString());
-        builder.append(Constants.WIN_NEWLINE).append(wrap(moduleDescription.trim())).append("Tasks: ");
+        builder.append(Constants.WIN_NEWLINE).append(removeBlanks(moduleDescription.trim())).append("Tasks: ");
         if (taskList != null && taskList.size() > 0) {
             for (Item item : taskList) {
                 builder.append(((Task)item).getDescription()).append(Constants.SPACE);
@@ -115,17 +115,10 @@ public class SingleModule extends Item {
         return builder.toString();
     }
 
-    private String wrap(String input) {
+    private String removeBlanks(String input) {
         input = input.replace(Constants.TAB, Constants.SPACE);
         input = input.replace(Constants.NEWLINE, Constants.SPACE);
-        StringBuilder builder = new StringBuilder();
-        int currentStart = 0;
-        while (currentStart < input.length()) {
-            int end = Math.min(input.length(), currentStart + Constants.BITMAP_W);
-            builder.append(input, currentStart, end).append(Constants.WIN_NEWLINE);
-            currentStart += Constants.BITMAP_W;
-        }
-        return builder.toString();
+        return input.replace(Constants.SPACE.repeat(2), Constants.SPACE);
     }
 
     /**
