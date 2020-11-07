@@ -52,7 +52,8 @@ public class Cli extends UI {
 
     @Override
     public void showText(String input) {
-        String[] lines = input.split(Constants.WIN_NEWLINE);
+        String wrappedText = wrapStringArray(input.split(Constants.WIN_NEWLINE));
+        String[] lines = wrappedText.split(Constants.WIN_NEWLINE);
         msgWrapper.show(stream, lines, msgFormat.getMessageOptions());
     }
 
@@ -63,7 +64,8 @@ public class Cli extends UI {
      * @param indexOption the index option
      */
     public void showListText(String input, MessageOptions indexOption) {
-        ArrayList<String> lines = new ArrayList<>(Arrays.asList(input.split(Constants.WIN_NEWLINE)));
+        String wrappedText = wrapStringArray(input.split(Constants.WIN_NEWLINE));
+        ArrayList<String> lines = new ArrayList<>(Arrays.asList(wrappedText.split(Constants.WIN_NEWLINE)));
         String head = lines.get(0);
         lines.remove(head);
         msgFormat.removeMessageOption(MessageOptions.LINE_AFTER);
@@ -80,6 +82,7 @@ public class Cli extends UI {
 
     @Override
     public void update(String input, Data data) {
+        String wrappedInput = wrapStringArray(input.split(Constants.WIN_NEWLINE));
         if (freshlySwitched) {
             String replay = data.lastInput;
             MessageOptions replayOption = data.lastIndexOption;
@@ -91,16 +94,16 @@ public class Cli extends UI {
             freshlySwitched = false;
             return;
         }
-        if (input == null || input.equals(Constants.ZERO_LENGTH_STRING)) {
+        if (wrappedInput.equals(Constants.ZERO_LENGTH_STRING)) {
             showText(Constants.ZERO_LENGTH_STRING);
-        } else if (input.contains(Constants.BMP_LIST_SWITCH)
-                || input.contains(Constants.BMP_SEL_SWITCH)) {
+        } else if (wrappedInput.contains(Constants.BMP_LIST_SWITCH)
+                || wrappedInput.contains(Constants.BMP_SEL_SWITCH)) {
             if (!data.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
                 showListText(data.lastInput, data.lastIndexOption);
             }
         } else {
-            showListText(input, data.indexOption);
-            data.lastInput = input;
+            showListText(wrappedInput, data.indexOption);
+            data.lastInput = wrappedInput;
             data.lastIndexOption = data.indexOption;
         }
         data.indexOption = MessageOptions.NOT_INDEXED;
