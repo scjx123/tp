@@ -80,7 +80,7 @@ public class Domnus {
 
                     }
                 }, delay, Integer.parseInt(interval));
-            } else {
+            } else if (interval.equals("360000")) {
                 timer.cancel();
                 timer = new Timer();
                 timer.schedule(new TimerTask() { // when it is snoozed
@@ -115,7 +115,7 @@ public class Domnus {
         // [AFTER READING THE ABOVE TEXT, PLEASE UNCOMMENT THE FOLLOWING 2 LINES TO RUN THE PROGRAM]
         // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
         // new Domnus(!isWindows, System.out, System.in, Constants.PATH,
-        //        Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
+        //       Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
     }
 
     //@@author TomLBZ
