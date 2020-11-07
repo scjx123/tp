@@ -209,6 +209,7 @@ Step 6. This ratio will be passed into `roundedRatioBar` to return *String* of a
 
 Step 7. Now `StatsAction` is completed and it will return this string back to `Command` to store it under the String variable `result`. The `Main` layer will retrieve `result`, before passing it onto `UI` layer for printing. 
 
+![statsDiagram](Images/StatsAction.png)
 
 **Design consideration:**
 
