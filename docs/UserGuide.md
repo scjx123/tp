@@ -9,46 +9,50 @@ create reminders, calculate and set goals for their MCs / CAPs.
 
 ## Contents
 
-- [Preliminaries](#preliminaries)
-  * [Installation](#installation)
-  * [Running the program](#running-the-program)
-  * [Guide format](#guide-format)
+- [Preliminaries](#Preliminaries)
+  * [Installation](#Installation)
+  * [Running the program](#Running-the-program)
+  * [Domsun Tutorial](#Domsun-Tutorial)
 - [Features](#features)
+- [Command Summary](#command-summary)
+    * [`Daily Tasks`](#Daily-Tasks)
+    * [`Module Planner`](#Module-Planner)
+    * [`General Features`](#General-Features)
 - [Usage](#usage)
-    * [`add` - Add task(s) to module(s)](#add---add-task-to-module)
-    * [`bye` - Quit the program](#bye---quit-the-program)
-    * [`cap` - Prints CAPs](#cap---calculate-caps)
-    * [`clear` - Clear the task list](#clear---clear-the-task-list)
-    * [`deadline` - Add a deadline to the task list](#deadline---add-a-deadline-to-the-task-list)
-    * [`delete` - Delete a task from the task list](#delete---delete-a-task-from-the-task-list)
+    * [`add` - Add task(s) to module(s)](#add---Add-task-to-module)
+    * [`bye` - Quit the program](#bye---Quit-the-program)
+    * [`cap` - Prints CAPs](#cap---Prints-CAPs)
+    * [`clear` - Clear the task list](#clear---Clear-the-task-list)
+    * [`deadline` - Add a deadline to the task list](#deadline---Add-a-deadline-to-the-task-list)
+    * [`delete` - Delete a task from the task list](#delete---Delete-a-task-from-the-task-list)
     * [`detail` - Prints item detail](#detail---Prints-item-detail)
-    * [`done` - Mark a task as done](#done---mark-a-task-as-done)
+    * [`done` - Mark a task as done](#done---Mark-a-task-as-done)
     * [`edit` - Modify attributes of an item](#edit---Modify-attributes-of-an-item)
-    * [`event` - Add an event to the task list](#event---add-an-event-to-the-task-list)
-    * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---switch-the-ui-to-the-fancy-mode-(gui-like-cli))
-    * [`find` - Find an event in the task list](#find---find-an-event-in-the-task-list)
-    * [`focus` - Change the context of the program](#focus---change-the-context-of-the-program)
-    * [`grade` - Add grade to course or module](#grade---add-grade-to-course-or-module)  
-    * [`help` - Print help text of the commands](#help---print-help-text-of-the-commands)
-    * [`list` - Print a list of added tasks](#list---print-a-list-of-added-tasks)
-    * [`mc` - Prints MCs](#mc---prints-mcs)
-    * [`next` - Switch the target region to the next page ***(GUI mode only)***](#next---switch-the-target-region-to-the-next-page)
-    * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---switch-the-ui-to-the-plain-mode-(pure-text-cli))
-    * [`prev` - Switch the target region to the previous page ***(GUI mode only)***](#prev---switch-the-target-region-to-the-previous-page)
-    * [`postpone` - Postpone a task to a later date](#postpone---postpone-a-task-to-a-later-date)
-    * [`reminder` - Print tasks that are due soon](#reminder---print-tasks-that-are-due-soon)
-    * [`sel` - Select items by index](#sel---select-items-by-index)
-    * [`snooze` - Delays reminder popup](#snooze---delays-reminder-popup)
+    * [`event` - Add an event to the task list](#event---Add-an-event-to-the-task-list)
+    * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---Switch-the-ui-to-the-fancy-mode-(gui-like-cli))
+    * [`find` - Find an event in the task list](#find---Find-an-event-in-the-task-list)
+    * [`focus` - Change the context of the program](#focus---Change-the-context-of-the-program)
+    * [`grade` - Add grade to course or module](#grade---Add-grade-to-course-or-module)
+    * [`goal` - Calculate how far the user is from his/her target CAP](#goal---Calculate-how-far-the-user-is-from-his/her-target-CAP)  
+    * [`help` - Print help text of the commands](#help---Print-help-text-of-the-commands)
+    * [`list` - Print a list of added tasks](#list---Print-a-list-of-added-tasks)
+    * [`mc` - Prints MCs](#mc---Prints-mcs)
+    * [`next` - Switch the target region to the next page ***(GUI mode only)***](#next---Switch-the-target-region-to-the-next-page)
+    * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---Switch-the-ui-to-the-plain-mode-(pure-text-cli))
+    * [`prev` - Switch the target region to the previous page ***(GUI mode only)***](#prev---Switch-the-target-region-to-the-previous-page)
+    * [`postpone` - Postpone a task to a later date](#postpone---Postpone-a-task-to-a-later-date)
+    * [`reminder` - Print tasks that are due soon](#reminder---Print-tasks-that-are-due-soon)
+    * [`sel` - Select items by index](#sel---Select-items-by-index)
+    * [`snooze` - Delays reminder popup](#snooze---Delays-reminder-popup)
     * [`stats` - Prints Statistics](#stats---Prints-Statistics)
-    * [`take` - Take module(s)](#take---take-module)
-    * [`todo` - Add a todo to the task list](#todo---add-a-todo-to-the-task-list)
-    * [`undone` - Mark a task as undone](#undone---mark-a-task-as-undone)
+    * [`take` - Take module(s)](#take---Take-module)
+    * [`todo` - Add a todo to the task list](#todo---Add-a-todo-to-the-task-list)
+    * [`undone` - Mark a task as undone](#undone---Mark-a-task-as-undone)
     * [`unknown` - Prints error message](#unknown---prints-error-message)
-    * [`unsel` - Unselect items](#unsel---unselect-items)
-    * [`untake` - Untake module(s)](#untake---untake-module)
+    * [`unsel` - Unselect items](#unsel---Unselect-items)
+    * [`untake` - Untake module(s)](#untake---Untake-module)
 - [Triggering the syntax reminder](#triggering-the-syntax-reminder)
 - [FAQ](#faq)
-- [Command Summary](#command-summary)
 
 ## Preliminaries
 
@@ -143,8 +147,56 @@ The program allows users to add some tasks to modules using the `add` command.
 ### Reminders
 The program allows user to set reminders at certain time, or remind themselves of the most urgent tasks on start-up.
 
-## Usage
+## Command Summary
 
+A cheat sheet of commonly used commands:
+
+### Daily Tasks
+|**Action** | **Format**| **Examples**|
+|------------|-------------|-------------|
+|**todo**|`todo [description]`|`todo borrow book`|
+|**deadline**|`deadline [description] -by [time]`|`deadline project submission -by 21/9/15 1:12`|
+|**event**|`event [description] -at [time]`|`event concert -at May 13 2020 8:00`|
+|**list**|`list date [asc / desc / spec “date”]`|`list date asc`|
+|**done**|`done [index]`|`done 2`|
+|**undone**|`undone [index]`|`undone 2`|
+|**find**|`find [keyword]`|`find exam`|
+|**postpone**| `postpone [index]`|`postpone 1`|
+|**reminder**|`reminder [on/off]` |`reminder`|
+|**snooze**|`snooze`||
+
+
+### Module Planner
+|**Action** | **Format**| **Examples**|
+|------------|-------------|-------------|
+|**take**|`take [index / module code]`|`take CS2113T`|
+|**untake**|`untake [index / module code]`|`untake CS2113T`|
+|**sel**|`sel [index / module code]`|`sel 1 2 3`|
+|**unsel**|`unsel [index / module code]`|`unsel CS1010 CS2113`|
+|**detail**|`detail [index / module code]`|`detail CS2113T`|
+|**grade**|`grade [-option] [module] [grade] {[module] [grade]...}`|`grade -a CS2113 A CG1112 A-`|
+|**goal**|`goal [-option] [total MC] [target CAP] [taken MC] [current CAP]`|`goal -c 160 4.9 100 4.5`|
+|**mc**|`mc [-option] [-details]`|`mc -p`|
+|**cap**|`cap [-option] [module] [grade] {[module] [grade]...}`|`cap -m CS2113 A CG1112 A-`|
+
+
+### General Features
+|**Action** | **Format**| **Examples**|
+|------------|-------------|-------------|
+|**add**|`add -task [index] -mod [module code]`|`add -task 1 -mod CS2113`|
+|**clear** | `clear`||
+|**delete**|`delete [index]`|`delete 2`|
+|**edit**|`edit [-mod / -task] [index / code (for module only)]`|`edit -mod CS2113 grade=A -task 1 description=do_homework type=event`|
+|**focus**|`focus [deadline / todo / event / task / mod / selected / taken]`|`focus deadline`|
+|**stats**|`stats [target]`| `stats`|
+|**help**|`help [options]`|`help deadline`|
+|**fancy**|`fancy [option]`|`fancy`|
+|**plain**|`plain [option]`|`plain`|
+|**next**|`next [option]`|`next`|
+|**prev**|`prev [option]`|`prev`|
+|**bye**|`bye`||
+
+## Usage
 
 ## Features - Daily Tasks 
 
@@ -382,8 +434,8 @@ Example of usage:
 
 Expected outcome:
  
-    ```
-    ____________________________________________________________
+    
+    _________________________________________________________
         I've postpone this task:
         [D][X] project submission (by: Sep 16 2021 01:12)
     ____________________________________________________________
@@ -395,7 +447,7 @@ Example of usage:
 
 Expected outcome:
     
-    ```
+    
     ____________________________________________________________
         I've postpone this task:
         [D][X] project submission (by: Sep 16 2021 02:12)
@@ -408,7 +460,7 @@ Example of usage:
 
 Expected outcome:
 
-    ```
+    
     ____________________________________________________________
         I've postpone this task:
         [D][X] project submission (by: Sep 23 2021 02:12)
@@ -421,7 +473,7 @@ Example of usage:
 
 Expected outcome:
 
-    ```
+    
     ____________________________________________________________
         I've postpone this task:
         [D][X] project submission (by: Sep 23 2022 02:12)
@@ -491,10 +543,10 @@ Example of usage:
 
 Expected outcome:
 
-    ```
-    ____________________________________________________________
+
+    __________________________________________________________________________
         I've snoozed the reminder for 1 minute. Will remind you in 6 minutes.
-    ____________________________________________________________    
+    __________________________________________________________________________    
     ```
 
 
@@ -618,7 +670,7 @@ Example of usage:
 Expected outcome:
 
    ```  
-    ____________________________________________________________
+    _____________________________________________________________________________________________________
     Here are the details you requested:
     Item: CS2113T Software Engineering & Object-Oriented Programming 4MC
     "This module introduces the necessary skills for systematic and rigorous development of software sys
@@ -628,7 +680,7 @@ Expected outcome:
     he industry, such as test automation tools, build automation tools, and code revisioning tools will 
     be covered.
     Tasks: [NOT FOUND]
-    ____________________________________________________________
+    ______________________________________________________________________________________________________
    ```
 
 
@@ -851,7 +903,7 @@ Example of usage:
 
 Exepected outcome:
     
-    ```
+    
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         grade=A; 
@@ -863,7 +915,7 @@ Example of usage:
 
 Expected outcome:
     
-    ```
+    
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         description=do homework; 
@@ -880,7 +932,7 @@ Example of usage:
     
 Expected outcome:
     
-    ```
+    
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         type=event; 
@@ -898,7 +950,7 @@ Example of usage:
 
 Expected outcome:
 
-    ```
+    
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         grade=A; 
@@ -1000,7 +1052,7 @@ Example of usage:
 Expected outcome:
 
    ```
-    ____________________________________________________________
+    __________________________________________________________________________________________________________________
         Here are all available commands:
         Command: bye  Description: Quit the program
         Command: clear  Description: Clear the task list
@@ -1029,7 +1081,7 @@ Expected outcome:
         Command: detail  Description: Print Details: Print the details of a specified module.
         Command: cap  Description: Calculate CAP: Calculate CAP for courses based on selected option.
         Use "help [target]" to see details :) Try "help help"!
-    ____________________________________________________________
+    _____________________________________________________________________________________________________________________
    ```
 Example of usage: 
 
@@ -1038,7 +1090,7 @@ Example of usage:
 Expected outcome:
 
    ```
-    ____________________________________________________________
+    ___________________________________________________________________________________________
         Name: list
         Description: Print a list of items depending on the current Focus
         Syntax:
@@ -1048,7 +1100,7 @@ Expected outcome:
         1. "list" >> list all added items
         2. "list date asc" >> list items with a "date" field in ascending order
         3. "list date spec Oct 5 2020" >> list items with specific "date" field of Oct 5 2020
-    ____________________________________________________________
+    ____________________________________________________________________________________________
 
    ```
 
@@ -1221,51 +1273,3 @@ Expected outcome:
 
 **A**: To run this program execute the jar file by ‘java -jar domnus.jar’
 
-## Command Summary
-
-A cheat sheet of commonly used commands:
-
-### Daily Tasks
-|**Action** | **Format**| **Examples**|
-|------------|-------------|-------------|
-|**todo**|`todo [description]`|`todo borrow book`|
-|**deadline**|`deadline [description] -by [time]`|`deadline project submission -by 21/9/15 1:12`|
-|**event**|`event [description] -at [time]`|`event concert -at May 13 2020 8:00`|
-|**list**|`list date [asc / desc / spec “date”]`|`list date asc`|
-|**done**|`done [index]`|`done 2`|
-|**undone**|`undone [index]`|`undone 2`|
-|**find**|`find [keyword]`|`find exam`|
-|**postpone**| `postpone [index]`|`postpone 1`|
-|**reminder**|`reminder [on/off]` |`reminder`|
-|**snooze**|`snooze`||
-
-
-### Module Planner
-|**Action** | **Format**| **Examples**|
-|------------|-------------|-------------|
-|**take**|`take [index / module code]`|`take CS2113T`|
-|**untake**|`untake [index / module code]`|`untake CS2113T`|
-|**sel**|`sel [index / module code]`|`sel 1 2 3`|
-|**unsel**|`unsel [index / module code]`|`unsel CS1010 CS2113`|
-|**detail**|`detail [index / module code]`|`detail CS2113T`|
-|**grade**|`grade [-option] [module] [grade] {[module] [grade]...}`|`grade -a CS2113 A CG1112 A-`|
-|**goal**|`goal [-option] [total MC] [target CAP] [taken MC] [current CAP]`|`goal -c 160 4.9 100 4.5`|
-|**mc**|`mc [-option] [-details]`|`mc -p`|
-|**cap**|`cap [-option] [module] [grade] {[module] [grade]...}`|`cap -m CS2113 A CG1112 A-`|
-
-
-### General Features
-|**Action** | **Format**| **Examples**|
-|------------|-------------|-------------|
-|**add**|`add -task [index] -mod [module code]`|`add -task 1 -mod CS2113`|
-|**clear** | `clear`||
-|**delete**|`delete [index]`|`delete 2`|
-|**edit**|`edit [-mod / -task] [index / code (for module only)]`|`edit -mod CS2113 grade=A -task 1 description=do_homework type=event`|
-|**focus**|`focus [deadline / todo / event / task / mod / selected / taken]`|`focus deadline`|
-|**stats**|`stats [target]`| `stats`|
-|**help**|`help [options]`|`help deadline`|
-|**fancy**|`fancy [option]`|`fancy`|
-|**plain**|`plain [option]`|`plain`|
-|**next**|`next [option]`|`next`|
-|**prev**|`prev [option]`|`prev`|
-|**bye**|`bye`||
