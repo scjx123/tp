@@ -72,6 +72,7 @@ public class Item {
                 patterns.add(datePattern);
                 patterns.add(datePattern.replace(Constants.PARAM_ALIAS, Constants.PARAM));
                 patterns.add(datePattern.replace(Constants.PARAM_ALIAS, Constants.CHAR_SPACE));
+                patterns.add(datePattern.replace(Constants.PARAM_ALIAS, Constants.CHAR_DOT));
             }
         } else {
             for (String datePattern : Constants.DATE_PATTERNS) {
@@ -80,6 +81,7 @@ public class Item {
                     patterns.add(concat);
                     patterns.add(concat.replace(Constants.PARAM_ALIAS, Constants.PARAM));
                     patterns.add(concat.replace(Constants.PARAM_ALIAS, Constants.CHAR_SPACE));
+                    patterns.add(datePattern.replace(Constants.PARAM_ALIAS, Constants.CHAR_DOT));
                 }
             }
         }

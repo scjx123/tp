@@ -208,7 +208,7 @@ public class FancyCli extends Cli {
         if (isDisplayMode) {
             initializeList(lines[0]);
             bmpSel.drawLine(0, 0, maxX, 0,
-                     "This command does not update the text region. Keeping the last content:",
+                     "This command did not update the text region. Keeping the last content:",
                     selBarColor, selBarText, false);
         } else {
             initializeSel(lines[0]);

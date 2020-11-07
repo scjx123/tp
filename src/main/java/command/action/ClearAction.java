@@ -15,7 +15,7 @@ public class ClearAction extends Action {
 
     @Override
     public String act(Data data) throws Exception {
-        if (flattenedArgs != null && flattenedArgs[0] != null) {
+        if (flattenedArgs != null && flattenedArgs.length > 0) {
             if (flattenedArgs[0].name.toLowerCase().equals("fancy")) {
                 return "I have cleared the text region for the fancy UI." + Constants.WIN_NEWLINE;
             }

@@ -69,6 +69,7 @@ public class Constants {
      * The constant CHAR_SPACE.
      */
     public static final char CHAR_SPACE = ' ';
+    public static final char CHAR_DOT = '.';
 
     public static final String EQUALS = "=";
     /**

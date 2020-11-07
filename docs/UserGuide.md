@@ -111,8 +111,10 @@ The *time* field consists of a *date* part (such as `Oct 13 1998`), and a *time*
 
 ### Fuzzy parsing
 The program fuzzily parses user's inputs with respect to date and time.<br>
-`"Oct 13 1998"`, `10/13/98`, `13-10-1998`, `13 Oct 98` and many more common date formats are all supported.<br>
-`1:1:0`, `01:01:00`, `1:01`, `01:1` and many more common time formats are all supported.
+Supports any date format delimited by `" "`, `-`, `/` and `.` in any order, such as 
+`"Oct 13 1998"`, `10/13/98`, `13-10-1998` and `13.Oct.98`.<br>
+Supports any time format delimited by `:` in 1 or 2 digits, such as
+`1:1:0`, `01:01:00`, `1:01` and `01:1`. Does not support the notations "am" or "pm".
 
 ### Auto-save and auto-load
 The program saves the tasks list automatically every time the list changes. <br>
