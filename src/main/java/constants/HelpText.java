@@ -296,10 +296,13 @@ public enum HelpText {
         "stats",
         "Print statistics for a given modules/tasks",
         new String[]{
-            "stats [target]",
-            "target: todo / deadline / event / <module code>"
+            "stats [-option] [module code]",
+            "option: -mod"
         },
-        new String[]{ "", },
+        new String[]{
+                "1. Module entered should exist. Otherwise you should expect an \"Module Not Found\" error message",
+                "2. If the command entered is stats alone, ensure that you are focusing on task by typing \"focus\""
+        },
         new String[]{
             "1. \"stats\" >> prints statistics of task completed",
             "2. \"stats -mod CS2113\" >> prints statistics of tasks completed under tasks of CS2113"
@@ -330,7 +333,10 @@ public enum HelpText {
             "mc [-option]",
             "option: -d(detailed)"
         },
-        new String[]{ "", },
+        new String[]{
+                "1. Default mc command prints the total mc that exist in the taken list of module",
+                "2. To print out a detailed list of mc belonging to the taken modules, ensure you have entered " +
+                        "\"focus taken\"."},
         new String[]{
             "1. \"mc\" >> print the total number of MCs currently taking",
             "2. \"mc -d\" >> print the detailed MC composition of the selection region"
