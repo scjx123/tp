@@ -1,14 +1,18 @@
+//@@author scjx123
+
 package command.action;
 
 import constants.Constants;
 import exceptions.CommandException;
+import exceptions.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Domsun;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StatsActionTest {
     private String[] testCommand = {"stats", "stats -mod CS2113","stats -garbage"};
@@ -20,24 +24,22 @@ public class StatsActionTest {
         Domsun d = new Domsun(false, System.out, System.in, Constants.PATH,
                 Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 
-        d.testSut("done 1", false, true);
-
         assertAll("StatsActionTest", () -> assertTrue(d.testSut(testCommand[0], false, true)
                         .contains("%")),
-            () -> assertTrue(d.testSut(testCommand[1], false, true).contains("%")),
+            () -> assertNotEquals(Constants.INVALID,d.testSut(testCommand[1], false, true).contains("[0.0%]")),
             () -> assertTrue(d.testSut(testCommand[2], false, true).contains(Constants.INVALID))
         );
     }
 
     @Test
-    void exceptionTesting() {
+    void statsAction_statsExceptionTesting_InvalidCommandDisplayed() {
         Exception exception = assertThrows(CommandException.class,
             () -> prepareTest(testCommand[2]));
         assertTrue(exception.getMessage().contains(Constants.INVALID));
     }
 
     @Test
-    void roundedBarGroupAssertions() {
+    void statsAction_LongRatioAndZero_CorrectPercentage() {
         int x = 0;
         double y = 1.0999999;
         assertAll("roundedRatioBarAssertion",
@@ -70,6 +72,5 @@ public class StatsActionTest {
             }
         }
     }
-
-
 }
+//@@author

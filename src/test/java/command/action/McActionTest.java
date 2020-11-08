@@ -1,3 +1,5 @@
+//@@author scjx123
+//
 //package command.action;
 //
 //import constants.Constants;
@@ -21,7 +23,7 @@
 //
 //        assertAll("McActionTest",
 //            () -> assertTrue(d.testSut(testCommand[0], false, true)
-//                .contains("48788")),
+//                .contains("0")),
 //            () -> assertTrue(d.testSut(testCommand[1], false, true).contains("12"))
 //        );
 //    }
@@ -35,3 +37,4 @@
 //    }
 //
 //}
+//@@author
