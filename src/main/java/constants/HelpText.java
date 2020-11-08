@@ -397,6 +397,29 @@ public enum HelpText {
             "3. \"list date spec Oct 5 2020\" >> list items with specific \"date\" field of Oct 5 2020"
         }),
     /**
+     * The Load.
+     */
+    LOAD(
+        "load",
+        "Loads linked tasks to ONE specified module without adding them to the main task list",
+        new String[]{
+            "load [module code] [task_string] ...",
+        },
+        new String[]{
+            "1. This command should only be used if you are highly familiar with the save file "
+                + "and you want to manually edit linked tasks to a specific module",
+            "2. We do NOT recommend using this command on a daily basis"
+        },
+        new String[]{
+            "1. \"load EE2028 [D][V]_Exam_(by:_Jan_11_2011_11:11)\" >> loads a task with attributes: "
+                + "\"description=Exam\", \"type=deadline\", \"date=Jan_11_2011_11:11\" and \"isdone=true\" "
+                + "into the linked task list of module EE2028, WITHOUT adding this task object to the main task list.",
+            "2. \"load EE2028 [T][X]_test1,[T][V]_test2\" >> loads a task with attributes: "
+                + "\"description=test1\", \"type=todo\" and \"isdone=false\", then another task with attributes: "
+                + "\"description=test2\", \"type=todo\" and \"isdone=true\", WITHOUT adding any of these tasks "
+                + "to the main task list",
+        }),
+    /**
      * The Mc.
      */
     MC(
