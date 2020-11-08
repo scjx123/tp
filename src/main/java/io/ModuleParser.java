@@ -1,3 +1,5 @@
+//@@author scjx123
+
 package io;
 
 import java.io.IOException;
@@ -50,12 +52,7 @@ public class ModuleParser {
      * The Temp string.
      */
     static String tempString;
-    static StringBuilder descriptionBuilder = new StringBuilder();
-    static boolean isDescriptionBuilder = false;
-    static StringBuilder prereqBuilder;
-    static boolean isPrereqBuilder = false;
-    String[] input;
-    int sum = 0;
+    private String[] input;
 
     /**
      * Constructor of ModuleParser.
@@ -157,3 +154,4 @@ public class ModuleParser {
         }
     }
 }
+//@@author
