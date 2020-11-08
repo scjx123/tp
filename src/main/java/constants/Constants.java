@@ -706,7 +706,7 @@ public class Constants {
     /**
      * The constant INIT_SEL.
      */
-    public static final String INIT_SEL = "This is the selection list.";
+    public static final String INIT_SEL = "This is the text region. It displays all information except the item list.";
     /**
      * The constant BMP_LIST_SWITCH.
      */
