@@ -81,8 +81,9 @@ public class FileSaver extends IO {
             StringBuilder strBuilder = new StringBuilder();
             for (Item item: courses) {
                 SingleModule module = (SingleModule) item;
-                strBuilder.append(module.getName()).append(Constants.SPACE)
-                    .append(module.grade).append(System.lineSeparator());
+                strBuilder.append(module.getName()).append(Constants.SPACE).append(module.grade)
+                        .append(Constants.SPACE).append(getTaskListString((SingleModule)item))
+                        .append(System.lineSeparator());
             }
             if (isFileInvalid()) {
                 throw new IOException();
@@ -94,5 +95,16 @@ public class FileSaver extends IO {
         } catch (IOException e) {
             return false;
         }
+    }
+
+    private String getTaskListString(SingleModule mod) {
+        if (mod.taskList == null || mod.taskList.size() == 0) {
+            return Constants.ZERO_LENGTH_STRING;
+        }
+        StringBuilder builder = new StringBuilder();
+        for (Item item : mod.taskList) {
+            builder.append(item.toString().replace(Constants.SPACE, Constants.LINE_UNIT)).append(Constants.SPACE);
+        }
+        return builder.toString().trim().replace(Constants.SPACE, Constants.COMMA);
     }
 }

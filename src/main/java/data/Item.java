@@ -9,6 +9,8 @@ import data.jobs.Task;
 import data.jobs.ToDo;
 import exceptions.CommandException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -55,6 +57,11 @@ public class Item {
      */
     public Item(String description) {
         this.description = description;
+    }
+
+    public String getStringFromDateTime(LocalDateTime dateTime) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        return dateFormat.format(dateTime);
     }
 
     /**

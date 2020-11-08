@@ -104,10 +104,11 @@ public class SingleModule extends Item {
     @Override
     public String getDetails() {
         StringBuilder builder = new StringBuilder(toString());
-        builder.append(Constants.WIN_NEWLINE).append(removeBlanks(moduleDescription.trim())).append("Tasks: ");
+        builder.append(Constants.WIN_NEWLINE).append(removeBlanks(moduleDescription.trim()))
+                .append(Constants.WIN_NEWLINE).append("Tasks: ").append(Constants.WIN_NEWLINE);
         if (taskList != null && taskList.size() > 0) {
             for (Item item : taskList) {
-                builder.append(((Task)item).getDescription()).append(Constants.SPACE);
+                builder.append((item).getDetails()).append(Constants.WIN_NEWLINE);
             }
         } else {
             builder.append(Constants.NOT_FOUND);
@@ -116,8 +117,8 @@ public class SingleModule extends Item {
     }
 
     private String removeBlanks(String input) {
-        input = input.replace(Constants.TAB, Constants.SPACE);
-        input = input.replace(Constants.NEWLINE, Constants.SPACE);
+        input = input.replace(Constants.TAB, Constants.SPACE).replace(Constants.WIN_NEWLINE, Constants.SPACE)
+                .replace(Constants.NEWLINE, Constants.SPACE);
         return input.replace(Constants.SPACE.repeat(2), Constants.SPACE);
     }
 

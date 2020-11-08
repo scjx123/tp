@@ -79,7 +79,7 @@ public class Domsun {
 
                     }
                 }, delay, Integer.parseInt(interval));
-            } else if (interval.equals("360000")) {
+            } else if (interval.equals(Constants.NEW_REMINDER_INTERVAL)) {
                 timer.cancel();
                 timer = new Timer();
                 timer.schedule(new TimerTask() { // when it is snoozed
@@ -136,7 +136,7 @@ public class Domsun {
      * Run.
      */
     public void run() {
-        // schedule reminder every 1 minutes
+        // schedule reminder every 6 minutes
         reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
         boolean isExit = false;
         while (!isExit) {

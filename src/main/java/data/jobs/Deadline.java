@@ -10,11 +10,6 @@ import constants.Constants;
 public class Deadline extends Task {
 
     /**
-     * Deadline due time.
-     */
-    protected String by;
-
-    /**
      * Instantiates a new Deadline.
      *
      * @param description deadline description
@@ -22,13 +17,13 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.timeString = by;
         setDateTime(by);
     }
 
     @Override
     public String toString() {
-        String byTime = getDateTimeString(by);
+        String byTime = getDateTimeString(timeString);
         if (isWeekly) {
             return Constants.DDL_ICON + super.toString() + " (by: " + byTime + ")" + " Weekly";
         } else {
