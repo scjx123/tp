@@ -127,12 +127,14 @@ public class Data {
     }
 
     public void addTask(Task task) {
+        //@@author scjx123
         if (task.isWeekly) {
             LocalDateTime newDate = checkRecurrenceDate(task);
             if (newDate != null) {
                 task.setDateTime(newDate);
             }
         }
+        //@@author
         if (tasks.contains(task)) {
             if (task instanceof ToDo) {
                 LOGGER.log(Level.INFO, "Duplicate found! Nudged the description of the task.");
@@ -213,6 +215,7 @@ public class Data {
         return target.get(index);
     }
 
+    //@@author scjx123
     /**
      * Check if today is the day for the tasks if yes, it will 'update' the
      * assignment with a new deadline.
@@ -233,6 +236,7 @@ public class Data {
         }
         return newDate;
     }
+    //@@author
 
 
 }
