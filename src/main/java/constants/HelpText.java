@@ -321,7 +321,7 @@ public enum HelpText {
         },
         new String[]{
             "1. The tasks should consists of date type i.e. events or deadline tasks, does not work on todo tasks",
-            "2. Each postpone delays the tasks by a day, an hour, a week or a year"
+            "2. Each postpone delays the tasks by a day, an hour, a week or a year",
             "3. When letter appears without a number as its parameter, the letter will be treated as a numeric value "
                 + "mapped A to 1 and Z to 26." + Constants.WIN_NEWLINE
                 + "For example, \"postpone boy\" is equivalent to \"postpone 2\" and "
