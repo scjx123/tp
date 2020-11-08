@@ -139,7 +139,7 @@ public class Storage {
     }
 
     private String courseDataToCommand(String input) {
-        String output = Constants.ZERO_LENGTH_STRING;
+        StringBuilder output = new StringBuilder();
         String[] iconSeparated = input.split(Constants.SPACE);
         String courseName = iconSeparated[0];
         boolean isCompleted = courseName.contains(Constants.COMPLETED_LABEL);
@@ -147,11 +147,17 @@ public class Storage {
             courseName = courseName.replace(Constants.COMPLETED_LABEL, Constants.ZERO_LENGTH_STRING);
         }
         if (!courseName.isBlank()) {
-            output = Constants.GRADE + Constants.SPACE + courseName + Constants.SPACE + iconSeparated[1];
+            output.append(Constants.GRADE + Constants.SPACE)
+                    .append(courseName).append(Constants.SPACE).append(iconSeparated[1]);
         }
         if (isCompleted) {
-            output += Constants.CMD_END + Constants.COMPLETE + Constants.SPACE + courseName;
+            output.append(Constants.CMD_END + Constants.COMPLETE + Constants.SPACE).append(courseName);
         }
-        return output;
+        if (iconSeparated.length > 2) {
+            String linkedTasksString = iconSeparated[2];
+            output.append(Constants.CMD_END + Constants.LOAD + Constants.SPACE)
+                    .append(courseName).append(Constants.SPACE).append(linkedTasksString);
+        }
+        return output.toString();
     }
 }

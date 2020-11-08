@@ -24,6 +24,7 @@ public enum HelpText {
             "2.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
                 + "\"-mod CS9999\" as a parameter for \"add\", you should expect a \"not found\" error message.",
             "3. Both parameters here (i.e. task and mod) are compulsory.",
+            "4. Once a task is added to a module, it is unlinked from the task list."
         },
         new String[]{
             "1. \"add -task 1 2 -mod CS2113 CS2113T \" >> add task 1 and task 2 in the current list to "
@@ -212,20 +213,29 @@ public enum HelpText {
      */
     EDIT(
         "edit",
-        "Modify the attributes of an item (task / module)",
+        "Modify the attributes of an item (task / module), or operate on one linked task of a module",
         new String[]{
-            "edit [-mod / -task] [index / code (for module only)] [field=new value] ...",
+            "edit -task [index] field=new_value {[field=new_value] ...}",
+            "edit -mod [module code] field=new_value {[field=new_value] ...}",
+            "edit -mod [module code] task=[del / done / undone]<linked task index>",
         },
         new String[]{
-            "1. No space allowed around \"=\". Use \"_\" in place of space for the \"[field=new value]\" parameters",
-            "2. Modules and task need to be \"completed\" or created beforehand.",
+            "1. Fields for \"-task\" include \"description\", \"type\", \"selected\", \"weekly\" and \"done\"",
+            "2. Fields for \"-mod\" include \"grade\", \"su\", \"selected\" and \"taken\"",
+            "3. No space allowed around the \"=\" sign. Use \"_\" in for spaces in \"[field=new_value]\" parameters",
+            "4. Modules and task referenced need to exist.",
+            "5. Removing a specified linked task from the module does not delete the task from the task list",
         },
         new String[]{
             "1. \"edit -mod CS2113T grade=A\" >> changes the \"grade\" field of module \"CS2113T\" to be \"A\"",
             "2. \"edit -task 1 description=do_homework\" >> "
                 + "changes the \"description\" field of the 1st task in the current list to \"do homework\"",
             "3. \"edit -task 1 type=event\" >> changes the \"type\" of the 1st task in the current list to \"event\"",
-            "4. \"edit -mod CS2113 grade=A -task 1 description=do_homework type=event\" >> do 1 to 3 sequentially"
+            "4. \"edit -mod CS2113 grade=A -task 1 description=do_homework type=event\" >> do 1 to 3 sequentially",
+            "5. \"edit -mod CS2113 task=del<1>\" >> removes the first linked task from the module if it exists",
+            "6. \"edit -mod CS2113 task=done<1>\" >> marks the first linked task from the module as done if it exists",
+            "7. \"edit -mod CS2113 task=undone<1>\" >> "
+                + "marks the first linked task from the module as undone if it exists",
         }),
     /**
      * The Event.
@@ -385,6 +395,29 @@ public enum HelpText {
             "1. \"list\" >> list all added items",
             "2. \"list date asc\" >> list items with a \"date\" field in ascending order",
             "3. \"list date spec Oct 5 2020\" >> list items with specific \"date\" field of Oct 5 2020"
+        }),
+    /**
+     * The Load.
+     */
+    LOAD(
+        "load",
+        "Loads linked tasks to ONE specified module without adding them to the main task list",
+        new String[]{
+            "load [module code] [task_string] ...",
+        },
+        new String[]{
+            "1. This command should only be used if you are highly familiar with the save file "
+                + "and you want to manually edit linked tasks to a specific module",
+            "2. We do NOT recommend using this command on a daily basis"
+        },
+        new String[]{
+            "1. \"load EE2028 [D][V]_Exam_(by:_Jan_11_2011_11:11)\" >> loads a task with attributes: "
+                + "\"description=Exam\", \"type=deadline\", \"date=Jan_11_2011_11:11\" and \"isdone=true\" "
+                + "into the linked task list of module EE2028, WITHOUT adding this task object to the main task list.",
+            "2. \"load EE2028 [T][X]_test1,[T][V]_test2\" >> loads a task with attributes: "
+                + "\"description=test1\", \"type=todo\" and \"isdone=false\", then another task with attributes: "
+                + "\"description=test2\", \"type=todo\" and \"isdone=true\", WITHOUT adding any of these tasks "
+                + "to the main task list",
         }),
     /**
      * The Mc.

@@ -21,6 +21,7 @@ import command.action.GoalAction;
 import command.action.GradeAction;
 import command.action.HelpAction;
 import command.action.ListAction;
+import command.action.LoadLinkedTasksAction;
 import command.action.McAction;
 import command.action.NextAction;
 import command.action.PlainAction;
@@ -255,6 +256,7 @@ public class Constants {
      * The constant FIND.
      */
     public static final String FIND = "find";
+    public static final String LOAD = "load";
     /**
      * The constant FOCUS.
      */
@@ -516,7 +518,9 @@ public class Constants {
      */
     public static final String[] TAKEN_ALIAS = {"taken", "take", "took", "taking", "istake", "istaken", "istaking",
         "t"};
-    public static final String[] TASK_ALIAS = {"task", "tasks", "linked", "tsk", "tsks"};
+    public static final String[] TASK_ALIAS = {"task", "tasks", "linked", "linkedtask", "linkedtasks", "l", "tsk",
+        "tsks", "link", "links", "assigned", "assignedtasks", "assignments", "due", "dues", "stuff", "things", "thing",
+        "del", "delete", "remove"};
     /**
      * The constant DESCRIPTION_ALIAS.
      */
@@ -590,7 +594,8 @@ public class Constants {
     /**
      * The constant NO_OPERATION_POSSIBLE.
      */
-    public static final String NO_OPERATION_POSSIBLE = "No operations possible." + WIN_NEWLINE;
+    public static final String NO_OPERATION_POSSIBLE = "No operations possible. Did you provide parameters correctly?"
+        + WIN_NEWLINE;
 
     /**
      * The constant NO_TASK_TYPE.
@@ -807,6 +812,7 @@ public class Constants {
         Map.entry(HELP, new HelpAction()),
         Map.entry(GRADE, new GradeAction()),
         Map.entry(LIST, new ListAction()),
+        Map.entry(LOAD, new LoadLinkedTasksAction()),
         Map.entry(FOCUS, new FocusAction()),
         Map.entry(REMINDER, new ReminderAction()),
         Map.entry(POSTPONE, new PostponeAction()),
@@ -846,6 +852,7 @@ public class Constants {
         Map.entry(HELP, HelpText.HELP),
         Map.entry(GRADE, HelpText.GRADE),
         Map.entry(LIST, HelpText.LIST),
+        Map.entry(LOAD, HelpText.LOAD),
         Map.entry(TODO, HelpText.TODO),
         Map.entry(UNDONE, HelpText.UNDONE),
         Map.entry(UNKNOWN, HelpText.UNKNOWN),
@@ -911,6 +918,7 @@ public class Constants {
             Map.entry(CAP, "Calculate cap on specified modules:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
+            Map.entry(LOAD, TEXT_PLACEHOLDER),
             Map.entry(TODO, ADDED + CHANGED),
             Map.entry(UNDONE, "Nice! I've marked this task as undone:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNKNOWN, "OOPS, I don't know what that means :-(" + WIN_NEWLINE + "Try \"help\"!"),
