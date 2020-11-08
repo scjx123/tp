@@ -52,7 +52,7 @@ public enum HelpText {
         "cap",
         "Calculate CAP for courses based on selected option.",
         new String[]{
-            "cap [index / code (for modules only)] [grade] ...",
+            "cap [index / code (for modules only)] [letter grade] ...",
             "cap [index(es) / codes (for modules only)]",
             "cap"
         },
@@ -72,7 +72,7 @@ public enum HelpText {
             "4. \"cap CG1111 CG1112 A\" >> calculated cap using existing grade for CG1111, and using A for CG1112",
         }),
     /**
-     * The Clear. (not done)
+     * The Clear.
      */
     CLEAR(
         "clear",
@@ -82,10 +82,13 @@ public enum HelpText {
             "clear fancy",
         },
         new String[]{
-            "1. Extra inputs after \"clear\" will be ignored if it is not fancy. For example:",
-            "1.1. If \"clear domsun\" is input in, \"domsun\" will be ignored and \"clear\" will be executed.",
-            "1.2. If \"clear fancy domsun\" is input in, \"domsun\" will be ignored "
+            "1. \"clear fancy\" can only be used in fancy UI mode",
+            "2. Extra inputs after \"clear\" will get an \"invalid command\" error unless"
+                + " it contains the word \"fancy\" (case insensitive). For example:",
+            "2.1. \"clear domsun\" results in an \"invalid command\" error.",
+            "2.2. If \"clear fancy domsun\" is input in, \"domsun\" will be ignored "
                 + "and \"clear fancy\" will be executed.",
+            "2.3. If \"clear MyFancyBoy\" is input in, \"clear fancy\" will be executed.",
         },
         new String[]{
             "1. \"clear\" >> clears the task list",
@@ -262,7 +265,7 @@ public enum HelpText {
         "grade",
         "Modify grade to the user's taken course/module.",
         new String[]{
-            "grade [index / code (for modules only)] [grade] ...",
+            "grade [index / code (for modules only)] [letter grade] ...",
             "grade [index(es) / codes (for modules only)]",
             "grade"
         },
@@ -321,7 +324,11 @@ public enum HelpText {
         },
         new String[]{
             "1. The tasks should consists of date type i.e. events or deadline tasks, does not work on todo tasks",
-            "2. Each postpone delays the tasks by a day, an hour, a week or a year"
+            "2. Each postpone delays the tasks by a day, an hour, a week or a year",
+            "3. When letter appears without a number as its parameter, the letter will be treated as a numeric value "
+                + "mapped A to 1 and Z to 26." + Constants.WIN_NEWLINE
+                + "For example, \"postpone boy\" is equivalent to \"postpone 2\" and "
+                + "\"postpone h\" is equivalent to \"postpone 8\".",
         },
         new String[]{
             "1. \"postpone 1\" >> postpone the task with index 1 by a day",
