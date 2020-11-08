@@ -1,2 +1,2 @@
-[D][X] eat (by: Nov 14 2020 18:30) Weekly
-[D][X] eat (by: Jan 30 2020 00:00) Weekly
+[T][X] eat
+[E][X] meditate/sleep (at: 9pm)
