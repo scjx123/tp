@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DetailActionTest {
     private String[] testCommand = {"detail -mod CS2113", "detail -mod ST2334"};
-    Domsun duke = new Domsun(false, System.out, System.in, Constants.PATH,
+    Domsun domsun = new Domsun(false, System.out, System.in, Constants.PATH,
         Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 
     @Test
     public void containsModuleTest() {
-        duke.testSut("focus list", false, false);
-        duke.testSut("clear", true, false);
-        assertTrue(duke.testSut(testCommand[0], false, true)
+        domsun.testSut("focus list", false, false);
+        domsun.testSut("clear", true, false);
+        assertTrue(domsun.testSut(testCommand[0], false, true)
             .contains("CS2113"));
     }
 

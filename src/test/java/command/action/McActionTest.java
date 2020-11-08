@@ -19,7 +19,8 @@
 //        Domsun d = new Domsun(false, System.out, System.in, Constants.PATH,
 //            Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 //
-//        assertAll("McActionTest", () -> assertTrue(d.testSut(testCommand[0], false, true)
+//        assertAll("McActionTest",
+//            () -> assertTrue(d.testSut(testCommand[0], false, true)
 //                .contains("48788")),
 //            () -> assertTrue(d.testSut(testCommand[1], false, true).contains("12"))
 //        );
