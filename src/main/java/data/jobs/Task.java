@@ -5,6 +5,8 @@ package data.jobs;
 import constants.Constants;
 import data.Item;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -31,6 +33,9 @@ public class Task extends Item {
         isWeekly = false;
     }
 
+    public String getSigniture() {
+        return Constants.ZERO_LENGTH_STRING;
+    }
 
     /**
      * Gets description of the task.
