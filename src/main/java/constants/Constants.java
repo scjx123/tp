@@ -434,7 +434,7 @@ public class Constants {
     /**
      * The constant NOT_COMPLETABLE.
      */
-    public static final String NOT_COMPLETABLE = "Grade is invalid or module is not yet taken: ";
+    public static final String NOT_COMPLETABLE = "Invalid grade or Module not taken / completed already: ";
     /**
      * The constant ADDED.
      */
