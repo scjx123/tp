@@ -101,13 +101,16 @@ public enum HelpText {
             "complete [index / code]"
         },
         new String[]{
-            "1. Index should be a positive integer. Otherwise you should expect an \"invalid command\" error message",
-            "2. You must reference existing tasks or modules when using this command. For example:",
-            "2.1. If \"list\" shows only 2 tasks but you try to use \"-task 3\" as a parameter for \"add\", you should "
-                + "expect an \"index out of range\" error message because \"3\" is out of range for your task list.",
-            "2.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
-                + "\"-mod CS9999\" as a parameter for \"add\", you should expect a \"not found\" error message.",
+            "1. Module should first be \"taken\" and \"grade\" before this function can run. "
+                + "Otherwise, you should expect an error message",
+            "2. Index should be a positive integer. Otherwise you should expect an \"invalid command\" error message",
             "3. Both parameters here (i.e. task and mod) are compulsory.",
+            "4. You must reference existing tasks or modules when using this command. For example:",
+            "4.1. If \"list\" shows only 2 tasks but you try to use \"-task 3\" as a parameter for \"add\", you should "
+                + "expect an \"index out of range\" error message because \"3\" is out of range for your task list.",
+            "4.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
+                + "\"-mod CS9999\" as a parameter for \"add\", you should expect a \"not found\" error message.",
+
         },
         new String[]{
             "1. \"complete CS2113\" >> marks module CS2113 as completed",
@@ -141,11 +144,8 @@ public enum HelpText {
         new String[]{
             "1. Index should be a positive integer. Otherwise you should expect an error message",
             "2. You must reference EXISTING tasks when using this command. For example:",
-            "2.1. If \"list\" shows only 2 tasks but you try to use \"-task 3\" as a parameter for \"add\", you should "
+            "2.1. If \"list\" shows only 2 tasks but you try to use \"delete 3\", you should "
                 + "expect an \"index out of range\" error message because \"3\" is out of range for your task list.",
-            "2.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
-                + "\"-mod CS9999\" as a parameter for \"add\", you should expect a \"not found\" error message.",
-            "3. Both parameters here (i.e. task and mod) are compulsory.",
         },
         new String[]{
             "1. \"delete 1\" >> deletes the task with index 1 from the current list"
@@ -205,16 +205,18 @@ public enum HelpText {
             "1. \"done 1\" >> marks the task with index 1 as done"
         }),
     /**
-     * The Edit.
+     * The Edit. (not sure)
      */
     EDIT(
         "edit",
         "Modify the attributes of an item (task / module)",
         new String[]{
             "edit [-mod / -task] [index / code (for module only)] [field=new value] ...",
-            "No space allowed around \"=\". Use \"_\" in place of space for the \"[field=new value]\" parameters"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. No space allowed around \"=\". Use \"_\" in place of space for the \"[field=new value]\" parameters",
+            "2. Modules and task need to be \"completed\" or created beforehand.",
+        },
         new String[]{
             "1. \"edit -mod CS2113T grade=A\" >> changes the \"grade\" field of module \"CS2113T\" to be \"A\"",
             "2. \"edit -task 1 description=do_homework\" >> "
@@ -315,9 +317,12 @@ public enum HelpText {
         "postpone task a day by default",
         new String[]{
             "postpone [index]",
-            "postpone [h / w / y] [index]"
+            "postpone (h / w / y) [index]"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. The tasks should consists of date type i.e. events or deadline tasks, does not work on todo tasks",
+            "2. Each postpone delays the tasks by a day, an hour, a week or a year"
+        },
         new String[]{
             "1. \"postpone 1\" >> postpone the task with index 1 by a day",
             "2. \"postpone h 1\" >> postpone the task with index 1 by an hour",
@@ -334,7 +339,7 @@ public enum HelpText {
             "help [target]",
             "target: the name of the target command"
         },
-        new String[]{ "", },
+        new String[]{"1. If unknown command is put in as \"target\", general help of all commands will be displayed.",},
         new String[]{
             "1. \"help\" >> prints the list of available commands",
             "2. \"help event\" >> prints the details of the \"event\" command"
@@ -386,7 +391,8 @@ public enum HelpText {
         new String[]{
             "1. Default mc command prints the total mc that exist in the taken list of module",
             "2. To print out a detailed list of mc belonging to the taken modules, ensure you have entered "
-                + "\"focus taken\"."},
+                + "\"focus taken\"."
+        },
         new String[]{
             "1. \"mc\" >> print the total number of MCs currently taking",
             "2. \"mc -d\" >> print the detailed MC composition of the selection region"
@@ -446,9 +452,7 @@ public enum HelpText {
         "reminder",
         "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
         new String[]{
-            "reminder",
-            "reminder on",
-            "reminder off"
+            "reminder (on/off)"
         },
         new String[]{ "", },
         new String[]{
@@ -493,7 +497,10 @@ public enum HelpText {
         new String[]{
             "take [index(es) / module code(s) (for modules only)]",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Index must be a positive integer referencing an existing item on the current list.",
+            "2. Module code must be a legitimate NUS module.",
+        },
         new String[]{
             "1. \"take\" >> if there is any module selected but not taken, mark it as taken",
             "2. \"take 1 2\" >> mark module 1 and module 2 as taken",
@@ -523,10 +530,10 @@ public enum HelpText {
             "undone [index]"
         },
         new String[]{
-            "1. Index must be a positive integer referencing an existing item.",
-            "2. If the index starts with a letter, it will be treated as a numerical value mapped A to 1 and Z to 26. "
-                    + "For example, \"undone apple\" is equivalent to \"undone 1\" "
-                    + "and \"undone C4\" is equivalent to \"undone 3\".",
+            "1. Index must be a positive integer referencing an existing item on the current list.",
+            "2. If the index starts with a letter, it will be treated as "
+                + "a number mapped A to 1 and Z to 26. For example:",
+            "2.1. \"undone apple\" is equivalent to \"undone 1\" and \"undone C4\" is equivalent to \"undone 3\".",
         },
         new String[]{
             "1. \"undone 1\" >> marks the task with index 1 as undone"
@@ -568,7 +575,10 @@ public enum HelpText {
         new String[]{
             "untake [index(es) / module code(s) (for modules only)]",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Index must be a positive integer referencing an existing item.",
+            "2. If modules that is not taken is input, module will still be marked as \"no longer taken\".",
+        },
         new String[]{
             "1. \"untake\" >> if there is any module selected and taken, mark it as not taken",
             "2. \"untake 1 2\" >> mark module 1 and module 2 as not taken",
