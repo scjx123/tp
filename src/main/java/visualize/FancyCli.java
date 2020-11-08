@@ -356,10 +356,10 @@ public class FancyCli extends Cli {
         }
         int num = Integer.parseInt(number.trim());
         int oldListIndex = listIndex;
-        int oldSelIndex = selIndex;
         listIndex = flipNumber(listIndex, isList, num, listString.length);
-        selIndex = flipNumber(selIndex, isSel, num, selString.length);
         listFlipped = !isList || (oldListIndex != listIndex);
+        int oldSelIndex = selIndex;
+        selIndex = flipNumber(selIndex, isSel, num, selString.length);
         selFlipped = !isSel || (oldSelIndex != selIndex);
     }
 
@@ -423,7 +423,7 @@ public class FancyCli extends Cli {
             int pages = (int) Math.ceil((double) numLines / (double) cellNum);
             listString = groupStrings(lines, pages, cellNum, true);
         } else {
-            numLines ++;
+            numLines++;
             int lineNum = bmpSel.height - 1;
             if (numLines <= lineNum) {
                 selString = new String[]{input};
