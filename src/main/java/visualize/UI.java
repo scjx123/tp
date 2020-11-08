@@ -107,6 +107,9 @@ public class UI {
     }
 
     protected String wrapString(String input) {
+        if (input == null || input.equals(Constants.ZERO_LENGTH_STRING)) {
+            return Constants.WIN_NEWLINE;
+        }
         StringBuilder builder = new StringBuilder();
         String[] words = input.split(Constants.SPACE);
         int wordLength = 0;

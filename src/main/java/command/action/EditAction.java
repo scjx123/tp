@@ -103,6 +103,8 @@ public class EditAction extends Action {
                             mod.isSelected = split[1].toLowerCase().contains("t");
                         } else if (Arrays.stream(Constants.TAKEN_ALIAS).anyMatch(s -> s.equals(split[0]))) {
                             mod.isTaken = split[1].toLowerCase().contains("t");
+                        } else if (Arrays.stream(Constants.TASK_ALIAS).anyMatch(s -> s.equals(split[0]))) {
+                            mod.immediateData = split[1];
                         } else {
                             operated = false;
                         }
@@ -261,11 +263,32 @@ public class EditAction extends Action {
                     target = findTask(targets, operation.itemIndex);
                 }
                 Item operatedTarget = operation.operate(target);
+                if (operatedTarget instanceof SingleModule) {
+                    String immediate = operatedTarget.immediateData;
+                    ArrayList<Item> immediateList = loadImmediateList(immediate, data.target);
+                }
                 data.updateItem(target, operatedTarget);
                 stringBuilder.append(operation.operationResult).append(Constants.WIN_NEWLINE);
             }
         }
         return defaultResult.replace(Constants.TEXT_PLACEHOLDER, stringBuilder.toString());
+    }
+
+    private ArrayList<Item> loadImmediateList(String immediate, ArrayList<Item> targets) {
+        return targets;
+    }
+
+    private boolean isImmediateFormatted(String input) {
+        if (input == null || input.length() == 0) {
+            return false;
+        }
+        String[] splitted = input.split(Constants.COMMA);
+        for (String fraction : splitted) {
+            if (fraction.length() != 2) {
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override
