@@ -516,7 +516,9 @@ public class Constants {
      */
     public static final String[] TAKEN_ALIAS = {"taken", "take", "took", "taking", "istake", "istaken", "istaking",
         "t"};
-    public static final String[] TASK_ALIAS = {"task", "tasks", "linked", "tsk", "tsks"};
+    public static final String[] TASK_ALIAS = {"task", "tasks", "linked", "linkedtask", "linkedtasks", "l", "tsk",
+        "tsks", "link", "links", "assigned", "assignedtasks", "assignments", "due", "dues", "stuff", "things", "thing",
+        "del", "delete", "remove"};
     /**
      * The constant DESCRIPTION_ALIAS.
      */
@@ -590,7 +592,8 @@ public class Constants {
     /**
      * The constant NO_OPERATION_POSSIBLE.
      */
-    public static final String NO_OPERATION_POSSIBLE = "No operations possible." + WIN_NEWLINE;
+    public static final String NO_OPERATION_POSSIBLE = "No operations possible. Did you provide parameters correctly?"
+        + WIN_NEWLINE;
 
     /**
      * The constant NO_TASK_TYPE.

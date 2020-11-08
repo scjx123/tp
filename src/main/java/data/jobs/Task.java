@@ -18,6 +18,7 @@ public class Task extends Item {
      * The Is done.
      */
     protected boolean isDone;
+    protected String timeString;
 
     /**
      * Instantiates a new Task.
@@ -33,8 +34,8 @@ public class Task extends Item {
         isWeekly = false;
     }
 
-    public String getSigniture() {
-        return Constants.ZERO_LENGTH_STRING;
+    public void setTimeString(String input){
+        timeString = input;
     }
 
     /**

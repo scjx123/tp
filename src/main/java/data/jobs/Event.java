@@ -10,11 +10,6 @@ import constants.Constants;
 public class Event extends Task {
 
     /**
-     * The At.
-     */
-    protected String at;
-
-    /**
      * Instantiates a new Event.
      *
      * @param description the description
@@ -22,13 +17,13 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        timeString = at;
         setDateTime(at);
     }
 
     @Override
     public String toString() {
-        String atTime = getDateTimeString(at);
+        String atTime = getDateTimeString(timeString);
         if (isWeekly) {
             return Constants.EVENT_ICON + super.toString() + " (at: " + atTime + ")" + " Weekly";
         } else {
