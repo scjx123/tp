@@ -215,8 +215,8 @@ public enum HelpText {
         "edit",
         "Modify the attributes of an item (task / module), or operate on one linked task of a module",
         new String[]{
-            "edit -task [index] [field=new_value] ...",
-            "edit -mod [module code] field=new_value",
+            "edit -task [index] field=new_value {[field=new_value] ...}",
+            "edit -mod [module code] field=new_value {[field=new_value] ...}",
             "edit -mod [module code] task=[del / done / undone]<linked task index>",
         },
         new String[]{

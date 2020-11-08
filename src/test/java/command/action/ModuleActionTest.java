@@ -30,8 +30,8 @@ class ModuleActionTest {
                 + "Module: [COMPLETED]CS2040C: now completed\r\n"
                 + "Module: [COMPLETED]MA1508E: now completed\r\n",
 
-            "Trying to modify the attribute(s) you specified:\r\n"
-                + "grade=A; \r\n",
+            "Trying to modify the attribute(s) you specified:\r\nWorking on Module: CS2040\r\n"
+                + "CS2040: grade = A AND taken = true;\r\n(The module must be taken in order to have a grade);\r\n",
         };
         assertEquals(expectedOutput[0], domsun.testSut(testCustomInputsCommand[0], false, true),
             "Take normal module");
