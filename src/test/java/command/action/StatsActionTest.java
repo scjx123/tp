@@ -1,3 +1,5 @@
+//@@author scjx123
+
 package command.action;
 
 import constants.Constants;
@@ -30,14 +32,14 @@ public class StatsActionTest {
     }
 
     @Test
-    void exceptionTesting() {
+    void statsAction_statsexceptionTesting_InvalidCommandDisplayed() {
         Exception exception = assertThrows(CommandException.class,
             () -> prepareTest(testCommand[2]));
         assertTrue(exception.getMessage().contains(Constants.INVALID));
     }
 
     @Test
-    void roundedBarGroupAssertions() {
+    void statsAction_statsroundedBarGroupAssertions_CorrectRatio() {
         int x = 0;
         double y = 1.0999999;
         assertAll("roundedRatioBarAssertion",
@@ -70,6 +72,5 @@ public class StatsActionTest {
             }
         }
     }
-
-
 }
+//@@author
