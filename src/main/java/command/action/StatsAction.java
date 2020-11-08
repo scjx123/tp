@@ -1,3 +1,5 @@
+//@@author scjx123
+
 package command.action;
 
 import command.Command;
@@ -67,6 +69,7 @@ public class StatsAction extends Action {
             if (doneItem > 0) {
                 ratio = (double) doneItem / targetList.size();
                 builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
+                assert ratio >= 0.0 : "fraction is greater or equal to zero";
             } else if (doneItem == 0) {
                 ratio = 0;
                 builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
@@ -76,7 +79,6 @@ public class StatsAction extends Action {
     }
 
     private String roundedRatioBar(double fraction) {
-        //assert fraction >= 0.0 : "fraction is greater or equal to zero";
         double roundedRatio = Math.round((fraction * 100) * 10) / 10.0;
         return Constants.ICON_LEFT + roundedRatio + Constants.PERCENT + Constants.ICON_RIGHT;
     }
@@ -106,7 +108,7 @@ public class StatsAction extends Action {
                 isMod = true;
                 userInput = "";
             } else {
-                throw new CommandException();
+                throw new InvalidCommandException();
             }
         }
     }

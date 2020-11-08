@@ -8,7 +8,6 @@ import java.util.TimerTask;
 
 
 import command.Command;
-import command.action.RemindAction;
 import command.action.ReminderAction;
 import command.action.SnoozeAction;
 import constants.Constants;
@@ -80,7 +79,7 @@ public class Domsun {
 
                     }
                 }, delay, Integer.parseInt(interval));
-            } else {
+            } else if (interval.equals("360000")) {
                 timer.cancel();
                 timer = new Timer();
                 timer.schedule(new TimerTask() { // when it is snoozed
@@ -116,6 +115,7 @@ public class Domsun {
         // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
         // new Domsun(!isWindows, System.out, System.in, Constants.PATH,
         //        Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
+
     }
 
     //@@author TomLBZ
@@ -149,12 +149,8 @@ public class Domsun {
                     ui.update(c.result, data);
                     isExit = c.isBye();
                     boolean isSnoozed = c.isSnoozed();
-                    boolean isRemind = c.isRemind();
                     if (isSnoozed) {
                         snoozeReminder();
-                    }
-                    if (isRemind) {
-                        setReminderSchedule();
                     }
                     if (isExit) {
                         // stops timer
@@ -172,14 +168,6 @@ public class Domsun {
         }
     }
 
-    //@@author: johanesrafael
-    /**
-     * Set reminder schedule.
-     */
-    public void setReminderSchedule() {
-        String schedule = new RemindAction().getSchedule();
-        reminderTimer(Constants.REMINDER_DELAY, schedule);
-    }
 
     //@@author: johanesrafael
     /**

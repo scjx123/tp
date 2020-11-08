@@ -26,7 +26,6 @@ import command.action.NextAction;
 import command.action.PlainAction;
 import command.action.PostponeAction;
 import command.action.PrevAction;
-import command.action.RemindAction;
 import command.action.ReminderAction;
 import command.action.SelectAction;
 import command.action.SnoozeAction;
@@ -264,10 +263,6 @@ public class Constants {
      * The constant REMINDER.
      */
     public static final String REMINDER = "reminder";
-    /**
-     * The constant REMIND.
-     */
-    public static final String REMIND = "remind";
     /**
      * The constant POSTPONE.
      */
@@ -803,7 +798,6 @@ public class Constants {
         Map.entry(LIST, new ListAction()),
         Map.entry(FOCUS, new FocusAction()),
         Map.entry(REMINDER, new ReminderAction()),
-        Map.entry(REMIND, new RemindAction()),
         Map.entry(POSTPONE, new PostponeAction()),
         Map.entry(SNOOZE, new SnoozeAction()),
         Map.entry(MC, new McAction()),
@@ -879,7 +873,6 @@ public class Constants {
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN, SU, COMPLETED}),
             Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
-            Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}),
             Map.entry(REMINDER, new String[]{"on", "off"}),
@@ -922,6 +915,5 @@ public class Constants {
             Map.entry(UNSEL, SELECTED_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNTAKE, TAKEN_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(SNOOZE, "I've snoozed the reminder for 1 minute. Will remind you in 6 minutes."),
-            Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));
+            Map.entry(SNOOZE, "I've snoozed the reminder for 1 minute. Will remind you in 6 minutes."));
 }

@@ -40,6 +40,3 @@ Credits (optional):
 ### 2.3 Contributions to DG:
 {include some extracts from the document here}
 ### 2.4 Contributions to team-based tasks: 
-### 2.5 Review/monitoring contributions: 
-### 2.6 Contributions beyond the project team:  
- **2.6.1 Community**
