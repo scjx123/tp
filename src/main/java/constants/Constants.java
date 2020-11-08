@@ -410,6 +410,11 @@ public class Constants {
     public static final String INDEX_OUT = "Index out of range. Index must be a positive integer referencing "
             + "an existing item." + WIN_NEWLINE;
     /**
+     * The constant CANNOT_MODIFY_CUSTOM_DATE.
+     */
+    public static final String CANNOT_MODIFY_CUSTOM_DATE = "Can not modify the custom date. Please edit the date or "
+            + "select the task which its date is in the preferred format. Then try again." + WIN_NEWLINE;
+    /**
      * The constant NO_DESCRIPTION.
      */
     public static final String NO_DESCRIPTION = "No description provided. Try \"help [command]\" if you are unsure of "

@@ -227,7 +227,10 @@ public class Item {
      * Re-set date time.
      * @param opt option input
      */
-    public void resetDateTime(String opt) {
+    public void resetDateTime(String opt) throws Exception {
+        if (dateTime == null) {
+            throw new Exception(Constants.CANNOT_MODIFY_CUSTOM_DATE);
+        }
         switch (opt) {
         case "d":
             dateTime = dateTime.plusDays(1);
@@ -245,7 +248,7 @@ public class Item {
             dateTime = dateTime.plusYears(1);
             break;
         default:
-            break;
+            throw new CommandException();
         }
     }
 
