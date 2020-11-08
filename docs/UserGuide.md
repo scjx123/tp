@@ -81,7 +81,7 @@ $ java -jar domsun.jar
 > Note: You can also run Domsun by double clicking the `domsun.jar` file directly.
 
 ### Domsun Tutorial 
-As a beginning, here is how Domsun works. It has 3 lists that you should take note of as shown below. (The list shown are non-exhaustive, as there are other dynamic list that are created based on the `focus` command. Do refer to focus section of this User Guide for mroe details). 
+As a beginning, here is how Domsun works. It has 3 lists that you should take note of as shown below. (The list shown are non-exhaustive, as there are other dynamic list that are created based on the `focus` command. Do refer to focus section of this User Guide for more details). 
 ![here](Images/Overview1.PNG)
 
 1. `focus` command focuses the app onto the list of task that you currently have. 
