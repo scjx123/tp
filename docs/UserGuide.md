@@ -536,6 +536,7 @@ Expected outcome:
 ### `snooze` - Delays reminder popup
 
 Typing `snooze` delays reminder popup by a default of 1 minute.
+The reminder popup will remind in every 6 minutes.
 
 Syntax:
 
