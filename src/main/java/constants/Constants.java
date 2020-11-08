@@ -412,8 +412,8 @@ public class Constants {
     /**
      * The constant CANNOT_MODIFY_CUSTOM_DATE.
      */
-    public static final String CANNOT_MODIFY_CUSTOM_DATE= "Can not modify the custom date. Please edit the date or pick"
-            + " the task which its date is in the preferred format. Then try again." + WIN_NEWLINE;
+    public static final String CANNOT_MODIFY_CUSTOM_DATE = "Can not modify the custom date. Please edit the date or "
+            + "select the task which its date is in the preferred format. Then try again." + WIN_NEWLINE;
     /**
      * The constant NO_DESCRIPTION.
      */
