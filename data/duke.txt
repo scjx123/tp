@@ -7,3 +7,6 @@
 [E][X] b (at: Oct 13 1998 00:00:03)
 [T][X] eat
 [E][X] meditate/sleep (at: 9pm)
+[D][X] e (by: Sep 24 2020 08:30)
+[D][X] e (by: 2020-09-29 9pm)
+[D][X] event (by: Mon 9 pm)
