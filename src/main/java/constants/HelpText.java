@@ -72,7 +72,7 @@ public enum HelpText {
             "4. \"cap CG1111 CG1112 A\" >> calculated cap using existing grade for CG1111, and using A for CG1112",
         }),
     /**
-     * The Clear. (not done)
+     * The Clear.
      */
     CLEAR(
         "clear",
@@ -82,10 +82,13 @@ public enum HelpText {
             "clear fancy",
         },
         new String[]{
-            "1. Extra inputs after \"clear\" will be ignored if it is not fancy. For example:",
-            "1.1. If \"clear domsun\" is input in, \"domsun\" will be ignored and \"clear\" will be executed.",
-            "1.2. If \"clear fancy domsun\" is input in, \"domsun\" will be ignored "
+            "1. \"clear fancy\" can only be used in fancy UI mode",
+            "2. Extra inputs after \"clear\" will get an \"invalid command\" error unless"
+                + " it contains the word \"fancy\" (case insensitive). For example:",
+            "2.1. \"clear domsun\" results in an \"invalid command\" error.",
+            "2.2. If \"clear fancy domsun\" is input in, \"domsun\" will be ignored "
                 + "and \"clear fancy\" will be executed.",
+            "2.3. If \"clear MyFancyBoy\" is input in, \"clear fancy\" will be executed.",
         },
         new String[]{
             "1. \"clear\" >> clears the task list",

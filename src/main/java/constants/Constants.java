@@ -435,6 +435,7 @@ public class Constants {
      * The constant NOT_COMPLETABLE.
      */
     public static final String NOT_COMPLETABLE = "Invalid grade or Module not taken / completed already: ";
+    public static final String FANCY_CLEARED = "I have cleared the text region for the fancy UI.";
     /**
      * The constant ADDED.
      */

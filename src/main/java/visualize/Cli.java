@@ -101,9 +101,9 @@ public class Cli extends UI {
                 || wrappedInput.contains(Constants.BMP_SEL_SWITCH)) {
             data.lastInput = Constants.FANCY_ONLY;
             showText(Constants.FANCY_ONLY);
-            //if (!data.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
-            //    showListText(data.lastInput, data.lastIndexOption);
-            //}
+        } else if (wrappedInput.contains(Constants.FANCY_CLEARED)) {
+            data.lastInput = Constants.FANCY_ONLY;
+            showText(Constants.FANCY_ONLY);
         } else {
             showListText(wrappedInput, data.indexOption);
             data.lastInput = wrappedInput;
