@@ -315,9 +315,12 @@ public enum HelpText {
         "postpone task a day by default",
         new String[]{
             "postpone [index]",
-            "postpone [h / w / y] [index]"
+            "postpone (h / w / y) [index]"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. The tasks should consists of date type i.e. events or deadline tasks, does not work on todo tasks",
+            "2. Each postpone delays the tasks by a day, an hour, a week or a year"
+        },
         new String[]{
             "1. \"postpone 1\" >> postpone the task with index 1 by a day",
             "2. \"postpone h 1\" >> postpone the task with index 1 by an hour",
@@ -446,9 +449,7 @@ public enum HelpText {
         "reminder",
         "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
         new String[]{
-            "reminder",
-            "reminder on",
-            "reminder off"
+            "reminder (on/off)"
         },
         new String[]{ "", },
         new String[]{
