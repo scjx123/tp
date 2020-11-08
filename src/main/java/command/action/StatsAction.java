@@ -1,3 +1,5 @@
+//@@author scjx123
+
 package command.action;
 
 import command.Command;
@@ -13,6 +15,8 @@ import exceptions.InvalidListException;
 import exceptions.ModuleNotFoundException;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The type Stats action.
@@ -24,6 +28,7 @@ public class StatsAction extends Action {
     SingleModule tempModule = null;
     int doneItem = 0;
     double ratio = 0;
+    private static final Logger LOGGER = Logger.getLogger(Data.class.getName());
 
     @Override
     public String act(Data data) throws Exception {
@@ -31,6 +36,7 @@ public class StatsAction extends Action {
         ArrayList<Item> targetList = new ArrayList<>(data.getTarget());
 
         if (isMod) {
+            LOGGER.log(Level.INFO, "Calculating Module Statistics");
             targetList = new ArrayList<>(data.mods);
             for (Item item : targetList) {
                 if (item.getName().toLowerCase().equals(selectedModule.toLowerCase())) {
@@ -49,6 +55,7 @@ public class StatsAction extends Action {
             ratio = (double)doneItem / tempModule.getTaskList().size();
             builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
         } else {
+            LOGGER.log(Level.INFO, "Calculating Statistics");
             if (targetList.equals(data.mods)) {
                 throw new InvalidListException();
             } else {
@@ -62,6 +69,7 @@ public class StatsAction extends Action {
             if (doneItem > 0) {
                 ratio = (double) doneItem / targetList.size();
                 builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
+                assert ratio >= 0.0 : "fraction is greater or equal to zero";
             } else if (doneItem == 0) {
                 ratio = 0;
                 builder.append(roundedRatioBar(ratio)).append(Constants.WIN_NEWLINE);
@@ -100,7 +108,7 @@ public class StatsAction extends Action {
                 isMod = true;
                 userInput = "";
             } else {
-                throw new CommandException();
+                throw new InvalidCommandException();
             }
         }
     }

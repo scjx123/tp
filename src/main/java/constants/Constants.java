@@ -26,7 +26,6 @@ import command.action.NextAction;
 import command.action.PlainAction;
 import command.action.PostponeAction;
 import command.action.PrevAction;
-import command.action.RemindAction;
 import command.action.ReminderAction;
 import command.action.SelectAction;
 import command.action.SnoozeAction;
@@ -144,6 +143,7 @@ public class Constants {
      * The constant DETAILS_SIGNATURE.
      */
     public static final String DETAILS_SIGNATURE = ": ";
+    public static final String COMMA = ",";
     /**
      * The constant TICK.
      */
@@ -196,7 +196,7 @@ public class Constants {
     /**
      * The constant NOT_FOUND.
      */
-    public static final String NOT_FOUND = "Your specified item is not found in the current list.";
+    public static final String NOT_FOUND = "Your specified item is not found in the current list." + WIN_NEWLINE;
 
     /**
      * The constant PATH.
@@ -263,10 +263,6 @@ public class Constants {
      * The constant REMINDER.
      */
     public static final String REMINDER = "reminder";
-    /**
-     * The constant REMIND.
-     */
-    public static final String REMIND = "remind";
     /**
      * The constant POSTPONE.
      */
@@ -408,12 +404,17 @@ public class Constants {
     public static final String NOTES = "Notes:";
     public static final String SAVE_CORRUPTED = "The save file is corrupted. Let's start afresh!";
     public static final String PAGED = "Try \"next\" or \"prev\" to flip pages for the region below!";
-    public static final String TEXT_HEADER = "Current Page for Text Below:";
+    public static final String TEXT_HEADER = "Current Page:";
     /**
      * The constant INDEX_OUT.
      */
     public static final String INDEX_OUT = "Index out of range. Index must be a positive integer referencing "
             + "an existing item." + WIN_NEWLINE;
+    /**
+     * The constant CANNOT_MODIFY_CUSTOM_DATE.
+     */
+    public static final String CANNOT_MODIFY_CUSTOM_DATE = "Can not modify the custom date. Please edit the date or "
+            + "select the task which its date is in the preferred format. Then try again." + WIN_NEWLINE;
     /**
      * The constant NO_DESCRIPTION.
      */
@@ -433,7 +434,8 @@ public class Constants {
     /**
      * The constant NOT_COMPLETABLE.
      */
-    public static final String NOT_COMPLETABLE = "Grade is invalid or module is not yet taken: ";
+    public static final String NOT_COMPLETABLE = "Invalid grade or Module not taken / completed already: ";
+    public static final String FANCY_CLEARED = "I have cleared the text region for the fancy UI.";
     /**
      * The constant ADDED.
      */
@@ -470,6 +472,8 @@ public class Constants {
      * The constant DUPLICATED_TASK.
      */
     public static final String DUPLICATED_TASK = "Duplicated Task was found. Task not added" + WIN_NEWLINE;
+    public static final String FANCY_ONLY = "This command should be used in FANCY UI only!" + WIN_NEWLINE;
+    public static final String ONLY_ONE_PAGE = "You cannot toggle pages when there is only 1 page!" + WIN_NEWLINE;
     /**
      * The constant WELCOME.
      */
@@ -512,6 +516,7 @@ public class Constants {
      */
     public static final String[] TAKEN_ALIAS = {"taken", "take", "took", "taking", "istake", "istaken", "istaking",
         "t"};
+    public static final String[] TASK_ALIAS = {"task", "tasks", "linked", "tsk", "tsks"};
     /**
      * The constant DESCRIPTION_ALIAS.
      */
@@ -702,7 +707,7 @@ public class Constants {
     /**
      * The constant INIT_SEL.
      */
-    public static final String INIT_SEL = "This is the selection list.";
+    public static final String INIT_SEL = "This is the text region. It displays all information except the item list.";
     /**
      * The constant BMP_LIST_SWITCH.
      */
@@ -801,7 +806,6 @@ public class Constants {
         Map.entry(LIST, new ListAction()),
         Map.entry(FOCUS, new FocusAction()),
         Map.entry(REMINDER, new ReminderAction()),
-        Map.entry(REMIND, new RemindAction()),
         Map.entry(POSTPONE, new PostponeAction()),
         Map.entry(SNOOZE, new SnoozeAction()),
         Map.entry(MC, new McAction()),
@@ -877,7 +881,6 @@ public class Constants {
             Map.entry(LIST, new String[]{"date", "asc", "desc", "spec"}),
             Map.entry(FOCUS, new String[]{DEADLINE, TODO, EVENT, MOD, TASK, SELECTED, TAKEN, SU, COMPLETED}),
             Map.entry(POSTPONE, new String[]{"h", "d", "w", "m", "y"}),
-            Map.entry(REMIND, new String[]{"one day after"}),
             Map.entry(PREV, new String[]{"i", "s", "a"}),
             Map.entry(NEXT, new String[]{"i", "s", "a"}),
             Map.entry(REMINDER, new String[]{"on", "off"}),
@@ -907,7 +910,7 @@ public class Constants {
             Map.entry(LIST, TEXT_PLACEHOLDER),
             Map.entry(TODO, ADDED + CHANGED),
             Map.entry(UNDONE, "Nice! I've marked this task as undone:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(UNKNOWN, "OOPS, I don't know what that means :-( Try \"help\"!"),
+            Map.entry(UNKNOWN, "OOPS, I don't know what that means :-(" + WIN_NEWLINE + "Try \"help\"!"),
             Map.entry(PREV, TEXT_PLACEHOLDER),
             Map.entry(NEXT, TEXT_PLACEHOLDER),
             Map.entry(FANCY, FANCY),
@@ -920,6 +923,5 @@ public class Constants {
             Map.entry(UNSEL, SELECTED_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(UNTAKE, TAKEN_CHANGED + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(POSTPONE, "I've postpone this task:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(SNOOZE, "I've snoozed the reminder for 1 minute. Will remind you in 6 minutes."),
-            Map.entry(REMIND, "Will remind you at " + TEXT_PLACEHOLDER));
+            Map.entry(SNOOZE, "I've snoozed the reminder for 1 minute. Will remind you in 6 minutes."));
 }

@@ -1,3 +1,5 @@
+//@@author scjx123
+
 package io;
 
 import java.io.IOException;
@@ -17,10 +19,6 @@ import data.SingleModule;
 import javax.swing.event.ListDataEvent;
 
 
-/**
- * This class contains parseFile() which is specifically used to read in contents from courselist text file.
- * DO NOT ALTER THE parseFILE() list under any circumstance.
- */
 public class ModuleParser {
     /**
      * The Module name.
@@ -54,18 +52,7 @@ public class ModuleParser {
      * The Temp string.
      */
     static String tempString;
-    static StringBuilder descriptionBuilder = new StringBuilder();
-    static boolean isDescriptionBuilder = false;
-    static StringBuilder prereqBuilder;
-    static boolean isPrereqBuilder = false;
-    String[] input;
-    /**
-     * DO NOT ALTER THIS FUNCTION UNDER ANY CIRCUMSTANCES.
-     * Processes the data of course list into its module code, name, description, mc and prerequisite.
-     *
-     * @param tempString A single line of data read from the content list text file.
-     */
-    int sum = 0;
+    private String[] input;
 
     /**
      * Constructor of ModuleParser.
@@ -167,3 +154,4 @@ public class ModuleParser {
         }
     }
 }
+//@@author

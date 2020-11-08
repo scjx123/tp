@@ -4,6 +4,8 @@ package lexical;
 
 import command.Command;
 import command.ParamNode;
+import constants.Constants;
+
 import java.util.ArrayList;
 
 /**
@@ -43,6 +45,9 @@ public class Parser {
      * @return the array list
      */
     public ArrayList<Command> parse(String input) {
+        if (input == null || input.equals(Constants.ZERO_LENGTH_STRING)) {
+            input = Constants.UNKNOWN;
+        }
         return parseTree(lexer.analyze(input));
     }
 
