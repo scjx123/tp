@@ -1,5 +1,5 @@
 [D][X] eat (by: Nov 14 2020 18:30) Weekly
-[D][X] eat (by: Jan 30 2020 00:00) Weekly
+[D][X] eat (by: Nov 05 2020 00:00) Weekly
 [E][X] b (at: Oct 15 1998 01:00)
 [E][X] b (at: Oct 13 2099 00:00)
 [E][X] b (at: Oct 20 1998 01:00:01)

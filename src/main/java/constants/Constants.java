@@ -404,7 +404,7 @@ public class Constants {
     public static final String NOTES = "Notes:";
     public static final String SAVE_CORRUPTED = "The save file is corrupted. Let's start afresh!";
     public static final String PAGED = "Try \"next\" or \"prev\" to flip pages for the region below!";
-    public static final String TEXT_HEADER = "Current Page for Text Below:";
+    public static final String TEXT_HEADER = "Current Page:";
     /**
      * The constant INDEX_OUT.
      */
@@ -466,6 +466,8 @@ public class Constants {
      * The constant DUPLICATED_TASK.
      */
     public static final String DUPLICATED_TASK = "Duplicated Task was found. Task not added" + WIN_NEWLINE;
+    public static final String FANCY_ONLY = "This command should be used in FANCY UI only!" + WIN_NEWLINE;
+    public static final String ONLY_ONE_PAGE = "You cannot toggle pages when there is only 1 page!" + WIN_NEWLINE;
     /**
      * The constant WELCOME.
      */
@@ -902,7 +904,7 @@ public class Constants {
             Map.entry(LIST, TEXT_PLACEHOLDER),
             Map.entry(TODO, ADDED + CHANGED),
             Map.entry(UNDONE, "Nice! I've marked this task as undone:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(UNKNOWN, "OOPS, I don't know what that means :-( Try \"help\"!"),
+            Map.entry(UNKNOWN, "OOPS, I don't know what that means :-(" + WIN_NEWLINE + "Try \"help\"!"),
             Map.entry(PREV, TEXT_PLACEHOLDER),
             Map.entry(NEXT, TEXT_PLACEHOLDER),
             Map.entry(FANCY, FANCY),

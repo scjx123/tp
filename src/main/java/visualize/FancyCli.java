@@ -37,6 +37,9 @@ public class FancyCli extends Cli {
     private int listIndex;
     private int selIndex;
 
+    private boolean listFlipped = false;
+    private boolean selFlipped = false;
+
     /**
      * Instantiates a new Fancy cli.
      *
@@ -77,7 +80,8 @@ public class FancyCli extends Cli {
      */
     public void initializeList(String text) {
         bmpList.flush(listBackground);
-        bmpList.drawLine(0, 0, maxX, 0, text, listBarColor, foreground, false);
+        String drawnText = text.replace(Constants.WIN_NEWLINE, Constants.ZERO_LENGTH_STRING);
+        bmpList.drawLine(0, 0, maxX, 0, drawnText, listBarColor, foreground, false);
     }
 
     /**
@@ -95,7 +99,8 @@ public class FancyCli extends Cli {
      */
     public void initializeSel(String text) {
         bmpSel.flush(selBackground);
-        bmpSel.drawLine(0, 0, maxX, 0, text, selBarColor, selBarText, false);
+        String drawnText = text.replace(Constants.WIN_NEWLINE, Constants.ZERO_LENGTH_STRING);
+        bmpSel.drawLine(0, 0, maxX, 0, drawnText, selBarColor, selBarText, false);
     }
 
     @Override
@@ -260,6 +265,8 @@ public class FancyCli extends Cli {
      * @param data         the data
      */
     public void update(String input, Data data) {
+        selFlipped = false;
+        listFlipped = false;
         String wrappedInput = wrapStringArray(input.split(Constants.WIN_NEWLINE));
         if (freshlySwitched) {
             String replay = data.lastInput;
@@ -267,6 +274,7 @@ public class FancyCli extends Cli {
             if (replay == null || replay.equals(Constants.ZERO_LENGTH_STRING)) {
                 showWelcome();
             } else {
+                replay = "Keeping last output: " + Constants.WIN_NEWLINE + replay;
                 boolean displayMode = replayOption != MessageOptions.NOT_INDEXED;
                 separatePages(replay, displayMode);
                 fixIndex();
@@ -288,10 +296,22 @@ public class FancyCli extends Cli {
             flipPage(wrappedInput);
             if (!data.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
                 if (listString.length > 0) {
-                    showText(getShownText(true), true, MessageOptions.INDEXED_NUM);
+                    String shownText = getShownText(true);
+                    if (!listFlipped) {
+                        shownText = shownText.replaceFirst(".*" + Constants.WIN_NEWLINE, Constants.ONLY_ONE_PAGE);
+                    }
+                    showText(shownText, true, MessageOptions.INDEXED_NUM);
+                } else {
+                    showText(Constants.ONLY_ONE_PAGE, true, MessageOptions.INDEXED_NUM);
                 }
                 if (selString.length > 0) {
-                    showText(getShownText(false), false, MessageOptions.NOT_INDEXED);
+                    String shownText = getShownText(false);
+                    if (!selFlipped) {
+                        shownText = shownText.replaceFirst(".*" + Constants.WIN_NEWLINE, Constants.ONLY_ONE_PAGE);
+                    }
+                    showText(shownText, false, MessageOptions.NOT_INDEXED);
+                } else {
+                    showText(Constants.ONLY_ONE_PAGE, false, MessageOptions.NOT_INDEXED);
                 }
             }
         } else {
@@ -335,11 +355,15 @@ public class FancyCli extends Cli {
             number = number.replace(Constants.BMP_SEL_SWITCH, Constants.ZERO_LENGTH_STRING);
         }
         int num = Integer.parseInt(number.trim());
-        listIndex = flippedNumber(listIndex, isList, num, listString.length);
-        selIndex = flippedNumber(selIndex, isSel, num, selString.length);
+        int oldListIndex = listIndex;
+        int oldSelIndex = selIndex;
+        listIndex = flipNumber(listIndex, isList, num, listString.length);
+        selIndex = flipNumber(selIndex, isSel, num, selString.length);
+        listFlipped = !isList || (oldListIndex != listIndex);
+        selFlipped = !isSel || (oldSelIndex != selIndex);
     }
 
-    private int flippedNumber(int currentNumber, boolean condition, int increment, int max) {
+    private int flipNumber(int currentNumber, boolean condition, int increment, int max) {
         int result = currentNumber;
         if (condition && max > 1) {
             result += increment;
@@ -399,6 +423,7 @@ public class FancyCli extends Cli {
             int pages = (int) Math.ceil((double) numLines / (double) cellNum);
             listString = groupStrings(lines, pages, cellNum, true);
         } else {
+            numLines ++;
             int lineNum = bmpSel.height - 1;
             if (numLines <= lineNum) {
                 selString = new String[]{input};
