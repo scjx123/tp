@@ -325,10 +325,11 @@ public enum HelpText {
         new String[]{
             "1. The tasks should consists of date type i.e. events or deadline tasks, does not work on todo tasks",
             "2. Each postpone delays the tasks by a day, an hour, a week or a year",
-            "3. When letter appears without a number as its parameter, the letter will be treated as a numeric value "
-                + "mapped A to 1 and Z to 26." + Constants.WIN_NEWLINE
-                + "For example, \"postpone boy\" is equivalent to \"postpone 2\" and "
-                + "\"postpone h\" is equivalent to \"postpone 8\".",
+            "3. Does not work with custom date unless you have updated the task with the preferred date format.",
+            "4. When letter appears without a number as its parameter, the letter will be treated as a numeric value "
+                    + "mapped A to 1 and Z to 26." + Constants.WIN_NEWLINE
+                    + "For example, \"postpone boy\" is equivalent to \"postpone 2\" and "
+                    + "\"postpone h\" is equivalent to \"postpone 8\".",
         },
         new String[]{
             "1. \"postpone 1\" >> postpone the task with index 1 by a day",
@@ -476,7 +477,7 @@ public enum HelpText {
         new String[]{
             "sel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
         },
-        new String[]{ "", },
+        new String[]{ "1. ", },
         new String[]{
             "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
             "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
@@ -491,7 +492,10 @@ public enum HelpText {
         new String[]{
             "snooze",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. No additional parameter needed!",
+            "2. If there is parameter, you should expect \"Invalid Command\" message."
+        },
         new String[]{
             "1. \"snooze\" >> Delay reminder popup by 1 minute"
         }),
