@@ -1,0 +1,2 @@
+[T][X] eat
+[E][X] meditate/sleep (at: 9pm)
