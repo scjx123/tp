@@ -136,7 +136,7 @@ public class Domsun {
      * Run.
      */
     public void run() {
-        // schedule reminder every 1 minutes
+        // schedule reminder every 6 minutes
         reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
         boolean isExit = false;
         while (!isExit) {
