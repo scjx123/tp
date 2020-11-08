@@ -1,3 +1,5 @@
+//@@ adinata15
+
 package command.action;
 
 import constants.Constants;
@@ -28,20 +30,24 @@ class CapActionTest {
                 "Custom input grade and modules")
         );
     }
-    /*
+
     @Test
-    public void act_userModule_calculatedCapValue() throws Exception {
-        int[] indices = {1, 2, 3};
-        String[] grades = {"A", "B", "C"};
-        for (int index : indices) {
-            SingleModule module = (SingleModule) dataTest.mods.get(index);
-            module.isTaken = true;
-            module.grade = grades[index - 1];
-        }
-        CapAction action = new CapAction();
-        action.option = "u";
-        String expectedOutput = "Here is your existing CAP: 3.5";
-        assertEquals(expectedOutput, action.act(dataTest), "Calculate CAP user's modules fails");
+    public void act_userModule_calculatedCapValue() {
+        domsun.testSut("take cs1231 ma1513 cg1112", false, false);
+        domsun.testSut("grade cs1231 a ma1513 b cg1112 c", false, false);
+        String expectedOutput =
+            "Calculate cap on specified modules:\r\n"
+                + "You did not specify modules, looking for graded modules in your taken modules...\r\n"
+                + "CG1112: C\r\n"
+                + "CS1231: A\r\n"
+                + "MA1513: B\r\n"
+                + "CAP = 3.25";
+        String testCustomInputsCommand = "cap";
+        assertAll("Cap action test",
+            () -> assertEquals(expectedOutput, domsun.testSut(testCustomInputsCommand, false, true),
+                "User grade and modules")
+        );
+        domsun.testSut("grade cs1231 ma1513 cg1112", false, false);
+        domsun.testSut("untake cs1231 ma1513 cg1112", false, false);
     }
-    */
 }

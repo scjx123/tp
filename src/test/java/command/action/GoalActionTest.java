@@ -1,3 +1,5 @@
+//@@ adinata15
+
 package command.action;
 
 import constants.Constants;
@@ -20,7 +22,7 @@ class GoalActionTest {
         };
 
     @Test
-    public void act_customModuleInputs_calculatedCapValue() {
+    public void act_customModuleInputs_requiredCapValue() {
         String[] expectedOutput = {
             "Your required average CAP is: 4.77\r\n"
                 + "Try \"cap\" to see your current cap!\r\n"
@@ -48,5 +50,21 @@ class GoalActionTest {
             () -> assertEquals(expectedOutput[3], domsun.testSut(testCommand[3], false, true),
                 "Low target")
         );
+    }
+
+    @Test
+    public void act_userModule_requiredCapValue() {
+        domsun.testSut("take cs1231 ma1513 cg1112", false, false);
+        domsun.testSut("grade cs1231 a ma1513 b cg1112 c", false, false);
+        String expectedOutput =
+            "Your required average CAP is: 4.93\r\n"
+                + "Try \"cap\" to see your current cap!\r\n"
+                + "Jia you! :D\r\n";
+        assertAll("Goal action test",
+            () -> assertEquals(expectedOutput, domsun.testSut(testCommand[4], false, true),
+                "User grade and modules")
+        );
+        domsun.testSut("grade cs1231 ma1513 cg1112", false, false);
+        domsun.testSut("untake cs1231 ma1513 cg1112", false, false);
     }
 }
