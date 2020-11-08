@@ -34,7 +34,7 @@ public class EditAction extends Action {
             operations = new ArrayList<>();
         }
 
-        public void normalOperation(boolean isMod, String input) throws Exception{
+        public void normalOperation(boolean isMod, String input) throws Exception {
             this.isMod = isMod;
             boolean isNumeric = isNumeric(input);
             if (isNumeric) {
@@ -53,7 +53,7 @@ public class EditAction extends Action {
             operations = new ArrayList<>();
         }
 
-        public Operation(boolean isMod, ArrayList<String> strings) throws Exception{
+        public Operation(boolean isMod, ArrayList<String> strings) throws Exception {
             if (strings == null || strings.size() == 0) {
                 this.defaultOperation();
             }
@@ -259,7 +259,7 @@ public class EditAction extends Action {
 
     private ArrayList<Operation> operations;
 
-    private Item findMod(ArrayList<Item> mods, ArrayList<Item> targets, int index, String code) throws Exception{
+    private Item findMod(ArrayList<Item> mods, ArrayList<Item> targets, int index, String code) throws Exception {
         if (code != null) {
             for (Item item : mods) {
                 if (item.getName().equals(code)) {
@@ -280,7 +280,7 @@ public class EditAction extends Action {
         throw new Exception("The module you specified is either completed or non-existent." + Constants.WIN_NEWLINE);
     }
 
-    private Item findTask(ArrayList<Item> targets, int index) throws Exception{
+    private Item findTask(ArrayList<Item> targets, int index) throws Exception {
         if (index < 0 || index >= targets.size()) {
             throw new Exception("Linked Task Index out of Range! " + Constants.WIN_NEWLINE
                     + "Try \"detail [code]\" to see linked tasks for this module." + Constants.WIN_NEWLINE);
@@ -323,7 +323,6 @@ public class EditAction extends Action {
         if (splitStrings.length != 2) {
             throw new CommandException();
         }
-        String cmd = splitStrings[0];
         String indexString = splitStrings[1].replace(">", Constants.ZERO_LENGTH_STRING);
         int index;
         try {
@@ -338,6 +337,7 @@ public class EditAction extends Action {
         if (mod.taskList.get(index) == null) {
             throw new Exception("The specified linked task does not exist" + Constants.WIN_NEWLINE);
         }
+        String cmd = splitStrings[0];
         switch (cmd) {
         case "del":
             mod.taskList.remove(index - 1);

@@ -67,7 +67,6 @@ public class LoadLinkedTasksAction extends Action {
     }
 
     private Task getTask(String task, String identity) throws Exception {
-        Task myTask;
         boolean isDone = false;
         boolean isDeadline = identity.equals("by:");
         String errIdentity = isDeadline ? Constants.DEADLINE : Constants.EVENT;
@@ -85,7 +84,7 @@ public class LoadLinkedTasksAction extends Action {
         String[] separated = task.split(identity);
         String description = separated[0].trim();
         String date = separated[1].trim();
-        myTask = isDeadline ? new Deadline(description, date) : new Event(description, date);
+        Task myTask = isDeadline ? new Deadline(description, date) : new Event(description, date);
         if (isDone) {
             myTask.markAsDone();
         }

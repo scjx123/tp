@@ -34,7 +34,7 @@ public class Task extends Item {
         isWeekly = false;
     }
 
-    public void setTimeString(String input){
+    public void setTimeString(String input) {
         timeString = input;
     }
 
