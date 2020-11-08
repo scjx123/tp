@@ -79,7 +79,7 @@ public class Domsun {
 
                     }
                 }, delay, Integer.parseInt(interval));
-            } else if (interval.equals("360000")) {
+            } else if (interval.equals(Constants.NEW_REMINDER_INTERVAL)) {
                 timer.cancel();
                 timer = new Timer();
                 timer.schedule(new TimerTask() { // when it is snoozed

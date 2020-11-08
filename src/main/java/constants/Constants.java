@@ -776,7 +776,10 @@ public class Constants {
      * The constant REMINDER_INTERVAL.
      */
     public static final String REMINDER_INTERVAL = "300000";
-
+    /**
+     * The constant NEW_REMINDER_INTERVAL.
+     */
+    public static final String NEW_REMINDER_INTERVAL = "360000";
     /**
      * The constant REMINDER_DELAY.
      */
