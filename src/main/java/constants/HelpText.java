@@ -530,7 +530,8 @@ public enum HelpText {
         },
         new String[]{
             "1. Index must be a positive integer referencing an existing item on the current list.",
-            "2. If the index starts with a letter, it will be treated as a number mapped A to 1 and Z to 26. For example:",
+            "2. If the index starts with a letter, it will be treated as "
+                + "a number mapped A to 1 and Z to 26. For example:",
             "2.1. \"undone apple\" is equivalent to \"undone 1\" and \"undone C4\" is equivalent to \"undone 3\".",
         },
         new String[]{

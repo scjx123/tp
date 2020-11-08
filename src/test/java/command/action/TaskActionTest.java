@@ -34,8 +34,8 @@ class TaskActionTest {
         domsun.testSut("deadline eat -by Tuesday", true, false);
         String[] expectedOutput = {
             "Noted. I've removed this task:\r\n"
-            + "[T][X] eat ice cream\r\n"
-            + "Now you have 1 tasks in the list.",
+                + "[T][X] eat ice cream\r\n"
+                + "Now you have 1 tasks in the list.",
 
             "Index out of range. Index must be a positive integer referencing an existing item.\r\n"
         };
