@@ -10,7 +10,7 @@ import seedu.duke.Domsun;
 class PostponeActionTest {
 
     private String[] testCommand = {"postpone ", "postpone 1", "postpone 5", "postpone h 1", "postpone a 1",
-            "postpone", "postpone 2", "postpone 3", "postpone w 3",};
+        "postpone", "postpone 2", "postpone 3", "postpone w 3",};
     private Domsun domsun = new Domsun(false, System.out, System.in, Constants.PATH,
             Constants.TEST_TASK_FILENAME, Constants.TEST_COURSE_FILENAME);
 
