@@ -182,7 +182,7 @@ public enum HelpText {
         "goal",
         "Calculate how far the user is from his/her target CAP",
         new String[]{
-            "goal -total [total MC] [target CAP] {-taken [taken MC] [current CAP]}",
+            "goal -total [total MC] [target CAP] -taken [taken MC] [current CAP]}",
         },
         new String[]{
             "1. All values on the parameters should be a positive integer. "
@@ -499,7 +499,7 @@ public enum HelpText {
         "reminder",
         "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
         new String[]{
-            "reminder (on/off)"
+            "reminder [on/off]"
         },
         new String[]{ "1. You should expect the reminder will appear every 5 minutes.", },
         new String[]{
