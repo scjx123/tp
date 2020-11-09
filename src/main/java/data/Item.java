@@ -230,6 +230,7 @@ public class Item {
         return theDate.getDayOfWeek();
     }
 
+    //@@author johanesrafael
     /**
      * Re-set date time.
      * @param opt option input
@@ -258,6 +259,7 @@ public class Item {
             throw new CommandException();
         }
     }
+    //@@author
 
     @Override
     public boolean equals(Object o) {
