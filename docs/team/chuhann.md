@@ -8,6 +8,7 @@ Given below are my contributions to the project.
 ### 2.1 Enhancements Implemented: 
 
 * New Feature: Reminder
+<br>
 What it does:
 Allows the user to set reminder for tasks that are due within 3 days
 <br>
@@ -22,6 +23,7 @@ Credits (optional):
 <br>
 
 * New Feature: Postpone
+<br>
 What it does:
 Allows the user to postpone a deadline or event task if user schedule any changes at any time
 <br>
@@ -36,6 +38,7 @@ Credits (optional):
 <br>
 
 * New Feature: Snooze
+<br>
 What it does:
 Allows the user to delay the "pop up" message by "snoozing" it
 <br>
@@ -50,6 +53,7 @@ Credits (optional):
 <br>
 
 * New Feature: Focus
+<br>
 What it does:
 Allows the user to change context to "todo", "event", "deadline", "task", "mod", "selected" or "taken"
 <br>
