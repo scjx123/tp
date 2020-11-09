@@ -250,7 +250,9 @@ A cheat sheet of commonly used commands:
 ### `todo` - Add a todo to the task list
 
 Typing `todo` allows the program to parse user's input and create a ***todo*** object with 
-specified *description*. It will be appended to the end of the task list.
+specified *description*. It will be appended to the end of the task list.<br>
+Note: 
+1. Todo description parameter here are compulsory.
 
 Syntax:
 
@@ -273,7 +275,9 @@ Expected outcome:
 ### `deadline` - Add a deadline to the task list
 
 Typing `deadline` allows the program to parse user's input and create a ***deadline*** object with 
-specified *description* and *time*. It will be appended to the end of the task list.
+specified *description* and *time*. It will be appended to the end of the task list. <br>
+Note: 
+1. Deadline description and time parameters here are compulsory.
 
 Syntax: 
 
@@ -304,7 +308,9 @@ Expected outcome:
 ### `event` - Add an event to the task list
 
 Typing `event` allows the program to parse user's input and create an ***event*** object with 
-specified *description* and *time*. It will be appended to the end of the task list.
+specified *description* and *time*. It will be appended to the end of the task list. <br>
+Note: 
+1. Event description and time parameters here are compulsory.
 
 Syntax:
 
@@ -333,7 +339,8 @@ The `asc` parameter tells the program to list tasks in ascending order with resp
 The `desc` parameter tells the program to list tasks in descending order with respect to their *date* field.<br>
 The `spec` parameter tells the program to only list tasks with the specified value of the *date* field.<br>
 
-Note: with each execution of the `list` command, the indices of all tasks will be 
+Note: 
+with each execution of the `list` command, the indices of all tasks will be 
 dynamically changed to refer to the task in the current list with the current indices.<br>
 In other words, indices of tasks are not tied to their sequence of creation, allowing the user
 to use commands much more flexibly, especially with the `find` command or the reordering parameters.
@@ -389,7 +396,9 @@ Expected outcome:
 ### `done` - Mark a task as done
 
 Typing `done` allows the user to mark the task at a specified *index* as **done**.<br>
-Note: *index* can be an integer number or a letter (`A` or `a` corresponds to 1).
+Note: 
+1. *index* can be an integer number or a letter (`A` or `a` corresponds to 1).<br>      
+2. If the index starts with a letter, it will be treated as a numerical value mapped A to 1 and Z to 26. For example, "done apple" is equivalent to "done 1" and "done C4" is equivalent to "done 3".
 
 Syntax:
 
@@ -412,7 +421,9 @@ Expected outcome:
 ### `undone` - Mark a task as undone
 
 Typing `undone` allows the user to mark the task at a specified *index* as **undone**.<br>
-Note: *index* can be an integer number or a letter (`A` or `a` corresponds to 1).
+Note:
+1. *index* can be an integer number or a letter (`A` or `a` corresponds to 1).<br>
+2. If the index starts with a letter, it will be treated as a number mapped A to 1 and Z to 26. For example: "undone apple" is equivalent to "undone 1" and "undone C4" is equivalent to "undone 3".
 
 Syntax:
 
@@ -468,7 +479,12 @@ Expected outcome (not found):
 ### `postpone` - Postpone a task by index
 
 Typing `postpone` delays a task specified by the user or by default a day.<br>
-Note: Option `h` for an hour. Option `w` for a week. Option `y` for a year.
+Note: 
+1. Option `h` for an hour. Option `w` for a week. Option `y` for a year.<br>
+2. The tasks should consists of date type i.e. events or deadline tasks, does not work on todo tasks.<br>
+3. Each postpone delays the tasks by a day, an hour, a week or a year.<br>
+4. Does not work with custom date unless you have updated the task with the preferred date format.<br>
+5. When letter appears without a number as its parameter, the letter will be treated as a numeric value mapped A to 1 and Z to 26. For example, "postpone boy" is equivalent to "postpone 2" and "postpone h" is equivalent to "postpone 8".<br>
 
 Syntax:
 
@@ -531,7 +547,8 @@ Expected outcome:
 ### `reminder` - Print tasks that are due soon
 
 Typing `reminder` prints the tasks that are due within a certain time range or to activate the reminder.<br>
-Note: The reminder popup is set by default to emerge every 5 minutes.  
+Note: 
+The reminder popup is set by default to emerge every 5 minutes.  
 
 Syntax:
 
@@ -579,7 +596,10 @@ Expected outcome:
 ### `snooze` - Delays reminder popup
 
 Typing `snooze` delays reminder popup by a default of 1 minute.
-The reminder popup will remind in every 6 minutes.
+The reminder popup will remind in every 6 minutes.<br>
+Note: 
+1. No additional parameter needed.<br>
+2. If there is parameter, you should expect "Invalid Command" message.
 
 Syntax:
 
@@ -602,7 +622,10 @@ Expected outcome:
 
 ### `take` - Take module
 
-Typing `take` marks specified module(s) as taken.
+Typing `take` marks specified module(s) as taken.<br>
+Note: 
+1. Index must be a positive integer referencing an existing item on the current list.<br>
+2. Module code must be a legitimate NUS module.
 
 Syntax:
 
@@ -624,8 +647,11 @@ Expected outcome:
 
 ### `untake` - Untake module
 
-Typing `untake` marks specified module(s) as not taken.
-
+Typing `untake` marks specified module(s) as not taken.<br>
+Note: 
+1. Index must be a positive integer referencing an existing item.<br>
+2. If modules that is not taken is input, module will still be marked as "no longer taken".
+      
 Syntax:
 
 `untake [index(es) / module code(s) (for modules only)]`
@@ -734,7 +760,11 @@ Expected outcome:
 
 ### `grade` - Add grade to course or module
 
-Typing `grade` allows the user to add grade to the user's taken course or module.
+Typing `grade` allows the user to add grade to the user's taken course or module.<br>
+Note: 
+1. Modules need to be "taken" first before grade is applied.<br>
+2. Grade and module code/index are compulsory parameters.<br>
+3. Grade and module code need to be acceptable grade and module in NUS. For example: If "grade CS2113 Z" or "grade CS9999 A" is input, error message will be displayed.
 
 Syntax:
 
@@ -773,7 +803,11 @@ Expected outcome:
 
 ### `goal` - Calculate how far the user is from his/her target CAP
 
-Typing `goal` allows the user to calculate how far the user is from his/her target CAP.
+Typing `goal` allows the user to calculate how far the user is from his/her target CAP.<br>
+Note: 
+1. All values on the parameters should be a positive integer. Otherwise you should expect an error message.<br>
+2. Both total MC and target CAP are compulsory parameters.<br>
+3. CAP values need to be within 0 to 5.
 
 Syntax:
 
@@ -806,7 +840,12 @@ Expected outcome:
 
 ### `mc` - Prints MCs
 
-Typing `mc` prints the number of MCs based on selected option. By default, this command focuses on the entire module list. In order to print the MC of taken modules, do remember to enter 'focus taken' before proceeding with this command. 
+Typing `mc` prints the number of MCs based on selected option. 
+By default, this command focuses on the entire module list. In order to print the MC of taken modules, 
+do remember to enter 'focus taken' before proceeding with this command. <br>
+Note: 
+1. Default mc command prints the total mc that exist in the taken list of module.<br>
+2. To print out a detailed list of mc belonging to the taken modules, ensure you have entered "focus taken". 
 
 Syntax:
 
@@ -844,7 +883,10 @@ Expected outcome:
 
 ### `cap` - Prints CAPs
 
-Typing `mc` prints the calculated CAP for courses based on selected option.
+Typing `mc` prints the calculated CAP for courses based on selected option.<br>
+Note: 
+1. Index should be a positive integer. Otherwise you should expect an "invalid command" error message.<br>
+2. You must reference existing tasks or modules when using this command. For example: If "list" shows only 2 tasks but you try to use "-task 3" as a parameter for "add", you should expect an "index out of range" error message because "3" is out of range for your task list. Similarly, if there is no mod called CS9999 in the module list and you try to use "-mod CS9999" as a parameter for "add", you should expect a "not found" error message.
 
 Syntax:
 
@@ -879,7 +921,12 @@ Expected outcome:
 
 ### `add` - Add task to module
 
-Typing `add` adds specified task(s) to specified module(s).
+Typing `add` adds specified task(s) to specified module(s).<br>
+Note: 
+1. Index should be a positive integer. Otherwise you should expect an "invalid command" error message.<br>
+2. You must reference EXISTING tasks or modules when using this command. For example: If "list" shows only 2 tasks but you try to use "-task 3" as a parameter for "add", you should expect an "index out of range" error message because "3" is out of range for your task list. Similarly, if there is no mod called CS9999 in the module list and you try to use "-mod CS9999" as a parameter for "add", you should expect a "not found" error message.<br>
+3. Both parameters here (i.e. task and mod) are compulsory.<br>
+4. Once a task is added to a module, it is unlinked from the task list.
 
 Syntax:
 
@@ -901,7 +948,10 @@ Expected outcome:
 
 ### `clear` - Clear the task list
 
-Typing `clear` results in the program deleting all added tasks from the task list.
+Typing `clear` results in the program deleting all added tasks from the task list.<br>
+Note: 
+1. "clear fancy" can only be used in fancy UI mode.<br>
+2. Extra inputs after "clear" will get an "invalid command" error unless it contains the word "fancy" (case insensitive). For example: "clear domsun" results in an "invalid command" error. If "clear fancy domsun" is input in, "domsun" will be ignored and "clear fancy" will be executed. If "clear MyFancyBoy" is input in, "clear fancy" will be executed.
 
 Example of usage: 
 
@@ -918,7 +968,9 @@ Expected outcome:
 ### `delete` - Delete a task from the task list
 
 Typing `delete` deletes the task with specified *index* from the current task list.<br>
-Note: *index* can be an integer number or a letter (`A` or `a` corresponds to 1).
+Note: 
+1. *index* should be an integer number or a letter (`A` or `a` corresponds to 1). Otherwise you should expect an error message.<br>
+2. You must reference EXISTING tasks when using this command. For example: If "list" shows only 2 tasks but you try to use "delete 3", you should expect an "index out of range" error message because "3" is out of range for your task list.
 
 Syntax:
 
@@ -937,7 +989,13 @@ Expected outcome:
 
 ### `edit` - Modify attributes of an item
 
-Typing `edit ` modifies the attributes of an task or module
+Typing `edit ` modifies the attributes of an task or module. <br>
+Note: 
+1. Fields for "-task" include "description", "type", "selected", "weekly" and "done".<br>
+2. Fields for "-mod" include "grade", "su", "selected" and "taken".<br>
+3. No space allowed around the "=" sign. Use "_" in for spaces in "[field=new_value]" parameters.<br>
+4. Modules and task referenced need to exist.<br>
+5. Removing a specified linked task from the module does not delete the task from the task list.
 
 Syntax:
 
@@ -1051,7 +1109,10 @@ Expected outcome:
 
 ### `stats` - Prints Statistics
 
-Typing `stats` prints the percentage of the task completed.
+Typing `stats` prints the percentage of the task completed.<br>
+Note: 
+1. Module entered should exist. Otherwise you should expect an "Module Not Found" error message.<br>
+2. If the command entered is stats alone, ensure that you are focusing on task by typing "focus".
 
 Syntax:
 
@@ -1157,7 +1218,9 @@ Expected outcome:
 
 Typing `fancy` switches the UI to the fancy mode (GUI-like CLI interface).<br>
 This command has no effect if the UI is already in fancy mode.<br>
-The fancy mode only shows correctly if your terminal supports ansi escape codes.
+The fancy mode only shows correctly if your terminal supports ansi escape codes.<br>
+Note: 
+1. This feature can be used on Linux or Mac only. Error numbers will be displayed on Windows.
 
 Syntax:
 
@@ -1176,7 +1239,9 @@ the UI switches to fancy mode (GUI-like CLI interface).
 
 Typing `plain` switches the UI to the plain mode (pure-text CLI interface). <br>
 This command has no effect if the UI is already in plain mode.<br>
-The plain mode shows correctly on all terminals.
+The plain mode shows correctly on all terminals.<br>
+Note: 
+1. Extra inputs after "plain" will be ignored. For example: If "plain bye" is input in, "bye" will be ignored and "plain" will be executed.
 
 Syntax:
 
@@ -1194,7 +1259,9 @@ The UI switches to plain mode (pure-text CLI interface).
 ### `next` - Switch the target region to the next page
 
 Typing `next` switches the target region to the next page, should a next page exist.<br>
-This command has no effect on pure text CLI mode.
+This command has no effect on pure text CLI mode.<br>
+Note: 
+1. This function should be used in FANCY UI only.
 
 Syntax:
 
@@ -1221,7 +1288,9 @@ The item list region (top) of the GUI is switched to the next page if a next pag
 ### `prev` - Switch the target region to the previous page
 
 Typing `prev` switches the target region to the previous page, should a previous page exist.<br>
-This command has no effect on pure text CLI mode.
+This command has no effect on pure text CLI mode.<br>
+Note: 
+1. This function should be used in FANCY UI only.
 
 Syntax:
 
@@ -1252,7 +1321,8 @@ Typing `unknown` or any string that is not a command will trigger the `unknown` 
 The `unknown` command prints an error message for debug purposes, it is also the default behaviour of the program
 when it fails to recognize the user's command. <br>
 
-Note: If the program recognizes the command successfully, yet fails to find required parameters, 
+Note: 
+If the program recognizes the command successfully, yet fails to find required parameters, 
 it will not trigger this `unknown` command. It will print a syntax error and remind the user of
 the correct syntax instead.
 
@@ -1276,7 +1346,9 @@ Expected outcome:
 
 Typing `bye` results in the program saving the current task list to a local file named 
 `./data/duke.txt`, and then quitting the program.
-
+Note: 
+1. Extra inputs after "bye" will be ignored. For example: If "bye domsun" is input in, "domsun" will be ignored and "bye" will be executed.
+         
 Example of usage: 
 
 `bye`
