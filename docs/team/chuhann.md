@@ -8,62 +8,46 @@ Given below are my contributions to the project.
 ### 2.1 Enhancements Implemented: 
 
 * New Feature: Reminder
-<br>
-What it does:
+** What it does:
 Allows the user to set reminder for tasks that are due within 3 days
-<br>
-Justification:
+** Justification:
 This feature allow users to know what tasks are going to be due by having a message every 5 minutes
-<br>
-Highlights:
+** Highlights:
 This feature can be further integrated to remind top 10 tasks in the future
-<br>
-Credits (optional):
+** Credits (optional):
 @johanesrafael for improving the code quality
 <br>
 
 * New Feature: Postpone
-<br>
-What it does:
+** What it does:
 Allows the user to postpone a deadline or event task if user schedule any changes at any time
-<br>
-Justification:
+** Justification:
 This feature allows users to 
-<br>
-Highlights:
+** Highlights:
 Postpone feature can be enhanced to deal with non-date items in the future
-<br>
-Credits (optional):
+** Credits (optional):
 @johanesrafael for improving the code quality 
 <br>
 
 * New Feature: Snooze
-<br>
-What it does:
+** What it does:
 Allows the user to delay the "pop up" message by "snoozing" it
-<br>
-Justification:
+** Justification:
 Reminder "pop up" message can be a little annoying if it comes up every 5 minutes, hence this feature gives user an option to delay the "pop up" message
-<br>
-Highlights:
+** Highlights:
 Snooze feature can be improved by adding more fields to cater for more options
-<br>
-Credits (optional):
+** Credits (optional):
 @johanesrafael for improving the code quality
 <br>
 
 * New Feature: Focus
-<br>
-What it does:
+** What it does:
 Allows the user to change context to "todo", "event", "deadline", "task", "mod", "selected" or "taken"
-<br>
-Justification:
+** Justification:
 Instead of viewing a whole list of combined tasks, changing context to specific task such as "todo" only lists on "todo" stuff and makes viewing of tasks neater
-<br>
-Highlights:
+** Highlights:
 This feature can be enhanced to change the context to multiple context such as "todo" and "event" in the future
-<br>
-Credits (optional): 
+** Credits (optional): 
 @tomlbz for fixing the bugs and code quality
 <br>
 
