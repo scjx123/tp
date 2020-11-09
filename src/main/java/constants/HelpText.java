@@ -495,7 +495,7 @@ public enum HelpText {
         new String[]{
             "reminder (on/off)"
         },
-        new String[]{ "", },
+        new String[]{ "1. You should expect the reminder will appear every 5 minutes.", },
         new String[]{
             "1. \"reminder\" >> list tasks that are due within the set period of time",
             "2. \"reminder on\" >> Switch on reminder",
