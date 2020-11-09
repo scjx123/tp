@@ -127,22 +127,27 @@ $ java -jar domsun.jar
 As a beginning, here is how Domsun works. It has 3 lists that you should take note of as shown below. (The lists shown are non-exhaustive, as there are other dynamic lists that are created based on the `focus` command. Do refer to `focus` section of this User Guide for more details). 
 ![here](Images/Overview1.PNG)
 
-1. `focus` command focuses the app onto the list of tasks that you currently have. 
-2. Likewise, `focus mod` focuses the app on the entire list of modules available in NUS, while `focus taken` is the list of taken modules of your choice. 
-3. To add a task under a module, you may enter the command `add -task 1 3 -mod CS2113`. 1 and 3 here are indices of the tasks in the task list. So be sure to have some task added BEFORE typing this command. 
-4. To mark a module as 'taken', you may enter `take CS2113 CS1010` while focusing on the module list by using `focus mod`. alternatively, you may use the indices method as before such as `take 1 4` to take the 1st and 2nd module available on the module list. 
-5. The `list` commands follows the app's current focus. If it is focusing on list of tasks, typing `list` will show all tasks. Likewise for modules and taken. 
-6. Typing `detail 1` when focusing on tasks list, will display the 1st index, task details. 
-7. Note that `detail 2` here will display different results as the two indices of 2 represent different modules! The one on the left represents CG2027 while the one on the right represent CS1010. 
+1. `focus` command focuses the app onto the list of tasks that you currently have. When starting the program for the first time, such a task list will be empty and you can create your own tasks using the `todo`, `event` or `deadline` commands. More on commands in later sections.
+2. Likewise, `focus mod` command focuses the app on the entire list of modules available in NUS, while `focus taken` applies a filter to the list of all modules, and collect all the taken modules into a dynamic list (a list of all your taken modules). There are other options available for `focus` command, such as `focus selected`. More on that later.
+3. To add a task under a module, you may enter the command `add -task 1 3 -mod CS2113`. 1 and 3 here are the ***indices*** of the tasks in ***your current list of focus***. So be sure to have some task created and are focusing on the correct list before typing this command. 
+4. To mark modules as 'taken', you may enter `take CS2113 CS1010`. Alternatively, you may use the indices method as before such as `take 1 4` to take the 1st and 2nd module available on the module list while focusing on such list by using `focus mod` first.
+5. The `list` commands follows the app's current focus. If it is focusing on list of tasks, typing `list` will show all tasks. Likewise for modules and taken and more. 
+6. Typing `detail 1` displays the details of the item ***in your current list of focus*** that has index 1. For example, when focusing on tasks list, this will display the details of the 1st task. 
+7. Similarly, `detail 2` will display different results depending on your current ***focus*** as the index 2 represents Module CG2027 if you are focusing on `mod`, and represents Module CS1010 if you are focusing on `taken`. 
 
-**A point to note before venturing into the libraries of commands that we have.**<br> 
-- You can switch between fancy mode display, and plain display anytime during the program. 
-During `list` command, you will be able to toggle between pages of fancy by using `prev` and `next`
-However, the current version of fancy mode is still in beta, hence, it is expected to not be able to fully display certain commands that are too long. such as `help`, `detail`,`mc` etc. Do look forward to the next update!
-![here](Images/Overview2.PNG)
+**A to note before venturing into the libraries of commands that we have.**<br> 
+You can switch between fancy mode display, and plain display anytime during the program. During list command, you will be able to toggle between pages of fancy by using prev and next However, the current version of fancy mode is still in beta, hence, it is expected to not be able to fully display certain commands that are too long. such as help, detail,mc etc. Do look forward to the next update!
+![here](Images/Overview2.PNG)<br>
+
+**Syntax Formats**
+- Different commands update different regions of the fancy UI. Most noticeably, `list` command only updates the upper region (the item list region), while `help` command only updates the bottom region (the text region).
+- This is designed so that you will be able to refer to your text region when you are operating on the item list, without worrying that the text below will be flushed away.
+- For example, if you did commands wrongly, the text region will display `invalid command` error and show the correct syntax. When you are browsing through the list you will be able to refer to the syntax below. Please do not mistake that kept message as a newly generated error.
+- You will be able to toggle between pages of fancy by using `prev` and `next` if you have followed the [Installation](#installation) steps successfully, or if you are on Mac or Linux, or if you are on Windows but using non-integrated terminals such as gitbash or Windows Terminal. Otherwise, if you are using cmd.exe (command line) or ps.exe (PowerShell) on Windows, please stick with plain text UI.
 - For each feature syntax, each type of symbols represent different explanation of the syntax.<br>
-    - The square bracket (`[]`) represents parameters. Do **not** type this in when using the feature. For example:<br>
-    In `help [target]`, `help` feature has `target`, the target action to be explained, as its parameter. For optional parameter, alternate use of the command is given on the `Notes` section of help text from `help`.
+    - The plain text (`example`) represents compulsory names. For example, if `do -stuff [index]` is shown in the Syntax, you must type exactly `do -stuff`, before typing any index.
+    - The square bracket (`[]`) represents parameters. Do **not** type the square bracket characters themselves in when using the feature. For example:<br>
+    In `help [target]`, `help` is a compulsory name, and `target` is its parameter. You can used any allowed name as a `target`, depending on what command you are using. For options of choice of the parameter, you can refer to the `Notes` section of help text from `help`, by typing `help help`.
     - The round bracket (`()`) represents additional explanation of the parameter. For example:<br>
     In `detail [module code (for modules only) / index]`, `for modules only` is simply further explanation of the `module code` parameter. Usage example refer to help text from `help` feature.
     - The three dots (`...`) represents that the parameter can be linked/chained together infinitely. For example:<br>
@@ -159,12 +164,15 @@ The program allows users to mark tasks as done (denoted by `[V]`) or undone (den
 
 ### List tasks and reorder them by their ***date*** field
 The program allows users to list tasks in ascending order or descending order with respect to their ***date*** values.<br>
-The program also allows the user to filter the task list and only display tasks within a specified date.
+The program also allows the user to filter the task list and only display tasks within a specified date.<br>
+ (this feature only applies to items with a valid parsable date, more on that later)
 
 ### Deadlines, Events, and ToDo's
 The program allows users to create 3 different kinds of tasks, *deadlines*, *events*, and *todos*.<br>
-*deadline* and *event* consists of both *description* and *time*, while *todo* does not contain *time*.<br>
-The *time* field consists of a *date* part (such as `Oct 13 1998`), and a *time* part (such as `00:00`).<br>
+*deadline* and *event* consists of both *description* and *date*, while *todo* does not contain *date*.<br>
+The *date* field consists of a *date* part (such as `Oct 13 1998`), and a *time* part (such as `00:00`).<br>
+If the *time* part is omitted during creation of the task, it will be set by default to 00:00.<br>
+You can use `postpone` or `edit` commands to change the date field later. (Not recommended. More on that later)
 
 ### Auto-save and auto-load
 The program saves the tasks list automatically every time the list changes. <br>
@@ -177,18 +185,22 @@ The program can remind the user of the syntax of a command if the command is cor
 The program allows users to list modules, mark modules as taken or untaken, and score grades for each module.
 
 ### Find function
-The program allows users to find items (tasks or modules) by keyword using the `find` command. 
+The program allows users to find items (tasks or modules) by keyword using the `find` command. More on that later.
 
 ### Dynamic target
 The program operates data dynamically. Users can operate on items as-is in the displayed sequence,<br>
-and need not follow the sequence of task creation or module addition.
+and need not follow the sequence of task creation or module addition. <br>
+For example, index `1` always refers to the first item in
+ the list you are ***currently focusing on***, which can be dynamically updated. You do not have to remember which task was the one you added first.
 
-### GUI inside CLI
-The program has a GUI mode that accomplishes a GUI-like CLI interface using the ANSI escape code sequence.<br> 
+### GUI inside CLI (fancy UI mode)
+The program has a fancy UI mode that accomplishes a GUI-like CLI interface using the ANSI escape code sequence.<br> 
 The user can use `fancy` to switch to the GUI mode and use `plain` to switch to plain text CLI mode.
 
 ### Link tasks to Modules
-The program allows users to add some tasks to modules using the `add` command.
+The program allows users to add some tasks to modules using the `add` command.<br>
+The tasks added to a module will appear in the module's `tasks` field, which can be viewed using the `detail` command. More on that later.<br>
+The tasks in the module's `tasks` field does not affect the main task list.
 
 ### Reminders
 The program allows users to set reminders at a certain time, or remind themselves of the most urgent tasks on start-up.
