@@ -7,66 +7,65 @@ Given below are my contributions to the project.
 
 ### 2.1 Enhancements Implemented: 
 
-New Feature: 
+New Feature: Reminder
 * Added reminder function
-<br> 
+
 What it does:
-* Allows the user to set reminder for tasks that are due within 3 days
+Allows the user to set reminder for tasks that are due within 3 days
 <br>
 Justification:
-* This feature allow users to know what tasks are going to be due by having a message every 5 minutes
+This feature allow users to know what tasks are going to be due by having a message every 5 minutes
 <br>
 Highlights:
-* This feature can be further integrated to remind top 10 tasks in the future
+This feature can be further integrated to remind top 10 tasks in the future
 <br>
 Credits (optional):
-* @johanesrafael for improving the code quality
+@johanesrafael for improving the code quality
 <br>
 
-
-New Feature: 
+New Feature: Postpone
 * Added postpone function
 <br> 
 What it does:
-* Allows the user to postpone a deadline or event task if user schedule any changes at any time
+Allows the user to postpone a deadline or event task if user schedule any changes at any time
 <br>
 Justification:
-* This feature allows users to 
+This feature allows users to 
 <br>
 Highlights:
-* Postpone feature can be enhanced to deal with non-date items in the future
+Postpone feature can be enhanced to deal with non-date items in the future
 <br>
 Credits (optional):
-* @johanesrafael for improving the code quality 
+@johanesrafael for improving the code quality 
 <br>
 
-New Feature: 
-* Added snooze function
+New Feature: Snooze
+Added snooze function
 <br> 
 What it does:
-* Allows the user to delay the "pop up" message by "snoozing" it
+Allows the user to delay the "pop up" message by "snoozing" it
 <br>
 Justification:
-* Reminder "pop up" message can be a little annoying if it comes up every 5 minutes, hence this feature gives user an option to delay the "pop up" message
+Reminder "pop up" message can be a little annoying if it comes up every 5 minutes, hence this feature gives user an option to delay the "pop up" message
 <br>
 Highlights:
-* Snooze feature can be improved by adding more fields to cater for more options
+Snooze feature can be improved by adding more fields to cater for more options
 <br>
 Credits (optional):
-* @johanesrafael for improving the code quality
+@johanesrafael for improving the code quality
 <br>
 
-New Feature: 
-* Added focus function
+New Feature: Focus
+Added focus function
 <br> 
 What it does:
-* Allows the user to change context to "todo", "event", "deadline", "task", "mod", "selected" or "taken"
+Allows the user to change context to "todo", "event", "deadline", "task", "mod", "selected" or "taken"
 <br>
 Justification:
-* Instead of viewing a whole list of combined tasks, changing context to specific task such as "todo" only lists on "todo" stuff and makes viewing of tasks neater
+Instead of viewing a whole list of combined tasks, changing context to specific task such as "todo" only lists on "todo" stuff and makes viewing of tasks neater
 <br>
 Highlights:
-* This feature can be enhanced to change the context to multiple context such as "todo" and "event" in the future
+This feature can be enhanced to change the context to multiple context such as "todo" and "event" in the future
 <br>
 Credits (optional): 
 @tomlbz for fixing the bugs and code quality
