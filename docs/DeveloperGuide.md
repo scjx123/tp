@@ -108,7 +108,7 @@ During the saving phase:
 
 **4.7 Flow of DOMSUN**<br>
 The sequence diagram below shows the main interaction of classes with each other throughout the whole lifecycle of DOMSUN.
-![uml](Images/DOMSUN_Main_Flow.png)
+![uml](Images/DOMSUM_Main_Flow.png)
 
 ## 5. Implementation<br>
 This section highlights some of our project's key feature and its implementation. 
