@@ -189,12 +189,15 @@ indiscriminately to any `Command` object and executed indifferently.
     - Cons: Harder to implement and extend. Every time we want a new functionality we would need to create a new list.
 
 ### 5.2 Statistic Feature 
-The statistic feature is facilitated by the StatsAction class. It extends `Action` class, and it functions under the architectural component `execute`. Internally, it stores an arraylist of Item object in `targetList`. This class implements the following operation: 
+The statistic feature is facilitated by the `StatsAction` class. It extends `Action` class, and it functions under the architectural component `execute`. Internally, it stores an arraylist of Item object in `targetList`. This class implements the following operation: 
 
  - `prepare()` - Sets `isMod` flag according to user's 
  - `act()`- Gets `targetList` and calculates the raw ratio of the completed items.
- - `roundedRatioBar()`- Returns a rounded ratio enclosed in square brackets for printing. 
+ - `roundedRatioBar()`- Returns a rounded ratio enclosed in square brackets for printing. <br>
 
+The class diagram for `StatsAction` class is illustrated below: 
+![statsDiagram](Images/StatsActionClass.png)
+<br>
 Given below is an example usage scenario and how the statistic mechanism behaves at each step. 
 
 Step 1. The user enters `stats -mod CS2113`	once the execute layer executes the message and calls `action.prepare()` class, `StatsAction` will begin its `prepare()` operation
