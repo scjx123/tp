@@ -24,6 +24,7 @@ public enum HelpText {
             "2.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
                 + "\"-mod CS9999\" as a parameter for \"add\", you should expect a \"not found\" error message.",
             "3. Both parameters here (i.e. task and mod) are compulsory.",
+            "4. Once a task is added to a module, it is unlinked from the task list."
         },
         new String[]{
             "1. \"add -task 1 2 -mod CS2113 CS2113T \" >> add task 1 and task 2 in the current list to "
@@ -52,7 +53,7 @@ public enum HelpText {
         "cap",
         "Calculate CAP for courses based on selected option.",
         new String[]{
-            "cap [index / code (for modules only)] [grade] ...",
+            "cap [index / code (for modules only)] [letter grade] ...",
             "cap [index(es) / codes (for modules only)]",
             "cap"
         },
@@ -72,7 +73,7 @@ public enum HelpText {
             "4. \"cap CG1111 CG1112 A\" >> calculated cap using existing grade for CG1111, and using A for CG1112",
         }),
     /**
-     * The Clear. (not done)
+     * The Clear.
      */
     CLEAR(
         "clear",
@@ -82,10 +83,13 @@ public enum HelpText {
             "clear fancy",
         },
         new String[]{
-            "1. Extra inputs after \"clear\" will be ignored if it is not fancy. For example:",
-            "1.1. If \"clear domsun\" is input in, \"domsun\" will be ignored and \"clear\" will be executed.",
-            "1.2. If \"clear fancy domsun\" is input in, \"domsun\" will be ignored "
+            "1. \"clear fancy\" can only be used in fancy UI mode",
+            "2. Extra inputs after \"clear\" will get an \"invalid command\" error unless"
+                + " it contains the word \"fancy\" (case insensitive). For example:",
+            "2.1. \"clear domsun\" results in an \"invalid command\" error.",
+            "2.2. If \"clear fancy domsun\" is input in, \"domsun\" will be ignored "
                 + "and \"clear fancy\" will be executed.",
+            "2.3. If \"clear MyFancyBoy\" is input in, \"clear fancy\" will be executed.",
         },
         new String[]{
             "1. \"clear\" >> clears the task list",
@@ -101,13 +105,16 @@ public enum HelpText {
             "complete [index / code]"
         },
         new String[]{
-            "1. Index should be a positive integer. Otherwise you should expect an \"invalid command\" error message",
-            "2. You must reference existing tasks or modules when using this command. For example:",
-            "2.1. If \"list\" shows only 2 tasks but you try to use \"-task 3\" as a parameter for \"add\", you should "
-                + "expect an \"index out of range\" error message because \"3\" is out of range for your task list.",
-            "2.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
-                + "\"-mod CS9999\" as a parameter for \"add\", you should expect a \"not found\" error message.",
+            "1. Module should first be \"taken\" and \"grade\" before this function can run. "
+                + "Otherwise, you should expect an error message",
+            "2. Index should be a positive integer. Otherwise you should expect an \"invalid command\" error message",
             "3. Both parameters here (i.e. task and mod) are compulsory.",
+            "4. You must reference existing tasks or modules when using this command. For example:",
+            "4.1. If \"list\" shows only 2 tasks but you try to use \"-task 3\" as a parameter for \"add\", you should "
+                + "expect an \"index out of range\" error message because \"3\" is out of range for your task list.",
+            "4.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
+                + "\"-mod CS9999\" as a parameter for \"add\", you should expect a \"not found\" error message.",
+
         },
         new String[]{
             "1. \"complete CS2113\" >> marks module CS2113 as completed",
@@ -141,11 +148,8 @@ public enum HelpText {
         new String[]{
             "1. Index should be a positive integer. Otherwise you should expect an error message",
             "2. You must reference EXISTING tasks when using this command. For example:",
-            "2.1. If \"list\" shows only 2 tasks but you try to use \"-task 3\" as a parameter for \"add\", you should "
+            "2.1. If \"list\" shows only 2 tasks but you try to use \"delete 3\", you should "
                 + "expect an \"index out of range\" error message because \"3\" is out of range for your task list.",
-            "2.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
-                + "\"-mod CS9999\" as a parameter for \"add\", you should expect a \"not found\" error message.",
-            "3. Both parameters here (i.e. task and mod) are compulsory.",
         },
         new String[]{
             "1. \"delete 1\" >> deletes the task with index 1 from the current list"
@@ -159,7 +163,14 @@ public enum HelpText {
         new String[]{
             "detail [module code (for modules only) / index]",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Index should be a positive integer. Otherwise you should expect an error message",
+            "2. You must reference EXISTING tasks or module when using this command. For example:",
+            "2.1. If \"list\" shows only 2 tasks but you try to use \"detail 3\", you should "
+                + "expect an \"index out of range\" error message because \"3\" is out of range for your task list.",
+            "2.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
+                + "\"detail CS9999\", you should expect a \"not found\" error message.",
+        },
         new String[]{
             "1. \"detail 1\" >> print the detail of item 1 in the list",
             "2. \"detail CS2113T\" >> print the detail of module CS2113T",
@@ -184,8 +195,8 @@ public enum HelpText {
                 + "with 160MC in total based on current grades",
             "2. \"goal -total 160 4.9 -taken 100 4.5\" >> "
                 + "comment on required average grade needed for:\r\n"
-                + "- MC total for graduation: 160\r\n" + "- Target CAP: 4.9\r\n"
-                + "- MC taken: 100\r\n" + "- Current CAP: 4.5\r\n"
+                + "- Total MC for graduation: 160\r\n" + "- Target CAP: 4.9\r\n"
+                + "- Total MC taken: 100\r\n" + "- Current CAP: 4.5\r\n"
         }),
     /**
      * The Done.
@@ -205,22 +216,33 @@ public enum HelpText {
             "1. \"done 1\" >> marks the task with index 1 as done"
         }),
     /**
-     * The Edit.
+     * The Edit. (not sure)
      */
     EDIT(
         "edit",
-        "Modify the attributes of an item (task / module)",
+        "Modify the attributes of an item (task / module), or operate on one linked task of a module",
         new String[]{
-            "edit [-mod / -task] [index / code (for module only)] [field=new value] ...",
-            "No space allowed around \"=\". Use \"_\" in place of space for the \"[field=new value]\" parameters"
+            "edit -task [index] field=new_value {[field=new_value] ...}",
+            "edit -mod [module code] field=new_value {[field=new_value] ...}",
+            "edit -mod [module code] task=[del / done / undone]<linked task index>",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Fields for \"-task\" include \"description\", \"type\", \"selected\", \"weekly\" and \"done\"",
+            "2. Fields for \"-mod\" include \"grade\", \"su\", \"selected\" and \"taken\"",
+            "3. No space allowed around the \"=\" sign. Use \"_\" in for spaces in \"[field=new_value]\" parameters",
+            "4. Modules and task referenced need to exist.",
+            "5. Removing a specified linked task from the module does not delete the task from the task list",
+        },
         new String[]{
             "1. \"edit -mod CS2113T grade=A\" >> changes the \"grade\" field of module \"CS2113T\" to be \"A\"",
             "2. \"edit -task 1 description=do_homework\" >> "
                 + "changes the \"description\" field of the 1st task in the current list to \"do homework\"",
             "3. \"edit -task 1 type=event\" >> changes the \"type\" of the 1st task in the current list to \"event\"",
-            "4. \"edit -mod CS2113 grade=A -task 1 description=do_homework type=event\" >> do 1 to 3 sequentially"
+            "4. \"edit -mod CS2113 grade=A -task 1 description=do_homework type=event\" >> do 1 to 3 sequentially",
+            "5. \"edit -mod CS2113 task=del<1>\" >> removes the first linked task from the module if it exists",
+            "6. \"edit -mod CS2113 task=done<1>\" >> marks the first linked task from the module as done if it exists",
+            "7. \"edit -mod CS2113 task=undone<1>\" >> "
+                + "marks the first linked task from the module as undone if it exists",
         }),
     /**
      * The Event.
@@ -260,7 +282,7 @@ public enum HelpText {
         "grade",
         "Modify grade to the user's taken course/module.",
         new String[]{
-            "grade [index / code (for modules only)] [grade] ...",
+            "grade [index / code (for modules only)] [letter grade] ...",
             "grade [index(es) / codes (for modules only)]",
             "grade"
         },
@@ -269,7 +291,6 @@ public enum HelpText {
             "2. Grade and module code/index are compulsory parameters.",
             "3. Grade and module code need to be acceptable grade and module in NUS. For example:",
             "3.1. If \"grade CS2113 Z\" or \"grade CS9999 A\" is input, error message will be displayed.",
-
         },
         new String[]{
             "1. \"grade CS2113 A CG1112 A-\" >> make A and A- the grades of modules CS2113 and CG1112 respectively",
@@ -315,9 +336,17 @@ public enum HelpText {
         "postpone task a day by default",
         new String[]{
             "postpone [index]",
-            "postpone [h / w / y] [index]"
+            "postpone (h / w / y) [index]"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. The tasks should consists of date type i.e. events or deadline tasks, does not work on todo tasks",
+            "2. Each postpone delays the tasks by a day, an hour, a week or a year",
+            "3. Does not work with custom date unless you have updated the task with the preferred date format.",
+            "4. When letter appears without a number as its parameter, the letter will be treated as a numeric value "
+                    + "mapped A to 1 and Z to 26." + Constants.WIN_NEWLINE
+                    + "For example, \"postpone boy\" is equivalent to \"postpone 2\" and "
+                    + "\"postpone h\" is equivalent to \"postpone 8\".",
+        },
         new String[]{
             "1. \"postpone 1\" >> postpone the task with index 1 by a day",
             "2. \"postpone h 1\" >> postpone the task with index 1 by an hour",
@@ -334,7 +363,7 @@ public enum HelpText {
             "help [target]",
             "target: the name of the target command"
         },
-        new String[]{ "", },
+        new String[]{"1. If unknown command is put in as \"target\", general help of all commands will be displayed.",},
         new String[]{
             "1. \"help\" >> prints the list of available commands",
             "2. \"help event\" >> prints the details of the \"event\" command"
@@ -374,6 +403,29 @@ public enum HelpText {
             "3. \"list date spec Oct 5 2020\" >> list items with specific \"date\" field of Oct 5 2020"
         }),
     /**
+     * The Load.
+     */
+    LOAD(
+        "load",
+        "Loads linked tasks to ONE specified module without adding them to the main task list",
+        new String[]{
+            "load [module code] [task_string] ...",
+        },
+        new String[]{
+            "1. This command should only be used if you are highly familiar with the save file "
+                + "and you want to manually edit linked tasks to a specific module",
+            "2. We do NOT recommend using this command on a daily basis"
+        },
+        new String[]{
+            "1. \"load EE2028 [D][V]_Exam_(by:_Jan_11_2011_11:11)\" >> loads a task with attributes: "
+                + "\"description=Exam\", \"type=deadline\", \"date=Jan_11_2011_11:11\" and \"isdone=true\" "
+                + "into the linked task list of module EE2028, WITHOUT adding this task object to the main task list.",
+            "2. \"load EE2028 [T][X]_test1,[T][V]_test2\" >> loads a task with attributes: "
+                + "\"description=test1\", \"type=todo\" and \"isdone=false\", then another task with attributes: "
+                + "\"description=test2\", \"type=todo\" and \"isdone=true\", WITHOUT adding any of these tasks "
+                + "to the main task list",
+        }),
+    /**
      * The Mc.
      */
     MC(
@@ -386,7 +438,8 @@ public enum HelpText {
         new String[]{
             "1. Default mc command prints the total mc that exist in the taken list of module",
             "2. To print out a detailed list of mc belonging to the taken modules, ensure you have entered "
-                + "\"focus taken\"."},
+                + "\"focus taken\"."
+        },
         new String[]{
             "1. \"mc\" >> print the total number of MCs currently taking",
             "2. \"mc -d\" >> print the detailed MC composition of the selection region"
@@ -446,11 +499,9 @@ public enum HelpText {
         "reminder",
         "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
         new String[]{
-            "reminder",
-            "reminder on",
-            "reminder off"
+            "reminder (on/off)"
         },
-        new String[]{ "", },
+        new String[]{ "1. You should expect the reminder will appear every 5 minutes.", },
         new String[]{
             "1. \"reminder\" >> list tasks that are due within the set period of time",
             "2. \"reminder on\" >> Switch on reminder",
@@ -465,7 +516,7 @@ public enum HelpText {
         new String[]{
             "sel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
         },
-        new String[]{ "", },
+        new String[]{ "1. ", },
         new String[]{
             "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
             "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
@@ -480,7 +531,10 @@ public enum HelpText {
         new String[]{
             "snooze",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. No additional parameter needed!",
+            "2. If there is parameter, you should expect \"Invalid Command\" message."
+        },
         new String[]{
             "1. \"snooze\" >> Delay reminder popup by 1 minute"
         }),
@@ -493,7 +547,10 @@ public enum HelpText {
         new String[]{
             "take [index(es) / module code(s) (for modules only)]",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Index must be a positive integer referencing an existing item on the current list.",
+            "2. Module code must be a legitimate NUS module.",
+        },
         new String[]{
             "1. \"take\" >> if there is any module selected but not taken, mark it as taken",
             "2. \"take 1 2\" >> mark module 1 and module 2 as taken",
@@ -523,10 +580,10 @@ public enum HelpText {
             "undone [index]"
         },
         new String[]{
-            "1. Index must be a positive integer referencing an existing item.",
-            "2. If the index starts with a letter, it will be treated as a numerical value mapped A to 1 and Z to 26. "
-                    + "For example, \"undone apple\" is equivalent to \"undone 1\" "
-                    + "and \"undone C4\" is equivalent to \"undone 3\".",
+            "1. Index must be a positive integer referencing an existing item on the current list.",
+            "2. If the index starts with a letter, it will be treated as "
+                + "a number mapped A to 1 and Z to 26. For example:",
+            "2.1. \"undone apple\" is equivalent to \"undone 1\" and \"undone C4\" is equivalent to \"undone 3\".",
         },
         new String[]{
             "1. \"undone 1\" >> marks the task with index 1 as undone"
@@ -568,7 +625,10 @@ public enum HelpText {
         new String[]{
             "untake [index(es) / module code(s) (for modules only)]",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Index must be a positive integer referencing an existing item.",
+            "2. If modules that is not taken is input, module will still be marked as \"no longer taken\".",
+        },
         new String[]{
             "1. \"untake\" >> if there is any module selected and taken, mark it as not taken",
             "2. \"untake 1 2\" >> mark module 1 and module 2 as not taken",

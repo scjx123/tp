@@ -8,52 +8,52 @@ Users will be able to browse and select modules, create and arrange tasks, add t
 create reminders, calculate and set goals for their MCs / CAPs.
 
 ## Contents
-
-- [Preliminaries](#Preliminaries)
-  * [Installation](#Installation)
-  * [Running the program](#Running-the-program)
-  * [Domsun Tutorial](#Domsun-Tutorial)
+### 
+- [Preliminaries](#preliminaries)
+  * [Installation](#installation)
+  * [Running the program](#running-the-program)
+  * [Domsun Tutorial](#domsun-tutorial)
 - [Features](#features)
 - [Command Summary](#command-summary)
-    * [`Daily Tasks`](#Daily-Tasks)
-    * [`Module Planner`](#Module-Planner)
-    * [`General Features`](#General-Features)
+    * [`Daily Tasks`](#daily-tasks)
+    * [`Module Planner`](#module-planner)
+    * [`General Features`](#general-features)
 - [Usage](#usage)
-  -[`Daily Tasks`](#todo---add-a-todo-to-the-task-list)
-    * [`todo` - Add a todo to the task list](#todo---add-a-todo-to-the-task-list)
-    * [`deadline` - Add a deadline to the task list](#deadline---add-a-deadline-to-the-task-list)
-    * [`event` - Add an event to the task list](#event---add-an-event-to-the-task-list)
-    * [`list` - Print a list of added tasks](#list---print-a-list-of-added-tasks)
-    * [`done` - Mark a task as done](#done---mark-a-task-as-done)
-    * [`undone` - Mark a task as undone](#undone---mark-a-task-as-undone)
-    * [`find` - Find an event in the task list](#find---find-an-event-in-the-task-list)
-    * [`postpone` - Postpone a task to a later date](#postpone---postpone-a-task-to-a-later-date)
-    * [`reminder` - Print tasks that are due soon](#reminder---print-tasks-that-are-due-soon)
-    * [`snooze` - Delays reminder popup](#snooze---delays-reminder-popup)
-  -[`Module Planner`](#take---take-module)
-    * [`take` - Take module(s)](#take---take-module)
-    * [`untake` - Untake module(s)](#untake---untake-module)
-    * [`sel` - Select items by index](#sel---select-items-by-index)
-    * [`unsel` - Unselect items](#unsel---unselect-items)
-    * [`detail` - Prints item detail](#detail---prints-item-detail)
-    * [`grade` - Add grade to course or module](#grade---add-grade-to-course-or-module)
-    * [`goal` - Calculate how far the user is from his/her target CAP](#goal---calculate-how-far-the-user-is-from-his/her-target-CAP)  
-    * [`mc` - Prints MCs](#mc---prints-mcs)
-    * [`cap` - Prints CAPs](#cap---prints-CAPs)
-  -[`General Features`](#add---add-task-to-module)
-    * [`add` - Add task(s) to module(s)](#add---add-task-to-module)
-    * [`clear` - Clear the task list](#clear---clear-the-task-list)
-    * [`delete` - Delete a task from the task list](#delete---delete-a-task-from-the-task-list)
-    * [`edit` - Modify attributes of an item](#edit---modify-attributes-of-an-item)
-    * [`focus` - Change the context of the program](#focus---change-the-context-of-the-program)
-    * [`stats` - Prints Statistics](#stats---prints-statistics)
-    * [`help` - Print help text of the commands](#help---print-help-text-of-the-commands)
-    * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---switch-the-ui-to-the-fancy-mode-(gui-like-cli))
-    * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---switch-the-ui-to-the-plain-mode-(pure-text-cli))
-    * [`next` - Switch the target region to the next page ***(GUI mode only)***](#next---switch-the-target-region-to-the-next-page)
-    * [`prev` - Switch the target region to the previous page ***(GUI mode only)***](#prev---switch-the-target-region-to-the-previous-page)
-    * [`unknown` - Prints error message](#unknown---prints-error-message)
-    * [`bye` - Quit the program](#bye---quit-the-program)
+    * [`Daily Tasks`](#todo---add-a-todo-to-the-task-list)
+        * [`todo` - Add a todo to the task list](#todo---add-a-todo-to-the-task-list)
+        * [`deadline` - Add a deadline to the task list](#deadline---add-a-deadline-to-the-task-list)
+        * [`event` - Add an event to the task list](#event---add-an-event-to-the-task-list)
+        * [`list` - Print a list of added tasks](#list---print-a-list-of-added-tasks)
+        * [`done` - Mark a task as done](#done---mark-a-task-as-done)
+        * [`undone` - Mark a task as undone](#undone---mark-a-task-as-undone)
+        * [`find` - Find an event in the task list](#find---find-an-event-in-the-task-list)
+        * [`postpone` - Postpone a task to a later date](#postpone---postpone-a-task-by-index)
+        * [`reminder` - Print tasks that are due soon](#reminder---print-tasks-that-are-due-soon)
+        * [`snooze` - Delays reminder popup](#snooze---delays-reminder-popup)
+    * [`Module Planner`](#take---take-module)
+        * [`take` - Take module(s)](#take---take-module)
+        * [`untake` - Untake module(s)](#untake---untake-module)
+        * [`sel` - Select items by index](#sel---select-items-by-index)
+        * [`unsel` - Unselect items](#unsel---unselect-items)
+        * [`detail` - Prints item detail](#detail---prints-item-detail)
+        * [`grade` - Add grade to course or module](#grade---add-grade-to-course-or-module)
+        * [`goal` - Calculate how far the user is from his/her target CAP](#goal---calculate-how-far-the-user-is-from-his/her-target-CAP)  
+        * [`mc` - Prints MCs](#mc---prints-mcs)
+        * [`cap` - Prints CAPs](#cap---prints-CAPs)
+    * [`General Features`](#add---add-task-to-module)
+        * [`add` - Add task(s) to module(s)](#add---add-task-to-module)
+        * [`clear` - Clear the task list](#clear---clear-the-task-list)
+        * [`delete` - Delete a task from the task list](#delete---delete-a-task-from-the-task-list)
+        * [`edit` - Modify attributes of an item](#edit---modify-attributes-of-an-item)
+        * [`focus` - Change the context of the program](#focus---change-the-context-of-the-program)
+        * [`stats` - Prints Statistics](#stats---prints-statistics)
+        * [`help` - Print help text of the commands](#help---print-help-text-of-the-commands)
+        * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---switch-the-ui-to-the-fancy-mode-(gui-like-cli))
+        * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---switch-the-ui-to-the-plain-mode-(pure-text-cli))
+        * [`next` - Switch the target region to the next page ***(GUI mode only)***](#next---switch-the-target-region-to-the-next-page)
+        * [`prev` - Switch the target region to the previous page ***(GUI mode only)***](#prev---switch-the-target-region-to-the-previous-page)
+        * [`unknown` - Prints error message](#unknown---prints-error-message)
+        * [`bye` - Quit the program](#bye---quit-the-program)
 - [Triggering the syntax reminder](#triggering-the-syntax-reminder)
 - [FAQ](#faq)
 
@@ -63,6 +63,49 @@ create reminders, calculate and set goals for their MCs / CAPs.
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Domsun` from [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases).
+3. If you are on Mac or Linux platforms, please ignore Step 4 to Step 6. 
+4. If you are on Windows platform, we recommend using ***Windows Terminal*** instead of cmd.exe:<br>
+![windows terminal](Images/winTerm.png)
+<br>If you do not have Windows Terminal, try it out! It is fast and powerful, and enables the full features
+of ANSI text rendering by default, which our Domsun will be utilising.
+5. If you insist on using `cmd.exe` as your terminal on Windows, it also works, but you need 
+ some extra work by doing the following steps:
+    - Type `regedit` in your Search box, and click `Run as Administrator`:<br>
+    ![regedit](Images/regedit.png)
+    <br>You can use other methods
+    to open your registry editor as well.
+    - Locate `Computer\HKEY_CURRENT_USER\Console`:<br>
+    ![hkey console](Images/hkeyConsole.png)
+    - Create a new `DWORD` entry in the registry table (right click on the right) named `VirtualTerminalLevel` 
+    if it is not present yet:<br>
+    ![dword](Images/dword.png)
+    - Right click on the value you have just created, and click on **`Modify`**:<br>
+    ![dwordmod](Images/dwordMod.png)
+    - Modify the value to be `00000001`:<br>
+    ![dwdvalue](Images/dwdvalue.png)
+6. Restart your cmd.exe by closing all cmd windows and re-open cmd.
+    - *What did you just do?*
+        1. You just enabled programs opened through cmd.exe to inherit ANSI rendering options from cmd.exe, which
+        is by default off. (The ANSI rendering for cmd.exe itself is by default ***on***.)
+        1. Microsoft used to enable this inheritance option by default. It is completely harmless.
+        1. However, in recent Windows versions Microsoft decided to move this feature over to their
+        newly developed Windows Terminal (which is cross-platform and more advanced. Yes it supports Linux commands as well).
+    - *Why do you need such an option?*
+        1. ANSI escape codes are responsible for the colors and font settings in terminal applications.
+        2. That is how the `htop` in Linux shows a colored UI.
+        3. Without enabling this option, all colors and fonts will return to their original form in plain text, 
+        something like this:<br>
+        ![ansi](Images/ansicodes.png)<br>
+        4. We believe that you will be more comfortable with the option on... something like this:<br>
+        ![newui](Images/newUI.png)<br>
+    - *What if you failed to do the previous steps?*
+        1. No worries. Our Domsun starts up in plain text mode by default on Windows platform, so you will see something like this:<br>
+        ![textui](Images/textui.png)<br>
+        2. The plain ui is perfectly usable with exactly the same functionalities as the colored one.
+        3. If you have succeeded in following the previous steps, you should be able to type `fancy` command to switch
+        to the colored UI, and type `plain` command to switch back to plain text.
+        4. More on commands later :)
+7. Congratulations! You're all set!
 
 > Java 11 and above is highly recommended, although Domsun might run on a lower version.
 
@@ -81,7 +124,7 @@ $ java -jar domsun.jar
 > Note: You can also run Domsun by double clicking the `domsun.jar` file directly.
 
 ### Domsun Tutorial 
-Here is an overview of how Domsun works. It maintains 3 key lists that you should take note. 
+As a beginning, here is how Domsun works. It has 3 lists that you should take note of as shown below. (The list shown are non-exhaustive, as there are other dynamic list that are created based on the `focus` command. Do refer to focus section of this User Guide for more details). 
 ![here](Images/Overview1.PNG)
 
 1. `focus` command focuses the app onto the list of task that you currently have. 
@@ -207,7 +250,9 @@ A cheat sheet of commonly used commands:
 ### `todo` - Add a todo to the task list
 
 Typing `todo` allows the program to parse user's input and create a ***todo*** object with 
-specified *description*. It will be appended to the end of the task list.
+specified *description*. It will be appended to the end of the task list.<br>
+Note: 
+1. Todo description parameter here are compulsory.
 
 Syntax:
 
@@ -230,7 +275,9 @@ Expected outcome:
 ### `deadline` - Add a deadline to the task list
 
 Typing `deadline` allows the program to parse user's input and create a ***deadline*** object with 
-specified *description* and *time*. It will be appended to the end of the task list.
+specified *description* and *time*. It will be appended to the end of the task list. <br>
+Note: 
+1. Deadline description and time parameters here are compulsory.
 
 Syntax: 
 
@@ -261,7 +308,9 @@ Expected outcome:
 ### `event` - Add an event to the task list
 
 Typing `event` allows the program to parse user's input and create an ***event*** object with 
-specified *description* and *time*. It will be appended to the end of the task list.
+specified *description* and *time*. It will be appended to the end of the task list. <br>
+Note: 
+1. Event description and time parameters here are compulsory.
 
 Syntax:
 
@@ -290,7 +339,8 @@ The `asc` parameter tells the program to list tasks in ascending order with resp
 The `desc` parameter tells the program to list tasks in descending order with respect to their *date* field.<br>
 The `spec` parameter tells the program to only list tasks with the specified value of the *date* field.<br>
 
-Note: with each execution of the `list` command, the indices of all tasks will be 
+Note: 
+with each execution of the `list` command, the indices of all tasks will be 
 dynamically changed to refer to the task in the current list with the current indices.<br>
 In other words, indices of tasks are not tied to their sequence of creation, allowing the user
 to use commands much more flexibly, especially with the `find` command or the reordering parameters.
@@ -346,7 +396,9 @@ Expected outcome:
 ### `done` - Mark a task as done
 
 Typing `done` allows the user to mark the task at a specified *index* as **done**.<br>
-Note: *index* can be an integer number or a letter (`A` or `a` corresponds to 1).
+Note: 
+1. *index* can be an integer number or a letter (`A` or `a` corresponds to 1).<br>      
+2. If the index starts with a letter, it will be treated as a numerical value mapped A to 1 and Z to 26. For example, "done apple" is equivalent to "done 1" and "done C4" is equivalent to "done 3".
 
 Syntax:
 
@@ -369,7 +421,9 @@ Expected outcome:
 ### `undone` - Mark a task as undone
 
 Typing `undone` allows the user to mark the task at a specified *index* as **undone**.<br>
-Note: *index* can be an integer number or a letter (`A` or `a` corresponds to 1).
+Note:
+1. *index* can be an integer number or a letter (`A` or `a` corresponds to 1).<br>
+2. If the index starts with a letter, it will be treated as a number mapped A to 1 and Z to 26. For example: "undone apple" is equivalent to "undone 1" and "undone C4" is equivalent to "undone 3".
 
 Syntax:
 
@@ -425,7 +479,12 @@ Expected outcome (not found):
 ### `postpone` - Postpone a task by index
 
 Typing `postpone` delays a task specified by the user or by default a day.<br>
-Note: Option `h` for an hour. Option `w` for a week. Option `y` for a year.
+Note: 
+1. Option `h` for an hour. Option `w` for a week. Option `y` for a year.<br>
+2. The tasks should consists of date type i.e. events or deadline tasks, does not work on todo tasks.<br>
+3. Each postpone delays the tasks by a day, an hour, a week or a year.<br>
+4. Does not work with custom date unless you have updated the task with the preferred date format.<br>
+5. When letter appears without a number as its parameter, the letter will be treated as a numeric value mapped A to 1 and Z to 26. For example, "postpone boy" is equivalent to "postpone 2" and "postpone h" is equivalent to "postpone 8".<br>
 
 Syntax:
 
@@ -488,7 +547,8 @@ Expected outcome:
 ### `reminder` - Print tasks that are due soon
 
 Typing `reminder` prints the tasks that are due within a certain time range or to activate the reminder.<br>
-Note: The reminder popup is set by default to emerge every 5 minutes.  
+Note: 
+The reminder popup is set by default to emerge every 5 minutes.  
 
 Syntax:
 
@@ -536,6 +596,10 @@ Expected outcome:
 ### `snooze` - Delays reminder popup
 
 Typing `snooze` delays reminder popup by a default of 1 minute.
+The reminder popup will remind in every 6 minutes.<br>
+Note: 
+1. No additional parameter needed.<br>
+2. If there is parameter, you should expect "Invalid Command" message.
 
 Syntax:
 
@@ -558,7 +622,10 @@ Expected outcome:
 
 ### `take` - Take module
 
-Typing `take` marks specified module(s) as taken.
+Typing `take` marks specified module(s) as taken.<br>
+Note: 
+1. Index must be a positive integer referencing an existing item on the current list.<br>
+2. Module code must be a legitimate NUS module.
 
 Syntax:
 
@@ -580,8 +647,11 @@ Expected outcome:
 
 ### `untake` - Untake module
 
-Typing `untake` marks specified module(s) as not taken.
-
+Typing `untake` marks specified module(s) as not taken.<br>
+Note: 
+1. Index must be a positive integer referencing an existing item.<br>
+2. If modules that is not taken is input, module will still be marked as "no longer taken".
+      
 Syntax:
 
 `untake [index(es) / module code(s) (for modules only)]`
@@ -690,7 +760,11 @@ Expected outcome:
 
 ### `grade` - Add grade to course or module
 
-Typing `grade` allows the user to add grade to the user's taken course or module.
+Typing `grade` allows the user to add grade to the user's taken course or module.<br>
+Note: 
+1. Modules need to be "taken" first before grade is applied.<br>
+2. Grade and module code/index are compulsory parameters.<br>
+3. Grade and module code need to be acceptable grade and module in NUS. For example: If "grade CS2113 Z" or "grade CS9999 A" is input, error message will be displayed.
 
 Syntax:
 
@@ -729,7 +803,11 @@ Expected outcome:
 
 ### `goal` - Calculate how far the user is from his/her target CAP
 
-Typing `goal` allows the user to calculate how far the user is from his/her target CAP.
+Typing `goal` allows the user to calculate how far the user is from his/her target CAP.<br>
+Note: 
+1. All values on the parameters should be a positive integer. Otherwise you should expect an error message.<br>
+2. Both total MC and target CAP are compulsory parameters.<br>
+3. CAP values need to be within 0 to 5.
 
 Syntax:
 
@@ -762,7 +840,12 @@ Expected outcome:
 
 ### `mc` - Prints MCs
 
-Typing `mc` prints the number of MCs based on selected option. By default, this command focuses on the entire module list. In order to print the MC of taken modules, do remember to enter 'focus taken' before proceeding with this command. 
+Typing `mc` prints the number of MCs based on selected option. 
+By default, this command focuses on the entire module list. In order to print the MC of taken modules, 
+do remember to enter 'focus taken' before proceeding with this command. <br>
+Note: 
+1. Default mc command prints the total mc that exist in the taken list of module.<br>
+2. To print out a detailed list of mc belonging to the taken modules, ensure you have entered "focus taken". 
 
 Syntax:
 
@@ -800,7 +883,10 @@ Expected outcome:
 
 ### `cap` - Prints CAPs
 
-Typing `mc` prints the calculated CAP for courses based on selected option.
+Typing `mc` prints the calculated CAP for courses based on selected option.<br>
+Note: 
+1. Index should be a positive integer. Otherwise you should expect an "invalid command" error message.<br>
+2. You must reference existing tasks or modules when using this command. For example: If "list" shows only 2 tasks but you try to use "-task 3" as a parameter for "add", you should expect an "index out of range" error message because "3" is out of range for your task list. Similarly, if there is no mod called CS9999 in the module list and you try to use "-mod CS9999" as a parameter for "add", you should expect a "not found" error message.
 
 Syntax:
 
@@ -835,7 +921,12 @@ Expected outcome:
 
 ### `add` - Add task to module
 
-Typing `add` adds specified task(s) to specified module(s).
+Typing `add` adds specified task(s) to specified module(s).<br>
+Note: 
+1. Index should be a positive integer. Otherwise you should expect an "invalid command" error message.<br>
+2. You must reference EXISTING tasks or modules when using this command. For example: If "list" shows only 2 tasks but you try to use "-task 3" as a parameter for "add", you should expect an "index out of range" error message because "3" is out of range for your task list. Similarly, if there is no mod called CS9999 in the module list and you try to use "-mod CS9999" as a parameter for "add", you should expect a "not found" error message.<br>
+3. Both parameters here (i.e. task and mod) are compulsory.<br>
+4. Once a task is added to a module, it is unlinked from the task list.
 
 Syntax:
 
@@ -857,7 +948,10 @@ Expected outcome:
 
 ### `clear` - Clear the task list
 
-Typing `clear` results in the program deleting all added tasks from the task list.
+Typing `clear` results in the program deleting all added tasks from the task list.<br>
+Note: 
+1. "clear fancy" can only be used in fancy UI mode.<br>
+2. Extra inputs after "clear" will get an "invalid command" error unless it contains the word "fancy" (case insensitive). For example: "clear domsun" results in an "invalid command" error. If "clear fancy domsun" is input in, "domsun" will be ignored and "clear fancy" will be executed. If "clear MyFancyBoy" is input in, "clear fancy" will be executed.
 
 Example of usage: 
 
@@ -874,7 +968,9 @@ Expected outcome:
 ### `delete` - Delete a task from the task list
 
 Typing `delete` deletes the task with specified *index* from the current task list.<br>
-Note: *index* can be an integer number or a letter (`A` or `a` corresponds to 1).
+Note: 
+1. *index* should be an integer number or a letter (`A` or `a` corresponds to 1). Otherwise you should expect an error message.<br>
+2. You must reference EXISTING tasks when using this command. For example: If "list" shows only 2 tasks but you try to use "delete 3", you should expect an "index out of range" error message because "3" is out of range for your task list.
 
 Syntax:
 
@@ -893,7 +989,13 @@ Expected outcome:
 
 ### `edit` - Modify attributes of an item
 
-Typing `edit ` modifies the attributes of an task or module
+Typing `edit ` modifies the attributes of an task or module. <br>
+Note: 
+1. Fields for "-task" include "description", "type", "selected", "weekly" and "done".<br>
+2. Fields for "-mod" include "grade", "su", "selected" and "taken".<br>
+3. No space allowed around the "=" sign. Use "_" in for spaces in "[field=new_value]" parameters.<br>
+4. Modules and task referenced need to exist.<br>
+5. Removing a specified linked task from the module does not delete the task from the task list.
 
 Syntax:
 
@@ -1007,7 +1109,10 @@ Expected outcome:
 
 ### `stats` - Prints Statistics
 
-Typing `stats` prints the percentage of the task completed.
+Typing `stats` prints the percentage of the task completed.<br>
+Note: 
+1. Module entered should exist. Otherwise you should expect an "Module Not Found" error message.<br>
+2. If the command entered is stats alone, ensure that you are focusing on task by typing "focus".
 
 Syntax:
 
@@ -1113,7 +1218,9 @@ Expected outcome:
 
 Typing `fancy` switches the UI to the fancy mode (GUI-like CLI interface).<br>
 This command has no effect if the UI is already in fancy mode.<br>
-The fancy mode only shows correctly if your terminal supports ansi escape codes.
+The fancy mode only shows correctly if your terminal supports ansi escape codes.<br>
+Note: 
+1. This feature can be used on Linux or Mac only. Error numbers will be displayed on Windows.
 
 Syntax:
 
@@ -1132,7 +1239,9 @@ the UI switches to fancy mode (GUI-like CLI interface).
 
 Typing `plain` switches the UI to the plain mode (pure-text CLI interface). <br>
 This command has no effect if the UI is already in plain mode.<br>
-The plain mode shows correctly on all terminals.
+The plain mode shows correctly on all terminals.<br>
+Note: 
+1. Extra inputs after "plain" will be ignored. For example: If "plain bye" is input in, "bye" will be ignored and "plain" will be executed.
 
 Syntax:
 
@@ -1150,7 +1259,9 @@ The UI switches to plain mode (pure-text CLI interface).
 ### `next` - Switch the target region to the next page
 
 Typing `next` switches the target region to the next page, should a next page exist.<br>
-This command has no effect on pure text CLI mode.
+This command has no effect on pure text CLI mode.<br>
+Note: 
+1. This function should be used in FANCY UI only.
 
 Syntax:
 
@@ -1177,7 +1288,9 @@ The item list region (top) of the GUI is switched to the next page if a next pag
 ### `prev` - Switch the target region to the previous page
 
 Typing `prev` switches the target region to the previous page, should a previous page exist.<br>
-This command has no effect on pure text CLI mode.
+This command has no effect on pure text CLI mode.<br>
+Note: 
+1. This function should be used in FANCY UI only.
 
 Syntax:
 
@@ -1208,7 +1321,8 @@ Typing `unknown` or any string that is not a command will trigger the `unknown` 
 The `unknown` command prints an error message for debug purposes, it is also the default behaviour of the program
 when it fails to recognize the user's command. <br>
 
-Note: If the program recognizes the command successfully, yet fails to find required parameters, 
+Note: 
+If the program recognizes the command successfully, yet fails to find required parameters, 
 it will not trigger this `unknown` command. It will print a syntax error and remind the user of
 the correct syntax instead.
 
@@ -1232,7 +1346,9 @@ Expected outcome:
 
 Typing `bye` results in the program saving the current task list to a local file named 
 `./data/duke.txt`, and then quitting the program.
-
+Note: 
+1. Extra inputs after "bye" will be ignored. For example: If "bye domsun" is input in, "domsun" will be ignored and "bye" will be executed.
+         
 Example of usage: 
 
 `bye`

@@ -8,7 +8,6 @@ import java.util.TimerTask;
 
 
 import command.Command;
-import command.action.RemindAction;
 import command.action.ReminderAction;
 import command.action.SnoozeAction;
 import constants.Constants;
@@ -60,7 +59,7 @@ public class Domsun {
         }
     }
 
-    //@@author: johanesrafael
+    //@@author johanesrafael
     /**
      * Make Reminder scheduler.
      * @param delay     the delay
@@ -80,7 +79,7 @@ public class Domsun {
 
                     }
                 }, delay, Integer.parseInt(interval));
-            } else {
+            } else if (interval.equals(Constants.NEW_REMINDER_INTERVAL)) {
                 timer.cancel();
                 timer = new Timer();
                 timer.schedule(new TimerTask() { // when it is snoozed
@@ -116,6 +115,7 @@ public class Domsun {
         // boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
         // new Domsun(!isWindows, System.out, System.in, Constants.PATH,
         //        Constants.TASK_FILENAME, Constants.COURSE_FILENAME).run();
+
     }
 
     //@@author TomLBZ
@@ -136,8 +136,10 @@ public class Domsun {
      * Run.
      */
     public void run() {
-        // schedule reminder every 1 minutes
+        //@@author johanesrafael
+        // schedule reminder every 6 minutes
         reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
+        //@@author
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -148,14 +150,12 @@ public class Domsun {
                     reattachUI(c.isFancy(), c.isPlain());
                     ui.update(c.result, data);
                     isExit = c.isBye();
+                    //@@author johanesrafael
                     boolean isSnoozed = c.isSnoozed();
-                    boolean isRemind = c.isRemind();
                     if (isSnoozed) {
                         snoozeReminder();
                     }
-                    if (isRemind) {
-                        setReminderSchedule();
-                    }
+                    //@@author
                     if (isExit) {
                         // stops timer
                         timer.cancel();
@@ -172,14 +172,6 @@ public class Domsun {
         }
     }
 
-    //@@author: johanesrafael
-    /**
-     * Set reminder schedule.
-     */
-    public void setReminderSchedule() {
-        String schedule = new RemindAction().getSchedule();
-        reminderTimer(Constants.REMINDER_DELAY, schedule);
-    }
 
     //@@author: johanesrafael
     /**

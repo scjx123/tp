@@ -1,3 +1,5 @@
+//@@author adinata15
+
 package command.action;
 
 import constants.Constants;
@@ -22,6 +24,27 @@ class TaskActionTest {
         assertAll("McActionTest",
             () -> assertEquals(expectedOutput, domsun.testSut(testCustomInputsCommand, true, true),
                 "Clear fails")
+        );
+    }
+
+    @Test
+    public void actDelete_normalCase_deleteResponseMessage() {
+        domsun.testSut("clear", true, false);
+        domsun.testSut("todo eat ice cream", true, false);
+        domsun.testSut("deadline eat -by Tuesday", true, false);
+        String[] expectedOutput = {
+            "Noted. I've removed this task:\r\n"
+                + "[T][X] eat ice cream\r\n"
+                + "Now you have 1 tasks in the list.",
+
+            "Index out of range. Index must be a positive integer referencing an existing item.\r\n"
+        };
+        String[] testCustomInputsCommand = {"delete 1", "delete 10"};
+        assertAll("Delete action test",
+            () -> assertEquals(expectedOutput[0], domsun.testSut(testCustomInputsCommand[0], true, true),
+                "Normal input"),
+            () -> assertEquals(expectedOutput[1], domsun.testSut(testCustomInputsCommand[1], true, true),
+                "Out of bound")
         );
     }
 

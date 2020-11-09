@@ -1,4 +1,4 @@
-//@@author: johanesrafael
+//@@author johanesrafael
 
 package command.action;
 
@@ -39,6 +39,9 @@ public class PostponeAction extends Action {
     @Override
     public void prepare(ParamNode args) throws Exception {
         super.prepare(args);
+        if (args.thisData == null) {
+            throw new CommandException();
+        }
         String[] param = args.thisData.toFlatString().split(" ");
         if (param.length == 1) {
             index = getIndex(args.thisData.name);
