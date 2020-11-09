@@ -13,7 +13,7 @@ create reminders, calculate and set goals for their MCs / CAPs.
   * [Installation](#installation)
   * [Running the program](#running-the-program)
   * [Domsun Tutorial](#domsun-tutorial)
-- [Features](#features)
+- [General Functions](#general-functions)
 - [Command Summary](#command-summary)
     * [`Daily Tasks`](#daily-tasks)
     * [`Module Planner`](#module-planner)
@@ -136,12 +136,20 @@ As a beginning, here is how Domsun works. It has 3 lists that you should take no
 7. Note that `detail 2` here will display different results as the two indices of 2 represent different modules! The one on the left represents CG2027 while the one on the right represent CS1010. 
 
 **A point to note before venturing into the libraries of commands that we have.**<br>
-You can switch between fancy mode display, and plain display anytime during the program. 
+- For each feature syntax, each type of symbols represent different explanation of the syntax.<br>
+    - The square bracket (`[]`) represents parameters. Do **not** type this in when using the feature. For example:<br>
+    In `help [target]`, `help` feature has `target`, the target action to be explained, as its parameter. For optional parameter, alternate use of the command is given on the `Notes` section of help text from `help`.
+    - The round bracket (`()`) represents additional explanation of the parameter. For example:<br>
+    In `detail [module code (for modules only) / index]`, `for modules only` is simply further explanation of the `module code` parameter. Usage example refer to help text from `help` feature.
+    - The three dots (`...`) represents that the parameter can be linked/chained together infinitely. For example:<br>
+    In `grade [index / code (for modules only)] [letter grade] ...`, `grade` can be followed by continuous list of `[index / code (for modules only)] [letter grade]`.  Usage example refer to help text from `help` feature.
+    
+- You can switch between fancy mode display, and plain display anytime during the program. 
 During `list` command, you will be able to toggle between pages of fancy by using `prev` and `next`
 However, the current version of fancy mode is still in beta, hence, it is expected to not be able to fully display certain commands that are too long. such as `help`, `detail`,`mc` etc. Do look forward to the next update!
 ![here](Images/Overview2.PNG)
 
-## Features 
+## General Functions 
 
 ### Addition and removal of tasks
 The program allows user to add or delete tasks from the task list.<br>
@@ -158,13 +166,6 @@ The program also allows the user to filter the task list and only display tasks 
 The program allows users to create 3 different kinds of tasks, *deadlines*, *events*, and *todos*.<br>
 *deadline* and *event* consists of both *description* and *time*, while *todo* does not contain *time*.<br>
 The *time* field consists of a *date* part (such as `Oct 13 1998`), and a *time* part (such as `00:00`).<br>
-
-### Fuzzy parsing
-The program fuzzily parses user's inputs with respect to date and time.<br>
-Supports any date format delimited by `" "`, `-` and `/`, with days, months and years in any order, such as 
-`"Oct 13 1998"`, `13/10/1998` and `1998-10-13`.<br>
-Supports any time format delimited by `:` in 1 or 2 digits, such as
-`1:1:0`, `01:01:00`, `1:01` and `01:1`. Does not support the notations "am" or "pm".
 
 ### Auto-save and auto-load
 The program saves the tasks list automatically every time the list changes. <br>
