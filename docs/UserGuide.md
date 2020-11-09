@@ -906,7 +906,7 @@ Expected outcome:
    ```
 Example of usage (when there are modules in the target): 
 
-`cap -m CS2113 A CS1010 B`
+`cap CS2113 A CS1010 B`
 
 Expected outcome:
 
@@ -982,11 +982,11 @@ Example of usage:
 
 Expected outcome:
 
-    ```
+    
     ____________________________________________________________
         
     ____________________________________________________________
-    ```  
+      
 
 ### `edit` - Modify attributes of an item
 
