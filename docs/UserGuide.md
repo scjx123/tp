@@ -502,7 +502,7 @@ Expected outcome:
         I've postpone this task:
         [D][X] project submission (by: Sep 16 2021 01:12)
     ____________________________________________________________
-    ```
+    
 
 Example of usage:
 
@@ -515,7 +515,7 @@ Expected outcome:
         I've postpone this task:
         [D][X] project submission (by: Sep 16 2021 02:12)
     ____________________________________________________________
-    ```
+    
 
 Example of usage:
 
@@ -528,7 +528,7 @@ Expected outcome:
         I've postpone this task:
         [D][X] project submission (by: Sep 23 2021 02:12)
     ____________________________________________________________
-    ```
+    
 
 Example of usage:
 
@@ -541,7 +541,7 @@ Expected outcome:
         I've postpone this task:
         [D][X] project submission (by: Sep 23 2022 02:12)
     ____________________________________________________________
-    ```
+    
 
 
 ### `reminder` - Print tasks that are due soon
@@ -615,7 +615,7 @@ Expected outcome:
     __________________________________________________________________________
         I've snoozed the reminder for 1 minute. Will remind you in 6 minutes.
     __________________________________________________________________________    
-    ```
+    
 
 
 ## Features - Module Planner 
@@ -1010,12 +1010,10 @@ Example of usage:
 
 Exepected outcome:
     
-    ```
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         grade=A; 
     ____________________________________________________________
-    ```
 
 Example of usage:
 `edit -task 1 description=do_homework`
@@ -1023,7 +1021,6 @@ Example of usage:
 Expected outcome:
     
     
-    ```
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         description=do homework; 
@@ -1033,14 +1030,12 @@ Expected outcome:
         Here is the list of items:
         1.[T][X] do homework
         2.[T][X] blah
-    ```
 
 Example of usage:
 `edit -task 1 type=event`
     
 Expected outcome:
     
-    ```
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         type=event; 
@@ -1051,14 +1046,12 @@ Expected outcome:
         1.[E][X] do homework (at: Jan 01 2021 00:00)
         2.[T][X] blah    
 
-    ```
 
 Example of usage:
 `edit -mod CS2113 grade=A -task 1 description=do_homework type=event`
 
 Expected outcome:
 
-    ```
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         grade=A; 
@@ -1069,7 +1062,6 @@ Expected outcome:
         Here is the list of items:
         1.[E][X] do homework (at: Jan 01 2021 00:00)
         2.[T][X] blah
-    ```
 
 
 
