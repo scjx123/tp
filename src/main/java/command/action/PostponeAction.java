@@ -1,4 +1,4 @@
-//@@author: johanesrafael
+//@@author johanesrafael
 
 package command.action;
 
