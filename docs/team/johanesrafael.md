@@ -58,9 +58,9 @@ Highlights: The first implementation of this command affected existing commands 
 
 ### 2.2 Contributions to UG: 
 Filled up the following: [Features Notes](https://github.com/AY2021S1-CS2113-T13-2/tp/pull/302/commits/3e8b227b25d479d2318e4123e859eea179e0e9c1), [Snooze](https://github.com/AY2021S1-CS2113-T13-2/tp/pull/254/files), [Postpone](https://github.com/AY2021S1-CS2113-T13-2/tp/pull/254/files), [Reminder](https://github.com/AY2021S1-CS2113-T13-2/tp/pull/254/commits/ee660f51f5d00c0bc319cc9a6e0529860b11c183).
-{include some extracts from the document here}
+
 ### 2.3 Contributions to DG:
-Created the following: [Postpone](https://github.com/AY2021S1-CS2113-T13-2/tp/pull/179/files), [Snooze](https://github.com/AY2021S1-CS2113-T13-2/tp/pull/210/commits/71648f59e06871760376f7df811aea4dced64d5f), [Snooze](https://github.com/AY2021S1-CS2113-T13-2/tp/commit/fd2f42a35c72814287a7456069e234cf3b8e36f8), [Focus](https://github.com/AY2021S1-CS2113-T13-2/tp/commit/2d32787c08255977dbe9dea2d8ff7f22ed4457d3)
-{include some extracts from the document here}
+Created the following: [Postpone](https://github.com/AY2021S1-CS2113-T13-2/tp/pull/179/files), Snooze([#210](https://github.com/AY2021S1-CS2113-T13-2/tp/pull/210/commits/71648f59e06871760376f7df811aea4dced64d5f) and [direct commit](https://github.com/AY2021S1-CS2113-T13-2/tp/commit/fd2f42a35c72814287a7456069e234cf3b8e36f8)), [Focus](https://github.com/AY2021S1-CS2113-T13-2/tp/commit/2d32787c08255977dbe9dea2d8ff7f22ed4457d3)
+
 ### 2.4 Contributions to team-based tasks: 
 Set up the GitHub team organization and repository, monitored repository, co-created milestones and proposed [issues](https://github.com/AY2021S1-CS2113-T13-2/tp/issues?q=is%3Aissue+is%3Aclosed+author%3Ajohanesrafael). Updated [User Guide](https://github.com/AY2021S1-CS2113-T13-2/tp/blob/master/docs/UserGuide.md) documents and [HelpText](https://github.com/AY2021S1-CS2113-T13-2/tp/pull/302/files) class.
