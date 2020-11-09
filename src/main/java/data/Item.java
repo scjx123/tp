@@ -9,6 +9,8 @@ import data.jobs.Task;
 import data.jobs.ToDo;
 import exceptions.CommandException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -55,6 +57,11 @@ public class Item {
      */
     public Item(String description) {
         this.description = description;
+    }
+
+    public String getStringFromDateTime(LocalDateTime dateTime) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        return dateFormat.format(dateTime);
     }
 
     /**
@@ -227,7 +234,10 @@ public class Item {
      * Re-set date time.
      * @param opt option input
      */
-    public void resetDateTime(String opt) {
+    public void resetDateTime(String opt) throws Exception {
+        if (dateTime == null) {
+            throw new Exception(Constants.CANNOT_MODIFY_CUSTOM_DATE);
+        }
         switch (opt) {
         case "d":
             dateTime = dateTime.plusDays(1);
@@ -245,7 +255,7 @@ public class Item {
             dateTime = dateTime.plusYears(1);
             break;
         default:
-            break;
+            throw new CommandException();
         }
     }
 

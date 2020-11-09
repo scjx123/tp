@@ -89,6 +89,7 @@ public class Cli extends UI {
             if (replay == null || replay.equals(Constants.ZERO_LENGTH_STRING)) {
                 showWelcome();
             } else {
+                replay = "Keeping last output: " + replay;
                 showListText(replay, replayOption);
             }
             freshlySwitched = false;
@@ -98,9 +99,11 @@ public class Cli extends UI {
             showText(Constants.ZERO_LENGTH_STRING);
         } else if (wrappedInput.contains(Constants.BMP_LIST_SWITCH)
                 || wrappedInput.contains(Constants.BMP_SEL_SWITCH)) {
-            if (!data.lastInput.equals(Constants.ZERO_LENGTH_STRING)) {
-                showListText(data.lastInput, data.lastIndexOption);
-            }
+            data.lastInput = Constants.FANCY_ONLY;
+            showText(Constants.FANCY_ONLY);
+        } else if (wrappedInput.contains(Constants.FANCY_CLEARED)) {
+            data.lastInput = Constants.FANCY_ONLY;
+            showText(Constants.FANCY_ONLY);
         } else {
             showListText(wrappedInput, data.indexOption);
             data.lastInput = wrappedInput;

@@ -5,6 +5,8 @@ package data.jobs;
 import constants.Constants;
 import data.Item;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -16,6 +18,7 @@ public class Task extends Item {
      * The Is done.
      */
     protected boolean isDone;
+    protected String timeString;
 
     /**
      * Instantiates a new Task.
@@ -31,6 +34,9 @@ public class Task extends Item {
         isWeekly = false;
     }
 
+    public void setTimeString(String input) {
+        timeString = input;
+    }
 
     /**
      * Gets description of the task.

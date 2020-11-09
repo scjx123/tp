@@ -21,6 +21,7 @@ import command.action.GoalAction;
 import command.action.GradeAction;
 import command.action.HelpAction;
 import command.action.ListAction;
+import command.action.LoadLinkedTasksAction;
 import command.action.McAction;
 import command.action.NextAction;
 import command.action.PlainAction;
@@ -143,6 +144,7 @@ public class Constants {
      * The constant DETAILS_SIGNATURE.
      */
     public static final String DETAILS_SIGNATURE = ": ";
+    public static final String COMMA = ",";
     /**
      * The constant TICK.
      */
@@ -195,7 +197,7 @@ public class Constants {
     /**
      * The constant NOT_FOUND.
      */
-    public static final String NOT_FOUND = "Your specified item is not found in the current list.";
+    public static final String NOT_FOUND = "Your specified item is not found in the current list." + WIN_NEWLINE;
 
     /**
      * The constant PATH.
@@ -254,6 +256,7 @@ public class Constants {
      * The constant FIND.
      */
     public static final String FIND = "find";
+    public static final String LOAD = "load";
     /**
      * The constant FOCUS.
      */
@@ -403,12 +406,17 @@ public class Constants {
     public static final String NOTES = "Notes:";
     public static final String SAVE_CORRUPTED = "The save file is corrupted. Let's start afresh!";
     public static final String PAGED = "Try \"next\" or \"prev\" to flip pages for the region below!";
-    public static final String TEXT_HEADER = "Current Page for Text Below:";
+    public static final String TEXT_HEADER = "Current Page:";
     /**
      * The constant INDEX_OUT.
      */
     public static final String INDEX_OUT = "Index out of range. Index must be a positive integer referencing "
             + "an existing item." + WIN_NEWLINE;
+    /**
+     * The constant CANNOT_MODIFY_CUSTOM_DATE.
+     */
+    public static final String CANNOT_MODIFY_CUSTOM_DATE = "Can not modify the custom date. Please edit the date or "
+            + "select the task which its date is in the preferred format. Then try again." + WIN_NEWLINE;
     /**
      * The constant NO_DESCRIPTION.
      */
@@ -428,7 +436,8 @@ public class Constants {
     /**
      * The constant NOT_COMPLETABLE.
      */
-    public static final String NOT_COMPLETABLE = "Grade is invalid or module is not yet taken: ";
+    public static final String NOT_COMPLETABLE = "Invalid grade or Module not taken / completed already: ";
+    public static final String FANCY_CLEARED = "I have cleared the text region for the fancy UI.";
     /**
      * The constant ADDED.
      */
@@ -465,6 +474,8 @@ public class Constants {
      * The constant DUPLICATED_TASK.
      */
     public static final String DUPLICATED_TASK = "Duplicated Task was found. Task not added" + WIN_NEWLINE;
+    public static final String FANCY_ONLY = "This command should be used in FANCY UI only!" + WIN_NEWLINE;
+    public static final String ONLY_ONE_PAGE = "You cannot toggle pages when there is only 1 page!" + WIN_NEWLINE;
     /**
      * The constant WELCOME.
      */
@@ -507,6 +518,9 @@ public class Constants {
      */
     public static final String[] TAKEN_ALIAS = {"taken", "take", "took", "taking", "istake", "istaken", "istaking",
         "t"};
+    public static final String[] TASK_ALIAS = {"task", "tasks", "linked", "linkedtask", "linkedtasks", "l", "tsk",
+        "tsks", "link", "links", "assigned", "assignedtasks", "assignments", "due", "dues", "stuff", "things", "thing",
+        "del", "delete", "remove"};
     /**
      * The constant DESCRIPTION_ALIAS.
      */
@@ -580,7 +594,8 @@ public class Constants {
     /**
      * The constant NO_OPERATION_POSSIBLE.
      */
-    public static final String NO_OPERATION_POSSIBLE = "No operations possible." + WIN_NEWLINE;
+    public static final String NO_OPERATION_POSSIBLE = "No operations possible. Did you provide parameters correctly?"
+        + WIN_NEWLINE;
 
     /**
      * The constant NO_TASK_TYPE.
@@ -697,7 +712,7 @@ public class Constants {
     /**
      * The constant INIT_SEL.
      */
-    public static final String INIT_SEL = "This is the selection list.";
+    public static final String INIT_SEL = "This is the text region. It displays all information except the item list.";
     /**
      * The constant BMP_LIST_SWITCH.
      */
@@ -771,7 +786,10 @@ public class Constants {
      * The constant REMINDER_INTERVAL.
      */
     public static final String REMINDER_INTERVAL = "300000";
-
+    /**
+     * The constant NEW_REMINDER_INTERVAL.
+     */
+    public static final String NEW_REMINDER_INTERVAL = "360000";
     /**
      * The constant REMINDER_DELAY.
      */
@@ -794,6 +812,7 @@ public class Constants {
         Map.entry(HELP, new HelpAction()),
         Map.entry(GRADE, new GradeAction()),
         Map.entry(LIST, new ListAction()),
+        Map.entry(LOAD, new LoadLinkedTasksAction()),
         Map.entry(FOCUS, new FocusAction()),
         Map.entry(REMINDER, new ReminderAction()),
         Map.entry(POSTPONE, new PostponeAction()),
@@ -833,6 +852,7 @@ public class Constants {
         Map.entry(HELP, HelpText.HELP),
         Map.entry(GRADE, HelpText.GRADE),
         Map.entry(LIST, HelpText.LIST),
+        Map.entry(LOAD, HelpText.LOAD),
         Map.entry(TODO, HelpText.TODO),
         Map.entry(UNDONE, HelpText.UNDONE),
         Map.entry(UNKNOWN, HelpText.UNKNOWN),
@@ -898,9 +918,10 @@ public class Constants {
             Map.entry(CAP, "Calculate cap on specified modules:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
             Map.entry(HELP, TEXT_PLACEHOLDER),
             Map.entry(LIST, TEXT_PLACEHOLDER),
+            Map.entry(LOAD, TEXT_PLACEHOLDER),
             Map.entry(TODO, ADDED + CHANGED),
             Map.entry(UNDONE, "Nice! I've marked this task as undone:" + WIN_NEWLINE + TEXT_PLACEHOLDER),
-            Map.entry(UNKNOWN, "OOPS, I don't know what that means :-( Try \"help\"!"),
+            Map.entry(UNKNOWN, "OOPS, I don't know what that means :-(" + WIN_NEWLINE + "Try \"help\"!"),
             Map.entry(PREV, TEXT_PLACEHOLDER),
             Map.entry(NEXT, TEXT_PLACEHOLDER),
             Map.entry(FANCY, FANCY),

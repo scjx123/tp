@@ -34,7 +34,7 @@ public class EditAction extends Action {
             operations = new ArrayList<>();
         }
 
-        public void normalOperation(boolean isMod, String input) {
+        public void normalOperation(boolean isMod, String input) throws Exception {
             this.isMod = isMod;
             boolean isNumeric = isNumeric(input);
             if (isNumeric) {
@@ -46,12 +46,14 @@ public class EditAction extends Action {
             } else {
                 if (isMod) {
                     modCode = input.trim();
+                } else {
+                    throw new Exception("A task must be referenced by an index!" + Constants.WIN_NEWLINE);
                 }
             }
             operations = new ArrayList<>();
         }
 
-        public Operation(boolean isMod, ArrayList<String> strings) {
+        public Operation(boolean isMod, ArrayList<String> strings) throws Exception {
             if (strings == null || strings.size() == 0) {
                 this.defaultOperation();
             }
@@ -59,6 +61,9 @@ public class EditAction extends Action {
             String input = strings.get(0);
             strings.remove(0);
             normalOperation(isMod, input);
+            if (strings.size() == 0) {
+                throw new Exception(Constants.NO_OPERATION_POSSIBLE);
+            }
             operations.addAll(strings);
         }
 
@@ -77,7 +82,7 @@ public class EditAction extends Action {
             return isNum;
         }
 
-        public Item operate(Item item) {
+        public Item operate(Item item) throws Exception {
             if (isMod && item instanceof SingleModule) {
                 return operateMod((SingleModule) item);
             } else {
@@ -85,54 +90,99 @@ public class EditAction extends Action {
             }
         }
 
-        private SingleModule operateMod(SingleModule mod) {
-            StringBuilder builder = new StringBuilder();
+        private SingleModule operateMod(SingleModule mod) throws Exception {
+            StringBuilder builder = new StringBuilder("Working on Module: " + mod.moduleCode + Constants.WIN_NEWLINE);
+            mod.immediateData = null;
             if (!mod.isCompleted) {
                 for (String operation : operations) {
                     String op = operation.replace(Constants.LINE_UNIT, Constants.SPACE).trim();
                     boolean operated = true;
                     if (op.contains(Constants.EQUALS)) {
                         String[] split = op.split(Constants.EQUALS);
+                        if (split.length != 2) {
+                            throw new Exception("Space are not allowed in the \"field=new_value\" parameter!"
+                                    + Constants.WIN_NEWLINE);
+                        }
                         split[0] = split[0].toLowerCase();
                         if (Arrays.stream(Constants.GRADE_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                            mod.grade = split[1].toUpperCase();
+                            boolean isBroken = false;
+                            if (split[1].length() >= 1) {
+                                String tmpGrade = split[1].toUpperCase().substring(0, Math.min(2, split[1].length()));
+                                for (String grade : Constants.VALID_GRADES) {
+                                    if (grade.equals(tmpGrade)) {
+                                        mod.grade = tmpGrade;
+                                        isBroken = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!isBroken) {
+                                StringBuilder validBuilder = new StringBuilder();
+                                for (String grade : Constants.VALID_GRADES) {
+                                    validBuilder.append(grade).append(Constants.SPACE);
+                                }
+                                String validGrades = validBuilder.toString();
+                                throw new Exception("Grade must be one of [" + validGrades + "]!"
+                                        + Constants.WIN_NEWLINE);
+                            }
                             mod.isTaken = true; // must be taken in order to have a grade
+                            op = split[0] + Constants.SPACE + Constants.EQUALS + Constants.SPACE + mod.grade
+                                    + " AND taken = true;" + Constants.WIN_NEWLINE
+                                    + "(The module must be taken in order to have a grade)";
                         } else if (Arrays.stream(Constants.SU_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                            mod.moduleSU = split[1];
+                            if (split[1].contains("s")) {
+                                mod.moduleSU = "S";
+                            } else {
+                                mod.moduleSU = "U";
+                            }
+                            op = split[0] + Constants.SPACE + Constants.EQUALS + Constants.SPACE + mod.moduleSU;
                         } else if (Arrays.stream(Constants.SELECTED_ALIAS).anyMatch(s -> s.equals(split[0]))) {
                             mod.isSelected = split[1].toLowerCase().contains("t");
+                            op = split[0] + Constants.SPACE + Constants.EQUALS + Constants.SPACE + mod.isSelected;
                         } else if (Arrays.stream(Constants.TAKEN_ALIAS).anyMatch(s -> s.equals(split[0]))) {
                             mod.isTaken = split[1].toLowerCase().contains("t");
+                            op = split[0] + Constants.SPACE + Constants.EQUALS + Constants.SPACE + mod.isTaken;
+                        } else if (Arrays.stream(Constants.TASK_ALIAS).anyMatch(s -> s.equals(split[0]))) {
+                            mod.immediateData = split[1];
                         } else {
+                            builder.append("\"").append(op).append("\" is not a valid operation on module ")
+                                    .append(mod.moduleCode).append(", and is skipped.").append(Constants.WIN_NEWLINE);
                             operated = false;
                         }
                     } else {
                         operated = false;
+                        builder.append("\"").append(op).append("\" is not a valid operation on module ")
+                                .append(mod.moduleCode).append(", and is skipped.").append(Constants.WIN_NEWLINE);
                     }
                     if (operated) {
-                        builder.append(op).append(Constants.CMD_END).append(Constants.SPACE);
+                        builder.append(mod.moduleCode).append(": ").append(op)
+                                .append(Constants.CMD_END).append(Constants.WIN_NEWLINE);
                     }
                 }
             }
             operationResult = builder.toString();
             if (operationResult.length() == 0) {
-                operationResult = Constants.NO_OPERATION_POSSIBLE;
+                throw new Exception(Constants.NO_OPERATION_POSSIBLE);
             }
             return mod;
         }
 
-        private Task operateTask(Task task) {
-            StringBuilder builder = new StringBuilder();
+        private Task operateTask(Task task) throws Exception {
+            StringBuilder builder = new StringBuilder("Working on Task: " + task.toString() + Constants.WIN_NEWLINE);
             for (String operation : operations) {
                 String op = operation.replace(Constants.LINE_UNIT, Constants.SPACE).trim();
                 boolean operated = true;
                 if (op.contains(Constants.EQUALS)) {
                     String[] split = op.split(Constants.EQUALS);
+                    if (split.length != 2) {
+                        throw new Exception("Space are not allowed in the \"field=new_value\" parameter!"
+                                + Constants.WIN_NEWLINE);
+                    }
                     split[0] = split[0].toLowerCase();
                     if (Arrays.stream(Constants.DESCRIPTION_ALIAS).anyMatch(s -> s.equals(split[0]))) {
                         task.setDescription(split[1]);
                     } else if (Arrays.stream(Constants.TYPE_ALIAS).anyMatch(s -> s.equals(split[0]))) {
-                        String dateTime = "01 01 2021 00:00";
+                        String dateTime = task.getStringFromDateTime(LocalDateTime.now());
                         if (task.isDated) {
                             dateTime = task.getDateTimeString();
                         }
@@ -178,34 +228,43 @@ public class EditAction extends Action {
                             if (localDateTime != null) {
                                 task.updateDateTime(localDateTime);
                             } else {
-                                operated = false;
+                                task.setTimeString(split[1]);
                             }
                         } else {
                             operated = false;
                         }
                     } else if (Arrays.stream(Constants.SELECTED_ALIAS).anyMatch(s -> s.equals(split[0]))) {
                         task.isSelected = split[1].toLowerCase().contains("t");
+                        op = split[0] + Constants.SPACE + Constants.EQUALS + Constants.SPACE + task.isSelected;
                     } else if (Arrays.stream(Constants.WEEKLY_ALIAS).anyMatch(s -> s.equals(split[0]))) {
                         task.isWeekly = split[1].toLowerCase().contains("t");
+                        op = split[0] + Constants.SPACE + Constants.EQUALS + Constants.SPACE + task.isWeekly;
                     } else if (Arrays.stream(Constants.DONE_ALIAS).anyMatch(s -> s.equals(split[0]))) {
                         if (split[1].toLowerCase().contains("t")) {
                             task.markAsDone();
                         } else {
                             task.markAsUndone();
                         }
+                        op = split[0] + Constants.SPACE + Constants.EQUALS + Constants.SPACE + task.getIsDone();
                     } else {
+                        builder.append("\"").append(op).append("\" is not a valid operation on task ")
+                                .append(task.getDescription()).append(", and is skipped.")
+                                .append(Constants.WIN_NEWLINE);
                         operated = false;
                     }
                 } else {
+                    builder.append("\"").append(op).append("\" is not a valid operation on task ")
+                            .append(task.getDescription()).append(", and is skipped.").append(Constants.WIN_NEWLINE);
                     operated = false;
                 }
                 if (operated) {
-                    builder.append(op).append(Constants.CMD_END).append(Constants.SPACE);
+                    builder.append(task.getDescription()).append(": ").append(op).append(Constants.CMD_END)
+                            .append(Constants.WIN_NEWLINE);
                 }
             }
             operationResult = builder.toString();
             if (operationResult.length() == 0) {
-                operationResult = Constants.NO_OPERATION_POSSIBLE;
+                throw new Exception(Constants.NO_OPERATION_POSSIBLE);
             }
             return task;
         }
@@ -213,7 +272,7 @@ public class EditAction extends Action {
 
     private ArrayList<Operation> operations;
 
-    private Item findMod(ArrayList<Item> mods, ArrayList<Item> targets, int index, String code) {
+    private Item findMod(ArrayList<Item> mods, ArrayList<Item> targets, int index, String code) throws Exception {
         if (code != null) {
             for (Item item : mods) {
                 if (item.getName().equals(code)) {
@@ -222,7 +281,7 @@ public class EditAction extends Action {
             }
         } else {
             if (index < 0 || index >= targets.size()) {
-                return null;
+                throw new Exception(Constants.INDEX_OUT);
             }
             Item target = targets.get(index);
             if (target instanceof SingleModule) {
@@ -231,18 +290,19 @@ public class EditAction extends Action {
                 return mods.get(index);
             }
         }
-        return null;
+        throw new Exception("The module you specified is either completed or non-existent." + Constants.WIN_NEWLINE);
     }
 
-    private Item findTask(ArrayList<Item> targets, int index) {
+    private Item findTask(ArrayList<Item> targets, int index) throws Exception {
         if (index < 0 || index >= targets.size()) {
-            return null;
+            throw new Exception("Linked Task Index out of Range! " + Constants.WIN_NEWLINE
+                    + "Try \"detail [code]\" to see linked tasks for this module." + Constants.WIN_NEWLINE);
         }
         Item target = targets.get(index);
         if (!(target instanceof SingleModule)) {
             return target;
         }
-        return null;
+        throw new Exception("The item with the specified index is not a Task." + Constants.WIN_NEWLINE);
     }
 
     @Override
@@ -250,7 +310,7 @@ public class EditAction extends Action {
         String defaultResult = super.act(data);
         StringBuilder stringBuilder = new StringBuilder();
         if (operations == null || operations.size() == 0) {
-            stringBuilder.append(Constants.NO_OPERATION_POSSIBLE);
+            throw new Exception(Constants.NO_OPERATION_POSSIBLE);
         } else {
             ArrayList<Item> targets = data.getTarget();
             for (Operation operation : operations) {
@@ -261,11 +321,52 @@ public class EditAction extends Action {
                     target = findTask(targets, operation.itemIndex);
                 }
                 Item operatedTarget = operation.operate(target);
+                if (operatedTarget instanceof SingleModule) {
+                    updateTask((SingleModule)operatedTarget);
+                }
                 data.updateItem(target, operatedTarget);
-                stringBuilder.append(operation.operationResult).append(Constants.WIN_NEWLINE);
+                stringBuilder.append(operation.operationResult);
             }
         }
         return defaultResult.replace(Constants.TEXT_PLACEHOLDER, stringBuilder.toString());
+    }
+
+    private void updateTask(SingleModule mod) throws Exception {
+        if (mod.immediateData == null) {
+            return;
+        }
+        String[] splitStrings = mod.immediateData.split("<");
+        if (splitStrings.length != 2) {
+            throw new CommandException();
+        }
+        String indexString = splitStrings[1].replace(">", Constants.ZERO_LENGTH_STRING);
+        int index;
+        try {
+            index = Integer.parseInt(indexString) - 1;
+        } catch (Exception e) {
+            throw new NumberFormatException("The format of index seems wrong..." + Constants.WIN_NEWLINE);
+        }
+        if (index < 0 || index > mod.taskList.size() - 1) {
+            throw new Exception("Linked Task Index out of Range! " + Constants.WIN_NEWLINE
+                    + "Try \"detail [module code]\" to see linked tasks for this module." + Constants.WIN_NEWLINE);
+        }
+        if (mod.taskList.get(index) == null) {
+            throw new Exception("The specified linked task does not exist" + Constants.WIN_NEWLINE);
+        }
+        String cmd = splitStrings[0];
+        switch (cmd) {
+        case "del":
+            mod.taskList.remove(index - 1);
+            break;
+        case "done":
+            ((Task)mod.taskList.get(index - 1)).markAsDone();
+            break;
+        case "undone":
+            ((Task)mod.taskList.get(index - 1)).markAsUndone();
+            break;
+        default:
+            throw new CommandException();
+        }
     }
 
     @Override
@@ -278,10 +379,10 @@ public class EditAction extends Action {
             }
             if (arg.name.equals(Constants.MOD)) {
                 String[] strings = arg.thisData.toFlatString().split(Constants.SPACE);
-                operations.add(new Operation(true, new ArrayList<String>(Arrays.asList(strings))));
+                operations.add(new Operation(true, new ArrayList<>(Arrays.asList(strings))));
             } else if (arg.name.equals(Constants.TASK)) {
                 String[] strings = arg.thisData.toFlatString().split(Constants.SPACE);
-                operations.add(new Operation(false, new ArrayList<String>(Arrays.asList(strings))));
+                operations.add(new Operation(false, new ArrayList<>(Arrays.asList(strings))));
             } else {
                 throw new CommandException();
             }

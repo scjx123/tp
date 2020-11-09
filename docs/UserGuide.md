@@ -8,16 +8,16 @@ Users will be able to browse and select modules, create and arrange tasks, add t
 create reminders, calculate and set goals for their MCs / CAPs.
 
 ## Contents
-
-- [Preliminaries](#Preliminaries)
-  * [Installation](#Installation)
-  * [Running the program](#Running-the-program)
-  * [Domsun Tutorial](#Domsun-Tutorial)
+### 
+- [Preliminaries](#preliminaries)
+  * [Installation](#installation)
+  * [Running the program](#running-the-program)
+  * [Domsun Tutorial](#domsun-tutorial)
 - [Features](#features)
 - [Command Summary](#command-summary)
-    * [`Daily Tasks`](#Daily-Tasks)
-    * [`Module Planner`](#Module-Planner)
-    * [`General Features`](#General-Features)
+    * [`Daily Tasks`](#daily-tasks)
+    * [`Module Planner`](#module-planner)
+    * [`General Features`](#general-features)
 - [Usage](#usage)
     * [`Daily Tasks`](#todo---add-a-todo-to-the-task-list)
         * [`todo` - Add a todo to the task list](#todo---add-a-todo-to-the-task-list)
@@ -27,10 +27,10 @@ create reminders, calculate and set goals for their MCs / CAPs.
         * [`done` - Mark a task as done](#done---mark-a-task-as-done)
         * [`undone` - Mark a task as undone](#undone---mark-a-task-as-undone)
         * [`find` - Find an event in the task list](#find---find-an-event-in-the-task-list)
-        * [`postpone` - Postpone a task to a later date](#postpone---postpone-a-task-to-a-later-date)
+        * [`postpone` - Postpone a task to a later date](#postpone---postpone-a-task-by-index)
         * [`reminder` - Print tasks that are due soon](#reminder---print-tasks-that-are-due-soon)
         * [`snooze` - Delays reminder popup](#snooze---delays-reminder-popup)
-    *[`Module Planner`](#take---take-module)
+    * [`Module Planner`](#take---take-module)
         * [`take` - Take module(s)](#take---take-module)
         * [`untake` - Untake module(s)](#untake---untake-module)
         * [`sel` - Select items by index](#sel---select-items-by-index)
@@ -40,7 +40,7 @@ create reminders, calculate and set goals for their MCs / CAPs.
         * [`goal` - Calculate how far the user is from his/her target CAP](#goal---calculate-how-far-the-user-is-from-his/her-target-CAP)  
         * [`mc` - Prints MCs](#mc---prints-mcs)
         * [`cap` - Prints CAPs](#cap---prints-CAPs)
-    *[`General Features`](#add---add-task-to-module)
+    * [`General Features`](#add---add-task-to-module)
         * [`add` - Add task(s) to module(s)](#add---add-task-to-module)
         * [`clear` - Clear the task list](#clear---clear-the-task-list)
         * [`delete` - Delete a task from the task list](#delete---delete-a-task-from-the-task-list)
@@ -63,6 +63,49 @@ create reminders, calculate and set goals for their MCs / CAPs.
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Domsun` from [Our Release Page](https://github.com/AY2021S1-CS2113-T13-2/tp/releases).
+3. If you are on Mac or Linux platforms, please ignore Step 4 to Step 6. 
+4. If you are on Windows platform, we recommend using ***Windows Terminal*** instead of cmd.exe:<br>
+![windows terminal](Images/winTerm.png)
+<br>If you do not have Windows Terminal, try it out! It is fast and powerful, and enables the full features
+of ANSI text rendering by default, which our Domsun will be utilising.
+5. If you insist on using `cmd.exe` as your terminal on Windows, it also works, but you need 
+ some extra work by doing the following steps:
+    - Type `regedit` in your Search box, and click `Run as Administrator`:<br>
+    ![regedit](Images/regedit.png)
+    <br>You can use other methods
+    to open your registry editor as well.
+    - Locate `Computer\HKEY_CURRENT_USER\Console`:<br>
+    ![hkey console](Images/hkeyConsole.png)
+    - Create a new `DWORD` entry in the registry table (right click on the right) named `VirtualTerminalLevel` 
+    if it is not present yet:<br>
+    ![dword](Images/dword.png)
+    - Right click on the value you have just created, and click on **`Modify`**:<br>
+    ![dwordmod](Images/dwordMod.png)
+    - Modify the value to be `00000001`:<br>
+    ![dwdvalue](Images/dwdvalue.png)
+6. Restart your cmd.exe by closing all cmd windows and re-open cmd.
+    - *What did you just do?*
+        1. You just enabled programs opened through cmd.exe to inherit ANSI rendering options from cmd.exe, which
+        is by default off. (The ANSI rendering for cmd.exe itself is by default ***on***.)
+        1. Microsoft used to enable this inheritance option by default. It is completely harmless.
+        1. However, in recent Windows versions Microsoft decided to move this feature over to their
+        newly developed Windows Terminal (which is cross-platform and more advanced. Yes it supports Linux commands as well).
+    - *Why do you need such an option?*
+        1. ANSI escape codes are responsible for the colors and font settings in terminal applications.
+        2. That is how the `htop` in Linux shows a colored UI.
+        3. Without enabling this option, all colors and fonts will return to their original form in plain text, 
+        something like this:<br>
+        ![ansi](Images/ansicodes.png)<br>
+        4. We believe that you will be more comfortable with the option on... something like this:<br>
+        ![newui](Images/newUI.png)<br>
+    - *What if you failed to do the previous steps?*
+        1. No worries. Our Domsun starts up in plain text mode by default on Windows platform, so you will see something like this:<br>
+        ![textui](Images/textui.png)<br>
+        2. The plain ui is perfectly usable with exactly the same functionalities as the colored one.
+        3. If you have succeeded in following the previous steps, you should be able to type `fancy` command to switch
+        to the colored UI, and type `plain` command to switch back to plain text.
+        4. More on commands later :)
+7. Congratulations! You're all set!
 
 > Java 11 and above is highly recommended, although Domsun might run on a lower version.
 
@@ -81,7 +124,7 @@ $ java -jar domsun.jar
 > Note: You can also run Domsun by double clicking the `domsun.jar` file directly.
 
 ### Domsun Tutorial 
-Here is an overview of how Domsun works. It maintains 3 key lists that you should take note. 
+As a beginning, here is how Domsun works. It has 3 lists that you should take note of as shown below. (The list shown are non-exhaustive, as there are other dynamic list that are created based on the `focus` command. Do refer to focus section of this User Guide for more details). 
 ![here](Images/Overview1.PNG)
 
 1. `focus` command focuses the app onto the list of task that you currently have. 
@@ -536,6 +579,7 @@ Expected outcome:
 ### `snooze` - Delays reminder popup
 
 Typing `snooze` delays reminder popup by a default of 1 minute.
+The reminder popup will remind in every 6 minutes.
 
 Syntax:
 
