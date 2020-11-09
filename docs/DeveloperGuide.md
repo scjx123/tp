@@ -17,7 +17,10 @@
 &nbsp;&nbsp;&nbsp;5.2 StatsAction Feature\
 &nbsp;&nbsp;&nbsp;5.3 Cap Caculator Feature\
 &nbsp;&nbsp;&nbsp;5.4 Reminder Feature\
-&nbsp;&nbsp;&nbsp;5.5 Postpone Feature\
+&nbsp;&nbsp;&nbsp;5.5 Snooze Feature\
+&nbsp;&nbsp;&nbsp;5.6 Postpone Feature\
+&nbsp;&nbsp;&nbsp;5.7 Grade Feature\
+&nbsp;&nbsp;&nbsp;5.8 Focus Feature\
 **6. Appendix A Product Scope**\
 **7. Appendix B User Stories** \
 **8. Appendix C Use Cases** \
@@ -33,7 +36,7 @@ create reminders and calculate their MCs / CAPs.
 ## 3. Setting Up
 1. **Configure Intellij for JDK 11**, as described [here](https://se-education.org/guides/tutorials/intellijJdk.html).
 1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
-1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Domnus.java` file, right-click it, and choose `Run Domnus.main()`. If the setup is correct, you should see something like the below:
+1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Domsun.java` file, right-click it, and choose `Run Domsun.main()`. If the setup is correct, you should see something like the below:
    ```
 
     > Task :compileJava UP-TO-DATE
@@ -104,8 +107,8 @@ During the saving phase:
 2) For the module list: This layer saves any module marked `TAKEN` by the user onto a text file, together with the relevant module information such as module's code, and grade attained (if any).  
 
 **4.7 Flow of DOMSUN**<br>
-The sequence diagram below shows the main interaction of classes with each other throughout the whole lifecycle of DOMSUM.
-![uml](Images/DOMNUS_Main_Flow.png)
+The sequence diagram below shows the main interaction of classes with each other throughout the whole lifecycle of DOMSUN.
+![uml](Images/DOMSUM_Main_Flow.png)
 
 ## 5. Implementation<br>
 This section highlights some of our project's key feature and its implementation. 
@@ -195,6 +198,9 @@ The statistic feature is facilitated by the `StatsAction` class. It extends `Act
  - `act()`- Gets `targetList` and calculates the raw ratio of the completed items.
  - `roundedRatioBar()`- Returns a rounded ratio enclosed in square brackets for printing. <br>
 
+The diagram below shows the various class associated with `StatsAction`
+![statsDiagram](Images/StatsDiagram.png)
+
 Given below is an example usage scenario and how the statistic mechanism behaves at each step. 
 
 Step 1. The user enters `stats -mod CS2113`	once the execute layer executes the message and calls `action.prepare()` class, `StatsAction` will begin its `prepare()` operation
@@ -264,28 +270,8 @@ The following sequence diagram shows how the reminder operation works
 
 ![Reminder_Sequence_Diagram](Images/ReminderAction_Sequence_Diagram.png)
 
-### 5.5 Remind Feature
 
-Another proposed manual reminder mechanism is facilitated by `RemindAction`. It extends `Action` to execute the command given by the user, output is then passed on to `Ui` for display. 
-Additionally, it implements the following operations:
-
-* `RemindAction#act()` - Set the reminder to be executed on the chosen time.
-* `RemindAction#prepare()` - Parse user command to suitable parameter for `RemindAction#act()` function.
-* `RemindAction#getSchedule` - Returns the schedule set by the user.
-
-Given below is an example usage scenario and how the remind mechanism behaves at each step.
-
-Step 1. The user executes `remind [time]` command to set schedule for the reminder. Command is then parsed by `RemindAction#prepare()` to be passed as arguments for `RemindAction#act()`.
-
-Step 2. `RemindAction#act()` calls `RemindAction#getSchedule` to pass the schedule later in `Ui`.
-
-Step 3. The schedule is returned to the user through `Ui`.
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![Postpone_Sequence_Diagram](Images/Remind.png)
-
-### 5.6 Snooze Feature
+### 5.5 Snooze Feature
 
 The proposed snooze mechanism is facilitated by `SnoozeAction`. It extends `Action` to execute the command given by the user, output is then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -304,7 +290,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/Snooze.png)
 
-### 5.8 Postpone Feature
+### 5.6 Postpone Feature
 
 The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute the command given by the user, output is then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
@@ -326,7 +312,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![Postpone_Sequence_Diagram](Images/PostponeAction_Sequence_Diagram.png)
 
-### 5.7 Grade feature
+### 5.7 Grade Feature
 
 This extends `TakeAction` to register modules as `isTaken` from `moduleList.txt`, output is then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
