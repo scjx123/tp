@@ -308,7 +308,11 @@ public enum HelpText {
         new String[]{
             "find [keyword]"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Keyword here means any word (time/description) on task list.",
+            "2. Ensure that you are referring to the most updated task list.",
+            "3. If keyword does not exist on the task list, a \"no found\" message will be shown.",
+        },
         new String[]{
             "1. \"find exam\" >> finds all tasks with the \"exam\" keyword from the task list"
         }),
@@ -322,7 +326,10 @@ public enum HelpText {
             "focus",
             "focus [deadline / todo / event / task / mod / selected / taken]"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. This function is used together with \"list\" to see the result of the \"focus\".",
+            "2. For more explanation, refer to the diagram on \"Domsun Tutorial\" on the UserGuide.",
+        },
         new String[]{
             "1. \"focus\" >> focus on \"task\". e.g. \"list\" will list all tasks from now on",
             "2. \"focus mod\" >> focus on \"mod\". e.g. \"list\" will list all modules from now on",
@@ -396,7 +403,12 @@ public enum HelpText {
             "list",
             "list date [asc / desc / spec \"date\"(any common date format)]"
         },
-        new String[]{ "", },
+        new String[]{
+            "1. When updates are done on the list (e.g : new \"todo\" task is added), "
+                + "\"list\" need to be run again to see the result of the update.",
+            "2. There are 2 main list in this application (i.e. task and module list). "
+                + "For more explanation, refer to the diagram on \"Domsun Tutorial\" on the UserGuide.",
+        },
         new String[]{
             "1. \"list\" >> list all added items",
             "2. \"list date asc\" >> list items with a \"date\" field in ascending order",
@@ -516,9 +528,12 @@ public enum HelpText {
         new String[]{
             "sel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
         },
-        new String[]{ "1. ", },
         new String[]{
-            "1. \"sel 1 2 3\" >> add the item with indices 1, 2and 3 from the item list to the selection",
+            "1. Index must be a positive integer referencing an existing item.",
+            "2. Module code needs to represent legitimate NUS module. Otherwise, an error message can be expected.",
+        },
+        new String[]{
+            "1. \"sel 1 2 3\" >> add the item with indices 1, 2 and 3 from the item list to the selection",
             "2. \"sel CS1010 CS2113\" >> add the modules CS1010 and CS2113 on the item list to the selection",
             "3. \"sel 5 CS2113\" >> add the item with index 5 and module CS2113 on the item list to the selection"
         }),
@@ -597,7 +612,7 @@ public enum HelpText {
         new String[]{
             "unknown"
         },
-        new String[]{ "", },
+        new String[]{"1. This fucntion is only used to check if the program is working correctly.",},
         new String[]{
             "1. \"unknown\" >> prints \"OOPS, I don't know what that means :-( Try \"help\"!\""
         }),
@@ -610,7 +625,10 @@ public enum HelpText {
         new String[]{
             "unsel [index(es) (for the currently listed items) / module code(s) (for modules only)]",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Index must be a positive integer referencing an existing item.",
+            "2. Item need to first be selected using \"sel\" for \"unsel\" to function properly.",
+        },
         new String[]{
             "1. \"unsel 1 2 3\" >> make items with indices 1, 2and 3 no longer selected",
             "2. \"unsel CS1010 CS2113\" >> make modules CS1010 and CS2113 no longer selected",
