@@ -13,6 +13,7 @@ Given below are my contributions to the project.
 
 ### 2.1 Enhancements Implemented: 
 <div style="page-break-after: always;"></div>
+
 New Feature: `Postpone [index] or [h/w/y] [index]`
 <br> 
 What it does: Typing `postpone [index] or [h /w /y] [index]` delays a task specified by the user or by default a day with option `h` for an hour,`w` for a week, or `y` for a year.
