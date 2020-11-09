@@ -21,7 +21,7 @@
 **6. Appendix A Product Scope**\
 **7. Appendix B User Stories** \
 **8. Appendix C Use Cases** \
-**9. Appendix D Non-funcitonal Requirements** \
+**9. Appendix D Non-functional Requirements** \
 **10. Appendix E Glossary** \
 **11. Appendix F. Instruction for Manual Testing**
 
@@ -60,17 +60,17 @@ The **Architecture Diagram** below represents a high-level design overview of th
 
 ![here](Images/Architecture_Diagram.PNG)
 
-As shown in the above diagram, user only interacts with the UI layer and their commands, in turn will be passed to next adjacent layer. Given below is a quick overview of each component. 
+As shown in the above diagram, the user only interacts with the UI layer and their commands, in turn, will be passed to the next adjacent layer. Given below is a quick overview of each component. 
 
 **4.2 Main Layer**<br>
 The `main` layer, it contains a single class known as `Domnus`. Its purpose can be split into 3 parts: 
 
-At Start Up: It calls upon the `storage` component to load user's past data and it also loads the complete module list that is packaged inside the JAR file. <br>
+At Start-Up: It calls upon the `storage` component to load the user's past data and it also loads the complete module list that is packaged inside the JAR file. <br>
 At Operating: It connects the relevant component of the program to ensure the program is operating as per the intended logic flow. <br>
-At Shutdown: It exits the running loop of the program to shutdown the program successfully. <br>
+At Shutdown: It exits the running loop of the program to shut down the program successfully. <br>
 
 **4.3 UI Layer**<br>
-Main gets user input and displays messages through the use of UI component. 
+The Main gets user input and displays messages through the use of UI components. 
 The UI layer entails the package *visualize*, which contains classes *ColoredString*, *Bitmap*, *UI*, *Cli*, 
 *FancyCli* and enumerations *Color* and *Sprite* in the following structure:
 ![uml](Images/Package%20visualize.png)
@@ -81,25 +81,25 @@ UI gets user input through *nextline()*, and renders strings as a user-comprehen
 
 UI's interaction with the rest of the program<br>
 UI passes the user's input string out to the DOMNUS object, which then passes the string to the Command Interpreter layer.
-UI also reads data from the Data object for refreshing purposes, but does not modify it. 
+UI also reads data from the Data object for refreshing purposes but does not modify it. 
 
 **4.4 Command Interpreter Layer**<br>
-Upon receiving command from the UI, DOMNUS would pass the entire user input into Command Interpreter (CI)
+Upon receiving a command from the UI, DOMNUS would pass the entire user input into Command Interpreter (CI)
 
 **4.5 Execute Layer**<br>
 The `Execute` layer carries out the relevant actions required based on the analyzed input. All of the features in the program are stored under this layer which is under the package name `command`. To summarize, this layer is responsible for: 
 
 1) Match the user's command to the relevant actions.
-2) Throw any exception based on errorneous user input/invalid conditions. 
+2) Throw any exception based on erroneous user input/invalid conditions. 
 
 **4.6 Storage Layer**<br>
 The `Storage` layer loads, saves, and do pre-data processing before performing the two aforementioned action. It is active in 2 phases. 
 
-During loading phase: 
+During the loading phase: 
 1) For the user's task: This layer translates the previously (if any) saved data format into recognizable commands and loads these data as per how the app functions during runtime. 
-2) For the module list: This layer conducts simple parsing of the text file containing all the modules and stores them creates individual item known as `SingleModule` before loading them into an arraylist. 
+2) For the module list: This layer conducts simple parsing of the text file containing all the modules and stores them creates individual items known as `SingleModule` before loading them into an ArrayList. 
 
-During saving phase: 
+During the saving phase: 
 1) For the user's task: This layer saves any changes that the user made to the task list onto a text file. 
 2) For the module list: This layer saves any module marked `TAKEN` by the user onto a text file, together with the relevant module information such as module's code, and grade attained (if any).  
 
@@ -125,7 +125,7 @@ and internally it stores an arraylist of `Item` object in `targetBackup` field t
  - `modifyObject()` - Performs the actual operation of modifying the target item. In `TakeAction`, it assigns the 
  `isTaken` field of the target item as `true`.
  - `getObjectInfo()` - Controls what is the text representation of the target object in the return string.
- - `safetyCheck()`- Sets the `isBlind` flag if user's input has a void parameter tree, thereby specifying the default 
+ - `safetyCheck()`- Sets the `isBlind` flag if the user's input has a void parameter tree, thereby specifying the default 
  mode of action for this command. 
  - `superAct()` - Returns `super.Act()`. Used as the break out node in the prototype chain for the inherited classes 
  to be able to call the method `Act()` of the ancestor. In child classes of `TakeAction`, this method can be overloaded
@@ -162,7 +162,7 @@ in this case `codes` and `indices`.
 
 Step 8. `act()` loops through all filtered items and calls `modifyObject()` on each of them.
 
-Step 9. `modidyObject()` modifies the objects of interest, in this case by setting the `isTaken` field to true.
+Step 9. `modifyObject()` modifies the objects of interest, in this case by setting the `isTaken` field to true.
 
 Step 10. Depending on the result of `modifyObject()`, `act()` parses the suitable string for output through the use of 
 a `StringBuilder` object, in the process calling `getObjectInfo()` to get the textual descriptions of the targets.
@@ -174,36 +174,36 @@ defined in `Constants.messageMap` with the actual result string, and returns it.
 
 **Design consideration:**
 
-1. Reuseable - functions such as `modyfiObject()` can be overloaded in child classes to achieve different functions.
+1. Reuseable - functions such as `modifyObject()` can be overloaded in child classes to achieve different functions.
 1. Low coupling - `prepare()` is not aware of the program `data`, and `act()` is not aware of the user input.
-1. Uniform - `TakeAction` as well as all other actions have uniform input and outputs, and can be mapped 
-indescriminatively to any `Command` object and executed indifferently.
+1. Uniform - `TakeAction` as well as all other actions have uniform input and outputs and can be mapped 
+indiscriminately to any `Command` object and executed indifferently.
 
 **Aspect : How TakeAction executes**
  - **Alternative 1 (current choice):** calls `getTarget()` method of `data` object using different flags 
  to get wanted targets.
     - Pros: Easy to implement and easy to read. Easily extendable by adding more flags in the `getTarget()` method.
-    - Cons: Slow. Everytime we `act()` on something, the `data` object needs to do the filtering again.
- - **Alternative 2:** Have many different lists or maps, each stores one category of data
-    - Pros: Fast, no need filtering in most cases.
-    - Cons: Harder to implement and extend. Everytime we want a new functionality we would need to create a new list.
+    - Cons: Slow. Every time we `act()` on something, the `data` object needs to do the filtering again.
+ - **Alternative 2:** Have many different lists or maps, each store one category of data
+    - Pros: Fast, no need for filtering in most cases.
+    - Cons: Harder to implement and extend. Every time we want a new functionality we would need to create a new list.
 
 ### 5.2 Statistic Feature 
-The statistic feature is facilitated by the StatsAction class. It extends `Action` class, and it functions under the architectural component `execute`. Internally, it stores an arraylist of Item object in `targetList`. This class implements the following operation: 
+The statistic feature is facilitated by the `StatsAction` class. It extends `Action` class, and it functions under the architectural component `execute`. Internally, it stores an arraylist of Item object in `targetList`. This class implements the following operation: 
 
  - `prepare()` - Sets `isMod` flag according to user's 
  - `act()`- Gets `targetList` and calculates the raw ratio of the completed items.
- - `roundedRatioBar()`- Returns a rounded ratio enclosed in square brackets for printing. 
+ - `roundedRatioBar()`- Returns a rounded ratio enclosed in square brackets for printing. <br>
 
 Given below is an example usage scenario and how the statistic mechanism behaves at each step. 
 
 Step 1. The user enters `stats -mod CS2113`	once the execute layer executes the message and calls `action.prepare()` class, `StatsAction` will begin its `prepare()` operation
 
-Step 2. `prepare()` looks at the input called `ParamNode args` which is user command processed by Command Intepreter layer, and starts to identify whether user has enter the keyword `mod ` if `userInput` contains the keyword, then `isMod` flag will be set. 
+Step 2. `prepare()` looks at the input called `ParamNode args` which is user command processed by Command Interpreter layer, and starts to identify whether the user has entered the keyword `mod ` if `userInput` contains the keyword, then `isMod` flag will be set. 
 
-Step 3. Next, execute layer will call `action.act()` which causes StatsAction to begin its `act()` operation. If `isMod` flag is set, `act()` will search for the user specified module and get the list of tasks tagged to it.
+Step 3. Next, execute layer will call `action.act()` which causes StatsAction to begin its `act()` operation. If `isMod` flag is set, `act()` will search for the user-specified module and get the list of tasks tagged to it.
 
-Step 5. Once the list of task is obtain, the operation will loop through the task list and count the number of completed task followed by generating a ratio. 
+Step 5. Once the list of tasks is obtained, the operation will loop through the task list and count the number of completed tasks followed by generating a ratio. 
 
 Step 6. This ratio will be passed into `roundedRatioBar` to return *String* of a rounded ratio to 1 decimal place enclosing it in square brackets. 
 
@@ -213,7 +213,7 @@ Step 7. Now `StatsAction` is completed and it will return this string back to `C
 
 **Design consideration:**
 
-**Aspect : How statistics executes**
+**Aspect: How statistics executes**
  - **Alternative 1 (current choice):** Create a separate class and get list of tasks/taken modules' task and scan through them to calculate statistics
 	 - Pros: Reduces Coupling and increase testability as a software unit itself. 
 	 - Cons: May have performance issues in terms of memory usage 
@@ -224,13 +224,13 @@ Step 7. Now `StatsAction` is completed and it will return this string back to `C
 
 ### 5.3 CAP calculator feature
 
-This feature extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+This feature extends `Action` to execute the command given by the user, output is then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
 
 * `CalculateCapAction#act()` - Calculate the user CAP based on stored user grades / input modules.
 * `CalculateCapAction#prepare()` - Parse user command to suitable parameter for `CalculateCapAction#act()` function.
 
-Given below is an example usage scenario and how thecap calculator mechanism behaves at each step.
+Given below is an example usage scenario and how the cap calculator mechanism behaves at each step.
 
 Step 1. The user executes `cap` command find his current CAP grade. Command is then parsed by `CalculateCapAction#prepare()` to be passed as arguments for `CalculateCapAction#act()`.
 
@@ -260,13 +260,13 @@ Step 3. `ReminderAction#act` then sorts the due dates in ascending order
 
 Step 4: Tasks due within 3 days are returned to the user through Ui
 
-The following sequence diagram diagram shows how the reminder operation works
+The following sequence diagram shows how the reminder operation works
 
 ![Reminder_Sequence_Diagram](Images/ReminderAction_Sequence_Diagram.png)
 
 ### 5.5 Remind Feature
 
-Another proposed manual reminder mechanism is facilitated by `RemindAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+Another proposed manual reminder mechanism is facilitated by `RemindAction`. It extends `Action` to execute the command given by the user, output is then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
 
 * `RemindAction#act()` - Set the reminder to be executed on the chosen time.
@@ -287,7 +287,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### 5.6 Snooze Feature
 
-The proposed snooze mechanism is facilitated by `SnoozeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+The proposed snooze mechanism is facilitated by `SnoozeAction`. It extends `Action` to execute the command given by the user, output is then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
 
 * `RemindAction#getNewInterval` - Returns the new interval set by the user.
@@ -306,7 +306,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### 5.8 Postpone Feature
 
-The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+The proposed undo/redo mechanism is facilitated by `PostponeAction`. It extends `Action` to execute the command given by the user, output is then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
 
 * `PostponeAction#act()` - Postpone the deadline or event task by the chosen parameter.
@@ -320,7 +320,7 @@ Step 2. `PostponeAction#act()` re-sets the date of the targeted task from the st
 
 Step 3. `PostponeAction#act()` then updates the stored user's data.
 
-Step 4. Postponed target task is returned to the user through `Ui`.
+Step 4. The postponed target task is returned to the user through `Ui`.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -328,7 +328,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### 5.7 Grade feature
 
-This extends `TakeAction` to register modules as `isTaken` from `moduleList.txt`, output are then passed on to `Ui` for display. 
+This extends `TakeAction` to register modules as `isTaken` from `moduleList.txt`, output is then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
 
 * `GradeAction#act()` - Calculate the user CAP based on stored user grades / input modules.
@@ -342,7 +342,7 @@ Step 2. `GradeAction#act()` takes in data prepared by `GradeAction#prepare()`.
 
 Step 3. `GradeAction#act()` then retrieves module data from the `modulelist.txt` to determine module details.
 
-Step 4. Grade is attributed to the corresponding modules and response message is returned to the user through `Ui`.
+Step 4. The grade is attributed to the corresponding modules and the response message is returned to the user through `Ui`.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -350,7 +350,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### 5.8 Focus Feature
 
-The proposed focus mechanism is facilitated by `FocusAction`. It extends `Action` to execute command given by the user, output are then passed on to `Ui` for display. 
+The proposed focus mechanism is facilitated by `FocusAction`. It extends `Action` to execute the command given by the user, output is then passed on to `Ui` for display. 
 Additionally, it implements the following operations:
 
 * `FocusAction#act()` - Sets the task flag by the chosen parameter.
@@ -371,30 +371,30 @@ The following activity diagram summarizes what happens when a user executes a ne
 ## Appendix A. Product scope
 ### Target user profile
 
- - has a need to manage significant number of schedules 
+ - needs to manage a significant number of schedules 
  - prefer desktop apps over other types 
  - can type fast
  - prefers typing to mouse interactions 
  - is reasonably comfortable using CLI apps 
 
 ### Value proposition
-All in one app to track tasks and their dates, monitor productivity and calculate cap. 
+All in one app to track tasks and their dates, monitor productivity, and calculate cap. 
 
 ## Appendix B. User Stories
 
 |Priority| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-| *** |Student before start of semester|List the modules MC|Follow the recommended MC |
-| *** |Student before start of semester|List of module available|Easily Choose which modules to take|
-| ** |Student before start of semester|Find the modules either by keyword, module code or even MC |Easily see the desired modules |
-| ** |Student before start of semester|Select the modules but not taking it yet |Easily whether the MC fits my requirement |
-| *  |Student before start of semester|Find out the etails of the Module|To find out more about the modules.|
-| *** |Student before start of semester|Take the desired modules|Mark the modules that i want to take as taken  |
-| *** |Student during the semester|Add tasks such as todo,deadline and event into my list|Easily keep track of all the task i have to complete  |
+| *** |Student before the start of semester|List the modules MC|Follow the recommended MC |
+| *** |Student before the start of semester|List of module available|Easily Choose which modules to take|
+| ** |Student before the start of semester|Find the modules either by keyword, module code, or even MC |Easily see the desired modules |
+| ** |Student before the start of semester|Select the modules but not taking it yet |Easily whether the MC fits my requirement |
+| *  |Student before the start of semester|Find out the details of the Module|To find out more about the modules.|
+| *** |Student before the start of semester|Take the desired modules|Mark the modules that I want to take as taken  |
+| *** |Student during the semester|Add tasks such as todo, deadline, and event into my list|Easily keep track of all the task I have to complete  |
 | ** |Student during the semester|Have a Reminder of which deadline is due soon|Ensure that no task is missed out  |
-| *** |Student during the semester|Add task to modules |Easily know which tasks belongs to which modules  |
+| *** |Student during the semester|Add a task to modules |Easily know which tasks belong to which modules  |
 | *** |Student during the semester|Delete task once they are completed |Remove unnecessary task on the list |
-| ** |Student after the semester|Calculate the CAP of my individual modules|Easily find out my performance this semester |
+| ** |Student after the semester|Calculate the CAP of my modules|Easily find out my performance this semester |
 | * |Student after the semester|Clear the list of tasks and modules|Start afresh for the next semester |
 
 {More to be added}
@@ -422,7 +422,7 @@ Use case ends.<br>
 
 
  1. User requests to list total MC on the current list.
- 2. DOMNUS shows the total MC of the current list. Default list is entire modules list.
+ 2. DOMNUS shows the total MC of the current list. The default list is the entire modules list.
 
 Use case ends.<br> 
 **Extensions** 
@@ -435,7 +435,7 @@ Use case ends.<br>
 
 1.  Should work on any  _mainstream OS_  as long as it has Java  `11`  or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
 
@@ -461,19 +461,19 @@ Test case: `plain`<br>
 Expected: Switches to plain mode of display<br>
 Test case: `Fancy` ,`Plain`<br>
 Expected: Error message due to cap sensitive. <br>
-3. Focusing between different list
+3. Focusing on a different list
 Test case: `focus mod`/`task`/`todo`/`deadline`/`event`/`selected`/`taken`<br>
-           Expected : Shows the current list you are focused on. No list will be shown. <br>
+           Expected: Shows the current list you are focused on. No list will be shown. <br>
 Test case: `focus taken` <br>
 Expected: Shows the current list of modules you have taken. <br>
 Other incorrect focus commands to try: `focus 0` , `focus what?`, ... (focus on non-existent list) <br>
-Expected : Error message due to invalid command. <br>
+Expected: Error message due to invalid command. <br>
 	
 4. List Modules/Task
 Test case: `focus mod` -> `list`<br>
 Expected: Shows the list of modules. <br>
 Test case: `focus task` -> `list` <br>
-Expected: Shows the current list of task. <br>
+Expected: Shows the current list of tasks. <br>
 	
 5. Find Modules 
 Test case: `focus mod` -> `find Engin`<br>
@@ -502,10 +502,10 @@ Expected: Module not found as inputs are case sensitive. <br>
 
 8. Reminder <br>
 Test cases: `reminder `<br>
-Expected: Shows task that are due within 3 days. <br>
+Expected: Shows tasks that are due within 3 days. <br>
 
 9. Cap Calculation <br>
 Test cases: `cap`<br>
-Expected: Shows you the calculated cap from stored useer data. <br>
+Expected: Shows you the calculated cap from stored user data. <br>
 Test cases: `cap -m CS2113 A+ EE2026 B CS1010 B-`<br>
 Expected: Shows you the calculated cap from given input modules. <br>
