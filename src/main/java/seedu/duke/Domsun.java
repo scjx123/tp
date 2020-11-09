@@ -59,7 +59,7 @@ public class Domsun {
         }
     }
 
-    //@@author: johanesrafael
+    //@@author johanesrafael
     /**
      * Make Reminder scheduler.
      * @param delay     the delay
@@ -136,8 +136,10 @@ public class Domsun {
      * Run.
      */
     public void run() {
+        //@@author johanesrafael
         // schedule reminder every 6 minutes
         reminderTimer(Constants.REMINDER_DELAY, Constants.REMINDER_INTERVAL);
+        //@@author
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -148,10 +150,12 @@ public class Domsun {
                     reattachUI(c.isFancy(), c.isPlain());
                     ui.update(c.result, data);
                     isExit = c.isBye();
+                    //@@author johanesrafael
                     boolean isSnoozed = c.isSnoozed();
                     if (isSnoozed) {
                         snoozeReminder();
                     }
+                    //@@author
                     if (isExit) {
                         // stops timer
                         timer.cancel();
