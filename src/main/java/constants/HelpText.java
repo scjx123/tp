@@ -182,7 +182,7 @@ public enum HelpText {
         "goal",
         "Calculate how far the user is from his/her target CAP",
         new String[]{
-            "goal -total [total MC] [target CAP] {-taken [taken MC] [current CAP]}",
+            "goal -total [total MC] [target CAP] -taken [taken MC] [current CAP]",
         },
         new String[]{
             "1. All values on the parameters should be a positive integer. "
@@ -368,9 +368,11 @@ public enum HelpText {
         "Print the list of available commands, or print the details of a specified command",
         new String[]{
             "help [target]",
-            "target: the name of the target command"
         },
-        new String[]{"1. If unknown command is put in as \"target\", general help of all commands will be displayed.",},
+        new String[]{
+            "1. If unknown command is put in as \"target\", general help of all commands will be displayed.",
+            "2. The parameter \"target\" is the name of the explained command/feature."
+        },
         new String[]{
             "1. \"help\" >> prints the list of available commands",
             "2. \"help event\" >> prints the details of the \"event\" command"
@@ -511,7 +513,7 @@ public enum HelpText {
         "reminder",
         "List out events and deadlines tasks that are due within " + Constants.REMINDER_RANGE + " days",
         new String[]{
-            "reminder (on/off)"
+            "reminder [on/off]"
         },
         new String[]{ "1. You should expect the reminder will appear every 5 minutes.", },
         new String[]{
