@@ -8,7 +8,7 @@ Users will be able to browse and select modules, create and arrange tasks, add t
 create reminders, calculate and set goals for their MCs / CAPs.
 
 ## Contents
-### 
+ 
 - [Preliminaries](#preliminaries)
   * [Installation](#installation)
   * [Running the program](#running-the-program)
@@ -981,6 +981,7 @@ Example of usage:
 `delete 1`
 
 Expected outcome:
+
     ```
     ____________________________________________________________
         
@@ -1009,7 +1010,7 @@ Example of usage:
 
 Exepected outcome:
     
-    
+    ```
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         grade=A; 
@@ -1022,6 +1023,7 @@ Example of usage:
 Expected outcome:
     
     
+    ```
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         description=do homework; 
@@ -1038,7 +1040,7 @@ Example of usage:
     
 Expected outcome:
     
-    
+    ```
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         type=event; 
@@ -1056,7 +1058,7 @@ Example of usage:
 
 Expected outcome:
 
-    
+    ```
     ____________________________________________________________
         Trying to modify the attribute(s) you specified:
         grade=A; 
