@@ -1,8 +1,8 @@
 package command.action;
 
-import constants.*;
-import org.junit.jupiter.api.*;
-import seedu.duke.*;
+import constants.Constants;
+import org.junit.jupiter.api.Test;
+import seedu.duke.Domsun;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
