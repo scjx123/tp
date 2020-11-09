@@ -592,7 +592,7 @@ Expected outcome:
         Auto-reminder: Here are the tasks due within 3 days: 
         (do not want to see this so often? try "snooze") 
         No task within 3 days from now 
-        Reminder is currently off. 
+
     ____________________________________________________________
    ```
 
@@ -604,7 +604,10 @@ Expected outcome:
 
    ```  
     ____________________________________________________________
-
+        Auto-reminder: Here are the tasks due within 3 days: 
+        (do not want to see this so often? try "snooze") 
+        No task within 3 days from now 
+        Reminder is currently off. 
     ____________________________________________________________
    ```
 
