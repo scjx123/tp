@@ -8,7 +8,7 @@ DOMNUS - is a desktop application that helps in module and task tracking. It was
 
 
 This is what out product looks like: 
-![here](../UI.png)
+![here](../../UI.png)
 
 ## 2. Summary of Contributions
 Given below are my contributions to the project. 
