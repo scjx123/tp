@@ -135,13 +135,14 @@ As a beginning, here is how Domsun works. It has 3 lists that you should take no
 6. Typing `detail 1` displays the details of the item ***in your current list of focus*** that has index 1. For example, when focusing on tasks list, this will display the details of the 1st task. 
 7. Similarly, `detail 2` will display different results depending on your current ***focus*** as the index 2 represents Module CG2027 if you are focusing on `mod`, and represents Module CS1010 if you are focusing on `taken`. 
 
-**A point to note before venturing into the libraries of commands that we have.**<br> 
-- You can switch between fancy mode display, and plain display anytime during the program. 
-- The UI will retain the last output from the last UI mode. For example, if your plain UI was showing "hello" before switching to fancy UI, the fancy UI will show "hello" as well.
+**A to note before venturing into the libraries of commands that we have.**<br> 
+You can switch between fancy mode display, and plain display anytime during the program. During list command, you will be able to toggle between pages of fancy by using prev and next However, the current version of fancy mode is still in beta, hence, it is expected to not be able to fully display certain commands that are too long. such as help, detail,mc etc. Do look forward to the next update!
+![here](Images/Overview2.PNG)<br>
+
+**Syntax Formats**
 - Different commands update different regions of the fancy UI. Most noticeably, `list` command only updates the upper region (the item list region), while `help` command only updates the bottom region (the text region).
 - This is designed so that you will be able to refer to your text region when you are operating on the item list, without worrying that the text below will be flushed away.
 - For example, if you did commands wrongly, the text region will display `invalid command` error and show the correct syntax. When you are browsing through the list you will be able to refer to the syntax below. Please do not mistake that kept message as a newly generated error.
-![here](Images/Overview2.PNG)
 - You will be able to toggle between pages of fancy by using `prev` and `next` if you have followed the [Installation](#installation) steps successfully, or if you are on Mac or Linux, or if you are on Windows but using non-integrated terminals such as gitbash or Windows Terminal. Otherwise, if you are using cmd.exe (command line) or ps.exe (PowerShell) on Windows, please stick with plain text UI.
 - For each feature syntax, each type of symbols represent different explanation of the syntax.<br>
     - The plain text (`example`) represents compulsory names. For example, if `do -stuff [index]` is shown in the Syntax, you must type exactly `do -stuff`, before typing any index.
