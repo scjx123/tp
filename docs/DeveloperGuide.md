@@ -43,9 +43,9 @@ create reminders and calculate their MCs / CAPs.
     > Task :processResources UP-TO-DATE
     > Task :classes UP-TO-DATE
     
-    > Task :Domnus.main()
+    > Task :Domsun.main()
     	____________________________________________________________
-    		Hello, I'm Domnus. What can I do for you?
+    		Hello, I'm Domsun. What can I do for you?
     	____________________________________________________________
     	____________________________________________________________
     		Here are the tasks due within 3 days: 
