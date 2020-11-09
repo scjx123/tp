@@ -1,4 +1,5 @@
 # Johanes Rafael Sudardji - Project Portfolio Page
+<!-- @@author johanesrafael -->
 ## 1. Overview
 ### 1.1 Project Overview 
 DOMNUS - is a desktop application that helps in module and task tracking. It was developed under the module CS2113 Software Engineering & Object Oriented Programming. Within the schedule of approximately 7 weeks, my team of 5 Computer Engineering students successfully created DOMNUS to help students to stay organize with respective to the modules they take in NUS. 
@@ -11,7 +12,7 @@ Given below are my contributions to the project.
 - In charge of `focus`, `reminder`, `snooze`, `postpone` of the code. 
 
 ### 2.1 Enhancements Implemented: 
-
+<div style="page-break-after: always;"></div>
 New Feature: `Postpone [index] or [h/w/y] [index]`
 <br> 
 What it does: Typing `postpone [index] or [h /w /y] [index]` delays a task specified by the user or by default a day with option `h` for an hour,`w` for a week, or `y` for a year.
