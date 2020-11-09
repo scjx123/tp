@@ -136,11 +136,14 @@ As a beginning, here is how Domsun works. It has 3 lists that you should take no
 7. Note that `detail 2` here will display different results as the two indices of 2 represent different modules! The one on the left represents CG2027 while the one on the right represent CS1010. 
 
 **A point to note before venturing into the libraries of commands that we have.**<br>
-- For each feature syntax, each type of brackets represent different degrees of importance of the parameters.<br>
-    - The square bracket (`[]`) represent parameters. Feature will **not** be able to work without this parameter. For example:<br>
-    In `todo [description]`, `todo` feature can only be used when there is `description`.
-    - The curly bracket (`{}`) represent optional parameters. Feature will still be able to work without this parameter. For example:<br>
-    In `todo [description]`, `todo` feature can only be used when there is `description`.  
+- For each feature syntax, each type of symbols represent different explanation of the syntax.<br>
+    - The square bracket (`[]`) represents parameters. Do **not** type this in when using the feature. For example:<br>
+    In `help [target]`, `help` feature has `target`, the target action to be explained, as its parameter. For optional parameter, alternate use of the command is given on the `Notes` section of help text from `help`.
+    - The round bracket (`()`) represents additional explanation of the parameter. For example:<br>
+    In `detail [module code (for modules only) / index]`, `for modules only` is simply further explanation of the `module code` parameter. Usage example refer to help text from `help` feature.
+    - The three dots (`...`) represents that the parameter can be linked/chained together infinitely. For example:<br>
+    In `grade [index / code (for modules only)] [letter grade] ...`, `grade` can be followed by continuous list of `[index / code (for modules only)] [letter grade]`.  Usage example refer to help text from `help` feature.
+    
 - You can switch between fancy mode display, and plain display anytime during the program. 
 During `list` command, you will be able to toggle between pages of fancy by using `prev` and `next`
 However, the current version of fancy mode is still in beta, hence, it is expected to not be able to fully display certain commands that are too long. such as `help`, `detail`,`mc` etc. Do look forward to the next update!
