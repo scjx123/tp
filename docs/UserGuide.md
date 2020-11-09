@@ -8,7 +8,6 @@ Users will be able to browse and select modules, create and arrange tasks, add t
 create reminders, calculate and set goals for their MCs / CAPs.
 
 ## Contents
- 
 - [Preliminaries](#preliminaries)
   * [Installation](#installation)
   * [Running the program](#running-the-program)
@@ -19,8 +18,8 @@ create reminders, calculate and set goals for their MCs / CAPs.
     * [`Module Planner`](#module-planner)
     * [`General Features`](#general-features)
 - [Usage](#usage)
-    * [`Daily Tasks`](#todo---add-a-todo-to-the-task-list)
-        * [`todo` - Add a todo to the task list](#todo---add-a-todo-to-the-task-list)
+    * [`Daily Tasks`](#todo---add-a-to-do-to-the-task-list)
+        * [`todo` - Add a todo to the task list](#todo---add-a-to-do-to-the-task-list)
         * [`deadline` - Add a deadline to the task list](#deadline---add-a-deadline-to-the-task-list)
         * [`event` - Add an event to the task list](#event---add-an-event-to-the-task-list)
         * [`list` - Print a list of added tasks](#list---print-a-list-of-added-tasks)
@@ -37,7 +36,7 @@ create reminders, calculate and set goals for their MCs / CAPs.
         * [`unsel` - Unselect items](#unsel---unselect-items)
         * [`detail` - Prints item detail](#detail---prints-item-detail)
         * [`grade` - Add grade to course or module](#grade---add-grade-to-course-or-module)
-        * [`goal` - Calculate how far the user is from his/her target CAP](#goal---calculate-how-far-the-user-is-from-his/her-target-cap)  
+        * [`goal` - Calculate how far the user is from his/her target CAP](#goal---calculate-how-far-the-user-is-from-his-or-her-target-cap)  
         * [`mc` - Prints MCs](#mc---prints-mcs)
         * [`cap` - Prints CAPs](#cap---prints-caps)
     * [`General Features`](#add---add-task-to-module)
@@ -46,10 +45,11 @@ create reminders, calculate and set goals for their MCs / CAPs.
         * [`delete` - Delete a task from the task list](#delete---delete-a-task-from-the-task-list)
         * [`edit` - Modify attributes of an item](#edit---modify-attributes-of-an-item)
         * [`focus` - Change the context of the program](#focus---change-the-context-of-the-program)
+        * [`load` - Loads linked tasks](#load---loads-linked-tasks) 
         * [`stats` - Prints Statistics](#stats---prints-statistics)
         * [`help` - Print help text of the commands](#help---print-help-text-of-the-commands)
-        * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---switch-the-ui-to-the-fancy-mode-(gui-like-cli))
-        * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---switch-the-ui-to-the-plain-mode-(pure-text-cli))
+        * [`fancy` - Switch the UI to the fancy mode (GUI-like CLI)](#fancy---switch-the-ui-to-the-fancy-mode)
+        * [`plain` - Switch the UI to the plain mode (pure-text CLI)](#plain---switch-the-ui-to-the-plain-mode)
         * [`next` - Switch the target region to the next page ***(GUI mode only)***](#next---switch-the-target-region-to-the-next-page)
         * [`prev` - Switch the target region to the previous page ***(GUI mode only)***](#prev---switch-the-target-region-to-the-previous-page)
         * [`unknown` - Prints error message](#unknown---prints-error-message)
@@ -236,6 +236,7 @@ A cheat sheet of commonly used commands:
 |**delete**|`delete [index]`|`delete 2`|
 |**edit**|`edit [-mod / -task] [index / code (for module only)]`|`edit -mod CS2113 grade=A -task 1 description=do_homework type=event`|
 |**focus**|`focus [deadline / todo / event / task / mod / selected / taken]`|`focus deadline`|
+|**load**| `load [module code] [task_string]`| `load EE2028 [D][V]_Exam_(by:_Jan_11_2011_11:11)`|
 |**stats**|`stats [target]`| `stats`|
 |**help**|`help [options]`|`help deadline`|
 |**fancy**|`fancy [option]`|`fancy`|
@@ -248,11 +249,12 @@ A cheat sheet of commonly used commands:
 
 ## Features - Daily Tasks 
 
-### `todo` - Add a todo task to the task list
+### `todo` - Add a to-do task to the task list
 
 Typing `todo` allows the program to parse the user's input and create a ***todo*** object with 
 specified *description*. It will be appended to the end of the task list.<br>
-Note: 
+
+Notes: 
 1. Todo description parameter here is compulsory.
 
 Syntax:
@@ -277,16 +279,17 @@ Expected outcome:
 
 Typing `deadline` allows the program to parse the user's input and create a ***deadline*** object with 
 specified *description* and *time*. It will be appended to the end of the task list. <br>
-Note: 
+
+Notes: 
 1. Deadline description and time parameters here are compulsory.
 
 Syntax: 
 
-`deadline [description] /by [time]`
+`deadline [description] -by [time]`
 
 Example of usage:
 
-`deadline ddl /by 21/9/15 1:12`
+`deadline ddl -by 21/9/15 1:12`
 
 Expected outcome:
 
@@ -298,28 +301,21 @@ Expected outcome:
     ____________________________________________________________
    ```
 
-   ```
-    ____________________________________________________________
-        Noted. I've removed this task:
-        [D][X] ddl (by: Sep 15 2021 01:12)
-        Now you have 0 tasks in the list.
-    ____________________________________________________________
-   ```
-
 ### `event` - Add an event to the task list
 
 Typing `event` allows the program to parse the user's input and create an ***event*** object with 
 specified *description* and *time*. It will be appended to the end of the task list. <br>
-Note: 
+
+Notes: 
 1. Event description and time parameters here are compulsory.
 
 Syntax:
 
-`event [description] /at [time]`
+`event [description] -at [time]`
 
 Example of usage: 
 
-`event midterm exam /at May 13 2020 8:00`
+`event midterm exam -at May 13 2020 8:00`
 
 Expected outcome:
 
@@ -340,11 +336,9 @@ The `asc` parameter tells the program to list tasks in ascending order with resp
 The `desc` parameter tells the program to list tasks in descending order with respect to their *date* field.<br>
 The `spec` parameter tells the program to only list tasks with the specified value of the *date* field.<br>
 
-Note: 
-with each execution of the `list` command, the indices of all tasks will be 
-dynamically changed to refer to the task in the current list with the current indices.<br>
-In other words, indices of tasks are not tied to their sequence of creation, allowing the user
-to use commands much more flexibly, especially with the `find` command or the reordering parameters.
+Notes: 
+1. When updates are done on the list (e.g : new "todo" task is added), "list" need to be run again to see the result of the update. 
+2. There are 2 main list in this application (i.e. task and module list). For more explanation, refer to the diagram on "Domsun Tutorial" on the UserGuide. 
 
 Syntax:
 
@@ -449,6 +443,11 @@ Expected outcome:
 Typing `find` commands the program to search through the task list and print all tasks with the
 specified *keyword*. If there is no task with such a *keyword*, `[NOT FOUND]` will be printed instead.
 
+Notes: 
+1. Keyword here means any word (time/description) on task list. 
+2. Ensure that you are referring to the most updated task list. 
+3. If keyword does not exist on the task list, a "no found" message will be shown. 
+
 Syntax:
 
 `find [keyword]`
@@ -490,7 +489,7 @@ Note:
 Syntax:
 
 `postpone [index]` <br>
-`postpone [h/w/y] [index]` 
+`postpone (h/w/y) [index]` 
 
 Example of usage:
 
@@ -548,8 +547,9 @@ Expected outcome:
 ### `reminder` - Print tasks that are due soon
 
 Typing `reminder` prints the tasks that are due within a certain time range or to activate the reminder.<br>
-Note: 
-The reminder popup is set by default to emerge every 5 minutes.  
+
+Notes: 
+1. The reminder popup is set by default to emerge every 5 minutes.  
 
 Syntax:
 
@@ -598,7 +598,8 @@ Expected outcome:
 
 Typing `snooze` delays reminder popup by a default of 1 minute.
 The reminder popup will remind in every 6 minutes.<br>
-Note: 
+
+Notes: 
 1. No additional parameter is needed.<br>
 2. If there is a parameter, you should expect "Invalid Command" message.
 
@@ -624,7 +625,8 @@ Expected outcome:
 ### `take` - Take module
 
 Typing `take` marks specified module(s) as taken.<br>
-Note: 
+
+Notes: 
 1. Index must be a positive integer referencing an existing item on the current list.<br>
 2. Module code must be a legitimate NUS module.
 
@@ -649,7 +651,8 @@ Expected outcome:
 ### `untake` - Untake module
 
 Typing `untake` marks specified module(s) as not taken.<br>
-Note: 
+
+Notes: 
 1. Index must be a positive integer referencing an existing item.<br>
 2. If modules that are not taken are input, the module will still be marked as "no longer taken".
       
@@ -673,6 +676,10 @@ Expected outcome:
 ### `sel` - Select items by index
 
 Typing `sel` selects the items specified.
+
+Notes: 
+1. Index must be a positive integer referencing an existing item. 
+2. Module code needs to represent legitimate NUS module. Otherwise, an error message can be 
 
 Syntax:
 
@@ -699,6 +706,10 @@ Expected outcome:
 
 Typing `unsel` marks items specified as unselected.
 
+Notes: 
+1. Index must be a positive integer referencing an existing item. 
+2. Item need to first be selected using "sel" for "unsel" to function properly. 
+
 Syntax:
 
 `unsel [index(es) (for the currently listed items) / module code(s) (for modules only)]`
@@ -720,6 +731,10 @@ Expected outcome:
 
 ### `detail` - Prints item detail
 Typing `detail` prints the details of a specified item.
+
+Notes: 
+1. Index should be a positive integer. Otherwise you should expect an error message 
+2. You must reference EXISTING tasks or module when using this command. For example: 
 
 Syntax:
 
@@ -766,6 +781,7 @@ Note:
 1. Modules need to be "taken" first before a grade is applied.<br>
 2. Grade and module code/index are compulsory parameters.<br>
 3. Grades and module code need to be acceptable grades and modules in NUS. For example: If "grade CS2113 Z" or "grade CS9999 A" is input, an error message will be displayed.
+4. If "grade CS2113 Z" or "grade CS9999 A" is input, error message will be displayed. 
 
 Syntax:
 
@@ -802,7 +818,7 @@ Expected outcome:
     ____________________________________________________________
     
 
-### `goal` - Calculate how far the user is from his/her target CAP
+### `goal` - Calculate how far the user is from his or her target CAP
 
 Typing `goal` allows the user to calculate how far the user is from his/her target CAP.<br>
 Note: 
@@ -850,7 +866,7 @@ Note:
 
 Syntax:
 
-`mc [-option] [-detail]` <br>
+`mc [-option]` <br>
 `option: -d(detailed)`
 
 Example of usage (when there are modules in the target): 
@@ -1072,6 +1088,10 @@ Typing `focus` changes the context that all other commands are based on the spec
 If no parameter is provided, the program will focus on `task`. <br>
 Other commands such as `list`, `done`, `sel`, etc. all operate based on the current focused context.
 
+Notes: 
+1. This function is used together with "list" to see the result of the "focus". 
+2. For more explanation, refer to the diagram on "Domsun Tutorial" on the UserGuide. 
+
 Syntax:
 
 `focus`
@@ -1101,19 +1121,58 @@ Expected outcome:
     task
     ____________________________________________________________
    ```
+### `load` - Loads linked tasks 
+
+Typing `load` loads linked tasks to ONE specified module without adding them to the main task list <br>
+
+Notes:
+1. This command should only be used if you are highly familiar with the save file and you want to manually edit linked tasks to a specific module 
+2. We do NOT recommend using this command on a daily basis 
+
+Syntax:
+
+`load [module code] [task_string]` <br>
+
+Example of usage:
+
+`load EE2028 [D][V]_Exam_(by:_Jan_11_2011_11:11)`
+
+Expected outcome:
+
+    ____________________________________________________________
+        Added Tasks: 
+        [D][V] Exam (by: Jan 11 2011 11:11) 
+        for module: EE2028; 
+        Try "detail EE2028" to check it out! 
+    ____________________________________________________________
+
+Example of usage:
+
+`load EE2028 [T][X]_test1,[T][V]_test2`
+
+Expected outcome:
+
+    ____________________________________________________________
+        Added Tasks: 
+        [T][X] test1 
+        [T][V] test2 
+        for module: EE2028; 
+        Try "detail EE2028" to check it out! 
+    ____________________________________________________________
+
 
 ### `stats` - Prints Statistics
 
 Typing `stats` prints the percentage of the task completed.<br>
-Note: 
+
+Notes: 
 1. Module entered should exist. Otherwise, you should expect a "Module Not Found" error message.<br>
 2. If the command entered is stats alone, ensure that you are focusing on the tasks list by typing "focus".
 
 Syntax:
 
-`stats [-option] [-detail]` <br>
+`stats [-option] [module code]` <br>
 `option: -mod` <br>
-`detail: [module code]`
 
 Example of usage (when focused on tasks list, and no task is completed): 
 
@@ -1144,6 +1203,9 @@ Expected outcome:
 
 Typing `help` allows the user to either print a list of available commands, 
 or print the details of a specified command.
+
+Notes: 
+1. If unknown command is put in as "target", general help of all commands will be displayed. 
 
 Syntax:
 
@@ -1209,7 +1271,7 @@ Expected outcome:
    ```
 
 
-### `fancy` - Switch the UI to the fancy mode (GUI-like CLI)
+### `fancy` - Switch the UI to the fancy mode
 
 Typing `fancy` switches the UI to the fancy mode (GUI-like CLI interface).<br>
 This command has no effect if the UI is already in fancy mode.<br>
@@ -1230,7 +1292,7 @@ Expected outcome:
 the UI switches to fancy mode (GUI-like CLI interface).
 
 
-### `plain` - Switch the UI to the plain mode (pure-text CLI)
+### `plain` - Switch the UI to the plain mode
 
 Typing `plain` switches the UI to the plain mode (pure-text CLI interface). <br>
 This command has no effect if the UI is already in plain mode.<br>
