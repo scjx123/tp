@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 
 ### 2.1 Enhancements Implemented: 
 
-New Feature: 
+New Feature: Postpone
 <br> 
 What it does:
 <br>
@@ -23,7 +23,18 @@ Highlights:
 Credits (optional): 
 <br>
 
-New Feature: 
+New Feature: Snooze
+<br>
+What it does:
+<br>
+Justification:
+<br>
+Highlights:
+<br>
+Credits (optional): 
+<br>
+
+New Feature: Reminder
 <br>
 What it does:
 <br>
