@@ -198,6 +198,9 @@ The statistic feature is facilitated by the `StatsAction` class. It extends `Act
  - `act()`- Gets `targetList` and calculates the raw ratio of the completed items.
  - `roundedRatioBar()`- Returns a rounded ratio enclosed in square brackets for printing. <br>
 
+The diagram below shows the various class associated with `StatsAction`
+![statsDiagram](Images/StatsDiagram.png)
+
 Given below is an example usage scenario and how the statistic mechanism behaves at each step. 
 
 Step 1. The user enters `stats -mod CS2113`	once the execute layer executes the message and calls `action.prepare()` class, `StatsAction` will begin its `prepare()` operation
