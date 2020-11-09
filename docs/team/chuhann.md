@@ -40,7 +40,7 @@ Credits (optional):
 <br>
 
 New Feature: Snooze
-Added snooze function
+* Added snooze function
 <br> 
 What it does:
 Allows the user to delay the "pop up" message by "snoozing" it
@@ -56,7 +56,7 @@ Credits (optional):
 <br>
 
 New Feature: Focus
-Added focus function
+* Added focus function
 <br> 
 What it does:
 Allows the user to change context to "todo", "event", "deadline", "task", "mod", "selected" or "taken"
