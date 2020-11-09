@@ -19,7 +19,7 @@ Since "domsun" is a task and module scheduler, its user (diligent NUS student) w
 Highlights:
 This action can be easily integrated with other actions in the future. Functions like `getObjectInfo` and `modifyObject` can be passed on to actions that need cap calculation too such as `GoalAction`.
 <br>
-Credits (optional): 
+Credits: 
 @tomlbz for improving the code quality and integrating CAP action with other actions in OOP manner.
 <br>
 
@@ -36,7 +36,7 @@ As studying for a long time, the user will want to know what grade he should get
 Highlights:
 This feature is synchronised with Cap Calculator and Grade Action so user can just need to input their grade once with Grade Action.
 <br>
-Credits (optional): 
+Credits: 
 @tomlbz for improving the code quality and integrating CAP action with other actions in OOP manner.
 <br>
 
@@ -53,7 +53,7 @@ After result release, user will want to register their grade to "domsun" for fut
 Highlights:
 This fucntion can be easily implemented by other future action that needs grade registration such as CAP and Goal calculator. 
 <br>
-Credits (optional):
+Credits:
 @tomlbz for improving the code quality and integrating CAP action with other actions in OOP manner. 
 <br>
 
