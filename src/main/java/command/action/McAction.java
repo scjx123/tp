@@ -39,7 +39,7 @@ public class McAction extends Action {
             }
         } else {
             int sum = 0;
-            data.getTarget(Constants.TAKEN);
+            data.getTarget();
             for (Item item : data.target) {
                 SingleModule m = (SingleModule)item;
                 sum += Integer.parseInt(m.getModuleMC().trim());
