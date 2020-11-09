@@ -1,4 +1,4 @@
-# Domnus - An easy way to track your schedules!
+# Domsun - An easy way to track your schedules!
 
 ![here](UI.png)
 
