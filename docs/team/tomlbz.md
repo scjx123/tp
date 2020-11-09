@@ -34,7 +34,11 @@ Added restrictions to non-applicable commands|Give the user an error message ins
 **Code Contributed**: [Reposense link](https://nus-cs2113-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=tomlbz&sort=groupTitle&sortWithin=title&since=2020-09-27&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=TomLBZ&tabRepo=AY2021S1-CS2113-T13-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other "My Reposense") 
 
 ### 2.2 Contributions to UG: 
-{include some extracts from the document here}
+
+Completed the ***Installation*** section of our UG, added pictures to aid understanding.<br>
+Wrote parts of the ***Domsun Tutorial***.<br>
+Wrote the initial update for all features in the feature list. Those are updated progressively by my Teammates later after each iteration.<br>
+
 ### 2.3 Contributions to DG:
 {include some extracts from the document here}
 ### 2.4 Contributions to team-based tasks: 
