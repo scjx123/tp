@@ -43,9 +43,9 @@ create reminders and calculate their MCs / CAPs.
     > Task :processResources UP-TO-DATE
     > Task :classes UP-TO-DATE
     
-    > Task :Domnus.main()
+    > Task :Domsun.main()
     	____________________________________________________________
-    		Hello, I'm Domnus. What can I do for you?
+    		Hello, I'm Domsun. What can I do for you?
     	____________________________________________________________
     	____________________________________________________________
     		Here are the tasks due within 3 days: 
@@ -251,7 +251,7 @@ Step 4. CAP value is calculated and returned to the user through `Ui`.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![cap uml diagram](Images/CalculateCapSequence.png)
+![cap uml diagram](Images/CapSequence.png)
 
 ### 5.4 Reminder Feature
 
@@ -335,7 +335,7 @@ Step 4. The grade is attributed to the corresponding modules and the response me
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![Grade_Sequence_Diagram](Images/GradeSequence.png)
+![Grade_Sequence_Diagram](Images/GradeSequenceFinal.png)
 
 ### 5.8 Focus Feature
 
