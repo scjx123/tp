@@ -163,7 +163,14 @@ public enum HelpText {
         new String[]{
             "detail [module code (for modules only) / index]",
         },
-        new String[]{ "", },
+        new String[]{
+            "1. Index should be a positive integer. Otherwise you should expect an error message",
+            "2. You must reference EXISTING tasks or module when using this command. For example:",
+            "2.1. If \"list\" shows only 2 tasks but you try to use \"detail 3\", you should "
+                + "expect an \"index out of range\" error message because \"3\" is out of range for your task list.",
+            "2.2. Similarly, if there is no mod called CS9999 in the module list and you try to use "
+                + "\"detail CS9999\", you should expect a \"not found\" error message.",
+        },
         new String[]{
             "1. \"detail 1\" >> print the detail of item 1 in the list",
             "2. \"detail CS2113T\" >> print the detail of module CS2113T",
@@ -188,8 +195,8 @@ public enum HelpText {
                 + "with 160MC in total based on current grades",
             "2. \"goal -total 160 4.9 -taken 100 4.5\" >> "
                 + "comment on required average grade needed for:\r\n"
-                + "- MC total for graduation: 160\r\n" + "- Target CAP: 4.9\r\n"
-                + "- MC taken: 100\r\n" + "- Current CAP: 4.5\r\n"
+                + "- Total MC for graduation: 160\r\n" + "- Target CAP: 4.9\r\n"
+                + "- Total MC taken: 100\r\n" + "- Current CAP: 4.5\r\n"
         }),
     /**
      * The Done.
@@ -284,7 +291,6 @@ public enum HelpText {
             "2. Grade and module code/index are compulsory parameters.",
             "3. Grade and module code need to be acceptable grade and module in NUS. For example:",
             "3.1. If \"grade CS2113 Z\" or \"grade CS9999 A\" is input, error message will be displayed.",
-
         },
         new String[]{
             "1. \"grade CS2113 A CG1112 A-\" >> make A and A- the grades of modules CS2113 and CG1112 respectively",
