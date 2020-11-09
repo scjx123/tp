@@ -75,7 +75,7 @@ At Shutdown: It exits the running loop of the program to shut down the program s
 **4.3 UI Layer**<br>
 The Main gets user input and displays messages through the use of UI components. 
 The UI layer entails the package *visualize*, which contains classes *ColoredString*, *Bitmap*, *UI*, *Cli*, 
-*FancyCli* and enumerations *Color* and *Sprite* in the following structure:
+*FancyCli* and enumerations *Color* and *Sprite* in the following structure:<br>
 ![uml](Images/Package%20visualize.png)
 
 UI's interaction with user<br>
@@ -87,7 +87,10 @@ UI passes the user's input string out to the DOMNUS object, which then passes th
 UI also reads data from the Data object for refreshing purposes but does not modify it. 
 
 **4.4 Command Interpreter Layer**<br>
-Upon receiving a command from the UI, DOMNUS would pass the entire user input into Command Interpreter (CI)
+Upon receiving a command from the UI, DOMNUS would pass the entire user input into Command Interpreter (CI)<br>
+The CI is implemented via the classes in the package `lexical`.<br>
+![lexical](Images/lexical.png)<br>
+The lexer converts String to a list of Tokens, and the parser converts it into a list of commands.
 
 **4.5 Execute Layer**<br>
 The `Execute` layer carries out the relevant actions required based on the analyzed input. All of the features in the program are stored under this layer which is under the package name `command`. To summarize, this layer is responsible for: 
