@@ -248,7 +248,7 @@ A cheat sheet of commonly used commands:
 
 ## Features - Daily Tasks 
 
-### `todo` - Add a to-do task to the task list
+### `todo` - Add a todo task to the task list
 
 Typing `todo` allows the program to parse the user's input and create a ***todo*** object with 
 specified *description*. It will be appended to the end of the task list.<br>
