@@ -108,7 +108,7 @@ During the saving phase:
 
 **4.7 Flow of DOMSUN**<br>
 The sequence diagram below shows the main interaction of classes with each other throughout the whole lifecycle of DOMSUN.
-![uml](Images/DOMSUN_Main_Flow.png)
+![uml](Images/DOMSUM_Main_Flow.png)
 
 ## 5. Implementation<br>
 This section highlights some of our project's key feature and its implementation. 
@@ -197,6 +197,9 @@ The statistic feature is facilitated by the `StatsAction` class. It extends `Act
  - `prepare()` - Sets `isMod` flag according to user's 
  - `act()`- Gets `targetList` and calculates the raw ratio of the completed items.
  - `roundedRatioBar()`- Returns a rounded ratio enclosed in square brackets for printing. <br>
+
+The diagram below shows the various class associated with `StatsAction`
+![statsDiagram](Images/StatsDiagram.png)
 
 Given below is an example usage scenario and how the statistic mechanism behaves at each step. 
 
